@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Actions\Jetstream;
 
 use Illuminate\Support\Facades\Gate;
@@ -17,7 +16,6 @@ class AddTeamMember implements AddsTeamMembers
      *
      * @param  mixed  $user
      * @param  mixed  $team
-     * @param  string  $email
      * @param  string|null  $role
      * @return void
      */
@@ -43,8 +41,6 @@ class AddTeamMember implements AddsTeamMembers
      * Validate the add member operation.
      *
      * @param  mixed  $team
-     * @param  string  $email
-     * @param  string|null  $role
      * @return void
      */
     protected function validate($team, string $email, ?string $role)
@@ -78,7 +74,6 @@ class AddTeamMember implements AddsTeamMembers
      * Ensure that the user is not already on the team.
      *
      * @param  mixed  $team
-     * @param  string  $email
      * @return \Closure
      */
     protected function ensureUserIsNotAlreadyOnTeam($team, string $email)

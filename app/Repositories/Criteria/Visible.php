@@ -1,0 +1,27 @@
+<?php
+namespace App\Repositories\Criteria;
+
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * Class Visible.
+ */
+class Visible
+{
+    /**
+     * Visible constructor.
+     */
+    public function __construct(private readonly array $fields)
+    {
+    }
+
+    /**
+     * Set visible fields.
+     *
+     * @param $model
+     */
+    public function apply($model): Builder
+    {
+        return $model->setVisible($this->fields);
+    }
+}

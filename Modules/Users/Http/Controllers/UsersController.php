@@ -1,30 +1,33 @@
 <?php
-
 namespace Modules\Users\Http\Controllers;
 
-use App\Models\User;
+use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Inertia\Inertia;
-use Modules\Users\Transformers\UserCollection;
+use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class UsersController extends Controller
 {
-
-    public function index()
+    public function __construct(private readonly UsersRepository $usersRepository)
     {
+    }
+
+    public function index(Request $request)
+    {
+        info($request->get('perPage'));
         return Inertia::render('Modules/Users/Index', [
-            'filters' => Request::all('search', 'role', 'trashed'),
-            'users' => User::query()
-                ->when(Request::input('search'), fn($query, $search) => $query->where('name', 'like', "%{$search}%"))
-                ->paginate(5)
+            'filters' => $request->only(['search', 'perPage']),
+            'users' => $this->usersRepository->withCriteria([
+                new WhereLike(['users.id', 'users.name', 'users.email'], $request->get('search'))
+            ])->paginate()
                 ->withQueryString()
                 ->through(fn ($user) => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-            ]),
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                ]),
         ]);
     }
 
@@ -39,7 +42,6 @@ class UsersController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      * @return Renderable
      */
     public function store(Request $request)
@@ -69,7 +71,6 @@ class UsersController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Renderable
      */

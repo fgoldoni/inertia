@@ -1,10 +1,8 @@
 <?php
-
 namespace Modules\Users\Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 
 class UsersDatabaseSeeder extends Seeder
 {

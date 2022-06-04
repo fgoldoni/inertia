@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Actions\Jetstream;
 
 use Illuminate\Auth\Access\AuthorizationException;
@@ -39,7 +38,7 @@ class RemoveTeamMember implements RemovesTeamMembers
      */
     protected function authorize($user, $team, $teamMember)
     {
-        if (! Gate::forUser($user)->check('removeTeamMember', $team) &&
+        if (!Gate::forUser($user)->check('removeTeamMember', $team) &&
             $user->id !== $teamMember->id) {
             throw new AuthorizationException();
         }

@@ -1,0 +1,27 @@
+<?php
+namespace App\Repositories\Criteria;
+
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * Class Take.
+ */
+class Take
+{
+    /**
+     * Take constructor.
+     */
+    public function __construct(private readonly int $number)
+    {
+    }
+
+    /**
+     * Set hidden fields.
+     *
+     * @param $model
+     */
+    public function apply($model): Builder
+    {
+        return $model->take($this->number);
+    }
+}

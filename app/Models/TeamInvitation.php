@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Laravel\Jetstream\Jetstream;
