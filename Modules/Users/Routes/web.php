@@ -11,6 +11,9 @@
 |
 */
 
-Route::prefix('users')->group(function() {
-    Route::get('/', 'UsersController@index');
-});
+
+use Modules\Users\Http\Controllers\UsersController;
+
+Route::get('users', [UsersController::class, 'index'])
+    ->name('users')
+    ->middleware('auth');

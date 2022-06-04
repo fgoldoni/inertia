@@ -2,19 +2,30 @@
 
 namespace Modules\Users\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Routing\Controller;
+use Inertia\Inertia;
+use Modules\Users\Transformers\UserCollection;
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
+
     public function index()
     {
-        return view('users::index');
+        return Inertia::render('Modules/Users/Index', [
+            'filters' => Request::all('search', 'role', 'trashed'),
+            'users' => User::query()
+                ->when(Request::input('search'), fn($query, $search) => $query->where('name', 'like', "%{$search}%"))
+                ->paginate(5)
+                ->withQueryString()
+                ->through(fn ($user) => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+            ]),
+        ]);
     }
 
     /**

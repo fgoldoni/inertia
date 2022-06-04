@@ -22,14 +22,18 @@ phpcs: ## PRS2 Validation
 	./vendor/bin/phpcs app/Providers --extensions=php -s
 	./vendor/bin/php-cs-fixer app/Http/Livewire fix --diff
 	./vendor/bin/php-cs-fixer app/Providers fix --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Database --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Entities --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Http --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Providers --diff
 
 php-cs: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix database --diff
 
 rector: ## PRS2 Validation
-	./vendor/bin/rector process --dry-run
 	./vendor/bin/rector process
+	./vendor/bin/rector process --dry-run
 
 server: ## Load phpMyAdmin server
 	 /usr/bin/php7.4 -S localhost:$(PORT) -t ../../phpMyAdmin
