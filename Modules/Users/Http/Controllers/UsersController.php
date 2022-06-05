@@ -10,17 +10,22 @@ use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class UsersController extends Controller
 {
-    public function __construct(private readonly UsersRepository $usersRepository)
+    /**
+     * @var \Illuminate\Http\Request
+     */
+    private Request $request;
+
+    public function __construct(private readonly UsersRepository $usersRepository, Request $request)
     {
+        $this->request = $request;
     }
 
-    public function index(Request $request)
+    public function index(array $modalProps = [])
     {
-        info($request->get('perPage'));
-        return Inertia::render('Modules/Users/Index', [
-            'filters' => $request->only(['search', 'perPage']),
+        return Inertia::render('Modules/Users/Index',  array_merge([
+            'filters' => $this->request->only(['search', 'perPage']),
             'users' => $this->usersRepository->withCriteria([
-                new WhereLike(['users.id', 'users.name', 'users.email'], $request->get('search'))
+                new WhereLike(['users.id', 'users.name', 'users.email'], $this->request->get('search'))
             ])->paginate()
                 ->withQueryString()
                 ->through(fn ($user) => [
@@ -28,16 +33,18 @@ class UsersController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                 ]),
-        ]);
+        ], $modalProps));
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('users::create');
+        Inertia::modal('Modules/Users/CreateModal');
+
+        return $this->index();
     }
 
     /**

@@ -3,6 +3,7 @@ namespace App\Providers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
+use Inertia\ResponseFactory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +25,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         JsonResource::withoutWrapping();
+
+        ResponseFactory::macro('modal', function ($modal) {
+            inertia()->share(['modal' => $modal]);
+        });
     }
 }

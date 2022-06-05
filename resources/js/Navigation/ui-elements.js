@@ -11,7 +11,6 @@ export const navigation = [
 ]
 
 export const userNavigation = [
-    { name: 'Your Profile', href: '#' },
+    { name: 'Your Profile', href: route('profile.show') },
     { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
 ]
