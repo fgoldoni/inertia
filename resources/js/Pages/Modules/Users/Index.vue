@@ -6,12 +6,10 @@
                     <h1 class="text-xl font-semibold text-gray-900">Users</h1>
                 </div>
                 <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                    <button type="button"  @click="openModal" class="uppercase inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <Link :href="route('admin.users.create')" class="uppercase inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <PlusIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                         Create
-                    </button>
-
-                    <Link :href="route('users.create')" class="uppercase inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">CREATE</Link>
+                    </Link>
                 </div>
             </div>
 
@@ -80,9 +78,9 @@
                                         {{ user.role }}
                                     </td>
                                     <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                                        >Edit<span class="sr-only">, {{ user.name }}</span></a
-                                        >
+                                        <Link :href="route('admin.users.edit', {'user': user.id})" preserve-state class="text-indigo-600 hover:text-indigo-900">
+                                            Edit<span class="sr-only">, {{ user.name }}</span>
+                                        </Link>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -127,7 +125,7 @@ const form = useForm({
 });
 
 watch(form,  debounce((value) => {
-    Inertia.get('/users', pickBy(value), { replace: true, preserveState: true })
+    Inertia.get(route('admin.users.index'), pickBy(value), { replace: true, preserveState: true })
 }, 300), { deep: true });
 
 const reset = () => {

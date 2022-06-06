@@ -45907,6 +45907,10 @@ var map = {
 		"./resources/js/Pages/Modules/Users/CreateModal.vue",
 		"resources_js_Pages_Modules_Users_CreateModal_vue"
 	],
+	"./Modules/Users/EditModal.vue": [
+		"./resources/js/Pages/Modules/Users/EditModal.vue",
+		"resources_js_Pages_Modules_Users_EditModal_vue"
+	],
 	"./Modules/Users/Index.vue": [
 		"./resources/js/Pages/Modules/Users/Index.vue",
 		"resources_js_Pages_Modules_Users_Index_vue"
@@ -46120,7 +46124,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Pages_API_Index_vue":1,"resources_js_Pages_API_Partials_ApiTokenManager_vue":1,"resources_js_Pages_Auth_ConfirmPassword_vue":1,"resources_js_Pages_Auth_ForgotPassword_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Register_vue":1,"resources_js_Pages_Auth_ResetPassword_vue":1,"resources_js_Pages_Auth_TwoFactorChallenge_vue":1,"resources_js_Pages_Auth_VerifyEmail_vue":1,"resources_js_Pages_Dashboard_vue":1,"resources_js_Pages_Modules_Users_CreateModal_vue":1,"resources_js_Pages_Modules_Users_Index_vue":1,"resources_js_Pages_PrivacyPolicy_vue":1,"resources_js_Pages_Profile_Partials_DeleteUserForm_vue":1,"resources_js_Pages_Profile_Partials_LogoutOtherBrowserSessionsForm_vue":1,"resources_js_Pages_Profile_Partials_TwoFactorAuthenticationForm_vue":1,"resources_js_Pages_Profile_Partials_UpdatePasswordForm_vue":1,"resources_js_Pages_Profile_Partials_UpdateProfileInformationForm_vue":1,"resources_js_Pages_Profile_Show_vue":1,"resources_js_Pages_Teams_Create_vue":1,"resources_js_Pages_Teams_Partials_CreateTeamForm_vue":1,"resources_js_Pages_Teams_Partials_DeleteTeamForm_vue":1,"resources_js_Pages_Teams_Partials_TeamMemberManager_vue":1,"resources_js_Pages_Teams_Partials_UpdateTeamNameForm_vue":1,"resources_js_Pages_Teams_Show_vue":1,"resources_js_Pages_TermsOfService_vue":1,"resources_js_Pages_Welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_API_Index_vue":1,"resources_js_Pages_API_Partials_ApiTokenManager_vue":1,"resources_js_Pages_Auth_ConfirmPassword_vue":1,"resources_js_Pages_Auth_ForgotPassword_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Register_vue":1,"resources_js_Pages_Auth_ResetPassword_vue":1,"resources_js_Pages_Auth_TwoFactorChallenge_vue":1,"resources_js_Pages_Auth_VerifyEmail_vue":1,"resources_js_Pages_Dashboard_vue":1,"resources_js_Pages_Modules_Users_CreateModal_vue":1,"resources_js_Pages_Modules_Users_EditModal_vue":1,"resources_js_Pages_Modules_Users_Index_vue":1,"resources_js_Pages_PrivacyPolicy_vue":1,"resources_js_Pages_Profile_Partials_DeleteUserForm_vue":1,"resources_js_Pages_Profile_Partials_LogoutOtherBrowserSessionsForm_vue":1,"resources_js_Pages_Profile_Partials_TwoFactorAuthenticationForm_vue":1,"resources_js_Pages_Profile_Partials_UpdatePasswordForm_vue":1,"resources_js_Pages_Profile_Partials_UpdateProfileInformationForm_vue":1,"resources_js_Pages_Profile_Show_vue":1,"resources_js_Pages_Teams_Create_vue":1,"resources_js_Pages_Teams_Partials_CreateTeamForm_vue":1,"resources_js_Pages_Teams_Partials_DeleteTeamForm_vue":1,"resources_js_Pages_Teams_Partials_TeamMemberManager_vue":1,"resources_js_Pages_Teams_Partials_UpdateTeamNameForm_vue":1,"resources_js_Pages_Teams_Show_vue":1,"resources_js_Pages_TermsOfService_vue":1,"resources_js_Pages_Welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

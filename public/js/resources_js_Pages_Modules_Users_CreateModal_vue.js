@@ -23,9 +23,16 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var open = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
+    var isOpen = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
+
+    function closeModal() {
+      isOpen.value = false;
+      window.history.back();
+    }
+
     var __returned__ = {
-      open: open,
+      isOpen: isOpen,
+      closeModal: closeModal,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       Dialog: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.Dialog,
       DialogPanel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.DialogPanel,
@@ -69,38 +76,30 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0"
 };
-var _hoisted_4 = {
-  "class": "mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100"
-};
-var _hoisted_5 = {
-  "class": "mt-3 text-center sm:mt-5"
-};
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Payment successful ");
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "mt-2"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "text-sm text-gray-500"
-}, "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius aliquam laudantium explicabo pariatur iste dolorem animi vitae error totam. At sapiente aliquam accusamus facere veritatis.")], -1
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, " ycaddvsda ", -1
 /* HOISTED */
 );
 
-var _hoisted_8 = {
+var _hoisted_5 = {
   "class": "mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["TransitionRoot"], {
+    show: $setup.isOpen,
     as: "template",
-    show: $setup.open
+    enter: "duration-300 ease-out",
+    "enter-from": "opacity-0",
+    "enter-to": "opacity-100",
+    leave: "duration-200 ease-in",
+    "leave-from": "opacity-100",
+    "leave-to": "opacity-0"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Dialog"], {
         as: "div",
         "class": "relative z-10",
-        onClose: _cache[2] || (_cache[2] = function ($event) {
-          return $setup.open = false;
-        })
+        onClose: $setup.closeModal
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TransitionChild"], {
@@ -132,31 +131,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 "class": "relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full sm:p-6"
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CheckIcon"], {
-                    "class": "h-6 w-6 text-green-600",
-                    "aria-hidden": "true"
-                  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DialogTitle"], {
-                    as: "h3",
-                    "class": "text-lg leading-6 font-medium text-gray-900"
-                  }, {
-                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                      return [_hoisted_6];
-                    }),
-                    _: 1
-                    /* STABLE */
-
-                  }), _hoisted_7])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+                  return [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
                     type: "button",
                     "class": "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm",
-                    onClick: _cache[0] || (_cache[0] = function ($event) {
-                      return $setup.open = false;
-                    })
+                    onClick: $setup.closeModal
                   }, "Deactivate"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
                     type: "button",
                     "class": "mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm",
-                    onClick: _cache[1] || (_cache[1] = function ($event) {
-                      return $setup.open = false;
-                    }),
+                    onClick: $setup.closeModal,
                     ref: "cancelButtonRef"
                   }, "Cancel", 512
                   /* NEED_PATCH */

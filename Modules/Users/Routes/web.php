@@ -15,10 +15,15 @@
 use Modules\Users\Http\Controllers\UsersController;
 
 Route::get('users', [UsersController::class, 'index'])
-    ->name('users')
+    ->name('admin.users.index')
     ->middleware('auth');
 
 Route::get('users/create', [UsersController::class, 'create'])
-    ->name('users.create')
+    ->name('admin.users.create')
     ->middleware('auth');
+
+Route::get('users/{user}/edit', [UsersController::class, 'edit'])
+    ->name('admin.users.edit')
+    ->middleware('auth');
+
 

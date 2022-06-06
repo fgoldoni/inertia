@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Users\Http\Controllers;
 
+use App\Models\User;
 use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -36,11 +37,8 @@ class UsersController extends Controller
         ], $modalProps));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create(Request $request)
+
+    public function create()
     {
         Inertia::modal('Modules/Users/CreateModal');
 
@@ -66,14 +64,15 @@ class UsersController extends Controller
         return view('users::show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
+
+    public function edit(User $user)
     {
-        return view('users::edit');
+        Inertia::modal('Modules/Users/EditModal');
+
+        return $this->index([
+            'editing' => $user,
+            'back' => 'admin.users.index'
+        ]);
     }
 
     /**

@@ -2,7 +2,7 @@ import {CalendarIcon, ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, UsersIcon} 
 
 export const navigation = [
     { name: 'Dashboard', href: route('dashboard'), icon: HomeIcon, current: route().current('dashboard') },
-    { name: 'Users', href: route('users'), icon: HomeIcon, current: route().current('users') },
+    { name: 'Users', href: route('admin.users.index'), icon: HomeIcon, current: route().current('users') },
     { name: 'Team', href: '#', icon: UsersIcon, current: false },
     { name: 'Projects', href: '#', icon: FolderIcon, current: false },
     { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
