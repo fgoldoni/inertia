@@ -14,16 +14,6 @@
 
 use Modules\Users\Http\Controllers\UsersController;
 
-Route::get('users', [UsersController::class, 'index'])
-    ->name('admin.users.index')
-    ->middleware('auth');
-
-Route::get('users/create', [UsersController::class, 'create'])
-    ->name('admin.users.create')
-    ->middleware('auth');
-
-Route::get('users/{user}/edit', [UsersController::class, 'edit'])
-    ->name('admin.users.edit')
-    ->middleware('auth');
-
-
+Route::prefix('admin')->middleware(['auth'])->as('admin.')->group(function () {
+    Route::resource('users', UsersController::class);
+});

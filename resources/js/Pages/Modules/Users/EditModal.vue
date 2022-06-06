@@ -1,13 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import JetButton from '@/Jetstream/Button.vue';
+import Select from '@/Components/Select';
 import JetInput from '@/Jetstream/Input.vue';
-import JetCheckbox from '@/Jetstream/Checkbox.vue';
 import JetLabel from '@/Jetstream/Label.vue';
-import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 import {useForm} from "@inertiajs/inertia-vue3";
+
 
 const enabled = ref(false)
 
@@ -15,6 +14,8 @@ const isOpen = ref(true)
 
 const props = defineProps({
     editing: Object,
+    roles: Object,
+    back: String,
 });
 
 const form = useForm({
@@ -25,7 +26,7 @@ const form = useForm({
 
 function closeModal() {
     isOpen.value = false
-    window.history.back();
+    window.location = route(props.back);
 }
 </script>
 
@@ -82,6 +83,9 @@ function closeModal() {
                                                             type="text"
                                                             class="mt-1 block w-full"
                                                             required/>
+                                                    </div>
+                                                    <div class="col-span-1">
+                                                        <Select :people="props.roles" v-if="props.roles"></Select>
                                                     </div>
                                                 </div>
                                             </div>

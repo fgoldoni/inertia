@@ -37,6 +37,7 @@ class RolesServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
     }
 

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Inertia\ResponseFactory;
 use Modules\Roles\Entities\Permission;
+use Modules\Roles\Providers\RolesServiceProvider;
+use Modules\Users\Providers\UsersServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(UsersServiceProvider::class);
+        $this->app->register(RolesServiceProvider::class);
     }
 
     /**

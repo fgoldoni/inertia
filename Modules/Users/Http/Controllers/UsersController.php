@@ -2,11 +2,13 @@
 namespace Modules\Users\Http\Controllers;
 
 use App\Models\User;
+use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Inertia\Inertia;
+use Modules\Roles\Repositories\Contracts\RolesRepository;
 use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class UsersController extends Controller
@@ -16,7 +18,7 @@ class UsersController extends Controller
      */
     private Request $request;
 
-    public function __construct(private readonly UsersRepository $usersRepository, Request $request)
+    public function __construct(private readonly UsersRepository $usersRepository, private readonly RolesRepository $rolesRepository, Request $request)
     {
         $this->request = $request;
     }
@@ -71,6 +73,9 @@ class UsersController extends Controller
 
         return $this->index([
             'editing' => $user,
+            'roles' => $this->rolesRepository->withCriteria([
+                new Select('roles.id', 'roles.name', 'roles.display_name')
+            ])->all(),
             'back' => 'admin.users.index'
         ]);
     }

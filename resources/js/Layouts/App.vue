@@ -162,11 +162,6 @@ import NavLink from '@/Navigation/NavLink';
 import DropdownLink from '@/Navigation/DropdownLink';
 import { navigation, userNavigation } from '@/Navigation/ui-elements'
 
-
-defineProps({
-    title: String,
-});
-
 const logout = () => {
     Inertia.post(route('logout'));
 };

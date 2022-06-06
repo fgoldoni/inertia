@@ -11,12 +11,12 @@ class Role extends SpatieRole
         parent::boot();
 
         self::created(function ($model) {
-            Cache::forget(config('gjob.system.cache.keys.roles'));
+            Cache::forget(config('app.system.cache.keys.roles'));
         });
     }
 
     public function isAdministrator(): bool
     {
-        return $this->name === config('gjob.system.users.roles.administrator');
+        return $this->name === config('app.system.users.roles.administrator');
     }
 }
