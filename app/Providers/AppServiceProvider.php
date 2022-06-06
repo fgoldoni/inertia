@@ -2,8 +2,11 @@
 namespace App\Providers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Inertia\ResponseFactory;
+use Modules\Roles\Entities\Permission;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,5 +32,22 @@ class AppServiceProvider extends ServiceProvider
         ResponseFactory::macro('modal', function ($modal) {
             inertia()->share(['modal' => $modal]);
         });
+
+        Gate::before(fn ($user, $ability) => $user->hasRole(config('app.system.users.roles.administrator')) ? true : null);
+
+        if (Schema::hasTable('permissions')) {
+            foreach ($this->getPermissions() as $permission) {
+                Gate::define(
+                    $permission->name,
+                    static fn ($user) => $user->hasPermissionTo($permission)
+                );
+            }
+        }
     }
+
+    private function getPermissions()
+    {
+        return Permission::get();
+    }
+
 }
