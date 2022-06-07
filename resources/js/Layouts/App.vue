@@ -166,6 +166,10 @@ const logout = () => {
     Inertia.post(route('logout'));
 };
 
+defineProps({
+    title: String,
+});
+
 const sidebarOpen = ref(false)
 
 </script>

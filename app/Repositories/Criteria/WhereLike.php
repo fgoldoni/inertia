@@ -22,17 +22,11 @@ class WhereLike
         $attributes = $this->attributes;
 
         return $model->when($this->value, function ($query) use ($value, $attributes) {
-
             $query->where(function ($query) use ($value, $attributes) {
-
                 foreach (Arr::wrap($attributes) as $attribute) {
-
                     $query->orWhere($attribute, 'like', '%' . $value . '%');
-
                 }
-
             });
-
         });
     }
 }

@@ -1,7 +1,6 @@
 <?php
 namespace Modules\Users\Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UsersDatabaseSeeder extends Seeder

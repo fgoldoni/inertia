@@ -52,5 +52,4 @@ class AppServiceProvider extends ServiceProvider
     {
         return Permission::get();
     }
-
 }
