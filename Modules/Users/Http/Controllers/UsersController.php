@@ -17,19 +17,8 @@ use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class UsersController extends Controller
 {
-    /**
-     * @var \Illuminate\Http\Request
-     */
-    private Request $request;
-    /**
-     * @var \Illuminate\Routing\Redirector
-     */
-    private Redirector $redirect;
-
-    public function __construct(private readonly UsersRepository $usersRepository, private readonly RolesRepository $rolesRepository, Request $request, Redirector $redirect)
+    public function __construct(private readonly UsersRepository $usersRepository, private readonly RolesRepository $rolesRepository, private readonly Request $request, private readonly Redirector $redirect)
     {
-        $this->request = $request;
-        $this->redirect = $redirect;
     }
 
     public function index(array $modalProps = [])
