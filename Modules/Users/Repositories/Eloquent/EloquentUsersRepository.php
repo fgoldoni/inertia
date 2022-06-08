@@ -9,6 +9,7 @@
 
 namespace Modules\Users\Repositories\Eloquent;
 
+use App\Models\Team;
 use App\Models\User;
 use App\Repositories\RepositoryAbstract;
 use Modules\Users\Repositories\Contracts\UsersRepository;
@@ -21,5 +22,15 @@ class EloquentUsersRepository extends RepositoryAbstract implements UsersReposit
     public function model()
     {
         return User::class;
+    }
+
+
+    public function createTeam(User $user)
+    {
+        $user->ownedTeams()->save(Team::forceCreate([
+            'user_id' => $user->id,
+            'name' => explode(' ', (string) $user->name, 2)[0] . "'s Team",
+            'personal_team' => true,
+        ]));
     }
 }

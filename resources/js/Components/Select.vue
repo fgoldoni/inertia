@@ -43,7 +43,7 @@ const props = defineProps({
     },
 });
 
-const selected = computed(() => props.people.find(element => element.id === props.selected))
+const selected = computed(() => props.people.find(element => element.id === props.selected)) || props.people[0]
 
 
 const emit = defineEmits(['onSelect']);

@@ -31,6 +31,7 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
 
     abstract public function model();
 
+
     public function all($columns = ['*']): Collection
     {
         return $this->model->get($columns);
@@ -222,5 +223,10 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
     public function setVisible(string $attribute)
     {
         return $this->model->makeVisible($attribute);
+    }
+
+    public function make(array $attributes = [])
+    {
+        return $this->model->make($attributes);
     }
 }

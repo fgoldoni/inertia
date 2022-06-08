@@ -17,10 +17,10 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:50'],
-            'email' => ['required', 'max:50', 'email', Rule::unique('users')],
-            'role_id' => ['required', 'integer'],
-            'password' => ['nullable', Password::min(8)->letters()->mixedCase()],
-            'phone' => ['nullable', new Phone()],
+            'email' => ['required', 'max:100', 'email', Rule::unique('users')],
+            'role' => ['required', 'min:1', 'integer'],
+            'password' => ['required', Password::min(8)->letters()->mixedCase()],
+            'phone' => ['required', 'min:6', new Phone()],
         ];
     }
 

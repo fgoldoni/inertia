@@ -1,10 +1,14 @@
 <?php
 namespace Modules\Users\Http\Controllers;
 
+use App\Models\Team;
 use App\Models\User;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Select;
+use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereLike;
+use App\Repositories\Criteria\WhereNot;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -16,12 +20,11 @@ use Modules\Users\Http\Requests\StoreUserRequest;
 use Modules\Users\Http\Requests\UpdateUserRequest;
 use Modules\Users\Repositories\Contracts\UsersRepository;
 use Modules\Users\Transformers\UserCollection;
+use Symfony\Component\HttpFoundation\Response;
 
 class UsersController extends Controller
 {
-    public function __construct(private readonly UsersRepository $usersRepository, private readonly RolesRepository $rolesRepository, private readonly Request $request, private readonly Redirector $redirect)
-    {
-    }
+    public function __construct(private readonly UsersRepository $usersRepository, private readonly RolesRepository $rolesRepository, private readonly Request $request, private readonly Redirector $redirect, private readonly ResponseFactory $response) {}
 
     public function index(array $modalProps = [])
     {
@@ -49,13 +52,23 @@ class UsersController extends Controller
     {
         Inertia::modal('Modules/Users/CreateModal');
 
-        return $this->index();
+        return $this->index([
+            'editing' => new UserCollection($this->usersRepository->make([
+                'name' => 'test',
+                'email' => 'test' . uniqid() . '@test.com',
+                'phone' => '+4915736795436',
+            ])),
+            'roles' => $this->rolesRepository->withCriteria([
+                new Select('roles.id', 'roles.name', 'roles.display_name'),
+                new WhereNot('roles.name', config('app.system.users.roles.default'))
+            ])->all(),
+        ]);
     }
 
     public function store(StoreUserRequest $request)
     {
-        $user = $this->usersRepository->update(array_merge(
-            $request->only('name', 'email'),
+        $user = $this->usersRepository->create(array_merge(
+            $request->only('name', 'email', 'phone'),
             [
                 'email_verified_at' => now(),
                 'password' => bcrypt('00000000'),
@@ -63,16 +76,14 @@ class UsersController extends Controller
             ]
         ));
 
-        $user->assignRole(config('app.system.users.roles.default'));
+        $user->syncRoles($request->get('role'));
 
-        return $this->redirect->route('users')->with('flash', 'User created.');
+        $this->usersRepository->createTeam($user);
+
+        return $this->response->json(['message' => __(':user created successfully.', ['user' => $user->name])], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
+
     public function show($id)
     {
         return view('users::show');

@@ -51,4 +51,6 @@ interface RepositoryInterface
     public function setHidden(string $attribute);
 
     public function setVisible(string $attribute);
+
+    public function make(array $attributes = []);
 }

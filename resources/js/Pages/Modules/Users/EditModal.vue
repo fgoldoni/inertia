@@ -24,7 +24,7 @@ const props = defineProps({
 
 const enabled = ref(false)
 const showPassword = ref(false)
-const isOpen = ref(false)
+const isOpen = ref(true)
 const queryString = pickBy({perPage: props.filters.perPage, page: props.filters.page, search: props.filters.search})
 
 
@@ -38,12 +38,7 @@ const form = useForm({
 });
 
 onMounted(() => {
-    if (!isOpen.value) {
-        setTimeout(() => {
-            isOpen.value = true
-            setTimeout(() => internationalNumber('#phone').init(), 500);
-        }, 500);
-    }
+    internationalNumber('#phone').init();
 })
 
 const redirectBack = () => window.location = route('admin.users.index', queryString)

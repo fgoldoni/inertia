@@ -4,6 +4,8 @@ namespace Modules\Users\Transformers;
 
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Roles\Entities\Role;
+use Modules\Roles\Http\Controllers\RolesController;
 
 class UserCollection extends JsonResource
 {
@@ -20,8 +22,8 @@ class UserCollection extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
-            'role' => $this->roles->value('id'),
-            'created_at' => $this->created_at->formatLocalized('%d %B, %Y'),
+            'role' => $this->roles->value('id') ?? Role::where('name', config('app.system.users.roles.manager'))->first()->id,
+            'created_at' => $this->created_at?->formatLocalized('%d %B, %Y'),
             'verified' => !is_null($this->email_verified_at),
         ];
     }
