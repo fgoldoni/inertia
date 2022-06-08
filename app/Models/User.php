@@ -61,4 +61,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Define if user is an admin.
+     */
+    public function isAdministrator(): bool
+    {
+        return $this->hasRole(config('app.system.users.roles.administrator'));
+    }
 }

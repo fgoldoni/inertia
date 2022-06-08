@@ -3,6 +3,10 @@ import { onMounted, ref } from 'vue';
 
 defineProps({
     modelValue: String,
+    placeholder: {
+        type: String,
+        default: '',
+    },
 });
 
 defineEmits(['update:modelValue']);

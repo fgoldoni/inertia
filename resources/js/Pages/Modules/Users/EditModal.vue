@@ -1,6 +1,10 @@
 <script setup>
 
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+
+import internationalNumber from '@/Plugins/internationalNumber'
+
+import 'intl-tel-input/build/css/intlTelInput.css'
 
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 
@@ -16,10 +20,19 @@ import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
 
 import JetInputError from '@/Jetstream/InputError.vue';
 
+import pickBy from 'lodash/pickBy'
+
+import zxcvbn from 'zxcvbn'
+
+import {generatePassword, strengthLevels} from '@/generatePassword'
+
+
 
 const enabled = ref(false)
 
-const isOpen = ref(true)
+const showPassword = ref(false)
+
+const isOpen = ref(false)
 
 const props = defineProps({
 
@@ -28,6 +41,8 @@ const props = defineProps({
     roles: Object,
 
     errors: Object,
+
+    filters: Object,
 
 });
 
@@ -39,59 +54,80 @@ const form = useForm({
 
     email: props.editing.email,
 
-    role_id: props.editing.roles[0].id,
+    phone: props.editing.phone,
+
+    role: props.editing.role,
+
+    password: '',
 
 });
 
-const updateInputRole = (role) => {
+onMounted(() => {
 
-    form.role_id = role.id
+    if (!isOpen.value) {
+        setTimeout(() => {
+            isOpen.value = true
+            setTimeout(() => internationalNumber('#phone').init(), 500);
+        }, 500);
+    }
+})
 
-}
+const updateInputRole = (role) => { form.role = role.id }
+
+const close = () => {console.log('close')}
+
+const generate = () => { form.password = generatePassword() }
+
+const score = computed(() => zxcvbn(form.password).score)
 
 </script>
 
 <template>
-    <TransitionRoot
-        :show="isOpen"
+    <TransitionRoot as="template"
+                    :show="isOpen"
 
-        as="template"
+                    enter="transition-opacity duration-500"
+                    enter-from="opacity-0"
+                    enter-to="opacity-100"
+                    leave="transition-opacity duration-500"
+                    leave-from="opacity-100"
+                    leave-to="opacity-0"
 
-        enter="delay-200 duration-300 ease-out"
-
-        enter-from="opacity-0"
-
-        enter-to="opacity-100"
-
-        leave="duration-200 ease-in"
-
-        leave-from="opacity-100"
-
-        leave-to="opacity-0"
     >
-        <Dialog as="div" class="relative z-10">
-            <TransitionChild
-                as="template"
-                enter="ease-out duration-300"
-                enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                enter-to="opacity-100 translate-y-0 sm:scale-100"
-                leave="ease-in duration-200"
-                leave-from="opacity-100 translate-y-0 sm:scale-100"
-                leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+        <Dialog as="div" class="relative z-10" @close="close">
+            <TransitionChild as="template"
+                             enter="transition-opacity ease-linear duration-300"
+                             enter-from="opacity-0"
+                             enter-to="opacity-100"
+                             leave="transition-opacity ease-linear duration-300"
+                             leave-from="opacity-100"
+                             leave-to="opacity-0"
+            >
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
             </TransitionChild>
 
             <div class="fixed z-10 inset-0 overflow-y-auto">
                 <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-                    <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 sm:scale-100" leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-                        <DialogPanel class="relative bg-white px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-4xl sm:w-full sm:p-6">
-                            <JetValidationErrors class="mb-4" />
+                    <TransitionChild as="template"
+                                     enter="transition ease-in-out duration-300 transform"
+                                     enter-from="-translate-x-full"
+                                     enter-to="translate-x-0"
+                                     leave="transition ease-in-out duration-300 transform"
+                                     leave-from="translate-x-0"
+                                     leave-to="-translate-x-full"
+                    >
+                        <DialogPanel class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-3xl sm:w-full">
+
                             <form @submit.prevent="form.put(route('admin.users.update', form.id))">
-                                <div>
-                                    <div class="mb-3">
-                                        <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900"> Payment successful </DialogTitle>
-                                    </div>
-                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                    <div>
+
+                                        <JetValidationErrors class="mb-4" />
+
+                                        <div class="mb-3">
+                                            <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900"> Edit Modal </DialogTitle>
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
                                             <div class="col-span-1 sm:col-span-3">
                                                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
                                                     <div class="col-span-1 sm:col-span-2">
@@ -112,7 +148,8 @@ const updateInputRole = (role) => {
                                                             </div>
 
                                                             <div class="col-span-1">
-                                                                <Select :people="props.roles" v-if="props.roles" @on-select="updateInputRole" :selected="form.role_id"></Select>
+                                                                <Select :people="props.roles" v-if="props.roles" @on-select="updateInputRole" :selected="form.role"></Select>
+                                                                <JetInputError :message="errors.role" class="mt-2" />
                                                             </div>
 
                                                             <div class="col-span-1 sm:col-span-2">
@@ -129,6 +166,49 @@ const updateInputRole = (role) => {
                                                                 <JetInputError :message="errors.email" class="mt-2" />
                                                             </div>
 
+                                                            <div class="col-span-1 sm:col-span-2">
+                                                                <div class="flex items-center justify-between">
+                                                                    <JetLabel for="password" value="Password" />
+                                                                    <div class="flex items-center divide-x divide-secondary-200 dark:divide-secondary-600">
+                                                                        <button @click="generate" type="button" class="pr-2 text-primary-600 text-sm font-medium leading-5 hover:text-primary-500 hover:underline dark:text-primary-500/50">
+                                                                            Generate
+                                                                        </button>
+                                                                        <button  @click="showPassword = !showPassword" v-text="showPassword ? 'Hide' : 'Show'" type="button"
+                                                                            class="pl-2 text-sm text-leading-5 text-primary-600 hover:text-primary-700 focus:outline-none focus:text-primary-700 hover:underline dark:text-primary-500/50">
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <JetInput
+                                                                    id="password"
+                                                                    v-model="form.password"
+                                                                    :type="showPassword ? 'text' : 'password'"
+                                                                    class="mt-1 block w-full"
+                                                                    autocomplete="new-password"
+                                                                />
+                                                            </div>
+
+                                                            <div class="col-span-1 sm:col-span-2">
+                                                                <span class="text-sm">
+                                                                    <span class="text-sm font-medium text-secondary-500 truncate">Password strength:</span> {{ strengthLevels[score] ?? 'Weak' }}
+                                                                </span>
+                                                                <progress :value="score" max="4" class="w-full"></progress>
+                                                            </div>
+
+                                                            <div class="col-span-1 sm:col-span-2">
+
+                                                                <JetLabel for="phone" value="Phone"/>
+
+                                                                <JetInput
+                                                                    id="phone"
+                                                                    v-model="form.phone"
+                                                                    type="text"
+                                                                    class="mt-1 block w-full"
+                                                                    placeholder="Phone"
+                                                                    required
+                                                                    autofocus/>
+
+                                                                <JetInputError :message="errors.phone" class="mt-2" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-span-1">
@@ -154,11 +234,12 @@ const updateInputRole = (role) => {
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
-                                <div class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
-                                <button type="submit" :disabled="form.processing" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Deactivate</button>
-                                <Link :href="route('admin.users.index')" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm" ref="cancelButtonRef">Cancel</Link>
-                            </div>
+                                <div class="bg-secondary-100 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                    <button type="submit" :disabled="form.processing" class="uppercase w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">Deactivate</button>
+                                    <Link :href="route('admin.users.index')"  preserve-state  preserve-scroll :data="pickBy({ perPage: props.filters.perPage, page: props.filters.page, search: props.filters.search })" class="uppercase mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" ref="cancelButtonRef">Cancel</Link>
+                                </div>
                             </form>
                         </DialogPanel>
                     </TransitionChild>

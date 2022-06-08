@@ -2,6 +2,7 @@
 namespace Modules\Users\Http\Controllers;
 
 use App\Models\User;
+use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Support\Renderable;
@@ -14,6 +15,7 @@ use Modules\Roles\Repositories\Contracts\RolesRepository;
 use Modules\Users\Http\Requests\StoreUserRequest;
 use Modules\Users\Http\Requests\UpdateUserRequest;
 use Modules\Users\Repositories\Contracts\UsersRepository;
+use Modules\Users\Transformers\UserCollection;
 
 class UsersController extends Controller
 {
@@ -24,15 +26,21 @@ class UsersController extends Controller
     public function index(array $modalProps = [])
     {
         return Inertia::render('Modules/Users/Index', array_merge([
-            'filters' => $this->request->only(['search', 'perPage']),
+            'filters' => $this->request->only(['search', 'perPage', 'page']),
             'users' => $this->usersRepository->withCriteria([
-                new WhereLike(['users.id', 'users.name', 'users.email'], $this->request->get('search'))
+                new WhereLike(['users.id', 'users.name', 'users.email'], $this->request->get('search')),
+                new EagerLoad(['roles:id,name,display_name']),
             ])->paginate()
                 ->withQueryString()
                 ->through(fn ($user) => [
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
+                    'phone' => $user->phone,
+                    'image' => $user->profile_photo_url,
+                    'role' => $user->roles->value('display_name'),
+                    'isAdministrator' => $user->isAdministrator(),
+                    'access' => $user->hasRole(config('app.system.users.roles.administrator')) ? __('Full') : __('Limited'),
                 ]),
         ], $modalProps));
     }
@@ -75,7 +83,7 @@ class UsersController extends Controller
         Inertia::modal('Modules/Users/EditModal');
 
         return $this->index([
-            'editing' => $user->load('roles:id'),
+            'editing' => new UserCollection($user->load('roles:id')),
             'roles' => $this->rolesRepository->withCriteria([
                 new Select('roles.id', 'roles.name', 'roles.display_name')
             ])->all(),
@@ -86,7 +94,7 @@ class UsersController extends Controller
     {
         $this->usersRepository->update($user->id, $request->only('name', 'email'));
 
-        $user->syncRoles($request->get('role_id'));
+        $user->syncRoles($request->get('role'));
 
         return $this->redirect->route('admin.users.index')->banner('User created.');
     }

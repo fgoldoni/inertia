@@ -51,9 +51,9 @@
                                     <input type="checkbox" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6" :checked="indeterminate || selectedUsers.length === users.data.length" :indeterminate="indeterminate" @change="selectedUsers = $event.target.checked ? users.data.map((p) => p.id) : []" />
                                 </th>
                                 <th scope="col" class="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">Name</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Role</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Access</th>
                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                     <span class="sr-only">Edit</span>
                                 </th>
@@ -65,21 +65,44 @@
                                     <div v-if="selectedUsers.includes(user.id)" class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"></div>
                                     <input type="checkbox" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6" :value="user.id" v-model="selectedUsers" />
                                 </td>
-                                <td :class="['whitespace-nowrap py-4 pr-3 text-sm font-medium', selectedUsers.includes(user.email) ? 'text-indigo-600' : 'text-gray-900']">
-                                    {{ user.name }}
+                                <td :class="['whitespace-nowrap py-4 pr-3 text-sm font-medium', selectedUsers.includes(user.id) ? 'text-indigo-600' : 'text-gray-900']">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 flex-shrink-0">
+                                            <img class="h-10 w-10 rounded-full" :src="user.image" alt="" />
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="font-medium text-gray-900">{{ user.name }}</div>
+                                            <div class="text-gray-500">{{ user.email }}</div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    {{ user.title }}
+                                    <div class="flex">
+                                        <div class="group inline-flex space-x-2 truncate text-sm cursor-pointer">
+                                            <ShieldCheckIcon class="flex-shrink-0 h-5 w-5 text-green-500 group-hover:text-green-700" aria-hidden="true" />
+                                            <p class="text-gray-500 truncate group-hover:text-gray-900">
+                                                {{ user.email }}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    {{ user.email }}
+                                   <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-secondary-100 text-secondary-800 dark:bg-secondary-700 dark:text-secondary-400">
+                                        {{ user.role }}
+                                   </span>
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    {{ user.role }}
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-right">
+                                    {{ user.access }}
                                 </td>
-                                <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <Link :href="route('admin.users.edit', {'user': user.id})" preserve-state class="text-indigo-600 hover:text-indigo-900">
-                                        Edit<span class="sr-only">, {{ user.name }}</span>
+                                <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 text-right cursor-pointer">
+                                    <span v-if="$page.props.user.id === user.id" class="group flex items-center flex-row-reverse text-sm leading-5 text-secondary-500 text-right dark:text-secondary-400">
+                                        <span class="text-gray-500 truncate group-hover:text-gray-900">Me</span>
+                                        <UserCircleIcon class="flex-shrink-0 h-5 w-5 text-green-500 group-hover:text-green-700 mr-1" aria-hidden="true" />
+                                    </span>
+
+                                    <Link v-if="$page.props.auth.user.isAdministrator && ! user.isAdministrator" :href="route('admin.users.edit', {'user': user.id})" preserve-state  preserve-scroll :data="pickBy({ perPage: form.perPage, page: form.page, search: form.search })" class="group flex flex-row-reverse items-center hover:shadow-2xl">
+                                        <PencilAltIcon class="flex-shrink-0 h-5 w-5 text-primary-500 group-hover:text-primary-700 mr-1 transition ease-in-out delay-150 group-hover:-translate-y-1 group-hover:scale-125 duration-300" aria-hidden="true" />
+                                        <span class="sr-only">, {{ user.name }}</span>
                                     </Link>
                                 </td>
                             </tr>
@@ -104,7 +127,7 @@ import Pagination from '@/Components/Pagination'
 import {useForm, Link, Head} from "@inertiajs/inertia-vue3";
 import pickBy from 'lodash/pickBy'
 import debounce from 'lodash/debounce'
-import { PlusIcon } from '@heroicons/vue/solid'
+import { PlusIcon, ShieldCheckIcon, PencilAltIcon, UserCircleIcon } from '@heroicons/vue/solid'
 
 const props = defineProps({
     filters: Object,
@@ -117,13 +140,14 @@ const indeterminate = computed(() => selectedUsers.value.length > 0 && selectedU
 
 const form = useForm({
     perPage: props.filters.perPage,
+    page: props.filters.page,
     search: props.filters.search,
     role: props.filters.role,
     trashed: props.filters.trashed,
 });
 
 watch(form,  debounce((value) => {
-    Inertia.get(route('admin.users.index'), pickBy(value), { replace: true, preserveState: true })
+    Inertia.get(route('admin.users.index'), pickBy({ perPage: form.perPage, page: form.page, search: form.search }), { replace: true, preserveState: true })
 }, 300), { deep: true });
 
 const reset = () => {
