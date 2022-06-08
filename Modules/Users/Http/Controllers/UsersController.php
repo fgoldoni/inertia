@@ -92,11 +92,17 @@ class UsersController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
+        $this->usersRepository->update($user->id, array_merge(
+            $request->only('name', 'email', 'phone'),
+            [
+                'password' => bcrypt($request->get('password')),
+            ]
+        ));
         $this->usersRepository->update($user->id, $request->only('name', 'email'));
 
         $user->syncRoles($request->get('role'));
 
-        return $this->redirect->route('admin.users.index')->banner('User created.');
+        return $this->redirect->route('admin.users.index', [http_build_query($request->only(['page', 'perPage', 'search']))])->banner(__(':user updated successfully.', ['user' => $user->name]));
     }
 
     /**

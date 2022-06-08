@@ -124,7 +124,7 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
 
     public function paginate(int $perPage = null, $columns = ['*'], $method = 'paginate'): LengthAwarePaginator
     {
-        $perPage ??= request()->get('perPage', 10);
+        $perPage ??= request()->get('perPage', 5);
 
         return $this->model->{$method}($perPage, $columns);
     }

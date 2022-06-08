@@ -2,16 +2,13 @@
 
 declare(strict_types=1);
 
-use Rector\Core\Configuration\Option;
-use Rector\Php74\Rector\Property\TypedPropertyRector;
+use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
+use Rector\Config\RectorConfig;
+use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\LevelSetList;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    // get parameters
-    $parameters = $containerConfigurator->parameters();
-
-    $parameters->set(Option::PATHS, [
+return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->paths([
         __DIR__ . '/app',
         __DIR__ . '/database',
 
@@ -19,18 +16,19 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/Modules/Users/Entities',
         __DIR__ . '/Modules/Users/Http',
         __DIR__ . '/Modules/Users/Providers',
+
         __DIR__ . '/Modules/Roles/Database',
         __DIR__ . '/Modules/Roles/Entities',
         __DIR__ . '/Modules/Roles/Http',
         __DIR__ . '/Modules/Roles/Providers',
     ]);
 
-    // Define what rule sets will be applied
-    $containerConfigurator->import(LevelSetList::UP_TO_PHP_81);
-
-    // get services (needed for register a single rule)
-    // $services = $containerConfigurator->services();
-
     // register a single rule
-    // $services->set(TypedPropertyRector::class);
+    $rectorConfig->rule(InlineConstructorDefaultToPropertyRector::class);
+
+    $rectorConfig->phpVersion(PhpVersion::PHP_81);
+
+    $rectorConfig->sets([
+        LevelSetList::UP_TO_PHP_81
+    ]);
 };

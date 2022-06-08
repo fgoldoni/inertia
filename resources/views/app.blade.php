@@ -14,12 +14,12 @@
 
         <!-- Scripts -->
         @routes
-        <script src="{{ mix('js/manifest.js') }}" defer></script>
-        <script src="{{ mix('js/vendor.js') }}" defer></script>
         <script src="{{ mix('js/app.js') }}" defer></script>
         @inertiaHead
     </head>
     <body class="h-full font-sans antialiased">
         @inertia
+
+        <x-translations></x-translations>
     </body>
 </html>

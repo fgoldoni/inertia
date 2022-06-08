@@ -21,6 +21,8 @@ class UserCollection extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'role' => $this->roles->value('id'),
+            'created_at' => $this->created_at->formatLocalized('%d %B, %Y'),
+            'verified' => !is_null($this->email_verified_at),
         ];
     }
 }

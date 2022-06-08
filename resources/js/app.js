@@ -1,46 +1,49 @@
 import './bootstrap';
 
-import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/inertia-vue3';
-import { InertiaProgress } from '@inertiajs/progress';
-import { useModal } from '@/UseModal';
-import Layout from '@/Layouts/App';
+import {createApp, h} from 'vue'
 
+import {createInertiaApp} from '@inertiajs/inertia-vue3'
+
+import {InertiaProgress} from '@inertiajs/progress'
+
+import {useModal} from '@/Mixins/UseModal'
+
+import Layout from '@/Layouts/App'
+
+import {translations} from '@/Mixins/translations'
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
-InertiaProgress.init({
-    // The delay after which the progress bar will
-    // appear during navigation, in milliseconds.
-    delay: 250,
-
-    // The color of the progress bar.
-    color: '#29d',
-
-    // Whether to include the default NProgress styles.
-    includeCSS: true,
-
-    // Whether the NProgress spinner will be shown.
-    showSpinner: true,
-})
-
 createInertiaApp({
+
     title: (title) => `${title} - ${appName}`,
+
     resolve: async name => {
+
         let page = (await require(`./Pages/${name}.vue`)).default
 
         page.layout ??= Layout;
 
         return page;
     },
-    setup({ el, app, props, plugin }) {
-        return createApp({ render: () => h(app, props) })
+    setup({el, app, props, plugin}) {
+
+        return createApp({render: () => h(app, props)})
+
             .use(plugin)
-            .mixin({ methods: { route } })
+
+            .mixin({methods: {route}})
+
             .mixin(useModal)
+
+            .mixin(translations)
+
             .mount(el);
     },
+
 });
+
+InertiaProgress.init()
 
 
 

@@ -1,11 +1,8 @@
-import {HomeIcon} from "@heroicons/vue/outline";
-
-const size = 32
 const characters = 'a-z,A-Z,0-9,#'
 
 export const strengthLevels = { 1: 'Weak', 2: 'Fair', 3: 'Good', 4: 'Strong' };
 
-export const generatePassword = () => {
+export const generatePassword = (size = 32) => {
 
     let charactersArray = characters.split(',')
     let CharacterSet = ''

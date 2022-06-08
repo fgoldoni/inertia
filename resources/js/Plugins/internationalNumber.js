@@ -5,7 +5,7 @@ export default (element) => ({
 
     init() {
         const phoneNumber = document.querySelector(this.input);
-        debugger
+
         let iti = intlTelInput(phoneNumber, {
             nationalMode: true,
             geoIpLookup: function(success, failure) {
