@@ -1,6 +1,6 @@
 <script setup>
-import {ref, computed, onMounted} from 'vue'
-import {useForm, Link} from "@inertiajs/inertia-vue3";
+import {ref, computed, onMounted, reactive} from 'vue'
+import {Link} from "@inertiajs/inertia-vue3";
 import {CalendarIcon, LockOpenIcon, AcademicCapIcon} from '@heroicons/vue/solid'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import pickBy from 'lodash/pickBy'
@@ -13,6 +13,9 @@ import Select from '@/Components/Select'
 import internationalNumber from '@/Plugins/internationalNumber'
 import 'intl-tel-input/build/css/intlTelInput.css'
 import {generatePassword, strengthLevels} from '@/Plugins/generatePassword'
+import { Errors } from "@/Plugins/errors";
+import LoadingButton from '@/Shared/LoadingButton'
+import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 
 
 const props = defineProps({
@@ -27,13 +30,16 @@ const showPassword = ref(false)
 const isOpen = ref(true)
 
 
-const form = useForm({
+const form = reactive({
     id: props.editing.id,
     name: props.editing.name,
     email: props.editing.email,
     phone: props.editing.phone,
     role: props.editing.role,
+    verified: props.editing.verified,
+    errors: new Errors(),
     password: '',
+    processing: false,
 });
 
 onMounted(() => {
@@ -41,7 +47,7 @@ onMounted(() => {
 })
 
 const redirectBack = () => window.location = route('admin.users.index', queryString())
-const close = () => redirectBack()
+const closeModal = () => redirectBack()
 const updateInputRole = (role) => form.role = role.id
 const generate = () => {
     form.password = generatePassword(10)
@@ -52,11 +58,23 @@ const score = computed(() => zxcvbn(form.password).score)
 
 const  queryString = () => pickBy({perPage: props.filters.perPage, page: props.filters.page, search: props.filters.search, field: props.filters.field, direction: props.filters.direction})
 
-const submit = () => {
-    form.transform(data => ({
-        ...data,
-        ...queryString,
-    })).put(route('admin.users.update', form.id));
+const onSubmit = () => {
+    form.processing = true;
+
+    axios.put(route('admin.users.update', form.id), {
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        role: form.role,
+        password: form.password,
+        verified: form.verified,
+        ...queryString(),
+    }).then(() => {
+        form.processing = false;
+    }).catch(error => {
+        form.processing = false;
+        form.errors.record(error.response.data.errors);
+    });
 };
 </script>
 
@@ -70,7 +88,7 @@ const submit = () => {
                     leave-from="opacity-100"
                     leave-to="opacity-0">
 
-        <Dialog as="div" class="relative z-10" @close="close">
+        <Dialog as="div" class="relative z-10" @close="closeModal">
 
             <TransitionChild as="template"
                              enter="transition-opacity ease-linear duration-300"
@@ -99,7 +117,7 @@ const submit = () => {
                         <DialogPanel
                             class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-4xl sm:w-full">
 
-                            <form @submit.prevent="submit">
+                            <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
 
                                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
@@ -132,13 +150,14 @@ const submit = () => {
 
                                                                 <JetInput
                                                                     id="name"
+                                                                    name="name"
                                                                     v-model="form.name"
                                                                     type="text"
                                                                     class="mt-1 block w-full"
                                                                     required
                                                                     autofocus/>
 
-                                                                <JetInputError :message="errors.name" class="mt-2"/>
+                                                                <JetInputError :message="form.errors.get('name')" class="mt-2"/>
                                                             </div>
 
                                                             <div class="col-span-1">
@@ -148,7 +167,7 @@ const submit = () => {
                                                                         @on-select="updateInputRole"
                                                                         :selected="form.role"/>
 
-                                                                <JetInputError :message="errors.role" class="mt-2"/>
+                                                                <JetInputError :message="form.errors.get('role')" class="mt-2"/>
                                                             </div>
 
                                                             <div class="col-span-1 sm:col-span-2">
@@ -157,12 +176,13 @@ const submit = () => {
 
                                                                 <JetInput
                                                                     id="email"
+                                                                    name="email"
                                                                     v-model="form.email"
                                                                     type="text"
                                                                     class="mt-1 block w-full"
                                                                     required/>
 
-                                                                <JetInputError :message="errors.email" class="mt-2"/>
+                                                                <JetInputError :message="form.errors.get('email')" class="mt-2"/>
 
                                                             </div>
 
@@ -172,6 +192,7 @@ const submit = () => {
 
                                                                 <JetInput
                                                                     id="phone"
+                                                                    name="phone"
                                                                     v-model="form.phone"
                                                                     type="text"
                                                                     class="mt-1 block w-full"
@@ -179,7 +200,7 @@ const submit = () => {
                                                                     required
                                                                     autofocus/>
 
-                                                                <JetInputError :message="errors.phone" class="mt-2"/>
+                                                                <JetInputError :message="form.errors.get('phone')" class="mt-2"/>
                                                             </div>
 
                                                             <div class="col-span-1 sm:col-span-2">
@@ -210,12 +231,13 @@ const submit = () => {
 
                                                                 <JetInput
                                                                     id="password"
+                                                                    name="password"
                                                                     v-model="form.password"
                                                                     :type="showPassword ? 'text' : 'password'"
                                                                     class="mt-1 block w-full"
                                                                     autocomplete="new-password"
                                                                 />
-
+                                                                <JetInputError :message="form.errors.get('password')" class="mt-2"/>
                                                             </div>
 
                                                             <div class="col-span-1 sm:col-span-2">
@@ -258,6 +280,19 @@ const submit = () => {
 
                                                                         <span
                                                                             class="text-green-700 text-sm font-medium">Verified</span>
+
+                                                                    </div>
+
+                                                                    <div class="flex items-center space-x-2" v-else>
+
+                                                                        <SwitchGroup as="div" class="flex items-center">
+                                                                            <Switch v-model="form.verified" :class="[form.verified ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
+                                                                                <span aria-hidden="true" :class="[form.verified ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
+                                                                            </Switch>
+                                                                            <SwitchLabel as="span" class="ml-3">
+                                                                                <span class="text-sm font-medium text-gray-900">Mark as verified</span>
+                                                                            </SwitchLabel>
+                                                                        </SwitchGroup>
 
                                                                     </div>
 
@@ -304,15 +339,16 @@ const submit = () => {
 
                                 <div class="bg-secondary-100 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
 
-                                    <button type="submit" :disabled="form.processing"
-                                            class="uppercase w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                    <LoadingButton type="submit" :loading="form.processing"
+                                                   class="uppercase w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm">
 
-                                        {{ __('Deactivate') }}
+                                        {{ __('Save') }}
 
-                                    </button>
+                                    </LoadingButton>
+
 
                                     <Link :href="route('admin.users.index')" preserve-state preserve-scroll
-                                          :data="pickBy({ perPage: props.filters.perPage, page: props.filters.page, search: props.filters.search })"
+                                          :data="queryString()"
                                           class="uppercase mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                                           ref="cancelButtonRef">
 

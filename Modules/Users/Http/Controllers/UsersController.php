@@ -53,7 +53,7 @@ class UsersController extends Controller
                     'isAdministrator' => $user->isAdministrator(),
                     'access' => $user->hasRole(config('app.system.users.roles.administrator')) ? __('Full') : __('Limited'),
                     'created_at' => $user->created_at?->formatLocalized('%d %B, %Y'),
-                    'verified' => !is_null($user->email_verified_at),
+                    'verified' => $user->hasVerifiedEmail(),
                 ]),
         ], $modalProps));
     }
@@ -123,11 +123,14 @@ class UsersController extends Controller
                 'password' => bcrypt($request->get('password')),
             ]
         ));
-        $this->usersRepository->update($user->id, $request->only('name', 'email'));
+
+        if ($request->get('verified')) {
+            $this->usersRepository->update($user->id,  ['email_verified_at' => now()]);
+        }
 
         $user->syncRoles($request->get('role'));
 
-        return $this->redirect->route('admin.users.index', [http_build_query($request->only(['page', 'perPage', 'search']))])->banner(__(':user updated successfully.', ['user' => $user->name]));
+        return $this->response->json(['message' => __(':user updated successfully.', ['user' => $user->name])], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK);
     }
 
     /**

@@ -112,7 +112,7 @@ const onSubmit = () => {
                         <DialogPanel
                             class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-4xl sm:w-full">
 
-                            <form @submit.prevent="onSubmit()" @keydown="form.errors.clear($event.target.name)">
+                            <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
 
                                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 

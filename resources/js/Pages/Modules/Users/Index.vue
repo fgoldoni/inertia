@@ -1,7 +1,7 @@
 <script setup>
 import {computed, ref, watch, reactive} from 'vue';
 import {Inertia} from '@inertiajs/inertia';
-import {PlusIcon, ShieldCheckIcon, PencilAltIcon, UserCircleIcon, RefreshIcon} from '@heroicons/vue/solid';
+import {PlusIcon, ShieldCheckIcon, PencilAltIcon, UserCircleIcon, RefreshIcon, ShieldExclamationIcon} from '@heroicons/vue/solid';
 import {SortAscendingIcon, SortDescendingIcon} from '@heroicons/vue/outline';
 import {useForm, Link, Head} from "@inertiajs/inertia-vue3";
 import pickBy from 'lodash/pickBy';
@@ -320,9 +320,8 @@ const sendEmailVerificationNotification = (id) => {
 
                                         <div class="group inline-flex space-x-2 truncate text-sm cursor-pointer">
 
-                                            <ShieldCheckIcon
-                                                class="flex-shrink-0 h-5 w-5 text-green-500 group-hover:text-green-700"
-                                                aria-hidden="true"/>
+                                            <ShieldCheckIcon v-if="user.verified" class="flex-shrink-0 h-5 w-5 text-green-500 group-hover:text-green-700" aria-hidden="true"/>
+                                            <ShieldExclamationIcon v-else class="flex-shrink-0 h-5 w-5 text-rose-500 group-hover:text-rose-700" aria-hidden="true"/>
 
                                             <p class="text-gray-500 truncate group-hover:text-gray-900">
 

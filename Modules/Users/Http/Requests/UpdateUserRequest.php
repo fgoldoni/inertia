@@ -16,11 +16,11 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:50'],
+            'name' => ['required', 'max:100'],
             'email' => ['required', 'max:100', 'email', Rule::unique('users')->ignore($this->user->id)],
             'role' => ['required', 'min:1', 'integer'],
             'password' => ['nullable', Password::min(8)->letters()->mixedCase()],
-            'phone' => ['nullable', new Phone()],
+            'phone' => ['nullable', 'min:6', new Phone()],
         ];
     }
 
