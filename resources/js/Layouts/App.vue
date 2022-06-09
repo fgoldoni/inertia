@@ -34,7 +34,7 @@
                             </div>
                             <div class="mt-5 flex-1 h-0 overflow-y-auto">
                                 <nav class="px-2 space-y-1">
-                                    <NavLink v-for="item in navigation" :key="item.name" :href="item.href" :active="item.current">
+                                    <NavLink v-for="item in navigation" :key="item.name" :href="route(item.href)" :active="route().current(item.href)">
                                         <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
                                         {{ item.name }}
                                     </NavLink>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="mt-5 flex-grow flex flex-col">
                     <nav class="flex-1 px-2 pb-4 space-y-1">
-                        <NavLink v-for="item in navigation" :key="item.name" :href="item.href" :active="item.current">
+                        <NavLink v-for="item in navigation" :key="item.name" :href="route(item.href)" :active="route().current(item.href)">
                             <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
                             {{ item.name }}
                         </NavLink>

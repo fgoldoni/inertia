@@ -27442,8 +27442,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   }), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.navigation, function (item) {
                     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["NavLink"], {
                       key: item.name,
-                      href: item.href,
-                      active: item.current
+                      href: _ctx.route(item.href),
+                      active: _ctx.route().current(item.href)
                     }, {
                       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                         return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(item.icon), {
@@ -27488,8 +27488,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["show"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Static sidebar for desktop "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar component, swap this element with another sidebar if you like "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_13, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.navigation, function (item) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["NavLink"], {
       key: item.name,
-      href: item.href,
-      active: item.current
+      href: _ctx.route(item.href),
+      active: _ctx.route().current(item.href)
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(item.icon), {
@@ -33489,37 +33489,37 @@ __webpack_require__.r(__webpack_exports__);
 
 var navigation = [{
   name: 'Dashboard',
-  href: route('dashboard'),
+  href: 'dashboard',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__["default"],
   current: route().current('dashboard')
 }, {
   name: 'Users',
-  href: route('admin.users.index'),
+  href: 'admin.users.index',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__["default"],
   current: route().current('users')
 }, {
   name: 'Team',
-  href: '#',
+  href: 'dashboard',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
   current: false
 }, {
   name: 'Projects',
-  href: '#',
+  href: 'dashboard',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
   current: false
 }, {
   name: 'Calendar',
-  href: '#',
+  href: 'dashboard',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
   current: false
 }, {
   name: 'Documents',
-  href: '#',
+  href: 'dashboard',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__["default"],
   current: false
 }, {
   name: 'Reports',
-  href: '#',
+  href: 'dashboard',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_5__["default"],
   current: false
 }];
