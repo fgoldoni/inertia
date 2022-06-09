@@ -36,6 +36,8 @@ interface RepositoryInterface
 
     public function forceDelete(int $id);
 
+    public function deleteAll(): ?bool;
+
     public function restore(int $id);
 
     public function pluck($column, $key = null);

@@ -11,6 +11,9 @@
 |
 */
 
-Route::prefix('roles')->group(function() {
-    Route::get('/', 'RolesController@index');
+use Modules\Roles\Http\Controllers\RolesController;
+
+
+Route::prefix('admin')->middleware(['auth', 'verified', 'password.confirm', 'permission:browse_roles'])->as('admin.')->group(function () {
+    Route::resource('roles', RolesController::class);
 });

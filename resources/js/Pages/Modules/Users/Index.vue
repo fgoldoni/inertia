@@ -8,6 +8,8 @@ import pickBy from 'lodash/pickBy';
 import debounce from 'lodash/debounce';
 import SearchFilter from '@/Components/SearchFilter';
 import Pagination from '@/Components/Pagination';
+import ConfirmModal from '@/Shared/ConfirmModal';
+
 
 const props = defineProps({
     filters: Object,
@@ -15,6 +17,8 @@ const props = defineProps({
 });
 
 const selectedUsers = ref([]);
+
+const confirmingUserDeletion = ref(false);
 
 const formVerification = reactive({
     password: '',
@@ -56,11 +60,29 @@ const sendEmailVerificationNotification = (id) => {
         console.log(response.data.message)
     });
 };
+
+const confirmUserDeletion = () => {
+    confirmingUserDeletion.value = true;
+};
+
+const onCloseModal = (state) => {
+    if(!state) return confirmingUserDeletion.value = false;
+
+    axios.delete(route('admin.users.destroy', { selected: selectedUsers.value })).then(() => {
+        Inertia.reload({ only: ['users'] })
+        confirmingUserDeletion.value = false;
+    }).catch(error => {
+        confirmingUserDeletion.value = false;
+    });
+};
+
 </script>
 
 <template>
 
     <Head title="Users"></Head>
+
+    <ConfirmModal :open="confirmingUserDeletion" @on-close="onCloseModal"></ConfirmModal>
 
     <div class="px-4 sm:px-6 lg:px-8">
 
@@ -151,7 +173,7 @@ const sendEmailVerificationNotification = (id) => {
 
                             </button>
 
-                            <button type="button"
+                            <button type="button" @click="confirmUserDeletion"
                                     class="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30">
 
                                 Delete all

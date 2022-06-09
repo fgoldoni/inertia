@@ -148,12 +148,17 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
         return $record;
     }
 
-    public function delete(int $id)
+    public function delete(?int $id)
     {
         $record = $this->find($id);
         $record->delete();
 
         return $record;
+    }
+
+    public function deleteAll(): ?bool
+    {
+        return $this->model->delete();
     }
 
     public function forceDelete(int $id)

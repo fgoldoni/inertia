@@ -9,7 +9,7 @@ import JetLabel from '@/Jetstream/Label.vue';
 import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
 
 const form = useForm({
-    password: '',
+    password: '00000000',
 });
 
 const passwordInput = ref(null);

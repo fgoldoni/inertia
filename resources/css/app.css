@@ -4,6 +4,8 @@
 
 [x-cloak] { display: none !important; }
 
+[v-cloak] {display: none}
+
 .iti {
     display: block !important;
 }

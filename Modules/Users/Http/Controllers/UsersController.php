@@ -7,10 +7,14 @@ use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\Where;
+use App\Repositories\Criteria\WhereHas;
+use App\Repositories\Criteria\WhereIn;
+use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WhereNot;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
@@ -133,14 +137,18 @@ class UsersController extends Controller
         return $this->response->json(['message' => __(':user updated successfully.', ['user' => $user->name])], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+
+    public function destroy($selected)
     {
-        //
+        $this->usersRepository->withCriteria([
+            new WhereKey(explode(',', $selected)),
+            new WhereNot('users.id', auth()->user()->id),
+            new WhereHas('roles', function (Builder $query) {
+                $query->whereNot('roles.name', config('app.system.users.roles.administrator'));
+            })
+        ])->deleteAll();
+
+        return $this->response->json(['message' => __('User deleted successfully.')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
     }
 
 

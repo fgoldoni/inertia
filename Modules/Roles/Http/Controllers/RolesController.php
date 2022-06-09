@@ -1,25 +1,26 @@
 <?php
 namespace Modules\Roles\Http\Controllers;
 
+use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\OrderBy;
+use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Inertia\Inertia;
 
 class RolesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
+
+    public function index(array $modalProps = [])
     {
-        return view('roles::index');
+        return Inertia::render('Modules/Roles/Index', array_merge([
+            'filters' => [],
+            'roles' => []
+        ], $modalProps));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
+
     public function create()
     {
         return view('roles::create');
