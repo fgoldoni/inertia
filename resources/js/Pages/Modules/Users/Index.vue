@@ -1,7 +1,8 @@
 <script setup>
-import {computed, ref, watch} from 'vue';
+import {computed, ref, watch, reactive} from 'vue';
 import {Inertia} from '@inertiajs/inertia';
-import {PlusIcon, ShieldCheckIcon, PencilAltIcon, UserCircleIcon} from '@heroicons/vue/solid';
+import {PlusIcon, ShieldCheckIcon, PencilAltIcon, UserCircleIcon, RefreshIcon} from '@heroicons/vue/solid';
+import {SortAscendingIcon, SortDescendingIcon} from '@heroicons/vue/outline';
 import {useForm, Link, Head} from "@inertiajs/inertia-vue3";
 import pickBy from 'lodash/pickBy';
 import debounce from 'lodash/debounce';
@@ -15,10 +16,18 @@ const props = defineProps({
 
 const selectedUsers = ref([]);
 
+const formVerification = reactive({
+    password: '',
+    processing: false,
+});
+
+
 const form = useForm({
     perPage: props.filters.perPage || 5,
     page: props.filters.page,
     search: props.filters.search,
+    field: props.filters.field,
+    direction: props.filters.direction,
     role: props.filters.role,
     trashed: props.filters.trashed,
 });
@@ -26,14 +35,27 @@ const form = useForm({
 const indeterminate = computed(() => selectedUsers.value.length > 0 && selectedUsers.value.length < props.users.data.length)
 
 watch(form, debounce(() => {
-    Inertia.get(route('admin.users.index'), pickBy({
-        perPage: form.perPage,
-        page: form.page,
-        search: form.search
-    }), {replace: true, preserveState: true})
+    Inertia.get(route('admin.users.index'), queryString(), {replace: true, preserveState: true})
 }, 300), {deep: true});
 
+const  queryString = () => pickBy({perPage: form.perPage, page: form.page, search: form.search, field: form.field, direction: form.direction})
+
 const reset = () => form.reset();
+const updateSearch = (value) => form.search = value
+
+const sort = (name) => {
+    form.field = name;
+    form.direction = form.direction === 'asc' ? 'desc' : 'asc';
+};
+
+const sendEmailVerificationNotification = (id) => {
+    formVerification.processing = true;
+
+    return axios.get(route('admin.users.verification.send', { user: id })).then(response => {
+        formVerification.processing = false;
+        console.log(response.data.message)
+    });
+};
 </script>
 
 <template>
@@ -55,7 +77,7 @@ const reset = () => form.reset();
                 <Link :href="route('admin.users.create')"
                       preserve-state
                       preserve-scroll
-                      :data="pickBy({ perPage: form.perPage, page: form.page, search: form.search })"
+                      :data="queryString()"
                       class="uppercase inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 
                     <PlusIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true"/>
@@ -76,7 +98,7 @@ const reset = () => form.reset();
 
                     <div class="col-span-1">
 
-                        <SearchFilter v-model="form.search" @reset="reset"/>
+                        <SearchFilter v-model="form.search" @on-model-value="updateSearch" @reset="reset"/>
 
                     </div>
 
@@ -154,16 +176,76 @@ const reset = () => form.reset();
 
                                 </th>
 
-                                <th scope="col"
-                                    class="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
+                                <th scope="col" @click="sort('id')" class="w-12 sm:w-16 py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
 
-                                    {{ __('Name') }}
+                                    <span class="group inline-flex cursor-pointer">
+
+                                        {{ __('ID') }}
+
+                                        <span  v-if="form.field !== 'id'" class="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+
+                                            <SortDescendingIcon class="invisible ml-2 h-5 w-5 flex-none rounded text-gray-400 group-hover:visible group-focus:visible" aria-hidden="true" />
+
+                                        </span>
+
+                                         <span  v-if="form.field === 'id'" class="ml-2 flex-none rounded text-gray-400">
+
+                                            <SortAscendingIcon v-if="form.direction === 'desc'" class="ml-2 h-5 w-5 flex-none rounded text-gray-400" aria-hidden="true" />
+
+                                             <SortDescendingIcon v-if="form.direction === 'asc'" class="ml-2 h-5 w-5 flex-none rounded text-gray-400" aria-hidden="true" />
+
+                                        </span>
+
+                                    </span>
 
                                 </th>
 
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                <th scope="col"
+                                    @click="sort('name')"
+                                    class="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
 
-                                    {{ __('Email') }}
+                                    <span class="group inline-flex cursor-pointer">
+
+                                        {{ __('Name') }}
+
+                                         <span  v-if="form.field !== 'name'" class="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+
+                                            <SortDescendingIcon class="invisible ml-2 h-5 w-5 flex-none rounded text-gray-400 group-hover:visible group-focus:visible" aria-hidden="true" />
+
+                                        </span>
+
+                                         <span  v-if="form.field === 'name'" class="ml-2 flex-none rounded text-gray-400">
+
+                                            <SortAscendingIcon v-if="form.direction === 'desc'" class="ml-2 h-5 w-5 flex-none rounded text-gray-400" aria-hidden="true" />
+
+                                             <SortDescendingIcon v-if="form.direction === 'asc'" class="ml-2 h-5 w-5 flex-none rounded text-gray-400" aria-hidden="true" />
+
+                                        </span>
+
+                                    </span>
+
+                                </th>
+
+                                <th scope="col"  @click="sort('email')" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+
+                                    <span class="group inline-flex cursor-pointer">
+                                        {{ __('Email') }}
+
+                                        <span  v-if="form.field !== 'email'" class="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+
+                                            <SortDescendingIcon class="invisible ml-2 h-5 w-5 flex-none rounded text-gray-400 group-hover:visible group-focus:visible" aria-hidden="true" />
+
+                                        </span>
+
+                                         <span  v-if="form.field === 'email'" class="ml-2 flex-none rounded text-gray-400">
+
+                                            <SortAscendingIcon v-if="form.direction === 'desc'" class="ml-2 h-5 w-5 flex-none rounded text-gray-400" aria-hidden="true" />
+
+                                             <SortDescendingIcon v-if="form.direction === 'asc'" class="ml-2 h-5 w-5 flex-none rounded text-gray-400" aria-hidden="true" />
+
+                                        </span>
+
+                                    </span>
 
                                 </th>
 
@@ -172,6 +254,7 @@ const reset = () => form.reset();
                                     {{ __('Role') }}
 
                                 </th>
+
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
 
                                     {{ __('Access') }}
@@ -205,6 +288,12 @@ const reset = () => form.reset();
 
                                 <td :class="['whitespace-nowrap py-4 pr-3 text-sm font-medium', selectedUsers.includes(user.id) ? 'text-indigo-600' : 'text-gray-900']">
 
+                                    {{ user.id }}
+
+                                </td>
+
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+
                                     <div class="flex items-center">
 
                                         <div class="h-10 w-10 flex-shrink-0">
@@ -217,7 +306,7 @@ const reset = () => form.reset();
 
                                             <div class="font-medium text-gray-900">{{ user.name }}</div>
 
-                                            <div class="text-gray-500">{{ user.email }}</div>
+                                            <div class="text-sm leading-5 text-secondary-500 dark:text-secondary-400">Registered on  {{ user.created_at }}</div>
 
                                         </div>
 
@@ -244,6 +333,13 @@ const reset = () => form.reset();
                                         </div>
 
                                     </div>
+
+                                    <button  @click="sendEmailVerificationNotification(user.id)" v-if="!user.verified" class="mt-2 group inline-flex items-center space-x-2 truncate text-sm text-primary-700" :class="{ 'cursor-not-allowed': formVerification.processing }" :disabled="formVerification.processing">
+                                        <RefreshIcon v-if="formVerification.processing" class="animate-spin flex-shrink-0 h-5 w-5 text-secondary-400 group-hover:text-secondary-500" aria-hidden="true" />
+                                        <p :class="{ 'opacity-25': formVerification.processing }" class="underline text-gray-500 truncate group-hover:text-gray-900">
+                                            {{ __('Resend Verification Email') }}
+                                        </p>
+                                    </button>
 
                                 </td>
 
@@ -280,7 +376,7 @@ const reset = () => form.reset();
                                     <Link v-if="$page.props.auth.user.isAdministrator && ! user.isAdministrator"
                                           :href="route('admin.users.edit', {'user': user.id})" preserve-state
                                           preserve-scroll
-                                          :data="pickBy({ perPage: form.perPage, page: form.page, search: form.search })"
+                                          :data="queryString()"
                                           class="group flex flex-row-reverse items-center hover:shadow-2xl">
 
                                         <PencilAltIcon

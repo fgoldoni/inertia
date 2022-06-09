@@ -6,7 +6,11 @@ defineProps({
     modelValue: String
 })
 
-const emit = defineEmits(['update:modelValue', 'reset']);
+const emit = defineEmits(['onModelValue', 'reset']);
+
+const onModelValue = (value) => {
+    emit('onModelValue', value);
+};
 
 </script>
 
@@ -22,7 +26,7 @@ const emit = defineEmits(['update:modelValue', 'reset']);
 
             </div>
 
-            <input class="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-l-md pl-10 sm:text-sm border-gray-300" autocomplete="off" type="text" name="search" :placeholder="__('Search…')" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
+            <input class="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-l-md pl-10 sm:text-sm border-gray-300" autocomplete="off" type="text" name="search" :placeholder="__('Search…')" :value="modelValue" @input="onModelValue($event.target.value)" />
 
         </div>
 

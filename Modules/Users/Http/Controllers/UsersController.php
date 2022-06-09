@@ -4,6 +4,7 @@ namespace Modules\Users\Http\Controllers;
 use App\Models\Team;
 use App\Models\User;
 use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereLike;
@@ -18,6 +19,7 @@ use Inertia\Inertia;
 use Modules\Roles\Repositories\Contracts\RolesRepository;
 use Modules\Users\Http\Requests\StoreUserRequest;
 use Modules\Users\Http\Requests\UpdateUserRequest;
+use Modules\Users\Notifications\AdminSendCredentials;
 use Modules\Users\Repositories\Contracts\UsersRepository;
 use Modules\Users\Transformers\UserCollection;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,11 +30,17 @@ class UsersController extends Controller
 
     public function index(array $modalProps = [])
     {
+        request()->validate([
+            'direction' => ['in:asc,desc'],
+            'field' => ['in:id,name,email']
+        ]);
+
         return Inertia::render('Modules/Users/Index', array_merge([
-            'filters' => $this->request->only(['search', 'perPage', 'page']),
+            'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'users' => $this->usersRepository->withCriteria([
                 new WhereLike(['users.id', 'users.name', 'users.email'], $this->request->get('search')),
                 new EagerLoad(['roles:id,name,display_name']),
+                new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
             ])->paginate()
                 ->withQueryString()
                 ->through(fn ($user) => [
@@ -44,6 +52,8 @@ class UsersController extends Controller
                     'role' => $user->roles->value('display_name'),
                     'isAdministrator' => $user->isAdministrator(),
                     'access' => $user->hasRole(config('app.system.users.roles.administrator')) ? __('Full') : __('Limited'),
+                    'created_at' => $user->created_at?->formatLocalized('%d %B, %Y'),
+                    'verified' => !is_null($user->email_verified_at),
                 ]),
         ], $modalProps));
     }
@@ -71,7 +81,7 @@ class UsersController extends Controller
             $request->only('name', 'email', 'phone'),
             [
                 'email_verified_at' => now(),
-                'password' => bcrypt('00000000'),
+                'password' => bcrypt($request->get('password')),
                 'api_token' => Str::random(60)
             ]
         ));
@@ -79,6 +89,10 @@ class UsersController extends Controller
         $user->syncRoles($request->get('role'));
 
         $this->usersRepository->createTeam($user);
+
+        if ($request->get('invite')) {
+            $user->notify(new AdminSendCredentials($request->get('password')));
+        }
 
         return $this->response->json(['message' => __(':user created successfully.', ['user' => $user->name])], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK);
     }
@@ -124,5 +138,17 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function sendEmailVerificationNotification(User $user)
+    {
+        if ($user->hasVerifiedEmail()) {
+            return;
+        }
+
+        $user->sendEmailVerificationNotification();
+
+        return $this->response->json(['message' =>__('Verification link sent!')], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 }

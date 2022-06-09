@@ -15,12 +15,12 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class OrderBy implements CriterionInterface
 {
-    public function __construct(private readonly string $column, private readonly string $dir = 'asc')
+    public function __construct(private  $column = null, private $dir = 'asc')
     {
     }
 
     public function apply($model): Builder
     {
-        return $model->orderBy($this->column, $this->dir);
+        return $model->when($this->column, fn ($query) => $query->orderBy($this->column, $this->dir));
     }
 }

@@ -16,4 +16,5 @@ use Modules\Users\Http\Controllers\UsersController;
 
 Route::prefix('admin')->middleware(['auth'])->as('admin.')->group(function () {
     Route::resource('users', UsersController::class);
+    Route::get('users/verification/send/{user}', [UsersController::class, 'sendEmailVerificationNotification'])->name('users.verification.send');
 });

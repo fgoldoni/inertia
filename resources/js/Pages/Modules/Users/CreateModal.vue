@@ -1,8 +1,8 @@
 <script setup>
 import {ref, computed, onMounted, reactive, nextTick} from 'vue'
 import {useForm, Link} from "@inertiajs/inertia-vue3";
-import {CalendarIcon, LockOpenIcon, AcademicCapIcon} from '@heroicons/vue/solid'
-import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
+import LoadingButton from '@/Shared/LoadingButton'
+import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
 import pickBy from 'lodash/pickBy'
 import zxcvbn from 'zxcvbn'
 import JetInput from '@/Jetstream/Input.vue'
@@ -21,11 +21,9 @@ const props = defineProps({
     filters: Object,
 });
 
-const enabled = ref(false)
+
 const showPassword = ref(false)
 const isOpen = ref(true)
-const queryString = pickBy({perPage: props.filters.perPage, page: props.filters.page, search: props.filters.search})
-
 
 const form = reactive({
     id: props.editing.id,
@@ -33,6 +31,7 @@ const form = reactive({
     email: props.editing.email,
     phone: props.editing.phone,
     role: props.editing.role,
+    enabled: ref(false),
     errors: new Errors(),
     password: '',
     processing: false,
@@ -42,7 +41,7 @@ onMounted(() => {
     internationalNumber('#phone').init();
 })
 
-const redirectBack = () => window.location = route('admin.users.index', queryString)
+const redirectBack = () => window.location = route('admin.users.index', queryString())
 const closeModal = () => redirectBack()
 const updateInputRole = (role) => form.role = role.id
 const generate = () => {
@@ -50,6 +49,8 @@ const generate = () => {
 }
 
 const score = computed(() => zxcvbn(form.password).score)
+
+const  queryString = () => pickBy({perPage: props.filters.perPage, page: props.filters.page, search: props.filters.search, field: props.filters.field, direction: props.filters.direction})
 
 const onSubmit = () => {
     form.processing = true;
@@ -60,6 +61,7 @@ const onSubmit = () => {
         phone: form.phone,
         role: form.role,
         password: form.password,
+        invite: form.enabled,
     }).then(() => {
         form.processing = false;
         closeModal();
@@ -257,46 +259,28 @@ const onSubmit = () => {
 
                                                     <div class="bg-secondary-100 col-span-1">
 
-                                                        <div class="p-8 grid grid-cols-1 gap-4 sm:grid-cols-1">
+                                                        <div class="pl-4 pt-2 grid grid-cols-1 gap-4 sm:grid-cols-1">
 
                                                             <div class="col-span-1">
 
-                                                                <div class="space-y-5">
+                                                                <JetLabel value="Invitation"/>
 
-                                                                    <div class="flex items-center space-x-2"
-                                                                         v-if="props.editing.verified">
+                                                                <!-- This example requires Tailwind CSS v2.0+ -->
+                                                                <SwitchGroup as="div" class="mt-2 flex items-center whitespace-nowrap">
+                                                                    <Switch v-model="form.enabled" :class="[form.enabled ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
+                                                                        <span aria-hidden="true" :class="[form.enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
+                                                                    </Switch>
+                                                                    <SwitchLabel as="span" class="ml-3">
+                                                                        <span class="text-sm font-medium text-gray-900">Send Invite</span>
+                                                                    </SwitchLabel>
+                                                                </SwitchGroup>
 
-                                                                        <LockOpenIcon class="h-5 w-5 text-green-500"
-                                                                                      aria-hidden="true"/>
+                                                            </div>
 
-                                                                        <span
-                                                                            class="text-green-700 text-sm font-medium">Verified</span>
+                                                            <div class="col-span-1">
 
-                                                                    </div>
-
-                                                                    <div class="flex items-center space-x-2">
-
-                                                                        <AcademicCapIcon class="h-5 w-5 text-gray-400"
-                                                                                         aria-hidden="true"/>
-
-                                                                        <span class="text-gray-900 text-sm font-medium">4 Job(s)</span>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="flex items-center space-x-2 whitespace-nowrap">
-
-                                                                        <CalendarIcon class="h-5 w-5 text-gray-400"
-                                                                                      aria-hidden="true"/>
-
-                                                                        <span class="text-gray-900 text-sm font-medium">
-
-                                                                            Created on <time datetime="2020-12-02"
-                                                                                             v-text="props.editing.created_at"></time>
-
-                                                                        </span>
-
-                                                                    </div>
-
+                                                                <div class="mt-2 text-sm text-secondary-500 dark:text-secondary-400">
+                                                                    Send an invitation to this administrator by email with his login information.
                                                                 </div>
 
                                                             </div>
@@ -317,15 +301,15 @@ const onSubmit = () => {
 
                                 <div class="bg-secondary-100 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
 
-                                    <button type="submit" :disabled="form.processing"
-                                            class="uppercase w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                    <LoadingButton type="submit" :loading="form.processing"
+                                            class="uppercase w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm">
 
-                                        {{ __('Deactivate') }}
+                                        {{ __('Save') }}
 
-                                    </button>
+                                    </LoadingButton>
 
                                     <Link :href="route('admin.users.index')" preserve-state preserve-scroll
-                                          :data="pickBy({ perPage: props.filters.perPage, page: props.filters.page, search: props.filters.search })"
+                                          :data="queryString()"
                                           class="uppercase mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                                           ref="cancelButtonRef">
 

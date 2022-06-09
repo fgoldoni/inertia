@@ -25,7 +25,6 @@ const props = defineProps({
 const enabled = ref(false)
 const showPassword = ref(false)
 const isOpen = ref(true)
-const queryString = pickBy({perPage: props.filters.perPage, page: props.filters.page, search: props.filters.search})
 
 
 const form = useForm({
@@ -41,7 +40,7 @@ onMounted(() => {
     internationalNumber('#phone').init();
 })
 
-const redirectBack = () => window.location = route('admin.users.index', queryString)
+const redirectBack = () => window.location = route('admin.users.index', queryString())
 const close = () => redirectBack()
 const updateInputRole = (role) => form.role = role.id
 const generate = () => {
@@ -49,6 +48,9 @@ const generate = () => {
 }
 
 const score = computed(() => zxcvbn(form.password).score)
+
+
+const  queryString = () => pickBy({perPage: props.filters.perPage, page: props.filters.page, search: props.filters.search, field: props.filters.field, direction: props.filters.direction})
 
 const submit = () => {
     form.transform(data => ({
