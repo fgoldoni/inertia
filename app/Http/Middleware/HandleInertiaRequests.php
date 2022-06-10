@@ -40,6 +40,11 @@ class HandleInertiaRequests extends Middleware
                     'isAdministrator' => $request->user()->isAdministrator(),
                 ] : null,
             ],
+            'can' => function () use ($request) {
+                return $request->user() ? [
+                    'is_impersonated' => $request->user()->isImpersonated(),
+                ] : null;
+            },
         ]);
     }
 }

@@ -2,7 +2,7 @@
 import {computed, ref, watch, reactive} from 'vue';
 import {Inertia} from '@inertiajs/inertia';
 import {PlusIcon, ShieldCheckIcon, PencilAltIcon, UserCircleIcon, RefreshIcon, ShieldExclamationIcon} from '@heroicons/vue/solid';
-import {SortAscendingIcon, SortDescendingIcon} from '@heroicons/vue/outline';
+import {SortAscendingIcon, SortDescendingIcon, ExternalLinkIcon} from '@heroicons/vue/outline';
 import {useForm, Link, Head} from "@inertiajs/inertia-vue3";
 import pickBy from 'lodash/pickBy';
 import debounce from 'lodash/debounce';
@@ -332,7 +332,20 @@ const onCloseModal = (state) => {
 
                                         <div class="ml-4">
 
-                                            <div class="font-medium text-gray-900">{{ user.name }}</div>
+                                            <div class="group inline-flex space-x-2 truncate text-sm">
+
+                                                <p class="font-medium text-gray-900 truncate group-hover:text-gray-900">
+
+                                                    {{ user.name }}
+
+                                                </p>
+
+                                                <a :href="route('impersonate', user.id)" v-if="user.can.impersonate">
+                                                    <ExternalLinkIcon class="flex-shrink-0 h-5 w-5 text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300" aria-hidden="true"/>
+                                                </a>
+
+
+                                            </div>
 
                                             <div class="text-sm leading-5 text-secondary-500 dark:text-secondary-400">Registered on  {{ user.created_at }}</div>
 

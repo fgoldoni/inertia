@@ -59,6 +59,9 @@ class UsersController extends Controller
                     'access' => $user->hasRole(config('app.system.users.roles.administrator')) ? __('Full') : __('Limited'),
                     'created_at' => $user->created_at?->formatLocalized('%d %B, %Y'),
                     'verified' => $user->hasVerifiedEmail(),
+                    'can' => [
+                        'impersonate' => auth()->user()->canImpersonate() && $user->canBeImpersonated()
+                    ],
                     'sessions' => $user->sessions->map(function ($session) {
                         $agent = $this->usersRepository->createAgent($session);
 

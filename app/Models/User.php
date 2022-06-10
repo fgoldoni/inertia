@@ -87,4 +87,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Session::class)->latestOfMany('last_activity')->withDefault();
     }
+
+    public function canImpersonate(): bool
+    {
+        return $this->hasPermissionTo('impersonate');
+    }
+
+    public function canBeImpersonated(): bool
+    {
+        return !$this->isAdministrator();
+    }
 }

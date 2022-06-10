@@ -19,6 +19,23 @@ class SeedFakePermissionsTableSeeder extends Seeder
     {
         $this->disableForeignKeys();
 
+        Permission::query()->create([
+            'name' => 'access_dashboard',
+            'group_name' => 'system',
+            'display_name' => __('Access Dashboard'),
+            'description' => __('This permission allow user to access to the dashboard.'),
+            'can_be_removed' => false,
+        ]);
+
+        Permission::query()->create([
+            'name' => 'impersonate',
+            'group_name' => 'system',
+            'display_name' => __('Impersonate User'),
+            'description' => __('This permission allow user to logged with the account of another user.'),
+            'can_be_removed' => false,
+        ]);
+
+        Permission::generate('brands');
         Permission::generate('roles');
         Permission::generate('users');
         Permission::generate('categories');
