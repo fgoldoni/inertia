@@ -61,7 +61,7 @@ const  queryString = () => pickBy({perPage: props.filters.perPage, page: props.f
 const onSubmit = () => {
     form.processing = true;
 
-    axios.put(route('admin.users.update', form.id), {
+    axios.put(route('admin.users.update', form.id), pickBy({
         name: form.name,
         email: form.email,
         phone: form.phone,
@@ -69,7 +69,7 @@ const onSubmit = () => {
         password: form.password,
         verified: form.verified,
         ...queryString(),
-    }).then(() => {
+    })).then(() => {
         form.processing = false;
     }).catch(error => {
         form.processing = false;

@@ -31,7 +31,6 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
 
     abstract public function model();
 
-
     public function all($columns = ['*']): Collection
     {
         return $this->model->get($columns);

@@ -4,6 +4,8 @@ namespace App\Models;
 use Grosv\LaravelPasswordlessLogin\Traits\PasswordlessLogin;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Lab404\Impersonate\Models\Impersonate;
@@ -12,6 +14,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Users\Entities\Session;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -73,5 +76,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAdministrator(): bool
     {
         return $this->hasRole(config('app.system.users.roles.administrator'));
+    }
+
+    public function sessions(): HasMany
+    {
+        return $this->hasMany(Session::class);
+    }
+
+    public function lastLogin(): HasOne
+    {
+        return $this->hasOne(Session::class)->latestOfMany('last_activity')->withDefault();
     }
 }

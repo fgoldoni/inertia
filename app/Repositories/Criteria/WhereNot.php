@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -15,8 +13,9 @@ class WhereNot
     /**
      * Where constructor.
      */
-    public function __construct(private readonly string $column, private readonly string $value) {}
-
+    public function __construct(private readonly string $column, private readonly string $value)
+    {
+    }
 
     public function apply($model): Builder
     {

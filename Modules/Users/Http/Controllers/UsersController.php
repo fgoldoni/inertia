@@ -1,23 +1,20 @@
 <?php
 namespace Modules\Users\Http\Controllers;
 
-use App\Models\Team;
 use App\Models\User;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;
-use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereHas;
-use App\Repositories\Criteria\WhereIn;
 use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WhereNot;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Modules\Roles\Repositories\Contracts\RolesRepository;
@@ -30,7 +27,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UsersController extends Controller
 {
-    public function __construct(private readonly UsersRepository $usersRepository, private readonly RolesRepository $rolesRepository, private readonly Request $request, private readonly Redirector $redirect, private readonly ResponseFactory $response) {}
+    public function __construct(private readonly UsersRepository $usersRepository, private readonly RolesRepository $rolesRepository, private readonly Request $request, private readonly Redirector $redirect, private readonly ResponseFactory $response)
+    {
+    }
 
     public function index(array $modalProps = [])
     {
@@ -43,7 +42,9 @@ class UsersController extends Controller
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'users' => $this->usersRepository->withCriteria([
                 new WhereLike(['users.id', 'users.name', 'users.email'], $this->request->get('search')),
-                new EagerLoad(['roles:id,name,display_name']),
+                new EagerLoad(['roles:id,name,display_name', 'sessions' => function ($query) {
+                    $query->orderBy('last_activity', 'desc');
+                }]),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
             ])->paginate()
                 ->withQueryString()
@@ -58,6 +59,20 @@ class UsersController extends Controller
                     'access' => $user->hasRole(config('app.system.users.roles.administrator')) ? __('Full') : __('Limited'),
                     'created_at' => $user->created_at?->formatLocalized('%d %B, %Y'),
                     'verified' => $user->hasVerifiedEmail(),
+                    'sessions' => $user->sessions->map(function ($session) {
+                        $agent = $this->usersRepository->createAgent($session);
+
+                        return (object) [
+                            'agent' => [
+                                'is_desktop' => $agent->isDesktop(),
+                                'platform' => $agent->platform(),
+                                'browser' => $agent->browser(),
+                            ],
+                            'ip_address' => $session->ip_address,
+                            'is_current_device' => $session->id === $this->request->session()->getId(),
+                            'last_active' => Carbon::createFromTimestamp($session->last_activity)->diffForHumans(),
+                        ];
+                    }),
                 ]),
         ], $modalProps));
     }
@@ -101,7 +116,6 @@ class UsersController extends Controller
         return $this->response->json(['message' => __(':user created successfully.', ['user' => $user->name])], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK);
     }
 
-
     public function show($id)
     {
         return view('users::show');
@@ -123,13 +137,14 @@ class UsersController extends Controller
     {
         $this->usersRepository->update($user->id, array_merge(
             $request->only('name', 'email', 'phone'),
+            $request->has('password') ?
             [
                 'password' => bcrypt($request->get('password')),
-            ]
+            ] : []
         ));
 
         if ($request->get('verified')) {
-            $this->usersRepository->update($user->id,  ['email_verified_at' => now()]);
+            $this->usersRepository->update($user->id, ['email_verified_at' => now()]);
         }
 
         $user->syncRoles($request->get('role'));
@@ -137,11 +152,10 @@ class UsersController extends Controller
         return $this->response->json(['message' => __(':user updated successfully.', ['user' => $user->name])], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK);
     }
 
-
     public function destroy($selected)
     {
         $this->usersRepository->withCriteria([
-            new WhereKey(explode(',', $selected)),
+            new WhereKey(explode(',', (string) $selected)),
             new WhereNot('users.id', auth()->user()->id),
             new WhereHas('roles', function (Builder $query) {
                 $query->whereNot('roles.name', config('app.system.users.roles.administrator'));
@@ -151,7 +165,6 @@ class UsersController extends Controller
         return $this->response->json(['message' => __('User deleted successfully.')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
     }
 
-
     public function sendEmailVerificationNotification(User $user)
     {
         if ($user->hasVerifiedEmail()) {
@@ -160,6 +173,6 @@ class UsersController extends Controller
 
         $user->sendEmailVerificationNotification();
 
-        return $this->response->json(['message' =>__('Verification link sent!')], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
+        return $this->response->json(['message' => __('Verification link sent!')], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 }

@@ -34,7 +34,7 @@ class Translations extends Component
 
             if (File::exists(lang_path("$locale"))) {
                 $phpTranslations = collect(File::allFiles(lang_path("$locale")))
-                    ->filter(fn($file) => $file->getExtension() === 'php')->flatMap(fn($file) => Arr::dot(File::getRequire($file->getRealPath())))->toArray();
+                    ->filter(fn ($file) => $file->getExtension() === 'php')->flatMap(fn ($file) => Arr::dot(File::getRequire($file->getRealPath())))->toArray();
             }
 
             if (File::exists(lang_path("$locale.json"))) {

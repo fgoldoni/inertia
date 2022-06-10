@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -10,11 +8,9 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class WhereIn
 {
-
     public function __construct(private readonly string $column, private readonly ?array $values = null)
     {
     }
-
 
     public function apply($model): Builder
     {

@@ -1,9 +1,6 @@
 <?php
 namespace Modules\Roles\Http\Controllers;
 
-use App\Repositories\Criteria\EagerLoad;
-use App\Repositories\Criteria\OrderBy;
-use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -11,7 +8,6 @@ use Inertia\Inertia;
 
 class RolesController extends Controller
 {
-
     public function index(array $modalProps = [])
     {
         return Inertia::render('Modules/Roles/Index', array_merge([
@@ -19,7 +15,6 @@ class RolesController extends Controller
             'roles' => []
         ], $modalProps));
     }
-
 
     public function create()
     {

@@ -12,6 +12,7 @@ namespace Modules\Users\Repositories\Eloquent;
 use App\Models\Team;
 use App\Models\User;
 use App\Repositories\RepositoryAbstract;
+use Jenssegers\Agent\Agent;
 use Modules\Users\Repositories\Contracts\UsersRepository;
 
 /**
@@ -32,5 +33,12 @@ class EloquentUsersRepository extends RepositoryAbstract implements UsersReposit
             'name' => explode(' ', (string) $user->name, 2)[0] . "'s Team",
             'personal_team' => true,
         ]));
+    }
+
+    public function createAgent($session)
+    {
+        return tap(new Agent, function ($agent) use ($session) {
+            $agent->setUserAgent($session->user_agent);
+        });
     }
 }
