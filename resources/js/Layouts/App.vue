@@ -1,8 +1,50 @@
+<script setup>
+import { ref } from 'vue'
+import { Inertia } from '@inertiajs/inertia';
+import JetBanner from '@/Jetstream/Banner.vue';
+import { Head } from '@inertiajs/inertia-vue3';
+import Notification from '@/Shared/Notification';
+
+import {
+    Dialog,
+    DialogPanel,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems,
+    TransitionChild,
+    TransitionRoot,
+} from '@headlessui/vue'
+import {
+    BellIcon,
+    MenuAlt2Icon,
+    XIcon,
+} from '@heroicons/vue/outline'
+
+import { SearchIcon } from '@heroicons/vue/solid'
+import NavLink from '@/Navigation/NavLink';
+import DropdownLink from '@/Navigation/DropdownLink';
+import { navigation, userNavigation } from '@/Navigation/ui-elements'
+
+const logout = () => {
+    Inertia.post(route('logout'));
+};
+
+defineProps({
+    title: String,
+});
+
+const sidebarOpen = ref(false)
+
+</script>
+
 <template>
     <div>
         <Head :title="title" />
 
         <JetBanner />
+
+        <Notification></Notification>
 
        <div>
            <Component
@@ -91,7 +133,7 @@
                         </button>
 
                         <!-- Profile dropdown -->
-                        <Menu as="div" class="ml-3 relative">
+                        <Menu as="div" class="ml-3 relative" v-if="$page.props.user">
                             <div>
                                 <MenuButton class="max-w-xs bg-white flex items-center text-sm focus:outline-none border-l border-gray-800 pl-4">
                                     <span class="sr-only">Open user menu</span>
@@ -144,41 +186,4 @@
     </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { Inertia } from '@inertiajs/inertia';
-import JetBanner from '@/Jetstream/Banner.vue';
-import { Head } from '@inertiajs/inertia-vue3';
 
-import {
-    Dialog,
-    DialogPanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    TransitionChild,
-    TransitionRoot,
-} from '@headlessui/vue'
-import {
-    BellIcon,
-    MenuAlt2Icon,
-    XIcon,
-} from '@heroicons/vue/outline'
-
-import { SearchIcon } from '@heroicons/vue/solid'
-import NavLink from '@/Navigation/NavLink';
-import DropdownLink from '@/Navigation/DropdownLink';
-import { navigation, userNavigation } from '@/Navigation/ui-elements'
-
-const logout = () => {
-    Inertia.post(route('logout'));
-};
-
-defineProps({
-    title: String,
-});
-
-const sidebarOpen = ref(false)
-
-</script>
