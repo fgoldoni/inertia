@@ -51,7 +51,6 @@ class HandleInertiaRequests extends Middleware
                     'message' => $request->session()->get('success'),
                 ];
             },
-            'popstate' => false,
         ]);
     }
 }

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Inertia } from '@inertiajs/inertia';
 import JetBanner from '@/Jetstream/Banner.vue';
 import { Head } from '@inertiajs/inertia-vue3';
@@ -35,6 +35,13 @@ defineProps({
 });
 
 const sidebarOpen = ref(false)
+
+onMounted(() => {
+    window.addEventListener("popstate", () => {
+        Inertia.reload({ only: ["flash"] });
+    });
+})
+
 
 </script>
 

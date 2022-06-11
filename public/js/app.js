@@ -22960,10 +22960,18 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var sidebarOpen = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+      window.addEventListener("popstate", function () {
+        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.reload({
+          only: ["flash"]
+        });
+      });
+    });
     var __returned__ = {
       logout: logout,
       sidebarOpen: sidebarOpen,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia,
       JetBanner: _Jetstream_Banner_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
       Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__.Head,
@@ -25861,7 +25869,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var show = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
+    var show = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var timeout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     var style = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       var _usePage$props$value$;
@@ -25878,7 +25886,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              show.value = true;
+              setTimeout(function () {
+                return show.value = true;
+              }, 1000);
 
               if (timeout.value) {
                 clearTimeout(timeout.value);
@@ -25886,7 +25896,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               timeout.value = setTimeout(function () {
                 return show.value = false;
-              }, 2000);
+              }, 5000);
 
             case 3:
             case "end":
@@ -25895,12 +25905,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee);
     })));
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      window.addEventListener("popstate", function () {
-        show.value = false;
-        console.log(show);
-      });
-    });
     var __returned__ = {
       show: show,
       timeout: timeout,
@@ -25911,7 +25915,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
-      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       usePage: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -34100,22 +34103,24 @@ var _hoisted_5 = {
 var _hoisted_6 = {
   "class": "flex-shrink-0"
 };
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_7 = {
   "class": "ml-3 w-0 flex-1 pt-0.5"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-sm font-medium text-gray-900"
-}, "Successfully saved!"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mt-1 text-sm text-gray-500"
-}, "Anyone with a link can now view this file.")], -1
+}, "Successfully saved!", -1
 /* HOISTED */
 );
 
-var _hoisted_8 = {
+var _hoisted_9 = {
+  "class": "mt-1 text-sm text-gray-500"
+};
+var _hoisted_10 = {
   "class": "ml-4 flex-shrink-0 flex"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "sr-only"
 }, "Close", -1
 /* HOISTED */
@@ -34123,10 +34128,10 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Global notification live region, render this permanently at the end of the document "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Notification panel, dynamically insert this into the live region when it needs to be displayed "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-    "enter-active-class": "transform ease-out duration-300 transition",
-    "enter-from-class": "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2",
+    "enter-active-class": "transform ease-out duration-500 transition",
+    "enter-from-class": "translate-y-6 opacity-0 sm:translate-y-0 sm:translate-x-6",
     "enter-to-class": "translate-y-0 opacity-100 sm:translate-x-0",
-    "leave-active-class": "transition ease-in duration-100",
+    "leave-active-class": "transition ease-in duration-500",
     "leave-from-class": "opacity-100",
     "leave-to-class": "opacity-0"
   }, {
@@ -34134,13 +34139,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [$setup.show && $setup.message ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CheckCircleIcon"], {
         "class": "h-6 w-6 text-green-400",
         "aria-hidden": "true"
-      })]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.message), 1
+      /* TEXT */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         onClick: _cache[0] || (_cache[0] = function ($event) {
           return $setup.show = false;
         }),
         "class": "bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      }, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["XIcon"], {
+      }, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["XIcon"], {
         "class": "h-5 w-5",
         "aria-hidden": "true"
       })])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
