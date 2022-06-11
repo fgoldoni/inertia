@@ -18,6 +18,7 @@ import LoadingButton from '@/Shared/LoadingButton'
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 
 
+
 const props = defineProps({
     editing: Object,
     roles: Object,
@@ -48,7 +49,9 @@ onMounted(() => {
 })
 
 const redirectBack = () => window.location = props.basePageRoute
-const closeModal = () => redirectBack()
+const closeModal = () => {
+    document.querySelector('#cancelButtonRef').click()
+}
 
 const updateInputRole = (role) => form.role = role.id
 const generate = () => {
@@ -68,7 +71,8 @@ const onSubmit = () => {
         role: form.role,
         password: form.password,
         verified: form.verified,
-    })).then(() => {
+    })).then((response) => {
+        closeModal()
         form.processing = false;
     }).catch(error => {
         form.processing = false;
@@ -348,7 +352,7 @@ const onSubmit = () => {
 
                                     <Link :href="props.basePageRoute" preserve-state preserve-scroll
                                           class="uppercase mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                                          ref="cancelButtonRef">
+                                          ref="cancelButtonRef" id="cancelButtonRef">
 
                                         {{ __('Cancel') }}
 

@@ -5,7 +5,7 @@
         <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
             <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
             <transition enter-active-class="transform ease-out duration-300 transition" enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2" enter-to-class="translate-y-0 opacity-100 sm:translate-x-0" leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                <div v-if="show" class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+                <div v-if="show && message" class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
                     <div class="p-4">
                         <div class="flex items-start">
                             <div class="flex-shrink-0">
@@ -30,9 +30,36 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { CheckCircleIcon } from '@heroicons/vue/outline'
 import { XIcon } from '@heroicons/vue/solid'
 
-const show = ref(true)
+import { computed, ref, watch, onMounted } from 'vue';
+import { usePage } from '@inertiajs/inertia-vue3';
+
+const show = ref(true);
+const timeout = ref(null);
+const style = computed(() => usePage().props.value.flash?.style || 'success');
+const message = computed(() => usePage().props.value.flash?.message || '');
+
+defineProps({
+    title: String,
+});
+
+watch(message, async () => {
+    show.value = true;
+
+    if (timeout.value) {
+        clearTimeout(timeout.value)
+    }
+
+    timeout.value = setTimeout(() => show.value = false, 2000)
+});
+
+onMounted(() => {
+    window.addEventListener("popstate", () => {
+        show.value = false
+        console.log(show)
+    });
+})
+
 </script>

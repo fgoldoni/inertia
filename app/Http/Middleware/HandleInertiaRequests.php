@@ -45,6 +45,13 @@ class HandleInertiaRequests extends Middleware
                     'is_impersonated' => $request->user()->isImpersonated(),
                 ] : null;
             },
+            'flash' => function () use ($request) {
+                return [
+                    'style' => 'success',
+                    'message' => $request->session()->get('success'),
+                ];
+            },
+            'popstate' => false,
         ]);
     }
 }

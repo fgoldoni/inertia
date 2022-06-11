@@ -155,6 +155,8 @@ class UsersController extends Controller
 
         $user->syncRoles($request->get('role'));
 
+        session()->flash('success', __(':user updated successfully.', ['user' => $user->name]));
+
         return $this->response->json(['message' => __(':user updated successfully.', ['user' => $user->name])], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK);
     }
 
