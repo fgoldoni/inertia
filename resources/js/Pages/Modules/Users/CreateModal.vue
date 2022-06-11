@@ -19,6 +19,7 @@ const props = defineProps({
     editing: Object,
     roles: Object,
     filters: Object,
+    basePageRoute: String,
 });
 
 
@@ -41,7 +42,7 @@ onMounted(() => {
     internationalNumber('#phone').init();
 })
 
-const redirectBack = () => window.location = route('admin.users.index', queryString())
+const redirectBack = () => window.location = props.basePageRoute;
 const closeModal = () => redirectBack()
 const updateInputRole = (role) => form.role = role.id
 const generate = () => {
@@ -49,8 +50,6 @@ const generate = () => {
 }
 
 const score = computed(() => zxcvbn(form.password).score)
-
-const  queryString = () => pickBy({perPage: props.filters.perPage, page: props.filters.page, search: props.filters.search, field: props.filters.field, direction: props.filters.direction})
 
 const onSubmit = () => {
     form.processing = true;
@@ -308,8 +307,7 @@ const onSubmit = () => {
 
                                     </LoadingButton>
 
-                                    <Link :href="route('admin.users.index')" preserve-state preserve-scroll
-                                          :data="queryString()"
+                                    <Link :href="props.basePageRoute" preserve-state preserve-scroll
                                           class="uppercase mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                                           ref="cancelButtonRef">
 

@@ -36,6 +36,10 @@ class AppServiceProvider extends ServiceProvider
             inertia()->share(['modal' => $modal]);
         });
 
+        ResponseFactory::macro('basePageRoute', function ($modal) {
+            inertia()->share(['basePageRoute' => $modal]);
+        });
+
         Gate::before(fn ($user, $ability) => $user->hasRole(config('app.system.users.roles.administrator')) ? true : null);
 
         if (Schema::hasTable('permissions')) {

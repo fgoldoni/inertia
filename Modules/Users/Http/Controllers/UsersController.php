@@ -84,6 +84,8 @@ class UsersController extends Controller
     {
         Inertia::modal('Modules/Users/CreateModal');
 
+        Inertia::basePageRoute(route('admin.users.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
+
         return $this->index([
             'editing' => new UserCollection($this->usersRepository->make([
                 'name' => 'test',
@@ -127,6 +129,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         Inertia::modal('Modules/Users/EditModal');
+        Inertia::basePageRoute(route('admin.users.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
             'editing' => new UserCollection($user->load('roles:id')),

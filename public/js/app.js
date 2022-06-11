@@ -24009,7 +24009,8 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     editing: Object,
     roles: Object,
-    filters: Object
+    filters: Object,
+    basePageRoute: String
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
@@ -24033,7 +24034,7 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     var redirectBack = function redirectBack() {
-      return window.location = route('admin.users.index', queryString());
+      return window.location = props.basePageRoute;
     };
 
     var closeModal = function closeModal() {
@@ -24051,16 +24052,6 @@ __webpack_require__.r(__webpack_exports__);
     var score = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return zxcvbn__WEBPACK_IMPORTED_MODULE_4___default()(form.password).score;
     });
-
-    var queryString = function queryString() {
-      return lodash_pickBy__WEBPACK_IMPORTED_MODULE_3___default()({
-        perPage: props.filters.perPage,
-        page: props.filters.page,
-        search: props.filters.search,
-        field: props.filters.field,
-        direction: props.filters.direction
-      });
-    };
 
     var onSubmit = function onSubmit() {
       form.processing = true;
@@ -24090,7 +24081,6 @@ __webpack_require__.r(__webpack_exports__);
       updateInputRole: updateInputRole,
       generate: generate,
       score: score,
-      queryString: queryString,
       onSubmit: onSubmit,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
@@ -24162,12 +24152,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Plugins_errors__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Plugins/errors */ "./resources/js/Plugins/errors.js");
 /* harmony import */ var _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.vue");
 /* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/switch/switch.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -24191,7 +24175,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     editing: Object,
     roles: Object,
     errors: Object,
-    filters: Object
+    filters: Object,
+    basePageRoute: String
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
@@ -24216,7 +24201,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
 
     var redirectBack = function redirectBack() {
-      return window.location = route('admin.users.index', queryString());
+      return window.location = props.basePageRoute;
     };
 
     var closeModal = function closeModal() {
@@ -24235,26 +24220,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return zxcvbn__WEBPACK_IMPORTED_MODULE_3___default()(form.password).score;
     });
 
-    var queryString = function queryString() {
-      return lodash_pickBy__WEBPACK_IMPORTED_MODULE_2___default()({
-        perPage: props.filters.perPage,
-        page: props.filters.page,
-        search: props.filters.search,
-        field: props.filters.field,
-        direction: props.filters.direction
-      });
-    };
-
     var onSubmit = function onSubmit() {
       form.processing = true;
-      axios.put(route('admin.users.update', form.id), lodash_pickBy__WEBPACK_IMPORTED_MODULE_2___default()(_objectSpread({
+      axios.put(route('admin.users.update', form.id), lodash_pickBy__WEBPACK_IMPORTED_MODULE_2___default()({
         name: form.name,
         email: form.email,
         phone: form.phone,
         role: form.role,
         password: form.password,
         verified: form.verified
-      }, queryString()))).then(function () {
+      })).then(function () {
         form.processing = false;
       })["catch"](function (error) {
         form.processing = false;
@@ -24273,7 +24248,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       updateInputRole: updateInputRole,
       generate: generate,
       score: score,
-      queryString: queryString,
       onSubmit: onSubmit,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
@@ -30280,10 +30254,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   }, 8
                   /* PROPS */
                   , ["loading"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Link"], {
-                    href: _ctx.route('admin.users.index'),
+                    href: $setup.props.basePageRoute,
                     "preserve-state": "",
                     "preserve-scroll": "",
-                    data: $setup.queryString(),
                     "class": "uppercase mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
                     ref: "cancelButtonRef"
                   }, {
@@ -30297,7 +30270,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
                   }, 8
                   /* PROPS */
-                  , ["href", "data"])])], 40
+                  , ["href"])])], 40
                   /* PROPS, HYDRATE_EVENTS */
                   , _hoisted_4)];
                 }),
@@ -30719,10 +30692,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   }, 8
                   /* PROPS */
                   , ["loading"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Link"], {
-                    href: _ctx.route('admin.users.index'),
+                    href: $setup.props.basePageRoute,
                     "preserve-state": "",
                     "preserve-scroll": "",
-                    data: $setup.queryString(),
                     "class": "uppercase mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
                     ref: "cancelButtonRef"
                   }, {
@@ -30736,7 +30708,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
                   }, 8
                   /* PROPS */
-                  , ["href", "data"])])], 40
+                  , ["href"])])], 40
                   /* PROPS, HYDRATE_EVENTS */
                   , _hoisted_4)];
                 }),
