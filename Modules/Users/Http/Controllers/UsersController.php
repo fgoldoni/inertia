@@ -43,7 +43,7 @@ class UsersController extends Controller
             'users' => $this->usersRepository->withCriteria([
                 new WhereLike(['users.id', 'users.name', 'users.email'], $this->request->get('search')),
                 new EagerLoad(['roles:id,name,display_name', 'sessions' => function ($query) {
-                    $query->orderBy('last_activity', 'desc');
+                    $query->orderBy('last_activity', 'desc')->limit(1);
                 }]),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
             ])->paginate()
@@ -118,7 +118,9 @@ class UsersController extends Controller
             $user->notify(new AdminSendCredentials($request->get('password')));
         }
 
-        return $this->response->json(['message' => __(':user created successfully.', ['user' => $user->name])], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK);
+        return $this->response
+            ->json([], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK)
+            ->flash(__(':user successfully added!', ['user' => $user->name]));
     }
 
     public function show($id)
@@ -129,6 +131,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         Inertia::modal('Modules/Users/EditModal');
+
         Inertia::basePageRoute(route('admin.users.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
@@ -155,9 +158,9 @@ class UsersController extends Controller
 
         $user->syncRoles($request->get('role'));
 
-        session()->flash('success', __(':user updated successfully.', ['user' => $user->name]));
-
-        return $this->response->json(['message' => __(':user updated successfully.', ['user' => $user->name])], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK);
+        return $this->response
+            ->json([], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK)
+            ->flash(__(':user updated successfully.', ['user' => $user->name]));
     }
 
     public function destroy($selected)
@@ -179,8 +182,10 @@ class UsersController extends Controller
             return;
         }
 
-        $user->sendEmailVerificationNotification();
+        //$user->sendEmailVerificationNotification();
 
-        return $this->response->json(['message' => __('Verification link sent!')], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
+        return $this->response
+            ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
+            ->flash(__('Verification link sent!'));
     }
 }

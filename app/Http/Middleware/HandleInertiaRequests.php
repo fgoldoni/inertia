@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Middleware;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -51,6 +52,8 @@ class HandleInertiaRequests extends Middleware
                     'message' => $request->session()->get('success'),
                 ];
             },
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
         ]);
     }
 }

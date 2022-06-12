@@ -57,6 +57,7 @@ const sendEmailVerificationNotification = (id) => {
 
     return axios.get(route('admin.users.verification.send', { user: id })).then(response => {
         formVerification.processing = false;
+        Inertia.reload({ only: ["flash"] });
         console.log(response.data.message)
     });
 };

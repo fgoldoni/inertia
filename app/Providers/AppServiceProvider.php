@@ -1,6 +1,7 @@
 <?php
 namespace App\Providers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
@@ -39,6 +40,14 @@ class AppServiceProvider extends ServiceProvider
         ResponseFactory::macro('basePageRoute', function ($modal) {
             inertia()->share(['basePageRoute' => $modal]);
         });
+
+        JsonResponse::macro('flash', function ($message) {
+           return [
+               'style' => 'success',
+               'message' => session()->flash('success', $message),
+           ];
+        });
+
 
         Gate::before(fn ($user, $ability) => $user->hasRole(config('app.system.users.roles.administrator')) ? true : null);
 

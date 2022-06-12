@@ -48,7 +48,6 @@ onMounted(() => {
     internationalNumber('#phone').init();
 })
 
-const redirectBack = () => window.location = props.basePageRoute
 const closeModal = () => {
     document.querySelector('#cancelButtonRef').click()
 }
@@ -72,8 +71,8 @@ const onSubmit = () => {
         password: form.password,
         verified: form.verified,
     })).then((response) => {
-        closeModal()
         form.processing = false;
+        closeModal()
     }).catch(error => {
         form.processing = false;
         form.errors.record(error.response.data.errors);
