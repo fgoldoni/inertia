@@ -182,7 +182,7 @@ class UsersController extends Controller
             return;
         }
 
-        //$user->sendEmailVerificationNotification();
+        $user->sendEmailVerificationNotification();
 
         return $this->response
             ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
