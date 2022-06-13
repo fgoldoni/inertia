@@ -2,10 +2,12 @@
 import {ref, computed, watch, onMounted, reactive, defineComponent, defineAsyncComponent} from 'vue'
 import {SortDescendingIcon} from '@heroicons/vue/outline';
 import debounce from "lodash/debounce";
+import Pagination from '@/Components/Pagination';
 import {Inertia} from "@inertiajs/inertia";
 
 const props = defineProps({
     config: Object,
+    rowData: Object,
 });
 
 
@@ -13,25 +15,19 @@ const apiUrl = props.config.apiUrl
 const fields = props.config.fields
 const perPage = props.config.perPage
 
-const rowData = reactive({});
 
 onMounted(() => {
-    Inertia.get(route('admin.users.index'), {}, {
-        replace: true,
-        preserveState: true,
-        onSuccess:  (page) => {rowData.value = page.props.rowData}
-    })
 })
 
 const selectedRow = ref([])
 const checked = ref(false)
-const indeterminate = computed(() => selectedRow.value.length > 0 && selectedRow.value.length < rowData.value.data.length)
+const indeterminate = computed(() => selectedRow.value.length > 0 && selectedRow.value.length < rowData.data.length)
 
 const setDefineAsyncComponent = (path) => defineAsyncComponent(() =>import(`@modules/${path}.vue`))
 
 </script>
 <template>
-    <div class="px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-0">
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
                 <h1 class="text-xl font-semibold text-gray-900">Users</h1>
@@ -41,7 +37,7 @@ const setDefineAsyncComponent = (path) => defineAsyncComponent(() =>import(`@mod
                 <button type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Add user</button>
             </div>
         </div>
-        <div class="mt-8 flex flex-col">
+        <div v-if="rowData" class="mt-8 flex flex-col">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div class="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -55,7 +51,7 @@ const setDefineAsyncComponent = (path) => defineAsyncComponent(() =>import(`@mod
                                     <template v-for="(value, key) in fields">
 
                                         <th v-if="value['name'] === '__checkbox'" scope="col" class="relative w-12 px-6 sm:w-16 sm:px-8">
-                                            <input v-if="rowData.value" type="checkbox" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6" :checked="indeterminate || selectedRow.length === rowData.value.data.length" :indeterminate="indeterminate" @change="selectedRow = $event.target.checked ? rowData.value.data.map((r) => r.id) : []" />
+                                            <input type="checkbox" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6" :checked="indeterminate || selectedRow.length === rowData.data.length" :indeterminate="indeterminate" @change="selectedRow = $event.target.checked ? rowData.data.map((r) => r.id) : []" />
                                         </th>
 
                                         <th v-else-if="value['name'] === 'id'" scope="col" class="w-12 sm:w-16 py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
@@ -97,7 +93,7 @@ const setDefineAsyncComponent = (path) => defineAsyncComponent(() =>import(`@mod
                             </thead>
 
                             <tbody class="divide-y divide-gray-200 bg-white">
-                            <tr v-if="rowData.value" v-for="row in rowData.value.data" :key="row.id" :class="[selectedRow.includes(row.id) && 'bg-gray-50']">
+                            <tr v-for="row in rowData.data" :key="row.id" :class="[selectedRow.includes(row.id) && 'bg-gray-50']">
 
                                 <template v-for="(value, key) in fields">
 
@@ -121,6 +117,7 @@ const setDefineAsyncComponent = (path) => defineAsyncComponent(() =>import(`@mod
                             </tr>
                             </tbody>
                         </table>
+                        <pagination :data="rowData"></pagination>
                     </div>
                 </div>
             </div>

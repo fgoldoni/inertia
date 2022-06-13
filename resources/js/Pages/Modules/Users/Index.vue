@@ -87,9 +87,9 @@ const onCloseModal = (state) => {
 
     <ConfirmModal :open="confirmingUserDeletion" @on-close="onCloseModal"></ConfirmModal>
 
-    <VueDatatable :config="config"></VueDatatable>
+    <VueDatatable :config="config" v-bind="$page.props"></VueDatatable>
 
-    <div class="mt-8 px-4 sm:px-6 lg:px-8">
+    <div class="mt-8 px-4 sm:px-0">
 
         <div class="sm:flex sm:items-center">
 
