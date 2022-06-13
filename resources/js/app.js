@@ -2,7 +2,7 @@ import './bootstrap';
 
 import {createApp, h} from 'vue'
 
-import {createInertiaApp} from '@inertiajs/inertia-vue3'
+import {createInertiaApp, Link} from '@inertiajs/inertia-vue3'
 
 import {InertiaProgress} from '@inertiajs/progress'
 
@@ -33,6 +33,8 @@ createInertiaApp({
             .use(plugin)
 
             .mixin({methods: {route}})
+
+            .component('Link', Link)
 
             .mixin(useModal)
 

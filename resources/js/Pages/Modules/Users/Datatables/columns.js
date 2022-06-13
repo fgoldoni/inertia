@@ -5,17 +5,19 @@ export default [
     {
         name: 'id',
         title: 'ID',
-        component: false
+        component: false,
+        sortField: 'id'
     },
     {
         name: '__component:Users/Datatables/CustomName',
         title: 'Name',
-        visible: false
+        sortField: 'name'
     },
     {
         name: '__component:Users/Datatables/CustomEmail',
         title: 'Email',
-        visible: false
+        visible: false,
+        sortField: 'email'
     },
     {
         name: '__component:Users/Datatables/CustomRole',
