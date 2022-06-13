@@ -1,12 +1,13 @@
 <script setup>
 import {ref, computed, watch, onMounted, reactive, defineComponent, defineAsyncComponent} from 'vue'
-import {SortDescendingIcon, PlusIcon} from '@heroicons/vue/outline';
+import {SortDescendingIcon, SortAscendingIcon, PlusIcon} from '@heroicons/vue/outline';
 import debounce from "lodash/debounce";
 import Pagination from '@/Components/Pagination';
 import {Inertia} from "@inertiajs/inertia";
 import {useForm} from "@inertiajs/inertia-vue3";
 import SearchFilter from '@/Components/SearchFilter';
 import pickBy from "lodash/pickBy";
+import ConfirmModal from '@/Shared/ConfirmModal';
 
 const props = defineProps({
     config: Object,
@@ -18,7 +19,7 @@ const props = defineProps({
 const fields = props.config.fields
 
 const form = useForm({
-    perPage: ref(props.filters.perPage || 5),
+    perPage: ref(props.config.perPage),
     page: ref(null),
     search: ref(''),
     field: props.filters.field,
@@ -41,7 +42,13 @@ const indeterminate = computed(() => selectedRow.value.length > 0 && selectedRow
 
 const setDefineAsyncComponent = (path) => defineAsyncComponent(() =>import(`@modules/${path}.vue`))
 
-const reset = () => form.reset();
+const reset = () => {
+    form.page = ref(null)
+    form.perPage = ref(props.config.perPage)
+    form.field = ref(null)
+    form.direction = ref(null)
+    form.search = ref('')
+};
 
 const updateSearch = (value) => form.search = value
 
@@ -53,9 +60,23 @@ const sort = (field) => {
     }
 };
 
+const confirmingUserDeletion = ref(false);
+
+const onCloseModal = (state) => {
+    if(!state) return confirmingUserDeletion.value = false;
+
+    axios.delete(route('admin.users.destroy', { selected: selectedRow.value })).then(() => {
+        Inertia.reload({ only: ['rowData'] })
+        confirmingUserDeletion.value = false;
+    }).catch(error => {
+        confirmingUserDeletion.value = false;
+    });
+};
+
 </script>
 <template>
     <div class="px-4 sm:px-0">
+        <ConfirmModal :open="confirmingUserDeletion" @on-close="onCloseModal"></ConfirmModal>
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
                 <h1 class="text-xl font-semibold text-gray-900">Users</h1>
@@ -122,10 +143,10 @@ const sort = (field) => {
         <div v-if="props.rowData" class="flex flex-col">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                    <div class="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                    <div class="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5">
                         <div v-if="selectedRow.length > 0" class="absolute top-0 left-12 flex h-12 items-center space-x-3 bg-gray-50 sm:left-16">
                             <button type="button" class="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30">Bulk edit</button>
-                            <button type="button" class="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30">Delete all</button>
+                            <button type="button" @click="confirmingUserDeletion = true" class="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30">Delete all</button>
                         </div>
                         <table class="min-w-full table-fixed divide-y divide-gray-300">
                             <thead class="bg-gray-50">
@@ -141,9 +162,17 @@ const sort = (field) => {
 
                                                 {{ value['title'] || value['name'] }}
 
-                                                <span  class="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                                                 <span  v-if="value['sortField'] && form.field !== value['name']" class="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
 
                                                     <SortDescendingIcon class="invisible ml-2 h-5 w-5 flex-none rounded text-gray-400 group-hover:visible group-focus:visible" aria-hidden="true" />
+
+                                                </span>
+
+                                                 <span  v-if="value['sortField'] && form.field === value['name']" class="ml-2 flex-none rounded text-gray-400">
+
+                                                    <SortAscendingIcon v-if="form.direction === 'desc'" class="ml-2 h-5 w-5 flex-none rounded text-gray-400" aria-hidden="true" />
+
+                                                     <SortDescendingIcon v-if="form.direction === 'asc'" class="ml-2 h-5 w-5 flex-none rounded text-gray-400" aria-hidden="true" />
 
                                                 </span>
 
@@ -159,9 +188,17 @@ const sort = (field) => {
 
                                                 {{ value['title'] || value['name'] }}
 
-                                                 <span  class="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                                                 <span  v-if="value['sortField'] && form.field !== value['name']" class="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
 
                                                     <SortDescendingIcon class="invisible ml-2 h-5 w-5 flex-none rounded text-gray-400 group-hover:visible group-focus:visible" aria-hidden="true" />
+
+                                                </span>
+
+                                                 <span  v-if="value['sortField'] && form.field === value['name']" class="ml-2 flex-none rounded text-gray-400">
+
+                                                    <SortAscendingIcon v-if="form.direction === 'desc'" class="ml-2 h-5 w-5 flex-none rounded text-gray-400" aria-hidden="true" />
+
+                                                     <SortDescendingIcon v-if="form.direction === 'asc'" class="ml-2 h-5 w-5 flex-none rounded text-gray-400" aria-hidden="true" />
 
                                                 </span>
 

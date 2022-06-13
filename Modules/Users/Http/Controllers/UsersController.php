@@ -176,7 +176,7 @@ class UsersController extends Controller
         return $this->response->json(['message' => __('User deleted successfully.')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
     }
 
-    public function sendEmailVerificationNotification(User $user)
+    public function sendEmailVerificationNotification(Request $request, User $user)
     {
         if ($user->hasVerifiedEmail()) {
             return;
@@ -186,6 +186,6 @@ class UsersController extends Controller
 
         return $this->response
             ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
-            ->flash(__('Verification link sent!'));
+            ->flash(__('The verification link has been successfully sent to :email', ['email' => $user->email]));
     }
 }
