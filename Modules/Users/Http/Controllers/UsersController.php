@@ -40,7 +40,7 @@ class UsersController extends Controller
 
         return Inertia::render('Modules/Users/Index', array_merge([
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
-            'users' => $this->usersRepository->withCriteria([
+            'rowData' => $this->usersRepository->withCriteria([
                 new WhereLike(['users.id', 'users.name', 'users.email'], $this->request->get('search')),
                 new EagerLoad(['roles:id,name,display_name', 'sessions' => function ($query) {
                     $query->orderBy('last_activity', 'desc')->limit(1);

@@ -9,11 +9,13 @@ import debounce from 'lodash/debounce';
 import SearchFilter from '@/Components/SearchFilter';
 import Pagination from '@/Components/Pagination';
 import ConfirmModal from '@/Shared/ConfirmModal';
+import VueDatatable from '@/Shared/VueDatatable';
+import config from '@/Pages/Modules/Users/Datatables/config'
 
 
 const props = defineProps({
     filters: Object,
-    users: Object,
+    rowData: Object,
 });
 
 const selectedUsers = ref([]);
@@ -70,7 +72,7 @@ const onCloseModal = (state) => {
     if(!state) return confirmingUserDeletion.value = false;
 
     axios.delete(route('admin.users.destroy', { selected: selectedUsers.value })).then(() => {
-        Inertia.reload({ only: ['users'] })
+        Inertia.reload({ only: ['rowData'] })
         confirmingUserDeletion.value = false;
     }).catch(error => {
         confirmingUserDeletion.value = false;
@@ -85,7 +87,9 @@ const onCloseModal = (state) => {
 
     <ConfirmModal :open="confirmingUserDeletion" @on-close="onCloseModal"></ConfirmModal>
 
-    <div class="px-4 sm:px-6 lg:px-8">
+    <VueDatatable :config="config"></VueDatatable>
+
+    <div class="mt-8 px-4 sm:px-6 lg:px-8">
 
         <div class="sm:flex sm:items-center">
 
@@ -193,9 +197,9 @@ const onCloseModal = (state) => {
 
                                     <input type="checkbox"
                                            class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6"
-                                           :checked="indeterminate || selectedUsers.length === users.data.length"
+                                           :checked="indeterminate || selectedUsers.length === rowData.data.length"
                                            :indeterminate="indeterminate"
-                                           @change="selectedUsers = $event.target.checked ? users.data.map((p) => p.id) : []"/>
+                                           @change="selectedUsers = $event.target.checked ? rowData.data.map((p) => p.id) : []"/>
 
                                 </th>
 
@@ -301,7 +305,7 @@ const onCloseModal = (state) => {
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
 
-                            <tr v-for="user in users.data" :key="user.id"
+                            <tr v-for="user in rowData.data" :key="user.id"
                                 :class="[selectedUsers.includes(user.id) && 'bg-gray-50']">
 
                                 <td class="relative w-12 px-6 sm:w-16 sm:px-8">
@@ -386,8 +390,7 @@ const onCloseModal = (state) => {
 
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
 
-                                    <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-secondary-100 text-secondary-800 dark:bg-secondary-700 dark:text-secondary-400">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-secondary-100 text-secondary-800 dark:bg-secondary-700 dark:text-secondary-400">
 
                                         {{ user.role }}
 
@@ -502,6 +505,6 @@ const onCloseModal = (state) => {
 
         </div>
 
-        <pagination :data="users"></pagination>
+        <pagination :data="rowData"></pagination>
     </div>
 </template>
