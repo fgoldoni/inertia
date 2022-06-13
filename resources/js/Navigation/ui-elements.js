@@ -9,6 +9,7 @@ export const navigation = [
     { name: 'Calendar', href: 'dashboard', icon: CalendarIcon, current: false },
     { name: 'Documents', href: 'dashboard', icon: InboxIcon, current: false },
     { name: 'Reports', href: 'dashboard', icon: ChartBarIcon, current: false },
+    { name: 'Telescope', href: 'telescope', icon: ChartBarIcon, current: false },
 ]
 
 export const userNavigation = [

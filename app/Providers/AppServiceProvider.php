@@ -41,13 +41,10 @@ class AppServiceProvider extends ServiceProvider
             inertia()->share(['basePageRoute' => $modal]);
         });
 
-        JsonResponse::macro('flash', function ($message) {
-           return [
-               'style' => 'success',
-               'message' => session()->flash('success', $message),
-           ];
-        });
-
+        JsonResponse::macro('flash', fn($message) => [
+            'style' => 'success',
+            'message' => session()->flash('success', $message),
+        ]);
 
         Gate::before(fn ($user, $ability) => $user->hasRole(config('app.system.users.roles.administrator')) ? true : null);
 

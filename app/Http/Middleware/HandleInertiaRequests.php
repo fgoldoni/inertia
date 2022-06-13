@@ -41,17 +41,13 @@ class HandleInertiaRequests extends Middleware
                     'isAdministrator' => $request->user()->isAdministrator(),
                 ] : null,
             ],
-            'can' => function () use ($request) {
-                return $request->user() ? [
-                    'is_impersonated' => $request->user()->isImpersonated(),
-                ] : null;
-            },
-            'flash' => function () use ($request) {
-                return [
-                    'style' => 'success',
-                    'message' => $request->session()->get('success'),
-                ];
-            },
+            'can' => fn() => $request->user() ? [
+                'is_impersonated' => $request->user()->isImpersonated(),
+            ] : null,
+            'flash' => fn() => [
+                'style' => 'success',
+                'message' => $request->session()->get('success'),
+            ],
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
         ]);
