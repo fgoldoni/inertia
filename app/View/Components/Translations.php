@@ -26,8 +26,6 @@ class Translations extends Component
     {
         $locale = App::getLocale();
 
-        Cache::flush();
-
         $translations = Cache::rememberForever("translations_$locale", function () use ($locale) {
             $phpTranslations = [];
             $jsonTranslations = [];

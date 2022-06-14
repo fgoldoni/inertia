@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Modules\Roles\Entities\Role;
 use Modules\Roles\Repositories\Contracts\PermissionsRepository;
@@ -25,7 +26,6 @@ class RolesController extends Controller
     {
         return Inertia::render('Modules/Roles/Index', array_merge([
             'filters' => [],
-            'permissions' => PermissionResource::collection($this->permissionsRepository->all())->groupBy('group_name'),
             'roles' => $this->rolesRepository->withCriteria([
                 new WithCount('users'),
                 new EagerLoad(['users']),
@@ -90,7 +90,13 @@ class RolesController extends Controller
         Inertia::basePageRoute(route('admin.roles.index', $request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
-            'editing' => new RoleResource($role->loadCount(['users'])->load(['users', 'permissions'])),
+            'editing' => new RoleResource($this->rolesRepository->withCriteria([
+                new WithCount('users'),
+                new EagerLoad(['users', 'permissions']),
+            ])->find($role->id)),
+            'permissions' => Cache::rememberForever(config('app.system.cache.keys.permissions'), function () {
+                return PermissionResource::collection($this->permissionsRepository->all())->groupBy('group_name');
+            }),
         ]);
     }
 

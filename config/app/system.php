@@ -24,6 +24,7 @@ return [
             'roles' => 'roles',
             'users' => 'users',
             'jobs' => 'jobs',
+            'permissions' => 'permissions',
         ],
     ],
 

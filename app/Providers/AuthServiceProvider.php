@@ -4,6 +4,10 @@ namespace App\Providers;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Schema;
+use Modules\Roles\Entities\Permission;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +29,22 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::before(fn ($user, $ability) => $user->hasRole(config('app.system.users.roles.administrator')) ? true : null);
+
+        if (Schema::hasTable('permissions')) {
+            foreach ($this->getPermissions() as $permission) {
+                Gate::define(
+                    $permission->name,
+                    static fn ($user) => $user->hasPermissionTo($permission)
+                );
+            }
+        }
+    }
+
+    private function getPermissions()
+    {
+        return Cache::rememberForever('all_permissions', function () {
+            return Permission::get();
+        });
     }
 }

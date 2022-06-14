@@ -150,6 +150,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Link"], {
       href: _ctx.route('admin.roles.edit', role.id),
+      only: ['editing', 'permissions', 'basePageRoute', 'modal'],
+      "preserve-state": "",
+      "preserve-scroll": "",
       "class": "group flex flex-col justify-between bg-white border border-secondary-200 dark:border-secondary-700 p-4 rounded-md overflow-hidden hover:shadow-md"
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
