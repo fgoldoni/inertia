@@ -1,19 +1,16 @@
 <script setup>
 import {ref, reactive} from 'vue'
-import {useForm, Link} from "@inertiajs/inertia-vue3";
 import LoadingButton from '@/Shared/LoadingButton'
-import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
-import pickBy from 'lodash/pickBy'
-import zxcvbn from 'zxcvbn'
+import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import Select from '@/Components/Select'
-import internationalNumber from '@/Plugins/internationalNumber'
 import 'intl-tel-input/build/css/intlTelInput.css'
-import {generatePassword, strengthLevels} from '@/Plugins/generatePassword'
 import { Errors } from '@/Plugins/errors'
-import {CalendarIcon, LockOpenIcon, AcademicCapIcon, TrashIcon} from '@heroicons/vue/solid'
+import {TrashIcon} from '@heroicons/vue/solid'
+import pickBy from "lodash/pickBy";
+import UsersList from '@/Components/UsersList'
+import {useForm} from "@inertiajs/inertia-vue3";
 
 
 const props = defineProps({
@@ -22,37 +19,39 @@ const props = defineProps({
     basePageRoute: String,
 });
 
-
 const isOpen = ref(true)
+
+const modal = useForm();
 
 const form = reactive({
     id: props.editing.id,
     name: props.editing.name,
     display_name: props.editing.display_name,
+    selectedRow: props.editing.permissions,
     errors: new Errors(),
     processing: false,
 });
 
-
 const closeModal = () => {
-    document.querySelector('#cancelButtonRef').click()
+    debugger
 }
-
 
 const onSubmit = () => {
     form.processing = true;
 
-    axios.post(route('admin.roles.store'), {
-        name: form.name
-    }).then(() => {
+    axios.put(route('admin.roles.update', form.id), pickBy({
+        name: form.name,
+        display_name: form.display_name,
+        permissions: form.selectedRow
+    })).then((response) => {
         form.processing = false;
-        closeModal();
     }).catch(error => {
         form.processing = false;
         form.errors.record(error.response.data.errors);
     });
 
 };
+
 </script>
 
 <template>
@@ -65,7 +64,7 @@ const onSubmit = () => {
                     leave-from="opacity-100"
                     leave-to="opacity-0">
 
-        <Dialog as="div" class="relative z-10" @close="closeModal()">
+        <Dialog as="div" class="relative z-10">
 
             <TransitionChild as="template"
                              enter="transition-opacity ease-linear duration-300"
@@ -163,17 +162,11 @@ const onSubmit = () => {
                                                                                 <span class="text-sm font-bold leading-5 capitalize tracking-wide text-secondary-900 sm:text-base sm:leading-6 dark:text-white">{{ group }}</span>
                                                                             </div>
                                                                             <div class="px-4 py-1 divide-y divide-secondary-200 dark:divide-secondary-700">
-                                                                                <div v-for="permission in permissions" class="flex items-center justify-between py-2">
+                                                                                <div v-for="(permission, key) in permissions" class="flex items-center justify-between py-2">
                                                                                     <div class="flex items-center space-x-3 cursor-pointer">
-                                                                                        <JetInput
-                                                                                            :id="'permission_' + permission.name"
-                                                                                            :name="'permission_' + permission.name"
-                                                                                            v-model="form.name"
-                                                                                            type="checkbox"
-                                                                                            class="focus:ring-primary-500 h-4 w-4 text-primary-600 border-secondary-300 rounded dark:bg-secondary-700 dark:border-secondary-600 dark:focus:offset-secondary-800"
-                                                                                            required/>
+                                                                                        <input :id="'permission_' + permission.id"  :name="'permission_' + permission.id" :value="permission.id" type="checkbox" v-model="form.selectedRow" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
 
-                                                                                        <JetLabel :for="'permission_' + permission.name" :value="permission.display_name"/>
+                                                                                        <JetLabel :for="'permission_' + permission.id" :value="permission.name"/>
                                                                                     </div>
                                                                                     <div class="flex items-center space-x-3">
                                                                                         <button v-if="permission.can_be_removed" type="button" class="inline-flex items-center text-sm leading-5 text-medium text-secondary-500 hover:text-rose-500 focus:text-rose-700 focus:outline-none focus:shadow-none dark:text-secondary-400 dark:hover:text-rose-500">
@@ -199,25 +192,24 @@ const onSubmit = () => {
                                                             <div class="col-span-1">
                                                                 <div class="flex items-center space-x-2">
                                                                     <div class="flex -space-x-1 relative z-0 overflow-hidden">
-                                                                        <img class="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                                                                        <img class="relative z-20 inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                                                                        <img class="relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="" />
-                                                                        <img class="relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="" />
-                                                                        <img class="relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="" />
-                                                                        <img class="relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="" />
-                                                                        <img class="relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="" />
-                                                                        <img class="relative z-0 inline-block h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                                                                        <img v-for="user in props.editing.users" :key="'image' + user.id" class="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white" :src="user.image" :alt="user.name" />
                                                                     </div>
 
-                                                                    <span class="shrink-0 text-xs leading-5 font-medium text-secondary-500 dark:text-secondary-400">+{{ 10 - 3 }}</span>
+                                                                    <span v-if="props.editing.users_count - 10 > 0" class="shrink-0 text-xs leading-5 font-medium text-secondary-500 dark:text-secondary-400">+{{ props.editing.users_count - 10 }}</span>
                                                                </div>
                                                             </div>
 
                                                             <div class="col-span-1">
 
                                                                 <div class="mt-2 text-sm text-secondary-500 dark:text-secondary-400">
-                                                                    Send an invitation to this administrator by email with his login information.
+                                                                    {{ __('These are the members who are already in your store with their associated roles.') }}
                                                                 </div>
+
+                                                            </div>
+
+                                                            <div class="col-span-1">
+
+                                                                <UsersList v-bind="$page.props.editing"></UsersList>
 
                                                             </div>
 
@@ -244,8 +236,8 @@ const onSubmit = () => {
 
                                     </LoadingButton>
 
-                                    <Link :href="props.basePageRoute" preserve-state preserve-scroll
-                                          class="uppercase mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                                    <Link :href="basePageRoute"
+                                          class="cursor-pointer uppercase mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                                           id="cancelButtonRef"
                                           ref="cancelButtonRef">
 

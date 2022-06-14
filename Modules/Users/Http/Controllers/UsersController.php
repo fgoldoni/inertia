@@ -60,7 +60,9 @@ class UsersController extends Controller
                     'created_at' => $user->created_at?->formatLocalized('%d %B, %Y'),
                     'verified' => $user->hasVerifiedEmail(),
                     'can' => [
-                        'impersonate' => auth()->user()->canImpersonate() && $user->canBeImpersonated()
+                        'impersonate' => auth()->user()->canImpersonate() && $user->canBeImpersonated(),
+                        'delete' => auth()->user()->hasPermissionTo('edit_users'),
+                        'edit' => auth()->user()->hasPermissionTo('edit_users'),
                     ],
                     'sessions' => $user->sessions->map(function ($session) {
                         $agent = $this->usersRepository->createAgent($session);

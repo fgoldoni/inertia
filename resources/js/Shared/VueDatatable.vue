@@ -28,10 +28,6 @@ const form = useForm({
 
 const  params = () => pickBy({perPage: form.perPage, search: form.search, field: form.field, direction: form.direction})
 
-
-onMounted(() => {
-})
-
 watch(form, debounce(() => {
     Inertia.get(props.config.apiUrl, params(), {replace: true, preserveState: true})
 }, 300), {deep: true});

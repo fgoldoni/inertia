@@ -1,7 +1,6 @@
 <script setup>
 import VueDatatable from '@/Shared/VueDatatable';
 import config from '@/Pages/Modules/Users/Datatables/config'
-
 </script>
 
 <template>

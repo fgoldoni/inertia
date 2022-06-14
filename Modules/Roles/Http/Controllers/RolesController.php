@@ -3,8 +3,10 @@ namespace Modules\Roles\Http\Controllers;
 
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\WithCount;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Inertia\Inertia;
 use Modules\Roles\Entities\Role;
@@ -15,7 +17,7 @@ use Modules\Roles\Transformers\RoleResource;
 
 class RolesController extends Controller
 {
-    public function __construct(private readonly RolesRepository $rolesRepository, private readonly PermissionsRepository $permissionsRepository)
+    public function __construct(private readonly RolesRepository $rolesRepository, private readonly PermissionsRepository $permissionsRepository, private readonly ResponseFactory $response)
     {
     }
 
@@ -23,9 +25,7 @@ class RolesController extends Controller
     {
         return Inertia::render('Modules/Roles/Index', array_merge([
             'filters' => [],
-            'permissions' => PermissionResource::collection($this->permissionsRepository->withCriteria([
-                new EagerLoad(['users']),
-            ])->all())->groupBy('group_name'),
+            'permissions' => PermissionResource::collection($this->permissionsRepository->all())->groupBy('group_name'),
             'roles' => $this->rolesRepository->withCriteria([
                 new WithCount('users'),
                 new EagerLoad(['users']),
@@ -90,18 +90,20 @@ class RolesController extends Controller
         Inertia::basePageRoute(route('admin.roles.index', $request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
-            'editing' => new RoleResource($role),
+            'editing' => new RoleResource($role->loadCount(['users'])->load(['users', 'permissions'])),
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, Role $role)
     {
-        //
+        $this->rolesRepository->update($role->id, $request->only('name', 'display_name'));
+
+        $role->syncPermissions($request->get('permissions'));
+
+        return $this->response
+            ->json([], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK)
+            ->flash(__('Permission(s) :permission has been given to this role.', ['permission' => implode(',', $request->get('permissions'))]));
     }
 
     /**

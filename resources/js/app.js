@@ -20,7 +20,7 @@ createInertiaApp({
 
     resolve: async name => {
 
-        let page = (await require(`./Pages/${name}.vue`)).default
+        let page = (await import(`./Pages/${name}.vue`)).default
 
         page.layout ??= Layout;
 

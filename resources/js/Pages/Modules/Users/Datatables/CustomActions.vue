@@ -1,6 +1,6 @@
 <script setup>
 import {Link} from "@inertiajs/inertia-vue3";
-import {PlusIcon, ShieldCheckIcon, PencilAltIcon, UserCircleIcon, RefreshIcon, ShieldExclamationIcon} from '@heroicons/vue/solid';
+import {PencilAltIcon, UserCircleIcon} from '@heroicons/vue/solid';
 
 const props = defineProps({
     row: Object,
@@ -20,7 +20,7 @@ const props = defineProps({
 
                                     </span>
 
-        <Link v-if="$page.props.auth.user.isAdministrator && ! props.row.isAdministrator"
+        <Link v-else-if="props.row.can.edit && ! props.row.isAdministrator"
               :href="route('admin.users.edit', {'user': props.row.id})" preserve-state
               preserve-scroll
               :data="{}"
