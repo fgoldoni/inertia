@@ -240,11 +240,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/CalendarIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/LockOpenIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/AcademicCapIcon.js");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/dialog/dialog.js");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/transitions/transition.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/CalendarIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/LockOpenIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/AcademicCapIcon.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/dialog/dialog.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/transitions/transition.js");
 /* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
 /* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var zxcvbn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! zxcvbn */ "./node_modules/zxcvbn/lib/main.js");
@@ -259,7 +259,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Plugins_generatePassword__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Plugins/generatePassword */ "./resources/js/Plugins/generatePassword.js");
 /* harmony import */ var _Plugins_errors__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Plugins/errors */ "./resources/js/Plugins/errors.js");
 /* harmony import */ var _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.vue");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/switch/switch.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/switch/switch.js");
+/* harmony import */ var _Composables_UseRole__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/Composables/UseRole */ "./resources/js/Composables/UseRole.js");
+
 
 
 
@@ -281,7 +283,6 @@ __webpack_require__.r(__webpack_exports__);
   __name: 'EditModal',
   props: {
     editing: Object,
-    roles: Object,
     errors: Object,
     filters: Object,
     basePageRoute: String
@@ -290,6 +291,7 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
+    var roles = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     var enabled = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var showPassword = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var isOpen = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
@@ -306,6 +308,9 @@ __webpack_require__.r(__webpack_exports__);
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       (0,_Plugins_internationalNumber__WEBPACK_IMPORTED_MODULE_9__["default"])('#phone').init();
+      _Composables_UseRole__WEBPACK_IMPORTED_MODULE_14__["default"].fetchRoles(function (response) {
+        return roles.value = response.data;
+      });
     });
 
     var closeModal = function closeModal() {
@@ -343,6 +348,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var __returned__ = {
+      roles: roles,
       props: props,
       enabled: enabled,
       showPassword: showPassword,
@@ -358,14 +364,14 @@ __webpack_require__.r(__webpack_exports__);
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Link,
-      CalendarIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_14__["default"],
-      LockOpenIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_15__["default"],
-      AcademicCapIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_16__["default"],
-      Dialog: _headlessui_vue__WEBPACK_IMPORTED_MODULE_17__.Dialog,
-      DialogPanel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_17__.DialogPanel,
-      DialogTitle: _headlessui_vue__WEBPACK_IMPORTED_MODULE_17__.DialogTitle,
-      TransitionChild: _headlessui_vue__WEBPACK_IMPORTED_MODULE_18__.TransitionChild,
-      TransitionRoot: _headlessui_vue__WEBPACK_IMPORTED_MODULE_18__.TransitionRoot,
+      CalendarIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_15__["default"],
+      LockOpenIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_16__["default"],
+      AcademicCapIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_17__["default"],
+      Dialog: _headlessui_vue__WEBPACK_IMPORTED_MODULE_18__.Dialog,
+      DialogPanel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_18__.DialogPanel,
+      DialogTitle: _headlessui_vue__WEBPACK_IMPORTED_MODULE_18__.DialogTitle,
+      TransitionChild: _headlessui_vue__WEBPACK_IMPORTED_MODULE_19__.TransitionChild,
+      TransitionRoot: _headlessui_vue__WEBPACK_IMPORTED_MODULE_19__.TransitionRoot,
       pickBy: (lodash_pickBy__WEBPACK_IMPORTED_MODULE_2___default()),
       zxcvbn: (zxcvbn__WEBPACK_IMPORTED_MODULE_3___default()),
       JetInput: _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -378,9 +384,10 @@ __webpack_require__.r(__webpack_exports__);
       strengthLevels: _Plugins_generatePassword__WEBPACK_IMPORTED_MODULE_11__.strengthLevels,
       Errors: _Plugins_errors__WEBPACK_IMPORTED_MODULE_12__.Errors,
       LoadingButton: _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_13__["default"],
-      Switch: _headlessui_vue__WEBPACK_IMPORTED_MODULE_19__.Switch,
-      SwitchGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_19__.SwitchGroup,
-      SwitchLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_19__.SwitchLabel
+      Switch: _headlessui_vue__WEBPACK_IMPORTED_MODULE_20__.Switch,
+      SwitchGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_20__.SwitchGroup,
+      SwitchLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_20__.SwitchLabel,
+      useRole: _Composables_UseRole__WEBPACK_IMPORTED_MODULE_14__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -897,9 +904,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
-                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [$setup.props.roles ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Select"], {
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [$setup.roles ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Select"], {
                     key: 0,
-                    people: $setup.props.roles,
+                    people: $setup.roles,
                     onOnSelect: $setup.updateInputRole,
                     selected: $setup.form.role
                   }, null, 8
@@ -1137,6 +1144,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , _hoisted_1);
 }
+
+/***/ }),
+
+/***/ "./resources/js/Composables/UseRole.js":
+/*!*********************************************!*\
+  !*** ./resources/js/Composables/UseRole.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  fetchRoles: function fetchRoles(success, error) {
+    return axios.get(route('api.roles.index')).then(function (response) {
+      return success(response.data);
+    }, function (response) {
+      return error(response);
+    });
+  }
+});
 
 /***/ }),
 

@@ -224,7 +224,7 @@ const onCloseModal = (state) => {
                                     </td>
 
                                     <td v-else class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        <component v-if="`${fields[key]['name']}`.includes('__component:')" :is="setDefineAsyncComponent(`${fields[key]['name']}`.replace('__component:', ''))" v-bind="{row: row}"/>
+                                        <component v-if="`${fields[key]['name']}`.includes('__component:')" :is="setDefineAsyncComponent(`${fields[key]['name']}`.replace('__component:', ''))" v-bind="{row: {... row, ... { params: params() }}}"/>
                                         <span v-else v-text="row[fields[key]['name']]"></span>
                                     </td>
 

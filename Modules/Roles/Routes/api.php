@@ -21,5 +21,6 @@ Route::controller(PermissionsController::class)->prefix('permissions')->name('ap
 });
 
 Route::controller(RolesController::class)->prefix('roles')->name('api.roles.')->group(function () {
+    Route::get('/', 'index')->name('index');
     Route::get('/{role}', 'show')->name('show');
 });

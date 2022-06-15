@@ -1,6 +1,7 @@
 <script setup>
 import {Link} from "@inertiajs/inertia-vue3";
 import {PencilAltIcon, UserCircleIcon} from '@heroicons/vue/solid';
+import pickBy from "lodash/pickBy";
 
 const props = defineProps({
     row: Object,
@@ -21,9 +22,11 @@ const props = defineProps({
                                     </span>
 
         <Link v-else-if="props.row.can.edit && ! props.row.isAdministrator"
-              :href="route('admin.users.edit', {'user': props.row.id})" preserve-state
+              :href="route('admin.users.edit', {'user': props.row.id})"
+              preserve-state
               preserve-scroll
-              :data="{}"
+              :data="pickBy(props.row.filters)"
+              :only="['editing', 'modal', 'roles', 'basePageRoute']"
               class="group flex flex-row-reverse items-center hover:shadow-2xl">
 
             <PencilAltIcon

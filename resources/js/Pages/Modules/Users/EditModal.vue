@@ -16,12 +16,14 @@ import {generatePassword, strengthLevels} from '@/Plugins/generatePassword'
 import { Errors } from "@/Plugins/errors";
 import LoadingButton from '@/Shared/LoadingButton'
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
+import useRole from '@/Composables/UseRole'
 
 
+
+const roles = ref(null)
 
 const props = defineProps({
     editing: Object,
-    roles: Object,
     errors: Object,
     filters: Object,
     basePageRoute: String,
@@ -46,7 +48,9 @@ const form = reactive({
 
 onMounted(() => {
     internationalNumber('#phone').init();
+    useRole.fetchRoles(response => roles.value = response.data);
 })
+
 
 const closeModal = () => {
     document.querySelector('#cancelButtonRef').click()
@@ -164,8 +168,8 @@ const onSubmit = () => {
 
                                                             <div class="col-span-1">
 
-                                                                <Select :people="props.roles"
-                                                                        v-if="props.roles"
+                                                                <Select :people="roles"
+                                                                        v-if="roles"
                                                                         @on-select="updateInputRole"
                                                                         :selected="form.role"/>
 

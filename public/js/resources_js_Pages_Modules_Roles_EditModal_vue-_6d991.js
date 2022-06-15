@@ -910,7 +910,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                       /* PROPS */
                       , _hoisted_32), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.form.selectedRow]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
                         "for": 'permission_' + permission.id,
-                        value: permission.name
+                        value: permission.display_name
                       }, null, 8
                       /* PROPS */
                       , ["for", "value"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [permission.can_be_removed ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TrashIcon"], {
@@ -957,7 +957,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   }, 8
                   /* PROPS */
                   , ["loading"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-                    href: $props.basePageRoute,
+                    href: $setup.props.basePageRoute,
                     "class": "cursor-pointer uppercase mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
                     id: "cancelButtonRef",
                     ref: "cancelButtonRef"

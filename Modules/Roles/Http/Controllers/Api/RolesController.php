@@ -9,13 +9,13 @@ use Modules\Roles\Repositories\Contracts\RolesRepository;
 
 class RolesController extends Controller
 {
-    public function __construct(private readonly ResponseFactory $response, private readonly RolesRepository $roles)
+    public function __construct(private readonly ResponseFactory $response, private readonly RolesRepository $rolesRepository)
     {
     }
 
     public function index()
     {
-
+        return $this->response->json(['data' => $this->rolesRepository->all(['id', 'name', 'display_name'])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
     public function store(Request $request)

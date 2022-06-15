@@ -1790,7 +1790,7 @@ var map = {
 	"./Modules/Users/Datatables/CustomActions.vue": [
 		"./resources/js/Pages/Modules/Users/Datatables/CustomActions.vue",
 		"/js/vendor",
-		"resources_js_Pages_Modules_Users_Datatables_CustomActions_vue"
+		"resources_js_Pages_Modules_Users_Datatables_CustomActions_vue-_960b0"
 	],
 	"./Modules/Users/Datatables/CustomEmail.vue": [
 		"./resources/js/Pages/Modules/Users/Datatables/CustomEmail.vue",

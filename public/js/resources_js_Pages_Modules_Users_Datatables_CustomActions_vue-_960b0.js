@@ -12,12 +12,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/PlusIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ShieldCheckIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/PencilAltIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/UserCircleIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/RefreshIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ShieldExclamationIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/PencilAltIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/UserCircleIcon.js");
+/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
+/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -32,12 +31,9 @@ __webpack_require__.r(__webpack_exports__);
     var __returned__ = {
       props: props,
       Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Link,
-      PlusIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_1__["default"],
-      ShieldCheckIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__["default"],
-      PencilAltIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__["default"],
-      UserCircleIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_4__["default"],
-      RefreshIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__["default"],
-      ShieldExclamationIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_6__["default"]
+      PencilAltIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__["default"],
+      UserCircleIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__["default"],
+      pickBy: (lodash_pickBy__WEBPACK_IMPORTED_MODULE_1___default())
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -86,7 +82,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "preserve-state": "",
     "preserve-scroll": "",
-    data: {},
+    data: $setup.pickBy($setup.props.row.filters),
+    only: ['editing', 'modal', 'roles', 'basePageRoute'],
     "class": "group flex flex-row-reverse items-center hover:shadow-2xl"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -102,7 +99,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  , ["href", "data"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),

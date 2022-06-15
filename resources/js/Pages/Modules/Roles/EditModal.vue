@@ -193,7 +193,7 @@ const onSubmit = () => {
                                                                                     <div class="flex items-center space-x-3 cursor-pointer">
                                                                                         <input :id="'permission_' + permission.id"  :name="'permission_' + permission.id" :value="permission.id" type="checkbox" v-model="form.selectedRow" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
 
-                                                                                        <JetLabel :for="'permission_' + permission.id" :value="permission.name"/>
+                                                                                        <JetLabel :for="'permission_' + permission.id" :value="permission.display_name"/>
                                                                                     </div>
                                                                                     <div class="flex items-center space-x-3">
                                                                                         <button v-if="permission.can_be_removed" type="button" class="inline-flex items-center text-sm leading-5 text-medium text-secondary-500 hover:text-rose-500 focus:text-rose-700 focus:outline-none focus:shadow-none dark:text-secondary-400 dark:hover:text-rose-500">
@@ -263,7 +263,7 @@ const onSubmit = () => {
 
                                     </LoadingButton>
 
-                                    <Link :href="basePageRoute"
+                                    <Link :href="props.basePageRoute"
                                           class="cursor-pointer uppercase mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                                           id="cancelButtonRef"
                                           ref="cancelButtonRef">

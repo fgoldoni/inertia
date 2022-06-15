@@ -94,10 +94,6 @@ class UsersController extends Controller
                 'email' => 'test' . uniqid() . '@test.com',
                 'phone' => '+4915736795436',
             ])),
-            'roles' => $this->rolesRepository->withCriteria([
-                new Select('roles.id', 'roles.name', 'roles.display_name'),
-                new WhereNot('roles.name', config('app.system.users.roles.default'))
-            ])->all(),
         ]);
     }
 
