@@ -12,52 +12,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/MailIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ArrowNarrowRightIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/PlusIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ArrowNarrowRightIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/PlusIcon.js");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'Index',
   props: {
-    filters: Object,
     roles: Object
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
     var props = __props;
-    var people = [{
-      name: 'Jane Cooper',
-      title: 'Regional Paradigm Technician',
-      role: 'Admin',
-      email: 'janecooper@example.com',
-      telephone: '+1-202-555-0170',
-      imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60'
-    }, {
-      name: 'Jane Cooper',
-      title: 'Regional Paradigm Technician',
-      role: 'Admin',
-      email: 'janecooper@example.com',
-      telephone: '+1-202-555-0170',
-      imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60'
-    }, {
-      name: 'Jane Cooper',
-      title: 'Regional Paradigm Technician',
-      role: 'Admin',
-      email: 'janecooper@example.com',
-      telephone: '+1-202-555-0170',
-      imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60'
-    }];
     var __returned__ = {
-      people: people,
       props: props,
-      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm,
       Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Link,
       Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Head,
-      MailIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_1__["default"],
-      ArrowNarrowRightIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__["default"],
-      PlusIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__["default"]
+      ArrowNarrowRightIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_1__["default"],
+      PlusIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -163,7 +136,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             key: 'user' + user.id,
             "class": "inline-block h-6 w-6 rounded-full ring-2 ring-white shadow-solid",
             src: user.image,
-            alt: user.name
+            alt: user.name,
+            loading: "lazy"
           }, null, 8
           /* PROPS */
           , _hoisted_9);

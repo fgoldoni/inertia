@@ -5,12 +5,11 @@ import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from 
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import 'intl-tel-input/build/css/intlTelInput.css'
 import { Errors } from '@/Plugins/errors'
 import {TrashIcon} from '@heroicons/vue/solid'
 import pickBy from "lodash/pickBy";
 import UsersList from '@/Components/UsersList'
-import {useForm} from "@inertiajs/inertia-vue3";
+import { InformationCircleIcon } from '@heroicons/vue/solid'
 
 
 const props = defineProps({
@@ -21,7 +20,9 @@ const props = defineProps({
 
 const isOpen = ref(true)
 
-const modal = useForm();
+const setIsOpen = () => {
+    document.querySelector('#cancelButtonRef').click()
+}
 
 const form = reactive({
     id: props.editing.id,
@@ -32,9 +33,6 @@ const form = reactive({
     processing: false,
 });
 
-const closeModal = () => {
-    debugger
-}
 
 const onSubmit = () => {
     form.processing = true;
@@ -44,6 +42,7 @@ const onSubmit = () => {
         display_name: form.display_name,
         permissions: form.selectedRow
     })).then((response) => {
+        setIsOpen()
         form.processing = false;
     }).catch(error => {
         form.processing = false;
@@ -64,7 +63,7 @@ const onSubmit = () => {
                     leave-from="opacity-100"
                     leave-to="opacity-0">
 
-        <Dialog as="div" class="relative z-10">
+        <Dialog as="div" class="relative z-10" @close="setIsOpen">
 
             <TransitionChild as="template"
                              enter="transition-opacity ease-linear duration-300"
@@ -99,7 +98,7 @@ const onSubmit = () => {
 
                                     <div>
 
-                                        <div class="mb-3">
+                                        <div>
 
                                             <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900">
 
@@ -107,6 +106,26 @@ const onSubmit = () => {
 
                                             </DialogTitle>
 
+                                        </div>
+
+                                        <div class="py-5" v-if="props.editing.name === 'administrator'">
+                                            <div class="rounded-md bg-primary-500 bg-opacity-10 p-4">
+                                                <div class="flex">
+                                                    <div class="shrink-0">
+                                                        <InformationCircleIcon  class="h-5 w-5 text-primary-400" />
+                                                    </div>
+                                                    <div class="ml-3 flex-1 md:flex md:justify-between">
+                                                        <p class="text-sm leading-5 text-primary-700">
+                                                            {{ __('You are about to update the admin role, this could block your access to the dashboard.') }}
+                                                        </p>
+                                                        <p class="mt-3 text-sm leading-5 md:mt-0 md:ml-6">
+                                                            <a href="javascript:;" class="whitespace-no-wrap font-medium text-primary-700 hover:text-primary-600 transition ease-in-out duration-150">
+                                                                {{ __('Learn more') }} &rarr;
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -192,7 +211,7 @@ const onSubmit = () => {
                                                             <div class="col-span-1">
                                                                 <div class="flex items-center space-x-2">
                                                                     <div class="flex -space-x-1 relative z-0 overflow-hidden">
-                                                                        <img v-for="user in props.editing.users" :key="'image' + user.id" class="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white" :src="user.image" :alt="user.name" />
+                                                                        <img v-for="user in props.editing.users" :key="'image' + user.id" class="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white" :src="user.image" :alt="user.name" loading="lazy"/>
                                                                     </div>
 
                                                                     <span v-if="props.editing.users_count - 10 > 0" class="shrink-0 text-xs leading-5 font-medium text-secondary-500 dark:text-secondary-400">+{{ props.editing.users_count - 10 }}</span>

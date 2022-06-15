@@ -1,39 +1,12 @@
 <script setup>
-import {useForm, Link, Head} from "@inertiajs/inertia-vue3";
-import { MailIcon, ArrowNarrowRightIcon, PlusIcon } from '@heroicons/vue/solid'
+import {Link, Head} from "@inertiajs/inertia-vue3";
+import {ArrowNarrowRightIcon, PlusIcon } from '@heroicons/vue/solid'
 
-const people = [
-    {
-        name: 'Jane Cooper',
-        title: 'Regional Paradigm Technician',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },{
-        name: 'Jane Cooper',
-        title: 'Regional Paradigm Technician',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },{
-        name: 'Jane Cooper',
-        title: 'Regional Paradigm Technician',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },
-]
 
 const props = defineProps({
-    filters: Object,
     roles: Object,
 });
+
 </script>
 
 <template>
@@ -71,7 +44,7 @@ const props = defineProps({
                     <div class="flex items-center justify-between">
                         <span class="text-xs leading-4 text-secondary-400 dark:text-secondary-500 font-semibold uppercase tracking-wider">{{ role.users_count }} {{ __('Account') }}</span>
                         <div class="flex -space-x-1 overflow-hidden">
-                            <img v-for="user in role.users" :key="'user' + user.id" class="inline-block h-6 w-6 rounded-full ring-2 ring-white shadow-solid" :src="user.image" :alt="user.name">
+                            <img v-for="user in role.users" :key="'user' + user.id" class="inline-block h-6 w-6 rounded-full ring-2 ring-white shadow-solid" :src="user.image" :alt="user.name"  loading="lazy"/>
                         </div>
                     </div>
                     <div>
