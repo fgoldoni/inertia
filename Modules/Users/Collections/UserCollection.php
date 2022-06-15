@@ -12,14 +12,9 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class UserCollection extends Collection
 {
-    public function groupByLetter()
+    public function groupByLetter(): UserCollection|\Illuminate\Support\Collection
     {
-        return $this->map(fn ($user) => [
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'image' => $user->profile_photo_url,
-        ])->sortBy('name')->groupBy(function($item) {
+        return $this->sortBy('name')->groupBy(function($item) {
             return $item['name'][0];
         });
     }

@@ -1,49 +1,52 @@
 <script setup>
-import {ref, reactive} from 'vue'
-import {useForm, Link} from "@inertiajs/inertia-vue3";
+import {ref, reactive, onMounted} from 'vue'
+import {Link} from "@inertiajs/inertia-vue3";
 import LoadingButton from '@/Shared/LoadingButton'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
-import pickBy from 'lodash/pickBy'
-import zxcvbn from 'zxcvbn'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import Select from '@/Components/Select'
-import internationalNumber from '@/Plugins/internationalNumber'
-import 'intl-tel-input/build/css/intlTelInput.css'
-import {generatePassword, strengthLevels} from '@/Plugins/generatePassword'
 import { Errors } from '@/Plugins/errors'
+import usePermission from '@/Composables/UsePermission'
 import {CalendarIcon, LockOpenIcon, AcademicCapIcon} from '@heroicons/vue/solid'
 
 
 const props = defineProps({
-    editing: Object,
     basePageRoute: String,
+});
+
+const editing = ref(null);
+
+const permissions = ref({
+    data: []
 });
 
 
 const isOpen = ref(true)
 
 const form = reactive({
-    name: props.editing.name,
+    name: 'props.editing.name',
     errors: new Errors(),
     processing: false,
 });
 
 
-const closeModal = () => {
+const setIsOpen = () => {
     document.querySelector('#cancelButtonRef').click()
 }
+
+onMounted(() => {
+    usePermission.fetchPermissions(response => permissions.value = response);
+})
+
 
 
 const onSubmit = () => {
     form.processing = true;
 
-    axios.post(route('admin.roles.store'), {
-        name: form.name
-    }).then(() => {
+    axios.post(route('admin.roles.store'), { name: form.name }).then(() => {
         form.processing = false;
-        closeModal();
+        setIsOpen();
     }).catch(error => {
         form.processing = false;
         form.errors.record(error.response.data.errors);
@@ -62,7 +65,7 @@ const onSubmit = () => {
                     leave-from="opacity-100"
                     leave-to="opacity-0">
 
-        <Dialog as="div" class="relative z-10" @close="closeModal()">
+        <Dialog as="div" class="relative z-10" @close="setIsOpen">
 
             <TransitionChild as="template"
                              enter="transition-opacity ease-linear duration-300"
@@ -171,7 +174,7 @@ const onSubmit = () => {
                                                                         <span class="text-gray-900 text-sm font-medium">
 
                                                                             Created on <time datetime="2020-12-02"
-                                                                                             v-text="props.editing.created_at"></time>
+                                                                                             v-text="'props.editing.created_at'"></time>
 
                                                                         </span>
 

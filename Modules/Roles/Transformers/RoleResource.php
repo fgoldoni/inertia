@@ -9,13 +9,6 @@ class RoleResource extends JsonResource
 
     public function toArray($request)
     {
-        $users = $this->users->map(fn ($user) => [
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'image' => $user->profile_photo_url,
-        ]);
-
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -23,7 +16,7 @@ class RoleResource extends JsonResource
             'created_at' => $this->created_at?->formatLocalized('%d %B, %Y'),
             'users_count' => $this->users_count,
             'permissions' => $this->permissions->pluck('id'),
-            'users' => $users->take(10),
+            'users' => $this->users->take(10),
             'users_list' => $this->users->groupByLetter(),
         ];
     }

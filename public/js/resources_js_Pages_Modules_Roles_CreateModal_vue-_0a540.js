@@ -236,7 +236,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'CreateModal',
   props: {
-    editing: Object,
     basePageRoute: String
   },
   setup: function setup(__props, _ref) {
@@ -245,14 +244,18 @@ __webpack_require__.r(__webpack_exports__);
     var props = __props;
     var isOpen = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      name: props.editing.name,
+      name: 'props.editing.name',
       errors: new _Plugins_errors__WEBPACK_IMPORTED_MODULE_12__.Errors(),
       processing: false
     });
 
-    var closeModal = function closeModal() {
+    var setIsOpen = function setIsOpen() {
       document.querySelector('#cancelButtonRef').click();
     };
+
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+      el.value; // <div>
+    });
 
     var onSubmit = function onSubmit() {
       form.processing = true;
@@ -260,7 +263,7 @@ __webpack_require__.r(__webpack_exports__);
         name: form.name
       }).then(function () {
         form.processing = false;
-        closeModal();
+        setIsOpen();
       })["catch"](function (error) {
         form.processing = false;
         form.errors.record(error.response.data.errors);
@@ -271,10 +274,11 @@ __webpack_require__.r(__webpack_exports__);
       props: props,
       isOpen: isOpen,
       form: form,
-      closeModal: closeModal,
+      setIsOpen: setIsOpen,
       onSubmit: onSubmit,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
+      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm,
       Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Link,
       LoadingButton: _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -672,9 +676,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Dialog"], {
         as: "div",
         "class": "relative z-10",
-        onClose: _cache[2] || (_cache[2] = function ($event) {
-          return $setup.closeModal();
-        })
+        onClose: $setup.setIsOpen
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TransitionChild"], {
@@ -756,7 +758,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "aria-hidden": "true"
                   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("time", {
                     datetime: "2020-12-02",
-                    textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.editing.created_at)
+                    textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)('props.editing.created_at')
                   }, null, 8
                   /* PROPS */
                   , _hoisted_24)])])])]), _hoisted_25])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingButton"], {

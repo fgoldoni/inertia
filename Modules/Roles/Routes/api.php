@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Modules\Roles\Http\Controllers\Api\PermissionsController;
+use Modules\Roles\Http\Controllers\Api\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,11 @@ use Modules\Roles\Http\Controllers\Api\PermissionsController;
 |
 */
 
-Route::middleware('auth:api')->get('/roles', function (Request $request) {
-    return $request->user();
+
+Route::controller(PermissionsController::class)->prefix('permissions')->name('api.permissions.')->group(function () {
+    Route::get('/', 'index')->name('index');
 });
 
-Route::controller(PermissionsController::class)->group(function () {
-    Route::get('/permissions', 'index')->name('permissions.index');
+Route::controller(RolesController::class)->prefix('roles')->name('api.roles.')->group(function () {
+    Route::get('/{role}', 'show')->name('show');
 });

@@ -1266,6 +1266,9 @@ var userNavigation = [{
   name: 'Your Profile',
   href: route('profile.show')
 }, {
+  name: 'API Tokens',
+  href: route('api-tokens.index')
+}, {
   name: 'Settings',
   href: '#'
 }];
@@ -1763,7 +1766,7 @@ var map = {
 	"./Modules/Roles/CreateModal.vue": [
 		"./resources/js/Pages/Modules/Roles/CreateModal.vue",
 		"/js/vendor",
-		"resources_js_Pages_Modules_Roles_CreateModal_vue-_0a540"
+		"resources_js_Pages_Modules_Roles_CreateModal_vue"
 	],
 	"./Modules/Roles/EditModal.vue": [
 		"./resources/js/Pages/Modules/Roles/EditModal.vue",

@@ -14,5 +14,6 @@ export const navigation = [
 
 export const userNavigation = [
     { name: 'Your Profile', href: route('profile.show') },
+    { name: 'API Tokens', href: route('api-tokens.index') },
     { name: 'Settings', href: '#' },
 ]

@@ -41,7 +41,10 @@ class HandleInertiaRequests extends Middleware
                     'isAdministrator' => $request->user()->isAdministrator(),
                 ] : null,
             ],
-            'flash' => fn() => [
+            'can' => fn () => $request->user() ? [
+                'is_impersonated' => $request->user()->isImpersonated(),
+            ] : null,
+            'flash' => fn () => [
                 'style' => 'success',
                 'message' => $request->session()->get('success'),
             ],

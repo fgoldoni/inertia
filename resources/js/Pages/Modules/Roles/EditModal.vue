@@ -1,5 +1,5 @@
 <script setup>
-import {ref, reactive} from 'vue'
+import {ref, reactive, onMounted} from 'vue'
 import LoadingButton from '@/Shared/LoadingButton'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import JetInput from '@/Jetstream/Input.vue'
@@ -10,15 +10,19 @@ import {TrashIcon} from '@heroicons/vue/solid'
 import pickBy from "lodash/pickBy";
 import UsersList from '@/Components/UsersList'
 import { InformationCircleIcon } from '@heroicons/vue/solid'
+import usePermission from '@/Composables/UsePermission'
 
 
 const props = defineProps({
     editing: Object,
-    permissions: Object,
     basePageRoute: String,
 });
 
 const isOpen = ref(true)
+
+const permissions = ref({
+    data: []
+});
 
 const setIsOpen = () => {
     document.querySelector('#cancelButtonRef').click()
@@ -32,6 +36,10 @@ const form = reactive({
     errors: new Errors(),
     processing: false,
 });
+
+onMounted(() => {
+    usePermission.fetchPermissions(response => permissions.value = response);
+})
 
 
 const onSubmit = () => {
@@ -176,7 +184,7 @@ const onSubmit = () => {
                                                                         <p class="ml-2 mt-1 text-sm leading-5 text-secondary-500 truncate">{{ __('in :name role', {'name': editing.display_name}) }}</p>
                                                                     </div>
                                                                     <div class="mt-4 border-t border-secondary-200 overflow-y-auto h-72 divide-y divide-secondary-200 dark:border-secondary-700 dark:divide-secondary-700">
-                                                                        <div v-for="(permissions, group) in props.permissions">
+                                                                        <div v-for="(permissions, group) in permissions.data">
                                                                             <div class="w-full py-1.5 px-4 bg-secondary-100 dark:bg-secondary-700">
                                                                                 <span class="text-sm font-bold leading-5 capitalize tracking-wide text-secondary-900 sm:text-base sm:leading-6 dark:text-white">{{ group }}</span>
                                                                             </div>
@@ -211,7 +219,7 @@ const onSubmit = () => {
                                                             <div class="col-span-1">
                                                                 <div class="flex items-center space-x-2">
                                                                     <div class="flex -space-x-1 relative z-0 overflow-hidden">
-                                                                        <img v-for="user in props.editing.users" :key="'image' + user.id" class="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white" :src="user.image" :alt="user.name" loading="lazy"/>
+                                                                        <img v-for="user in props.editing.users" :key="'image' + user.id" class="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white" :src="user.profile_photo_url" :alt="user.name" loading="lazy"/>
                                                                     </div>
 
                                                                     <span v-if="props.editing.users_count - 10 > 0" class="shrink-0 text-xs leading-5 font-medium text-secondary-500 dark:text-secondary-400">+{{ props.editing.users_count - 10 }}</span>

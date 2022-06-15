@@ -10,7 +10,7 @@
                     <li v-for="person in props.users_list[letter]" :key="person.id" class="bg-white">
                         <div class="relative px-6 py-5 flex items-center space-x-3 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
                             <div class="flex-shrink-0">
-                                <img class="h-10 w-10 rounded-full" :src="person.image" alt="" />
+                                <img class="h-10 w-10 rounded-full" :src="person.profile_photo_url" alt="" />
                             </div>
                             <div class="flex-1 min-w-0">
                                 <a href="javascript:;" class="focus:outline-none">

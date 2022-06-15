@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             inertia()->share(['basePageRoute' => $modal]);
         });
 
-        JsonResponse::macro('flash', fn($message) => [
+        JsonResponse::macro('flash', fn ($message) => [
             'style' => 'success',
             'message' => session()->flash('success', $message),
         ]);
