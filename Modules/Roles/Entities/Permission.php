@@ -1,6 +1,8 @@
 <?php
 namespace Modules\Roles\Entities;
 
+use Illuminate\Database\Eloquent\Collection;
+use Modules\Roles\Collections\PermissionCollection;
 use Spatie\Permission\Models\Permission as SpatiePermission;
 
 class Permission extends SpatiePermission
@@ -72,5 +74,10 @@ class Permission extends SpatiePermission
             'description' => __('This permission allow you to removed a record of :item.', ['item' => $item]),
             'can_be_removed' => false,
         ]);
+    }
+
+    public function newCollection(array $models = []): Collection
+    {
+        return new PermissionCollection($models);
     }
 }

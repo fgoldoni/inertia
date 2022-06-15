@@ -29,9 +29,7 @@ class RolesController extends Controller
     public function index(array $modalProps = [])
     {
         return Inertia::render('Modules/Roles/Index', array_merge([
-
-            'roles' => Cache::rememberForever(config('app.system.cache.keys.roles'), function () {
-                return $this->rolesRepository->withCriteria([
+            'rowData' => $this->rolesRepository->withCriteria([
                     new WithCount('users'),
                     new EagerLoad(['users']),
                 ])
@@ -47,8 +45,7 @@ class RolesController extends Controller
                             'name' => $user->name,
                             'image' => $user->profile_photo_url,
                         ])->take(6),
-                    ]);
-            }),
+                    ]),
 
         ], $modalProps));
     }
@@ -92,6 +89,8 @@ class RolesController extends Controller
 
     public function edit(Request $request, Role $role)
     {
+        Cache::flush();
+
         Inertia::modal('Modules/Roles/EditModal');
 
         Inertia::basePageRoute(route('admin.roles.index',
@@ -103,7 +102,7 @@ class RolesController extends Controller
                 new EagerLoad(['users', 'permissions']),
             ])->find($role->id)),
             'permissions' => Cache::rememberForever(config('app.system.cache.keys.permissions'), function () {
-                return PermissionResource::collection($this->permissionsRepository->all())->groupBy('group_name');
+                return $this->permissionsRepository->all()->groupByName();
             }),
         ]);
     }

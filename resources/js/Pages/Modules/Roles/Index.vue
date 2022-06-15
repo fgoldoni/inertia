@@ -4,7 +4,7 @@ import {ArrowNarrowRightIcon, PlusIcon } from '@heroicons/vue/solid'
 
 
 const props = defineProps({
-    roles: Object,
+    rowData: Object,
 });
 
 </script>
@@ -39,7 +39,7 @@ const props = defineProps({
         </div>
 
         <ul role="list" class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <li v-for="role in props.roles" :key="role.id" class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+            <li v-for="role in props.rowData" :key="role.id" class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
                 <Link :href="route('admin.roles.edit', role.id)"  :only="['editing', 'permissions', 'basePageRoute', 'modal']" preserve-state preserve-scroll class="group flex flex-col justify-between bg-white border border-secondary-200 dark:border-secondary-700 p-4 rounded-md overflow-hidden hover:shadow-md">
                     <div class="flex items-center justify-between">
                         <span class="text-xs leading-4 text-secondary-400 dark:text-secondary-500 font-semibold uppercase tracking-wider">{{ role.users_count }} {{ __('Account') }}</span>

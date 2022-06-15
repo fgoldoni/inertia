@@ -24,9 +24,7 @@ class RoleResource extends JsonResource
             'users_count' => $this->users_count,
             'permissions' => $this->permissions->pluck('id'),
             'users' => $users->take(10),
-            'users_list' => $users->sortBy('name')->groupBy(function($item) {
-                return $item['name'][0];
-            }),
+            'users_list' => $this->users->groupByLetter(),
         ];
     }
 }

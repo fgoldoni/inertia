@@ -3,6 +3,7 @@ namespace App\Models;
 
 use Grosv\LaravelPasswordlessLogin\Traits\PasswordlessLogin;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -14,6 +15,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Roles\Collections\PermissionCollection;
+use Modules\Users\Collections\UserCollection;
 use Modules\Users\Entities\Session;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -96,5 +99,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function canBeImpersonated(): bool
     {
         return !$this->isAdministrator();
+    }
+
+    public function newCollection(array $models = []): Collection
+    {
+        return new UserCollection($models);
     }
 }
