@@ -49,7 +49,10 @@ const props = defineProps({
                         </div>
                     </div>
                     <div>
-                        <h3 class="mt-4 text-lg leading-6 font-medium text-secondary-900 dark:text-white">{{ role.display_name }}</h3>
+                        <h3 class="mt-4 flex items-center justify-between">
+                            <span class="text-lg leading-6 font-medium text-secondary-900 dark:text-white"> {{ role.display_name }}</span>
+                            <span class="uppercase text-xs leading-6 font-medium text-primary-500 dark:text-white float-right"> {{ role.access }}</span>
+                        </h3>
                         <p class="mt-1 flex items-center text-sm text-primary-600 group-hover:text-primary-500">
                             {{ __('View details') }}
                             <span class="ml-2">

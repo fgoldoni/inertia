@@ -74,10 +74,10 @@ const onSubmit = () => {
         <Dialog as="div" class="relative z-10" @close="setIsOpen">
 
             <TransitionChild as="template"
-                             enter="transition-opacity ease-linear duration-300"
+                             enter="ease-out duration-300"
                              enter-from="opacity-0"
                              enter-to="opacity-100"
-                             leave="transition-opacity ease-linear duration-300"
+                             leave="ease-in duration-200"
                              leave-from="opacity-100"
                              leave-to="opacity-0">
 
@@ -90,12 +90,12 @@ const onSubmit = () => {
                 <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
 
                     <TransitionChild as="template"
-                                     enter="transition ease-in-out duration-300 transform"
-                                     enter-from="-translate-x-full"
-                                     enter-to="translate-x-0"
-                                     leave="transition ease-in-out duration-300 transform"
-                                     leave-from="translate-x-0"
-                                     leave-to="-translate-x-full">
+                                     enter="ease-out duration-300"
+                                     enter-from="-opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                     enter-to="opacity-100 translate-y-0 sm:scale-100"
+                                     leave="ease-in duration-200"
+                                     leave-from="opacity-100 translate-y-0 sm:scale-100"
+                                     leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
 
                         <DialogPanel
                             class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full">
@@ -106,7 +106,7 @@ const onSubmit = () => {
 
                                     <div>
 
-                                        <div>
+                                        <div class="mb-3">
 
                                             <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900">
 
@@ -116,7 +116,7 @@ const onSubmit = () => {
 
                                         </div>
 
-                                        <div class="py-5" v-if="props.editing.name === 'administrator'">
+                                        <div class="mb-3" v-if="props.editing.name === 'administrator'">
                                             <div class="rounded-md bg-primary-500 bg-opacity-10 p-4">
                                                 <div class="flex">
                                                     <div class="shrink-0">

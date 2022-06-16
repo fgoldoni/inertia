@@ -11,7 +11,7 @@ class WithCount
     /**
      * WithCount constructor.
      */
-    public function __construct(private readonly string $relations)
+    public function __construct(private readonly array $relations)
     {
     }
 

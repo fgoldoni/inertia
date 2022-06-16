@@ -31,7 +31,7 @@ class RolesController extends Controller
     {
         return Inertia::render('Modules/Roles/Index', array_merge([
             'rowData' => $this->rolesRepository->withCriteria([
-                new WithCount('users'),
+                new WithCount(['users']),
                 new EagerLoad(['users']),
             ])
                     ->get()
@@ -40,7 +40,8 @@ class RolesController extends Controller
                         'name' => $role->name,
                         'display_name' => $role->display_name,
                         'can_be_removed' => $role->can_be_removed,
-                        'users_count' => $role->users_count,
+                        'access' => $role->isAdministrator() ? __('Full') : __('Limited'),
+                        'permissions_count' => $role->permissions_count,
                         'users' => $role->users->map(fn ($user) => [
                             'id' => $user->id,
                             'name' => $user->name,
@@ -98,7 +99,7 @@ class RolesController extends Controller
 
         return $this->index([
             'editing' => new RoleResource($this->rolesRepository->withCriteria([
-                new WithCount('users'),
+                new WithCount(['users']),
                 new EagerLoad(['users:id,name,email,profile_photo_path', 'permissions']),
             ])->find($role->id))
         ]);

@@ -87,12 +87,18 @@ var _hoisted_8 = {
 };
 var _hoisted_9 = ["src", "alt"];
 var _hoisted_10 = {
-  "class": "mt-4 text-lg leading-6 font-medium text-secondary-900 dark:text-white"
+  "class": "mt-4 flex items-center justify-between"
 };
 var _hoisted_11 = {
-  "class": "mt-1 flex items-center text-sm text-primary-600 group-hover:text-primary-500"
+  "class": "text-lg leading-6 font-medium text-secondary-900 dark:text-white"
 };
 var _hoisted_12 = {
+  "class": "uppercase text-xs leading-6 font-medium text-primary-500 dark:text-white float-right"
+};
+var _hoisted_13 = {
+  "class": "mt-1 flex items-center text-sm text-primary-600 group-hover:text-primary-500"
+};
+var _hoisted_14 = {
   "class": "ml-2"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -144,11 +150,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           , _hoisted_9);
         }), 128
         /* KEYED_FRAGMENT */
-        ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(role.display_name), 1
+        ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(role.display_name), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('View details')) + " ", 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(role.access), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ArrowNarrowRightIcon"], {
+        )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('View details')) + " ", 1
+        /* TEXT */
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ArrowNarrowRightIcon"], {
           "class": "w-5 h-5"
         })])])])];
       }),
