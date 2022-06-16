@@ -1766,7 +1766,7 @@ var map = {
 	"./Modules/Roles/CreateModal.vue": [
 		"./resources/js/Pages/Modules/Roles/CreateModal.vue",
 		"/js/vendor",
-		"resources_js_Pages_Modules_Roles_CreateModal_vue"
+		"resources_js_Pages_Modules_Roles_CreateModal_vue-_0a540"
 	],
 	"./Modules/Roles/EditModal.vue": [
 		"./resources/js/Pages/Modules/Roles/EditModal.vue",

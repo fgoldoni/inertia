@@ -183,6 +183,9 @@ const onSubmit = () => {
                                                                         <h3 class="text-lg leading-6 font-medium text-secondary-900 dark:text-white">{{ __('Permissions') }}</h3>
                                                                         <p class="ml-2 mt-1 text-sm leading-5 text-secondary-500 truncate">{{ __('in :name role', {'name': editing.display_name}) }}</p>
                                                                     </div>
+
+                                                                    <JetInputError :message="form.errors.get('permissions')" class="mt-2 px-5"/>
+
                                                                     <div class="mt-4 border-t border-secondary-200 overflow-y-auto h-72 divide-y divide-secondary-200 dark:border-secondary-700 dark:divide-secondary-700">
                                                                         <div v-for="(permissions, group) in permissions.data">
                                                                             <div class="w-full py-1.5 px-4 bg-secondary-100 dark:bg-secondary-700">

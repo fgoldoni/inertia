@@ -8,11 +8,15 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Modules\Roles\Entities\Role;
+use Modules\Roles\Http\Requests\StoreRoleRequest;
+use Modules\Roles\Http\Requests\UpdateRoleRequest;
 use Modules\Roles\Repositories\Contracts\PermissionsRepository;
 use Modules\Roles\Repositories\Contracts\RolesRepository;
 use Modules\Roles\Transformers\RoleResource;
+use Modules\Users\Notifications\AdminSendCredentials;
 
 class RolesController extends Controller
 {
@@ -62,14 +66,16 @@ class RolesController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Renderable
-     */
-    public function store(Request $request)
+
+    public function store(StoreRoleRequest $request)
     {
-        //
+        $role = $this->rolesRepository->create($request->only('name', 'display_name'));
+
+        $role->syncPermissions($request->get('permissions'));
+
+        return $this->response
+            ->json([], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK)
+            ->flash(__(':role successfully added!', ['role' => $role->display_name]));
     }
 
     /**
@@ -98,7 +104,7 @@ class RolesController extends Controller
         ]);
     }
 
-    public function update(Request $request, Role $role)
+    public function update(UpdateRoleRequest $request, Role $role)
     {
         $this->rolesRepository->update($role->id, $request->only('name', 'display_name'));
 
