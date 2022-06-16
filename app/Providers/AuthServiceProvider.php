@@ -43,6 +43,6 @@ class AuthServiceProvider extends ServiceProvider
 
     private function getPermissions()
     {
-        return Cache::rememberForever('all_permissions', fn() => Permission::get());
+        return Cache::rememberForever('all_permissions', fn () => Permission::get());
     }
 }

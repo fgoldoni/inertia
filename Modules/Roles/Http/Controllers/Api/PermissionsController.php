@@ -18,27 +18,19 @@ class PermissionsController extends Controller
         return $this->response->json(['data' => $this->permissionsRepository->all(['id', 'name', 'display_name', 'group_name'])->groupByName()], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
-
     public function store(Request $request)
     {
-
     }
-
 
     public function show($id)
     {
-
     }
-
 
     public function update(Request $request, $id)
     {
-
     }
-
 
     public function destroy($id)
     {
-
     }
 }

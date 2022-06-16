@@ -21,7 +21,7 @@ const fields = props.config.fields
 const form = useForm({
     perPage: ref(props.config.perPage),
     page: ref(null),
-    search: ref(''),
+    search: ref(props.filters.search),
     field: props.filters.field,
     direction: props.filters.direction,
 });
@@ -30,7 +30,7 @@ const  params = () => pickBy({perPage: form.perPage, search: form.search, field:
 
 watch(form, debounce(() => {
     Inertia.get(props.config.apiUrl, params(), {replace: true, preserveState: true})
-}, 300), {deep: true});
+}, 500), {deep: true});
 
 const selectedRow = ref([])
 const checked = ref(false)

@@ -4,7 +4,6 @@ namespace Modules\Users\Http\Controllers;
 use App\Models\User;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
-use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\WhereHas;
 use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
@@ -56,13 +55,13 @@ class UsersController extends Controller
                     'image' => $user->profile_photo_url,
                     'role' => $user->roles->value('display_name'),
                     'isAdministrator' => $user->isAdministrator(),
-                    'access' => $user->hasRole(config('app.system.users.roles.administrator')) ? __('Full') : __('Limited'),
+                    'access' => $user->isAdministrator() ? __('Full') : __('Limited'),
                     'created_at' => $user->created_at?->formatLocalized('%d %B, %Y'),
                     'verified' => $user->hasVerifiedEmail(),
                     'can' => [
-                        'impersonate' => auth()->user()->canImpersonate() && $user->canBeImpersonated(),
-                        'delete' => auth()->user()->hasPermissionTo('edit_users'),
-                        'edit' => auth()->user()->hasPermissionTo('edit_users'),
+                        'impersonate' => $this->request->user()->canImpersonate() && $user->canBeImpersonated(),
+                        'delete' => $this->request->user()->hasPermissionTo('edit_users'),
+                        'edit' => $this->request->user()->hasPermissionTo('edit_users'),
                     ],
                     'sessions' => $user->sessions->map(function ($session) {
                         $agent = $this->usersRepository->createAgent($session);
@@ -74,7 +73,7 @@ class UsersController extends Controller
                                 'browser' => $agent->browser(),
                             ],
                             'ip_address' => $session->ip_address,
-                            'is_current_device' => $session->id === $this->request->session()->getId(),
+                            'is_current_device' => $session->id === session()->getId(),
                             'last_active' => Carbon::createFromTimestamp($session->last_activity)->diffForHumans(),
                         ];
                     }),
@@ -133,10 +132,7 @@ class UsersController extends Controller
         Inertia::basePageRoute(route('admin.users.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
-            'editing' => new UserCollection($user->load('roles:id')),
-            'roles' => $this->rolesRepository->withCriteria([
-                new Select('roles.id', 'roles.name', 'roles.display_name')
-            ])->all(),
+            'editing' => new UserCollection($user->load('roles:id'))
         ]);
     }
 

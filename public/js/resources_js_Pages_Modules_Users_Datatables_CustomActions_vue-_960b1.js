@@ -82,8 +82,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "preserve-state": "",
     "preserve-scroll": "",
-    data: $setup.pickBy($setup.props.row.filters),
-    only: ['editing', 'modal', 'roles', 'basePageRoute'],
+    data: $setup.pickBy($setup.props.row.params),
+    only: ['editing', 'modal', 'basePageRoute'],
     "class": "group flex flex-row-reverse items-center hover:shadow-2xl"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {

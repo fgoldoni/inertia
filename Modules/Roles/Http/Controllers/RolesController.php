@@ -8,7 +8,6 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Modules\Roles\Entities\Role;
 use Modules\Roles\Repositories\Contracts\PermissionsRepository;

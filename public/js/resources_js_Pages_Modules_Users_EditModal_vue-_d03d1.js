@@ -291,10 +291,19 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
-    var roles = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var score = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return zxcvbn__WEBPACK_IMPORTED_MODULE_3___default()(form.password).score;
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+      (0,_Plugins_internationalNumber__WEBPACK_IMPORTED_MODULE_9__["default"])('#phone').init();
+      _Composables_UseRole__WEBPACK_IMPORTED_MODULE_14__["default"].fetchRoles(function (response) {
+        return roles.value = response.data;
+      });
+    });
     var enabled = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var showPassword = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var isOpen = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
+    var roles = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       id: props.editing.id,
       name: props.editing.name,
@@ -305,12 +314,6 @@ __webpack_require__.r(__webpack_exports__);
       errors: new _Plugins_errors__WEBPACK_IMPORTED_MODULE_12__.Errors(),
       password: '',
       processing: false
-    });
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      (0,_Plugins_internationalNumber__WEBPACK_IMPORTED_MODULE_9__["default"])('#phone').init();
-      _Composables_UseRole__WEBPACK_IMPORTED_MODULE_14__["default"].fetchRoles(function (response) {
-        return roles.value = response.data;
-      });
     });
 
     var closeModal = function closeModal() {
@@ -324,10 +327,6 @@ __webpack_require__.r(__webpack_exports__);
     var generate = function generate() {
       form.password = (0,_Plugins_generatePassword__WEBPACK_IMPORTED_MODULE_11__.generatePassword)(10);
     };
-
-    var score = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return zxcvbn__WEBPACK_IMPORTED_MODULE_3___default()(form.password).score;
-    });
 
     var onSubmit = function onSubmit() {
       form.processing = true;
@@ -348,16 +347,16 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var __returned__ = {
-      roles: roles,
       props: props,
+      score: score,
       enabled: enabled,
       showPassword: showPassword,
       isOpen: isOpen,
+      roles: roles,
       form: form,
       closeModal: closeModal,
       updateInputRole: updateInputRole,
       generate: generate,
-      score: score,
       onSubmit: onSubmit,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,

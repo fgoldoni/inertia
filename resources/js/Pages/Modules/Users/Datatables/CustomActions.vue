@@ -25,8 +25,8 @@ const props = defineProps({
               :href="route('admin.users.edit', {'user': props.row.id})"
               preserve-state
               preserve-scroll
-              :data="pickBy(props.row.filters)"
-              :only="['editing', 'modal', 'roles', 'basePageRoute']"
+              :data="pickBy(props.row.params)"
+              :only="['editing', 'modal', 'basePageRoute']"
               class="group flex flex-row-reverse items-center hover:shadow-2xl">
 
             <PencilAltIcon

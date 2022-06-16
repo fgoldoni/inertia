@@ -18,10 +18,6 @@ import LoadingButton from '@/Shared/LoadingButton'
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 import useRole from '@/Composables/UseRole'
 
-
-
-const roles = ref(null)
-
 const props = defineProps({
     editing: Object,
     errors: Object,
@@ -29,10 +25,17 @@ const props = defineProps({
     basePageRoute: String,
 });
 
+const score = computed(() => zxcvbn(form.password).score)
+
+onMounted(() => {
+    internationalNumber('#phone').init();
+    useRole.fetchRoles(response => roles.value = response.data);
+})
+
 const enabled = ref(false)
 const showPassword = ref(false)
 const isOpen = ref(true)
-
+const roles = ref(null)
 
 const form = reactive({
     id: props.editing.id,
@@ -46,23 +49,15 @@ const form = reactive({
     processing: false,
 });
 
-onMounted(() => {
-    internationalNumber('#phone').init();
-    useRole.fetchRoles(response => roles.value = response.data);
-})
-
-
 const closeModal = () => {
     document.querySelector('#cancelButtonRef').click()
 }
 
 const updateInputRole = (role) => form.role = role.id
+
 const generate = () => {
     form.password = generatePassword(10)
 }
-
-const score = computed(() => zxcvbn(form.password).score)
-
 
 const onSubmit = () => {
     form.processing = true;
