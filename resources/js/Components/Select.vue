@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-    <Listbox as="div" v-model="selected" @update:modelValue="onSelect">
+    <Listbox as="div" :value="selected" @update:modelValue="onSelect">
         <ListboxLabel class="block text-sm font-medium text-gray-700"> Role </ListboxLabel>
         <div class="mt-1 relative">
             <ListboxButton class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -12,7 +12,7 @@
 
             <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
                 <ListboxOptions class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                    <ListboxOption as="template" v-for="person in people" :key="person.id" :value="person" v-slot="{ active, selected }">
+                    <ListboxOption as="template" v-for="person in items" :key="person.id" :value="person" v-slot="{ active, selected }">
                         <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9']">
               <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">
                 {{ person.display_name }}
@@ -36,14 +36,14 @@ import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
 import {Inertia} from "@inertiajs/inertia";
 
 const props = defineProps({
-    people: Array,
+    items: Array,
     selected: {
         type: Number,
         default: 1,
     },
 });
 
-const selected = computed(() => props.people.find(element => element.id === props.selected)) || props.people[0]
+const selected = computed(() => props.items.find(element => element.id === props.selected)) || props.items[0]
 
 
 const emit = defineEmits(['onSelect']);

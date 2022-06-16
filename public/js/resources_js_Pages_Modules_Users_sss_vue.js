@@ -23,7 +23,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'Select',
   props: {
-    people: Array,
+    items: Array,
     selected: {
       type: Number,
       "default": 1
@@ -36,10 +36,10 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
     var selected = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return props.people.find(function (element) {
+      return props.items.find(function (element) {
         return element.id === props.selected;
       });
-    }) || props.people[0];
+    }) || props.items[0];
 
     var onSelect = function onSelect(value) {
       emit('onSelect', value);
@@ -340,10 +340,8 @@ var _hoisted_4 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Listbox"], {
     as: "div",
-    modelValue: $setup.selected,
-    "onUpdate:modelValue": [_cache[0] || (_cache[0] = function ($event) {
-      return $setup.selected = $event;
-    }), $setup.onSelect]
+    value: $setup.selected,
+    "onUpdate:modelValue": $setup.onSelect
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxLabel"], {
@@ -379,7 +377,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.people, function (person) {
+              return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.items, function (person) {
                 return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ListboxOption"], {
                   as: "template",
                   key: person.id,
@@ -431,7 +429,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["modelValue"]);
+  , ["value"]);
 }
 
 /***/ }),

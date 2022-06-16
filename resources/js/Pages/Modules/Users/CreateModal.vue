@@ -13,14 +13,16 @@ import internationalNumber from '@/Plugins/internationalNumber'
 import 'intl-tel-input/build/css/intlTelInput.css'
 import {generatePassword, strengthLevels} from '@/Plugins/generatePassword'
 import { Errors } from '@/Plugins/errors'
+import { useFetch } from '@/Composables/UseFetch'
 
 
 const props = defineProps({
     editing: Object,
-    roles: Object,
     filters: Object,
     basePageRoute: String,
 });
+
+const { data: roles, fetchData: fetchRoles } = useFetch()
 
 
 const showPassword = ref(false)
@@ -40,9 +42,11 @@ const form = reactive({
 
 onMounted(() => {
     internationalNumber('#phone').init();
+    fetchRoles(route('api.roles.index'));
 })
 
 const closeModal = () => {
+    isOpen.value = false
     document.querySelector('#cancelButtonRef').click()
 }
 const updateInputRole = (role) => form.role = role.id
@@ -156,8 +160,8 @@ const onSubmit = () => {
 
                                                             <div class="col-span-1">
 
-                                                                <Select :people="props.roles"
-                                                                        v-if="props.roles"
+                                                                <Select :items="roles.data"
+                                                                        v-if="roles.data"
                                                                         @on-select="updateInputRole"
                                                                         :selected="form.role"/>
 

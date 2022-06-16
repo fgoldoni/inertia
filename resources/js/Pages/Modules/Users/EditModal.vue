@@ -16,7 +16,7 @@ import {generatePassword, strengthLevels} from '@/Plugins/generatePassword'
 import { Errors } from "@/Plugins/errors";
 import LoadingButton from '@/Shared/LoadingButton'
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
-import useRole from '@/Composables/UseRole'
+import { useFetch } from '@/Composables/UseFetch'
 
 const props = defineProps({
     editing: Object,
@@ -27,15 +27,16 @@ const props = defineProps({
 
 const score = computed(() => zxcvbn(form.password).score)
 
+const { data: roles, fetchData: fetchRoles } = useFetch()
+
 onMounted(() => {
     internationalNumber('#phone').init();
-    useRole.fetchRoles(response => roles.value = response.data);
+    fetchRoles(route('api.roles.index'));
 })
 
 const enabled = ref(false)
 const showPassword = ref(false)
 const isOpen = ref(true)
-const roles = ref(null)
 
 const form = reactive({
     id: props.editing.id,
@@ -50,6 +51,7 @@ const form = reactive({
 });
 
 const closeModal = () => {
+    isOpen.value = false
     document.querySelector('#cancelButtonRef').click()
 }
 
@@ -163,8 +165,8 @@ const onSubmit = () => {
 
                                                             <div class="col-span-1">
 
-                                                                <Select :people="roles"
-                                                                        v-if="roles"
+                                                                <Select :items="roles.data"
+                                                                        v-if="roles.data"
                                                                         @on-select="updateInputRole"
                                                                         :selected="form.role"/>
 

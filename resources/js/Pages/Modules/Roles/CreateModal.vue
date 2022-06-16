@@ -7,20 +7,16 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
 import { Errors } from '@/Plugins/errors'
-import usePermission from '@/Composables/UsePermission'
+import { useFetch } from '@/Composables/UseFetch'
 import {CalendarIcon, LockOpenIcon, AcademicCapIcon} from '@heroicons/vue/solid'
 
 
 const props = defineProps({
+    editing: Object,
     basePageRoute: String,
 });
 
-const editing = ref(null);
-
-const permissions = ref({
-    data: []
-});
-
+const { data: permissions, fetchData: fetchPermissions } = useFetch()
 
 const isOpen = ref(true)
 
@@ -32,14 +28,13 @@ const form = reactive({
 
 
 const setIsOpen = () => {
+    isOpen.value = false
     document.querySelector('#cancelButtonRef').click()
 }
 
 onMounted(() => {
-    usePermission.fetchPermissions(response => permissions.value = response);
+    fetchPermissions(route('api.permissions.index'));
 })
-
-
 
 const onSubmit = () => {
     form.processing = true;

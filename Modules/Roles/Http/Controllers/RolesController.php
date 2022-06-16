@@ -54,10 +54,11 @@ class RolesController extends Controller
         Inertia::basePageRoute(route('admin.roles.index'));
 
         return $this->index([
-            'editing' => $this->rolesRepository->make([
+            'editing' => new RoleResource($this->rolesRepository->make([
+                'id' => null,
                 'name' => 'test',
-            ]),
-            'permissions' => [],
+                'display_name' => 'test'
+            ])),
         ]);
     }
 

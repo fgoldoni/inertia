@@ -10,7 +10,7 @@ import {TrashIcon} from '@heroicons/vue/solid'
 import pickBy from "lodash/pickBy";
 import UsersList from '@/Components/UsersList'
 import { InformationCircleIcon } from '@heroicons/vue/solid'
-import usePermission from '@/Composables/UsePermission'
+import { useFetch } from '@/Composables/UseFetch'
 
 
 const props = defineProps({
@@ -20,11 +20,11 @@ const props = defineProps({
 
 const isOpen = ref(true)
 
-const permissions = ref({
-    data: []
-});
+
+const { data: permissions, fetchData: fetchPermissions } = useFetch()
 
 const setIsOpen = () => {
+    isOpen.value = false
     document.querySelector('#cancelButtonRef').click()
 }
 
@@ -38,7 +38,7 @@ const form = reactive({
 });
 
 onMounted(() => {
-    usePermission.fetchPermissions(response => permissions.value = response);
+    fetchPermissions(route('api.permissions.index'));
 })
 
 
