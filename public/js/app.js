@@ -1766,12 +1766,12 @@ var map = {
 	"./Modules/Roles/CreateModal.vue": [
 		"./resources/js/Pages/Modules/Roles/CreateModal.vue",
 		"/js/vendor",
-		"resources_js_Pages_Modules_Roles_CreateModal_vue-_0a540"
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Roles_CreateModal_vue-_-0c84700"
 	],
 	"./Modules/Roles/EditModal.vue": [
 		"./resources/js/Pages/Modules/Roles/EditModal.vue",
 		"/js/vendor",
-		"resources_js_Pages_Modules_Roles_EditModal_vue-_6d990"
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Roles_EditModal_vue-_cc-6b123d0"
 	],
 	"./Modules/Roles/Index.vue": [
 		"./resources/js/Pages/Modules/Roles/Index.vue",

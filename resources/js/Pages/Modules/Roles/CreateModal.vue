@@ -8,8 +8,10 @@ import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
 import { Errors } from '@/Plugins/errors'
 import { useFetch } from '@/Composables/UseFetch'
+import Assigned from '@/Shared/Assigned'
 import {CalendarIcon, LockOpenIcon, AcademicCapIcon, TrashIcon} from '@heroicons/vue/solid'
 import pickBy from "lodash/pickBy";
+import moment from 'moment'
 
 
 const props = defineProps({
@@ -26,10 +28,15 @@ const form = reactive({
     name: props.editing.name,
     display_name: props.editing.display_name,
     selectedRow: props.editing.permissions,
+    users: [],
     errors: new Errors(),
     processing: false,
 });
 
+
+const onAssigned = (value) => {
+    form.users = value
+}
 
 const setIsOpen = () => {
     isOpen.value = false
@@ -46,7 +53,8 @@ const onSubmit = () => {
     axios.post(route('admin.roles.store'), pickBy({
         name: form.name,
         display_name: form.display_name,
-        permissions: form.selectedRow
+        permissions: form.selectedRow,
+        users: form.users
     })).then(() => {
         form.processing = false;
         setIsOpen();
@@ -95,7 +103,7 @@ const onSubmit = () => {
                                      leave-to="-translate-x-full">
 
                         <DialogPanel
-                            class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-4xl sm:w-full">
+                            class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full">
 
                             <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
 
@@ -179,7 +187,7 @@ const onSubmit = () => {
                                                                                         <button v-if="permission.can_be_removed" type="button" class="inline-flex items-center text-sm leading-5 text-medium text-secondary-500 hover:text-rose-500 focus:text-rose-700 focus:outline-none focus:shadow-none dark:text-secondary-400 dark:hover:text-rose-500">
                                                                                             <TrashIcon class="w-4 h-4" />
                                                                                         </button>
-                                                                                        <time datetime="{{ permission.created_at }}" class="capitalize text-xs font-medium leading-5 text-secondary-400 dark:text-secondary-500">{{ permission.created_at }}</time>
+                                                                                        <time datetime="{{ permission.created_at }}" class="capitalize text-xs font-medium leading-5 text-secondary-400 dark:text-secondary-500">{{ moment(permission.created_at, moment.ISO_8601).format('MMM YY') }}</time>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -194,56 +202,10 @@ const onSubmit = () => {
 
                                                     <div class="bg-secondary-100 col-span-1">
 
-                                                        <div class="pl-4 pt-2 grid grid-cols-1 gap-4 sm:grid-cols-1">
+                                                        <div class="px-4 pt-2 grid grid-cols-1 gap-4 sm:grid-cols-1">
 
-                                                            <div class="col-span-1">
+                                                            <Assigned @on-assigned="onAssigned"></Assigned>
 
-                                                                <div class="space-y-5">
-
-                                                                    <div class="flex items-center space-x-2">
-
-                                                                        <LockOpenIcon class="h-5 w-5 text-green-500"
-                                                                                      aria-hidden="true"/>
-
-                                                                        <span
-                                                                            class="text-green-700 text-sm font-medium">Verified</span>
-
-                                                                    </div>
-
-                                                                    <div class="flex items-center space-x-2">
-
-                                                                        <AcademicCapIcon class="h-5 w-5 text-gray-400"
-                                                                                         aria-hidden="true"/>
-
-                                                                        <span class="text-gray-900 text-sm font-medium">4 Job(s)</span>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="flex items-center space-x-2 whitespace-nowrap">
-
-                                                                        <CalendarIcon class="h-5 w-5 text-gray-400"
-                                                                                      aria-hidden="true"/>
-
-                                                                        <span class="text-gray-900 text-sm font-medium">
-
-                                                                            Created on <time datetime="2020-12-02"
-                                                                                             v-text="'props.editing.created_at'"></time>
-
-                                                                        </span>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="col-span-1">
-
-                                                                <div class="mt-2 text-sm text-secondary-500 dark:text-secondary-400">
-                                                                    Send an invitation to this administrator by email with his login information.
-                                                                </div>
-
-                                                            </div>
 
                                                         </div>
 

@@ -24,7 +24,7 @@ __webpack_require__.r(__webpack_exports__);
   __name: 'Select',
   props: {
     items: Array,
-    selected: {
+    selectedItem: {
       type: Number,
       "default": 1
     }
@@ -35,19 +35,17 @@ __webpack_require__.r(__webpack_exports__);
         emit = _ref.emit;
     expose();
     var props = __props;
-    var selected = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return props.items.find(function (element) {
-        return element.id === props.selected;
-      });
-    }) || props.items[0];
+    var selectedItem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.items.find(function (element) {
+      return element.id === props.selected;
+    }) || props.items[0]);
 
     var onSelect = function onSelect(value) {
-      emit('onSelect', value);
+      emit('onSelect', value.id);
     };
 
     var __returned__ = {
       props: props,
-      selected: selected,
+      selectedItem: selectedItem,
       emit: emit,
       onSelect: onSelect,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
@@ -323,8 +321,8 @@ __webpack_require__.r(__webpack_exports__);
       document.querySelector('#cancelButtonRef').click();
     };
 
-    var updateInputRole = function updateInputRole(role) {
-      return form.role = role.id;
+    var updateInputRole = function updateInputRole(roleId) {
+      return form.role = roleId;
     };
 
     var generate = function generate() {
@@ -461,8 +459,10 @@ var _hoisted_4 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Listbox"], {
     as: "div",
-    value: $setup.selected,
-    "onUpdate:modelValue": $setup.onSelect
+    modelValue: $setup.selectedItem,
+    "onUpdate:modelValue": [_cache[0] || (_cache[0] = function ($event) {
+      return $setup.selectedItem = $event;
+    }), $setup.onSelect]
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxLabel"], {
@@ -478,7 +478,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.selected.display_name), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.selectedItem.display_name), 1
           /* TEXT */
           ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SelectorIcon"], {
             "class": "h-5 w-5 text-gray-400",
@@ -506,14 +506,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 }, {
                   "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
                     var active = _ref.active,
-                        selected = _ref.selected;
+                        selectedItem = _ref.selectedItem;
                     return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
                       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([active ? 'text-white bg-indigo-600' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9'])
                     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-                      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([selected ? 'font-semibold' : 'font-normal', 'block truncate'])
+                      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([selectedItem ? 'font-semibold' : 'font-normal', 'block truncate'])
                     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(person.display_name), 3
                     /* TEXT, CLASS */
-                    ), selected ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+                    ), selectedItem ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
                       key: 0,
                       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4'])
                     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CheckIcon"], {
@@ -550,7 +550,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["value"]);
+  , ["modelValue"]);
 }
 
 /***/ }),

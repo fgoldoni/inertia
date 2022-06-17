@@ -30,6 +30,7 @@
         "@headlessui/vue": "^1.6.4",
         "@heroicons/vue": "^1.0.6",
         "intl-tel-input": "^17.0.16",
+        "moment": "^2.29.3",
         "zxcvbn": "^4.4.2"
     }
 }

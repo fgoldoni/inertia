@@ -49,7 +49,8 @@ const closeModal = () => {
     isOpen.value = false
     document.querySelector('#cancelButtonRef').click()
 }
-const updateInputRole = (role) => form.role = role.id
+const updateInputRole = (roleId) => form.role = roleId
+
 const generate = () => {
     form.password = generatePassword(10)
 }

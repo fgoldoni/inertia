@@ -11,6 +11,7 @@ import pickBy from "lodash/pickBy";
 import UsersList from '@/Components/UsersList'
 import { InformationCircleIcon } from '@heroicons/vue/solid'
 import { useFetch } from '@/Composables/UseFetch'
+import moment from 'moment'
 
 
 const props = defineProps({
@@ -188,7 +189,7 @@ const onSubmit = () => {
 
                                                                     <div class="mt-4 border-t border-secondary-200 overflow-y-auto h-72 divide-y divide-secondary-200 dark:border-secondary-700 dark:divide-secondary-700">
                                                                         <div v-for="(permissions, group) in permissions.data">
-                                                                            <div class="w-full py-1.5 px-4 bg-secondary-100 dark:bg-secondary-700">
+                                                                            <div class="sticky top-0 w-full py-1.5 px-4 bg-secondary-100 dark:bg-secondary-700">
                                                                                 <span class="text-sm font-bold leading-5 capitalize tracking-wide text-secondary-900 sm:text-base sm:leading-6 dark:text-white">{{ group }}</span>
                                                                             </div>
                                                                             <div class="px-4 py-1 divide-y divide-secondary-200 dark:divide-secondary-700">
@@ -202,7 +203,7 @@ const onSubmit = () => {
                                                                                         <button v-if="permission.can_be_removed" type="button" class="inline-flex items-center text-sm leading-5 text-medium text-secondary-500 hover:text-rose-500 focus:text-rose-700 focus:outline-none focus:shadow-none dark:text-secondary-400 dark:hover:text-rose-500">
                                                                                             <TrashIcon class="w-4 h-4" />
                                                                                         </button>
-                                                                                        <time datetime="{{ permission.created_at }}" class="capitalize text-xs font-medium leading-5 text-secondary-400 dark:text-secondary-500">{{ permission.created_at }}</time>
+                                                                                        <time datetime="{{ permission.created_at }}" class="capitalize text-xs font-medium leading-5 text-secondary-400 dark:text-secondary-500">{{ moment(permission.created_at, moment.ISO_8601).format('MMM YY') }}</time>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

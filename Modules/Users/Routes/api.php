@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Users\Http\Controllers\Api\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/users', function (Request $request) {
-    return $request->user();
+
+Route::controller(UsersController::class)->prefix('users')->name('api.users.')->group(function () {
+    Route::get('/', 'index')->name('index');
 });
