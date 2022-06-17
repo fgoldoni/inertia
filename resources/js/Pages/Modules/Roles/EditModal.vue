@@ -12,6 +12,8 @@ import UsersList from '@/Components/UsersList'
 import { InformationCircleIcon } from '@heroicons/vue/solid'
 import { useFetch } from '@/Composables/UseFetch'
 import moment from 'moment'
+import Assigned from '@/Shared/Assigned'
+
 
 
 const props = defineProps({
@@ -21,6 +23,10 @@ const props = defineProps({
 
 const isOpen = ref(true)
 
+
+const onAssigned = (value) => {
+    form.users = value
+}
 
 const { data: permissions, fetchData: fetchPermissions } = useFetch()
 
@@ -36,6 +42,7 @@ const form = reactive({
     selectedRow: props.editing.permissions,
     errors: new Errors(),
     processing: false,
+    users: [],
 });
 
 onMounted(() => {
@@ -238,11 +245,7 @@ const onSubmit = () => {
 
                                                             </div>
 
-                                                            <div class="col-span-1">
-
-                                                                <UsersList v-bind="$page.props.editing"></UsersList>
-
-                                                            </div>
+                                                            <Assigned @on-assigned="onAssigned" :items="props.editing.users"></Assigned>
 
                                                         </div>
 

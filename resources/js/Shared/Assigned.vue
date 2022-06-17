@@ -1,19 +1,43 @@
-<!--
-  This example requires Tailwind CSS v2.0+
+<script setup>
+import { computed, ref, onMounted , watch } from 'vue'
+import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
+import {
+    Combobox,
+    ComboboxButton,
+    ComboboxInput,
+    ComboboxLabel,
+    ComboboxOption,
+    ComboboxOptions,
+} from '@headlessui/vue'
 
-  This example requires some changes to your config:
+import { useUsers } from '@/Composables/UseUsers'
+import debounce from "lodash/debounce";
+import UsersList from '@/Components/UsersList'
 
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
+const { data: users, doFetchData: doFetchUsers, doMapData } = useUsers()
+
+const props = defineProps({
+    items: {
+        type: Array,
+        default: [],
+    },
+});
+
+
+const query = ref('')
+const filteredAssigned = ref(props.items)
+const selectedPerson = ref(props.items.map((r) => r.id))
+
+const emit = defineEmits(['onAssigned']);
+
+
+watch(query, debounce(() => {
+    doFetchUsers({search: query.value});
+}, 500), {deep: true});
+
+watch(selectedPerson, debounce(() => filteredAssigned.value = doMapData(selectedPerson), 500), {deep: true});
+</script>
+
 <template>
     <div class="col-span-1">
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
@@ -53,41 +77,8 @@
 
             </div>
             <div class="col-span-1">
-                <UsersList :users_list="usersByLetter"></UsersList>
+                <UsersList :items="filteredAssigned"></UsersList>
             </div>
         </div>
     </div>
 </template>
-
-<script setup>
-import { computed, ref, onMounted , watch } from 'vue'
-import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
-import {
-    Combobox,
-    ComboboxButton,
-    ComboboxInput,
-    ComboboxLabel,
-    ComboboxOption,
-    ComboboxOptions,
-} from '@headlessui/vue'
-
-import { useUsers } from '@/Composables/UseUsers'
-import debounce from "lodash/debounce";
-import UsersList from '@/Components/UsersList'
-
-const { data: users, fetchData: fetchUsers, groupByFirstLetterData } = useUsers()
-
-
-const query = ref('')
-const usersByLetter = ref({})
-const selectedPerson = ref([])
-
-const emit = defineEmits(['onAssigned']);
-
-
-watch(query, debounce(() => {
-    fetchUsers({search: query.value});
-}, 500), {deep: true});
-
-watch(selectedPerson, debounce(() => usersByLetter.value = groupByFirstLetterData(selectedPerson), 500), {deep: true});
-</script>

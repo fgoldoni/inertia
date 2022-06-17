@@ -11,7 +11,7 @@ export function useUsers() {
 
     const processing = ref(false)
 
-    const fetchData = async (params) => {
+    const doFetchData = async (params) => {
         processing.value = true
 
         await axios.get(route('api.users.index', pickBy(params))).then((res) => (data.value = res.data))
@@ -19,10 +19,12 @@ export function useUsers() {
             .finally(() => (processing.value = false))
     }
 
-    const itemsFilter = (items) => data.value.data.filter((item) => items.value.includes(item.id))
 
-    const groupByFirstLetterData = (items) => {
-        return itemsFilter(items).reduce((r, e) => {
+    const doMapData = (items) => data.value.data.filter((item) => items.value.includes(item.id))
+
+    const doGroupData = (items) => {
+
+        return items.reduce((r, e) => {
             // get first letter of name of current element
             let group = e.name[0];
             // if there is no property in accumulator with this letter create it
@@ -34,5 +36,5 @@ export function useUsers() {
         }, {})
     }
 
-    return { processing, error, data , fetchData, groupByFirstLetterData }
+    return { processing, error, data , doFetchData, doGroupData, doMapData }
 }
