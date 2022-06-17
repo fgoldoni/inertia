@@ -20,7 +20,23 @@ export function useUsers() {
     }
 
 
-    const doMapData = (items) => data.value.data.filter((item) => items.value.includes(item.id))
+    const doMergeData = (items) => {
+
+        return items.reduce(
+
+            (unique, item) => {
+
+                if(!unique) unique = [item]
+
+                if(unique.findIndex((element) => element.id === item.id) < 0) unique.push(item)
+
+                return unique
+            },
+            [],
+        );
+    }
+
+    const doMapData = (data, items) => data.filter((item) => items.value.includes(item.id))
 
     const doGroupData = (items) => {
 
@@ -36,5 +52,5 @@ export function useUsers() {
         }, {})
     }
 
-    return { processing, error, data , doFetchData, doGroupData, doMapData }
+    return { processing, error, data , doFetchData, doGroupData, doMapData, doMergeData }
 }

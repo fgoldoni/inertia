@@ -19,7 +19,7 @@ const props = defineProps({
     basePageRoute: String,
 });
 
-const { data: permissions, fetchData: fetchPermissions } = useFetch()
+const { data: permissions, doFetchData: doFetchPermissions } = useFetch()
 
 const isOpen = ref(true)
 
@@ -44,7 +44,7 @@ const setIsOpen = () => {
 }
 
 onMounted(() => {
-    fetchPermissions(route('api.permissions.index'));
+    doFetchPermissions(route('api.permissions.index'));
 })
 
 const onSubmit = () => {

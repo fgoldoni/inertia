@@ -51,7 +51,7 @@ const onSubmit = () => {
         name: form.name,
         display_name: form.display_name,
         permissions: form.selectedRow,
-        users: form.users
+        users: [...props.editing.users.map((r) => r.id), ...form.users]
     })).then((response) => {
         setIsOpen()
         form.processing = false;
@@ -276,16 +276,6 @@ const onSubmit = () => {
                                                                     </div>
 
                                                                     <span v-if="props.editing.users_count - 10 > 0" class="shrink-0 text-xs leading-5 font-medium text-secondary-500 dark:text-secondary-400">+{{ props.editing.users_count - 10 }}</span>
-
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="col-span-1">
-
-                                                                <div class="mt-2 text-sm text-secondary-500 dark:text-secondary-400">
-
-                                                                    {{ __('These are the members who are already in your store with their associated roles.') }}
 
                                                                 </div>
 

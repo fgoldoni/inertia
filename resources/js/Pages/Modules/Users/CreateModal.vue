@@ -22,7 +22,7 @@ const props = defineProps({
     basePageRoute: String,
 });
 
-const { data: roles, fetchData: fetchRoles } = useFetch()
+const { data: roles, doFetchData: doFetchRoles } = useFetch()
 
 
 const showPassword = ref(false)
@@ -42,7 +42,7 @@ const form = reactive({
 
 onMounted(() => {
     internationalNumber('#phone').init();
-    fetchRoles(route('api.roles.index'));
+    doFetchRoles(route('api.roles.index'));
 })
 
 const closeModal = () => {

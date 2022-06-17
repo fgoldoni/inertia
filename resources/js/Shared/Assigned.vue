@@ -6,7 +6,7 @@ import debounce from "lodash/debounce";
 import { useUsers } from '@/Composables/UseUsers'
 import UsersList from '@/Components/UsersList'
 
-const { data: users, doFetchData: doFetchUsers, doMapData } = useUsers()
+const { data: users, doFetchData: doFetchUsers, doMapData, doMergeData } = useUsers()
 
 const props = defineProps({
     items: {
@@ -23,7 +23,7 @@ const selectedAssigned = ref(props.items.map((r) => r.id))
 const emit = defineEmits(['onAssigned']);
 
 watch(query, debounce(() => doFetchUsers({search: query.value}), 500), {deep: true});
-watch(selectedAssigned, debounce(() => filteredAssigned.value = [...props.items, ...doMapData(selectedAssigned)], 500), {deep: true});
+watch(selectedAssigned, debounce(() => filteredAssigned.value = doMergeData([...props.items, ...doMapData([...users.value.data, ...filteredAssigned.value], selectedAssigned)]), 500), {deep: true});
 
 </script>
 

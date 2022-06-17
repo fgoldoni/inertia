@@ -27,11 +27,11 @@ const props = defineProps({
 
 const score = computed(() => zxcvbn(form.password).score)
 
-const { data: roles, fetchData: fetchRoles } = useFetch()
+const { data: roles, doFetchData: doFetchRoles } = useFetch()
 
 onMounted(() => {
     internationalNumber('#phone').init();
-    fetchRoles(route('api.roles.index'));
+    doFetchRoles(route('api.roles.index'));
 })
 
 const enabled = ref(false)
