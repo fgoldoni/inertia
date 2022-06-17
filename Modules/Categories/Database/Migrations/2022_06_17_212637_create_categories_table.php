@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
+    use \App\Traits\Database\Migration;
+
     /**
      * Run the migrations.
      *
@@ -16,7 +17,20 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
 
+            $table->json('name');
+            $table->string('slug');
+            $table->boolean('online')->default(true);
+            $table->integer('position')->unsigned()->nullable();
+            $table->string('type')->default('area');
+            $table->unsignedBigInteger('parent_id')->nullable()->index();
+
+            $this->addSeoFields($table);
+
+            $table->softDeletes();
             $table->timestamps();
+
+            // Indexes
+            $table->unique('slug');
         });
     }
 

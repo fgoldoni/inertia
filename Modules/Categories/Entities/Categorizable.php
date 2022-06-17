@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Categories\Entities;
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,10 +8,10 @@ class Categorizable extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
-    protected static function newFactory()
+    protected $guarded = [];
+
+    public function categorizable()
     {
-        return \Modules\Categories\Database\factories\CategorizableFactory::new();
+        return $this->morphTo();
     }
 }

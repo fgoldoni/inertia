@@ -1359,7 +1359,17 @@ var appName = ((_window$document$getE = window.document.getElementsByTagName('ti
     }).component('Link', _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link).component('Head', _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head).mixin(_Mixins_UseModal__WEBPACK_IMPORTED_MODULE_4__.useModal).mixin(_Mixins_translations__WEBPACK_IMPORTED_MODULE_6__.translations).mount(el);
   }
 });
-_inertiajs_progress__WEBPACK_IMPORTED_MODULE_3__.InertiaProgress.init();
+_inertiajs_progress__WEBPACK_IMPORTED_MODULE_3__.InertiaProgress.init({
+  // The delay after which the progress bar will
+  // appear during navigation, in milliseconds.
+  delay: 250,
+  // The color of the progress bar.
+  color: '#29d',
+  // Whether to include the default NProgress styles.
+  includeCSS: true,
+  // Whether the NProgress spinner will be shown.
+  showSpinner: true
+});
 
 /***/ }),
 
@@ -1762,6 +1772,21 @@ var map = {
 	"./Dashboard.vue": [
 		"./resources/js/Pages/Dashboard.vue",
 		"resources_js_Pages_Dashboard_vue"
+	],
+	"./Modules/Categories/Datatables/CustomActions.vue": [
+		"./resources/js/Pages/Modules/Categories/Datatables/CustomActions.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Categories_Datatables_CustomActions_vue-_65f90"
+	],
+	"./Modules/Categories/Datatables/CustomName.vue": [
+		"./resources/js/Pages/Modules/Categories/Datatables/CustomName.vue",
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Categories_Datatables_C-33c6f9"
+	],
+	"./Modules/Categories/Index.vue": [
+		"./resources/js/Pages/Modules/Categories/Index.vue",
+		"/js/vendor",
+		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-461362"
 	],
 	"./Modules/Roles/CreateModal.vue": [
 		"./resources/js/Pages/Modules/Roles/CreateModal.vue",

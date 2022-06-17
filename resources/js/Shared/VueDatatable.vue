@@ -208,7 +208,7 @@ const onCloseModal = (state) => {
                             </thead>
 
                             <tbody class="divide-y divide-gray-200 bg-white">
-                            <tr v-for="row in props.rowData.data" :key="row.id" :class="[selectedRow.includes(row.id) && 'bg-gray-50']">
+                            <tr v-for="row in props.rowData.data" :key="row.id" :class="[selectedRow.includes(row.id) ? 'bg-primary-100' : 'even:bg-secondary-100 odd:bg-white']">
 
                                 <template v-for="(value, key) in fields">
 

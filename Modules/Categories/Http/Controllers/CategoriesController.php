@@ -2,20 +2,34 @@
 
 namespace Modules\Categories\Http\Controllers;
 
+use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\OrderBy;
+use App\Repositories\Criteria\WhereLike;
+use App\Repositories\Criteria\WithCount;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Inertia\Inertia;
+use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 
 class CategoriesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
+    public function __construct(private readonly CategoriesRepository $categoriesRepository, private readonly ResponseFactory $response, private readonly Request $request) {}
+
+
+    public function index(array $modalProps = [])
     {
-        return view('categories::index');
+        return Inertia::render('Modules/Categories/Index', array_merge([
+            'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
+            'rowData' => $this->categoriesRepository->withCriteria([
+                new WhereLike(['categories.id', 'categories.name', 'categories.slug'], $this->request->get('search')),
+                new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
+            ])->paginate(),
+
+        ], $modalProps));
     }
+
 
     /**
      * Show the form for creating a new resource.
