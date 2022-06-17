@@ -113,6 +113,8 @@ class RolesController extends Controller
 
         $role->syncPermissions($request->get('permissions'));
 
+        $this->rolesRepository->sync($role->id, 'users', $request->get('users'));
+
         return $this->response
             ->json([], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK)
             ->flash(__(

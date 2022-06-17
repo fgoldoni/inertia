@@ -10,7 +10,7 @@ export function useFetch() {
 
     const processing = ref(false)
 
-    const fetchData = async (url) => {
+    const doFetchData = async (url) => {
         processing.value = true
 
         await axios.get(url).then((res) => (data.value = res.data))
@@ -18,5 +18,5 @@ export function useFetch() {
             .finally(() => (processing.value = false))
     }
 
-    return { processing, error, data , fetchData }
+    return { processing, error, data , doFetchData }
 }

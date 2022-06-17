@@ -1175,7 +1175,7 @@ function useFetch() {
   var error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
   var processing = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
 
-  var fetchData = /*#__PURE__*/function () {
+  var doFetchData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url) {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
@@ -1199,7 +1199,7 @@ function useFetch() {
       }, _callee);
     }));
 
-    return function fetchData(_x) {
+    return function doFetchData(_x) {
       return _ref.apply(this, arguments);
     };
   }();
@@ -1208,7 +1208,7 @@ function useFetch() {
     processing: processing,
     error: error,
     data: data,
-    fetchData: fetchData
+    doFetchData: doFetchData
   };
 }
 
