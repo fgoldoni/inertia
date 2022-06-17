@@ -5,7 +5,7 @@ export const navigation = [
     { name: 'Users', href: 'admin.users.index', icon: HomeIcon, current: route().current('admin.users.index') },
     { name: 'Roles', href: 'admin.roles.index', icon: CubeIcon, current: route().current('admin.roles.index') },
     { name: 'Team', href: 'dashboard', icon: UsersIcon, current: false },
-    { name: 'Projects', href: 'dashboard', icon: FolderIcon, current: false },
+    { name: 'Categories', href: 'admin.categories.index', icon: FolderIcon, current: route().current('admin.categories.index') },
     { name: 'Calendar', href: 'dashboard', icon: CalendarIcon, current: false },
     { name: 'Documents', href: 'dashboard', icon: InboxIcon, current: false },
     { name: 'Reports', href: 'dashboard', icon: ChartBarIcon, current: false },

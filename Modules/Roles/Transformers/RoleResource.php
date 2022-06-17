@@ -16,8 +16,7 @@ class RoleResource extends JsonResource
             'created_at' => $this->created_at?->formatLocalized('%d %B, %Y'),
             'users_count' => $this->users_count,
             'permissions' => $this->permissions->pluck('id'),
-            'users' => $this->users,
-            'users_list' => $this->users->groupByLetter(),
+            'users' => $this->users
         ];
     }
 }

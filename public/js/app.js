@@ -1237,10 +1237,10 @@ var navigation = [{
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
   current: false
 }, {
-  name: 'Projects',
-  href: 'dashboard',
+  name: 'Categories',
+  href: 'admin.categories.index',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
-  current: false
+  current: route().current('admin.categories.index')
 }, {
   name: 'Calendar',
   href: 'dashboard',

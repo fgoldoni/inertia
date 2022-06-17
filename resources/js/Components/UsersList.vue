@@ -17,7 +17,7 @@ const filteredItems = computed(() => doGroupData(props.items))
 
     <div class="relative overflow-auto">
 
-        <nav class="h-80 overflow-y-auto" aria-label="Directory">
+        <nav class="h-72 overflow-y-auto" aria-label="Directory">
 
             <div v-for="letter in Object.keys(filteredItems)" :key="letter" class="relative">
 

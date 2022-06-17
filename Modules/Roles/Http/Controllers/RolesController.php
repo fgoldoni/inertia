@@ -81,13 +81,7 @@ class RolesController extends Controller
             ->flash(__(':role successfully added!', ['role' => $role->display_name]));
     }
 
-    /**
-     * Show the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Renderable
-     */
+
     public function show($id)
     {
         return view('roles::show');
@@ -102,7 +96,7 @@ class RolesController extends Controller
         return $this->index([
             'editing' => new RoleResource($this->rolesRepository->withCriteria([
                 new WithCount(['users']),
-                new EagerLoad(['users:id,name,email,profile_photo_path', 'permissions']),
+                new EagerLoad(['users' => fn ($query) => $query->select('id','name','email','profile_photo_path')->orderBy('name'), 'permissions']),
             ])->find($role->id))
         ]);
     }

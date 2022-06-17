@@ -5,6 +5,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use Inertia\ResponseFactory;
+use Modules\Categories\Providers\CategoriesServiceProvider;
 use Modules\Roles\Providers\RolesServiceProvider;
 use Modules\Users\Providers\UsersServiceProvider;
 
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->register(UsersServiceProvider::class);
         $this->app->register(RolesServiceProvider::class);
+        $this->app->register(CategoriesServiceProvider::class);
     }
 
     /**
