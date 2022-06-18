@@ -1801,7 +1801,7 @@ var map = {
 	"./Modules/Categories/Datatables/CustomName.vue": [
 		"./resources/js/Pages/Modules/Categories/Datatables/CustomName.vue",
 		"/js/vendor",
-		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Categories_Datatables_C-33c6f9"
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Categories_Datatables_C-8574a30"
 	],
 	"./Modules/Categories/Datatables/CustomUpdatedAt.vue": [
 		"./resources/js/Pages/Modules/Categories/Datatables/CustomUpdatedAt.vue",

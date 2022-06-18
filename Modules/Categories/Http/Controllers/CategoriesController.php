@@ -38,7 +38,7 @@ class CategoriesController extends Controller
     {
         Inertia::modal('Modules/Categories/CreateModal');
 
-        Inertia::basePageRoute(route('admin.categories.index'));
+        Inertia::basePageRoute(route('admin.categories.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
             'editing' => $this->categoriesRepository->make([
@@ -70,7 +70,7 @@ class CategoriesController extends Controller
     {
         Inertia::modal('Modules/Categories/EditModal');
 
-        Inertia::basePageRoute(route('admin.categories.index'));
+        Inertia::basePageRoute(route('admin.categories.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
             'editing' => $this->categoriesRepository->withCriteria([

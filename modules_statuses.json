@@ -3,5 +3,7 @@
     "Roles": true,
     "Categories": true,
     "Attachments": true,
-    "Countries": true
+    "Countries": true,
+    "Companies": true,
+    "Jobs": true
 }

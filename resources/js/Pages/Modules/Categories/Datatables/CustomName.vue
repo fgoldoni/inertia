@@ -1,5 +1,6 @@
 <script setup>
 import {ExternalLinkIcon} from '@heroicons/vue/outline';
+import pickBy from "lodash/pickBy";
 import moment from 'moment'
 
 const props = defineProps({
@@ -28,9 +29,13 @@ const props = defineProps({
 
                 </p>
 
-                <a :href="route('impersonate', props.row.id)">
+                <Link :href="route('admin.categories.edit', props.row.id)"
+                      preserve-state
+                      preserve-scroll
+                      :data="pickBy(props.row.params)"
+                      :only="['editing', 'modal', 'basePageRoute']">
                     <ExternalLinkIcon class="flex-shrink-0 h-5 w-5 text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300" aria-hidden="true"/>
-                </a>
+                </Link>
 
 
             </div>
