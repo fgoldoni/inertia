@@ -1783,6 +1783,11 @@ var map = {
 		"/js/vendor",
 		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Categories_Datatables_C-33c6f9"
 	],
+	"./Modules/Categories/EditModal.vue": [
+		"./resources/js/Pages/Modules/Categories/EditModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Categories_EditModal_vue-_1acd0"
+	],
 	"./Modules/Categories/Index.vue": [
 		"./resources/js/Pages/Modules/Categories/Index.vue",
 		"/js/vendor",
@@ -1844,11 +1849,6 @@ var map = {
 		"./resources/js/Pages/Modules/Users/Index.vue",
 		"/js/vendor",
 		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-271f65"
-	],
-	"./Modules/Users/sss.vue": [
-		"./resources/js/Pages/Modules/Users/sss.vue",
-		"/js/vendor",
-		"resources_js_Pages_Modules_Users_sss_vue"
 	],
 	"./PrivacyPolicy.vue": [
 		"./resources/js/Pages/PrivacyPolicy.vue",

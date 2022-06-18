@@ -20,9 +20,11 @@ const props = defineProps({
 
             <div class="group inline-flex space-x-2 truncate text-sm">
 
-                <p class="font-medium text-gray-900 truncate group-hover:text-gray-900">
+                <p class="flex items-center truncate space-x-2 font-medium text-gray-900 truncate group-hover:text-gray-900">
 
-                    {{ props.row.name }}
+                    <div :class="[props.row.online ? 'bg-green-400' : 'bg-secondary-200', 'flex-shrink-0 w-2.5 h-2.5 rounded-full']" aria-hidden="true"></div>
+
+                    <span>{{ props.row.name }} <span class="text-gray-500 font-normal" v-if="props.row.parent">in {{ props.row.parent.name }}</span></span>
 
                 </p>
 

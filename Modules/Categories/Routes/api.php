@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Categories\Http\Controllers\Api\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/categories', function (Request $request) {
-    return $request->user();
+Route::controller(CategoriesController::class)->prefix('categories')->name('api.categories.')->group(function () {
+    Route::get('/', 'index')->name('index');
 });

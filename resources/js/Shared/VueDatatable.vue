@@ -1,5 +1,5 @@
 <script setup>
-import {ref, computed, watch, onMounted, reactive, defineComponent, defineAsyncComponent} from 'vue'
+import {ref, computed, watch, defineAsyncComponent} from 'vue'
 import {SortDescendingIcon, SortAscendingIcon, PlusIcon} from '@heroicons/vue/outline';
 import debounce from "lodash/debounce";
 import Pagination from '@/Components/Pagination';
@@ -79,7 +79,7 @@ const onCloseModal = (state) => {
                 <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                <Link :href="route('admin.users.create')"
+                <Link :href="props.config.createUrl"
                       preserve-state
                       preserve-scroll
                       :data="pickBy({... params(), ...{ page: props.filters.page }})"

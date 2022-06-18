@@ -1,5 +1,6 @@
 {
     "Users": true,
     "Roles": true,
-    "Categories": true
+    "Categories": true,
+    "Attachments": true
 }

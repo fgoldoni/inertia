@@ -11,7 +11,10 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Inertia\Inertia;
+use Modules\Categories\Entities\Category;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
+use Modules\Roles\Entities\Role;
+use Modules\Roles\Transformers\RoleResource;
 
 class CategoriesController extends Controller
 {
@@ -25,49 +28,52 @@ class CategoriesController extends Controller
             'rowData' => $this->categoriesRepository->withCriteria([
                 new WhereLike(['categories.id', 'categories.name', 'categories.slug'], $this->request->get('search')),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
+                new EagerLoad(['parent:id,name']),
             ])->paginate(),
 
         ], $modalProps));
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
+    public function create(Request $request)
     {
-        return view('categories::create');
+        Inertia::modal('Modules/Categories/CreateModal');
+
+        Inertia::basePageRoute(route('admin.categories.index'));
+
+        return $this->index([
+            'editing' => $this->categoriesRepository->make([
+                'id' => null,
+                'name' => 'test',
+                'seo_title' => 'test',
+                'seo_description' => 'test',
+                'seo_description' => 'test',
+                'online' => true
+            ])
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
     public function show($id)
     {
         return view('categories::show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
+
+    public function edit(Request $request, Category $category)
     {
-        return view('categories::edit');
+        Inertia::modal('Modules/Categories/EditModal');
+
+        Inertia::basePageRoute(route('admin.categories.index'));
+
+        return $this->index([
+            'editing' => $this->categoriesRepository->withCriteria([
+            ])->find($category->id)
+        ]);
     }
 
     /**

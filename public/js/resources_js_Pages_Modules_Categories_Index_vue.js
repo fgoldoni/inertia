@@ -87,6 +87,10 @@ __webpack_require__.r(__webpack_exports__);
   title: 'Slug',
   sortField: 'slug'
 }, {
+  name: 'updated_at',
+  title: 'Last Updated',
+  sortField: 'updated_at'
+}, {
   name: '__component:Categories/Datatables/CustomActions',
   title: '__actions'
 }]);
@@ -107,6 +111,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   apiUrl: route('admin.categories.index'),
+  createUrl: route('admin.categories.create'),
   perPage: 5,
   fields: _columns__WEBPACK_IMPORTED_MODULE_0__["default"]
 });

@@ -18,6 +18,11 @@ export default [
         sortField: 'slug'
     },
     {
+        name: 'updated_at',
+        title: 'Last Updated',
+        sortField: 'updated_at'
+    },
+    {
         name: '__component:Categories/Datatables/CustomActions',
         title: '__actions',
     }

@@ -116,6 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   apiUrl: route('admin.users.index'),
+  createUrl: route('admin.users.create'),
   perPage: 5,
   fields: _columns__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
