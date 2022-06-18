@@ -141,10 +141,10 @@ const onSubmit = () => {
                                                                         <dd class="mt-1 max-w-prose text-sm text-gray-900 space-y-5" v-html="props.editing.country.name" />
                                                                     </div>
                                                                     <div class="sm:col-span-2">
-                                                                        <dt class="capitalize text-sm font-medium text-gray-500">{{ __('Cities') }}</dt>
+                                                                        <dt class="capitalize text-sm font-medium text-gray-500">{{ __('Division') }}</dt>
                                                                         <dd class="capitalize mt-1 max-w-prose">
                                                                              <span class="inline-flex rounded-full bg-indigo-100 px-2 text-xs font-semibold leading-5 text-indigo-800">
-                                                                                {{ props.editing.cities_count  + ' Cities'}}
+                                                                                {{ props.editing.division.name }}
                                                                             </span>
                                                                         </dd>
                                                                     </div>
