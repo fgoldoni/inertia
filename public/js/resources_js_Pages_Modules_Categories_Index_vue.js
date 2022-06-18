@@ -83,11 +83,7 @@ __webpack_require__.r(__webpack_exports__);
   title: 'Name',
   sortField: 'name'
 }, {
-  name: 'slug',
-  title: 'Slug',
-  sortField: 'slug'
-}, {
-  name: 'updated_at',
+  name: '__component:Categories/Datatables/CustomUpdatedAt',
   title: 'Last Updated',
   sortField: 'updated_at'
 }, {

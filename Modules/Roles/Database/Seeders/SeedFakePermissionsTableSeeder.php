@@ -39,6 +39,8 @@ class SeedFakePermissionsTableSeeder extends Seeder
         Permission::generate('roles');
         Permission::generate('users');
         Permission::generate('categories');
+        Permission::generate('countries');
+        Permission::generate('attachments');
         Permission::generate('companies');
         Permission::generate('jobs');
 

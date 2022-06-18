@@ -2,5 +2,6 @@
     "Users": true,
     "Roles": true,
     "Categories": true,
-    "Attachments": true
+    "Attachments": true,
+    "Countries": true
 }

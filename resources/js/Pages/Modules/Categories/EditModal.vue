@@ -142,7 +142,7 @@ const onSubmit = () => {
                                                                 <JetInputError :message="form.errors.get('name')" class="mt-2"/>
                                                             </div>
 
-                                                            <IndicatorSelected @on-selected="updateInputSelected" :selected="props.editing.parent"></IndicatorSelected>
+                                                            <IndicatorSelected @on-selected="updateInputSelected" :selected="props.editing.parent" label="Parent"></IndicatorSelected>
 
                                                             <div class="col-span-1 sm:col-span-2">
 

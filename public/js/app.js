@@ -1242,6 +1242,11 @@ var navigation = [{
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
   current: route().current('admin.categories.index')
 }, {
+  name: 'Countries',
+  href: 'admin.countries.index',
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
+  current: route().current('admin.countries.index')
+}, {
   name: 'Calendar',
   href: 'dashboard',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -1787,6 +1792,11 @@ var map = {
 		"./resources/js/Pages/Modules/Categories/Datatables/CustomName.vue",
 		"/js/vendor",
 		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Categories_Datatables_C-33c6f9"
+	],
+	"./Modules/Categories/Datatables/CustomUpdatedAt.vue": [
+		"./resources/js/Pages/Modules/Categories/Datatables/CustomUpdatedAt.vue",
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Categories_Datatables_C-ec1deb"
 	],
 	"./Modules/Categories/EditModal.vue": [
 		"./resources/js/Pages/Modules/Categories/EditModal.vue",

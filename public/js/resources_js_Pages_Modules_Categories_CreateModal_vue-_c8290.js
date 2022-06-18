@@ -427,6 +427,10 @@ __webpack_require__.r(__webpack_exports__);
     selected: {
       type: Object,
       "default": null
+    },
+    label: {
+      type: String,
+      "default": 'Assigned to'
     }
   },
   emits: ['onSelected'],
@@ -1129,16 +1133,13 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "col-span-1"
 };
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Assigned to");
-
-var _hoisted_5 = {
+var _hoisted_4 = {
   "class": "relative mt-1"
 };
-var _hoisted_6 = {
+var _hoisted_5 = {
   "class": "flex items-center"
 };
-var _hoisted_7 = {
+var _hoisted_6 = {
   "class": "sr-only"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -1154,12 +1155,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "block text-sm font-medium text-gray-700"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_4];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.label), 1
+          /* TEXT */
+          )];
         }),
         _: 1
         /* STABLE */
 
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ComboboxInput"], {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ComboboxInput"], {
         "class": "w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm",
         onChange: _cache[0] || (_cache[0] = function ($event) {
           return $setup.query = $event.target.value;
@@ -1197,7 +1200,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     selected = _ref.selected;
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
                   "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-indigo-600 text-white' : 'text-gray-900'])
-                }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+                }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
                   "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['inline-block h-2 w-2 flex-shrink-0 rounded-full', person.online ? 'bg-green-400' : 'bg-gray-200']),
                   "aria-hidden": "true"
                 }, null, 2
@@ -1206,7 +1209,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['ml-3 truncate', selected && 'font-semibold'])
                 }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(person.name) + " ", 1
                 /* TEXT */
-                ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_7, " is " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(person.online ? 'online' : 'offline'), 1
+                ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, " is " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(person.online ? 'online' : 'offline'), 1
                 /* TEXT */
                 )], 2
                 /* CLASS */
