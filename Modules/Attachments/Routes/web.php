@@ -11,6 +11,9 @@
 |
 */
 
-Route::prefix('attachments')->group(function() {
-    Route::get('/', 'AttachmentsController@index');
+
+use Modules\Attachments\Http\Controllers\AttachmentsController;
+
+Route::prefix('admin')->middleware(['auth', 'verified'])->as('admin.')->group(function () {
+    Route::resource('attachments', AttachmentsController::class);
 });

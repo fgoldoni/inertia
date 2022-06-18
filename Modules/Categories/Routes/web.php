@@ -15,6 +15,4 @@ use Modules\Categories\Http\Controllers\CategoriesController;
 
 Route::prefix('admin')->middleware(['auth', 'verified', 'permission:browse_categories'])->as('admin.')->group(function () {
     Route::resource('categories', CategoriesController::class)->except([ 'destroy' ]);
-    Route::delete('categories/{selected}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
-    Route::get('categories/verification/send/{user}', [CategoriesController::class, 'sendEmailVerificationNotification'])->name('categories.verification.send');
 });

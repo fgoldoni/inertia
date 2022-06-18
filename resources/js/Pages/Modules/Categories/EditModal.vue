@@ -91,7 +91,7 @@ const onSubmit = () => {
                                      leave-to="-translate-x-full">
 
                         <DialogPanel
-                            class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-4xl sm:w-full">
+                            class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full">
 
                             <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
 
@@ -174,7 +174,7 @@ const onSubmit = () => {
 
                                                     <div class="bg-secondary-100 col-span-1">
 
-                                                        <div class="pl-4 pt-2 grid grid-cols-1 gap-4 sm:grid-cols-1">
+                                                        <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
 
                                                             <div class="col-span-1">
                                                                 <!-- This example requires Tailwind CSS v2.0+ -->

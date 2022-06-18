@@ -302,6 +302,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/TrashIcon.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -315,15 +316,15 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'ImageUpload',
   setup: function setup(__props, _ref) {
-    var _this = this;
-
     var expose = _ref.expose;
     expose();
     var dragging = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var media = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
+    var fileUpload = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
 
     var uploadFiles = function uploadFiles(files) {
       files.forEach(function (file) {
@@ -339,7 +340,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }).forEach(function (media) {
         var form = new FormData();
         form.append('file', media.file);
-        axios.post(_this.route('media.store'), form, {
+        axios.post(route('admin.attachments.store'), form, {
           onUploadProgress: function onUploadProgress(event) {
             media.progress = Math.round(event.loaded * 100 / event.total);
           }
@@ -371,16 +372,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var files = _toConsumableArray($event.target.files);
 
       uploadFiles(files);
-      _this.$refs.files.value = null;
+      fileUpload.value = null;
     };
 
     var __returned__ = {
       dragging: dragging,
       media: media,
+      fileUpload: fileUpload,
       uploadFiles: uploadFiles,
       onDroppedFiles: onDroppedFiles,
       onSelectedFiles: onSelectedFiles,
-      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref
+      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      TrashIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -691,7 +694,7 @@ var _hoisted_16 = {
   "class": "bg-secondary-100 col-span-1"
 };
 var _hoisted_17 = {
-  "class": "pl-4 pt-2 grid grid-cols-1 gap-4 sm:grid-cols-1"
+  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
 };
 var _hoisted_18 = {
   "class": "col-span-1"
@@ -752,7 +755,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DialogPanel"], {
-                "class": "relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-4xl sm:w-full"
+                "class": "relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full"
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                   return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
@@ -954,7 +957,7 @@ var _hoisted_1 = {
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "block text-sm font-medium text-gray-700"
-}, " Image Preview ", -1
+}, " Image Upload ", -1
 /* HOISTED */
 );
 
@@ -982,7 +985,7 @@ var _hoisted_6 = {
   "class": "flex text-sm text-gray-600"
 };
 var _hoisted_7 = {
-  "for": "files",
+  "for": "fileUpload",
   "class": "relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
 };
 
@@ -1002,28 +1005,83 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
+var _hoisted_11 = {
+  "class": "col-span-1"
+};
+var _hoisted_12 = {
+  "class": "my-6 bg-white rounded divide-y divide-gray-200 shadow"
+};
+var _hoisted_13 = {
+  "class": "text-sm text-gray-700"
+};
+var _hoisted_14 = {
+  key: 0,
+  "class": "w-40 bg-gray-200 rounded-full h-5 shadow-inner overflow-hidden relative flex items-center justify-center"
+};
+var _hoisted_15 = {
+  "class": "relative z-10 text-xs font-semibold text-center text-white drop-shadow text-shadow"
+};
+var _hoisted_16 = {
+  key: 1,
+  "class": "text-sm text-red-600"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onDrop: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.onDroppedFiles, ["prevent"]),
     onDragover: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-      return $setup.dragging.value = true;
+      return $setup.dragging = true;
     }, ["prevent"])),
     onDragleave: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-      return $setup.dragging.value = false;
+      return $setup.dragging = false;
     }, ["prevent"])),
-    "class": "mt-1 border-2 border-gray-300 border-dashed rounded-md px-6 pt-5 pb-6 flex justify-center"
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.dragging ? 'border-indigo-500' : 'border-gray-400', 'mt-1 border-2 border-dashed rounded-md px-6 pt-5 pb-6 flex justify-center'])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     onInput: $setup.onSelectedFiles,
-    id: "files",
-    name: "files",
-    ref: "files",
+    id: "fileUpload",
+    name: "fileUpload",
+    ref: "fileUpload",
     type: "file",
     "class": "sr-only"
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  )]), _hoisted_9]), _hoisted_10])], 40
-  /* PROPS, HYDRATE_EVENTS */
-  , _hoisted_3)]);
+  )]), _hoisted_9]), _hoisted_10])], 42
+  /* CLASS, PROPS, HYDRATE_EVENTS */
+  , _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.media, function (item, index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
+      key: index,
+      "class": "p-3 flex items-center justify-between"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.file.name), 1
+    /* TEXT */
+    ), !item.uploaded && !item.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      "class": "inline-block h-full bg-indigo-600 absolute top-0 left-0",
+      style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)("width: ".concat(item.progress, "%"))
+    }, null, 4
+    /* STYLE */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.progress) + "%", 1
+    /* TEXT */
+    )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.error), 1
+    /* TEXT */
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item.uploaded ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
+      key: 2,
+      href: "#",
+      "class": "text-sm text-indigo-600 underline"
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TrashIcon"], {
+          "class": "flex-shrink-0 h-4 w-4 text-rose-500 group-hover:text-rose-700 mr-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-125 duration-300"
+        })];
+      }),
+      _: 1
+      /* STABLE */
+
+    })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
