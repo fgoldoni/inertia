@@ -224,12 +224,17 @@ __webpack_require__.r(__webpack_exports__);
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       id: props.editing.id,
       name: props.editing.name,
+      parent_id: props.editing.parent_id,
       seo_title: props.editing.seo_title,
       seo_description: props.editing.seo_description,
       online: (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.editing.online),
       errors: new _Plugins_errors__WEBPACK_IMPORTED_MODULE_7__.Errors(),
       processing: false
     });
+
+    var updateInputSelected = function updateInputSelected(value) {
+      form.parent_id = value;
+    };
 
     var closeModal = function closeModal() {
       isOpen.value = false;
@@ -238,15 +243,17 @@ __webpack_require__.r(__webpack_exports__);
 
     var onSubmit = function onSubmit() {
       form.processing = true;
-      axios.put(route('admin.categories.edit', form.id), {
+      axios.put(route('admin.categories.update', form.id), {
         name: form.name,
-        invite: form.online
+        parent_id: form.parent_id,
+        seo_title: form.seo_title,
+        seo_description: form.seo_description,
+        online: form.online
       }).then(function () {
         form.processing = false;
         closeModal();
       })["catch"](function (error) {
         form.processing = false;
-        debugger;
         form.errors.record(error.response.data.errors);
       });
     };
@@ -255,14 +262,11 @@ __webpack_require__.r(__webpack_exports__);
       props: props,
       isOpen: isOpen,
       form: form,
+      updateInputSelected: updateInputSelected,
       closeModal: closeModal,
       onSubmit: onSubmit,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
-      computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
-      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
-      nextTick: vue__WEBPACK_IMPORTED_MODULE_0__.nextTick,
-      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm,
       Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Link,
       LoadingButton: _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_2__["default"],
       Dialog: _headlessui_vue__WEBPACK_IMPORTED_MODULE_10__.Dialog,
@@ -419,9 +423,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'IndicatorSelected',
-  props: {},
+  props: {
+    selected: {
+      type: Object,
+      "default": null
+    }
+  },
+  emits: ['onSelected'],
   setup: function setup(__props, _ref) {
-    var expose = _ref.expose;
+    var expose = _ref.expose,
+        emit = _ref.emit;
     expose();
     var props = __props;
 
@@ -430,7 +441,7 @@ __webpack_require__.r(__webpack_exports__);
         doFetchData = _useFetch.doFetchData;
 
     var query = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
-    var selectedItem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
+    var selectedItem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.selected);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(query, lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(function () {
       return doFetchData(route('api.categories.index', {
         search: query.value
@@ -438,9 +449,15 @@ __webpack_require__.r(__webpack_exports__);
     }, 500), {
       deep: true
     });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(selectedItem, lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(function (value) {
+      return emit('onSelected', value.id);
+    }, 500), {
+      deep: true
+    });
     var __returned__ = {
       items: items,
       doFetchData: doFetchData,
+      emit: emit,
       props: props,
       query: query,
       selectedItem: selectedItem,
@@ -797,13 +814,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
-                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["IndicatorSelected"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["IndicatorSelected"], {
+                    onOnSelected: $setup.updateInputSelected,
+                    selected: $setup.props.editing.parent
+                  }, null, 8
+                  /* PROPS */
+                  , ["selected"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
                     "for": "seo_title",
                     value: "Seo Title",
                     optional: ""
                   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
                     id: "seo_title",
-                    name: "Seo Title",
+                    name: "seo_title",
                     modelValue: $setup.form.seo_title,
                     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
                       return $setup.form.seo_title = $event;
@@ -823,7 +845,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     optional: ""
                   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetTextarea"], {
                     id: "seo_description",
-                    name: "Seo Description",
+                    name: "seo_description",
                     modelValue: $setup.form.seo_description,
                     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
                       return $setup.form.seo_description = $event;

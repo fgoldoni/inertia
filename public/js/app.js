@@ -1773,6 +1773,11 @@ var map = {
 		"./resources/js/Pages/Dashboard.vue",
 		"resources_js_Pages_Dashboard_vue"
 	],
+	"./Modules/Categories/CreateModal.vue": [
+		"./resources/js/Pages/Modules/Categories/CreateModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Categories_CreateModal_vue-_c8290"
+	],
 	"./Modules/Categories/Datatables/CustomActions.vue": [
 		"./resources/js/Pages/Modules/Categories/Datatables/CustomActions.vue",
 		"/js/vendor",

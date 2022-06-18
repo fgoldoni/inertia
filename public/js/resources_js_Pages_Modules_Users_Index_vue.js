@@ -115,8 +115,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _columns__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./columns */ "./resources/js/Pages/Modules/Users/Datatables/columns.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  title: 'Users',
   apiUrl: route('admin.users.index'),
   createUrl: route('admin.users.create'),
+  deleteUri: 'admin.users.destroy',
   perPage: 5,
   fields: _columns__WEBPACK_IMPORTED_MODULE_0__["default"]
 });

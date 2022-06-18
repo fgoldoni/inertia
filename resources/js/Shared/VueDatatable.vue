@@ -61,7 +61,7 @@ const confirmingUserDeletion = ref(false);
 const onCloseModal = (state) => {
     if(!state) return confirmingUserDeletion.value = false;
 
-    axios.delete(route('admin.users.destroy', { selected: selectedRow.value })).then(() => {
+    axios.delete(route(props.config.deleteUri, { selected: selectedRow.value })).then(() => {
         Inertia.reload({ only: ['rowData'] })
         confirmingUserDeletion.value = false;
     }).catch(error => {
@@ -75,7 +75,7 @@ const onCloseModal = (state) => {
         <ConfirmModal :open="confirmingUserDeletion" @on-close="onCloseModal"></ConfirmModal>
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
-                <h1 class="text-xl font-semibold text-gray-900">Users</h1>
+                <h1 class="text-xl font-semibold text-gray-900">{{ props.config.title }}</h1>
                 <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">

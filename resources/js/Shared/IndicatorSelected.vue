@@ -7,13 +7,22 @@ import { useFetch } from '@/Composables/UseFetch'
 
 const { data: items, doFetchData } = useFetch()
 
+const emit = defineEmits(['onSelected']);
+
 const props = defineProps({
+    selected: {
+        type: Object,
+        default: null,
+    }
 });
 
 const query = ref('')
-const selectedItem = ref()
+const selectedItem = ref(props.selected)
 
 watch(query, debounce(() => doFetchData(route('api.categories.index', {search: query.value})), 500), {deep: true});
+
+watch(selectedItem, debounce((value) => emit('onSelected', value.id), 500), {deep: true});
+
 </script>
 
 <template>

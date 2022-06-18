@@ -4,14 +4,21 @@ namespace Modules\Categories\Http\Controllers;
 
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
+use App\Repositories\Criteria\WhereHas;
+use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
+use App\Repositories\Criteria\WhereNot;
 use App\Repositories\Criteria\WithCount;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Inertia\Inertia;
 use Modules\Categories\Entities\Category;
+use Modules\Categories\Http\Requests\StoreCategoryRequest;
+use Modules\Categories\Http\Requests\UpdateCategoryRequest;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 use Modules\Roles\Entities\Role;
 use Modules\Roles\Transformers\RoleResource;
@@ -53,9 +60,13 @@ class CategoriesController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        $category = $this->categoriesRepository->create($request->only('name', 'online', 'seo_title', 'seo_description', 'parent_id'));
+
+        return $this->response
+            ->json([], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK)
+            ->flash(__(':category successfully added!', ['category' => $category->name]));
     }
 
     public function show($id)
@@ -72,28 +83,28 @@ class CategoriesController extends Controller
 
         return $this->index([
             'editing' => $this->categoriesRepository->withCriteria([
-            ])->find($category->id)
+                new EagerLoad(['parent:id,name']),
+            ])->find($category->id, ['id', 'name', 'online', 'seo_title', 'seo_description', 'parent_id'])
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category = $this->categoriesRepository->update($category->id, $request->only('name', 'online', 'seo_title', 'seo_description', 'parent_id'));
+
+        return $this->response
+            ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
+            ->flash(__(':category updated successfully!', ['category' => $category->name]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+
+    public function destroy($selected)
     {
-        //
+        $this->categoriesRepository->withCriteria([
+            new WhereKey(explode(',', (string) $selected))
+        ])->deleteAll();
+
+        return $this->response->json(['message' => __('Category deleted successfully.')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
     }
 }

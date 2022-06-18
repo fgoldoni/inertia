@@ -44,7 +44,7 @@ const closeModal = () => {
 const onSubmit = () => {
     form.processing = true;
 
-    axios.put(route('admin.categories.update', form.id), {
+    axios.post(route('admin.categories.store'), {
         name: form.name,
         parent_id: form.parent_id,
         seo_title: form.seo_title,
