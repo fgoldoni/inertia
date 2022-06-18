@@ -21,6 +21,23 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/Modules/Roles/Entities',
         __DIR__ . '/Modules/Roles/Http',
         __DIR__ . '/Modules/Roles/Providers',
+
+        __DIR__ . '/Modules/Categories/Database',
+        __DIR__ . '/Modules/Categories/Entities',
+        __DIR__ . '/Modules/Categories/Http',
+        __DIR__ . '/Modules/Categories/Providers',
+
+
+        __DIR__ . '/Modules/Countries/Database',
+        __DIR__ . '/Modules/Countries/Entities',
+        __DIR__ . '/Modules/Countries/Http',
+        __DIR__ . '/Modules/Countries/Providers',
+
+
+        __DIR__ . '/Modules/Attachments/Database',
+        __DIR__ . '/Modules/Attachments/Entities',
+        __DIR__ . '/Modules/Attachments/Http',
+        __DIR__ . '/Modules/Attachments/Providers',
     ]);
 
     // register a single rule

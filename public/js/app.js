@@ -1209,8 +1209,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "userNavigation": () => (/* binding */ userNavigation)
 /* harmony export */ });
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/HomeIcon.js");
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/CubeIcon.js");
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/UsersIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/UsersIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/CubeIcon.js");
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/FolderIcon.js");
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/CalendarIcon.js");
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/InboxIcon.js");
@@ -1222,6 +1222,11 @@ var navigation = [{
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__["default"],
   current: route().current('dashboard')
 }, {
+  name: 'Team',
+  href: 'dashboard',
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+  current: false
+}, {
   name: 'Users',
   href: 'admin.users.index',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -1229,13 +1234,8 @@ var navigation = [{
 }, {
   name: 'Roles',
   href: 'admin.roles.index',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
-  current: route().current('admin.roles.index')
-}, {
-  name: 'Team',
-  href: 'dashboard',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
-  current: false
+  current: route().current('admin.roles.index')
 }, {
   name: 'Categories',
   href: 'admin.categories.index',
@@ -1807,6 +1807,36 @@ var map = {
 		"./resources/js/Pages/Modules/Categories/Index.vue",
 		"/js/vendor",
 		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-461362"
+	],
+	"./Modules/Countries/CreateModal.vue": [
+		"./resources/js/Pages/Modules/Countries/CreateModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Countries_CreateModal_vue-_e1da0"
+	],
+	"./Modules/Countries/Datatables/CustomActions.vue": [
+		"./resources/js/Pages/Modules/Countries/Datatables/CustomActions.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Countries_Datatables_CustomActions_vue-_22c30"
+	],
+	"./Modules/Countries/Datatables/CustomName.vue": [
+		"./resources/js/Pages/Modules/Countries/Datatables/CustomName.vue",
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Countries_Datatables_Cu-660ae3"
+	],
+	"./Modules/Countries/Datatables/CustomUpdatedAt.vue": [
+		"./resources/js/Pages/Modules/Countries/Datatables/CustomUpdatedAt.vue",
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Countries_Datatables_Cu-07ef8d"
+	],
+	"./Modules/Countries/EditModal.vue": [
+		"./resources/js/Pages/Modules/Countries/EditModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Countries_EditModal_vue"
+	],
+	"./Modules/Countries/Index.vue": [
+		"./resources/js/Pages/Modules/Countries/Index.vue",
+		"/js/vendor",
+		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-de4758"
 	],
 	"./Modules/Roles/CreateModal.vue": [
 		"./resources/js/Pages/Modules/Roles/CreateModal.vue",

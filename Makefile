@@ -38,6 +38,18 @@ php-cs: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Entities --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Http --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Providers --diff
+    ../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Database --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Entities --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Http --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Providers --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Categories/Database --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Categories/Entities --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Categories/Http --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Categories/Providers --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Attachments/Database --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Attachments/Entities --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Attachments/Http --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Attachments/Providers --diff
 
 rector: ## PRS2 Validation
 	./vendor/bin/rector process

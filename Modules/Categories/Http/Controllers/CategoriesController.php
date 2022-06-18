@@ -36,7 +36,7 @@ class CategoriesController extends Controller
                 new WhereLike(['categories.id', 'categories.name', 'categories.slug'], $this->request->get('search')),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
                 new EagerLoad(['parent:id,name']),
-            ])->paginate(),
+            ])->paginate()->withQueryString(),
 
         ], $modalProps));
     }

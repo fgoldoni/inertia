@@ -2,9 +2,9 @@ import {CalendarIcon, ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, UsersIcon, 
 
 export const navigation = [
     { name: 'Dashboard', href: 'dashboard', icon: HomeIcon, current: route().current('dashboard') },
+    { name: 'Team', href: 'dashboard', icon: UsersIcon, current: false },
     { name: 'Users', href: 'admin.users.index', icon: HomeIcon, current: route().current('admin.users.index') },
     { name: 'Roles', href: 'admin.roles.index', icon: CubeIcon, current: route().current('admin.roles.index') },
-    { name: 'Team', href: 'dashboard', icon: UsersIcon, current: false },
     { name: 'Categories', href: 'admin.categories.index', icon: FolderIcon, current: route().current('admin.categories.index') },
     { name: 'Countries', href: 'admin.countries.index', icon: FolderIcon, current: route().current('admin.countries.index') },
     { name: 'Calendar', href: 'dashboard', icon: CalendarIcon, current: false },
