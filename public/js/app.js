@@ -1247,6 +1247,16 @@ var navigation = [{
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
   current: route().current('admin.countries.index')
 }, {
+  name: 'Divisions',
+  href: 'admin.divisions.index',
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
+  current: route().current('admin.divisions.index')
+}, {
+  name: 'Cities',
+  href: 'admin.cities.index',
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
+  current: route().current('admin.cities.index')
+}, {
   name: 'Calendar',
   href: 'dashboard',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -1808,11 +1818,6 @@ var map = {
 		"/js/vendor",
 		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-461362"
 	],
-	"./Modules/Countries/CreateModal.vue": [
-		"./resources/js/Pages/Modules/Countries/CreateModal.vue",
-		"/js/vendor",
-		"resources_js_Pages_Modules_Countries_CreateModal_vue-_e1da0"
-	],
 	"./Modules/Countries/Datatables/CustomActions.vue": [
 		"./resources/js/Pages/Modules/Countries/Datatables/CustomActions.vue",
 		"/js/vendor",
@@ -1821,12 +1826,7 @@ var map = {
 	"./Modules/Countries/Datatables/CustomName.vue": [
 		"./resources/js/Pages/Modules/Countries/Datatables/CustomName.vue",
 		"/js/vendor",
-		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Countries_Datatables_Cu-660ae3"
-	],
-	"./Modules/Countries/Datatables/CustomUpdatedAt.vue": [
-		"./resources/js/Pages/Modules/Countries/Datatables/CustomUpdatedAt.vue",
-		"/js/vendor",
-		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Countries_Datatables_Cu-07ef8d"
+		"resources_js_Pages_Modules_Countries_Datatables_CustomName_vue-_7cd60"
 	],
 	"./Modules/Countries/EditModal.vue": [
 		"./resources/js/Pages/Modules/Countries/EditModal.vue",
@@ -1837,6 +1837,30 @@ var map = {
 		"./resources/js/Pages/Modules/Countries/Index.vue",
 		"/js/vendor",
 		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-de4758"
+	],
+	"./Modules/Divisions/Datatables/CustomActions.vue": [
+		"./resources/js/Pages/Modules/Divisions/Datatables/CustomActions.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Divisions_Datatables_CustomActions_vue-_578f0"
+	],
+	"./Modules/Divisions/Datatables/CustomCities.vue": [
+		"./resources/js/Pages/Modules/Divisions/Datatables/CustomCities.vue",
+		"resources_js_Pages_Modules_Divisions_Datatables_CustomCities_vue"
+	],
+	"./Modules/Divisions/Datatables/CustomName.vue": [
+		"./resources/js/Pages/Modules/Divisions/Datatables/CustomName.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Divisions_Datatables_CustomName_vue-_10cb0"
+	],
+	"./Modules/Divisions/EditModal.vue": [
+		"./resources/js/Pages/Modules/Divisions/EditModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Divisions_EditModal_vue"
+	],
+	"./Modules/Divisions/Index.vue": [
+		"./resources/js/Pages/Modules/Divisions/Index.vue",
+		"/js/vendor",
+		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-4c8926"
 	],
 	"./Modules/Roles/CreateModal.vue": [
 		"./resources/js/Pages/Modules/Roles/CreateModal.vue",

@@ -1,6 +1,6 @@
 <script setup>
 import {Link} from "@inertiajs/inertia-vue3";
-import {PencilAltIcon, UserCircleIcon} from '@heroicons/vue/solid';
+import {PencilAltIcon} from '@heroicons/vue/solid';
 import pickBy from "lodash/pickBy";
 
 const props = defineProps({

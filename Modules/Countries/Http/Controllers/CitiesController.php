@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Countries\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
@@ -28,7 +27,6 @@ class CitiesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      * @return Renderable
      */
     public function store(Request $request)
@@ -58,7 +56,6 @@ class CitiesController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Renderable
      */

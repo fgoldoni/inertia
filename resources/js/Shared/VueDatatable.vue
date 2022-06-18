@@ -20,7 +20,7 @@ const fields = props.config.fields
 
 const form = useForm({
     perPage: ref(props.config.perPage),
-    page: ref(null),
+    page: ref(props.filters.page),
     search: ref(props.filters.search),
     field: props.filters.field,
     direction: props.filters.direction,
@@ -224,7 +224,7 @@ const onCloseModal = (state) => {
                                     </td>
 
                                     <td v-else class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        <component v-if="`${fields[key]['name']}`.includes('__component:')" :is="setDefineAsyncComponent(`${fields[key]['name']}`.replace('__component:', ''))" v-bind="{row: {... row, ... { params: params() }}}"/>
+                                        <component v-if="`${fields[key]['name']}`.includes('__component:')" :is="setDefineAsyncComponent(`${fields[key]['name']}`.replace('__component:', ''))" v-bind="{row: {... row, ... { params: {... params(), ...{ page: props.filters.page }} }}}"/>
                                         <span v-else v-text="row[fields[key]['name']]"></span>
                                     </td>
 

@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Categories\Database\factories\CategoryFactory;
 use Modules\Categories\Http\Enums\CategoryType;
-use Modules\Jobs\Entities\Job;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
@@ -26,7 +25,6 @@ class Category extends Model
         'type' => CategoryType::class,
     ];
 
-
     protected static function newFactory(): CategoryFactory
     {
         return CategoryFactory::new();
@@ -36,7 +34,6 @@ class Category extends Model
     {
         return $this->morphedByMany($class, 'categorizable', 'categorizables', 'category_id', 'categorizable_id', 'id', 'id');
     }
-
 
     public function getSlugOptions() : SlugOptions
     {

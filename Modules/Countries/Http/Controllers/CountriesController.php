@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Countries\Http\Controllers;
 
 use App\Repositories\Criteria\EagerLoad;
@@ -12,15 +11,15 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Inertia\Inertia;
-use Modules\Categories\Entities\Category;
 use Modules\Countries\Entities\Country;
 use Modules\Countries\Http\Requests\UpdateCountryRequest;
 use Modules\Countries\Repositories\Contracts\CountriesRepository;
 
 class CountriesController extends Controller
 {
-    public function __construct(private readonly CountriesRepository $countriesRepository, private readonly ResponseFactory $response, private readonly Request $request) {}
-
+    public function __construct(private readonly CountriesRepository $countriesRepository, private readonly ResponseFactory $response, private readonly Request $request)
+    {
+    }
 
     public function index(array $modalProps = [])
     {
@@ -47,7 +46,6 @@ class CountriesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      * @return Renderable
      */
     public function store(Request $request)
@@ -65,18 +63,16 @@ class CountriesController extends Controller
         return view('countries::show');
     }
 
-
     public function edit(Request $request, Country $country)
     {
         Inertia::modal('Modules/Countries/EditModal');
 
-        Inertia::basePageRoute(route('admin.countries.index'));
+        Inertia::basePageRoute(route('admin.countries.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
             'editing' => $this->countriesRepository->find($country->id, ['id', 'name', 'full_name', 'continent_id', 'emoji', 'currency_code', 'currency_name', 'capital'])
         ]);
     }
-
 
     public function update(UpdateCountryRequest $request, Country $country)
     {

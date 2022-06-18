@@ -81,7 +81,7 @@ const onSubmit = () => {
                                      leave-to="-translate-x-full">
 
                         <DialogPanel
-                            class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full">
+                            class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-3xl sm:w-full">
 
                             <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
 

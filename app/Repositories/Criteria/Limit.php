@@ -2,7 +2,6 @@
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Arr;
 
 /**
  * Class WhereLike

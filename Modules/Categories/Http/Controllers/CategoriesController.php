@@ -1,17 +1,11 @@
 <?php
-
 namespace Modules\Categories\Http\Controllers;
 
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
-use App\Repositories\Criteria\WhereHas;
 use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
-use App\Repositories\Criteria\WhereNot;
-use App\Repositories\Criteria\WithCount;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -20,13 +14,12 @@ use Modules\Categories\Entities\Category;
 use Modules\Categories\Http\Requests\StoreCategoryRequest;
 use Modules\Categories\Http\Requests\UpdateCategoryRequest;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
-use Modules\Roles\Entities\Role;
-use Modules\Roles\Transformers\RoleResource;
 
 class CategoriesController extends Controller
 {
-    public function __construct(private readonly CategoriesRepository $categoriesRepository, private readonly ResponseFactory $response, private readonly Request $request) {}
-
+    public function __construct(private readonly CategoriesRepository $categoriesRepository, private readonly ResponseFactory $response, private readonly Request $request)
+    {
+    }
 
     public function index(array $modalProps = [])
     {
@@ -40,7 +33,6 @@ class CategoriesController extends Controller
 
         ], $modalProps));
     }
-
 
     public function create(Request $request)
     {
@@ -74,7 +66,6 @@ class CategoriesController extends Controller
         return view('categories::show');
     }
 
-
     public function edit(Request $request, Category $category)
     {
         Inertia::modal('Modules/Categories/EditModal');
@@ -88,7 +79,6 @@ class CategoriesController extends Controller
         ]);
     }
 
-
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category = $this->categoriesRepository->update($category->id, $request->only('name', 'online', 'seo_title', 'seo_description', 'parent_id'));
@@ -97,7 +87,6 @@ class CategoriesController extends Controller
             ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
             ->flash(__(':category updated successfully!', ['category' => $category->name]));
     }
-
 
     public function destroy($selected)
     {

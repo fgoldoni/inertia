@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Attachments\Entities;
 
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +9,7 @@ class Attachment extends Model
     use HasFactory;
 
     protected $fillable = [];
-    
+
     protected static function newFactory()
     {
         return \Modules\Attachments\Database\factories\AttachmentFactory::new();

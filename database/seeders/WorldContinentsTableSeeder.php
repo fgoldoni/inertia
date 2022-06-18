@@ -1,12 +1,10 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
 class WorldContinentsTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -14,55 +12,44 @@ class WorldContinentsTableSeeder extends Seeder
      */
     public function run()
     {
-        
-
         \DB::table('world_continents')->truncate();
-        
-        \DB::table('world_continents')->insert(array (
-            0 => 
-            array (
+
+        \DB::table('world_continents')->insert([
+            0 => [
                 'id' => 1,
                 'name' => 'Asia',
                 'code' => 'as',
-            ),
-            1 => 
-            array (
+            ],
+            1 => [
                 'id' => 2,
                 'name' => 'Europe',
                 'code' => 'eu',
-            ),
-            2 => 
-            array (
+            ],
+            2 => [
                 'id' => 3,
                 'name' => 'Africa',
                 'code' => 'af',
-            ),
-            3 => 
-            array (
+            ],
+            3 => [
                 'id' => 4,
                 'name' => 'Oceania',
                 'code' => 'oc',
-            ),
-            4 => 
-            array (
+            ],
+            4 => [
                 'id' => 5,
                 'name' => 'Antarctica',
                 'code' => 'an',
-            ),
-            5 => 
-            array (
+            ],
+            5 => [
                 'id' => 6,
                 'name' => 'North America',
                 'code' => 'na',
-            ),
-            6 => 
-            array (
+            ],
+            6 => [
                 'id' => 7,
                 'name' => 'South America',
                 'code' => 'sa',
-            ),
-        ));
-        
-        
+            ],
+        ]);
     }
 }

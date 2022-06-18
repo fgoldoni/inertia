@@ -7,7 +7,6 @@ use Modules\Attachments\Repositories\Eloquent\EloquentAttachmentsRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
-
     protected $defer = false;
 
     public function boot()

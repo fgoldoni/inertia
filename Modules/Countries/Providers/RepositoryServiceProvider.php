@@ -11,7 +11,6 @@ use Modules\Countries\Repositories\Eloquent\EloquentDivisionsRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
-
     protected $defer = false;
 
     public function boot()

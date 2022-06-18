@@ -38,7 +38,9 @@ php-cs: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Entities --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Http --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Providers --diff
-    ../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Database --diff
+
+php-cs-2: ## PRS2 Validation
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Database --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Entities --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Http --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Providers --diff

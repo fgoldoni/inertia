@@ -1,15 +1,11 @@
 <script setup>
 import {ref, reactive} from 'vue'
-import {Link} from "@inertiajs/inertia-vue3";
 import LoadingButton from '@/Shared/LoadingButton'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
-import JetTextarea from '@/Jetstream/Textarea'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
 import { Errors } from '@/Plugins/errors'
-import IndicatorSelected from '@/Shared/IndicatorSelected'
-import ImageUpload from '@/Shared/ImageUpload'
 
 const props = defineProps({
     editing: Object,
@@ -22,19 +18,10 @@ const isOpen = ref(true)
 const form = reactive({
     id: props.editing.id,
     name: props.editing.name,
-    parent_id: props.editing.parent_id,
-    seo_title: props.editing.seo_title,
-    seo_description: props.editing.seo_description,
-    online: ref(props.editing.online),
     errors: new Errors(),
     processing: false,
 });
 
-
-
-const updateInputSelected = (value) => {
-   form.parent_id = value
-}
 
 const closeModal = () => {
     isOpen.value = false
@@ -44,12 +31,8 @@ const closeModal = () => {
 const onSubmit = () => {
     form.processing = true;
 
-    axios.post(route('admin.categories.store'), {
+    axios.put(route('admin.countries.update', form.id), {
         name: form.name,
-        parent_id: form.parent_id,
-        seo_title: form.seo_title,
-        seo_description: form.seo_description,
-        online: form.online,
     }).then(() => {
         form.processing = false;
         closeModal();
@@ -98,7 +81,7 @@ const onSubmit = () => {
                                      leave-to="-translate-x-full">
 
                         <DialogPanel
-                            class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full">
+                            class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-3xl sm:w-full">
 
                             <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
 
@@ -142,39 +125,6 @@ const onSubmit = () => {
                                                                 <JetInputError :message="form.errors.get('name')" class="mt-2"/>
                                                             </div>
 
-                                                            <IndicatorSelected @on-selected="updateInputSelected" :selected="props.editing.parent"></IndicatorSelected>
-
-                                                            <div class="col-span-1 sm:col-span-2">
-
-                                                                <JetLabel for="seo_title" value="Seo Title" optional/>
-
-                                                                <JetInput
-                                                                    id="seo_title"
-                                                                    name="seo_title"
-                                                                    v-model="form.seo_title"
-                                                                    type="text"
-                                                                    class="mt-1 block w-full"/>
-
-                                                                <JetInputError :message="form.errors.get('seo_title')" class="mt-2"/>
-                                                            </div>
-
-                                                            <div class="col-span-1 sm:col-span-2">
-
-                                                                <JetLabel for="seo_description" value="Seo Description" optional/>
-
-                                                                <JetTextarea
-                                                                    id="seo_description"
-                                                                    name="seo_description"
-                                                                    v-model="form.seo_description"
-                                                                    type="text"
-                                                                    class="mt-1 block w-full"/>
-
-                                                                <p class="mt-2 text-sm text-gray-500">160 characters</p>
-
-
-                                                                <JetInputError :message="form.errors.get('seo_description')" class="mt-2"/>
-                                                            </div>
-
                                                         </div>
 
                                                     </div>
@@ -184,19 +134,24 @@ const onSubmit = () => {
                                                         <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
 
                                                             <div class="col-span-1">
-                                                                <!-- This example requires Tailwind CSS v2.0+ -->
-                                                                <SwitchGroup as="div" class="mt-2 flex items-center whitespace-nowrap">
-                                                                    <Switch v-model="form.online" :class="[form.online ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
-                                                                        <span aria-hidden="true" :class="[form.online ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
-                                                                    </Switch>
-                                                                    <SwitchLabel as="span" class="ml-3">
-                                                                        <span class="text-sm font-medium text-gray-900 cursor-pointer">Online</span>
-                                                                    </SwitchLabel>
-                                                                </SwitchGroup>
+
+                                                                <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                                                                    <div class="sm:col-span-2">
+                                                                        <dt class="capitalize text-sm font-medium text-gray-500">{{ __('Country') }} {{ props.editing.country.emoji }}</dt>
+                                                                        <dd class="mt-1 max-w-prose text-sm text-gray-900 space-y-5" v-html="props.editing.country.name" />
+                                                                    </div>
+                                                                    <div class="sm:col-span-2">
+                                                                        <dt class="capitalize text-sm font-medium text-gray-500">{{ __('Cities') }}</dt>
+                                                                        <dd class="capitalize mt-1 max-w-prose">
+                                                                             <span class="inline-flex rounded-full bg-indigo-100 px-2 text-xs font-semibold leading-5 text-indigo-800">
+                                                                                {{ props.editing.cities_count  + ' Cities'}}
+                                                                            </span>
+                                                                        </dd>
+                                                                    </div>
+                                                                </dl>
 
                                                             </div>
 
-                                                            <ImageUpload></ImageUpload>
 
                                                         </div>
 

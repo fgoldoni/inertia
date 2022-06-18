@@ -7,6 +7,8 @@ export const navigation = [
     { name: 'Roles', href: 'admin.roles.index', icon: CubeIcon, current: route().current('admin.roles.index') },
     { name: 'Categories', href: 'admin.categories.index', icon: FolderIcon, current: route().current('admin.categories.index') },
     { name: 'Countries', href: 'admin.countries.index', icon: FolderIcon, current: route().current('admin.countries.index') },
+    { name: 'Divisions', href: 'admin.divisions.index', icon: FolderIcon, current: route().current('admin.divisions.index') },
+    { name: 'Cities', href: 'admin.cities.index', icon: FolderIcon, current: route().current('admin.cities.index') },
     { name: 'Calendar', href: 'dashboard', icon: CalendarIcon, current: false },
     { name: 'Documents', href: 'dashboard', icon: InboxIcon, current: false },
     { name: 'Reports', href: 'dashboard', icon: ChartBarIcon, current: false },

@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Categories\Http\Controllers\Api;
 
 use App\Repositories\Criteria\OrderBy;
@@ -9,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
-use Modules\Roles\Repositories\Contracts\PermissionsRepository;
 
 class CategoriesController extends Controller
 {
@@ -29,7 +27,6 @@ class CategoriesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -49,7 +46,6 @@ class CategoriesController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Response
      */

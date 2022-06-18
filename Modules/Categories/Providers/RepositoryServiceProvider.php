@@ -7,7 +7,6 @@ use Modules\Categories\Repositories\Eloquent\EloquentCategoriesRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
-
     protected $defer = false;
 
     public function boot()
