@@ -1,6 +1,6 @@
 <template>
 
-    <Listbox as="div" v-model="selectedItem" @update:modelValue="onSelect">
+    <Listbox as="div" :model-value="props.modelValue" :multiple="props.multiple" @update:modelValue="value => emit('update:modelValue', value)">
 
         <ListboxLabel class="block text-sm font-medium text-gray-700"> Role </ListboxLabel>
 
@@ -8,7 +8,8 @@
 
             <ListboxButton class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 
-                <span class="block truncate">{{ selectedItem.display_name }}</span>
+                <span class="block truncate" v-if="label">{{ label }}</span>
+                <span class="text-gray-500" v-else>{{ props.placeholder }}</span>
 
                 <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 
@@ -22,11 +23,11 @@
 
                 <ListboxOptions class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
 
-                    <ListboxOption as="template" v-for="person in items" :key="person.id" :value="person" v-slot="{ active, selected }">
+                    <ListboxOption as="template" v-for="option in props.options" :key="option.name" :value="option.id" v-slot="{ active, selected }">
 
                        <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9']">
                           <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">
-                            {{ person.display_name }}
+                            {{ option.name }}
                           </span>
 
                           <span v-if="selected" :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
@@ -50,24 +51,33 @@
 import { ref, computed } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
-import {Inertia} from "@inertiajs/inertia";
 
 const props = defineProps({
-    items: Array,
-    selected: {
-        type: Number,
-        default: 1,
+    options: Array,
+    modelValue: [String, Number, Array],
+    placeholder: {
+        type: String,
+        default: "Select option",
     },
+    multiple: Boolean,
+    error: String
 });
 
-const selectedItem = ref(props.items.find(element => element.id === props.selected) || props.items[0])
+const label = computed(() => {
+    return props.options
+        .filter(option => {
+            if (Array.isArray(props.modelValue)) {
+                return props.modelValue.includes(option.id);
+            }
+
+            return props.modelValue === option.id;
+        })
+        .map(option => option.name)
+        .join(", ");
+});
 
 
 
-const emit = defineEmits(['onSelect']);
-
-const onSelect = (value) => {
-    emit('onSelect', value.id);
-};
+const emit = defineEmits(["update:modelValue"]);
 
 </script>

@@ -9,7 +9,7 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
 import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
-import Select from '@/Components/Select'
+import BaseListbox from '@/Shared/BaseListbox'
 import internationalNumber from '@/Plugins/internationalNumber'
 import 'intl-tel-input/build/css/intlTelInput.css'
 import {generatePassword, strengthLevels} from '@/Plugins/generatePassword'
@@ -165,10 +165,7 @@ const onSubmit = () => {
 
                                                             <div class="col-span-1">
 
-                                                                <Select :items="roles.data"
-                                                                        v-if="roles.data"
-                                                                        @on-select="updateInputRole"
-                                                                        :selected="form.role"/>
+                                                                <BaseListbox :options="roles.data" v-if="roles.data" v-model="form.role"  placeholder="Select roles"/>
 
                                                                 <JetInputError :message="form.errors.get('role')" class="mt-2"/>
                                                             </div>

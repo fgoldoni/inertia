@@ -1232,7 +1232,7 @@ var navigation = [{
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__["default"],
   current: route().current('admin.users.index')
 }, {
-  name: 'Roles',
+  name: 'Roles & Permissions',
   href: 'admin.roles.index',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
   current: route().current('admin.roles.index')
