@@ -60,7 +60,7 @@ var _hoisted_1 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Link"], {
-    href: _ctx.route('admin.divisions.edit', $setup.props.row.id),
+    href: _ctx.route('admin.jobs.edit', $setup.props.row.id),
     "preserve-state": "",
     "preserve-scroll": "",
     data: $setup.pickBy($setup.props.row.params),

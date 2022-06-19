@@ -1935,14 +1935,19 @@ var map = {
 		"/js/vendor",
 		"resources_js_Pages_Modules_Jobs_Datatables_CustomActions_vue-_706a0"
 	],
-	"./Modules/Jobs/Datatables/CustomCities.vue": [
-		"./resources/js/Pages/Modules/Jobs/Datatables/CustomCities.vue",
-		"resources_js_Pages_Modules_Jobs_Datatables_CustomCities_vue"
-	],
 	"./Modules/Jobs/Datatables/CustomName.vue": [
 		"./resources/js/Pages/Modules/Jobs/Datatables/CustomName.vue",
 		"/js/vendor",
 		"resources_js_Pages_Modules_Jobs_Datatables_CustomName_vue-_72440"
+	],
+	"./Modules/Jobs/Datatables/CustomOwner.vue": [
+		"./resources/js/Pages/Modules/Jobs/Datatables/CustomOwner.vue",
+		"resources_js_Pages_Modules_Jobs_Datatables_CustomOwner_vue"
+	],
+	"./Modules/Jobs/Datatables/CustomUpdatedAt.vue": [
+		"./resources/js/Pages/Modules/Jobs/Datatables/CustomUpdatedAt.vue",
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Jobs_Datatables_CustomU-ada8d2"
 	],
 	"./Modules/Jobs/EditModal.vue": [
 		"./resources/js/Pages/Modules/Jobs/EditModal.vue",

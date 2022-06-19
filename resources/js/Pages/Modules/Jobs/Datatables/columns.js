@@ -8,16 +8,26 @@ export default [
         sortField: 'id'
     },
     {
-        name: '__component:Divisions/Datatables/CustomName',
+        name: '__component:Jobs/Datatables/CustomName',
         title: 'Name',
         sortField: 'name'
     },
     {
-        name: '__component:Divisions/Datatables/CustomCities',
-        title: 'Cities',
+        name: '__component:Jobs/Datatables/CustomOwner',
+        title: 'Owner',
     },
     {
-        name: '__component:Divisions/Datatables/CustomActions',
+        name: 'state',
+        title: 'Status',
+        sortField: 'state'
+    },
+    {
+        name: '__component:Jobs/Datatables/CustomUpdatedAt',
+        title: 'Last Updated',
+        sortField: 'updated_at'
+    },
+    {
+        name: '__component:Jobs/Datatables/CustomActions',
         title: '__actions',
     }
 ]

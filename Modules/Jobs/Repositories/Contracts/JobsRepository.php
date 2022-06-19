@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Categories\Repositories\Contracts;
+namespace Modules\Jobs\Repositories\Contracts;
 
 interface JobsRepository
 {

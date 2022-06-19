@@ -65,12 +65,14 @@ var _hoisted_4 = {
   "class": "inline-block rounded-full bg-indigo-100 px-2 text-xs font-semibold leading-5 text-indigo-800"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _$setup$props$row$cit;
+
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.emoji) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.name), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    href: _ctx.route('admin.divisions.edit', $setup.props.row.id),
+    href: _ctx.route('admin.jobs.edit', $setup.props.row.id),
     "preserve-state": "",
     "preserve-scroll": "",
     data: $setup.pickBy($setup.props.row.params),
@@ -87,7 +89,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href", "data"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.country.emoji) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.country.name), 1
+  , ["href", "data"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.country.emoji) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.country.name) + " / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$props$row$cit = $setup.props.row.city) === null || _$setup$props$row$cit === void 0 ? void 0 : _$setup$props$row$cit.name), 1
   /* TEXT */
   )])]);
 }

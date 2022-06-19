@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Shared_VueDatatable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Shared/VueDatatable */ "./resources/js/Shared/VueDatatable.vue");
-/* harmony import */ var _Pages_Modules_Divisions_Datatables_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Modules/Divisions/Datatables/config */ "./resources/js/Pages/Modules/Divisions/Datatables/config.js");
+/* harmony import */ var _Pages_Modules_Jobs_Datatables_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Modules/Jobs/Datatables/config */ "./resources/js/Pages/Modules/Jobs/Datatables/config.js");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var __returned__ = {
       VueDatatable: _Shared_VueDatatable__WEBPACK_IMPORTED_MODULE_0__["default"],
-      config: _Pages_Modules_Divisions_Datatables_config__WEBPACK_IMPORTED_MODULE_1__["default"]
+      config: _Pages_Modules_Jobs_Datatables_config__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -50,7 +50,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
-    title: "Divisions"
+    title: "Jobs"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["VueDatatable"], (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
     config: $setup.config
   }, _ctx.$page.props), null, 16
@@ -62,10 +62,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Modules/Divisions/Datatables/columns.js":
-/*!********************************************************************!*\
-  !*** ./resources/js/Pages/Modules/Divisions/Datatables/columns.js ***!
-  \********************************************************************/
+/***/ "./resources/js/Pages/Modules/Jobs/Datatables/columns.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/Pages/Modules/Jobs/Datatables/columns.js ***!
+  \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -79,34 +79,42 @@ __webpack_require__.r(__webpack_exports__);
   title: 'ID',
   sortField: 'id'
 }, {
-  name: '__component:Divisions/Datatables/CustomName',
+  name: '__component:Jobs/Datatables/CustomName',
   title: 'Name',
   sortField: 'name'
 }, {
-  name: '__component:Divisions/Datatables/CustomCities',
-  title: 'Cities'
+  name: '__component:Jobs/Datatables/CustomOwner',
+  title: 'Owner'
 }, {
-  name: '__component:Divisions/Datatables/CustomActions',
+  name: 'state',
+  title: 'Status',
+  sortField: 'state'
+}, {
+  name: '__component:Jobs/Datatables/CustomUpdatedAt',
+  title: 'Last Updated',
+  sortField: 'updated_at'
+}, {
+  name: '__component:Jobs/Datatables/CustomActions',
   title: '__actions'
 }]);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Modules/Divisions/Datatables/config.js":
-/*!*******************************************************************!*\
-  !*** ./resources/js/Pages/Modules/Divisions/Datatables/config.js ***!
-  \*******************************************************************/
+/***/ "./resources/js/Pages/Modules/Jobs/Datatables/config.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/Pages/Modules/Jobs/Datatables/config.js ***!
+  \**************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _columns__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./columns */ "./resources/js/Pages/Modules/Divisions/Datatables/columns.js");
+/* harmony import */ var _columns__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./columns */ "./resources/js/Pages/Modules/Jobs/Datatables/columns.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  title: 'Divisions',
-  apiUrl: route('admin.divisions.index'),
+  title: 'Jobs',
+  apiUrl: route('admin.jobs.index'),
   perPage: 5,
   fields: _columns__WEBPACK_IMPORTED_MODULE_0__["default"]
 });

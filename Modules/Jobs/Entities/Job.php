@@ -2,21 +2,21 @@
 
 namespace Modules\Jobs\Entities;
 
-use App\Models\Company;
 use App\Traits\BelongsToUser;
 use App\Traits\Categorizable;
-use App\Traits\HasAvatar;
-use App\Traits\HasTeams;
 use App\Traits\JobAttribute;
 use App\Traits\WithinDays;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Companies\Entities\Company;
 use Modules\Countries\Entities\City;
 use Modules\Countries\Entities\Country;
 use Modules\Countries\Entities\Division;
 use Modules\Jobs\Database\factories\JobFactory;
+use Modules\Jobs\Enums\JobState;
+use Modules\Jobs\Enums\SalaryType;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -30,6 +30,12 @@ class Job extends Model
     protected $guarded = [];
 
     public array $translatable = ['name'];
+
+    protected $casts = [
+        'state' => JobState::class,
+        'salary_type' => SalaryType::class,
+        'closing_to' => 'date'
+    ];
 
     protected static function newFactory(): JobFactory
     {

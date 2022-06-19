@@ -18,7 +18,7 @@ const props = defineProps({
 
             </p>
 
-            <Link :href="route('admin.divisions.edit', props.row.id)"
+            <Link :href="route('admin.jobs.edit', props.row.id)"
                 preserve-state
                 preserve-scroll
                 :data="pickBy(props.row.params)"
@@ -31,7 +31,7 @@ const props = defineProps({
 
         <div>
                 <span class="inline-block rounded-full bg-indigo-100 px-2 text-xs font-semibold leading-5 text-indigo-800">
-                    {{ props.row.country.emoji }} {{ props.row.country.name }}
+                    {{ props.row.country.emoji }} {{ props.row.country.name }} / {{ props.row.city?.name }}
                 </span>
         </div>
 

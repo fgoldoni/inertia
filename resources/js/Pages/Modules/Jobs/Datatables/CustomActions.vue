@@ -11,7 +11,7 @@ const props = defineProps({
 <template>
     <div>
         <Link
-              :href="route('admin.divisions.edit', props.row.id)"
+              :href="route('admin.jobs.edit', props.row.id)"
               preserve-state
               preserve-scroll
               :data="pickBy(props.row.params)"
