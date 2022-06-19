@@ -22,6 +22,7 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "tailwindcss": "^3.0.0",
+        "unplugin-element-plus": "^0.4.0",
         "vue": "^3.2.31",
         "vue-loader": "^17.0.0"
     },
@@ -29,6 +30,7 @@
         "@babel/plugin-syntax-dynamic-import": "^7.8.3",
         "@headlessui/vue": "^1.6.4",
         "@heroicons/vue": "^1.0.6",
+        "element-plus": "^2.2.6",
         "intl-tel-input": "^17.0.16",
         "moment": "^2.29.3",
         "zxcvbn": "^4.4.2"

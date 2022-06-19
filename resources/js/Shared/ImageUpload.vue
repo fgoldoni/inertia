@@ -87,7 +87,7 @@ const onSelectedFiles = ($event) => {
                 class="p-3 flex items-center justify-between">
                 <div class="text-sm text-gray-700">{{ item.file.name }}</div>
 
-                <div v-if="!item.uploaded && !item.error" class="w-40 bg-gray-200 rounded-full h-5 shadow-inner overflow-hidden relative flex items-center justify-center">
+                <div v-if="!item.uploaded && !item.error" class="w-40 bg-gray-200 rounded-full h-3 shadow-inner overflow-hidden relative flex items-center justify-center">
                     <div class="inline-block h-full bg-indigo-600 absolute top-0 left-0" :style="`width: ${item.progress}%`"></div>
                     <div class="relative z-10 text-xs font-semibold text-center text-white drop-shadow text-shadow">{{ item.progress }}%</div>
                 </div>

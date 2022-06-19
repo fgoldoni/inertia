@@ -1196,11 +1196,14 @@ select {
 .h-2\.5 {
   height: 0.625rem;
 }
-.max-h-60 {
-  max-height: 15rem;
+.h-3 {
+  height: 0.75rem;
 }
 .max-h-56 {
   max-height: 14rem;
+}
+.max-h-60 {
+  max-height: 15rem;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -1722,6 +1725,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(79 70 229 / var(--tw-bg-opacity));
 }
+.bg-indigo-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(224 231 255 / var(--tw-bg-opacity));
+}
 .bg-primary-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(99 102 241 / var(--tw-bg-opacity));
@@ -1729,10 +1736,6 @@ select {
 .bg-secondary-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(226 232 240 / var(--tw-bg-opacity));
-}
-.bg-indigo-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(224 231 255 / var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
@@ -1882,15 +1885,6 @@ select {
 .pl-10 {
   padding-left: 2.5rem;
 }
-.pr-10 {
-  padding-right: 2.5rem;
-}
-.pr-2 {
-  padding-right: 0.5rem;
-}
-.pr-9 {
-  padding-right: 2.25rem;
-}
 .pl-8 {
   padding-left: 2rem;
 }
@@ -1899,6 +1893,15 @@ select {
 }
 .pl-4 {
   padding-left: 1rem;
+}
+.pr-10 {
+  padding-right: 2.5rem;
+}
+.pr-9 {
+  padding-right: 2.25rem;
+}
+.pr-2 {
+  padding-right: 0.5rem;
 }
 .pb-6 {
   padding-bottom: 1.5rem;
@@ -1963,11 +1966,11 @@ select {
 .font-semibold {
   font-weight: 600;
 }
-.font-normal {
-  font-weight: 400;
-}
 .font-bold {
   font-weight: 700;
+}
+.font-normal {
+  font-weight: 400;
 }
 .uppercase {
   text-transform: uppercase;
@@ -2086,6 +2089,10 @@ select {
   --tw-text-opacity: 1;
   color: rgb(67 56 202 / var(--tw-text-opacity));
 }
+.text-indigo-800 {
+  --tw-text-opacity: 1;
+  color: rgb(55 48 163 / var(--tw-text-opacity));
+}
 .text-secondary-900 {
   --tw-text-opacity: 1;
   color: rgb(15 23 42 / var(--tw-text-opacity));
@@ -2109,10 +2116,6 @@ select {
 .text-green-700 {
   --tw-text-opacity: 1;
   color: rgb(21 128 61 / var(--tw-text-opacity));
-}
-.text-indigo-800 {
-  --tw-text-opacity: 1;
-  color: rgb(55 48 163 / var(--tw-text-opacity));
 }
 .text-secondary-800 {
   --tw-text-opacity: 1;
@@ -2259,11 +2262,11 @@ select {
 .duration-300 {
   transition-duration: 300ms;
 }
-.duration-100 {
-  transition-duration: 100ms;
-}
 .duration-1000 {
   transition-duration: 1000ms;
+}
+.duration-100 {
+  transition-duration: 100ms;
 }
 .duration-500 {
   transition-duration: 500ms;

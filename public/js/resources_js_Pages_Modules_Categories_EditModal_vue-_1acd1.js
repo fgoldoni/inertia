@@ -1185,7 +1185,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onChange: _cache[0] || (_cache[0] = function ($event) {
           return $setup.query = $event.target.value;
         }),
-        "display-value": $setup.label
+        "display-value": $setup.label,
+        autocomplete: "off"
       }, null, 8
       /* PROPS */
       , ["placeholder"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ComboboxButton"], {
