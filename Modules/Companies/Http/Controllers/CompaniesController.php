@@ -5,9 +5,13 @@ namespace Modules\Companies\Http\Controllers;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;
+use App\Repositories\Criteria\WhereHas;
+use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
+use App\Repositories\Criteria\WhereNot;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -28,7 +32,7 @@ class CompaniesController extends Controller
         return Inertia::render('Modules/Companies/Index', array_merge([
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'rowData' => $this->companiesRepository->withCriteria([
-                new Select('id', 'name', 'email', 'phone', 'user_id', 'live_at', 'created_at', 'updated_at'),
+                new Select('id', 'name', 'email', 'phone', 'user_id', 'online', 'created_at', 'updated_at'),
                 new WhereLike(['companies.id', 'companies.name', 'companies.email', 'companies.content'], $this->request->get('search')),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
                 new EagerLoad(['user:id,name', 'jobs:id,company_id']),
@@ -46,10 +50,10 @@ class CompaniesController extends Controller
         return $this->index([
             'editing' => $this->companiesRepository->make([
                 'id' => null,
-                'name' => 'test',
-                'seo_title' => 'test',
-                'seo_description' => 'test',
-                'seo_description' => 'test',
+                'name' => 'test' . uniqid(),
+                'content' => 'test',
+                'email' => 'test' . uniqid() . '@test.com',
+                'phone' => '+4915736795436',
                 'online' => true
             ])
         ]);
@@ -57,18 +61,20 @@ class CompaniesController extends Controller
 
     public function store(StoreCompanyRequest $request)
     {
-        $category = $this->companiesRepository->create($request->only('name', 'online', 'seo_title', 'seo_description', 'parent_id'));
+        $company = $this->companiesRepository->create(array_merge(
+            $request->only('name', 'content', 'email', 'phone', 'online'),
+            [
+                'user_id' => auth()->user()->id
+            ]
+        ));
+
 
         return $this->response
             ->json([], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK)
-            ->flash(__(':category successfully added!', ['company' => $company->name]));
+            ->flash(__(':company successfully added!', ['company' => $company->name]));
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
+
     public function show($id)
     {
         return view('companies::show');
@@ -83,26 +89,25 @@ class CompaniesController extends Controller
         return $this->index([
             'editing' => $this->companiesRepository->withCriteria([
                 new EagerLoad(['jobs:id,company_id']),
-            ])->find($company->id, ['id', 'name', 'email', 'phone', 'user_id', 'live_at', 'created_at', 'updated_at'])
+            ])->find($company->id, ['id', 'name', 'content', 'email', 'phone', 'user_id', 'online', 'created_at', 'updated_at'])
         ]);
     }
 
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        $category = $this->companiesRepository->update($category->id, $request->only('name', 'online', 'seo_title', 'seo_description', 'parent_id'));
+        $company = $this->companiesRepository->update($company->id, $request->only('name', 'content', 'email', 'phone', 'online'));
 
         return $this->response
             ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
-            ->flash(__(':category updated successfully!', ['category' => $category->name]));
+            ->flash(__(':company updated successfully!', ['company' => $company->name]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+    public function destroy($selected)
     {
-        //
+        $this->companiesRepository->withCriteria([
+            new WhereKey(explode(',', (string) $selected))
+        ])->deleteAll();
+
+        return $this->response->json(['message' => __('Company deleted successfully.')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
     }
 }

@@ -20,7 +20,6 @@ const props = defineProps({
 const isOpen = ref(true)
 
 const form = reactive({
-    id: props.editing.id,
     name: props.editing.name,
     content: props.editing.content,
     email: props.editing.email,
@@ -43,7 +42,7 @@ onMounted(() => {
 const onSubmit = () => {
     form.processing = true;
 
-    axios.put(route('admin.companies.update', form.id), {
+    axios.post(route('admin.companies.store'), {
         name: form.name,
         content: form.content,
         email: form.email,

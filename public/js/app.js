@@ -1852,6 +1852,11 @@ var map = {
 		"/js/vendor",
 		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-a0efc4"
 	],
+	"./Modules/Companies/CreateModal.vue": [
+		"./resources/js/Pages/Modules/Companies/CreateModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Companies_CreateModal_vue"
+	],
 	"./Modules/Companies/Datatables/CustomActions.vue": [
 		"./resources/js/Pages/Modules/Companies/Datatables/CustomActions.vue",
 		"/js/vendor",

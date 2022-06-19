@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Categories\Enums\CategoryType;
 use Modules\Companies\Database\factories\CompanyFactory;
 use Modules\Jobs\Entities\Job;
 use Nicolaslopezj\Searchable\SearchableTrait;
@@ -18,6 +19,10 @@ class Company extends Model
     use HasFactory, HasSlug, BelongsToUser, SoftDeletes;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'online' => 'boolean',
+    ];
 
     protected static function newFactory(): CompanyFactory
     {

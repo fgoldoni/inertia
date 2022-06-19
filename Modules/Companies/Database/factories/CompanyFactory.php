@@ -26,9 +26,8 @@ class CompanyFactory extends Factory
             'content' => $this->faker->sentence,
             'email' => $this->faker->email,
             'phone' => $this->faker->phoneNumber,
-            'state' => $this->faker->randomElement([CompanyState::Draft, CompanyState::Published, CompanyState::Archived, CompanyState::Hold]),
             'user_id' => $this->faker->numberBetween(1, 10),
-            'live_at' => $this->faker->randomElement([$this->faker->dateTimeInInterval('-5 days', 'now'), null]),
+            'online' =>  $this->faker->boolean,
         ];
     }
 }

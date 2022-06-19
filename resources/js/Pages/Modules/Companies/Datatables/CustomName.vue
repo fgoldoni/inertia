@@ -23,7 +23,7 @@ const props = defineProps({
 
                 <p class="flex items-center truncate space-x-2 font-medium text-gray-900 truncate group-hover:text-gray-900">
 
-                    <div :class="[props.row.live_at ? 'bg-green-400' : 'bg-secondary-200', 'flex-shrink-0 w-2.5 h-2.5 rounded-full']" aria-hidden="true"></div>
+                    <div :class="[props.row.online ? 'bg-green-400' : 'bg-secondary-200', 'flex-shrink-0 w-2.5 h-2.5 rounded-full']" aria-hidden="true"></div>
                     <span>{{ props.row.name }}</span>
 
                 </p>
