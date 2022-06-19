@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 use Inertia\ResponseFactory;
 use Modules\Attachments\Providers\AttachmentsServiceProvider;
 use Modules\Categories\Providers\CategoriesServiceProvider;
+use Modules\Companies\Providers\CompaniesServiceProvider;
+use Modules\Jobs\Providers\JobsServiceProvider;
 use Modules\Roles\Providers\RolesServiceProvider;
 use Modules\Users\Providers\UsersServiceProvider;
 
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(RolesServiceProvider::class);
         $this->app->register(CategoriesServiceProvider::class);
         $this->app->register(AttachmentsServiceProvider::class);
+        $this->app->register(CompaniesServiceProvider::class);
+        $this->app->register(JobsServiceProvider::class);
     }
 
     /**

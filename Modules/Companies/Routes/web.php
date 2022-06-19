@@ -11,6 +11,7 @@
 |
 */
 
-Route::prefix('companies')->group(function() {
-    Route::get('/', 'CompaniesController@index');
+Route::prefix('admin')->middleware(['auth', 'verified', 'permission:browse_companies'])->as('admin.')->group(function () {
+    Route::resource('companies', CompaniesController::class)->except([ 'destroy' ]);
+    Route::delete('companies/{selected}', [CompaniesController::class, 'destroy'])->name('companies.destroy');
 });

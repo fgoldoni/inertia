@@ -9,6 +9,8 @@ export const navigation = [
     { name: 'Countries', href: 'admin.countries.index', icon: FolderIcon, current: route().current('admin.countries.index') },
     { name: 'Divisions', href: 'admin.divisions.index', icon: FolderIcon, current: route().current('admin.divisions.index') },
     { name: 'Cities', href: 'admin.cities.index', icon: FolderIcon, current: route().current('admin.cities.index') },
+    { name: 'Companies', href: 'admin.companies.index', icon: FolderIcon, current: route().current('admin.companies.index') },
+    { name: 'Jobs', href: 'admin.jobs.index', icon: FolderIcon, current: route().current('admin.jobs.index') },
     { name: 'Calendar', href: 'dashboard', icon: CalendarIcon, current: false },
     { name: 'Documents', href: 'dashboard', icon: InboxIcon, current: false },
     { name: 'Reports', href: 'dashboard', icon: ChartBarIcon, current: false },

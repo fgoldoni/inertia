@@ -3,7 +3,7 @@ namespace Modules\Categories\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Categories\Entities\Category;
-use Modules\Categories\Http\Enums\CategoryType;
+use Modules\Categories\Enums\CategoryType;
 
 class SeedFakeCategoriesTableSeeder extends Seeder
 {

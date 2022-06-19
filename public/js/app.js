@@ -1257,6 +1257,16 @@ var navigation = [{
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
   current: route().current('admin.cities.index')
 }, {
+  name: 'Companies',
+  href: 'admin.companies.index',
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
+  current: route().current('admin.companies.index')
+}, {
+  name: 'Jobs',
+  href: 'admin.jobs.index',
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
+  current: route().current('admin.jobs.index')
+}, {
   name: 'Calendar',
   href: 'dashboard',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -1842,6 +1852,35 @@ var map = {
 		"/js/vendor",
 		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-a0efc4"
 	],
+	"./Modules/Companies/Datatables/CustomActions.vue": [
+		"./resources/js/Pages/Modules/Companies/Datatables/CustomActions.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Companies_Datatables_CustomActions_vue-_63a90"
+	],
+	"./Modules/Companies/Datatables/CustomContact.vue": [
+		"./resources/js/Pages/Modules/Companies/Datatables/CustomContact.vue",
+		"resources_js_Pages_Modules_Companies_Datatables_CustomContact_vue"
+	],
+	"./Modules/Companies/Datatables/CustomName.vue": [
+		"./resources/js/Pages/Modules/Companies/Datatables/CustomName.vue",
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Companies_Datatables_Cu-1f298c0"
+	],
+	"./Modules/Companies/Datatables/CustomUpdatedAt.vue": [
+		"./resources/js/Pages/Modules/Companies/Datatables/CustomUpdatedAt.vue",
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Companies_Datatables_Cu-043006"
+	],
+	"./Modules/Companies/EditModal.vue": [
+		"./resources/js/Pages/Modules/Companies/EditModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Companies_EditModal_vue"
+	],
+	"./Modules/Companies/Index.vue": [
+		"./resources/js/Pages/Modules/Companies/Index.vue",
+		"/js/vendor",
+		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-fef0ce"
+	],
 	"./Modules/Countries/Datatables/CustomActions.vue": [
 		"./resources/js/Pages/Modules/Countries/Datatables/CustomActions.vue",
 		"/js/vendor",
@@ -1885,6 +1924,30 @@ var map = {
 		"./resources/js/Pages/Modules/Divisions/Index.vue",
 		"/js/vendor",
 		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-4c8926"
+	],
+	"./Modules/Jobs/Datatables/CustomActions.vue": [
+		"./resources/js/Pages/Modules/Jobs/Datatables/CustomActions.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Jobs_Datatables_CustomActions_vue-_706a0"
+	],
+	"./Modules/Jobs/Datatables/CustomCities.vue": [
+		"./resources/js/Pages/Modules/Jobs/Datatables/CustomCities.vue",
+		"resources_js_Pages_Modules_Jobs_Datatables_CustomCities_vue"
+	],
+	"./Modules/Jobs/Datatables/CustomName.vue": [
+		"./resources/js/Pages/Modules/Jobs/Datatables/CustomName.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Jobs_Datatables_CustomName_vue-_72440"
+	],
+	"./Modules/Jobs/EditModal.vue": [
+		"./resources/js/Pages/Modules/Jobs/EditModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Jobs_EditModal_vue"
+	],
+	"./Modules/Jobs/Index.vue": [
+		"./resources/js/Pages/Modules/Jobs/Index.vue",
+		"/js/vendor",
+		"node_modules_babel-loader_lib_index_js_clonedRuleSet-5_use_0_node_modules_vue-loader_dist_ind-1f419d"
 	],
 	"./Modules/Roles/CreateModal.vue": [
 		"./resources/js/Pages/Modules/Roles/CreateModal.vue",

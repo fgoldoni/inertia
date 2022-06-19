@@ -79,8 +79,8 @@ refresh: migrate ## refresh + php artisan module:seed Admin & php artisan module
 	php artisan module:seed Users
 	php artisan module:seed Categories
 	php artisan world:init
-	## php artisan module:seed Companies
-	## php artisan module:seed Jobs
+	php artisan module:seed Companies
+	php artisan module:seed Jobs
 	## php artisan module:seed Posts
 	## php artisan module:seed Events
 	## php artisan module:seed Tickets

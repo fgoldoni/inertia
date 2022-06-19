@@ -1,10 +1,12 @@
 <?php
 namespace Modules\Categories\Entities;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Categories\Builders\CategoryBuilder;
 use Modules\Categories\Database\factories\CategoryFactory;
-use Modules\Categories\Http\Enums\CategoryType;
+use Modules\Categories\Enums\CategoryType;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
@@ -60,5 +62,10 @@ class Category extends Model
         Category::creating(function ($model) {
             $model->position = Category::max('position') + 1;
         });
+    }
+
+    public function newEloquentBuilder($query): Builder
+    {
+        return new CategoryBuilder($query);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Categories\Http\Enums;
+namespace Modules\Categories\Enums;
 
 enum CategoryType: string
 {

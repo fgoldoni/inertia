@@ -1,11 +1,14 @@
 <?php
 
+use App\Traits\Database\DisableForeignKeys;
+use App\Traits\Database\TruncateTable;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
+    use DisableForeignKeys, TruncateTable;
     /**
      * Run the migrations.
      *
@@ -16,6 +19,18 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
 
+            $table->string('name');
+            $table->string('slug');
+            $table->longText('content')->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->string('phone')->nullable();
+            $table->string('state')->default('draft');
+            $table->datetime('live_at')->nullable();
+
+            $table->string('avatar_path', 2048)->nullable();
+
+            $table->foreignId('user_id')->unsigned()->index()->references('id')->on('users')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -27,6 +42,10 @@ return new class extends Migration
      */
     public function down()
     {
+        $this->disableForeignKeys();
+
         Schema::dropIfExists('companies');
+
+        $this->enableForeignKeys();
     }
 };

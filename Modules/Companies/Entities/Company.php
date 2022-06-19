@@ -2,17 +2,37 @@
 
 namespace Modules\Companies\Entities;
 
+use App\Traits\BelongsToUser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Companies\Database\factories\CompanyFactory;
+use Modules\Jobs\Entities\Job;
+use Nicolaslopezj\Searchable\SearchableTrait;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Company extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSlug, BelongsToUser, SoftDeletes;
 
-    protected $fillable = [];
-    
-    protected static function newFactory()
+    protected $guarded = [];
+
+    protected static function newFactory(): CompanyFactory
     {
-        return \Modules\Companies\Database\factories\CompanyFactory::new();
+        return CompanyFactory::new();
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
+
+    public function jobs(): HasMany
+    {
+        return $this->hasMany(Job::class);
     }
 }
