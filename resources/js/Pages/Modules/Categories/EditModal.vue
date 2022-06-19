@@ -32,10 +32,6 @@ const form = reactive({
 
 
 
-const updateInputSelected = (value) => {
-   form.parent_id = value
-}
-
 const closeModal = () => {
     isOpen.value = false
     document.querySelector('#cancelButtonRef').click()
@@ -142,7 +138,7 @@ const onSubmit = () => {
                                                                 <JetInputError :message="form.errors.get('name')" class="mt-2"/>
                                                             </div>
 
-                                                            <IndicatorSelected @on-selected="updateInputSelected" :selected="props.editing.parent" label="Parent"></IndicatorSelected>
+                                                            <IndicatorSelected v-model="form.parent_id" placeholder="--- No category ---" :label="props.editing.parent?.name"></IndicatorSelected>
 
                                                             <div class="col-span-1 sm:col-span-2">
 

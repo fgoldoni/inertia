@@ -15,7 +15,7 @@ class StoreCategoryRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:100', 'unique:categories,name'],
             'online' => ['required', 'boolean'],
-            'parent_id' => ['required', 'integer'],
+            'parent_id' => ['nullable', 'integer'],
             'seo_title' => ['required', 'string'],
             'seo_description' => ['required', 'string', 'max:160'],
         ];

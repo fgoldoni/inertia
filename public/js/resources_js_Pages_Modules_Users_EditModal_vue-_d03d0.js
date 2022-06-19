@@ -257,10 +257,6 @@ __webpack_require__.r(__webpack_exports__);
       document.querySelector('#cancelButtonRef').click();
     };
 
-    var updateInputRole = function updateInputRole(roleId) {
-      return form.role = roleId;
-    };
-
     var generate = function generate() {
       form.password = (0,_Plugins_generatePassword__WEBPACK_IMPORTED_MODULE_11__.generatePassword)(10);
     };
@@ -293,7 +289,6 @@ __webpack_require__.r(__webpack_exports__);
       isOpen: isOpen,
       form: form,
       closeModal: closeModal,
-      updateInputRole: updateInputRole,
       generate: generate,
       onSubmit: onSubmit,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
@@ -1201,6 +1196,10 @@ function useFetch() {
   var error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
   var processing = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
 
+  var doInitData = function doInitData(item) {
+    return data.value.data = item;
+  };
+
   var doFetchData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url) {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -1234,6 +1233,7 @@ function useFetch() {
     processing: processing,
     error: error,
     data: data,
+    doInitData: doInitData,
     doFetchData: doFetchData
   };
 }

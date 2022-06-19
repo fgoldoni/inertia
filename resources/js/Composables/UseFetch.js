@@ -10,6 +10,8 @@ export function useFetch() {
 
     const processing = ref(false)
 
+    const doInitData = (item) => data.value.data = item
+
     const doFetchData = async (url) => {
         processing.value = true
 
@@ -18,5 +20,5 @@ export function useFetch() {
             .finally(() => (processing.value = false))
     }
 
-    return { processing, error, data , doFetchData }
+    return { processing, error, data , doInitData, doFetchData }
 }

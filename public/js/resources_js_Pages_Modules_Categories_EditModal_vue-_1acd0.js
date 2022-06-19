@@ -232,10 +232,6 @@ __webpack_require__.r(__webpack_exports__);
       processing: false
     });
 
-    var updateInputSelected = function updateInputSelected(value) {
-      form.parent_id = value;
-    };
-
     var closeModal = function closeModal() {
       isOpen.value = false;
       document.querySelector('#cancelButtonRef').click();
@@ -262,7 +258,6 @@ __webpack_require__.r(__webpack_exports__);
       props: props,
       isOpen: isOpen,
       form: form,
-      updateInputSelected: updateInputSelected,
       closeModal: closeModal,
       onSubmit: onSubmit,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
@@ -424,16 +419,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'IndicatorSelected',
   props: {
-    selected: {
-      type: Object,
-      "default": null
-    },
     label: {
       type: String,
-      "default": 'Assigned to'
-    }
+      "default": null
+    },
+    options: Array,
+    modelValue: [String, Number, Array],
+    placeholder: {
+      type: String,
+      "default": "Select option"
+    },
+    multiple: Boolean,
+    error: String
   },
-  emits: ['onSelected'],
+  emits: ["update:modelValue"],
   setup: function setup(__props, _ref) {
     var expose = _ref.expose,
         emit = _ref.emit;
@@ -442,10 +441,10 @@ __webpack_require__.r(__webpack_exports__);
 
     var _useFetch = (0,_Composables_UseFetch__WEBPACK_IMPORTED_MODULE_2__.useFetch)(),
         items = _useFetch.data,
+        doInitData = _useFetch.doInitData,
         doFetchData = _useFetch.doFetchData;
 
     var query = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
-    var selectedItem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.selected);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(query, lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(function () {
       return doFetchData(route('api.categories.index', {
         search: query.value
@@ -453,18 +452,29 @@ __webpack_require__.r(__webpack_exports__);
     }, 500), {
       deep: true
     });
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(selectedItem, lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(function (value) {
-      return emit('onSelected', value.id);
-    }, 500), {
-      deep: true
-    });
+
+    var label = function label(person) {
+      if (!person) return;
+      if (!items.value.data) return props.label;
+      return items.value.data.filter(function (option) {
+        if (Array.isArray(person)) {
+          return person.includes(option.id);
+        }
+
+        return person === option.id;
+      }).map(function (option) {
+        return option.name;
+      }).join(", ");
+    };
+
     var __returned__ = {
       items: items,
+      doInitData: doInitData,
       doFetchData: doFetchData,
-      emit: emit,
       props: props,
       query: query,
-      selectedItem: selectedItem,
+      emit: emit,
+      label: label,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
       CheckIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -745,7 +755,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Dialog"], {
         as: "div",
         "class": "relative z-10",
-        onClose: _cache[5] || (_cache[5] = function ($event) {
+        onClose: _cache[6] || (_cache[6] = function ($event) {
           return $setup.closeModal();
         })
       }, {
@@ -779,9 +789,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 "class": "relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full"
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  var _$setup$props$editing;
+
                   return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
                     onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.onSubmit, ["prevent"]),
-                    onKeydown: _cache[4] || (_cache[4] = function ($event) {
+                    onKeydown: _cache[5] || (_cache[5] = function ($event) {
                       return $setup.form.errors.clear($event.target.name);
                     })
                   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DialogTitle"], {
@@ -819,12 +831,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   }, null, 8
                   /* PROPS */
                   , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["IndicatorSelected"], {
-                    onOnSelected: $setup.updateInputSelected,
-                    selected: $setup.props.editing.parent,
-                    label: "Parent"
+                    modelValue: $setup.form.parent_id,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+                      return $setup.form.parent_id = $event;
+                    }),
+                    placeholder: "--- No category ---",
+                    label: (_$setup$props$editing = $setup.props.editing.parent) === null || _$setup$props$editing === void 0 ? void 0 : _$setup$props$editing.name
                   }, null, 8
                   /* PROPS */
-                  , ["selected"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                  , ["modelValue", "label"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
                     "for": "seo_title",
                     value: "Seo Title",
                     optional: ""
@@ -832,7 +847,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     id: "seo_title",
                     name: "seo_title",
                     modelValue: $setup.form.seo_title,
-                    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+                    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
                       return $setup.form.seo_title = $event;
                     }),
                     type: "text",
@@ -852,7 +867,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     id: "seo_description",
                     name: "seo_description",
                     modelValue: $setup.form.seo_description,
-                    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+                    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
                       return $setup.form.seo_description = $event;
                     }),
                     type: "text",
@@ -871,7 +886,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Switch"], {
                         modelValue: $setup.form.online,
-                        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+                        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
                           return $setup.form.online = $event;
                         }),
                         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.form.online ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'])
@@ -1134,21 +1149,24 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "col-span-1"
 };
-var _hoisted_4 = {
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Assigned to");
+
+var _hoisted_5 = {
   "class": "relative mt-1"
 };
-var _hoisted_5 = {
+var _hoisted_6 = {
   "class": "flex items-center"
 };
-var _hoisted_6 = {
+var _hoisted_7 = {
   "class": "sr-only"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Combobox"], {
     as: "div",
-    modelValue: $setup.selectedItem,
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $setup.selectedItem = $event;
+    "model-value": $setup.props.modelValue,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function (value) {
+      return $setup.emit('update:modelValue', value);
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -1156,24 +1174,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "block text-sm font-medium text-gray-700"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.label), 1
-          /* TEXT */
-          )];
+          return [_hoisted_4];
         }),
         _: 1
         /* STABLE */
 
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ComboboxInput"], {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ComboboxInput"], {
         "class": "w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm",
+        placeholder: $setup.props.placeholder,
         onChange: _cache[0] || (_cache[0] = function ($event) {
           return $setup.query = $event.target.value;
         }),
-        "display-value": function displayValue(person) {
-          return person === null || person === void 0 ? void 0 : person.name;
-        }
+        "display-value": $setup.label
       }, null, 8
       /* PROPS */
-      , ["display-value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ComboboxButton"], {
+      , ["placeholder"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ComboboxButton"], {
         "class": "absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -1190,10 +1205,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.items.data, function (person) {
+          return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.items.data, function (option) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ComboboxOption"], {
-              key: person.id,
-              value: person,
+              key: option.id,
+              value: option.id,
               as: "template"
             }, {
               "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
@@ -1201,16 +1216,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     selected = _ref.selected;
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
                   "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-indigo-600 text-white' : 'text-gray-900'])
-                }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-                  "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['inline-block h-2 w-2 flex-shrink-0 rounded-full', person.online ? 'bg-green-400' : 'bg-gray-200']),
+                }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+                  "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['inline-block h-2 w-2 flex-shrink-0 rounded-full', option.online ? 'bg-green-400' : 'bg-gray-200']),
                   "aria-hidden": "true"
                 }, null, 2
                 /* CLASS */
                 ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
                   "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['ml-3 truncate', selected && 'font-semibold'])
-                }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(person.name) + " ", 1
+                }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(option.name) + " ", 1
                 /* TEXT */
-                ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, " is " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(person.online ? 'online' : 'offline'), 1
+                ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_7, " is " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(option.online ? 'online' : 'offline'), 1
                 /* TEXT */
                 )], 2
                 /* CLASS */
@@ -1246,7 +1261,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["modelValue"])])])]);
+  , ["model-value"])])])]);
 }
 
 /***/ }),
@@ -1306,6 +1321,10 @@ function useFetch() {
   var error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
   var processing = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
 
+  var doInitData = function doInitData(item) {
+    return data.value.data = item;
+  };
+
   var doFetchData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url) {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -1339,6 +1358,7 @@ function useFetch() {
     processing: processing,
     error: error,
     data: data,
+    doInitData: doInitData,
     doFetchData: doFetchData
   };
 }
