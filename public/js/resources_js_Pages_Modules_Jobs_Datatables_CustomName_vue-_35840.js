@@ -76,7 +76,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "preserve-state": "",
     "preserve-scroll": "",
     data: $setup.pickBy($setup.props.row.params),
-    only: ['editing', 'modal', 'basePageRoute']
+    only: ['editing', 'modal', 'basePageRoute', 'states']
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ExternalLinkIcon"], {

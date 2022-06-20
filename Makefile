@@ -29,7 +29,6 @@ phpcs: ## PRS2 Validation
 
 php-cs: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app --diff
-	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix database --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Database --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Entities --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Http --diff

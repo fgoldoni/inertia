@@ -22,7 +22,7 @@ const props = defineProps({
                 preserve-state
                 preserve-scroll
                 :data="pickBy(props.row.params)"
-                :only="['editing', 'modal', 'basePageRoute']">
+                :only="['editing', 'modal', 'basePageRoute', 'states']">
                 <ExternalLinkIcon class="flex-shrink-0 h-5 w-5 text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300" aria-hidden="true"/>
             </Link>
 

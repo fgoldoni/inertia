@@ -1,11 +1,7 @@
 <?php
-
 namespace Modules\Roles\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
-use Modules\Users\Rules\Phone;
 
 class StoreRoleRequest extends FormRequest
 {

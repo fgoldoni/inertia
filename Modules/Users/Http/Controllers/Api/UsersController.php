@@ -1,16 +1,12 @@
 <?php
-
 namespace Modules\Users\Http\Controllers\Api;
 
-use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Limit;
-use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Roles\Repositories\Contracts\PermissionsRepository;
 use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class UsersController extends Controller

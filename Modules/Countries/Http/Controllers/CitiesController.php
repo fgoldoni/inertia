@@ -5,7 +5,6 @@ use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\WhereLike;
-use App\Repositories\Criteria\WithCount;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -13,9 +12,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Inertia\Inertia;
 use Modules\Countries\Entities\City;
-use Modules\Countries\Entities\Division;
 use Modules\Countries\Http\Requests\UpdateCityRequest;
-use Modules\Countries\Http\Requests\UpdateDivisionRequest;
 use Modules\Countries\Repositories\Contracts\CitiesRepository;
 
 class CitiesController extends Controller
@@ -37,7 +34,6 @@ class CitiesController extends Controller
 
         ], $modalProps));
     }
-
 
     /**
      * Show the form for creating a new resource.

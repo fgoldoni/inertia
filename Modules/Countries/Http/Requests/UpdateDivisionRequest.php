@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Countries\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;

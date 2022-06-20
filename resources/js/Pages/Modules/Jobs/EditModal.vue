@@ -1,26 +1,40 @@
 <script setup>
-import {ref, reactive} from 'vue'
+import {ref, reactive, onMounted} from 'vue'
 import LoadingButton from '@/Shared/LoadingButton'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
+import { QuestionMarkCircleIcon } from '@heroicons/vue/solid'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
+import JetTextarea from '@/Jetstream/Textarea'
 import JetInputError from '@/Jetstream/InputError.vue';
 import { Errors } from '@/Plugins/errors'
+import ImageUpload from '@/Shared/ImageUpload'
+import BaseListbox from '@/Shared/BaseListbox'
+import DatePicker from '@/Shared/DatePicker'
+import { useFetch } from '@/Composables/UseFetch'
+import {useForm} from "@inertiajs/inertia-vue3";
+
+const { data: roles, doFetchData: doFetchRoles } = useFetch()
 
 const props = defineProps({
     editing: Object,
     filters: Object,
+    states: Array,
     basePageRoute: String,
 });
 
 const isOpen = ref(true)
 
-const form = reactive({
+const form = useForm({
     id: props.editing.id,
     name: props.editing.name,
-    errors: new Errors(),
-    processing: false,
+    content: props.editing.content,
+    state: props.editing.state,
 });
+
+onMounted(() => {
+    doFetchRoles(route('api.roles.index'));
+})
 
 
 const closeModal = () => {
@@ -29,18 +43,10 @@ const closeModal = () => {
 }
 
 const onSubmit = () => {
-    form.processing = true;
-
-    axios.put(route('admin.divisions.update', form.id), {
-        name: form.name,
-    }).then(() => {
-        form.processing = false;
-        closeModal();
-    }).catch(error => {
-        form.processing = false;
-        form.errors.record(error.response.data.errors);
-    });
-
+    form.transform((data) => ({
+        ...data,
+        ...props.filters,
+    })).put(route('admin.jobs.update', form.id));
 };
 </script>
 
@@ -81,11 +87,11 @@ const onSubmit = () => {
                                      leave-to="-translate-x-full">
 
                         <DialogPanel
-                            class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-3xl sm:w-full">
+                            class="relative bg-gray-100 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full">
 
-                            <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
+                            <form @submit.prevent="onSubmit">
 
-                                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
                                     <div>
 
@@ -109,49 +115,131 @@ const onSubmit = () => {
 
                                                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
-                                                            <div class="col-span-1 sm:col-span-2">
+                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
 
-                                                                <JetLabel for="name" value="Name" required/>
+                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
 
-                                                                <JetInput
-                                                                    id="name"
-                                                                    name="name"
-                                                                    v-model="form.name"
-                                                                    type="text"
-                                                                    class="mt-1 block w-full"
-                                                                    required
-                                                                    autofocus/>
+                                                                    <div class="col-span-1 sm:col-span-2">
 
-                                                                <JetInputError :message="form.errors.get('name')" class="mt-2"/>
+                                                                        <JetLabel for="name" value="Name" required/>
+
+                                                                        <JetInput
+                                                                            id="name"
+                                                                            name="name"
+                                                                            v-model="form.name"
+                                                                            type="text"
+                                                                            class="mt-1 block w-full"
+                                                                            required
+                                                                            autofocus/>
+
+                                                                        <JetInputError :message="form.errors.name" class="mt-2"/>
+                                                                    </div>
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+
+                                                                        <JetLabel for="content" value="Content" required/>
+
+                                                                        <JetTextarea
+                                                                            id="content"
+                                                                            name="content"
+                                                                            v-model="form.content"
+                                                                            type="text"
+                                                                            class="mt-1 block w-full"
+                                                                            required/>
+
+                                                                        <div class="mt-3 flex items-center justify-between">
+                                                                            <a href="#" class="group inline-flex items-start text-sm space-x-2 text-gray-500 hover:text-gray-900">
+                                                                                <QuestionMarkCircleIcon class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
+                                                                                <span> Some HTML is okay. </span>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <JetInputError :message="form.errors.content" class="mt-2"/>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
+
+                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+
+                                                                       sgfsdgfd
+                                                                    </div>
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+
+                                                                       fgdfg
+                                                                    </div>
+
+                                                                </div>
+
                                                             </div>
 
                                                         </div>
 
                                                     </div>
 
-                                                    <div class="bg-secondary-100 col-span-1">
+                                                    <div class="col-span-1">
 
-                                                        <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
+                                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 
-                                                            <div class="col-span-1">
+                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
 
-                                                                <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-                                                                    <div class="sm:col-span-2">
-                                                                        <dt class="capitalize text-sm font-medium text-gray-500">{{ __('Country') }} {{ props.editing.country.emoji }}</dt>
-                                                                        <dd class="mt-1 max-w-prose text-sm text-gray-900 space-y-5" v-html="props.editing.country.name" />
-                                                                    </div>
-                                                                    <div class="sm:col-span-2">
-                                                                        <dt class="capitalize text-sm font-medium text-gray-500">{{ __('Cities') }}</dt>
-                                                                        <dd class="capitalize mt-1 max-w-prose">
-                                                                             <span class="inline-flex rounded-full bg-indigo-100 px-2 text-xs font-semibold leading-5 text-indigo-800">
-                                                                                {{ props.editing.cities_count  + ' Cities'}}
-                                                                            </span>
-                                                                        </dd>
-                                                                    </div>
-                                                                </dl>
+                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
+
+                                                                    <ImageUpload></ImageUpload>
+
+                                                                </div>
 
                                                             </div>
 
+                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
+
+                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
+
+                                                                    <div class="col-span-1">
+
+                                                                        <BaseListbox :options="props.states" v-if="props.states" v-model="form.state"  placeholder="Publish"/>
+
+                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                    </div>
+                                                                    <div class="col-span-1">
+
+                                                                        <JetLabel value="Expiration Date" required/>
+
+                                                                        <DatePicker></DatePicker>
+
+                                                                        <JetInputError :message="form.errors.role" class="mt-2"/>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
+
+                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
+
+                                                                    <div class="col-span-1">
+                                                                        <!-- This example requires Tailwind CSS v2.0+ -->
+                                                                        <SwitchGroup as="div" class="flex items-center whitespace-nowrap">
+                                                                            <Switch v-model="form.enabled" :class="[form.enabled ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
+                                                                                <span aria-hidden="true" :class="[form.enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
+                                                                            </Switch>
+                                                                            <SwitchLabel as="span" class="ml-3">
+                                                                                <span class="text-sm font-medium text-gray-500">Negotiable Salary</span>
+                                                                            </SwitchLabel>
+                                                                        </SwitchGroup>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
 
                                                         </div>
 
@@ -167,7 +255,7 @@ const onSubmit = () => {
 
                                 </div>
 
-                                <div class="bg-secondary-100 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                <div class="bg-secondary-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
 
                                     <LoadingButton type="submit" :loading="form.processing"
                                             class="uppercase w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm">

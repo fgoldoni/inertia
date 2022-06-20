@@ -8,9 +8,11 @@ use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
 use Modules\Jobs\Entities\Job;
 use Modules\Jobs\Http\Requests\StoreJobRequest;
@@ -19,7 +21,7 @@ use Modules\Jobs\Repositories\Contracts\JobsRepository;
 
 class JobsController extends Controller
 {
-    public function __construct(private readonly JobsRepository $jobsRepository, private readonly ResponseFactory $response, private readonly Request $request)
+    public function __construct(private readonly JobsRepository $jobsRepository, private readonly ResponseFactory $response, private readonly Request $request, private readonly Redirector $redirect)
     {
     }
 
@@ -85,17 +87,18 @@ class JobsController extends Controller
         return $this->index([
             'editing' => $this->jobsRepository->withCriteria([
                 new EagerLoad(['user:id,name', 'company:id,name', 'categories:id,name,type', 'country:id,name,emoji', 'city:id,name', 'division:id,name']),
-            ])->find($job->id, ['id', 'name', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at'])
+            ])->find($job->id, ['id', 'name', 'content', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at']),
+            'states' => $this->jobsRepository->getStates()
         ]);
     }
 
     public function update(UpdateJobRequest $request, Job $job)
     {
-        $job = $this->jobsRepository->update($job->id, $request->only('name', 'content', 'email', 'phone', 'online'));
+        //$job = $this->jobsRepository->update($job->id, $request->only('name'));
 
-        return $this->response
-            ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
-            ->flash(__(':job updated successfully!', ['job' => $job->name]));
+        return $this->redirect->route('admin.jobs.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction']))->flash(
+            __('Great! You have accepted the invitation to join the :team team.', ['team' => 'Job']),
+        );
     }
 
     public function destroy($selected)

@@ -2,6 +2,7 @@
 namespace App\Providers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use Inertia\ResponseFactory;
@@ -50,5 +51,12 @@ class AppServiceProvider extends ServiceProvider
             'style' => 'success',
             'message' => session()->flash('success', $message),
         ]);
+
+        RedirectResponse::macro('flash', function ($message) {
+            return $this->with('flash', [
+                'style' => 'success',
+                'message' => session()->flash('success', $message),
+            ]);
+        });
     }
 }

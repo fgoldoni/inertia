@@ -7,14 +7,11 @@ use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WithCount;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Inertia\Inertia;
-use Modules\Countries\Entities\Country;
 use Modules\Countries\Entities\Division;
-use Modules\Countries\Http\Requests\UpdateCountryRequest;
 use Modules\Countries\Http\Requests\UpdateDivisionRequest;
 use Modules\Countries\Repositories\Contracts\DivisionsRepository;
 
@@ -39,18 +36,15 @@ class DivisionsController extends Controller
         ], $modalProps));
     }
 
-
     public function create()
     {
         return view('countries::create');
     }
 
-
     public function store(Request $request)
     {
         //
     }
-
 
     public function show($id)
     {
@@ -80,7 +74,6 @@ class DivisionsController extends Controller
             ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
             ->flash(__(':division updated successfully!', ['division' => $division->name]));
     }
-
 
     public function destroy($id)
     {

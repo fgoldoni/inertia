@@ -15,7 +15,7 @@ const props = defineProps({
               preserve-state
               preserve-scroll
               :data="pickBy(props.row.params)"
-              :only="['editing', 'modal', 'basePageRoute']"
+              :only="['editing', 'modal', 'basePageRoute', 'states']"
               class="group flex flex-row-reverse items-center hover:shadow-2xl ml-2">
 
             <PencilAltIcon
