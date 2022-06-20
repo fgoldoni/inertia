@@ -218,9 +218,33 @@ class SeedFakeCategoriesTableSeeder extends Seeder
         Category::factory()->create(['name' => 'Diploma', 'type' => CategoryType::JobLevel]);
         Category::factory()->create(['name' => 'Short Course', 'type' => CategoryType::JobLevel]);
 
-        Category::factory()->create(['name' => 'Not required', 'type' => CategoryType::Gender]);
+        Category::factory()->create(['name' => 'Both', 'type' => CategoryType::Gender]);
         Category::factory()->create(['name' => 'Female', 'type' => CategoryType::Gender]);
         Category::factory()->create(['name' => 'Male', 'type' => CategoryType::Gender]);
+
+
+        Category::factory()->create(['name' => 'Fresh', 'type' => CategoryType::Experience]);
+        Category::factory()->create(['name' => '1 Year', 'type' => CategoryType::Experience]);
+        Category::factory()->create(['name' => '2 Year', 'type' => CategoryType::Experience]);
+        Category::factory()->create(['name' => '3 Year', 'type' => CategoryType::Experience]);
+        Category::factory()->create(['name' => '4 Year', 'type' => CategoryType::Experience]);
+
+        Category::factory()->create(['name' => 'Manager', 'type' => CategoryType::CareerLevel]);
+        Category::factory()->create(['name' => 'Office', 'type' => CategoryType::CareerLevel]);
+        Category::factory()->create(['name' => 'Student', 'type' => CategoryType::CareerLevel]);
+        Category::factory()->create(['name' => 'Executive', 'type' => CategoryType::CareerLevel]);
+        Category::factory()->create(['name' => 'Others', 'type' => CategoryType::CareerLevel]);
+
+        Category::factory()->create(['name' => 'Internal', 'type' => CategoryType::ApplyType]);
+        Category::factory()->create(['name' => 'External URL', 'type' => CategoryType::ApplyType]);
+        Category::factory()->create(['name' => 'By Email', 'type' => CategoryType::ApplyType]);
+        Category::factory()->create(['name' => 'Call To Apply', 'type' => CategoryType::ApplyType]);
+
+        Category::factory()->create(['name' => 'Monthly', 'type' => CategoryType::SalaryType]);
+        Category::factory()->create(['name' => 'Weekly', 'type' => CategoryType::SalaryType]);
+        Category::factory()->create(['name' => 'Daily', 'type' => CategoryType::SalaryType]);
+        Category::factory()->create(['name' => 'Hourly', 'type' => CategoryType::SalaryType]);
+        Category::factory()->create(['name' => 'Yearly', 'type' => CategoryType::SalaryType]);
 
         Category::factory()->create(['name' => 'Be involved in every step of the product design cycle from discovery to developer handoff and user acceptance testing.', 'type' => CategoryType::Responsibility]);
         Category::factory()->create(['name' => 'Work with BAs, product managers and tech teams to lead the Product Design', 'type' => CategoryType::Responsibility]);

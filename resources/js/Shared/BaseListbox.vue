@@ -53,7 +53,7 @@ import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } f
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
 
 const props = defineProps({
-    options: Array,
+    options: [Array, Object],
     modelValue: [String, Number, Array],
     placeholder: {
         type: String,

@@ -2,9 +2,11 @@
 namespace Modules\Categories\Entities;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Categories\Builders\CategoryBuilder;
+use Modules\Categories\Collections\CategoryCollection;
 use Modules\Categories\Database\factories\CategoryFactory;
 use Modules\Categories\Enums\CategoryType;
 use Spatie\Sluggable\HasSlug;
@@ -62,6 +64,11 @@ class Category extends Model
         Category::creating(function ($model) {
             $model->position = Category::max('position') + 1;
         });
+    }
+
+    public function newCollection(array $models = []): Collection
+    {
+        return new CategoryCollection($models);
     }
 
     public function newEloquentBuilder($query): Builder

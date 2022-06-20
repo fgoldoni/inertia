@@ -2,9 +2,12 @@
 
 namespace Modules\Jobs\Repositories\Contracts;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 interface JobsRepository
 {
     public function getStates(): Collection;
+
+    public function initCategories($categories): array;
 }

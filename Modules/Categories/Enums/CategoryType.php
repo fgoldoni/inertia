@@ -11,7 +11,15 @@ enum CategoryType: string
 
     case JobLevel = 'jobLevel';
 
+    case CareerLevel = 'careerLevel';
+
+    case ApplyType = 'applyType';
+
+    case SalaryType = 'salaryType';
+
     case Gender = 'gender';
+
+    case Experience = 'experience';
 
     case Benefit = 'benefit';
 

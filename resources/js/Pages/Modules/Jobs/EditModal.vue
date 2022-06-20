@@ -7,14 +7,14 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetTextarea from '@/Jetstream/Textarea'
 import JetInputError from '@/Jetstream/InputError.vue';
-import { Errors } from '@/Plugins/errors'
 import ImageUpload from '@/Shared/ImageUpload'
 import BaseListbox from '@/Shared/BaseListbox'
 import DatePicker from '@/Shared/DatePicker'
-import { useFetch } from '@/Composables/UseFetch'
+import { useJobs } from '@/Composables/UseJobs'
 import {useForm} from "@inertiajs/inertia-vue3";
 
-const { data: roles, doFetchData: doFetchRoles } = useFetch()
+
+const { data: job, doFetchData: doFetchJob } = useJobs()
 
 const props = defineProps({
     editing: Object,
@@ -33,7 +33,7 @@ const form = useForm({
 });
 
 onMounted(() => {
-    doFetchRoles(route('api.roles.index'));
+    doFetchJob(props.editing.id);
 })
 
 
@@ -89,7 +89,7 @@ const onSubmit = () => {
                         <DialogPanel
                             class="relative bg-gray-100 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full">
 
-                            <form @submit.prevent="onSubmit">
+                            <form @submit.prevent="onSubmit" v-if="job.data">
 
                                 <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
@@ -121,7 +121,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <JetLabel for="name" value="Name" required/>
+                                                                        <JetLabel for="name" value="Job Title" required/>
 
                                                                         <JetInput
                                                                             id="name"
@@ -137,7 +137,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <JetLabel for="content" value="Content" required/>
+                                                                        <JetLabel for="content" value="Job Description" required/>
 
                                                                         <JetTextarea
                                                                             id="content"
@@ -167,18 +167,112 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                       sgfsdgfd
+                                                                        <BaseListbox :options="job.data.companies" v-model="form.company_id"  placeholder="Companies"/>
+
+                                                                        <JetInputError :message="form.errors.company_id" class="mt-2"/>
+
                                                                     </div>
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                       fgdfg
+                                                                        <BaseListbox :options="job.data.industries" v-model="form.state"  placeholder="Industries"/>
+
+                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+
                                                                     </div>
 
                                                                 </div>
 
                                                             </div>
 
+                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
+
+                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+                                                                    <div class="col-span-1">
+
+                                                                        <JetLabel for="salary_min" value="Min. Salary" required/>
+
+                                                                        <JetInput
+                                                                            id="salary_min"
+                                                                            name="salary_min"
+                                                                            v-model="form.salary_min"
+                                                                            type="text"
+                                                                            class="mt-1 block w-full"
+                                                                            required/>
+
+                                                                        <JetInputError :message="form.errors.salary_min" class="mt-2"/>
+                                                                    </div>
+
+                                                                    <div class="col-span-1">
+
+                                                                        <JetLabel for="salary_max" value="Max. Salary" required/>
+
+                                                                        <JetInput
+                                                                            id="salary_max"
+                                                                            name="salary_max"
+                                                                            v-model="form.salary_max"
+                                                                            type="text"
+                                                                            class="mt-1 block w-full"
+                                                                            required/>
+
+                                                                        <JetInputError :message="form.errors.salary_max" class="mt-2"/>
+                                                                    </div>
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+                                                                        <SwitchGroup as="div" class="flex items-center whitespace-nowrap">
+                                                                            <Switch v-model="form.enabled" :class="[form.enabled ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
+                                                                                <span aria-hidden="true" :class="[form.enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
+                                                                            </Switch>
+                                                                            <SwitchLabel as="span" class="ml-3">
+                                                                                <span class="text-sm font-medium text-gray-500">Negotiable Salary</span>
+                                                                            </SwitchLabel>
+                                                                        </SwitchGroup>
+
+                                                                    </div>
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+
+                                                                        <BaseListbox :options="job.data.salaryTypes" v-model="form.state"  placeholder="Salary Types"/>
+
+                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
+
+                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+
+                                                                        <BaseListbox :options="job.data.jobTypes" v-model="form.state"  placeholder="Job Type"/>
+
+                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                    </div>
+
+                                                                    <div class="col-span-1">
+
+                                                                        <BaseListbox :options="job.data.experiences" v-model="form.state"  placeholder="Experiences"/>
+
+                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+
+                                                                    </div>
+
+                                                                    <div class="col-span-1">
+
+                                                                        <BaseListbox :options="job.data.careerLevels" v-model="form.state"  placeholder="Career Level"/>
+
+                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
                                                         </div>
 
                                                     </div>
@@ -203,13 +297,14 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
-                                                                        <BaseListbox :options="props.states" v-if="props.states" v-model="form.state"  placeholder="Publish"/>
+                                                                        <BaseListbox :options="job.data.states" v-model="form.state"  placeholder="Publish"/>
 
                                                                         <JetInputError :message="form.errors.state" class="mt-2"/>
                                                                     </div>
+
                                                                     <div class="col-span-1">
 
-                                                                        <JetLabel value="Expiration Date" required/>
+                                                                        <JetLabel value="Application Deadline Date" required/>
 
                                                                         <DatePicker></DatePicker>
 
@@ -225,16 +320,32 @@ const onSubmit = () => {
                                                                 <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
 
                                                                     <div class="col-span-1">
-                                                                        <!-- This example requires Tailwind CSS v2.0+ -->
-                                                                        <SwitchGroup as="div" class="flex items-center whitespace-nowrap">
-                                                                            <Switch v-model="form.enabled" :class="[form.enabled ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
-                                                                                <span aria-hidden="true" :class="[form.enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
-                                                                            </Switch>
-                                                                            <SwitchLabel as="span" class="ml-3">
-                                                                                <span class="text-sm font-medium text-gray-500">Negotiable Salary</span>
-                                                                            </SwitchLabel>
-                                                                        </SwitchGroup>
 
+                                                                        <BaseListbox :options="job.data.genders" v-model="form.state"  placeholder="Gender"/>
+
+                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                    </div>
+
+                                                                    <div class="col-span-1">
+
+                                                                        <BaseListbox :options="job.data.jobLevels" v-model="form.state"  placeholder="Qualification"/>
+
+                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
+
+                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
+
+                                                                    <div class="col-span-1">
+
+                                                                        <BaseListbox :options="job.data.applyTypes" v-model="form.state"  placeholder="Job Apply Types"/>
+
+                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
                                                                     </div>
 
                                                                 </div>

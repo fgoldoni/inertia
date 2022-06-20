@@ -2,16 +2,28 @@
 
 namespace Modules\Jobs\Http\Controllers\Api;
 
+use App\Repositories\Criteria\ByUser;
+use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\OrderBy;
+use App\Repositories\Criteria\Select;
+use App\Repositories\Criteria\WhereLike;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Categories\Repositories\Contracts\CategoriesRepository;
+use Modules\Companies\Repositories\Contracts\CompaniesRepository;
+use Modules\Jobs\Entities\Job;
+use Modules\Jobs\Repositories\Contracts\JobsRepository;
+use Modules\Roles\Repositories\Contracts\RolesRepository;
 
 class JobsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
+    public function __construct(private readonly ResponseFactory $response, private readonly JobsRepository $jobsRepository, private readonly RolesRepository $rolesRepository, private readonly CompaniesRepository $companiesRepository, private readonly CategoriesRepository $categoriesRepository)
+    {
+    }
+
     public function index()
     {
         return view('jobs::index');
@@ -36,14 +48,21 @@ class JobsController extends Controller
         //
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+
+    public function show(Job $job)
     {
-        return view('jobs::show');
+        $result = [];
+
+        $result = $this->jobsRepository->initCategories($this->categoriesRepository->get(['id', 'name', 'type']));
+
+        $result['states'] = $this->jobsRepository->getStates();
+        $result['roles'] = $this->rolesRepository->all(['id', 'name']);
+        $result['companies'] = $this->companiesRepository->withCriteria([
+            new ByUser($job->user_id)
+        ])->all(['id', 'name', 'user_id']);
+
+
+        return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
     /**

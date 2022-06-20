@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Jobs\Http\Controllers\Api\JobsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/jobs', function (Request $request) {
-    return $request->user();
+Route::controller(JobsController::class)->prefix('jobs')->name('api.jobs.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{job}', 'show')->name('show');
 });

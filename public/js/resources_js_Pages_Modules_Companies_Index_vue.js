@@ -26,7 +26,10 @@ __webpack_require__.r(__webpack_exports__);
   title: 'Contact',
   sortField: 'email'
 }, {
-  name: '__component:Categories/Datatables/CustomUpdatedAt',
+  name: '__component:Companies/Datatables/CustomOwner',
+  title: 'Owner'
+}, {
+  name: '__component:Companies/Datatables/CustomUpdatedAt',
   title: 'Last Updated',
   sortField: 'updated_at'
 }, {

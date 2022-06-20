@@ -24,12 +24,10 @@ class ByUser implements CriterionInterface
     {
     }
 
-    /**
-     * @param $model
-     */
+
     public function apply($model): Builder
     {
-        if (Auth::user()->hasPermissionTo(Flag::PERMISSION_ADMIN)) {
+        if (auth()->user()?->isAdministrator()) {
             return $model->newQuery();
         }
 

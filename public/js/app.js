@@ -292,6 +292,7 @@ window._ = (lodash__WEBPACK_IMPORTED_MODULE_0___default());
 
 window.axios = (axios__WEBPACK_IMPORTED_MODULE_1___default());
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Authorization'] = 'Bearer LcQUoZAtS7CFLjylQqcMjnI0AtXjIGVtpNH1eVFJ';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -1870,6 +1871,10 @@ var map = {
 		"./resources/js/Pages/Modules/Companies/Datatables/CustomName.vue",
 		"/js/vendor",
 		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Companies_Datatables_Cu-8c55090"
+	],
+	"./Modules/Companies/Datatables/CustomOwner.vue": [
+		"./resources/js/Pages/Modules/Companies/Datatables/CustomOwner.vue",
+		"resources_js_Pages_Modules_Companies_Datatables_CustomOwner_vue"
 	],
 	"./Modules/Companies/Datatables/CustomUpdatedAt.vue": [
 		"./resources/js/Pages/Modules/Companies/Datatables/CustomUpdatedAt.vue",

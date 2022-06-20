@@ -6,6 +6,7 @@ use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 use Modules\Categories\Entities\Category;
 use Modules\Categories\Enums\CategoryType;
+use Modules\Companies\Entities\Company;
 use Modules\Countries\Entities\City;
 use Modules\Countries\Entities\Division;
 use Modules\Jobs\Entities\Job;
@@ -34,7 +35,8 @@ class JobsDatabaseSeeder extends Seeder
 
             return [];
         })->create(['live_at' => $faker->dateTimeInInterval('now', '-1 days')])->each(function ($job) {
-            $industry = Category::industry()->limit(10)->inRandomOrder()->first();
+
+            $industry = Category::area()->inRandomOrder()->first();
 
             $jobType = Category::type(CategoryType::JobType)->inRandomOrder()->first();
 
@@ -49,6 +51,10 @@ class JobsDatabaseSeeder extends Seeder
             $benefit = Category::type(CategoryType::Benefit)->inRandomOrder()->first();
 
             $job->syncCategories([$industry->id, $jobType->id, $jobLevel->id, $gender->id, $responsibility->id, $skill->id, $benefit->id], false);
+
+            $job->company_id = Company::where('user_id', $job->user_id)->inRandomOrder()->first()?->id;
+
+            $job->save();
         });
 
         Job::factory(100)->state(function (array $attributes) {

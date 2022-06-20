@@ -1,15 +1,15 @@
 "use strict";
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Modules_Jobs_EditModal_vue"],{
 
-/***/ "./resources/js/Composables/UseFetch.js":
-/*!**********************************************!*\
-  !*** ./resources/js/Composables/UseFetch.js ***!
-  \**********************************************/
+/***/ "./resources/js/Composables/UseJobs.js":
+/*!*********************************************!*\
+  !*** ./resources/js/Composables/UseJobs.js ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "useFetch": () => (/* binding */ useFetch)
+/* harmony export */   "useJobs": () => (/* binding */ useJobs)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -21,26 +21,22 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-function useFetch() {
+function useJobs() {
   var data = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
     data: null
   });
   var error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
   var processing = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
 
-  var doInitData = function doInitData(item) {
-    return data.value.data = item;
-  };
-
   var doFetchData = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(id) {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               processing.value = true;
               _context.next = 3;
-              return axios.get(url).then(function (res) {
+              return axios.get(route('api.jobs.show', id)).then(function (res) {
                 return data.value = res.data;
               })["catch"](function (err) {
                 return error.value = err;
@@ -65,98 +61,9 @@ function useFetch() {
     processing: processing,
     error: error,
     data: data,
-    doInitData: doInitData,
     doFetchData: doFetchData
   };
 }
-
-/***/ }),
-
-/***/ "./resources/js/Plugins/errors.js":
-/*!****************************************!*\
-  !*** ./resources/js/Plugins/errors.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Errors": () => (/* binding */ Errors)
-/* harmony export */ });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-// eslint-disable-next-line
-var Errors = /*#__PURE__*/function () {
-  function Errors() {
-    _classCallCheck(this, Errors);
-
-    this.errors = {};
-  }
-
-  _createClass(Errors, [{
-    key: "get",
-    value: function get(field) {
-      if (this.errors[field]) {
-        return this.errors[field][0];
-      }
-    }
-  }, {
-    key: "getWithMutator",
-    value: function getWithMutator(field, mutator) {
-      if (this.errors[field]) {
-        return this.errors[field][0].replace(field, mutator);
-      }
-    }
-  }, {
-    key: "clear",
-    value: function clear(field) {
-      if (this.errors !== undefined && this.errors[field]) delete this.errors[field];
-    }
-  }, {
-    key: "drop",
-    value: function drop() {
-      this.errors = {};
-    }
-  }, {
-    key: "has",
-    value: function has(field) {
-      return this.errors.hasOwnProperty(field);
-    }
-  }, {
-    key: "first",
-    value: function first(field) {
-      if (this.errors[field]) {
-        return this.errors[field];
-      }
-    }
-  }, {
-    key: "any",
-    value: function any() {
-      return Object.keys(this.errors).length > 0;
-    }
-  }, {
-    key: "record",
-    value: function record(errors) {
-      this.errors = errors;
-    }
-  }, {
-    key: "getErrors",
-    value: function getErrors() {
-      var msg = '';
-
-      for (var field in this.errors) {
-        msg += this.errors[field][0] + '<br/>';
-      }
-
-      return msg;
-    }
-  }]);
-
-  return Errors;
-}();
 
 /***/ }),
 
@@ -346,26 +253,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.vue");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/dialog/dialog.js");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/transitions/transition.js");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/switch/switch.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/QuestionMarkCircleIcon.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/dialog/dialog.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/transitions/transition.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/switch/switch.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/QuestionMarkCircleIcon.js");
 /* harmony import */ var _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Input.vue */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Label.vue */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_Textarea__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Textarea */ "./resources/js/Jetstream/Textarea.vue");
 /* harmony import */ var _Jetstream_InputError_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/InputError.vue */ "./resources/js/Jetstream/InputError.vue");
-/* harmony import */ var _Plugins_errors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Plugins/errors */ "./resources/js/Plugins/errors.js");
-/* harmony import */ var _Shared_ImageUpload__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Shared/ImageUpload */ "./resources/js/Shared/ImageUpload.vue");
-/* harmony import */ var _Shared_BaseListbox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Shared/BaseListbox */ "./resources/js/Shared/BaseListbox.vue");
-/* harmony import */ var _Shared_DatePicker__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Shared/DatePicker */ "./resources/js/Shared/DatePicker.vue");
-/* harmony import */ var _Composables_UseFetch__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Composables/UseFetch */ "./resources/js/Composables/UseFetch.js");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _Shared_ImageUpload__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Shared/ImageUpload */ "./resources/js/Shared/ImageUpload.vue");
+/* harmony import */ var _Shared_BaseListbox__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Shared/BaseListbox */ "./resources/js/Shared/BaseListbox.vue");
+/* harmony import */ var _Shared_DatePicker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Shared/DatePicker */ "./resources/js/Shared/DatePicker.vue");
+/* harmony import */ var _Composables_UseJobs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Composables/UseJobs */ "./resources/js/Composables/UseJobs.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -393,19 +298,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     expose();
     var props = __props;
 
-    var _useFetch = (0,_Composables_UseFetch__WEBPACK_IMPORTED_MODULE_10__.useFetch)(),
-        roles = _useFetch.data,
-        doFetchRoles = _useFetch.doFetchData;
+    var _useJobs = (0,_Composables_UseJobs__WEBPACK_IMPORTED_MODULE_9__.useJobs)(),
+        job = _useJobs.data,
+        doFetchJob = _useJobs.doFetchData;
 
     var isOpen = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
-    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_11__.useForm)({
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_10__.useForm)({
       id: props.editing.id,
       name: props.editing.name,
       content: props.editing.content,
       state: props.editing.state
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      doFetchRoles(route('api.roles.index'));
+      doFetchJob(props.editing.id);
     });
 
     var closeModal = function closeModal() {
@@ -420,8 +325,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
 
     var __returned__ = {
-      roles: roles,
-      doFetchRoles: doFetchRoles,
+      job: job,
+      doFetchJob: doFetchJob,
       props: props,
       isOpen: isOpen,
       form: form,
@@ -431,25 +336,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       LoadingButton: _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_1__["default"],
-      Dialog: _headlessui_vue__WEBPACK_IMPORTED_MODULE_12__.Dialog,
-      DialogPanel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_12__.DialogPanel,
-      DialogTitle: _headlessui_vue__WEBPACK_IMPORTED_MODULE_12__.DialogTitle,
-      TransitionChild: _headlessui_vue__WEBPACK_IMPORTED_MODULE_13__.TransitionChild,
-      TransitionRoot: _headlessui_vue__WEBPACK_IMPORTED_MODULE_13__.TransitionRoot,
-      Switch: _headlessui_vue__WEBPACK_IMPORTED_MODULE_14__.Switch,
-      SwitchGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_14__.SwitchGroup,
-      SwitchLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_14__.SwitchLabel,
-      QuestionMarkCircleIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_15__["default"],
+      Dialog: _headlessui_vue__WEBPACK_IMPORTED_MODULE_11__.Dialog,
+      DialogPanel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_11__.DialogPanel,
+      DialogTitle: _headlessui_vue__WEBPACK_IMPORTED_MODULE_11__.DialogTitle,
+      TransitionChild: _headlessui_vue__WEBPACK_IMPORTED_MODULE_12__.TransitionChild,
+      TransitionRoot: _headlessui_vue__WEBPACK_IMPORTED_MODULE_12__.TransitionRoot,
+      Switch: _headlessui_vue__WEBPACK_IMPORTED_MODULE_13__.Switch,
+      SwitchGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_13__.SwitchGroup,
+      SwitchLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_13__.SwitchLabel,
+      QuestionMarkCircleIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_14__["default"],
       JetInput: _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
       JetLabel: _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
       JetTextarea: _Jetstream_Textarea__WEBPACK_IMPORTED_MODULE_4__["default"],
       JetInputError: _Jetstream_InputError_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-      Errors: _Plugins_errors__WEBPACK_IMPORTED_MODULE_6__.Errors,
-      ImageUpload: _Shared_ImageUpload__WEBPACK_IMPORTED_MODULE_7__["default"],
-      BaseListbox: _Shared_BaseListbox__WEBPACK_IMPORTED_MODULE_8__["default"],
-      DatePicker: _Shared_DatePicker__WEBPACK_IMPORTED_MODULE_9__["default"],
-      useFetch: _Composables_UseFetch__WEBPACK_IMPORTED_MODULE_10__.useFetch,
-      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_11__.useForm
+      ImageUpload: _Shared_ImageUpload__WEBPACK_IMPORTED_MODULE_6__["default"],
+      BaseListbox: _Shared_BaseListbox__WEBPACK_IMPORTED_MODULE_7__["default"],
+      DatePicker: _Shared_DatePicker__WEBPACK_IMPORTED_MODULE_8__["default"],
+      useJobs: _Composables_UseJobs__WEBPACK_IMPORTED_MODULE_9__.useJobs,
+      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_10__.useForm
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -481,7 +385,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'BaseListbox',
   props: {
-    options: Array,
+    options: [Array, Object],
     modelValue: [String, Number, Array],
     placeholder: {
       type: String,
@@ -906,59 +810,104 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_19 = {
   "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-2"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "col-span-1 sm:col-span-2"
-}, " sgfsdgfd "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "col-span-1 sm:col-span-2"
-}, " fgdfg ")])], -1
-/* HOISTED */
-);
-
+};
 var _hoisted_20 = {
-  "class": "col-span-1"
+  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-2"
 };
 var _hoisted_21 = {
-  "class": "grid grid-cols-1 gap-4 sm:grid-cols-1"
+  "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_22 = {
-  "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
+  "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_23 = {
-  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
-};
-var _hoisted_24 = {
   "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
 };
+var _hoisted_24 = {
+  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-2"
+};
 var _hoisted_25 = {
-  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
+  "class": "col-span-1"
 };
 var _hoisted_26 = {
   "class": "col-span-1"
 };
 var _hoisted_27 = {
-  "class": "col-span-1"
-};
-var _hoisted_28 = {
-  "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
-};
-var _hoisted_29 = {
-  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
-};
-var _hoisted_30 = {
-  "class": "col-span-1"
+  "class": "col-span-1 sm:col-span-2"
 };
 
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "text-sm font-medium text-gray-500"
 }, "Negotiable Salary", -1
 /* HOISTED */
 );
 
+var _hoisted_29 = {
+  "class": "col-span-1 sm:col-span-2"
+};
+var _hoisted_30 = {
+  "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
+};
+var _hoisted_31 = {
+  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-2"
+};
 var _hoisted_32 = {
+  "class": "col-span-1 sm:col-span-2"
+};
+var _hoisted_33 = {
+  "class": "col-span-1"
+};
+var _hoisted_34 = {
+  "class": "col-span-1"
+};
+var _hoisted_35 = {
+  "class": "col-span-1"
+};
+var _hoisted_36 = {
+  "class": "grid grid-cols-1 gap-4 sm:grid-cols-1"
+};
+var _hoisted_37 = {
+  "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
+};
+var _hoisted_38 = {
+  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
+};
+var _hoisted_39 = {
+  "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
+};
+var _hoisted_40 = {
+  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
+};
+var _hoisted_41 = {
+  "class": "col-span-1"
+};
+var _hoisted_42 = {
+  "class": "col-span-1"
+};
+var _hoisted_43 = {
+  "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
+};
+var _hoisted_44 = {
+  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
+};
+var _hoisted_45 = {
+  "class": "col-span-1"
+};
+var _hoisted_46 = {
+  "class": "col-span-1"
+};
+var _hoisted_47 = {
+  "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
+};
+var _hoisted_48 = {
+  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
+};
+var _hoisted_49 = {
+  "class": "col-span-1"
+};
+var _hoisted_50 = {
   "class": "bg-secondary-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -978,7 +927,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Dialog"], {
         as: "div",
         "class": "relative z-10",
-        onClose: _cache[4] || (_cache[4] = function ($event) {
+        onClose: _cache[15] || (_cache[15] = function ($event) {
           return $setup.closeModal();
         })
       }, {
@@ -1012,7 +961,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 "class": "relative bg-gray-100 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full"
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+                  return [$setup.job.data ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
+                    key: 0,
                     onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.onSubmit, ["prevent"])
                   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DialogTitle"], {
                     as: "h3",
@@ -1028,7 +978,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
                   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
                     "for": "name",
-                    value: "Name",
+                    value: "Job Title",
                     required: ""
                   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
                     id: "name",
@@ -1050,7 +1000,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   /* PROPS */
                   , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
                     "for": "content",
-                    value: "Content",
+                    value: "Job Description",
                     required: ""
                   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetTextarea"], {
                     id: "content",
@@ -1072,37 +1022,84 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
-                  , ["message"])])])]), _hoisted_19])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ImageUpload"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [$setup.props.states ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["BaseListbox"], {
-                    key: 0,
-                    options: $setup.props.states,
-                    modelValue: $setup.form.state,
+                  , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                    options: $setup.job.data.companies,
+                    modelValue: $setup.form.company_id,
                     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-                      return $setup.form.state = $event;
+                      return $setup.form.company_id = $event;
                     }),
-                    placeholder: "Publish"
+                    placeholder: "Companies"
                   }, null, 8
                   /* PROPS */
-                  , ["options", "modelValue"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.company_id,
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                    options: $setup.job.data.industries,
+                    modelValue: $setup.form.state,
+                    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+                      return $setup.form.state = $event;
+                    }),
+                    placeholder: "Industries"
+                  }, null, 8
+                  /* PROPS */
+                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
                     message: $setup.form.errors.state,
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
-                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                    value: "Expiration Date",
+                  , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                    "for": "salary_min",
+                    value: "Min. Salary",
                     required: ""
-                  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DatePicker"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                    message: $setup.form.errors.role,
+                  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
+                    id: "salary_min",
+                    name: "salary_min",
+                    modelValue: $setup.form.salary_min,
+                    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+                      return $setup.form.salary_min = $event;
+                    }),
+                    type: "text",
+                    "class": "mt-1 block w-full",
+                    required: ""
+                  }, null, 8
+                  /* PROPS */
+                  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.salary_min,
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
-                  , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" This example requires Tailwind CSS v2.0+ "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SwitchGroup"], {
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                    "for": "salary_max",
+                    value: "Max. Salary",
+                    required: ""
+                  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
+                    id: "salary_max",
+                    name: "salary_max",
+                    modelValue: $setup.form.salary_max,
+                    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+                      return $setup.form.salary_max = $event;
+                    }),
+                    type: "text",
+                    "class": "mt-1 block w-full",
+                    required: ""
+                  }, null, 8
+                  /* PROPS */
+                  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.salary_max,
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SwitchGroup"], {
                     as: "div",
                     "class": "flex items-center whitespace-nowrap"
                   }, {
                     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Switch"], {
                         modelValue: $setup.form.enabled,
-                        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+                        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
                           return $setup.form.enabled = $event;
                         }),
                         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.form.enabled ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'])
@@ -1125,7 +1122,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                         "class": "ml-3"
                       }, {
                         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [_hoisted_31];
+                          return [_hoisted_28];
                         }),
                         _: 1
                         /* STABLE */
@@ -1135,7 +1132,127 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     _: 1
                     /* STABLE */
 
-                  })])])])])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingButton"], {
+                  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                    options: $setup.job.data.salaryTypes,
+                    modelValue: $setup.form.state,
+                    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+                      return $setup.form.state = $event;
+                    }),
+                    placeholder: "Salary Types"
+                  }, null, 8
+                  /* PROPS */
+                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.state,
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                    options: $setup.job.data.jobTypes,
+                    modelValue: $setup.form.state,
+                    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+                      return $setup.form.state = $event;
+                    }),
+                    placeholder: "Job Type"
+                  }, null, 8
+                  /* PROPS */
+                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.state,
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                    options: $setup.job.data.experiences,
+                    modelValue: $setup.form.state,
+                    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+                      return $setup.form.state = $event;
+                    }),
+                    placeholder: "Experiences"
+                  }, null, 8
+                  /* PROPS */
+                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.state,
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                    options: $setup.job.data.careerLevels,
+                    modelValue: $setup.form.state,
+                    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+                      return $setup.form.state = $event;
+                    }),
+                    placeholder: "Career Level"
+                  }, null, 8
+                  /* PROPS */
+                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.state,
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ImageUpload"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                    options: $setup.job.data.states,
+                    modelValue: $setup.form.state,
+                    "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
+                      return $setup.form.state = $event;
+                    }),
+                    placeholder: "Publish"
+                  }, null, 8
+                  /* PROPS */
+                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.state,
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                    value: "Application Deadline Date",
+                    required: ""
+                  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DatePicker"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.role,
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                    options: $setup.job.data.genders,
+                    modelValue: $setup.form.state,
+                    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
+                      return $setup.form.state = $event;
+                    }),
+                    placeholder: "Gender"
+                  }, null, 8
+                  /* PROPS */
+                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.state,
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                    options: $setup.job.data.jobLevels,
+                    modelValue: $setup.form.state,
+                    "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
+                      return $setup.form.state = $event;
+                    }),
+                    placeholder: "Qualification"
+                  }, null, 8
+                  /* PROPS */
+                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.state,
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                    options: $setup.job.data.applyTypes,
+                    modelValue: $setup.form.state,
+                    "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+                      return $setup.form.state = $event;
+                    }),
+                    placeholder: "Job Apply Types"
+                  }, null, 8
+                  /* PROPS */
+                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.state,
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])])])])])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingButton"], {
                     type: "submit",
                     loading: $setup.form.processing,
                     "class": "uppercase w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm"
@@ -1170,7 +1287,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   /* PROPS */
                   , ["href"])])], 40
                   /* PROPS, HYDRATE_EVENTS */
-                  , _hoisted_4)];
+                  , _hoisted_4)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
                 }),
                 _: 1
                 /* STABLE */

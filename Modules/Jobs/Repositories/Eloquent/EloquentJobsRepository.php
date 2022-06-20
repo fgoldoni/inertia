@@ -48,4 +48,19 @@ class EloquentJobsRepository extends RepositoryAbstract implements JobsRepositor
             ]
         ]);
     }
+
+    public function initCategories($categories): array
+    {
+        return [
+            'areas' => $categories->areas(),
+            'industries' => array_values($categories->industries()->toArray()),
+            'jobTypes' => array_values($categories->jobTypes()->toArray()),
+            'salaryTypes' => array_values($categories->salaryTypes()->toArray()),
+            'jobLevels' => array_values($categories->jobLevels()->toArray()),
+            'genders' => array_values($categories->genders()->toArray()),
+            'experiences' => array_values($categories->experiences()->toArray()),
+            'careerLevels' => array_values($categories->careerLevels()->toArray()),
+            'applyTypes' => array_values($categories->applyTypes()->toArray()),
+        ];
+    }
 }
