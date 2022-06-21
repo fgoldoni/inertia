@@ -175,6 +175,14 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
+                                                                        <BaseListbox :options="job.data.areas" v-model="form.state"  placeholder="Areas"/>
+
+                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+
+                                                                    </div>
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+
                                                                         <BaseListbox :options="job.data.industries" v-model="form.state"  placeholder="Industries"/>
 
                                                                         <JetInputError :message="form.errors.state" class="mt-2"/>
@@ -268,6 +276,81 @@ const onSubmit = () => {
 
                                                                         <JetInputError :message="form.errors.state" class="mt-2"/>
 
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
+
+                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+
+                                                                        <JetLabel for="address" value="Friendly Address" required/>
+
+                                                                        <JetInput
+                                                                            id="address"
+                                                                            name="address"
+                                                                            v-model="form.address"
+                                                                            type="text"
+                                                                            class="mt-1 block w-full"
+                                                                            required/>
+
+                                                                        <JetInputError :message="form.errors.address" class="mt-2"/>
+                                                                    </div>
+
+                                                                    <div class="col-span-1">
+
+                                                                        <JetLabel for="country_id" value="Country" required/>
+
+                                                                        <JetInput
+                                                                            id="country_id"
+                                                                            name="country_id"
+                                                                            v-model="form.country_id"
+                                                                            type="text"
+                                                                            class="mt-1 block w-full"
+                                                                            required/>
+
+                                                                        <JetInputError :message="form.errors.country_id" class="mt-2"/>
+                                                                    </div>
+
+                                                                    <div class="col-span-1">
+
+                                                                        <JetLabel for="city_id" value="City" required/>
+
+                                                                        <JetInput
+                                                                            id="city_id"
+                                                                            name="city_id"
+                                                                            v-model="form.city_id"
+                                                                            type="text"
+                                                                            class="mt-1 block w-full"
+                                                                            required/>
+
+                                                                        <JetInputError :message="form.errors.city_id" class="mt-2"/>
+                                                                    </div>
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+
+                                                                        <JetLabel for="iframe" value="iFrame" required/>
+
+                                                                        <JetTextarea
+                                                                            id="iframe"
+                                                                            name="iframe"
+                                                                            v-model="form.iframe"
+                                                                            type="text"
+                                                                            class="mt-1 block w-full"
+                                                                            required/>
+
+                                                                        <div class="mt-3 flex items-center justify-between">
+                                                                            <a href="#" class="group inline-flex items-start text-sm space-x-2 text-gray-500 hover:text-gray-900">
+                                                                                <QuestionMarkCircleIcon class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
+                                                                                <span> Some HTML is okay. </span>
+                                                                            </a>
+                                                                        </div>
+
+                                                                        <JetInputError :message="form.errors.content" class="mt-2"/>
                                                                     </div>
 
                                                                 </div>
