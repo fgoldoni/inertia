@@ -1040,7 +1040,7 @@ var _hoisted_1 = {
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "block text-sm font-medium text-gray-700"
-}, " Image Upload ", -1
+}, " Cover image ", -1
 /* HOISTED */
 );
 
@@ -1126,7 +1126,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "fileUpload",
     ref: "fileUpload",
     type: "file",
-    "class": "sr-only"
+    "class": "sr-only",
+    multiple: ""
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   )]), _hoisted_9]), _hoisted_10])], 42

@@ -59,7 +59,7 @@ const onSelectedFiles = ($event) => {
 
 <template>
     <div class="col-span-1">
-        <label class="block text-sm font-medium text-gray-700"> Image Upload </label>
+        <label class="block text-sm font-medium text-gray-700"> Cover image </label>
         <div
             @drop.prevent="onDroppedFiles"
             @dragover.prevent="dragging = true"
@@ -72,7 +72,7 @@ const onSelectedFiles = ($event) => {
                 <div class="flex text-sm text-gray-600">
                     <label for="fileUpload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                         <span>Upload a file</span>
-                        <input @input="onSelectedFiles" id="fileUpload"   name="fileUpload"  ref="fileUpload" type="file" class="sr-only" />
+                        <input @input="onSelectedFiles" id="fileUpload"   name="fileUpload"  ref="fileUpload" type="file" class="sr-only" multiple/>
                     </label>
                     <p class="pl-1">or drag and drop</p>
                 </div>

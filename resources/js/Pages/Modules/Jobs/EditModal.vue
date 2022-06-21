@@ -10,6 +10,7 @@ import JetInputError from '@/Jetstream/InputError.vue';
 import ImageUpload from '@/Shared/ImageUpload'
 import BaseListbox from '@/Shared/BaseListbox'
 import DatePicker from '@/Shared/DatePicker'
+import AvatarInput from '@/Shared/AvatarInput'
 import { useJobs } from '@/Composables/UseJobs'
 import {useForm} from "@inertiajs/inertia-vue3";
 
@@ -30,6 +31,7 @@ const form = useForm({
     name: props.editing.name,
     content: props.editing.content,
     state: props.editing.state,
+    avatar: null,
 });
 
 onMounted(() => {
@@ -368,7 +370,13 @@ const onSubmit = () => {
 
                                                                 <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
 
+                                                                    <div class="col-span-1">
+                                                                        <JetLabel :value="__('Assets')" class="mb-2"/>
+                                                                        <AvatarInput v-model="form.avatar" default-src="https://ui-avatars.com/api/?name=A+S&color=7F9CF5&background=EBF4FF"></AvatarInput>
+                                                                    </div>
+
                                                                     <ImageUpload></ImageUpload>
+
 
                                                                 </div>
 
@@ -390,6 +398,11 @@ const onSubmit = () => {
                                                                         <JetLabel value="Application Deadline Date" required/>
 
                                                                         <DatePicker></DatePicker>
+
+                                                                        <p class="mt-2 text-sm leading-5 text-secondary-500 dark:text-secondary-400">
+                                                                            Specify a deadline date so that your job are scheduled on your store.
+                                                                        </p>
+
 
                                                                         <JetInputError :message="form.errors.role" class="mt-2"/>
                                                                     </div>
