@@ -3,6 +3,7 @@
 namespace Modules\Jobs\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateJobRequest extends FormRequest
 {
@@ -14,7 +15,13 @@ class UpdateJobRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'max:256'],
+            'files.*' => ['nullable', 'max:2048',
+                Rule::exists('attachments', 'id')
+                ->where(function ($query) {
+                    //$query->where('user_id', request()->user()->id);
+                })
+            ],
         ];
     }
 

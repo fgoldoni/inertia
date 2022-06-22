@@ -222,7 +222,6 @@ class SeedFakeCategoriesTableSeeder extends Seeder
         Category::factory()->create(['name' => 'Female', 'type' => CategoryType::Gender]);
         Category::factory()->create(['name' => 'Male', 'type' => CategoryType::Gender]);
 
-
         Category::factory()->create(['name' => 'Fresh', 'type' => CategoryType::Experience]);
         Category::factory()->create(['name' => '1 Year', 'type' => CategoryType::Experience]);
         Category::factory()->create(['name' => '2 Year', 'type' => CategoryType::Experience]);

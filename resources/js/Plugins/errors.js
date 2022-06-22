@@ -30,6 +30,9 @@ export class  Errors {
     any () {
         return Object.keys(this.errors).length > 0
     }
+    all () {
+        return this.any() ? this.errors : []
+    }
     record (errors) {
         this.errors = errors
     }

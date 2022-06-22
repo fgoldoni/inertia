@@ -17,7 +17,6 @@ trait Impersonate
      * Return true or false if the user can be impersonate.
      *
      * @param void
-     * @return  bool
      */
     public function canBeImpersonated(): bool
     {

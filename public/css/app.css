@@ -1737,10 +1737,6 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
-.bg-primary-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(49 46 129 / var(--tw-bg-opacity));
-}
 .bg-primary-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(224 231 255 / var(--tw-bg-opacity));
@@ -2522,10 +2518,6 @@ select {
 
 .hover\:bg-opacity-25:hover {
   --tw-bg-opacity: 0.25;
-}
-
-.hover\:bg-opacity-100:hover {
-  --tw-bg-opacity: 1;
 }
 
 .hover\:text-gray-500:hover {

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Attachments\Traits\AttachableTrait;
 use Modules\Companies\Entities\Company;
 use Modules\Countries\Entities\City;
 use Modules\Countries\Entities\Country;
@@ -24,7 +25,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Job extends Model
 {
-    use HasFactory, HasSlug, HasTranslations, Categorizable, BelongsToUser, SoftDeletes, WithinDays, JobAttribute;
+    use HasFactory, HasSlug, HasTranslations, Categorizable, BelongsToUser, SoftDeletes, WithinDays, JobAttribute, AttachableTrait;
 
 
     protected $guarded = [];

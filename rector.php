@@ -9,7 +9,8 @@ use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        __DIR__ . '/app',
+        __DIR__ . '/app/Http',
+        __DIR__ . '/app/Traits',
         __DIR__ . '/database',
 
         __DIR__ . '/Modules/Users/Database',

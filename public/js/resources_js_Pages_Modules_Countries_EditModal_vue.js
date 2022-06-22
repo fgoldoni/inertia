@@ -67,6 +67,11 @@ var Errors = /*#__PURE__*/function () {
       return Object.keys(this.errors).length > 0;
     }
   }, {
+    key: "all",
+    value: function all() {
+      return this.any() ? this.errors : [];
+    }
+  }, {
     key: "record",
     value: function record(errors) {
       this.errors = errors;

@@ -15,6 +15,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
+use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Jobs\Entities\Job;
 use Modules\Jobs\Http\Requests\StoreJobRequest;
 use Modules\Jobs\Http\Requests\UpdateJobRequest;
@@ -22,7 +23,7 @@ use Modules\Jobs\Repositories\Contracts\JobsRepository;
 
 class JobsController extends Controller
 {
-    public function __construct(private readonly JobsRepository $jobsRepository, private readonly ResponseFactory $response, private readonly Request $request, private readonly Redirector $redirect)
+    public function __construct(private readonly JobsRepository $jobsRepository, private readonly AttachmentsRepository $attachmentsRepository, private readonly ResponseFactory $response, private readonly Request $request, private readonly Redirector $redirect)
     {
     }
 
@@ -69,6 +70,8 @@ class JobsController extends Controller
         ));
 
 
+
+
         return $this->response
             ->json([], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK)
             ->flash(__(':job successfully added!', ['job' => $job->name]));
@@ -88,18 +91,22 @@ class JobsController extends Controller
 
         return $this->index([
             'editing' => $this->jobsRepository->withCriteria([
-                new EagerLoad(['user:id,name', 'company:id,name', 'categories:id,name,type', 'country:id,name,emoji', 'city:id,name', 'division:id,name']),
+                new EagerLoad(['user:id,name', 'company:id,name', 'categories:id,name,type', 'country:id,name,emoji', 'city:id,name', 'division:id,name', 'attachments:id,name,filename,attachable_id,attachable_type']),
             ])->find($job->id, ['id', 'name', 'content', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at'])
         ]);
     }
 
     public function update(UpdateJobRequest $request, Job $job)
     {
-        //$job = $this->jobsRepository->update($job->id, $request->only('name'));
+        $job = $this->jobsRepository->update($job->id, $request->only('name'));
 
-        return $this->redirect->route('admin.jobs.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction']))->flash(
-            __('Great! You have accepted the invitation to join the :team team.', ['team' => 'Job']),
-        );
+        $this->attachmentsRepository->findWhereIn('id', $request->get('files'))->each(function ($item, $key) use ($job) {
+            $job->attachments()->save($item);
+        });
+
+        return $this->response
+            ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
+            ->flash(__('Great! You have accepted the invitation to join the :team team.', ['team' => 'Job']));
     }
 
     public function destroy($selected)

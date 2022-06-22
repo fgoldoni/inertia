@@ -7,13 +7,15 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetTextarea from '@/Jetstream/Textarea'
 import JetInputError from '@/Jetstream/InputError.vue';
-import SingleImageUpload from '@/Shared/SingleImageUpload'
+import ValidationErrors from '@/Shared/ValidationErrors';
+import ImageUpload from '@/Shared/ImageUpload'
 import BaseListbox from '@/Shared/BaseListbox'
 import DatePicker from '@/Shared/DatePicker'
 import AvatarInput from '@/Shared/AvatarInput'
 import { useJobs } from '@/Composables/UseJobs'
-import {useForm} from "@inertiajs/inertia-vue3";
 import {useMedia} from "@/Composables/UseMedia";
+import pickBy from "lodash/pickBy";
+import {Errors} from "@/Plugins/errors";
 
 
 const { data: job, doFetchData: doFetchJob } = useJobs()
@@ -27,13 +29,17 @@ const props = defineProps({
 
 const isOpen = ref(true)
 
-const form = useForm({
+const form = reactive({
     id: props.editing.id,
     name: props.editing.name,
-    content: props.editing.content,
+    files: props.editing.attachments,
     state: props.editing.state,
     avatar: null,
+    errors: new Errors(),
+    password: '',
+    processing: false,
 });
+
 
 onMounted(() => {
     doFetchJob(props.editing.id);
@@ -47,11 +53,16 @@ const closeModal = () => {
 
 const onSubmit = () => {
 
-    form.transform((data) => ({
-        ...data,
-        ...{ files : useMedia.value.media?.map(item => item.id) },
-        ...props.filters,
-    })).put(route('admin.jobs.update', form.id));
+    axios.put(route('admin.jobs.update', form.id), pickBy({
+        name: form.name,
+        files: useMedia.value.media?.filter(item => !item.error).map(item => item.id),
+        ...props.filters
+    })).then((response) => {
+        form.processing = false;
+    }).catch(error => {
+        form.processing = false;
+        form.errors.record(error.response.data.errors);
+    });
 
 };
 </script>
@@ -95,7 +106,7 @@ const onSubmit = () => {
                         <DialogPanel
                             class="relative bg-gray-100 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full">
 
-                            <form @submit.prevent="onSubmit" v-if="job.data">
+                            <form @submit.prevent="onSubmit" v-if="job.data" @keydown="form.errors.clear($event.target.name)">
 
                                 <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
@@ -126,6 +137,10 @@ const onSubmit = () => {
                                                                 <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                                                                     <div class="col-span-1 sm:col-span-2">
+                                                                        <ValidationErrors :errors="form.errors.all()" class="mb-4" />
+                                                                    </div>
+
+                                                                    <div class="col-span-1 sm:col-span-2">
 
                                                                         <JetLabel for="name" value="Job Title" />
 
@@ -138,7 +153,7 @@ const onSubmit = () => {
 
                                                                             autofocus/>
 
-                                                                        <JetInputError :message="form.errors.name" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('name')" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1 sm:col-span-2">
@@ -383,12 +398,11 @@ const onSubmit = () => {
                                                                     </div>
 
                                                                     <div class="col-span-1">
-                                                                        <SingleImageUpload multiple></SingleImageUpload>
+
+                                                                        <ImageUpload v-model="form.files"></ImageUpload>
+
+                                                                        <JetInputError :message="form.errors.get('files')" class="mt-2"/>
                                                                     </div>
-
-
-
-
 
                                                                 </div>
 

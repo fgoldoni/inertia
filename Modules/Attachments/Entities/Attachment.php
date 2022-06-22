@@ -3,7 +3,7 @@ namespace Modules\Attachments\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Storage;
 
 class Attachment extends Model
@@ -14,7 +14,7 @@ class Attachment extends Model
 
     public $appends = ['url'];
 
-    public function attachable(): MorphMany
+    public function attachable(): MorphTo
     {
         return $this->morphMany(Attachment::class, 'attachable');
     }
@@ -25,13 +25,15 @@ class Attachment extends Model
             ? Storage::disk($this->avatarDisk())->url($this->filename)
             : $this->defaultAvatarUrl();
     }
+
     /**
      * Get the default avatar photo URL if no avatar photo has been uploaded.
      */
     protected function defaultAvatarUrl(): string
     {
-        return 'https://ui-avatars.com/api/?name=' . urlencode($this->filename) . '&color=7F9CF5&background=EBF4FF';
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
     }
+
     /**
      * Get the disk that avatar photos should be stored on.
      */
@@ -40,5 +42,17 @@ class Attachment extends Model
         return 'upload';
     }
 
+    public static function boot()
+    {
+        parent::boot();
 
+        self::deleted(function ($attachment) {
+            $attachment->deleteFile();
+        });
+    }
+
+    public function deleteFile()
+    {
+        Storage::disk($this->disk)->delete($this->filename);
+    }
 }

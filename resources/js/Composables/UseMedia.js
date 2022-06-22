@@ -1,7 +1,9 @@
-import { ref } from 'vue'
+import {ref} from 'vue'
 
 
 export const useMedia = ref({
+
+    multiple: false,
 
     dragging: false,
 
@@ -28,11 +30,27 @@ export const useMedia = ref({
         }
     },
 
-    push(file) {
+    doLoadFiles (files) {
+
+        if (!this.multiple) files = [files[0]]
+
+        files.forEach(file => {
+            this.push({
+                id: file.id,
+                file: file,
+                url: file.url,
+                progress: 100,
+                error: null,
+                uploaded: true,
+            });
+        })
+    },
+
+    push (file) {
         this.media.unshift(file)
     },
 
-    doDroppedFiles($event) {
+    doDroppedFiles ($event) {
 
         this.dragging = false;
 
@@ -43,18 +61,20 @@ export const useMedia = ref({
         this.doUploadFiles(files);
     },
 
-    doSelectedFiles ($event) {
+    doSelectedFiles($event) {
 
         let files = [...$event.target.files];
 
         this.doUploadFiles(files);
     },
 
-    doUploadFiles (files) {
+    doUploadFiles(files) {
+
+        if (!this.multiple) files = [files[0]]
 
         files.forEach(file => {
 
-            this.media.unshift({
+            this.push({
                 file: file,
                 url: null,
                 progress: 0,
@@ -66,32 +86,32 @@ export const useMedia = ref({
 
         });
     },
-    doSubmitFiles () {
+    doSubmitFiles() {
 
         this.media.filter(media => !media.uploaded).forEach(media => {
 
-                let form = new FormData;
+            let form = new FormData;
 
-                form.append('file', media.file);
+            form.append('file', media.file);
 
-                axios.post(route('api.attachments.store'), form, {
-                    onUploadProgress: (event) => {
-                        media.progress = Math.round(event.loaded * 100 / event.total);
-                    },
+            axios.post(route('api.attachments.store'), form, {
+                onUploadProgress: (event) => {
+                    media.progress = Math.round(event.loaded * 100 / event.total);
+                },
+            })
+                .then((res) => {
+                    media.id = res.data.data.id
+                    media.url = res.data.data.url
+                    media.uploaded = true
                 })
-                    .then((res) => {
-                        media.id = res.data.data.id
-                        media.url = res.data.data.url
-                        media.uploaded = true
-                    })
 
-                    .catch(error => {
-                        media.error = `Upload failed. Please try again later.`;
+                .catch(error => {
+                    media.error = `Upload failed. Please try again later.`;
 
-                        if (error?.response.status === 422) {
-                            media.error = error.response.data.errors.file[0];
-                        }
-                    });
-            });
+                    if (error?.response.status === 422) {
+                        media.error = error.response.data.errors.file[0];
+                    }
+                });
+        });
     }
 })
