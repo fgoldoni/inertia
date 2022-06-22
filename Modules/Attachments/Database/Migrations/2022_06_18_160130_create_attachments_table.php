@@ -13,8 +13,16 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('attachments', function (Blueprint $table) {
+
             $table->id();
 
+            $table->nullableMorphs('attachable');
+
+            $table->string('filename');
+
+            $table->foreignId('user_id')->nullable()->unsigned()->index()->references('id')->on('users')->onDelete('cascade');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

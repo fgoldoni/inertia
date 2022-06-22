@@ -13,6 +13,7 @@ import DatePicker from '@/Shared/DatePicker'
 import AvatarInput from '@/Shared/AvatarInput'
 import { useJobs } from '@/Composables/UseJobs'
 import {useForm} from "@inertiajs/inertia-vue3";
+import {useMedia} from "@/Composables/UseMedia";
 
 
 const { data: job, doFetchData: doFetchJob } = useJobs()
@@ -32,7 +33,6 @@ const form = useForm({
     content: props.editing.content,
     state: props.editing.state,
     avatar: null,
-    files: null,
 });
 
 onMounted(() => {
@@ -46,10 +46,13 @@ const closeModal = () => {
 }
 
 const onSubmit = () => {
+
     form.transform((data) => ({
         ...data,
+        ...{ files : useMedia.value.media?.map(item => item.id) },
         ...props.filters,
     })).put(route('admin.jobs.update', form.id));
+
 };
 </script>
 
@@ -124,7 +127,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <JetLabel for="name" value="Job Title" required/>
+                                                                        <JetLabel for="name" value="Job Title" />
 
                                                                         <JetInput
                                                                             id="name"
@@ -132,7 +135,7 @@ const onSubmit = () => {
                                                                             v-model="form.name"
                                                                             type="text"
                                                                             class="mt-1 block w-full"
-                                                                            required
+
                                                                             autofocus/>
 
                                                                         <JetInputError :message="form.errors.name" class="mt-2"/>
@@ -140,7 +143,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <JetLabel for="content" value="Job Description" required/>
+                                                                        <JetLabel for="content" value="Job Description" />
 
                                                                         <JetTextarea
                                                                             id="content"
@@ -148,7 +151,7 @@ const onSubmit = () => {
                                                                             v-model="form.content"
                                                                             type="text"
                                                                             class="mt-1 block w-full"
-                                                                            required/>
+                                                                            />
 
                                                                         <div class="mt-3 flex items-center justify-between">
                                                                             <a href="#" class="group inline-flex items-start text-sm space-x-2 text-gray-500 hover:text-gray-900">
@@ -202,7 +205,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
-                                                                        <JetLabel for="salary_min" value="Min. Salary" required/>
+                                                                        <JetLabel for="salary_min" value="Min. Salary" />
 
                                                                         <JetInput
                                                                             id="salary_min"
@@ -210,14 +213,14 @@ const onSubmit = () => {
                                                                             v-model="form.salary_min"
                                                                             type="text"
                                                                             class="mt-1 block w-full"
-                                                                            required/>
+                                                                            />
 
                                                                         <JetInputError :message="form.errors.salary_min" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1">
 
-                                                                        <JetLabel for="salary_max" value="Max. Salary" required/>
+                                                                        <JetLabel for="salary_max" value="Max. Salary" />
 
                                                                         <JetInput
                                                                             id="salary_max"
@@ -225,7 +228,7 @@ const onSubmit = () => {
                                                                             v-model="form.salary_max"
                                                                             type="text"
                                                                             class="mt-1 block w-full"
-                                                                            required/>
+                                                                            />
 
                                                                         <JetInputError :message="form.errors.salary_max" class="mt-2"/>
                                                                     </div>
@@ -291,7 +294,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <JetLabel for="address" value="Friendly Address" required/>
+                                                                        <JetLabel for="address" value="Friendly Address" />
 
                                                                         <JetInput
                                                                             id="address"
@@ -299,14 +302,14 @@ const onSubmit = () => {
                                                                             v-model="form.address"
                                                                             type="text"
                                                                             class="mt-1 block w-full"
-                                                                            required/>
+                                                                            />
 
                                                                         <JetInputError :message="form.errors.address" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1">
 
-                                                                        <JetLabel for="country_id" value="Country" required/>
+                                                                        <JetLabel for="country_id" value="Country" />
 
                                                                         <JetInput
                                                                             id="country_id"
@@ -314,14 +317,14 @@ const onSubmit = () => {
                                                                             v-model="form.country_id"
                                                                             type="text"
                                                                             class="mt-1 block w-full"
-                                                                            required/>
+                                                                            />
 
                                                                         <JetInputError :message="form.errors.country_id" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1">
 
-                                                                        <JetLabel for="city_id" value="City" required/>
+                                                                        <JetLabel for="city_id" value="City" />
 
                                                                         <JetInput
                                                                             id="city_id"
@@ -329,14 +332,14 @@ const onSubmit = () => {
                                                                             v-model="form.city_id"
                                                                             type="text"
                                                                             class="mt-1 block w-full"
-                                                                            required/>
+                                                                            />
 
                                                                         <JetInputError :message="form.errors.city_id" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <JetLabel for="iframe" value="iFrame" required/>
+                                                                        <JetLabel for="iframe" value="iFrame" />
 
                                                                         <JetTextarea
                                                                             id="iframe"
@@ -344,7 +347,7 @@ const onSubmit = () => {
                                                                             v-model="form.iframe"
                                                                             type="text"
                                                                             class="mt-1 block w-full"
-                                                                            required/>
+                                                                            />
 
                                                                         <div class="mt-3 flex items-center justify-between">
                                                                             <a href="#" class="group inline-flex items-start text-sm space-x-2 text-gray-500 hover:text-gray-900">
@@ -404,7 +407,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
-                                                                        <JetLabel value="Application Deadline Date" required/>
+                                                                        <JetLabel value="Application Deadline Date" />
 
                                                                         <DatePicker></DatePicker>
 

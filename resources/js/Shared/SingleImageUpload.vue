@@ -53,6 +53,8 @@ const props = defineProps({
                             <div class="inline-block h-full bg-indigo-600 absolute top-0 left-0" :style="`width: ${item.progress}%`"></div>
                             <div class="relative z-10 text-xs font-semibold text-center text-white drop-shadow text-shadow">{{ item.progress }}%</div>
                         </div>
+
+                        <div v-if="item.error" class="text-sm text-red-600">{{ item.error }}</div>
                     </div>
                 </li>
             </ul>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Attachments\Http\Controllers\Api\AttachmentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/attachments', function (Request $request) {
-    return $request->user();
+Route::controller(AttachmentsController::class)->prefix('attachments')->name('api.attachments.')->group(function () {
+    Route::post('/', 'store')->name('store');
+    Route::delete('/{attachment}', 'destroy')->name('destroy');
 });
