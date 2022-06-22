@@ -3,11 +3,11 @@ import { ref } from 'vue'
 
 export const useMedia = ref({
 
-    dragging: ref(false),
+    dragging: false,
 
-    media: ref([]),
+    media: [],
 
-    error: ref(null),
+    error: null,
 
     doRemoveFile(index, item) {
         this.media.splice(index, 1)

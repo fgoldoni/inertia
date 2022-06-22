@@ -1,6 +1,7 @@
 <script setup>
 import {XIcon} from '@heroicons/vue/outline'
 import {useMedia} from '@/Composables/UseMedia'
+import {TrashIcon} from '@heroicons/vue/solid'
 import {ref} from "vue";
 
 const fileUpload = ref(null);
@@ -42,17 +43,39 @@ const props = defineProps({
             <ul role="list" class="grid grid-cols-1 gap-x-4 gap-y-8" :class="{ 'sm:grid-cols-2 sm:gap-x-6': useMedia.media.length > 1 }">
                 <li v-for="(item, index) in useMedia.media" :key="index">
                     <div class="relative w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
-                        <img :src="item.url" alt="" class="object-cover w-full pointer-events-none group-hover:opacity-75" />
+                        <img v-if="item.uploaded" :src="item.url" alt="" class="object-cover w-full pointer-events-none group-hover:opacity-75" />
 
-                        <button @click="useMedia.doRemoveFile(index, item)" type="button" class="absolute inset-0 top-0 left-0 h-4 w-4 text-white bg-primary-900 bg-opacity-75 rounded-full hover:bg-opacity-100 cursor-pointer focus:outline-none">
+                        <button v-if="item.uploaded" @click="useMedia.doRemoveFile(index, item)" type="button" class="absolute inset-0 top-0 left-0 h-4 w-4 rounded-full hover:bg-rose-500 hover:bg-opacity-25 focus:outline-none text-rose-500 transition duration-200 cursor-pointer">
                             <XIcon class="flex-shrink-0 h-4 w-4" />
                         </button>
 
-                        <div v-if="useMedia.media.loading" class="bg-primary-900 btn-spinner" />
+                        <div v-if="!item.uploaded && !item.error" class="w-full bg-gray-200 rounded-full h-3 shadow-inner overflow-hidden relative flex items-center justify-center">
+                            <div class="inline-block h-full bg-indigo-600 absolute top-0 left-0" :style="`width: ${item.progress}%`"></div>
+                            <div class="relative z-10 text-xs font-semibold text-center text-white drop-shadow text-shadow">{{ item.progress }}%</div>
+                        </div>
                     </div>
                 </li>
             </ul>
 
+        </div>
+
+        <div class="col-span-1" v-if="useMedia.media.length">
+            <ul class="my-6 bg-white rounded divide-y divide-gray-200 shadow">
+                <li v-for="(item, index) in useMedia.media" :key="index"
+                    class="p-3 flex items-center justify-between">
+                    <div class="text-sm text-gray-700">{{ item.file.name }}</div>
+
+                    <div v-if="!item.uploaded && !item.error" class="w-40 bg-gray-200 rounded-full h-3 shadow-inner overflow-hidden relative flex items-center justify-center">
+                        <div class="inline-block h-full bg-indigo-600 absolute top-0 left-0" :style="`width: ${item.progress}%`"></div>
+                        <div class="relative z-10 text-xs font-semibold text-center text-white drop-shadow text-shadow">{{ item.progress }}%</div>
+                    </div>
+
+                    <div v-if="item.error" class="text-sm text-red-600">{{ item.error }}</div>
+                    <button type="button"  @click="useMedia.doRemoveFile(index, item)" v-if="item.uploaded" class="text-sm text-indigo-600 underline">
+                        <TrashIcon class="flex-shrink-0 h-4 w-4 text-rose-500 group-hover:text-rose-700 mr-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-125 duration-300" />
+                    </button>
+                </li>
+            </ul>
         </div>
 
     </div>
