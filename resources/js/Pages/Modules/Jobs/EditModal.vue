@@ -7,7 +7,7 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetTextarea from '@/Jetstream/Textarea'
 import JetInputError from '@/Jetstream/InputError.vue';
-import ImageUpload from '@/Shared/ImageUpload'
+import SingleImageUpload from '@/Shared/SingleImageUpload'
 import BaseListbox from '@/Shared/BaseListbox'
 import DatePicker from '@/Shared/DatePicker'
 import AvatarInput from '@/Shared/AvatarInput'
@@ -32,6 +32,7 @@ const form = useForm({
     content: props.editing.content,
     state: props.editing.state,
     avatar: null,
+    files: null,
 });
 
 onMounted(() => {
@@ -371,11 +372,19 @@ const onSubmit = () => {
                                                                 <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
 
                                                                     <div class="col-span-1">
+
                                                                         <JetLabel :value="__('Assets')" class="mb-2"/>
+
                                                                         <AvatarInput v-model="form.avatar" default-src="https://ui-avatars.com/api/?name=A+S&color=7F9CF5&background=EBF4FF"></AvatarInput>
+
                                                                     </div>
 
-                                                                    <ImageUpload></ImageUpload>
+                                                                    <div class="col-span-1">
+                                                                        <SingleImageUpload multiple></SingleImageUpload>
+                                                                    </div>
+
+
+
 
 
                                                                 </div>
