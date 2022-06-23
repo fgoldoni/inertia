@@ -36,23 +36,7 @@ class JobsDatabaseSeeder extends Seeder
             return [];
         })->create(['live_at' => $faker->dateTimeInInterval('now', '-1 days')])->each(function ($job) {
 
-            $area = Category::area()->inRandomOrder()->first();
-
-            $industry = Category::industry()->inRandomOrder()->first();
-
-            $jobType = Category::type(CategoryType::JobType)->inRandomOrder()->first();
-
-            $jobLevel = Category::type(CategoryType::JobLevel)->inRandomOrder()->first();
-
-            $gender = Category::type(CategoryType::Gender)->inRandomOrder()->first();
-
-            $responsibility = Category::type(CategoryType::Responsibility)->inRandomOrder()->first();
-
-            $skill = Category::type(CategoryType::Skill)->inRandomOrder()->first();
-
-            $benefit = Category::type(CategoryType::Benefit)->inRandomOrder()->first();
-
-            $job->syncCategories([$area->id, $industry->id, $jobType->id, $jobLevel->id, $gender->id, $responsibility->id, $skill->id, $benefit->id], false);
+            $this->syncCategories($job);
 
             $job->company_id = Company::where('user_id', $job->user_id)->inRandomOrder()->first()?->id;
 
@@ -73,21 +57,9 @@ class JobsDatabaseSeeder extends Seeder
 
             return [];
         })->create(['live_at' => $faker->dateTimeInInterval('-1 days', '-2 days')])->each(function ($job) {
-            $industry = Category::industry()->limit(10)->inRandomOrder()->first();
 
-            $jobType = Category::type(CategoryType::JobType)->inRandomOrder()->first();
+            $this->syncCategories($job);
 
-            $jobLevel = Category::type(CategoryType::JobLevel)->inRandomOrder()->first();
-
-            $gender = Category::type(CategoryType::Gender)->inRandomOrder()->first();
-
-            $responsibility = Category::type(CategoryType::Responsibility)->inRandomOrder()->first();
-
-            $skill = Category::type(CategoryType::Skill)->inRandomOrder()->first();
-
-            $benefit = Category::type(CategoryType::Benefit)->inRandomOrder()->first();
-
-            $job->syncCategories([$industry->id, $jobType->id, $jobLevel->id, $gender->id, $responsibility->id, $skill->id, $benefit->id], false);
         });
 
         Job::factory(100)->state(function (array $attributes) {
@@ -119,21 +91,7 @@ class JobsDatabaseSeeder extends Seeder
 
             return [];
         })->create(['live_at' => $faker->dateTimeInInterval('-7 days', '-30 days')])->each(function ($job) {
-            $industry = Category::industry()->limit(10)->inRandomOrder()->first();
-
-            $jobType = Category::type(CategoryType::JobType)->inRandomOrder()->first();
-
-            $jobLevel = Category::type(CategoryType::JobLevel)->inRandomOrder()->first();
-
-            $gender = Category::type(CategoryType::Gender)->inRandomOrder()->first();
-
-            $responsibility = Category::type(CategoryType::Responsibility)->inRandomOrder()->first();
-
-            $skill = Category::type(CategoryType::Skill)->inRandomOrder()->first();
-
-            $benefit = Category::type(CategoryType::Benefit)->inRandomOrder()->first();
-
-            $job->syncCategories([$industry->id, $jobType->id, $jobLevel->id, $gender->id, $responsibility->id, $skill->id, $benefit->id], false);
+            $this->syncCategories($job);
         });
 
         Job::factory(100)->state(function (array $attributes) {
@@ -149,21 +107,32 @@ class JobsDatabaseSeeder extends Seeder
             }
             return [];
         })->create(['live_at' => $faker->dateTimeInInterval('-30 days', '-60 days')])->each(function ($job) {
-            $industry = Category::industry()->limit(10)->inRandomOrder()->first();
-
-            $jobType = Category::type(CategoryType::JobType)->inRandomOrder()->first();
-
-            $jobLevel = Category::type(CategoryType::JobLevel)->inRandomOrder()->first();
-
-            $gender = Category::type(CategoryType::Gender)->inRandomOrder()->first();
-
-            $responsibility = Category::type(CategoryType::Responsibility)->inRandomOrder()->first();
-
-            $skill = Category::type(CategoryType::Skill)->inRandomOrder()->first();
-
-            $benefit = Category::type(CategoryType::Benefit)->inRandomOrder()->first();
-
-            $job->syncCategories([$industry->id, $jobType->id, $jobLevel->id, $gender->id, $responsibility->id, $skill->id, $benefit->id], false);
+            $this->syncCategories($job);
         });
+    }
+
+    private function syncCategories(Job $job)
+    {
+        $industry = Category::industry()->limit(10)->inRandomOrder()->first();
+
+        $jobType = Category::type(CategoryType::JobType)->inRandomOrder()->first();
+
+        $jobLevel = Category::type(CategoryType::JobLevel)->inRandomOrder()->first();
+
+        $gender = Category::type(CategoryType::Gender)->inRandomOrder()->first();
+
+        $responsibility = Category::type(CategoryType::Responsibility)->inRandomOrder()->first();
+
+        $skill = Category::type(CategoryType::Skill)->inRandomOrder()->first();
+
+        $benefit = Category::type(CategoryType::Benefit)->inRandomOrder()->first();
+
+        $experience = Category::type(CategoryType::Experience)->inRandomOrder()->first();
+
+        $careerLevel = Category::type(CategoryType::CareerLevel)->inRandomOrder()->first();
+
+        $applyType = Category::type(CategoryType::ApplyType)->inRandomOrder()->first();
+
+        $job->syncCategories([$industry->id, $jobType->id, $jobLevel->id, $gender->id, $responsibility->id, $skill->id, $benefit->id, $experience->id, $careerLevel->id, $applyType->id], false);
     }
 }

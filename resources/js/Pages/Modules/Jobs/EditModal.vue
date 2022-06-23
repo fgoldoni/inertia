@@ -38,17 +38,23 @@ const form = reactive({
 
     area: props.editing.categories.find(element => element.type === "area")?.id,
     industry: props.editing.categories.find(element => element.type === "industry")?.id,
-    jobType: props.editing.categories.find(element => element.type === "jobType")?.id,
+    job_type: props.editing.categories.find(element => element.type === "jobType")?.id,
     jobLevel: props.editing.categories.find(element => element.type === "jobLevel")?.id,
     gender: props.editing.categories.find(element => element.type === "gender")?.id,
     responsibility: props.editing.categories.find(element => element.type === "responsibility")?.id,
     skill: props.editing.categories.find(element => element.type === "skill")?.id,
     benefit: props.editing.categories.find(element => element.type === "benefit")?.id,
+    experience: props.editing.categories.find(element => element.type === "experience")?.id,
+    career_level: props.editing.categories.find(element => element.type === "careerLevel")?.id,
+    apply_type: props.editing.categories.find(element => element.type === "applyType")?.id,
 
     salary_type: props.editing.salary_type,
     salary_min: props.editing.salary_min,
     salary_max: props.editing.salary_max,
     negotiable: props.editing.negotiable,
+
+    iframe: props.editing.iframe,
+
     files: props.editing.attachments,
     state: props.editing.state,
     defaultSrc: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(props.editing.name) + '&color=7F9CF5&background=EBF4FF',
@@ -81,7 +87,7 @@ const onSubmit = () => {
         salary_max: form.salary_max,
         negotiable: form.negotiable,
         salary_type: form.salary_type,
-        jobType: form.jobType,
+        job_type: form.job_type,
         avatar_path: useAvatar.value.media?.avatar_path,
         files: useMedia.value.doMediaFetchIds(),
         ...props.filters
@@ -308,24 +314,24 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <BaseListbox :options="job.data.jobTypes" v-model="form.state"  placeholder="Job Type"/>
+                                                                        <BaseListbox :options="job.data.jobTypes" v-model="form.job_type"  placeholder="Job Type"/>
 
-                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('job_type')" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1">
 
-                                                                        <BaseListbox :options="job.data.experiences" v-model="form.state"  placeholder="Experiences"/>
+                                                                        <BaseListbox :options="job.data.experiences" v-model="form.experience"  placeholder="Experiences"/>
 
-                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('experience')" class="mt-2"/>
 
                                                                     </div>
 
                                                                     <div class="col-span-1">
 
-                                                                        <BaseListbox :options="job.data.careerLevels" v-model="form.state"  placeholder="Career Level"/>
+                                                                        <BaseListbox :options="job.data.careerLevels" v-model="form.career_level"  placeholder="Career Level"/>
 
-                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('career_level')" class="mt-2"/>
 
                                                                     </div>
 
@@ -401,7 +407,7 @@ const onSubmit = () => {
                                                                             </a>
                                                                         </div>
 
-                                                                        <JetInputError :message="form.errors.content" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('iframe')" class="mt-2"/>
                                                                     </div>
 
                                                                 </div>

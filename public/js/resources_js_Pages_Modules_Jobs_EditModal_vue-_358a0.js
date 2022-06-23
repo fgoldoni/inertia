@@ -620,7 +620,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     basePageRoute: String
   },
   setup: function setup(__props, _ref) {
-    var _props$editing$compan, _props$editing$catego, _props$editing$catego2, _props$editing$catego3, _props$editing$catego4, _props$editing$catego5, _props$editing$catego6, _props$editing$catego7, _props$editing$catego8;
+    var _props$editing$compan, _props$editing$catego, _props$editing$catego2, _props$editing$catego3, _props$editing$catego4, _props$editing$catego5, _props$editing$catego6, _props$editing$catego7, _props$editing$catego8, _props$editing$catego9, _props$editing$catego10, _props$editing$catego11;
 
     var expose = _ref.expose;
     expose();
@@ -642,7 +642,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       industry: (_props$editing$catego2 = props.editing.categories.find(function (element) {
         return element.type === "industry";
       })) === null || _props$editing$catego2 === void 0 ? void 0 : _props$editing$catego2.id,
-      jobType: (_props$editing$catego3 = props.editing.categories.find(function (element) {
+      job_type: (_props$editing$catego3 = props.editing.categories.find(function (element) {
         return element.type === "jobType";
       })) === null || _props$editing$catego3 === void 0 ? void 0 : _props$editing$catego3.id,
       jobLevel: (_props$editing$catego4 = props.editing.categories.find(function (element) {
@@ -660,10 +660,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       benefit: (_props$editing$catego8 = props.editing.categories.find(function (element) {
         return element.type === "benefit";
       })) === null || _props$editing$catego8 === void 0 ? void 0 : _props$editing$catego8.id,
+      experience: (_props$editing$catego9 = props.editing.categories.find(function (element) {
+        return element.type === "experience";
+      })) === null || _props$editing$catego9 === void 0 ? void 0 : _props$editing$catego9.id,
+      career_level: (_props$editing$catego10 = props.editing.categories.find(function (element) {
+        return element.type === "careerLevel";
+      })) === null || _props$editing$catego10 === void 0 ? void 0 : _props$editing$catego10.id,
+      apply_type: (_props$editing$catego11 = props.editing.categories.find(function (element) {
+        return element.type === "applyType";
+      })) === null || _props$editing$catego11 === void 0 ? void 0 : _props$editing$catego11.id,
       salary_type: props.editing.salary_type,
       salary_min: props.editing.salary_min,
       salary_max: props.editing.salary_max,
       negotiable: props.editing.negotiable,
+      iframe: props.editing.iframe,
       files: props.editing.attachments,
       state: props.editing.state,
       defaultSrc: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(props.editing.name) + '&color=7F9CF5&background=EBF4FF',
@@ -694,7 +704,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         salary_max: form.salary_max,
         negotiable: form.negotiable,
         salary_type: form.salary_type,
-        jobType: form.jobType,
+        job_type: form.job_type,
         avatar_path: (_useAvatar$value$medi = _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_13__.useAvatar.value.media) === null || _useAvatar$value$medi === void 0 ? void 0 : _useAvatar$value$medi.avatar_path,
         files: _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_12__.useMedia.value.doMediaFetchIds()
       }, props.filters))).then(function (response) {
@@ -1672,43 +1682,43 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   /* PROPS */
                   , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
                     options: $setup.job.data.jobTypes,
-                    modelValue: $setup.form.state,
+                    modelValue: $setup.form.job_type,
                     "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-                      return $setup.form.state = $event;
+                      return $setup.form.job_type = $event;
                     }),
                     placeholder: "Job Type"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                    message: $setup.form.errors.state,
+                    message: $setup.form.errors.get('job_type'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
                     options: $setup.job.data.experiences,
-                    modelValue: $setup.form.state,
+                    modelValue: $setup.form.experience,
                     "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-                      return $setup.form.state = $event;
+                      return $setup.form.experience = $event;
                     }),
                     placeholder: "Experiences"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                    message: $setup.form.errors.state,
+                    message: $setup.form.errors.get('experience'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
                     options: $setup.job.data.careerLevels,
-                    modelValue: $setup.form.state,
+                    modelValue: $setup.form.career_level,
                     "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
-                      return $setup.form.state = $event;
+                      return $setup.form.career_level = $event;
                     }),
                     placeholder: "Career Level"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                    message: $setup.form.errors.state,
+                    message: $setup.form.errors.get('career_level'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
@@ -1787,7 +1797,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "class": "flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500",
                     "aria-hidden": "true"
                   }), _hoisted_45])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                    message: $setup.form.errors.content,
+                    message: $setup.form.errors.get('iframe'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */

@@ -26,6 +26,7 @@ class UpdateJobRequest extends FormRequest
             'salary_min' => ['required', 'integer'],
             'salary_max' => ['required', 'integer'],
             'salary_type' => [new Enum(SalaryType::class)],
+            'job_type' => ['required', Rule::exists('categories', 'id')],
             'negotiable' => ['required', 'boolean'],
             'avatar_path' => ['nullable', 'max:256', Rule::exists('categories', 'id')],
             'files.*' => ['nullable', 'max:2048',

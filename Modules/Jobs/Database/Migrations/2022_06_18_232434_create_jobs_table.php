@@ -28,7 +28,6 @@ return new class extends Migration {
             $table->string('salary_type')->default((SalaryType::Year)->value);
             $table->boolean('negotiable')->default(true);
             $table->string('state')->default((JobState::Draft)->value);
-
             $table->string('avatar_path', 2048)->nullable();
 
             $table->foreignId('company_id')->nullable()->index()->references('id')->on('companies')->onDelete('cascade');
@@ -39,6 +38,7 @@ return new class extends Migration {
             $table->date('closing_to')->nullable();
 
             $table->datetime('live_at')->nullable();
+            $table->string('address')->nullable();
             $table->text('iframe')->nullable();
             $table->integer('view_count')->default(0);
 
