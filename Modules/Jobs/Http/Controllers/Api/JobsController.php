@@ -56,6 +56,7 @@ class JobsController extends Controller
         $result = $this->jobsRepository->initCategories($this->categoriesRepository->get(['id', 'name', 'type']));
 
         $result['states'] = $this->jobsRepository->getStates();
+        $result['salaryTypes'] = $this->jobsRepository->salaryTypes();
         $result['roles'] = $this->rolesRepository->all(['id', 'name']);
         $result['companies'] = $this->companiesRepository->withCriteria([
             new ByUser($job->user_id)

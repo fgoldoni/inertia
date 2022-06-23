@@ -15,15 +15,13 @@ enum CategoryType: string
 
     case ApplyType = 'applyType';
 
-    case SalaryType = 'salaryType';
-
     case Gender = 'gender';
 
     case Experience = 'experience';
 
     case Benefit = 'benefit';
 
-    case Responsibility = 'Responsibility';
+    case Responsibility = 'responsibility';
 
     case Skill = 'skill';
 }

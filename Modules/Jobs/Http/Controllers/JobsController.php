@@ -17,6 +17,7 @@ use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Jobs\Entities\Job;
+use Modules\Jobs\Enums\SalaryType;
 use Modules\Jobs\Http\Requests\StoreJobRequest;
 use Modules\Jobs\Http\Requests\UpdateJobRequest;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
@@ -94,7 +95,7 @@ class JobsController extends Controller
                 new EagerLoad(['user:id,name', 'company:id,name', 'categories:id,name,type', 'country:id,name,emoji', 'city:id,name', 'division:id,name', 'attachments' => function ($query) {
                     $query->select(['id', 'name', 'filename', 'disk', 'attachable_id', 'attachable_type'])->where('attachments.disk', config('app.system.disks.uploads'));
                 }]),
-            ])->find($job->id, ['id', 'name', 'content', 'avatar_path', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at'])
+            ])->find($job->id, ['id', 'name', 'content', 'salary_min', 'salary_max', 'negotiable', 'salary_type', 'avatar_path', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at'])
         ]);
     }
 

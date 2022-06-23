@@ -33,6 +33,22 @@ const isOpen = ref(true)
 const form = reactive({
     id: props.editing.id,
     name: props.editing.name,
+    content: props.editing.content,
+    company: props.editing.company?.id,
+
+    area: props.editing.categories.find(element => element.type === "area")?.id,
+    industry: props.editing.categories.find(element => element.type === "industry")?.id,
+    jobType: props.editing.categories.find(element => element.type === "jobType")?.id,
+    jobLevel: props.editing.categories.find(element => element.type === "jobLevel")?.id,
+    gender: props.editing.categories.find(element => element.type === "gender")?.id,
+    responsibility: props.editing.categories.find(element => element.type === "responsibility")?.id,
+    skill: props.editing.categories.find(element => element.type === "skill")?.id,
+    benefit: props.editing.categories.find(element => element.type === "benefit")?.id,
+
+    salary_type: props.editing.salary_type,
+    salary_min: props.editing.salary_min,
+    salary_max: props.editing.salary_max,
+    negotiable: props.editing.negotiable,
     files: props.editing.attachments,
     state: props.editing.state,
     defaultSrc: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(props.editing.name) + '&color=7F9CF5&background=EBF4FF',
@@ -57,6 +73,15 @@ const onSubmit = () => {
 
     axios.put(route('admin.jobs.update', form.id), pickBy({
         name: form.name,
+        content: form.content,
+        company: form.company,
+        area: form.area,
+        salary_min: form.salary_min,
+        industry: form.industry,
+        salary_max: form.salary_max,
+        negotiable: form.negotiable,
+        salary_type: form.salary_type,
+        jobType: form.jobType,
         avatar_path: useAvatar.value.media?.avatar_path,
         files: useMedia.value.doMediaFetchIds(),
         ...props.filters
@@ -80,7 +105,7 @@ const onSubmit = () => {
                     leave-from="opacity-100"
                     leave-to="opacity-0">
 
-        <Dialog as="div" class="relative z-10" @close="closeModal()">
+        <Dialog as="div" class="relative z-10">
 
             <TransitionChild as="template"
                              enter="transition-opacity ease-linear duration-300"
@@ -178,7 +203,7 @@ const onSubmit = () => {
                                                                             </a>
                                                                         </div>
 
-                                                                        <JetInputError :message="form.errors.content" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('content')" class="mt-2"/>
                                                                     </div>
 
                                                                 </div>
@@ -191,25 +216,25 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <BaseListbox :options="job.data.companies" v-model="form.company_id"  placeholder="Companies"/>
+                                                                        <BaseListbox :options="job.data.companies" v-model="form.company"  placeholder="Companies"/>
 
-                                                                        <JetInputError :message="form.errors.company_id" class="mt-2"/>
-
-                                                                    </div>
-
-                                                                    <div class="col-span-1 sm:col-span-2">
-
-                                                                        <BaseListbox :options="job.data.areas" v-model="form.state"  placeholder="Areas"/>
-
-                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('company')" class="mt-2"/>
 
                                                                     </div>
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <BaseListbox :options="job.data.industries" v-model="form.state"  placeholder="Industries"/>
+                                                                        <BaseListbox :options="job.data.areas" v-model="form.area"  placeholder="Areas"/>
 
-                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('area')" class="mt-2"/>
+
+                                                                    </div>
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+
+                                                                        <BaseListbox :options="job.data.industries" v-model="form.industry"  placeholder="Industries"/>
+
+                                                                        <JetInputError :message="form.errors.get('industry')" class="mt-2"/>
 
                                                                     </div>
 
@@ -229,11 +254,11 @@ const onSubmit = () => {
                                                                             id="salary_min"
                                                                             name="salary_min"
                                                                             v-model="form.salary_min"
-                                                                            type="text"
+                                                                            type="number"
                                                                             class="mt-1 block w-full"
                                                                             />
 
-                                                                        <JetInputError :message="form.errors.salary_min" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('salary_min')" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1">
@@ -244,30 +269,32 @@ const onSubmit = () => {
                                                                             id="salary_max"
                                                                             name="salary_max"
                                                                             v-model="form.salary_max"
-                                                                            type="text"
+                                                                            type="number"
                                                                             class="mt-1 block w-full"
                                                                             />
 
-                                                                        <JetInputError :message="form.errors.salary_max" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('salary_max')" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1 sm:col-span-2">
                                                                         <SwitchGroup as="div" class="flex items-center whitespace-nowrap">
-                                                                            <Switch v-model="form.enabled" :class="[form.enabled ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
-                                                                                <span aria-hidden="true" :class="[form.enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
+                                                                            <Switch v-model="form.negotiable" :class="[form.negotiable ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
+                                                                                <span aria-hidden="true" :class="[form.negotiable ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
                                                                             </Switch>
                                                                             <SwitchLabel as="span" class="ml-3">
                                                                                 <span class="text-sm font-medium text-gray-500">Negotiable Salary</span>
                                                                             </SwitchLabel>
                                                                         </SwitchGroup>
 
+                                                                        <JetInputError :message="form.errors.get('negotiable')" class="mt-2"/>
+
                                                                     </div>
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <BaseListbox :options="job.data.salaryTypes" v-model="form.state"  placeholder="Salary Types"/>
+                                                                        <BaseListbox :options="job.data.salaryTypes" v-model="form.salary_type"  placeholder="Salary Types"/>
 
-                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('salary_type')" class="mt-2"/>
 
                                                                     </div>
 

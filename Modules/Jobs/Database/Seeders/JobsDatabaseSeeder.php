@@ -36,7 +36,9 @@ class JobsDatabaseSeeder extends Seeder
             return [];
         })->create(['live_at' => $faker->dateTimeInInterval('now', '-1 days')])->each(function ($job) {
 
-            $industry = Category::area()->inRandomOrder()->first();
+            $area = Category::area()->inRandomOrder()->first();
+
+            $industry = Category::industry()->inRandomOrder()->first();
 
             $jobType = Category::type(CategoryType::JobType)->inRandomOrder()->first();
 
@@ -50,7 +52,7 @@ class JobsDatabaseSeeder extends Seeder
 
             $benefit = Category::type(CategoryType::Benefit)->inRandomOrder()->first();
 
-            $job->syncCategories([$industry->id, $jobType->id, $jobLevel->id, $gender->id, $responsibility->id, $skill->id, $benefit->id], false);
+            $job->syncCategories([$area->id, $industry->id, $jobType->id, $jobLevel->id, $gender->id, $responsibility->id, $skill->id, $benefit->id], false);
 
             $job->company_id = Company::where('user_id', $job->user_id)->inRandomOrder()->first()?->id;
 

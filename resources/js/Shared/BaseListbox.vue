@@ -54,7 +54,7 @@ import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
 
 const props = defineProps({
     options: [Array, Object],
-    modelValue: [String, Number, Array],
+    modelValue: [String, Number, Array, Object],
     placeholder: {
         type: String,
         default: "Select option",
@@ -68,6 +68,10 @@ const label = computed(() => {
         .filter(option => {
             if (Array.isArray(props.modelValue)) {
                 return props.modelValue.includes(option.id);
+            }
+
+            if (_.isObject(props.modelValue)) {
+                return Object.values(props.modelValue).includes(option.id);
             }
 
             return props.modelValue === option.id;

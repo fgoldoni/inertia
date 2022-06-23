@@ -294,7 +294,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'Input',
   props: {
-    modelValue: String,
+    modelValue: [String, Number],
     name: {
       type: String,
       "default": ''

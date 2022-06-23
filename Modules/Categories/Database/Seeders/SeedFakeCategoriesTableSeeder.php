@@ -239,12 +239,6 @@ class SeedFakeCategoriesTableSeeder extends Seeder
         Category::factory()->create(['name' => 'By Email', 'type' => CategoryType::ApplyType]);
         Category::factory()->create(['name' => 'Call To Apply', 'type' => CategoryType::ApplyType]);
 
-        Category::factory()->create(['name' => 'Monthly', 'type' => CategoryType::SalaryType]);
-        Category::factory()->create(['name' => 'Weekly', 'type' => CategoryType::SalaryType]);
-        Category::factory()->create(['name' => 'Daily', 'type' => CategoryType::SalaryType]);
-        Category::factory()->create(['name' => 'Hourly', 'type' => CategoryType::SalaryType]);
-        Category::factory()->create(['name' => 'Yearly', 'type' => CategoryType::SalaryType]);
-
         Category::factory()->create(['name' => 'Be involved in every step of the product design cycle from discovery to developer handoff and user acceptance testing.', 'type' => CategoryType::Responsibility]);
         Category::factory()->create(['name' => 'Work with BAs, product managers and tech teams to lead the Product Design', 'type' => CategoryType::Responsibility]);
         Category::factory()->create(['name' => 'Maintain quality of the design process and ensure that when designs are translated into code they accurately reflect the design specifications.', 'type' => CategoryType::Responsibility]);

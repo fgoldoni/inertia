@@ -37,6 +37,7 @@ class Job extends Model
     protected $casts = [
         'state' => JobState::class,
         'salary_type' => SalaryType::class,
+        'negotiable' => 'boolean',
         'closing_to' => 'date'
     ];
 

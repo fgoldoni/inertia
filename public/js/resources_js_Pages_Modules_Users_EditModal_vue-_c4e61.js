@@ -273,7 +273,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'Input',
   props: {
-    modelValue: String,
+    modelValue: [String, Number],
     name: {
       type: String,
       "default": ''
@@ -609,7 +609,7 @@ __webpack_require__.r(__webpack_exports__);
   __name: 'BaseListbox',
   props: {
     options: [Array, Object],
-    modelValue: [String, Number, Array],
+    modelValue: [String, Number, Array, Object],
     placeholder: {
       type: String,
       "default": "Select option"
@@ -627,6 +627,10 @@ __webpack_require__.r(__webpack_exports__);
       return props.options.filter(function (option) {
         if (Array.isArray(props.modelValue)) {
           return props.modelValue.includes(option.id);
+        }
+
+        if (_.isObject(props.modelValue)) {
+          return Object.values(props.modelValue).includes(option.id);
         }
 
         return props.modelValue === option.id;

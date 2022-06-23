@@ -15,6 +15,7 @@ use Modules\Jobs\Entities\Category;
 use Modules\Jobs\Entities\Job;
 use Modules\Jobs\Entities\Role;
 use Modules\Jobs\Enums\JobState;
+use Modules\Jobs\Enums\SalaryType;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 
 /**
@@ -55,12 +56,33 @@ class EloquentJobsRepository extends RepositoryAbstract implements JobsRepositor
             'areas' => $categories->areas(),
             'industries' => array_values($categories->industries()->toArray()),
             'jobTypes' => array_values($categories->jobTypes()->toArray()),
-            'salaryTypes' => array_values($categories->salaryTypes()->toArray()),
             'jobLevels' => array_values($categories->jobLevels()->toArray()),
             'genders' => array_values($categories->genders()->toArray()),
             'experiences' => array_values($categories->experiences()->toArray()),
             'careerLevels' => array_values($categories->careerLevels()->toArray()),
             'applyTypes' => array_values($categories->applyTypes()->toArray()),
         ];
+    }
+
+    public function salaryTypes(): Collection
+    {
+        return collect([
+            [
+                'id' => (SalaryType::Hour)->value,
+                'name' => ucfirst((SalaryType::Hour)->value),
+            ],
+            [
+                'id' => (SalaryType::Day)->value,
+                'name' => ucfirst((SalaryType::Day)->value),
+            ],
+            [
+                'id' => (SalaryType::Month)->value,
+                'name' => ucfirst((SalaryType::Month)->value),
+            ],
+            [
+                'id' => (SalaryType::Year)->value,
+                'name' => ucfirst((SalaryType::Year)->value),
+            ]
+        ]);
     }
 }
