@@ -1936,7 +1936,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                       return $setup.form.country_id = $event;
                     }),
                     placeholder: "No category",
-                    "api-url": "api.categories.index",
+                    "api-url": "api.countries.index",
                     label: "Country",
                     "default-value": (_$setup$props$editing = $setup.props.editing.country) === null || _$setup$props$editing === void 0 ? void 0 : _$setup$props$editing.name,
                     key: "select-country"
@@ -1953,7 +1953,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                       return $setup.form.city_id = $event;
                     }),
                     placeholder: "No city",
-                    "api-url": "api.categories.index",
+                    "api-url": "api.cities.index",
                     label: "City",
                     "default-value": (_$setup$props$editing2 = $setup.props.editing.city) === null || _$setup$props$editing2 === void 0 ? void 0 : _$setup$props$editing2.name,
                     key: "select-city"

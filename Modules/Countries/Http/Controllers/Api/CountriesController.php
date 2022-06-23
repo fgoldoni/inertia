@@ -2,19 +2,32 @@
 
 namespace Modules\Countries\Http\Controllers\Api;
 
+use App\Repositories\Criteria\OrderBy;
+use App\Repositories\Criteria\WhereLike;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Categories\Repositories\Contracts\CategoriesRepository;
+use Modules\Countries\Repositories\Contracts\CitiesRepository;
+use Modules\Countries\Repositories\Contracts\CountriesRepository;
+use Modules\Countries\Repositories\Contracts\DivisionsRepository;
 
 class CountriesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
+    public function __construct(private readonly ResponseFactory $response, private readonly CountriesRepository $countriesRepository)
     {
-        return view('countries::index');
+    }
+
+    public function index(Request $request)
+    {
+        $countries = $this->countriesRepository->withCriteria([
+            new WhereLike(['world_countries.id', 'world_countries.name', 'world_countries.full_name'], $request->get('search')),
+            new OrderBy('name', 'asc'),
+        ])->all(['id', 'name', 'emoji']);
+
+        return $this->response->json(['data' => $countries], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
     /**

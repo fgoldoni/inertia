@@ -363,7 +363,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
-                                                                        <BaseComboboxes v-model="form.country_id" placeholder="No category" api-url="api.categories.index" label="Country" :default-value="props.editing.country?.name" key="select-country"></BaseComboboxes>
+                                                                        <BaseComboboxes v-model="form.country_id" placeholder="No category" api-url="api.countries.index" label="Country" :default-value="props.editing.country?.name" key="select-country"></BaseComboboxes>
 
                                                                         <JetInputError :message="form.errors.get('country_id')" class="mt-2"/>
 
@@ -371,7 +371,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
-                                                                        <BaseComboboxes v-model="form.city_id" placeholder="No city" api-url="api.categories.index" label="City" :default-value="props.editing.city?.name" key="select-city"></BaseComboboxes>
+                                                                        <BaseComboboxes v-model="form.city_id" placeholder="No city" api-url="api.cities.index" label="City" :default-value="props.editing.city?.name" key="select-city"></BaseComboboxes>
 
                                                                         <JetInputError :message="form.errors.get('city_id')" class="mt-2"/>
 
