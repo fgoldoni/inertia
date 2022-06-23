@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Countries\Http\Controllers\Api\CitiesController;
+use Modules\Countries\Http\Controllers\Api\CountriesController;
+use Modules\Countries\Http\Controllers\Api\DivisionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/countries', function (Request $request) {
-    return $request->user();
+Route::controller(CountriesController::class)->prefix('countries')->name('api.countries.')->group(function () {
+    Route::get('/', 'index')->name('index');
+});
+
+Route::controller(CitiesController::class)->prefix('cities')->name('api.cities.')->group(function () {
+    Route::get('/', 'index')->name('index');
+});
+
+Route::controller(DivisionsController::class)->prefix('divisions')->name('api.divisions.')->group(function () {
+    Route::get('/', 'index')->name('index');
 });

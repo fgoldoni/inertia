@@ -12,6 +12,7 @@ import ImageUpload from '@/Shared/ImageUpload'
 import BaseListbox from '@/Shared/BaseListbox'
 import DatePicker from '@/Shared/DatePicker'
 import AvatarInput from '@/Shared/AvatarInput'
+import BaseComboboxes from '@/Shared/BaseComboboxes'
 import { useJobs } from '@/Composables/UseJobs'
 import {useMedia} from "@/Composables/UseMedia";
 import {useAvatar} from "@/Composables/UseAvatar";
@@ -53,6 +54,8 @@ const form = reactive({
     salary_max: props.editing.salary_max,
     negotiable: props.editing.negotiable,
 
+    city_id: props.editing.city_id,
+    country_id: props.editing.country_id,
     iframe: props.editing.iframe,
 
     files: props.editing.attachments,
@@ -360,32 +363,18 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
-                                                                        <JetLabel for="country_id" value="Country" />
+                                                                        <BaseComboboxes v-model="form.country_id" placeholder="No category" api-url="api.categories.index" label="Country" :default-value="props.editing.country?.name" key="select-country"></BaseComboboxes>
 
-                                                                        <JetInput
-                                                                            id="country_id"
-                                                                            name="country_id"
-                                                                            v-model="form.country_id"
-                                                                            type="text"
-                                                                            class="mt-1 block w-full"
-                                                                            />
+                                                                        <JetInputError :message="form.errors.get('country_id')" class="mt-2"/>
 
-                                                                        <JetInputError :message="form.errors.country_id" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1">
 
-                                                                        <JetLabel for="city_id" value="City" />
+                                                                        <BaseComboboxes v-model="form.city_id" placeholder="No city" api-url="api.categories.index" label="City" :default-value="props.editing.city?.name" key="select-city"></BaseComboboxes>
 
-                                                                        <JetInput
-                                                                            id="city_id"
-                                                                            name="city_id"
-                                                                            v-model="form.city_id"
-                                                                            type="text"
-                                                                            class="mt-1 block w-full"
-                                                                            />
+                                                                        <JetInputError :message="form.errors.get('city_id')" class="mt-2"/>
 
-                                                                        <JetInputError :message="form.errors.city_id" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1 sm:col-span-2">

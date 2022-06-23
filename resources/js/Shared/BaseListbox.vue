@@ -54,7 +54,10 @@ import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
 
 const props = defineProps({
     options: [Array, Object],
-    modelValue: [String, Number, Array, Object],
+    modelValue: {
+        type: [String, Number, Array, Object],
+        default: null,
+    },
     placeholder: {
         type: String,
         default: "Select option",

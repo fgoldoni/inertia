@@ -284,10 +284,7 @@ function render(_ctx, _cache) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dialog, {
         as: "div",
-        "class": "relative z-10",
-        onClose: _cache[24] || (_cache[24] = function ($event) {
-          return _ctx.closeModal();
-        })
+        "class": "relative z-10"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TransitionChild, {
@@ -382,49 +379,49 @@ function render(_ctx, _cache) {
                     "class": "flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500",
                     "aria-hidden": "true"
                   }), _hoisted_18])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-                    message: _ctx.form.errors.content,
+                    message: _ctx.form.errors.get('content'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseListbox, {
                     options: _ctx.job.data.companies,
-                    modelValue: _ctx.form.company_id,
+                    modelValue: _ctx.form.company,
                     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-                      return _ctx.form.company_id = $event;
+                      return _ctx.form.company = $event;
                     }),
                     placeholder: "Companies"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-                    message: _ctx.form.errors.company_id,
+                    message: _ctx.form.errors.get('company'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseListbox, {
                     options: _ctx.job.data.areas,
-                    modelValue: _ctx.form.state,
+                    modelValue: _ctx.form.area,
                     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-                      return _ctx.form.state = $event;
+                      return _ctx.form.area = $event;
                     }),
                     placeholder: "Areas"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-                    message: _ctx.form.errors.state,
+                    message: _ctx.form.errors.get('area'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseListbox, {
                     options: _ctx.job.data.industries,
-                    modelValue: _ctx.form.state,
+                    modelValue: _ctx.form.industry,
                     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-                      return _ctx.form.state = $event;
+                      return _ctx.form.industry = $event;
                     }),
                     placeholder: "Industries"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-                    message: _ctx.form.errors.state,
+                    message: _ctx.form.errors.get('industry'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
@@ -438,12 +435,12 @@ function render(_ctx, _cache) {
                     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
                       return _ctx.form.salary_min = $event;
                     }),
-                    type: "text",
+                    type: "number",
                     "class": "mt-1 block w-full"
                   }, null, 8
                   /* PROPS */
                   , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-                    message: _ctx.form.errors.salary_min,
+                    message: _ctx.form.errors.get('salary_min'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
@@ -457,12 +454,12 @@ function render(_ctx, _cache) {
                     "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
                       return _ctx.form.salary_max = $event;
                     }),
-                    type: "text",
+                    type: "number",
                     "class": "mt-1 block w-full"
                   }, null, 8
                   /* PROPS */
                   , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-                    message: _ctx.form.errors.salary_max,
+                    message: _ctx.form.errors.get('salary_max'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
@@ -472,16 +469,16 @@ function render(_ctx, _cache) {
                   }, {
                     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Switch, {
-                        modelValue: _ctx.form.enabled,
+                        modelValue: _ctx.form.negotiable,
                         "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
-                          return _ctx.form.enabled = $event;
+                          return _ctx.form.negotiable = $event;
                         }),
-                        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([_ctx.form.enabled ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'])
+                        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([_ctx.form.negotiable ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'])
                       }, {
                         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
                             "aria-hidden": "true",
-                            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([_ctx.form.enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'])
+                            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([_ctx.form.negotiable ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'])
                           }, null, 2
                           /* CLASS */
                           )];
@@ -506,59 +503,64 @@ function render(_ctx, _cache) {
                     _: 1
                     /* STABLE */
 
-                  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseListbox, {
+                  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
+                    message: _ctx.form.errors.get('negotiable'),
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseListbox, {
                     options: _ctx.job.data.salaryTypes,
-                    modelValue: _ctx.form.state,
+                    modelValue: _ctx.form.salary_type,
                     "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-                      return _ctx.form.state = $event;
+                      return _ctx.form.salary_type = $event;
                     }),
                     placeholder: "Salary Types"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-                    message: _ctx.form.errors.state,
+                    message: _ctx.form.errors.get('salary_type'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseListbox, {
                     options: _ctx.job.data.jobTypes,
-                    modelValue: _ctx.form.state,
+                    modelValue: _ctx.form.job_type,
                     "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-                      return _ctx.form.state = $event;
+                      return _ctx.form.job_type = $event;
                     }),
                     placeholder: "Job Type"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-                    message: _ctx.form.errors.state,
+                    message: _ctx.form.errors.get('job_type'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseListbox, {
                     options: _ctx.job.data.experiences,
-                    modelValue: _ctx.form.state,
+                    modelValue: _ctx.form.experience,
                     "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-                      return _ctx.form.state = $event;
+                      return _ctx.form.experience = $event;
                     }),
                     placeholder: "Experiences"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-                    message: _ctx.form.errors.state,
+                    message: _ctx.form.errors.get('experience'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BaseListbox, {
                     options: _ctx.job.data.careerLevels,
-                    modelValue: _ctx.form.state,
+                    modelValue: _ctx.form.career_level,
                     "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
-                      return _ctx.form.state = $event;
+                      return _ctx.form.career_level = $event;
                     }),
                     placeholder: "Career Level"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-                    message: _ctx.form.errors.state,
+                    message: _ctx.form.errors.get('career_level'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
@@ -637,7 +639,7 @@ function render(_ctx, _cache) {
                     "class": "flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500",
                     "aria-hidden": "true"
                   }), _hoisted_44])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_JetInputError, {
-                    message: _ctx.form.errors.content,
+                    message: _ctx.form.errors.get('iframe'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */

@@ -609,7 +609,10 @@ __webpack_require__.r(__webpack_exports__);
   __name: 'BaseListbox',
   props: {
     options: [Array, Object],
-    modelValue: [String, Number, Array, Object],
+    modelValue: {
+      type: [String, Number, Array, Object],
+      "default": null
+    },
     placeholder: {
       type: String,
       "default": "Select option"
