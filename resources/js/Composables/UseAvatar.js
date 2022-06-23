@@ -23,9 +23,9 @@ export const useAvatar = ref({
                     this.media.avatar_url = defaultSrc
                 })
                 .catch(error => {
-                    this.media.error = `Upload failed. Please try again later.`;
+                    this.error = `Upload failed. Please try again later.`;
                     if (error?.response.status === 422) {
-                        this.media.error = error.response.data.errors.file[0];
+                        this.error = error.response.data.errors.file[0];
                     }
                 });
         }
@@ -75,10 +75,11 @@ export const useAvatar = ref({
             })
 
             .catch(error => {
-                this.media.error = `Upload failed. Please try again later.`;
+                debugger
+                this.error = `Upload failed. Please try again later.`;
 
                 if (error?.response.status === 422) {
-                    this.media.error = error.response.data.errors.file[0];
+                    this.error = error.response.data.errors.file[0];
                 }
             });
     }

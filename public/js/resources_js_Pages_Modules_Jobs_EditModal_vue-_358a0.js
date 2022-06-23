@@ -28,10 +28,10 @@ var useAvatar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
         _this.media.avatar_path = null;
         _this.media.avatar_url = defaultSrc;
       })["catch"](function (error) {
-        _this.media.error = "Upload failed. Please try again later.";
+        _this.error = "Upload failed. Please try again later.";
 
         if ((error === null || error === void 0 ? void 0 : error.response.status) === 422) {
-          _this.media.error = error.response.data.errors.file[0];
+          _this.error = error.response.data.errors.file[0];
         }
       });
     }
@@ -69,10 +69,11 @@ var useAvatar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
         uploaded: true
       });
     })["catch"](function (error) {
-      _this2.media.error = "Upload failed. Please try again later.";
+      debugger;
+      _this2.error = "Upload failed. Please try again later.";
 
       if ((error === null || error === void 0 ? void 0 : error.response.status) === 422) {
-        _this2.media.error = error.response.data.errors.file[0];
+        _this2.error = error.response.data.errors.file[0];
       }
     });
   }
@@ -252,9 +253,11 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
     });
   },
   doSubmitFiles: function doSubmitFiles() {
+    var _this4 = this;
+
     this.media.filter(function (media) {
       return !media.uploaded;
-    }).forEach(function (media) {
+    }).forEach(function (media, index) {
       var form = new FormData();
       form.append('file', media.file);
       axios.post(route('api.attachments.store'), form, {
@@ -265,11 +268,18 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
         media.id = res.data.data.id;
         media.url = res.data.data.url;
         media.uploaded = true;
+        _this4.error = null;
       })["catch"](function (error) {
         media.error = "Upload failed. Please try again later.";
 
         if ((error === null || error === void 0 ? void 0 : error.response.status) === 422) {
           media.error = error.response.data.errors.file[0];
+        }
+
+        if (!_this4.multiple) {
+          _this4.media.splice(index, 1);
+
+          _this4.error = media.error;
         }
       });
     });
@@ -1907,10 +1917,18 @@ var _hoisted_2 = ["src"];
 var _hoisted_3 = {
   "class": "absolute top-0 h-20 w-20 rounded-full ring-4 ring-primary-100 bg-black bg-opacity-25 flex items-center justify-center"
 };
+var _hoisted_4 = {
+  key: 0,
+  "class": "col-span-1"
+};
+var _hoisted_5 = {
+  key: 0,
+  "class": "text-xs text-rose-500"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$setup$useAvatar$med;
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "file",
     accept: "image/*",
     "class": "hidden",
@@ -1944,7 +1962,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "rounded-full hover:bg-white hover:bg-opacity-25 p-2 focus:outline-none text-white transition duration-200"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["XIcon"], {
     "class": "flex-shrink-0 h-4 w-4"
-  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
+  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), $setup.useAvatar.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [$setup.useAvatar.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.useAvatar.error), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -2199,8 +2221,16 @@ var _hoisted_17 = {
   key: 3,
   "class": "text-xs text-rose-500"
 };
+var _hoisted_18 = {
+  key: 2,
+  "class": "col-span-1"
+};
+var _hoisted_19 = {
+  key: 0,
+  "class": "text-xs text-rose-500"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$setup.props.multiple || !$setup.useMedia.media.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$setup.props.multiple || !$setup.useMedia.media.length || $setup.useMedia.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onDrop: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       var _$setup$useMedia;
 
@@ -2272,7 +2302,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 2
   /* CLASS */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.useMedia.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [$setup.useMedia.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.useMedia.error), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),

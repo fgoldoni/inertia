@@ -93,7 +93,7 @@ export const useMedia = ref({
     },
     doSubmitFiles() {
 
-        this.media.filter(media => !media.uploaded).forEach(media => {
+        this.media.filter(media => !media.uploaded).forEach((media, index) => {
 
             let form = new FormData;
 
@@ -108,13 +108,21 @@ export const useMedia = ref({
                     media.id = res.data.data.id
                     media.url = res.data.data.url
                     media.uploaded = true
+                    this.error = null
                 })
 
                 .catch(error => {
+
                     media.error = `Upload failed. Please try again later.`;
 
                     if (error?.response.status === 422) {
+
                         media.error = error.response.data.errors.file[0];
+                    }
+
+                    if (!this.multiple) {
+                        this.media.splice(index, 1)
+                        this.error = media.error
                     }
                 });
         });

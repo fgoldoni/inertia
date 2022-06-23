@@ -64,6 +64,10 @@ watch(() => props.modelValue, (file) => {
 
         </div>
     </div>
+
+    <div class="col-span-1" v-if="useAvatar.error">
+        <div v-if="useAvatar.error" class="text-xs text-rose-500">{{ useAvatar.error }}</div>
+    </div>
 </template>
 
 

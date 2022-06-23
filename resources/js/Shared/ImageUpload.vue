@@ -25,7 +25,7 @@ onMounted(() => {
 
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 
-        <div class="col-span-1"  v-if="props.multiple || !useMedia.media.length">
+        <div class="col-span-1"  v-if="props.multiple || !useMedia.media.length || useMedia.error">
             <div
                 @drop.prevent="useMedia.doDroppedFiles"
                 @dragover.prevent="useMedia.dragging = true"
@@ -68,6 +68,10 @@ onMounted(() => {
                 </li>
             </ul>
 
+        </div>
+
+        <div class="col-span-1" v-if="useMedia.error">
+            <div v-if="useMedia.error" class="text-xs text-rose-500">{{ useMedia.error }}</div>
         </div>
 
     </div>
