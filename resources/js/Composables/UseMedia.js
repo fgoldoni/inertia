@@ -34,7 +34,8 @@ export const useMedia = ref({
 
         if (!this.multiple) files = [files[0]]
 
-        files.forEach(file => {
+        files.filter((e) => !e).forEach(file => {
+
             this.push({
                 id: file.id,
                 file: file,

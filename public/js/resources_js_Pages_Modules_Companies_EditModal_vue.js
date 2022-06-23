@@ -51,7 +51,9 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
     var _this2 = this;
 
     if (!this.multiple) files = [files[0]];
-    files.forEach(function (file) {
+    files.filter(function (e) {
+      return !e;
+    }).forEach(function (file) {
       _this2.push({
         id: file.id,
         file: file,
@@ -583,7 +585,10 @@ __webpack_require__.r(__webpack_exports__);
     var fileUpload = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(null);
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
       _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_0__.useMedia.value.multiple = props.multiple;
-      _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_0__.useMedia.value.doLoadFiles(props.modelValue);
+
+      if (Array.isArray(props.modelValue) && props.modelValue.length) {
+        _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_0__.useMedia.value.doLoadFiles(props.modelValue);
+      }
     });
     var __returned__ = {
       fileUpload: fileUpload,

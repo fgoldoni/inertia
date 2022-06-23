@@ -399,6 +399,8 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
+                                                                        <JetLabel :value="__('Cover Image')" class="mb-2"/>
+
                                                                         <ImageUpload v-model="form.files"></ImageUpload>
 
                                                                         <JetInputError :message="form.errors.get('files')" class="mt-2"/>

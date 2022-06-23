@@ -117,7 +117,9 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
     var _this2 = this;
 
     if (!this.multiple) files = [files[0]];
-    files.forEach(function (file) {
+    files.filter(function (e) {
+      return !e;
+    }).forEach(function (file) {
       _this2.push({
         id: file.id,
         file: file,
@@ -836,7 +838,10 @@ __webpack_require__.r(__webpack_exports__);
     var fileUpload = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(null);
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
       _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_0__.useMedia.value.multiple = props.multiple;
-      _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_0__.useMedia.value.doLoadFiles(props.modelValue);
+
+      if (Array.isArray(props.modelValue) && props.modelValue.length) {
+        _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_0__.useMedia.value.doLoadFiles(props.modelValue);
+      }
     });
     var __returned__ = {
       fileUpload: fileUpload,
@@ -1659,7 +1664,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "default-src": "https://ui-avatars.com/api/?name=A+S&color=7F9CF5&background=EBF4FF"
                   }, null, 8
                   /* PROPS */
-                  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ImageUpload"], {
+                  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                    value: _ctx.__('Cover Image'),
+                    "class": "mb-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ImageUpload"], {
                     modelValue: $setup.form.files,
                     "onUpdate:modelValue": _cache[17] || (_cache[17] = function ($event) {
                       return $setup.form.files = $event;

@@ -11,8 +11,12 @@ const props = defineProps({
 });
 
 onMounted(() => {
+
     useMedia.value.multiple = props.multiple;
-    useMedia.value.doLoadFiles(props.modelValue);
+
+    if (Array.isArray(props.modelValue) && props.modelValue.length) {
+        useMedia.value.doLoadFiles(props.modelValue);
+    }
 })
 
 </script>
