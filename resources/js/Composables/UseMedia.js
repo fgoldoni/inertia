@@ -32,9 +32,10 @@ export const useMedia = ref({
 
     doLoadFiles (files) {
 
+
         if (!this.multiple) files = [files[0]]
 
-        files.filter((e) => !e).forEach(file => {
+        files.forEach(file => {
 
             this.push({
                 id: file.id,

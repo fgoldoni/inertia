@@ -37,7 +37,7 @@ class AttachmentsController extends Controller
     {
         $file = $request->file('file');
 
-        $request->file('file')->store(now()->format('Y') . '/' . now()->format('m'), 'upload');
+        $request->file('file')->store(now()->format('Y') . '/' . now()->format('m'), $request->file('disk', config('app.system.disks.uploads')));
 
         $attachment = $this->attachmentsRepository->create([
             'name' => $file->getClientOriginalName(),

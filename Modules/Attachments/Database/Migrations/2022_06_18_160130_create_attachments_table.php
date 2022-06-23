@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name')->nullable();
             $table->string('filename')->nullable();
-            $table->string('disk')->default('upload');
+            $table->string('disk')->default(config('app.system.disks.uploads'));
             $table->string('mime_type')->nullable();
             $table->string('size')->nullable();
 

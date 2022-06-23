@@ -44,10 +44,17 @@ return [
             'throw' => false,
         ],
 
-        'upload' => [
+        'uploads' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/upload'),
-            'url' => env('APP_URL').'/upload',
+            'root' => storage_path('app/public/uploads'),
+            'url' => env('APP_URL').'/uploads',
+            'visibility' => 'public',
+        ],
+
+        'avatars' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/avatars'),
+            'url' => env('APP_URL').'/avatars',
             'visibility' => 'public',
         ],
 
@@ -78,7 +85,8 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path('upload') => storage_path('app/public/upload'),
+        public_path('uploads') => storage_path('app/public/uploads'),
+        public_path('avatars') => storage_path('app/public/avatars'),
     ],
 
 ];

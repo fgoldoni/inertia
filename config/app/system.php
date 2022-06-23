@@ -27,5 +27,9 @@ return [
             'permissions' => 'permissions',
         ],
     ],
+    'disks' => [
+        'uploads' => 'uploads',
+        'avatars' => 'avatars',
+    ],
 
 ];
