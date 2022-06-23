@@ -72,10 +72,11 @@ export const useAvatar = ref({
                     uploaded: true,
                 });
 
+                this.error = null;
+
             })
 
             .catch(error => {
-                debugger
                 this.error = `Upload failed. Please try again later.`;
 
                 if (error?.response.status === 422) {

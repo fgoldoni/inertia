@@ -68,8 +68,9 @@ var useAvatar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
         error: null,
         uploaded: true
       });
+
+      _this2.error = null;
     })["catch"](function (error) {
-      debugger;
       _this2.error = "Upload failed. Please try again later.";
 
       if ((error === null || error === void 0 ? void 0 : error.response.status) === 422) {
@@ -1919,7 +1920,7 @@ var _hoisted_3 = {
 };
 var _hoisted_4 = {
   key: 0,
-  "class": "col-span-1"
+  "class": "col-span-1 mt-2"
 };
 var _hoisted_5 = {
   key: 0,
