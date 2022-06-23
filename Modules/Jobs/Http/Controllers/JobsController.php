@@ -91,14 +91,16 @@ class JobsController extends Controller
 
         return $this->index([
             'editing' => $this->jobsRepository->withCriteria([
-                new EagerLoad(['user:id,name', 'company:id,name', 'categories:id,name,type', 'country:id,name,emoji', 'city:id,name', 'division:id,name', 'attachments:id,name,filename,attachable_id,attachable_type']),
-            ])->find($job->id, ['id', 'name', 'content', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at'])
+                new EagerLoad(['user:id,name', 'company:id,name', 'categories:id,name,type', 'country:id,name,emoji', 'city:id,name', 'division:id,name', 'attachments' => function ($query) {
+                    $query->select(['id', 'name', 'filename', 'disk', 'attachable_id', 'attachable_type'])->where('attachments.disk', config('app.system.disks.uploads'));
+                }]),
+            ])->find($job->id, ['id', 'name', 'content', 'avatar_path', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at'])
         ]);
     }
 
     public function update(UpdateJobRequest $request, Job $job)
     {
-        $job = $this->jobsRepository->update($job->id, $request->only('name'));
+        $job = $this->jobsRepository->update($job->id, $request->only('name', 'avatar_path'));
 
         $this->attachmentsRepository->findWhereIn('id', $request->get('files'))->each(function ($item, $key) use ($job) {
             $job->attachments()->save($item);

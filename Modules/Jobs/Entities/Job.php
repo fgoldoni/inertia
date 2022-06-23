@@ -4,12 +4,14 @@ namespace Modules\Jobs\Entities;
 
 use App\Traits\BelongsToUser;
 use App\Traits\Categorizable;
+use App\Traits\HasAvatar;
 use App\Traits\JobAttribute;
 use App\Traits\WithinDays;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use Modules\Attachments\Traits\AttachableTrait;
 use Modules\Companies\Entities\Company;
 use Modules\Countries\Entities\City;
@@ -25,7 +27,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Job extends Model
 {
-    use HasFactory, HasSlug, HasTranslations, Categorizable, BelongsToUser, SoftDeletes, WithinDays, JobAttribute, AttachableTrait;
+    use HasFactory, HasSlug, HasAvatar, HasTranslations, Categorizable, BelongsToUser, SoftDeletes, WithinDays, JobAttribute, AttachableTrait;
 
 
     protected $guarded = [];
@@ -36,6 +38,10 @@ class Job extends Model
         'state' => JobState::class,
         'salary_type' => SalaryType::class,
         'closing_to' => 'date'
+    ];
+
+    protected $appends = [
+        'avatar_url',
     ];
 
     protected static function newFactory(): JobFactory
@@ -78,5 +84,4 @@ class Job extends Model
     {
         return $this->belongsTo(City::class)->withDefault(['name' => '']);
     }
-
 }

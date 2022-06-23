@@ -14,7 +14,8 @@ class StoreAttachmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => ['nullable', 'mimes:jpeg,jpg,png,gif', 'max:10000']
+            'disk' => ['nullable', 'string', 'in:uploads,avatars'],
+            'file' => ['required', 'mimes:jpeg,jpg,png,gif', 'max:10000']
         ];
     }
 

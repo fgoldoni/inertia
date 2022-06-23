@@ -1,19 +1,20 @@
 <script setup>
 import {CameraIcon, XIcon} from '@heroicons/vue/outline'
-import {ref, watch} from "vue";
-import {useForm} from "@inertiajs/inertia-vue3";
+import {ref, watch, onMounted} from "vue";
+import {useAvatar} from '@/Composables/UseAvatar'
 
 const emit = defineEmits(["update:modelValue"]);
 const fileRef = ref(null);
 
 const props = defineProps({
-    modelValue: [File],
+    modelValue: [String, File],
     defaultSrc: String
 });
 
-const form = useForm({
-    src: props.defaultSrc
-});
+onMounted(() => {
+    useAvatar.value.doLoadFile(props.modelValue, props.defaultSrc);
+})
+
 
 const browse = () =>  fileRef.value.click();
 
@@ -28,11 +29,7 @@ watch(() => props.modelValue, (file) => {
         }
 
     } else {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = (e) => {
-            form.src = e.target.result;
-        };
+        useAvatar.value.doSubmitFile(props.modelValue);
     }
 }, {deep: true});
 </script>
@@ -46,7 +43,7 @@ watch(() => props.modelValue, (file) => {
             ref="fileRef"
             @change="e => emit('update:modelValue', e.target.files[0])"
         />
-        <img :src="form.src" alt="Admin SG" class="h-20 w-20 rounded-full ring-4 ring-white object-cover">
+        <img v-if="useAvatar.media" :src="useAvatar.media.avatar_url" alt="Admin SG" class="h-20 w-20 rounded-full ring-4 ring-white object-cover">
         <div class="absolute top-0 h-20 w-20 rounded-full ring-4 ring-primary-100 bg-black bg-opacity-25 flex items-center justify-center">
             <button
                 type="button"
@@ -58,8 +55,8 @@ watch(() => props.modelValue, (file) => {
 
             <button
                 type="button"
-                v-if="props.modelValue"
-                @click="remove()"
+                v-if="useAvatar.media?.avatar_path"
+                @click="useAvatar.doRemoveFile(props.defaultSrc)"
                 class="rounded-full hover:bg-white hover:bg-opacity-25 p-2 focus:outline-none text-white transition duration-200"
             >
                 <XIcon class="flex-shrink-0 h-4 w-4" />

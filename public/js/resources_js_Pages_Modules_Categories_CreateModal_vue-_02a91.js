@@ -101,6 +101,15 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
   dragging: false,
   media: [],
   error: null,
+  doMediaFetchIds: function doMediaFetchIds() {
+    var _this$media;
+
+    return (_this$media = this.media) === null || _this$media === void 0 ? void 0 : _this$media.filter(function (item) {
+      return !item.error;
+    }).map(function (item) {
+      return item.id;
+    });
+  },
   doRemoveFile: function doRemoveFile(index, item) {
     var _this = this;
 

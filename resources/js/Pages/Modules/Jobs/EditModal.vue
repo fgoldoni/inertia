@@ -14,6 +14,7 @@ import DatePicker from '@/Shared/DatePicker'
 import AvatarInput from '@/Shared/AvatarInput'
 import { useJobs } from '@/Composables/UseJobs'
 import {useMedia} from "@/Composables/UseMedia";
+import {useAvatar} from "@/Composables/UseAvatar";
 import pickBy from "lodash/pickBy";
 import {Errors} from "@/Plugins/errors";
 
@@ -34,7 +35,8 @@ const form = reactive({
     name: props.editing.name,
     files: props.editing.attachments,
     state: props.editing.state,
-    avatar: null,
+    defaultSrc: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(props.editing.name) + '&color=7F9CF5&background=EBF4FF',
+    avatar: props.editing.avatar_path,
     errors: new Errors(),
     password: '',
     processing: false,
@@ -55,7 +57,8 @@ const onSubmit = () => {
 
     axios.put(route('admin.jobs.update', form.id), pickBy({
         name: form.name,
-        files: useMedia.value.media?.filter(item => !item.error).map(item => item.id),
+        avatar_path: useAvatar.value.media?.avatar_path,
+        files: useMedia.value.doMediaFetchIds(),
         ...props.filters
     })).then((response) => {
         form.processing = false;
@@ -393,7 +396,7 @@ const onSubmit = () => {
 
                                                                         <JetLabel :value="__('Assets')" class="mb-2"/>
 
-                                                                        <AvatarInput v-model="form.avatar" default-src="https://ui-avatars.com/api/?name=A+S&color=7F9CF5&background=EBF4FF"></AvatarInput>
+                                                                        <AvatarInput v-model="form.avatar" :default-src="form.defaultSrc"></AvatarInput>
 
                                                                     </div>
 

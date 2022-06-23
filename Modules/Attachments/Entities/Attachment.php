@@ -47,7 +47,7 @@ class Attachment extends Model
      */
     protected function uploadDisk(): string
     {
-        return config('app.system.disks.uploads');
+        return $this->disk ?? config('app.system.disks.uploads');
     }
 
     public static function boot()

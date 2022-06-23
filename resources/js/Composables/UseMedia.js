@@ -11,6 +11,9 @@ export const useMedia = ref({
 
     error: null,
 
+    doMediaFetchIds () {
+        return this.media?.filter(item => !item.error).map(item => item.id)
+    },
     doRemoveFile(index, item) {
 
         this.media.splice(index, 1)

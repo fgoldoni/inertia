@@ -16,6 +16,7 @@ class UpdateJobRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:256'],
+            'avatar_path' => ['required', 'max:256'],
             'files.*' => ['nullable', 'max:2048',
                 Rule::exists('attachments', 'id')
                 ->where(function ($query) {

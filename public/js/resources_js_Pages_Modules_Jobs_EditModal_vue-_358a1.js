@@ -1,6 +1,85 @@
 "use strict";
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Modules_Jobs_EditModal_vue-_358a1"],{
 
+/***/ "./resources/js/Composables/UseAvatar.js":
+/*!***********************************************!*\
+  !*** ./resources/js/Composables/UseAvatar.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "useAvatar": () => (/* binding */ useAvatar)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var useAvatar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
+  media: null,
+  error: null,
+  baseUrl: document.querySelector('meta[name="baseUrl"]').content,
+  push: function push(item) {
+    this.media = item;
+  },
+  doRemoveFile: function doRemoveFile(defaultSrc) {
+    var _this = this;
+
+    if (this.media.avatar_path) {
+      axios["delete"](route('api.avatars.destroy', encodeURIComponent(this.media.avatar_path))).then(function () {
+        _this.media.avatar_path = null;
+        _this.media.avatar_url = defaultSrc;
+      })["catch"](function (error) {
+        _this.media.error = "Upload failed. Please try again later.";
+
+        if ((error === null || error === void 0 ? void 0 : error.response.status) === 422) {
+          _this.media.error = error.response.data.errors.file[0];
+        }
+      });
+    }
+  },
+  doLoadFile: function doLoadFile(filename, defaultSrc) {
+    var avatar_url = defaultSrc;
+    var avatar_path = null;
+
+    if (filename && typeof filename === 'string') {
+      avatar_url = "".concat(this.baseUrl, "/avatars/").concat(filename);
+      avatar_path = filename;
+    }
+
+    this.push({
+      id: null,
+      file: null,
+      avatar_url: avatar_url,
+      avatar_path: avatar_path,
+      progress: 100,
+      error: null,
+      uploaded: true
+    });
+  },
+  doSubmitFile: function doSubmitFile(file) {
+    var _this2 = this;
+
+    var form = new FormData();
+    form.append('file', file);
+    axios.post(route('api.avatars.store'), form).then(function (res) {
+      _this2.push({
+        avatar_url: "".concat(_this2.baseUrl, "/avatars/").concat(res.data.data.filename),
+        avatar_path: res.data.data.filename,
+        progress: 100,
+        error: null,
+        uploaded: true
+      });
+    })["catch"](function (error) {
+      _this2.media.error = "Upload failed. Please try again later.";
+
+      if ((error === null || error === void 0 ? void 0 : error.response.status) === 422) {
+        _this2.media.error = error.response.data.errors.file[0];
+      }
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/Composables/UseJobs.js":
 /*!*********************************************!*\
   !*** ./resources/js/Composables/UseJobs.js ***!
@@ -96,6 +175,15 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
   dragging: false,
   media: [],
   error: null,
+  doMediaFetchIds: function doMediaFetchIds() {
+    var _this$media;
+
+    return (_this$media = this.media) === null || _this$media === void 0 ? void 0 : _this$media.filter(function (item) {
+      return !item.error;
+    }).map(function (item) {
+      return item.id;
+    });
+  },
   doRemoveFile: function doRemoveFile(index, item) {
     var _this = this;
 
@@ -469,10 +557,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.vue");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/dialog/dialog.js");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/transitions/transition.js");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/switch/switch.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/QuestionMarkCircleIcon.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/dialog/dialog.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/transitions/transition.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/switch/switch.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/QuestionMarkCircleIcon.js");
 /* harmony import */ var _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Input.vue */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Label.vue */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_Textarea__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Textarea */ "./resources/js/Jetstream/Textarea.vue");
@@ -484,14 +572,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_AvatarInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Shared/AvatarInput */ "./resources/js/Shared/AvatarInput.vue");
 /* harmony import */ var _Composables_UseJobs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Composables/UseJobs */ "./resources/js/Composables/UseJobs.js");
 /* harmony import */ var _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Composables/UseMedia */ "./resources/js/Composables/UseMedia.js");
-/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
-/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _Plugins_errors__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/Plugins/errors */ "./resources/js/Plugins/errors.js");
+/* harmony import */ var _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Composables/UseAvatar */ "./resources/js/Composables/UseAvatar.js");
+/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
+/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _Plugins_errors__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/Plugins/errors */ "./resources/js/Plugins/errors.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -533,8 +623,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       name: props.editing.name,
       files: props.editing.attachments,
       state: props.editing.state,
-      avatar: null,
-      errors: new _Plugins_errors__WEBPACK_IMPORTED_MODULE_14__.Errors(),
+      defaultSrc: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(props.editing.name) + '&color=7F9CF5&background=EBF4FF',
+      avatar: props.editing.avatar_path,
+      errors: new _Plugins_errors__WEBPACK_IMPORTED_MODULE_15__.Errors(),
       password: '',
       processing: false
     });
@@ -548,15 +639,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
 
     var onSubmit = function onSubmit() {
-      var _useMedia$value$media;
+      var _useAvatar$value$medi;
 
-      axios.put(route('admin.jobs.update', form.id), lodash_pickBy__WEBPACK_IMPORTED_MODULE_13___default()(_objectSpread({
+      axios.put(route('admin.jobs.update', form.id), lodash_pickBy__WEBPACK_IMPORTED_MODULE_14___default()(_objectSpread({
         name: form.name,
-        files: (_useMedia$value$media = _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_12__.useMedia.value.media) === null || _useMedia$value$media === void 0 ? void 0 : _useMedia$value$media.filter(function (item) {
-          return !item.error;
-        }).map(function (item) {
-          return item.id;
-        })
+        avatar_path: (_useAvatar$value$medi = _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_13__.useAvatar.value.media) === null || _useAvatar$value$medi === void 0 ? void 0 : _useAvatar$value$medi.avatar_path,
+        files: _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_12__.useMedia.value.doMediaFetchIds()
       }, props.filters))).then(function (response) {
         form.processing = false;
       })["catch"](function (error) {
@@ -577,15 +665,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       LoadingButton: _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_1__["default"],
-      Dialog: _headlessui_vue__WEBPACK_IMPORTED_MODULE_15__.Dialog,
-      DialogPanel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_15__.DialogPanel,
-      DialogTitle: _headlessui_vue__WEBPACK_IMPORTED_MODULE_15__.DialogTitle,
-      TransitionChild: _headlessui_vue__WEBPACK_IMPORTED_MODULE_16__.TransitionChild,
-      TransitionRoot: _headlessui_vue__WEBPACK_IMPORTED_MODULE_16__.TransitionRoot,
-      Switch: _headlessui_vue__WEBPACK_IMPORTED_MODULE_17__.Switch,
-      SwitchGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_17__.SwitchGroup,
-      SwitchLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_17__.SwitchLabel,
-      QuestionMarkCircleIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_18__["default"],
+      Dialog: _headlessui_vue__WEBPACK_IMPORTED_MODULE_16__.Dialog,
+      DialogPanel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_16__.DialogPanel,
+      DialogTitle: _headlessui_vue__WEBPACK_IMPORTED_MODULE_16__.DialogTitle,
+      TransitionChild: _headlessui_vue__WEBPACK_IMPORTED_MODULE_17__.TransitionChild,
+      TransitionRoot: _headlessui_vue__WEBPACK_IMPORTED_MODULE_17__.TransitionRoot,
+      Switch: _headlessui_vue__WEBPACK_IMPORTED_MODULE_18__.Switch,
+      SwitchGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_18__.SwitchGroup,
+      SwitchLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_18__.SwitchLabel,
+      QuestionMarkCircleIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_19__["default"],
       JetInput: _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
       JetLabel: _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
       JetTextarea: _Jetstream_Textarea__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -597,8 +685,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       AvatarInput: _Shared_AvatarInput__WEBPACK_IMPORTED_MODULE_10__["default"],
       useJobs: _Composables_UseJobs__WEBPACK_IMPORTED_MODULE_11__.useJobs,
       useMedia: _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_12__.useMedia,
-      pickBy: (lodash_pickBy__WEBPACK_IMPORTED_MODULE_13___default()),
-      Errors: _Plugins_errors__WEBPACK_IMPORTED_MODULE_14__.Errors
+      useAvatar: _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_13__.useAvatar,
+      pickBy: (lodash_pickBy__WEBPACK_IMPORTED_MODULE_14___default()),
+      Errors: _Plugins_errors__WEBPACK_IMPORTED_MODULE_15__.Errors
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -623,14 +712,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/CameraIcon.js");
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/XIcon.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Composables/UseAvatar */ "./resources/js/Composables/UseAvatar.js");
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'AvatarInput',
   props: {
-    modelValue: [File],
+    modelValue: [String, File],
     defaultSrc: String
   },
   emits: ["update:modelValue"],
@@ -640,8 +729,8 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
     var fileRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
-    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
-      src: props.defaultSrc
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+      _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_1__.useAvatar.value.doLoadFile(props.modelValue, props.defaultSrc);
     });
 
     var browse = function browse() {
@@ -664,12 +753,7 @@ __webpack_require__.r(__webpack_exports__);
           fileRef.value.value = null;
         }
       } else {
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-
-        reader.onload = function (e) {
-          form.src = e.target.result;
-        };
+        _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_1__.useAvatar.value.doSubmitFile(props.modelValue);
       }
     }, {
       deep: true
@@ -678,14 +762,14 @@ __webpack_require__.r(__webpack_exports__);
       emit: emit,
       fileRef: fileRef,
       props: props,
-      form: form,
       browse: browse,
       remove: remove,
       CameraIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
       XIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
-      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm
+      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
+      useAvatar: _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_1__.useAvatar
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -1659,10 +1743,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "onUpdate:modelValue": _cache[16] || (_cache[16] = function ($event) {
                       return $setup.form.avatar = $event;
                     }),
-                    "default-src": "https://ui-avatars.com/api/?name=A+S&color=7F9CF5&background=EBF4FF"
+                    "default-src": $setup.form.defaultSrc
                   }, null, 8
                   /* PROPS */
-                  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                  , ["modelValue", "default-src"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
                     value: _ctx.__('Cover Image'),
                     "class": "mb-2"
                   }, null, 8
@@ -1824,6 +1908,8 @@ var _hoisted_3 = {
   "class": "absolute top-0 h-20 w-20 rounded-full ring-4 ring-primary-100 bg-black bg-opacity-25 flex items-center justify-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _$setup$useAvatar$med;
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "file",
     accept: "image/*",
@@ -1834,13 +1920,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: $setup.form.src,
+  ), $setup.useAvatar.media ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+    key: 0,
+    src: $setup.useAvatar.media.avatar_url,
     alt: "Admin SG",
     "class": "h-20 w-20 rounded-full ring-4 ring-white object-cover"
   }, null, 8
   /* PROPS */
-  , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $setup.browse();
@@ -1848,11 +1935,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "rounded-full hover:bg-white hover:bg-opacity-25 p-2 focus:outline-none text-white transition duration-200"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CameraIcon"], {
     "class": "flex-shrink-0 h-4 w-4"
-  })]), $setup.props.modelValue ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  })]), (_$setup$useAvatar$med = $setup.useAvatar.media) !== null && _$setup$useAvatar$med !== void 0 && _$setup$useAvatar$med.avatar_path ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     type: "button",
     onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $setup.remove();
+      return $setup.useAvatar.doRemoveFile($setup.props.defaultSrc);
     }),
     "class": "rounded-full hover:bg-white hover:bg-opacity-25 p-2 focus:outline-none text-white transition duration-200"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["XIcon"], {

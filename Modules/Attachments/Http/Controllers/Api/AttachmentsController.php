@@ -37,10 +37,11 @@ class AttachmentsController extends Controller
     {
         $file = $request->file('file');
 
-        $request->file('file')->store(now()->format('Y') . '/' . now()->format('m'), $request->file('disk', config('app.system.disks.uploads')));
+        $request->file('file')->store(now()->format('Y') . '/' . now()->format('m'), $request->get('disk', config('app.system.disks.uploads')));
 
         $attachment = $this->attachmentsRepository->create([
             'name' => $file->getClientOriginalName(),
+            'disk' => $request->get('disk', config('app.system.disks.uploads')),
             'filename' => now()->format('Y') . '/' . now()->format('m') . '/' . $file->hashName(),
             'mime_type' => $file->getMimeType(),
             'size' => $file->getSize(),
