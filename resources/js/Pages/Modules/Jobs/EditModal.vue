@@ -13,6 +13,8 @@ import BaseListbox from '@/Shared/BaseListbox'
 import DatePicker from '@/Shared/DatePicker'
 import AvatarInput from '@/Shared/AvatarInput'
 import BaseComboboxes from '@/Shared/BaseComboboxes'
+import BasePackages from '@/Shared/BasePackages'
+import BaseDisclosure from '@/Components/BaseDisclosure'
 import { useJobs } from '@/Composables/UseJobs'
 import {useMedia} from "@/Composables/UseMedia";
 import {useAvatar} from "@/Composables/UseAvatar";
@@ -164,27 +166,6 @@ const onSubmit = () => {
 
                                                             <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
 
-                                                                <Disclosure as="div"  key="section-id" class="border-b border-gray-200 p-6" v-slot="{ open }">
-                                                                    <h3 class="-my-3 flow-root">
-                                                                        <DisclosureButton class="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500">
-                                                                            <span class="font-medium text-gray-900">
-                                                                             xgfdg
-                                                                            </span>
-                                                                              <span class="ml-6 flex items-center">
-                                                                                  <PlusSmIcon v-if="!open" class="h-5 w-5" aria-hidden="true" />
-                                                                                  <MinusSmIcon v-else class="h-5 w-5" aria-hidden="true" />
-                                                                             </span>
-                                                                        </DisclosureButton>
-                                                                    </h3>
-                                                                    <DisclosurePanel class="pt-6">
-                                                                        <div class="space-y-4">
-                                                                            <div key="option.value" class="flex items-center">
-                                                                                drtzrtz
-                                                                            </div>
-                                                                        </div>
-                                                                    </DisclosurePanel>
-                                                                </Disclosure>
-
                                                                 <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                                                                     <div class="col-span-1 sm:col-span-2">
@@ -233,7 +214,7 @@ const onSubmit = () => {
 
                                                             </div>
 
-                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
+                                                            <BaseDisclosure :title="__('Companies & Areas')">
 
                                                                 <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
 
@@ -263,11 +244,12 @@ const onSubmit = () => {
 
                                                                 </div>
 
-                                                            </div>
+                                                            </BaseDisclosure>
 
-                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
 
-                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                                            <BaseDisclosure :title="__('Salaries')">
+
+                                                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                                                                     <div class="col-span-1">
 
@@ -279,7 +261,7 @@ const onSubmit = () => {
                                                                             v-model="form.salary_min"
                                                                             type="number"
                                                                             class="mt-1 block w-full"
-                                                                            />
+                                                                        />
 
                                                                         <JetInputError :message="form.errors.get('salary_min')" class="mt-2"/>
                                                                     </div>
@@ -294,7 +276,7 @@ const onSubmit = () => {
                                                                             v-model="form.salary_max"
                                                                             type="number"
                                                                             class="mt-1 block w-full"
-                                                                            />
+                                                                        />
 
                                                                         <JetInputError :message="form.errors.get('salary_max')" class="mt-2"/>
                                                                     </div>
@@ -323,11 +305,12 @@ const onSubmit = () => {
 
                                                                 </div>
 
-                                                            </div>
+                                                            </BaseDisclosure>
 
-                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
 
-                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                                            <BaseDisclosure :title="__('Experiences & Career')">
+
+                                                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
@@ -354,11 +337,12 @@ const onSubmit = () => {
 
                                                                 </div>
 
-                                                            </div>
+                                                            </BaseDisclosure>
 
-                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
 
-                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                                            <BaseDisclosure :title="__('Friendly Address')">
+
+                                                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
@@ -370,7 +354,7 @@ const onSubmit = () => {
                                                                             v-model="form.address"
                                                                             type="text"
                                                                             class="mt-1 block w-full"
-                                                                            />
+                                                                        />
 
                                                                         <JetInputError :message="form.errors.get('address')" class="mt-2"/>
                                                                     </div>
@@ -401,7 +385,7 @@ const onSubmit = () => {
                                                                             v-model="form.iframe"
                                                                             type="text"
                                                                             class="mt-1 block w-full"
-                                                                            />
+                                                                        />
 
                                                                         <div class="mt-3 flex items-center justify-between">
                                                                             <a href="#" class="group inline-flex items-start text-sm space-x-2 text-gray-500 hover:text-gray-900">
@@ -415,7 +399,9 @@ const onSubmit = () => {
 
                                                                 </div>
 
-                                                            </div>
+                                                            </BaseDisclosure>
+
+
                                                         </div>
 
                                                     </div>
@@ -438,7 +424,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
-                                                                        <JetLabel :value="__('Cover Image')" class="mb-2"/>
+                                                                        <JetLabel :value="__('Featured Image')" class="mb-2"/>
 
                                                                         <ImageUpload v-model="form.files"></ImageUpload>
 
@@ -480,9 +466,9 @@ const onSubmit = () => {
 
                                                             </div>
 
-                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
+                                                            <BaseDisclosure :title="__('Gender & Qualification')">
 
-                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
+                                                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 
                                                                     <div class="col-span-1">
 
@@ -502,11 +488,11 @@ const onSubmit = () => {
 
                                                                 </div>
 
-                                                            </div>
+                                                            </BaseDisclosure>
 
-                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
+                                                            <BaseDisclosure :title="__('Job Apply Types')">
 
-                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
+                                                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 
                                                                     <div class="col-span-1">
 
@@ -518,7 +504,13 @@ const onSubmit = () => {
 
                                                                 </div>
 
-                                                            </div>
+                                                            </BaseDisclosure>
+
+                                                            <BaseDisclosure :title="__('Your Packages')">
+
+                                                                <BasePackages></BasePackages>
+
+                                                            </BaseDisclosure>
 
                                                         </div>
 
