@@ -117,43 +117,20 @@ const onSubmit = () => {
 </script>
 
 <template>
-    <TransitionRoot as="template"
-                    :show="isOpen"
-                    enter="transition-opacity duration-500"
-                    enter-from="opacity-0"
-                    enter-to="opacity-100"
-                    leave="transition-opacity duration-500"
-                    leave-from="opacity-100"
-                    leave-to="opacity-0">
-
+    <TransitionRoot as="template" :show="isOpen">
         <Dialog as="div" class="relative z-10">
 
-            <TransitionChild as="template"
-                             enter="transition-opacity ease-linear duration-300"
-                             enter-from="opacity-0"
-                             enter-to="opacity-100"
-                             leave="transition-opacity ease-linear duration-300"
-                             leave-from="opacity-100"
-                             leave-to="opacity-0">
-
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"/>
-
+            <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
+                <div class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity md:block" />
             </TransitionChild>
 
             <div class="fixed z-10 inset-0 overflow-y-auto">
 
-                <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+                <div class="flex items-stretch md:items-center justify-center min-h-full text-center md:px-2 lg:px-4">
 
-                    <TransitionChild as="template"
-                                     enter="transition ease-in-out duration-300 transform"
-                                     enter-from="-translate-x-full"
-                                     enter-to="translate-x-0"
-                                     leave="transition ease-in-out duration-300 transform"
-                                     leave-from="translate-x-0"
-                                     leave-to="-translate-x-full">
+                    <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enter-to="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 md:scale-100" leave-to="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
 
-                        <DialogPanel
-                            class="relative bg-gray-100 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full">
+                        <DialogPanel class="relative bg-gray-100 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full">
 
                             <form @submit.prevent="onSubmit" v-if="job.data" @keydown="form.errors.clear($event.target.name)">
 
