@@ -12,6 +12,7 @@ import {
 
 import debounce from "lodash/debounce";
 import { useFetch } from '@/Composables/UseFetch'
+import pickBy from "lodash/pickBy";
 
 const { data: items, doInitData, doFetchData } = useFetch()
 
@@ -22,6 +23,10 @@ const props = defineProps({
     },
     apiUrl: String,
     modelValue: [String, Number, Array],
+    countryId: {
+        type: Number,
+        default: null,
+    },
     defaultValue: {
         type: String,
         default: null,
@@ -40,7 +45,7 @@ const query = ref('')
 
 const emit = defineEmits(["update:modelValue"]);
 
-watch(query, debounce(() => doFetchData(route(props.apiUrl, {search: query.value})), 500), {deep: true});
+watch(query, debounce(() => doFetchData(route(props.apiUrl, pickBy({search: query.value, country_id: props.countryId}))), 500), {deep: true});
 
 const label = (person) => {
 
@@ -77,11 +82,16 @@ const label = (person) => {
                         <ComboboxOption v-for="option in items.data" :key="option.id" :value="option.id" as="template" v-slot="{ active, selected }">
                             <li :class="['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-indigo-600 text-white' : 'text-gray-900']">
                                 <div class="flex items-center">
-                                    <span :class="['inline-block h-2 w-2 flex-shrink-0 rounded-full', option.online ? 'bg-green-400' : 'bg-gray-200']" aria-hidden="true" />
-                                    <span :class="['ml-3 truncate', selected && 'font-semibold']">
-                {{ option.name }}
-                <span class="sr-only"> is {{ option.online ? 'online' : 'offline' }}</span>
-              </span>
+                                    <span v-if="option.online" :class="['inline-block h-2 w-2 flex-shrink-0 rounded-full mr-3', option.online ? 'bg-green-400' : 'bg-gray-200']" aria-hidden="true" />
+                                    <span v-if="option.emoji" class="inline-block flex-shrink-0  mr-3" aria-hidden="true" v-html="option.emoji"/>
+                                    <span v-if="option.country" class="inline-block flex-shrink-0  mr-3" aria-hidden="true" v-html="option.country?.emoji"/>
+                                    <span :class="['truncate', selected && 'font-bold']">
+                                        {{ option.name }}
+                                        <span class="sr-only"> is {{ option.online ? 'online' : 'offline' }}</span>
+                                    </span>
+                                    <span v-if="option.division" :class="['ml-2 truncate text-gray-500', active ? 'text-indigo-200' : 'text-gray-500']">
+                                        {{ option.division?.name }}
+                                    </span>
                                 </div>
 
                                 <span v-if="selected" :class="['absolute inset-y-0 right-0 flex items-center pr-4', active ? 'text-white' : 'text-indigo-600']">

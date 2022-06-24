@@ -2,7 +2,10 @@
 
 namespace Modules\Countries\Http\Controllers\Api;
 
+use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\Limit;
 use App\Repositories\Criteria\OrderBy;
+use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
@@ -20,10 +23,20 @@ class CitiesController extends Controller
 
     public function index(Request $request)
     {
-        $cities = $this->citiesRepository->withCriteria([
-            new WhereLike(['world_cities.id', 'world_cities.name', 'world_cities.full_name'], $request->get('search')),
-            new OrderBy('name', 'asc'),
-        ])->all(['id', 'name']);
+        $cities = [];
+
+        if (strlen($request->get('search')) > 2) {
+
+            $cities = $this->citiesRepository->withCriteria([
+                new WhereLike(['world_cities.id', 'world_cities.name', 'world_cities.full_name'], $request->get('search')),
+                new Where('country_id', $request->get('country_id')),
+                new OrderBy('name', 'asc'),
+                new EagerLoad(['country:id,name,emoji', 'division:id,name']),
+                new Limit(10),
+            ])->all(['id', 'name', 'country_id', 'division_id']);
+
+        }
+
 
         return $this->response->json(['data' => $cities], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }

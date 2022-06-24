@@ -1284,11 +1284,11 @@ select {
 .h-0 {
   height: 0px;
 }
-.h-3 {
-  height: 0.75rem;
-}
 .h-2 {
   height: 0.5rem;
+}
+.h-3 {
+  height: 0.75rem;
 }
 .h-2\.5 {
   height: 0.625rem;
@@ -2223,6 +2223,10 @@ select {
 .text-secondary-800 {
   --tw-text-opacity: 1;
   color: rgb(30 41 59 / var(--tw-text-opacity));
+}
+.text-indigo-200 {
+  --tw-text-opacity: 1;
+  color: rgb(199 210 254 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;

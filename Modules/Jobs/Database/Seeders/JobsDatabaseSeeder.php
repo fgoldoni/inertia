@@ -113,6 +113,8 @@ class JobsDatabaseSeeder extends Seeder
 
     private function syncCategories(Job $job)
     {
+        $area = Category::area()->limit(10)->inRandomOrder()->first();
+
         $industry = Category::industry()->limit(10)->inRandomOrder()->first();
 
         $jobType = Category::type(CategoryType::JobType)->inRandomOrder()->first();
@@ -133,6 +135,6 @@ class JobsDatabaseSeeder extends Seeder
 
         $applyType = Category::type(CategoryType::ApplyType)->inRandomOrder()->first();
 
-        $job->syncCategories([$industry->id, $jobType->id, $jobLevel->id, $gender->id, $responsibility->id, $skill->id, $benefit->id, $experience->id, $careerLevel->id, $applyType->id], false);
+        $job->syncCategories([$area->id, $industry->id, $jobType->id, $jobLevel->id, $gender->id, $responsibility->id, $skill->id, $benefit->id, $experience->id, $careerLevel->id, $applyType->id], false);
     }
 }

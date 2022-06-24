@@ -55,7 +55,7 @@ const form = reactive({
     negotiable: props.editing.negotiable,
 
     city_id: props.editing.city_id,
-    country_id: props.editing.country_id,
+    country_id: null,
     iframe: props.editing.iframe,
 
     files: props.editing.attachments,
@@ -91,6 +91,9 @@ const onSubmit = () => {
         negotiable: form.negotiable,
         salary_type: form.salary_type,
         job_type: form.job_type,
+        city_id: form.city_id,
+        country_id: form.country_id,
+        iframe: form.iframe,
         avatar_path: useAvatar.value.media?.avatar_path,
         files: useMedia.value.doMediaFetchIds(),
         ...props.filters
@@ -371,7 +374,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
-                                                                        <BaseComboboxes v-model="form.city_id" placeholder="No city" api-url="api.cities.index" label="City" :default-value="props.editing.city?.name" key="select-city"></BaseComboboxes>
+                                                                        <BaseComboboxes v-model="form.city_id" :country-id="form.country_id" placeholder="No city" api-url="api.cities.index" label="City" :default-value="props.editing.city?.name" key="select-city"></BaseComboboxes>
 
                                                                         <JetInputError :message="form.errors.get('city_id')" class="mt-2"/>
 

@@ -18,15 +18,13 @@ class Where
     /**
      * Where constructor.
      */
-    public function __construct(private readonly string $column, private readonly string $value)
+    public function __construct(private readonly string $column, private readonly ?string $value = null)
     {
     }
 
-    /**
-     * @param $model
-     */
+
     public function apply($model): Builder
     {
-        return $model->where($this->column, $this->value);
+        return $model->when($this->value, fn ($query) => $query->where($this->column, $this->value));
     }
 }
