@@ -40,7 +40,7 @@ const form = reactive({
     area: props.editing.categories.find(element => element.type === "area")?.id,
     industry: props.editing.categories.find(element => element.type === "industry")?.id,
     job_type: props.editing.categories.find(element => element.type === "jobType")?.id,
-    jobLevel: props.editing.categories.find(element => element.type === "jobLevel")?.id,
+    job_level: props.editing.categories.find(element => element.type === "jobLevel")?.id,
     gender: props.editing.categories.find(element => element.type === "gender")?.id,
     responsibility: props.editing.categories.find(element => element.type === "responsibility")?.id,
     skill: props.editing.categories.find(element => element.type === "skill")?.id,
@@ -54,12 +54,15 @@ const form = reactive({
     salary_max: props.editing.salary_max,
     negotiable: props.editing.negotiable,
 
+    address: props.editing.address,
     city_id: props.editing.city_id,
     country_id: props.editing.country_id,
     iframe: props.editing.iframe,
 
     files: props.editing.attachments,
     state: props.editing.state,
+    closing_to: props.editing.closing_to,
+
     defaultSrc: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(props.editing.name) + '&color=7F9CF5&background=EBF4FF',
     avatar: props.editing.avatar_path,
     errors: new Errors(),
@@ -91,8 +94,13 @@ const onSubmit = () => {
         negotiable: form.negotiable,
         salary_type: form.salary_type,
         job_type: form.job_type,
+        address: form.address,
         city_id: form.city_id,
         country_id: form.country_id,
+        state: form.state,
+        gender: form.gender,
+        apply_type: form.apply_type,
+        closing_to: form.closing_to,
         iframe: form.iframe,
         avatar_path: useAvatar.value.media?.avatar_path,
         files: useMedia.value.doMediaFetchIds(),
@@ -361,7 +369,7 @@ const onSubmit = () => {
                                                                             class="mt-1 block w-full"
                                                                             />
 
-                                                                        <JetInputError :message="form.errors.address" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('address')" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1">
@@ -446,12 +454,13 @@ const onSubmit = () => {
 
                                                                         <BaseListbox :options="job.data.states" v-model="form.state"  placeholder="Publish"/>
 
-                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('state')" class="mt-2"/>
+
                                                                     </div>
 
                                                                     <div class="col-span-1">
 
-                                                                        <JetLabel value="Application Deadline Date" />
+                                                                        <JetLabel :value="__('Application Deadline Date')" />
 
                                                                         <DatePicker></DatePicker>
 
@@ -460,7 +469,8 @@ const onSubmit = () => {
                                                                         </p>
 
 
-                                                                        <JetInputError :message="form.errors.role" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('closing_to')" class="mt-2"/>
+
                                                                     </div>
 
                                                                 </div>
@@ -473,16 +483,18 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
-                                                                        <BaseListbox :options="job.data.genders" v-model="form.state"  placeholder="Gender"/>
+                                                                        <BaseListbox :options="job.data.genders" v-model="form.gender"  placeholder="Gender"/>
 
-                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('gender')" class="mt-2"/>
+
                                                                     </div>
 
                                                                     <div class="col-span-1">
 
-                                                                        <BaseListbox :options="job.data.jobLevels" v-model="form.state"  placeholder="Qualification"/>
+                                                                        <BaseListbox :options="job.data.jobLevels" v-model="form.job_level"  :placeholder="__('Qualification')"/>
 
-                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('job_level')" class="mt-2"/>
+
                                                                     </div>
 
                                                                 </div>
@@ -495,9 +507,10 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
-                                                                        <BaseListbox :options="job.data.applyTypes" v-model="form.state"  placeholder="Job Apply Types"/>
+                                                                        <BaseListbox :options="job.data.applyTypes" v-model="form.apply_type" :placeholder="__('Job Apply Types')"/>
 
-                                                                        <JetInputError :message="form.errors.state" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('apply_type')" class="mt-2"/>
+
                                                                     </div>
 
                                                                 </div>

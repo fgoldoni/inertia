@@ -718,7 +718,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       job_type: (_props$editing$catego3 = props.editing.categories.find(function (element) {
         return element.type === "jobType";
       })) === null || _props$editing$catego3 === void 0 ? void 0 : _props$editing$catego3.id,
-      jobLevel: (_props$editing$catego4 = props.editing.categories.find(function (element) {
+      job_level: (_props$editing$catego4 = props.editing.categories.find(function (element) {
         return element.type === "jobLevel";
       })) === null || _props$editing$catego4 === void 0 ? void 0 : _props$editing$catego4.id,
       gender: (_props$editing$catego5 = props.editing.categories.find(function (element) {
@@ -746,11 +746,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       salary_min: props.editing.salary_min,
       salary_max: props.editing.salary_max,
       negotiable: props.editing.negotiable,
+      address: props.editing.address,
       city_id: props.editing.city_id,
       country_id: props.editing.country_id,
       iframe: props.editing.iframe,
       files: props.editing.attachments,
       state: props.editing.state,
+      closing_to: props.editing.closing_to,
       defaultSrc: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(props.editing.name) + '&color=7F9CF5&background=EBF4FF',
       avatar: props.editing.avatar_path,
       errors: new _Plugins_errors__WEBPACK_IMPORTED_MODULE_16__.Errors(),
@@ -780,8 +782,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         negotiable: form.negotiable,
         salary_type: form.salary_type,
         job_type: form.job_type,
+        address: form.address,
         city_id: form.city_id,
         country_id: form.country_id,
+        state: form.state,
+        gender: form.gender,
+        apply_type: form.apply_type,
+        closing_to: form.closing_to,
         iframe: form.iframe,
         avatar_path: (_useAvatar$value$medi = _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_14__.useAvatar.value.media) === null || _useAvatar$value$medi === void 0 ? void 0 : _useAvatar$value$medi.avatar_path,
         files: _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_13__.useMedia.value.doMediaFetchIds()
@@ -1938,7 +1945,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   }, null, 8
                   /* PROPS */
                   , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                    message: $setup.form.errors.address,
+                    message: $setup.form.errors.get('address'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
@@ -2039,56 +2046,58 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                    message: $setup.form.errors.state,
+                    message: $setup.form.errors.get('state'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                    value: "Application Deadline Date"
-                  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DatePicker"]), _hoisted_56, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                    message: $setup.form.errors.role,
+                    value: _ctx.__('Application Deadline Date')
+                  }, null, 8
+                  /* PROPS */
+                  , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DatePicker"]), _hoisted_56, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.get('closing_to'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
                     options: $setup.job.data.genders,
-                    modelValue: $setup.form.state,
+                    modelValue: $setup.form.gender,
                     "onUpdate:modelValue": _cache[19] || (_cache[19] = function ($event) {
-                      return $setup.form.state = $event;
+                      return $setup.form.gender = $event;
                     }),
                     placeholder: "Gender"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                    message: $setup.form.errors.state,
+                    message: $setup.form.errors.get('gender'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
                     options: $setup.job.data.jobLevels,
-                    modelValue: $setup.form.state,
+                    modelValue: $setup.form.job_level,
                     "onUpdate:modelValue": _cache[20] || (_cache[20] = function ($event) {
-                      return $setup.form.state = $event;
+                      return $setup.form.job_level = $event;
                     }),
-                    placeholder: "Qualification"
+                    placeholder: _ctx.__('Qualification')
                   }, null, 8
                   /* PROPS */
-                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                    message: $setup.form.errors.state,
+                  , ["options", "modelValue", "placeholder"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.get('job_level'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
                   , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_63, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
                     options: $setup.job.data.applyTypes,
-                    modelValue: $setup.form.state,
+                    modelValue: $setup.form.apply_type,
                     "onUpdate:modelValue": _cache[21] || (_cache[21] = function ($event) {
-                      return $setup.form.state = $event;
+                      return $setup.form.apply_type = $event;
                     }),
-                    placeholder: "Job Apply Types"
+                    placeholder: _ctx.__('Job Apply Types')
                   }, null, 8
                   /* PROPS */
-                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                    message: $setup.form.errors.state,
+                  , ["options", "modelValue", "placeholder"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.get('apply_type'),
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */

@@ -28,6 +28,10 @@ class UpdateJobRequest extends FormRequest
             'salary_type' => [new Enum(SalaryType::class)],
             'job_type' => ['required', Rule::exists('categories', 'id')],
             'negotiable' => ['required', 'boolean'],
+            'address' => ['required', 'max:256'],
+            'iframe' => ['nullable'],
+            'city_id' => ['required', Rule::exists('world_cities', 'id')],
+            'country_id' => ['required', Rule::exists('world_countries', 'id')],
             'avatar_path' => ['nullable', 'max:256', Rule::exists('categories', 'id')],
             'files.*' => ['nullable', 'max:2048',
                 Rule::exists('attachments', 'id')

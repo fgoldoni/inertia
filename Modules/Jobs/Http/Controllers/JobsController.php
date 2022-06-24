@@ -33,7 +33,7 @@ class JobsController extends Controller
         return Inertia::render('Modules/Jobs/Index', array_merge([
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'rowData' => $this->jobsRepository->withCriteria([
-                new Select('id', 'name', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at'),
+                new Select('id', 'name', 'state', 'address', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at'),
                 new WhereLike(['jobs.id', 'jobs.name'], $this->request->get('search')),
                 new ByUser(auth()->user()->id),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
