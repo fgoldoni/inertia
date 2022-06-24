@@ -747,7 +747,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       salary_max: props.editing.salary_max,
       negotiable: props.editing.negotiable,
       city_id: props.editing.city_id,
-      country_id: null,
+      country_id: props.editing.country_id,
       iframe: props.editing.iframe,
       files: props.editing.attachments,
       state: props.editing.state,
@@ -2316,7 +2316,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     selected = _ref.selected;
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
                   "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-indigo-600 text-white' : 'text-gray-900'])
-                }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [option.online ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+                }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [option.hasOwnProperty('online') ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
                   key: 0,
                   "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['inline-block h-2 w-2 flex-shrink-0 rounded-full mr-3', option.online ? 'bg-green-400' : 'bg-gray-200']),
                   "aria-hidden": "true"

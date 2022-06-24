@@ -13,6 +13,11 @@ export default [
         sortField: 'name'
     },
     {
+        name: 'type',
+        title: 'Type',
+        sortField: 'type'
+    },
+    {
         name: '__component:Categories/Datatables/CustomUpdatedAt',
         title: 'Last Updated',
         sortField: 'updated_at'

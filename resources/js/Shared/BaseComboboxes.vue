@@ -82,7 +82,7 @@ const label = (person) => {
                         <ComboboxOption v-for="option in items.data" :key="option.id" :value="option.id" as="template" v-slot="{ active, selected }">
                             <li :class="['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-indigo-600 text-white' : 'text-gray-900']">
                                 <div class="flex items-center">
-                                    <span v-if="option.online" :class="['inline-block h-2 w-2 flex-shrink-0 rounded-full mr-3', option.online ? 'bg-green-400' : 'bg-gray-200']" aria-hidden="true" />
+                                    <span v-if="option.hasOwnProperty('online')" :class="['inline-block h-2 w-2 flex-shrink-0 rounded-full mr-3', option.online ? 'bg-green-400' : 'bg-gray-200']" aria-hidden="true" />
                                     <span v-if="option.emoji" class="inline-block flex-shrink-0  mr-3" aria-hidden="true" v-html="option.emoji"/>
                                     <span v-if="option.country" class="inline-block flex-shrink-0  mr-3" aria-hidden="true" v-html="option.country?.emoji"/>
                                     <span :class="['truncate', selected && 'font-bold']">

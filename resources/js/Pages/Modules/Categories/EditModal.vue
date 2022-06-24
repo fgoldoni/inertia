@@ -8,7 +8,7 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
 import { Errors } from '@/Plugins/errors'
-import IndicatorSelected from '@/Shared/IndicatorSelected'
+import BaseComboboxes from '@/Shared/BaseComboboxes'
 import ImageUpload from '@/Shared/ImageUpload'
 
 const props = defineProps({
@@ -138,7 +138,14 @@ const onSubmit = () => {
                                                                 <JetInputError :message="form.errors.get('name')" class="mt-2"/>
                                                             </div>
 
-                                                            <IndicatorSelected v-model="form.parent_id" placeholder="--- No category ---" :label="props.editing.parent?.name"></IndicatorSelected>
+
+                                                            <div class="col-span-1 sm:col-span-2">
+
+                                                                    <BaseComboboxes v-model="form.parent_id" :country-id="form.country_id" placeholder="No category" api-url="api.categories.index" label="Parent" :default-value="props.editing.parent?.name" key="select-city"></BaseComboboxes>
+
+                                                                    <JetInputError :message="form.errors.get('parent_id')" class="mt-2"/>
+
+                                                            </div>
 
                                                             <div class="col-span-1 sm:col-span-2">
 

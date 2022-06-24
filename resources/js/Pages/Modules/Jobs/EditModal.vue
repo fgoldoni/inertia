@@ -55,7 +55,7 @@ const form = reactive({
     negotiable: props.editing.negotiable,
 
     city_id: props.editing.city_id,
-    country_id: null,
+    country_id: props.editing.country_id,
     iframe: props.editing.iframe,
 
     files: props.editing.attachments,
