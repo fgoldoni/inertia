@@ -1,8 +1,8 @@
 <script setup>
 import {ref, reactive, onMounted} from 'vue'
 import LoadingButton from '@/Shared/LoadingButton'
-import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
-import { QuestionMarkCircleIcon } from '@heroicons/vue/solid'
+import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel,  Disclosure,  DisclosureButton,  DisclosurePanel} from '@headlessui/vue'
+import { QuestionMarkCircleIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/vue/solid'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetTextarea from '@/Jetstream/Textarea'
@@ -114,6 +114,8 @@ const onSubmit = () => {
     });
 
 };
+
+
 </script>
 
 <template>
@@ -131,6 +133,7 @@ const onSubmit = () => {
                     <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enter-to="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 md:scale-100" leave-to="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
 
                         <DialogPanel class="flex text-base bg-secondary-100 text-left transform transition w-full md:max-w-4xl md:px-4 md:my-8 lg:max-w-6xl">
+
 
                             <form @submit.prevent="onSubmit" v-if="job.data" @keydown="form.errors.clear($event.target.name)">
 
@@ -158,7 +161,29 @@ const onSubmit = () => {
 
                                                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
+
                                                             <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
+
+                                                                <Disclosure as="div"  key="section-id" class="border-b border-gray-200 p-6" v-slot="{ open }">
+                                                                    <h3 class="-my-3 flow-root">
+                                                                        <DisclosureButton class="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500">
+                                                                            <span class="font-medium text-gray-900">
+                                                                             xgfdg
+                                                                            </span>
+                                                                              <span class="ml-6 flex items-center">
+                                                                                  <PlusSmIcon v-if="!open" class="h-5 w-5" aria-hidden="true" />
+                                                                                  <MinusSmIcon v-else class="h-5 w-5" aria-hidden="true" />
+                                                                             </span>
+                                                                        </DisclosureButton>
+                                                                    </h3>
+                                                                    <DisclosurePanel class="pt-6">
+                                                                        <div class="space-y-4">
+                                                                            <div key="option.value" class="flex items-center">
+                                                                                drtzrtz
+                                                                            </div>
+                                                                        </div>
+                                                                    </DisclosurePanel>
+                                                                </Disclosure>
 
                                                                 <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
 
