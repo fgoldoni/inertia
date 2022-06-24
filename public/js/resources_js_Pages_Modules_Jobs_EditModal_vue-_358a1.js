@@ -788,6 +788,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         state: form.state,
         gender: form.gender,
         apply_type: form.apply_type,
+        job_level: form.job_level,
         closing_to: form.closing_to,
         iframe: form.iframe,
         avatar_path: (_useAvatar$value$medi = _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_14__.useAvatar.value.media) === null || _useAvatar$value$medi === void 0 ? void 0 : _useAvatar$value$medi.avatar_path,

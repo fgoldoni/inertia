@@ -100,6 +100,7 @@ const onSubmit = () => {
         state: form.state,
         gender: form.gender,
         apply_type: form.apply_type,
+        job_level: form.job_level,
         closing_to: form.closing_to,
         iframe: form.iframe,
         avatar_path: useAvatar.value.media?.avatar_path,
