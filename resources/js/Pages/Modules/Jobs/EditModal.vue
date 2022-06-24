@@ -14,6 +14,7 @@ import DatePicker from '@/Shared/DatePicker'
 import AvatarInput from '@/Shared/AvatarInput'
 import BaseComboboxes from '@/Shared/BaseComboboxes'
 import BasePackages from '@/Shared/BasePackages'
+import Skills from '@/Shared/Skills'
 import BaseDisclosure from '@/Components/BaseDisclosure'
 import { useJobs } from '@/Composables/UseJobs'
 import {useMedia} from "@/Composables/UseMedia";
@@ -398,6 +399,13 @@ const onSubmit = () => {
                                                                     </div>
 
                                                                 </div>
+
+                                                            </BaseDisclosure>
+
+
+                                                            <BaseDisclosure :title="__('Responsibilities, Skills & Benefits')">
+
+                                                                <Skills></Skills>
 
                                                             </BaseDisclosure>
 
