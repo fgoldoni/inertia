@@ -1211,9 +1211,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* STABLE */
 
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-        "leave-active-class": "transition ease-in duration-100",
-        "leave-from-class": "opacity-100",
-        "leave-to-class": "opacity-0"
+        "enter-active-class": "transition duration-100 ease-out",
+        "enter-from-class": "transform scale-95 opacity-0",
+        "enter-to-class": "transform scale-100 opacity-100",
+        "leave-active-class": "transition duration-75 ease-out",
+        "leave-from-class": "transform scale-100 opacity-100",
+        "leave-to-class": "transform scale-95 opacity-0"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxOptions"], {

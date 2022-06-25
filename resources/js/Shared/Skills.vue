@@ -1,44 +1,49 @@
 <template>
-    <div class="my-8">
-        <h3 class="text-sm font-medium text-gray-900">Key Responsibilities</h3>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 space-y-4">
 
-        <div class="mt-4">
-            <ul role="list" class="pl-4 list-disc text-sm space-y-2">
-                <li v-for="responsibility in responsibilities" :key="responsibility.id" class="text-gray-400">
-                    <span class="text-gray-600" v-text="responsibility.name"></span>
-                </li>
-            </ul>
+        <div class="mt-8 col-span-1 sm:col-span-2">
+
+            <h3 class="text-sm font-medium text-gray-900">Key Responsibilities</h3>
+
+            <div class="mt-4">
+                <ul role="list" class="pl-4 list-disc text-sm space-y-2">
+                    <li v-for="responsibility in responsibilities" :key="responsibility.id" class="text-gray-400">
+                        <span class="text-gray-600" v-text="responsibility.name"></span>
+                    </li>
+                </ul>
+            </div>
+
         </div>
-    </div>
 
-    <div class="my-8">
-        <h3 class="text-sm font-medium text-gray-900">Skill & Experience</h3>
+        <div class="col-span-1 sm:col-span-2">
 
-        <div class="mt-4">
-            <ul role="list" class="pl-4 list-disc text-sm space-y-2">
-                <li v-for="skill in skills" :key="skill.id" class="text-gray-400">
-                    <span class="text-gray-600" v-text="skill.name"></span>
-                </li>
-            </ul>
+            <h3 class="text-sm font-medium text-gray-900">Skill & Experience</h3>
+
+            <div class="mt-4">
+                <ul role="list" class="pl-4 list-disc text-sm space-y-2">
+                    <li v-for="skill in skills" :key="skill.id" class="text-gray-400">
+                        <span class="text-gray-600" v-text="skill.name"></span>
+                    </li>
+                </ul>
+            </div>
+
         </div>
-    </div>
 
-    <div class="my-8">
-        <h3 class="text-sm font-medium text-gray-900">Benefits</h3>
+        <div class="col-span-1 sm:col-span-2">
 
-        <div class="mt-4">
-            <ul role="list" class="pl-4 list-disc text-sm space-y-2">
-                <li v-for="benefit in benefits" :key="benefit.id" class="text-gray-400">
-                    <span class="text-gray-600" v-text="benefit.name"></span>
-                </li>
-            </ul>
+            <h3 class="text-sm font-medium text-gray-900">Benefits</h3>
+
+            <div class="mt-4">
+                <ul role="list" class="pl-4 list-disc text-sm space-y-2">
+                    <li v-for="benefit in benefits" :key="benefit.id" class="text-gray-400">
+                        <span class="text-gray-600" v-text="benefit.name"></span>
+                    </li>
+                </ul>
+            </div>
+
         </div>
-    </div>
 
-
-    <div class="my-8 w-full grid grid-cols-1 gap-4 sm:grid-cols-1">
-
-        <div class="col-span-1">
+        <div class="col-span-1 sm:col-span-2">
 
             <div class="flex flex-nowrap justify-between py-2 space-x-2">
                 <RadioGroup v-model="mem" class="mt-2">
@@ -56,57 +61,62 @@
             </div>
 
         </div>
-        <div class="col-span-1" v-if="mem.name == 'Responsibilities'">
+
+        <div class="col-span-1 sm:col-span-2" v-if="mem.name == 'Responsibilities'">
 
             <BaseListbox :options="props.options.responsibilities" v-model="form.responsibilities"  placeholder="Select Responsibilities" label="--- Select Responsibilities ---" multiple/>
 
         </div>
 
-        <div class="col-span-1" v-if="mem.name == 'Skills'">
+        <div class="col-span-1 sm:col-span-2" v-if="mem.name == 'Skills'">
 
             <BaseListbox :options="props.options.skills" v-model="form.skills"  placeholder="Select Skills" label="--- Select Skills ---" multiple/>
 
         </div>
 
-        <div class="col-span-1" v-if="mem.name == 'Benefits'">
+        <div class="col-span-1 sm:col-span-2" v-if="mem.name == 'Benefits'">
 
             <BaseListbox :options="props.options.benefits" v-model="form.benefits"  placeholder="Select Benefits" label="--- Select Benefits ----" multiple/>
 
         </div>
 
-    </div>
 
-    <form action="#" class="relative">
-        <div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
-            <label for="title" class="sr-only">Title</label>
-            <input type="text" name="title" id="title" class="block w-full border-0 pt-2.5 text-lg font-medium placeholder-gray-500 focus:ring-0" placeholder="Title" disabled/>
-            <label for="description" class="sr-only">Description</label>
-            <textarea rows="4" name="description" id="description" class="block w-full border-0 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Write a description..." />
+        <div class="col-span-1 sm:col-span-2">
 
-            <!-- Spacer element to match the height of the toolbar -->
-            <div aria-hidden="true">
-                <div class="py-2">
-                    <div class="h-9" />
-                </div>
-                <div class="h-px" />
-                <div class="py-2">
-                    <div class="py-px">
-                        <div class="h-9" />
+            <form action="#" class="relative">
+                <div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+                    <label for="description" class="sr-only">Description</label>
+                    <textarea rows="4" name="description" id="description" class="block w-full border-0 pt-2.5 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Write a description..." />
+
+                    <!-- Spacer element to match the height of the toolbar -->
+                    <div aria-hidden="true">
+                        <div class="py-2">
+                            <div class="h-9" />
+                        </div>
+                        <div class="h-px" />
+                        <div class="py-2">
+                            <div class="py-px">
+                                <div class="h-9" />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="absolute bottom-0 inset-x-px">
-            <!-- Actions: These are just examples to demonstrate the concept, replace/wire these up however makes sense for your project. -->
+                <div class="absolute bottom-0 inset-x-px">
+                    <!-- Actions: These are just examples to demonstrate the concept, replace/wire these up however makes sense for your project. -->
 
-            <div class="border-t border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3">
-                <div class="flex-shrink-0">
-                    <button type="submit" class="uppercase inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add Custom</button>
+                    <div class="border-t border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3">
+                        <div class="flex-shrink-0">
+                            <button type="submit" class="uppercase inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add Custom</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
+
         </div>
-    </form>
+
+    </div>
+
 </template>
 
 <script setup>
