@@ -61,6 +61,9 @@ class EloquentJobsRepository extends RepositoryAbstract implements JobsRepositor
             'experiences' => array_values($categories->experiences()->toArray()),
             'careerLevels' => array_values($categories->careerLevels()->toArray()),
             'applyTypes' => array_values($categories->applyTypes()->toArray()),
+            'responsibilities' => array_values($categories->responsibilities()->toArray()),
+            'skills' => array_values($categories->skills()->toArray()),
+            'benefits' => array_values($categories->benefits()->toArray()),
         ];
     }
 

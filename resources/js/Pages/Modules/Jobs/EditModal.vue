@@ -405,7 +405,7 @@ const onSubmit = () => {
 
                                                             <BaseDisclosure :title="__('Responsibilities, Skills & Benefits')">
 
-                                                                <Skills></Skills>
+                                                                <Skills :options="job.data"></Skills>
 
                                                             </BaseDisclosure>
 

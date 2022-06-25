@@ -2,14 +2,14 @@
 
     <Listbox as="div" :model-value="props.modelValue" :multiple="props.multiple" @update:modelValue="value => emit('update:modelValue', value)">
 
-        <ListboxLabel class="block text-sm font-medium text-gray-700"> {{ props.placeholder }} </ListboxLabel>
+        <ListboxLabel class="block text-sm font-medium text-gray-700" v-if="label"> {{ props.label }} </ListboxLabel>
 
         <div class="mt-1 relative">
 
             <ListboxButton class="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 
                 <span class="block truncate" v-if="label">{{ label }}</span>
-                <span class="text-gray-500" v-else>{{ props.placeholder }}</span>
+                <span class="text-gray-500" v-else v-text="'--- ' + props.placeholder + ' ---'"></span>
 
                 <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 
@@ -58,6 +58,7 @@ const props = defineProps({
         type: [String, Number, Array, Object],
         default: null,
     },
+    label: String,
     placeholder: {
         type: String,
         default: "Select option",

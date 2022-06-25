@@ -1131,6 +1131,7 @@ __webpack_require__.r(__webpack_exports__);
       type: [String, Number, Array, Object],
       "default": null
     },
+    label: String,
     placeholder: {
       type: String,
       "default": "Select option"
@@ -1373,19 +1374,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/listbox/listbox.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/CalendarIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/PaperClipIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/TagIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/UserCircleIcon.js");
+/* harmony import */ var _Components_BaseDisclosure__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/BaseDisclosure */ "./resources/js/Components/BaseDisclosure.vue");
+/* harmony import */ var _Shared_BaseListbox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Shared/BaseListbox */ "./resources/js/Shared/BaseListbox.vue");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/radio-group/radio-group.js");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'Skills',
+  props: {
+    editing: Object,
+    options: Object
+  },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
+    var props = __props;
+    var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+      responsibility: 1,
+      skill: 1
+    });
+    var memoryOptions = [{
+      name: 'Responsibilities',
+      inStock: true
+    }, {
+      name: 'Skills',
+      inStock: true
+    }, {
+      name: 'Benefits',
+      inStock: true
+    }];
+    var mem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(memoryOptions[0]);
     var assignees = [{
       name: 'Unassigned',
       value: null
@@ -1415,6 +1435,10 @@ __webpack_require__.r(__webpack_exports__);
     var labelled = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(labels[0]);
     var dated = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(dueDates[0]);
     var __returned__ = {
+      props: props,
+      form: form,
+      memoryOptions: memoryOptions,
+      mem: mem,
       assignees: assignees,
       labels: labels,
       dueDates: dueDates,
@@ -1422,15 +1446,12 @@ __webpack_require__.r(__webpack_exports__);
       labelled: labelled,
       dated: dated,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
-      Listbox: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.Listbox,
-      ListboxButton: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.ListboxButton,
-      ListboxLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.ListboxLabel,
-      ListboxOption: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.ListboxOption,
-      ListboxOptions: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.ListboxOptions,
-      CalendarIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__["default"],
-      PaperClipIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__["default"],
-      TagIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_4__["default"],
-      UserCircleIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__["default"]
+      reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
+      BaseDisclosure: _Components_BaseDisclosure__WEBPACK_IMPORTED_MODULE_1__["default"],
+      BaseListbox: _Shared_BaseListbox__WEBPACK_IMPORTED_MODULE_2__["default"],
+      RadioGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_3__.RadioGroup,
+      RadioGroupLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_3__.RadioGroupLabel,
+      RadioGroupOption: _headlessui_vue__WEBPACK_IMPORTED_MODULE_3__.RadioGroupOption
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -2308,7 +2329,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     title: _ctx.__('Responsibilities, Skills & Benefits')
                   }, {
                     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Skills"])];
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Skills"], {
+                        options: $setup.job.data
+                      }, null, 8
+                      /* PROPS */
+                      , ["options"])];
                     }),
                     _: 1
                     /* STABLE */
@@ -2756,10 +2781,7 @@ var _hoisted_2 = {
   key: 0,
   "class": "block truncate"
 };
-var _hoisted_3 = {
-  key: 1,
-  "class": "text-gray-500"
-};
+var _hoisted_3 = ["textContent"];
 var _hoisted_4 = {
   "class": "absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
 };
@@ -2773,26 +2795,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxLabel"], {
+      return [$setup.label ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ListboxLabel"], {
+        key: 0,
         "class": "block text-sm font-medium text-gray-700"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.placeholder), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.label), 1
           /* TEXT */
           )];
         }),
         _: 1
         /* STABLE */
 
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxButton"], {
+      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxButton"], {
         "class": "bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [$setup.label ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.label), 1
           /* TEXT */
-          )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.placeholder), 1
-          /* TEXT */
-          )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SelectorIcon"], {
+          )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+            key: 1,
+            "class": "text-gray-500",
+            textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)('--- ' + $setup.props.placeholder + ' ---')
+          }, null, 8
+          /* PROPS */
+          , _hoisted_3)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SelectorIcon"], {
             "class": "h-5 w-5 text-gray-400",
             "aria-hidden": "true"
           })])];
@@ -3269,7 +3296,7 @@ var _hoisted_1 = {
   "class": "relative"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500\"><label for=\"title\" class=\"sr-only\">Title</label><input type=\"text\" name=\"title\" id=\"title\" class=\"block w-full border-0 pt-2.5 text-lg font-medium placeholder-gray-500 focus:ring-0\" placeholder=\"Title\"><label for=\"description\" class=\"sr-only\">Description</label><textarea rows=\"2\" name=\"description\" id=\"description\" class=\"block w-full border-0 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm\" placeholder=\"Write a description...\"></textarea><!-- Spacer element to match the height of the toolbar --><div aria-hidden=\"true\"><div class=\"py-2\"><div class=\"h-9\"></div></div><div class=\"h-px\"></div><div class=\"py-2\"><div class=\"py-px\"><div class=\"h-9\"></div></div></div></div></div>", 1);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500\"><label for=\"title\" class=\"sr-only\">Title</label><input type=\"text\" name=\"title\" id=\"title\" class=\"block w-full border-0 pt-2.5 text-lg font-medium placeholder-gray-500 focus:ring-0\" placeholder=\"Title\"><label for=\"description\" class=\"sr-only\">Description</label><textarea rows=\"4\" name=\"description\" id=\"description\" class=\"block w-full border-0 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm\" placeholder=\"Write a description...\"></textarea><!-- Spacer element to match the height of the toolbar --><div aria-hidden=\"true\"><div class=\"py-2\"><div class=\"h-9\"></div></div><div class=\"h-px\"></div><div class=\"py-2\"><div class=\"py-px\"><div class=\"h-9\"></div></div></div></div></div>", 1);
 
 var _hoisted_3 = {
   "class": "absolute bottom-0 inset-x-px"
@@ -3278,80 +3305,52 @@ var _hoisted_4 = {
   "class": "flex flex-nowrap justify-end py-2 px-2 space-x-2 sm:px-3"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Assign ");
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Choose a memory option ");
 
 var _hoisted_6 = {
-  "class": "relative"
+  "class": "grid grid-cols-3 gap-3"
 };
-var _hoisted_7 = ["src"];
-var _hoisted_8 = {
-  "class": "flex items-center"
-};
-var _hoisted_9 = ["src"];
-var _hoisted_10 = {
-  "class": "ml-3 block font-medium truncate"
-};
-
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Add a label ");
-
-var _hoisted_12 = {
-  "class": "relative"
-};
-var _hoisted_13 = {
-  "class": "flex items-center"
-};
-var _hoisted_14 = {
-  "class": "block font-medium truncate"
-};
-
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Add a due date ");
-
-var _hoisted_16 = {
-  "class": "relative"
-};
-var _hoisted_17 = {
-  "class": "flex items-center"
-};
-var _hoisted_18 = {
-  "class": "block font-medium truncate"
-};
-var _hoisted_19 = {
+var _hoisted_7 = {
   "class": "border-t border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3"
 };
-var _hoisted_20 = {
-  "class": "flex"
+var _hoisted_8 = {
+  "class": "flex-1"
 };
-var _hoisted_21 = {
-  type: "button",
-  "class": "-ml-2 -my-2 rounded-full px-3 py-2 inline-flex items-center text-left text-gray-400 group"
+var _hoisted_9 = {
+  "class": "w-full grid grid-cols-1 gap-4 sm:grid-cols-1"
+};
+var _hoisted_10 = {
+  key: 0,
+  "class": "col-span-1"
+};
+var _hoisted_11 = {
+  key: 1,
+  "class": "col-span-1"
+};
+var _hoisted_12 = {
+  key: 2,
+  "class": "col-span-1"
 };
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "text-sm text-gray-500 group-hover:text-gray-600 italic"
-}, "Attach a file", -1
-/* HOISTED */
-);
-
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex-shrink-0"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
-  "class": "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-}, "Create")], -1
+  "class": "uppercase inline-flex items-center px-7 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+}, "Add")], -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Actions: These are just examples to demonstrate the concept, replace/wire these up however makes sense for your project. "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Listbox"], {
-    as: "div",
-    modelValue: $setup.assigned,
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Actions: These are just examples to demonstrate the concept, replace/wire these up however makes sense for your project. "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroup"], {
+    modelValue: $setup.mem,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $setup.assigned = $event;
+      return $setup.mem = $event;
     }),
-    "class": "flex-shrink-0"
+    "class": "mt-2"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxLabel"], {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroupLabel"], {
         "class": "sr-only"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -3360,270 +3359,78 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxButton"], {
-        "class": "relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [$setup.assigned.value === null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["UserCircleIcon"], {
-            key: 0,
-            "class": "flex-shrink-0 h-5 w-5 text-gray-300 sm:-ml-1",
-            "aria-hidden": "true"
-          })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
-            key: 1,
-            src: $setup.assigned.avatar,
-            alt: "",
-            "class": "flex-shrink-0 h-5 w-5 rounded-full"
-          }, null, 8
-          /* PROPS */
-          , _hoisted_7)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.assigned.value === null ? '' : 'text-gray-900', 'hidden truncate sm:ml-2 sm:block'])
-          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.assigned.value === null ? 'Assign' : $setup.assigned.name), 3
-          /* TEXT, CLASS */
-          )];
-        }),
-        _: 1
-        /* STABLE */
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.memoryOptions, function (option) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroupOption"], {
+          as: "template",
+          key: option.name,
+          value: option,
+          disabled: !option.inStock
+        }, {
+          "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
+            var active = _ref.active,
+                checked = _ref.checked;
+            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+              "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([option.inStock ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed', active ? 'ring-2 ring-offset-2 ring-indigo-500' : '', checked ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50', 'border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1'])
+            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroupLabel"], {
+              as: "span"
+            }, {
+              "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(option.name), 1
+                /* TEXT */
+                )];
+              }),
+              _: 2
+              /* DYNAMIC */
 
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-        "leave-active-class": "transition ease-in duration-100",
-        "leave-from-class": "opacity-100",
-        "leave-to-class": "opacity-0"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxOptions"], {
-            "class": "absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.assignees, function (assignee) {
-                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxOption"], {
-                  as: "template",
-                  key: assignee.value,
-                  value: assignee
-                }, {
-                  "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
-                    var active = _ref.active;
-                    return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-                      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([active ? 'bg-gray-100' : 'bg-white', 'cursor-default select-none relative py-2 px-3'])
-                    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [assignee.avatar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
-                      key: 0,
-                      src: assignee.avatar,
-                      alt: "",
-                      "class": "flex-shrink-0 h-5 w-5 rounded-full"
-                    }, null, 8
-                    /* PROPS */
-                    , _hoisted_9)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["UserCircleIcon"], {
-                      key: 1,
-                      "class": "flex-shrink-0 h-5 w-5 text-gray-400",
-                      "aria-hidden": "true"
-                    })), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(assignee.name), 1
-                    /* TEXT */
-                    )])], 2
-                    /* CLASS */
-                    )];
-                  }),
-                  _: 2
-                  /* DYNAMIC */
+            }, 1024
+            /* DYNAMIC_SLOTS */
+            )], 2
+            /* CLASS */
+            )];
+          }),
+          _: 2
+          /* DYNAMIC */
 
-                }, 1032
-                /* PROPS, DYNAMIC_SLOTS */
-                , ["value"]);
-              }), 64
-              /* STABLE_FRAGMENT */
-              ))];
-            }),
-            _: 1
-            /* STABLE */
-
-          })];
-        }),
-        _: 1
-        /* STABLE */
-
-      })])];
+        }, 1032
+        /* PROPS, DYNAMIC_SLOTS */
+        , ["value", "disabled"]);
+      }), 64
+      /* STABLE_FRAGMENT */
+      ))])];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Listbox"], {
-    as: "div",
-    modelValue: $setup.labelled,
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [$setup.mem.name == 'Responsibilities' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+    options: $setup.props.options.responsibilities,
+    modelValue: $setup.form.responsibility,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $setup.labelled = $event;
+      return $setup.form.responsibility = $event;
     }),
-    "class": "flex-shrink-0"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxLabel"], {
-        "class": "sr-only"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_11];
-        }),
-        _: 1
-        /* STABLE */
-
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxButton"], {
-        "class": "relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TagIcon"], {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.labelled.value === null ? 'text-gray-300' : 'text-gray-500', 'flex-shrink-0 h-5 w-5 sm:-ml-1']),
-            "aria-hidden": "true"
-          }, null, 8
-          /* PROPS */
-          , ["class"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.labelled.value === null ? '' : 'text-gray-900', 'hidden truncate sm:ml-2 sm:block'])
-          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.labelled.value === null ? 'Label' : $setup.labelled.name), 3
-          /* TEXT, CLASS */
-          )];
-        }),
-        _: 1
-        /* STABLE */
-
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-        "leave-active-class": "transition ease-in duration-100",
-        "leave-from-class": "opacity-100",
-        "leave-to-class": "opacity-0"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxOptions"], {
-            "class": "absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.labels, function (label) {
-                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxOption"], {
-                  as: "template",
-                  key: label.value,
-                  value: label
-                }, {
-                  "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref2) {
-                    var active = _ref2.active;
-                    return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-                      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([active ? 'bg-gray-100' : 'bg-white', 'cursor-default select-none relative py-2 px-3'])
-                    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(label.name), 1
-                    /* TEXT */
-                    )])], 2
-                    /* CLASS */
-                    )];
-                  }),
-                  _: 2
-                  /* DYNAMIC */
-
-                }, 1032
-                /* PROPS, DYNAMIC_SLOTS */
-                , ["value"]);
-              }), 64
-              /* STABLE_FRAGMENT */
-              ))];
-            }),
-            _: 1
-            /* STABLE */
-
-          })];
-        }),
-        _: 1
-        /* STABLE */
-
-      })])];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
+    placeholder: "Select Responsibilities"
+  }, null, 8
   /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Listbox"], {
-    as: "div",
-    modelValue: $setup.dated,
+  , ["options", "modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.mem.name == 'Skills' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+    options: $setup.props.options.skills,
+    modelValue: $setup.form.skill,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $setup.dated = $event;
+      return $setup.form.skill = $event;
     }),
-    "class": "flex-shrink-0"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxLabel"], {
-        "class": "sr-only"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_15];
-        }),
-        _: 1
-        /* STABLE */
-
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxButton"], {
-        "class": "relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CalendarIcon"], {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.dated.value === null ? 'text-gray-300' : 'text-gray-500', 'flex-shrink-0 h-5 w-5 sm:-ml-1']),
-            "aria-hidden": "true"
-          }, null, 8
-          /* PROPS */
-          , ["class"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.dated.value === null ? '' : 'text-gray-900', 'hidden truncate sm:ml-2 sm:block'])
-          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.dated.value === null ? 'Due date' : $setup.dated.name), 3
-          /* TEXT, CLASS */
-          )];
-        }),
-        _: 1
-        /* STABLE */
-
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-        "leave-active-class": "transition ease-in duration-100",
-        "leave-from-class": "opacity-100",
-        "leave-to-class": "opacity-0"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxOptions"], {
-            "class": "absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.dueDates, function (dueDate) {
-                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ListboxOption"], {
-                  as: "template",
-                  key: dueDate.value,
-                  value: dueDate
-                }, {
-                  "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref3) {
-                    var active = _ref3.active;
-                    return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-                      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([active ? 'bg-gray-100' : 'bg-white', 'cursor-default select-none relative py-2 px-3'])
-                    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(dueDate.name), 1
-                    /* TEXT */
-                    )])], 2
-                    /* CLASS */
-                    )];
-                  }),
-                  _: 2
-                  /* DYNAMIC */
-
-                }, 1032
-                /* PROPS, DYNAMIC_SLOTS */
-                , ["value"]);
-              }), 64
-              /* STABLE_FRAGMENT */
-              ))];
-            }),
-            _: 1
-            /* STABLE */
-
-          })];
-        }),
-        _: 1
-        /* STABLE */
-
-      })])];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
+    placeholder: "Select Skills"
+  }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["PaperClipIcon"], {
-    "class": "-ml-1 h-5 w-5 mr-2 group-hover:text-gray-500",
-    "aria-hidden": "true"
-  }), _hoisted_22])]), _hoisted_23])])]);
+  , ["options", "modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.mem.name == 'Benefits' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+    options: $setup.props.options.benefits,
+    modelValue: $setup.form.Benefit,
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $setup.form.Benefit = $event;
+    }),
+    placeholder: "Select Benefits"
+  }, null, 8
+  /* PROPS */
+  , ["options", "modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), _hoisted_13])])]);
 }
 
 /***/ }),

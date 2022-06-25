@@ -20,7 +20,7 @@
             <label for="title" class="sr-only">Title</label>
             <input type="text" name="title" id="title" class="block w-full border-0 pt-2.5 text-lg font-medium placeholder-gray-500 focus:ring-0" placeholder="Title" />
             <label for="description" class="sr-only">Description</label>
-            <textarea rows="2" name="description" id="description" class="block w-full border-0 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Write a description..." />
+            <textarea rows="4" name="description" id="description" class="block w-full border-0 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Write a description..." />
 
             <!-- Spacer element to match the height of the toolbar -->
             <div aria-hidden="true">
@@ -39,92 +39,45 @@
         <div class="absolute bottom-0 inset-x-px">
             <!-- Actions: These are just examples to demonstrate the concept, replace/wire these up however makes sense for your project. -->
             <div class="flex flex-nowrap justify-end py-2 px-2 space-x-2 sm:px-3">
-                <Listbox as="div" v-model="assigned" class="flex-shrink-0">
-                    <ListboxLabel class="sr-only"> Assign </ListboxLabel>
-                    <div class="relative">
-                        <ListboxButton class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3">
-                            <UserCircleIcon v-if="assigned.value === null" class="flex-shrink-0 h-5 w-5 text-gray-300 sm:-ml-1" aria-hidden="true" />
-
-                            <img v-else :src="assigned.avatar" alt="" class="flex-shrink-0 h-5 w-5 rounded-full" />
-
-                            <span :class="[assigned.value === null ? '' : 'text-gray-900', 'hidden truncate sm:ml-2 sm:block']">{{ assigned.value === null ? 'Assign' : assigned.name }}</span>
-                        </ListboxButton>
-
-                        <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                            <ListboxOptions class="absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                                <ListboxOption as="template" v-for="assignee in assignees" :key="assignee.value" :value="assignee" v-slot="{ active }">
-                                    <li :class="[active ? 'bg-gray-100' : 'bg-white', 'cursor-default select-none relative py-2 px-3']">
-                                        <div class="flex items-center">
-                                            <img v-if="assignee.avatar" :src="assignee.avatar" alt="" class="flex-shrink-0 h-5 w-5 rounded-full" />
-                                            <UserCircleIcon v-else class="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
-                                            <span class="ml-3 block font-medium truncate">
-                        {{ assignee.name }}
-                      </span>
-                                        </div>
-                                    </li>
-                                </ListboxOption>
-                            </ListboxOptions>
-                        </transition>
+                <RadioGroup v-model="mem" class="mt-2">
+                    <RadioGroupLabel class="sr-only"> Choose a memory option </RadioGroupLabel>
+                    <div class="grid grid-cols-3 gap-3">
+                        <RadioGroupOption as="template" v-for="option in memoryOptions" :key="option.name" :value="option" :disabled="!option.inStock" v-slot="{ active, checked }">
+                            <div :class="[option.inStock ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed', active ? 'ring-2 ring-offset-2 ring-indigo-500' : '', checked ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50', 'border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1']">
+                                <RadioGroupLabel as="span">
+                                    {{ option.name }}
+                                </RadioGroupLabel>
+                            </div>
+                        </RadioGroupOption>
                     </div>
-                </Listbox>
-
-                <Listbox as="div" v-model="labelled" class="flex-shrink-0">
-                    <ListboxLabel class="sr-only"> Add a label </ListboxLabel>
-                    <div class="relative">
-                        <ListboxButton class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3">
-                            <TagIcon :class="[labelled.value === null ? 'text-gray-300' : 'text-gray-500', 'flex-shrink-0 h-5 w-5 sm:-ml-1']" aria-hidden="true" />
-                            <span :class="[labelled.value === null ? '' : 'text-gray-900', 'hidden truncate sm:ml-2 sm:block']">{{ labelled.value === null ? 'Label' : labelled.name }}</span>
-                        </ListboxButton>
-
-                        <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                            <ListboxOptions class="absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                                <ListboxOption as="template" v-for="label in labels" :key="label.value" :value="label" v-slot="{ active }">
-                                    <li :class="[active ? 'bg-gray-100' : 'bg-white', 'cursor-default select-none relative py-2 px-3']">
-                                        <div class="flex items-center">
-                      <span class="block font-medium truncate">
-                        {{ label.name }}
-                      </span>
-                                        </div>
-                                    </li>
-                                </ListboxOption>
-                            </ListboxOptions>
-                        </transition>
-                    </div>
-                </Listbox>
-
-                <Listbox as="div" v-model="dated" class="flex-shrink-0">
-                    <ListboxLabel class="sr-only"> Add a due date </ListboxLabel>
-                    <div class="relative">
-                        <ListboxButton class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3">
-                            <CalendarIcon :class="[dated.value === null ? 'text-gray-300' : 'text-gray-500', 'flex-shrink-0 h-5 w-5 sm:-ml-1']" aria-hidden="true" />
-                            <span :class="[dated.value === null ? '' : 'text-gray-900', 'hidden truncate sm:ml-2 sm:block']">{{ dated.value === null ? 'Due date' : dated.name }}</span>
-                        </ListboxButton>
-
-                        <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                            <ListboxOptions class="absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                                <ListboxOption as="template" v-for="dueDate in dueDates" :key="dueDate.value" :value="dueDate" v-slot="{ active }">
-                                    <li :class="[active ? 'bg-gray-100' : 'bg-white', 'cursor-default select-none relative py-2 px-3']">
-                                        <div class="flex items-center">
-                      <span class="block font-medium truncate">
-                        {{ dueDate.name }}
-                      </span>
-                                        </div>
-                                    </li>
-                                </ListboxOption>
-                            </ListboxOptions>
-                        </transition>
-                    </div>
-                </Listbox>
+                </RadioGroup>
             </div>
             <div class="border-t border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3">
-                <div class="flex">
-                    <button type="button" class="-ml-2 -my-2 rounded-full px-3 py-2 inline-flex items-center text-left text-gray-400 group">
-                        <PaperClipIcon class="-ml-1 h-5 w-5 mr-2 group-hover:text-gray-500" aria-hidden="true" />
-                        <span class="text-sm text-gray-500 group-hover:text-gray-600 italic">Attach a file</span>
-                    </button>
+                <div class="flex-1">
+                    <div class="w-full grid grid-cols-1 gap-4 sm:grid-cols-1">
+
+                        <div class="col-span-1" v-if="mem.name == 'Responsibilities'">
+
+                            <BaseListbox :options="props.options.responsibilities" v-model="form.responsibility"  placeholder="Select Responsibilities"/>
+
+                        </div>
+
+                        <div class="col-span-1" v-if="mem.name == 'Skills'">
+
+                            <BaseListbox :options="props.options.skills" v-model="form.skill"  placeholder="Select Skills"/>
+
+                        </div>
+
+                        <div class="col-span-1" v-if="mem.name == 'Benefits'">
+
+                            <BaseListbox :options="props.options.benefits" v-model="form.Benefit"  placeholder="Select Benefits"/>
+
+                        </div>
+
+                    </div>
                 </div>
                 <div class="flex-shrink-0">
-                    <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create</button>
+                    <button type="submit" class="uppercase inline-flex items-center px-7 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add</button>
                 </div>
             </div>
         </div>
@@ -132,9 +85,31 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
-import { CalendarIcon, PaperClipIcon, TagIcon, UserCircleIcon } from '@heroicons/vue/solid'
+import { ref, reactive } from 'vue'
+import BaseDisclosure from '@/Components/BaseDisclosure'
+import BaseListbox from '@/Shared/BaseListbox'
+
+import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+
+const props = defineProps({
+    editing: Object,
+    options: Object,
+});
+
+const form = reactive({
+    responsibility: 1,
+    skill: 1,
+})
+
+
+
+const memoryOptions = [
+    { name: 'Responsibilities', inStock: true },
+    { name: 'Skills', inStock: true },
+    { name: 'Benefits', inStock: true },
+]
+
+const mem = ref(memoryOptions[0])
 
 const assignees = [
     { name: 'Unassigned', value: null },
