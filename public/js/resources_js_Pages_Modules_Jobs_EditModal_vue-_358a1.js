@@ -744,7 +744,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     basePageRoute: String
   },
   setup: function setup(__props, _ref) {
-    var _props$editing$compan, _props$editing$catego, _props$editing$catego2, _props$editing$catego3, _props$editing$catego4, _props$editing$catego5, _props$editing$catego6, _props$editing$catego7, _props$editing$catego8, _props$editing$catego9, _props$editing$catego10, _props$editing$catego11;
+    var _props$editing$compan, _props$editing$catego, _props$editing$catego2, _props$editing$catego3, _props$editing$catego4, _props$editing$catego5, _props$editing$catego6, _props$editing$catego7, _props$editing$catego8;
 
     var expose = _ref.expose;
     expose();
@@ -775,24 +775,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       gender: (_props$editing$catego5 = props.editing.categories.find(function (element) {
         return element.type === "gender";
       })) === null || _props$editing$catego5 === void 0 ? void 0 : _props$editing$catego5.id,
-      responsibility: (_props$editing$catego6 = props.editing.categories.find(function (element) {
-        return element.type === "responsibility";
-      })) === null || _props$editing$catego6 === void 0 ? void 0 : _props$editing$catego6.id,
-      skill: (_props$editing$catego7 = props.editing.categories.find(function (element) {
-        return element.type === "skill";
-      })) === null || _props$editing$catego7 === void 0 ? void 0 : _props$editing$catego7.id,
-      benefit: (_props$editing$catego8 = props.editing.categories.find(function (element) {
-        return element.type === "benefit";
-      })) === null || _props$editing$catego8 === void 0 ? void 0 : _props$editing$catego8.id,
-      experience: (_props$editing$catego9 = props.editing.categories.find(function (element) {
+      experience: (_props$editing$catego6 = props.editing.categories.find(function (element) {
         return element.type === "experience";
-      })) === null || _props$editing$catego9 === void 0 ? void 0 : _props$editing$catego9.id,
-      career_level: (_props$editing$catego10 = props.editing.categories.find(function (element) {
+      })) === null || _props$editing$catego6 === void 0 ? void 0 : _props$editing$catego6.id,
+      career_level: (_props$editing$catego7 = props.editing.categories.find(function (element) {
         return element.type === "careerLevel";
-      })) === null || _props$editing$catego10 === void 0 ? void 0 : _props$editing$catego10.id,
-      apply_type: (_props$editing$catego11 = props.editing.categories.find(function (element) {
+      })) === null || _props$editing$catego7 === void 0 ? void 0 : _props$editing$catego7.id,
+      apply_type: (_props$editing$catego8 = props.editing.categories.find(function (element) {
         return element.type === "applyType";
-      })) === null || _props$editing$catego11 === void 0 ? void 0 : _props$editing$catego11.id,
+      })) === null || _props$editing$catego8 === void 0 ? void 0 : _props$editing$catego8.id,
       salary_type: props.editing.salary_type,
       salary_min: props.editing.salary_min,
       salary_max: props.editing.salary_max,
@@ -1374,10 +1365,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Components_BaseDisclosure__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/BaseDisclosure */ "./resources/js/Components/BaseDisclosure.vue");
-/* harmony import */ var _Shared_BaseListbox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Shared/BaseListbox */ "./resources/js/Shared/BaseListbox.vue");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/radio-group/radio-group.js");
-
+/* harmony import */ var _Shared_BaseListbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Shared/BaseListbox */ "./resources/js/Shared/BaseListbox.vue");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/radio-group/radio-group.js");
 
 
 
@@ -1392,8 +1381,21 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      responsibility: 1,
-      skill: 1
+      responsibility: props.editing.categories.filter(function (element) {
+        return element.type === "responsibility";
+      }).map(function (element) {
+        return element.id;
+      }),
+      skill: props.editing.categories.filter(function (element) {
+        return element.type === "skill";
+      }).map(function (element) {
+        return element.id;
+      }),
+      benefit: props.editing.categories.filter(function (element) {
+        return element.type === "benefit";
+      }).map(function (element) {
+        return element.id;
+      })
     });
     var memoryOptions = [{
       name: 'Responsibilities',
@@ -1447,11 +1449,10 @@ __webpack_require__.r(__webpack_exports__);
       dated: dated,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
-      BaseDisclosure: _Components_BaseDisclosure__WEBPACK_IMPORTED_MODULE_1__["default"],
-      BaseListbox: _Shared_BaseListbox__WEBPACK_IMPORTED_MODULE_2__["default"],
-      RadioGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_3__.RadioGroup,
-      RadioGroupLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_3__.RadioGroupLabel,
-      RadioGroupOption: _headlessui_vue__WEBPACK_IMPORTED_MODULE_3__.RadioGroupOption
+      BaseListbox: _Shared_BaseListbox__WEBPACK_IMPORTED_MODULE_1__["default"],
+      RadioGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_2__.RadioGroup,
+      RadioGroupLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_2__.RadioGroupLabel,
+      RadioGroupOption: _headlessui_vue__WEBPACK_IMPORTED_MODULE_2__.RadioGroupOption
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -2330,10 +2331,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   }, {
                     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Skills"], {
-                        options: $setup.job.data
+                        options: $setup.job.data,
+                        editing: $setup.props.editing
                       }, null, 8
                       /* PROPS */
-                      , ["options"])];
+                      , ["options", "editing"])];
                     }),
                     _: 1
                     /* STABLE */
@@ -2797,7 +2799,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$setup.label ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ListboxLabel"], {
         key: 0,
-        "class": "block text-sm font-medium text-gray-700"
+        "class": "block text-sm font-medium text-gray-500"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.label), 1
@@ -3291,18 +3293,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
-  action: "#",
-  "class": "relative"
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-8"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-sm font-medium text-gray-900"
+}, "Highlights"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "mt-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", {
+  role: "list",
+  "class": "pl-4 list-disc text-sm space-y-2"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
+  "class": "text-gray-400"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-gray-600"
+}, "highlight")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
+  "class": "text-gray-400"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-gray-600"
+}, "highlight")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
+  "class": "text-gray-400"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-gray-600"
+}, "highlight")])])])], -1
+/* HOISTED */
+);
+
+var _hoisted_2 = {
+  "class": "my-8 w-full grid grid-cols-1 gap-4 sm:grid-cols-1"
 };
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500\"><label for=\"title\" class=\"sr-only\">Title</label><input type=\"text\" name=\"title\" id=\"title\" class=\"block w-full border-0 pt-2.5 text-lg font-medium placeholder-gray-500 focus:ring-0\" placeholder=\"Title\"><label for=\"description\" class=\"sr-only\">Description</label><textarea rows=\"4\" name=\"description\" id=\"description\" class=\"block w-full border-0 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm\" placeholder=\"Write a description...\"></textarea><!-- Spacer element to match the height of the toolbar --><div aria-hidden=\"true\"><div class=\"py-2\"><div class=\"h-9\"></div></div><div class=\"h-px\"></div><div class=\"py-2\"><div class=\"py-px\"><div class=\"h-9\"></div></div></div></div></div>", 1);
-
 var _hoisted_3 = {
-  "class": "absolute bottom-0 inset-x-px"
+  "class": "col-span-1"
 };
 var _hoisted_4 = {
-  "class": "flex flex-nowrap justify-end py-2 px-2 space-x-2 sm:px-3"
+  "class": "flex flex-nowrap justify-between py-2 space-x-2"
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Choose a memory option ");
@@ -3311,38 +3335,50 @@ var _hoisted_6 = {
   "class": "grid grid-cols-3 gap-3"
 };
 var _hoisted_7 = {
-  "class": "border-t border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3"
-};
-var _hoisted_8 = {
-  "class": "flex-1"
-};
-var _hoisted_9 = {
-  "class": "w-full grid grid-cols-1 gap-4 sm:grid-cols-1"
-};
-var _hoisted_10 = {
   key: 0,
   "class": "col-span-1"
 };
-var _hoisted_11 = {
+var _hoisted_8 = {
   key: 1,
   "class": "col-span-1"
 };
-var _hoisted_12 = {
+var _hoisted_9 = {
   key: 2,
   "class": "col-span-1"
 };
+var _hoisted_10 = {
+  action: "#",
+  "class": "relative"
+};
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500\"><label for=\"title\" class=\"sr-only\">Title</label><input type=\"text\" name=\"title\" id=\"title\" class=\"block w-full border-0 pt-2.5 text-lg font-medium placeholder-gray-500 focus:ring-0\" placeholder=\"Title\" disabled><label for=\"description\" class=\"sr-only\">Description</label><textarea rows=\"4\" name=\"description\" id=\"description\" class=\"block w-full border-0 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm\" placeholder=\"Write a description...\"></textarea><!-- Spacer element to match the height of the toolbar --><div aria-hidden=\"true\"><div class=\"py-2\"><div class=\"h-9\"></div></div><div class=\"h-px\"></div><div class=\"py-2\"><div class=\"py-px\"><div class=\"h-9\"></div></div></div></div></div>", 1);
+
+var _hoisted_12 = {
+  "class": "absolute bottom-0 inset-x-px"
+};
+var _hoisted_13 = {
+  "class": "flex flex-nowrap justify-between py-2 px-2 space-x-2 sm:px-3"
+};
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Choose a memory option ");
+
+var _hoisted_15 = {
+  "class": "grid grid-cols-3 gap-3"
+};
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "border-t border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex-shrink-0"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
-  "class": "uppercase inline-flex items-center px-7 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-}, "Add")], -1
+  "class": "uppercase inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+}, "Add Custom")])], -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Actions: These are just examples to demonstrate the concept, replace/wire these up however makes sense for your project. "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroup"], {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroup"], {
     modelValue: $setup.mem,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.mem = $event;
@@ -3403,34 +3439,101 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [$setup.mem.name == 'Responsibilities' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+  , ["modelValue"])])]), $setup.mem.name == 'Responsibilities' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
     options: $setup.props.options.responsibilities,
     modelValue: $setup.form.responsibility,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $setup.form.responsibility = $event;
     }),
-    placeholder: "Select Responsibilities"
+    placeholder: "Select Responsibilities",
+    label: "--- Select Responsibilities ---",
+    multiple: ""
   }, null, 8
   /* PROPS */
-  , ["options", "modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.mem.name == 'Skills' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+  , ["options", "modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.mem.name == 'Skills' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
     options: $setup.props.options.skills,
     modelValue: $setup.form.skill,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $setup.form.skill = $event;
     }),
-    placeholder: "Select Skills"
+    placeholder: "Select Skills",
+    label: "--- Select Skills ---"
   }, null, 8
   /* PROPS */
-  , ["options", "modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.mem.name == 'Benefits' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+  , ["options", "modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.mem.name == 'Benefits' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
     options: $setup.props.options.benefits,
-    modelValue: $setup.form.Benefit,
+    modelValue: $setup.form.benefit,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $setup.form.Benefit = $event;
+      return $setup.form.benefit = $event;
     }),
-    placeholder: "Select Benefits"
+    placeholder: "Select Benefits",
+    label: "--- Select Benefits ----"
   }, null, 8
   /* PROPS */
-  , ["options", "modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), _hoisted_13])])]);
+  , ["options", "modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Actions: These are just examples to demonstrate the concept, replace/wire these up however makes sense for your project. "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroup"], {
+    modelValue: $setup.mem,
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $setup.mem = $event;
+    }),
+    "class": "mt-2"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroupLabel"], {
+        "class": "sr-only"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_14];
+        }),
+        _: 1
+        /* STABLE */
+
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.memoryOptions, function (option) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroupOption"], {
+          as: "template",
+          key: option.name,
+          value: option,
+          disabled: !option.inStock
+        }, {
+          "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref2) {
+            var active = _ref2.active,
+                checked = _ref2.checked;
+            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+              "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([option.inStock ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed', active ? 'ring-2 ring-offset-2 ring-indigo-500' : '', checked ? 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700' : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50', 'border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1'])
+            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroupLabel"], {
+              as: "span"
+            }, {
+              "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(option.name), 1
+                /* TEXT */
+                )];
+              }),
+              _: 2
+              /* DYNAMIC */
+
+            }, 1024
+            /* DYNAMIC_SLOTS */
+            )], 2
+            /* CLASS */
+            )];
+          }),
+          _: 2
+          /* DYNAMIC */
+
+        }, 1032
+        /* PROPS, DYNAMIC_SLOTS */
+        , ["value", "disabled"]);
+      }), 64
+      /* STABLE_FRAGMENT */
+      ))])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["modelValue"])]), _hoisted_16])])], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),

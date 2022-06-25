@@ -45,9 +45,6 @@ const form = reactive({
     job_type: props.editing.categories.find(element => element.type === "jobType")?.id,
     job_level: props.editing.categories.find(element => element.type === "jobLevel")?.id,
     gender: props.editing.categories.find(element => element.type === "gender")?.id,
-    responsibility: props.editing.categories.find(element => element.type === "responsibility")?.id,
-    skill: props.editing.categories.find(element => element.type === "skill")?.id,
-    benefit: props.editing.categories.find(element => element.type === "benefit")?.id,
     experience: props.editing.categories.find(element => element.type === "experience")?.id,
     career_level: props.editing.categories.find(element => element.type === "careerLevel")?.id,
     apply_type: props.editing.categories.find(element => element.type === "applyType")?.id,
@@ -405,7 +402,7 @@ const onSubmit = () => {
 
                                                             <BaseDisclosure :title="__('Responsibilities, Skills & Benefits')">
 
-                                                                <Skills :options="job.data"></Skills>
+                                                                <Skills :options="job.data" :editing="props.editing"></Skills>
 
                                                             </BaseDisclosure>
 

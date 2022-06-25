@@ -2,7 +2,7 @@
 
     <Listbox as="div" :model-value="props.modelValue" :multiple="props.multiple" @update:modelValue="value => emit('update:modelValue', value)">
 
-        <ListboxLabel class="block text-sm font-medium text-gray-700" v-if="label"> {{ props.label }} </ListboxLabel>
+        <ListboxLabel class="block text-sm font-medium text-gray-500" v-if="label"> {{ props.label }} </ListboxLabel>
 
         <div class="mt-1 relative">
 
