@@ -64,19 +64,19 @@
 
         <div class="col-span-1 sm:col-span-2" v-if="mem.name == 'Responsibilities'">
 
-            <BaseListbox :options="props.options.responsibilities" v-model="form.responsibilities"  placeholder="Select Responsibilities" label="--- Select Responsibilities ---" multiple/>
+            <BaseListbox :options="props.options.responsibilities" v-model="form.responsibilities"  placeholder="Select Responsibilities" label="Select Responsibilities" multiple/>
 
         </div>
 
         <div class="col-span-1 sm:col-span-2" v-if="mem.name == 'Skills'">
 
-            <BaseListbox :options="props.options.skills" v-model="form.skills"  placeholder="Select Skills" label="--- Select Skills ---" multiple/>
+            <BaseListbox :options="props.options.skills" v-model="form.skills"  placeholder="Select Skills" label="Select Skills" multiple/>
 
         </div>
 
         <div class="col-span-1 sm:col-span-2" v-if="mem.name == 'Benefits'">
 
-            <BaseListbox :options="props.options.benefits" v-model="form.benefits"  placeholder="Select Benefits" label="--- Select Benefits ----" multiple/>
+            <BaseListbox :options="props.options.benefits" v-model="form.benefits"  placeholder="Select Benefits" label="Select Benefits" multiple/>
 
         </div>
 

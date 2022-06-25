@@ -14,6 +14,7 @@ import DatePicker from '@/Shared/DatePicker'
 import AvatarInput from '@/Shared/AvatarInput'
 import BaseComboboxes from '@/Shared/BaseComboboxes'
 import BasePackages from '@/Shared/BasePackages'
+import Tags from '@/Shared/Tags'
 import Skills from '@/Shared/Skills'
 import BaseDisclosure from '@/Components/BaseDisclosure'
 import { useJobs } from '@/Composables/UseJobs'
@@ -218,7 +219,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <BaseListbox :options="job.data.companies" v-model="form.company"  placeholder="Companies"/>
+                                                                        <BaseListbox :options="job.data.companies" v-model="form.company"  placeholder="Companies"  label="Companies"/>
 
                                                                         <JetInputError :message="form.errors.get('company')" class="mt-2"/>
 
@@ -226,7 +227,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <BaseListbox :options="job.data.areas" v-model="form.area"  placeholder="Areas"/>
+                                                                        <BaseListbox :options="job.data.areas" v-model="form.area" placeholder="Areas" label="Areas"/>
 
                                                                         <JetInputError :message="form.errors.get('area')" class="mt-2"/>
 
@@ -234,7 +235,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <BaseListbox :options="job.data.industries" v-model="form.industry"  placeholder="Industries"/>
+                                                                        <BaseListbox :options="job.data.industries" v-model="form.industry" placeholder="Industries" label="Industries"/>
 
                                                                         <JetInputError :message="form.errors.get('industry')" class="mt-2"/>
 
@@ -295,7 +296,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <BaseListbox :options="job.data.salaryTypes" v-model="form.salary_type"  placeholder="Salary Types"/>
+                                                                        <BaseListbox :options="job.data.salaryTypes" v-model="form.salary_type" placeholder="Salary Types" label="Salary Types"/>
 
                                                                         <JetInputError :message="form.errors.get('salary_type')" class="mt-2"/>
 
@@ -312,14 +313,14 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <BaseListbox :options="job.data.jobTypes" v-model="form.job_type"  placeholder="Job Type"/>
+                                                                        <BaseListbox :options="job.data.jobTypes" v-model="form.job_type" placeholder="Job Type" label="Job Type"/>
 
                                                                         <JetInputError :message="form.errors.get('job_type')" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1">
 
-                                                                        <BaseListbox :options="job.data.experiences" v-model="form.experience"  placeholder="Experiences"/>
+                                                                        <BaseListbox :options="job.data.experiences" v-model="form.experience" placeholder="Experiences" label="Experiences"/>
 
                                                                         <JetInputError :message="form.errors.get('experience')" class="mt-2"/>
 
@@ -327,9 +328,34 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1">
 
-                                                                        <BaseListbox :options="job.data.careerLevels" v-model="form.career_level"  placeholder="Career Level"/>
+                                                                        <BaseListbox :options="job.data.careerLevels" v-model="form.career_level" placeholder="Career Level" label="Career Level"/>
 
                                                                         <JetInputError :message="form.errors.get('career_level')" class="mt-2"/>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </BaseDisclosure>
+
+
+                                                            <BaseDisclosure :title="__('Gender & Qualification')">
+
+                                                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+
+                                                                        <BaseListbox :options="job.data.genders" v-model="form.gender"  placeholder="Gender" label="Gender"/>
+
+                                                                        <JetInputError :message="form.errors.get('gender')" class="mt-2"/>
+
+                                                                    </div>
+
+                                                                    <div class="col-span-1 sm:col-span-2">
+
+                                                                        <BaseListbox :options="job.data.jobLevels" v-model="form.job_level"  :placeholder="__('Qualification')" :label="__('Qualification')"/>
+
+                                                                        <JetInputError :message="form.errors.get('job_level')" class="mt-2"/>
 
                                                                     </div>
 
@@ -471,29 +497,6 @@ const onSubmit = () => {
 
                                                             </div>
 
-                                                            <BaseDisclosure :title="__('Gender & Qualification')">
-
-                                                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
-
-                                                                    <div class="col-span-1">
-
-                                                                        <BaseListbox :options="job.data.genders" v-model="form.gender"  placeholder="Gender"/>
-
-                                                                        <JetInputError :message="form.errors.get('gender')" class="mt-2"/>
-
-                                                                    </div>
-
-                                                                    <div class="col-span-1">
-
-                                                                        <BaseListbox :options="job.data.jobLevels" v-model="form.job_level"  :placeholder="__('Qualification')"/>
-
-                                                                        <JetInputError :message="form.errors.get('job_level')" class="mt-2"/>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </BaseDisclosure>
 
                                                             <BaseDisclosure :title="__('Job Apply Types')">
 
@@ -508,6 +511,12 @@ const onSubmit = () => {
                                                                     </div>
 
                                                                 </div>
+
+                                                            </BaseDisclosure>
+
+                                                            <BaseDisclosure :title="__('Jobs Tags')">
+
+                                                                <Tags></Tags>
 
                                                             </BaseDisclosure>
 
