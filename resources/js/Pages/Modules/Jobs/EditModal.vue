@@ -39,7 +39,7 @@ const form = reactive({
     id: props.editing.id,
     name: props.editing.name,
     content: props.editing.content,
-    company: props.editing.company?.id,
+    company: props.editing.company_id,
 
     area: props.editing.categories.find(element => element.type === "area")?.id,
     industry: props.editing.categories.find(element => element.type === "industry")?.id,
@@ -57,6 +57,7 @@ const form = reactive({
 
     address: props.editing.address,
     city_id: props.editing.city_id,
+    zip: props.editing.zip,
     country_id: props.editing.country_id,
     iframe: props.editing.iframe,
 
@@ -87,23 +88,35 @@ const onSubmit = () => {
     axios.put(route('admin.jobs.update', form.id), pickBy({
         name: form.name,
         content: form.content,
+
         company: form.company,
         area: form.area,
-        salary_min: form.salary_min,
         industry: form.industry,
+
+        salary_min: form.salary_min,
         salary_max: form.salary_max,
         negotiable: form.negotiable,
         salary_type: form.salary_type,
+
         job_type: form.job_type,
-        address: form.address,
-        city_id: form.city_id,
-        country_id: form.country_id,
-        state: form.state,
+        experience: form.experience,
+
+        career_level: form.career_level,
         gender: form.gender,
-        apply_type: form.apply_type,
+
         job_level: form.job_level,
-        closing_to: form.closing_to,
+        address: form.address,
+        country_id: form.country_id,
+        city_id: form.city_id,
+        zip: form.zip,
+
+
         iframe: form.iframe,
+        state: form.state,
+
+        closing_to: form.closing_to,
+        apply_type: form.apply_type,
+
         avatar_path: useAvatar.value.media?.avatar_path,
         files: useMedia.value.doMediaFetchIds(),
         ...props.filters

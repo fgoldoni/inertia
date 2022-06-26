@@ -750,7 +750,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     basePageRoute: String
   },
   setup: function setup(__props, _ref) {
-    var _props$editing$compan, _props$editing$catego, _props$editing$catego2, _props$editing$catego3, _props$editing$catego4, _props$editing$catego5, _props$editing$catego6, _props$editing$catego7, _props$editing$catego8;
+    var _props$editing$catego, _props$editing$catego2, _props$editing$catego3, _props$editing$catego4, _props$editing$catego5, _props$editing$catego6, _props$editing$catego7, _props$editing$catego8;
 
     var expose = _ref.expose;
     expose();
@@ -765,7 +765,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       id: props.editing.id,
       name: props.editing.name,
       content: props.editing.content,
-      company: (_props$editing$compan = props.editing.company) === null || _props$editing$compan === void 0 ? void 0 : _props$editing$compan.id,
+      company: props.editing.company_id,
       area: (_props$editing$catego = props.editing.categories.find(function (element) {
         return element.type === "area";
       })) === null || _props$editing$catego === void 0 ? void 0 : _props$editing$catego.id,
@@ -796,6 +796,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       negotiable: props.editing.negotiable,
       address: props.editing.address,
       city_id: props.editing.city_id,
+      zip: props.editing.zip,
       country_id: props.editing.country_id,
       iframe: props.editing.iframe,
       files: props.editing.attachments,
@@ -824,21 +825,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         content: form.content,
         company: form.company,
         area: form.area,
-        salary_min: form.salary_min,
         industry: form.industry,
+        salary_min: form.salary_min,
         salary_max: form.salary_max,
         negotiable: form.negotiable,
         salary_type: form.salary_type,
         job_type: form.job_type,
-        address: form.address,
-        city_id: form.city_id,
-        country_id: form.country_id,
-        state: form.state,
+        experience: form.experience,
+        career_level: form.career_level,
         gender: form.gender,
-        apply_type: form.apply_type,
         job_level: form.job_level,
-        closing_to: form.closing_to,
+        address: form.address,
+        country_id: form.country_id,
+        city_id: form.city_id,
+        zip: form.zip,
         iframe: form.iframe,
+        state: form.state,
+        closing_to: form.closing_to,
+        apply_type: form.apply_type,
         avatar_path: (_useAvatar$value$medi = _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_18__.useAvatar.value.media) === null || _useAvatar$value$medi === void 0 ? void 0 : _useAvatar$value$medi.avatar_path,
         files: _Composables_UseMedia__WEBPACK_IMPORTED_MODULE_17__.useMedia.value.doMediaFetchIds()
       }, props.filters))).then(function (response) {
@@ -2979,7 +2983,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "block text-sm font-medium text-gray-500"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)('--- ' + $setup.props.label + ' ---'), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.label), 1
           /* TEXT */
           )];
         }),

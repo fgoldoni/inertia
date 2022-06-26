@@ -101,11 +101,20 @@ class JobsController extends Controller
 
     public function update(UpdateJobRequest $request, Job $job)
     {
-        $job = $this->jobsRepository->update($job->id, $request->only('name', 'avatar_path'));
+
+         $job = $this->jobsRepository->update($job->id, array_merge(
+             $request->only('name', 'content', 'avatar_path', 'salary_type', 'state'),
+             [
+                 'company_id' => $request->get('company')
+             ]
+         ));
+
 
         $this->attachmentsRepository->findWhereIn('id', $request->get('files'))->each(function ($item, $key) use ($job) {
             $job->attachments()->save($item);
         });
+
+        $this->jobsRepository->sync($job->id, 'categories', $request->only('area'));
 
         return $this->response
             ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)

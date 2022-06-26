@@ -1184,7 +1184,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "block text-sm font-medium text-gray-500"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)('--- ' + $setup.props.label + ' ---'), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.label), 1
           /* TEXT */
           )];
         }),
