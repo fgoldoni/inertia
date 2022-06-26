@@ -2,6 +2,7 @@
 
 namespace Modules\Jobs\Http\Controllers\Api;
 
+use App\Models\User;
 use App\Repositories\Criteria\ByUser;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
@@ -49,7 +50,7 @@ class JobsController extends Controller
     }
 
 
-    public function show(Job $job)
+    public function show(User $user)
     {
         $result = $this->jobsRepository->initCategories($this->categoriesRepository->get(['id', 'name', 'type']));
 
@@ -57,7 +58,7 @@ class JobsController extends Controller
         $result['salaryTypes'] = $this->jobsRepository->salaryTypes();
         $result['roles'] = $this->rolesRepository->all(['id', 'name']);
         $result['companies'] = $this->companiesRepository->withCriteria([
-            new ByUser($job->user_id)
+            new ByUser($user->id)
         ])->all(['id', 'name', 'user_id']);
 
 

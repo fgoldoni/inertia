@@ -33,7 +33,6 @@ class JobFactory extends Factory
             'salary_type' => $this->faker->randomElement([SalaryType::Day, SalaryType::Hour, SalaryType::Month, SalaryType::Year]),
             'closing_to' => $this->faker->dateTimeInInterval('now', '+30 days'),
             'live_at' => $this->faker->randomElement([$this->faker->dateTimeInInterval('-5 days', 'now'), null]),
-            'experience' => $this->faker->numberBetween(1, 5),
             'salary_min' => $this->faker->randomElement([38000, 40000, 45000, 50000, 55000, 60000, 65000]),
             'salary_max' => $this->faker->randomElement([70000, 75000, 80000, 85000, 90000]),
             'address' => $this->faker->address,

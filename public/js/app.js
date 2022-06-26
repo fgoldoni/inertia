@@ -1935,6 +1935,11 @@ var map = {
 		"/js/vendor",
 		"node_modules_unplugin_dist_webpack_loaders_transform_js_ruleSet_1_rules_26_use_0_node_modules-904dd9"
 	],
+	"./Modules/Jobs/CreateModal.vue": [
+		"./resources/js/Pages/Modules/Jobs/CreateModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Jobs_CreateModal_vue-_a8540"
+	],
 	"./Modules/Jobs/Datatables/CustomActions.vue": [
 		"./resources/js/Pages/Modules/Jobs/Datatables/CustomActions.vue",
 		"/js/vendor",

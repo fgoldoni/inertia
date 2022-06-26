@@ -1,8 +1,8 @@
 <script setup>
 import {ref, reactive, onMounted} from 'vue'
 import LoadingButton from '@/Shared/LoadingButton'
-import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
-import { QuestionMarkCircleIcon } from '@heroicons/vue/solid'
+import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel,  Disclosure,  DisclosureButton,  DisclosurePanel} from '@headlessui/vue'
+import { QuestionMarkCircleIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/vue/solid'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetTextarea from '@/Jetstream/Textarea'
@@ -40,7 +40,7 @@ const form = reactive({
     id: props.editing.id,
     name: props.editing.name,
     content: props.editing.content,
-    company_id: props.editing.company_id,
+    company: props.editing.company_id,
 
     area: props.editing.categories?.find(element => element.type === "area")?.id,
     industry: props.editing.categories?.find(element => element.type === "industry")?.id,
@@ -91,11 +91,11 @@ const closeModal = () => {
 
 const onSubmit = () => {
 
-    axios.put(route('admin.jobs.update', form.id), pickBy({
+    axios.post(route('admin.jobs.store'), pickBy({
         name: form.name,
         content: form.content,
 
-        company_id: form.company_id,
+        company: form.company,
         area: form.area,
         industry: form.industry,
 
@@ -273,7 +273,7 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <BaseListbox :options="job.data.companies" v-model="form.company_id"  placeholder="Companies"  label="Companies"/>
+                                                                        <BaseListbox :options="job.data.companies" v-model="form.company"  placeholder="Companies"  label="Companies"/>
 
                                                                         <JetInputError :message="form.errors.get('company')" class="mt-2"/>
 

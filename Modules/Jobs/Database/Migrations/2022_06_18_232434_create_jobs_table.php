@@ -22,7 +22,6 @@ return new class extends Migration {
             $table->string('slug');
             $table->string('phone')->nullable();
             $table->longText('content')->nullable();
-            $table->smallInteger('experience')->unsigned()->nullable();
             $table->integer('salary_min')->unsigned()->nullable();
             $table->integer('salary_max')->unsigned()->nullable();
             $table->string('salary_type')->default((SalaryType::Year)->value);

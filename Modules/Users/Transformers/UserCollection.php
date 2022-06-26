@@ -5,7 +5,6 @@ namespace Modules\Users\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Roles\Entities\Role;
-use Modules\Roles\Http\Controllers\RolesController;
 
 class UserCollection extends JsonResource
 {

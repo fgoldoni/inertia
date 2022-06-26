@@ -16,5 +16,5 @@ use Modules\Jobs\Http\Controllers\Api\JobsController;
 
 Route::controller(JobsController::class)->prefix('jobs')->name('api.jobs.')->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/{job}', 'show')->name('show');
+    Route::get('/{user}', 'show')->name('show');
 });

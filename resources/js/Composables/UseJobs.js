@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import { usePage } from '@inertiajs/inertia-vue3';
 
 export function useJobs() {
 
@@ -13,7 +14,7 @@ export function useJobs() {
     const doFetchData = async (id) => {
         processing.value = true
 
-        await axios.get(route('api.jobs.show', id)).then((res) => (data.value = res.data))
+        await axios.get(route('api.jobs.show', usePage().props.value.auth.user?.id)).then((res) => (data.value = res.data))
             .catch((err) => (error.value = err))
             .finally(() => (processing.value = false))
     }

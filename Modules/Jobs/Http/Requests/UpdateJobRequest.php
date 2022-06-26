@@ -20,7 +20,7 @@ class UpdateJobRequest extends FormRequest
         return [
             'name' => ['required', 'max:256'],
             'content' => ['required', 'min:4'],
-            'company' => ['required', Rule::exists('companies', 'id')],
+            'company_id' => ['required', Rule::exists('companies', 'id')],
             'area' => ['nullable', Rule::exists('categories', 'id')],
             'industry' => ['nullable', Rule::exists('categories', 'id')],
             'salary_min' => ['required', 'integer'],

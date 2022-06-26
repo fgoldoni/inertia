@@ -21,6 +21,7 @@ use Modules\Jobs\Enums\SalaryType;
 use Modules\Jobs\Http\Requests\StoreJobRequest;
 use Modules\Jobs\Http\Requests\UpdateJobRequest;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
+use Modules\Jobs\Transformers\JobResource;
 
 class JobsController extends Controller
 {
@@ -64,18 +65,26 @@ class JobsController extends Controller
     public function store(StoreJobRequest $request)
     {
         $job = $this->jobsRepository->create(array_merge(
-            $request->only('name', 'content', 'email', 'phone', 'online'),
+            $request->only('name', 'content', 'avatar_path', 'salary_type', 'state'),
             [
-                'user_id' => auth()->user()->id
+                'user_id' => $request->user()->id,
+                'company_id' => $request->get('company')
             ]
         ));
 
+        $this->attachmentsRepository->findWhereIn('id', $request->get('files'))->each(function ($item, $key) use ($job) {
+            $job->attachments()->save($item);
+        });
 
 
+        $this->jobsRepository->sync($job->id, 'categories', array_merge(
+            $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type'),
+            $request->get('skills', []),
+            $request->get('benefits', []),
+            $request->get('responsibilities', []),
+        ));
 
-        return $this->response
-            ->json([], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK)
-            ->flash(__(':job successfully added!', ['job' => $job->name]));
+        return $this->response->json(['message' => __('The Job (:item) has been successfully updated', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
 
@@ -91,11 +100,11 @@ class JobsController extends Controller
         Inertia::basePageRoute(route('admin.jobs.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
-            'editing' => $this->jobsRepository->withCriteria([
+            'editing' => new JobResource($this->jobsRepository->withCriteria([
                 new EagerLoad(['user:id,name', 'company:id,name', 'categories:id,name,type', 'country:id,name,emoji', 'city:id,name', 'division:id,name', 'attachments' => function ($query) {
                     $query->select(['id', 'name', 'filename', 'disk', 'attachable_id', 'attachable_type'])->where('attachments.disk', config('app.system.disks.uploads'));
                 }]),
-            ])->find($job->id, ['id', 'name', 'content', 'address', 'salary_min', 'salary_max', 'negotiable', 'salary_type', 'iframe', 'avatar_path', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at'])
+            ])->find($job->id, ['id', 'name', 'content', 'address', 'salary_min', 'salary_max', 'negotiable', 'salary_type', 'iframe', 'avatar_path', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at']))
         ]);
     }
 
@@ -103,10 +112,8 @@ class JobsController extends Controller
     {
 
          $job = $this->jobsRepository->update($job->id, array_merge(
-             $request->only('name', 'content', 'avatar_path', 'salary_type', 'state'),
-             [
-                 'company_id' => $request->get('company')
-             ]
+             $request->only('name', 'content', 'avatar_path', 'salary_type', 'state', 'company_id'),
+             []
          ));
 
 
@@ -116,9 +123,9 @@ class JobsController extends Controller
 
         $this->jobsRepository->sync($job->id, 'categories', array_merge(
             $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type'),
-            $request->get('skills'),
-            $request->get('benefits'),
-            $request->get('responsibilities'),
+            $request->get('skills', []),
+            $request->get('benefits', []),
+            $request->get('responsibilities', []),
         ));
 
         return $this->response
