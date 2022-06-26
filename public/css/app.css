@@ -694,6 +694,9 @@ select {
 .aspect-h-7 {
   --tw-aspect-h: 7;
 }
+.aspect-h-4 {
+  --tw-aspect-h: 4;
+}
 .prose {
   color: var(--tw-prose-body);
   max-width: 65ch;
@@ -1051,6 +1054,9 @@ select {
 .invisible {
   visibility: hidden;
 }
+.static {
+  position: static;
+}
 .fixed {
   position: fixed;
 }
@@ -1313,6 +1319,9 @@ select {
 }
 .h-2\.5 {
   height: 0.625rem;
+}
+.h-40 {
+  height: 10rem;
 }
 .max-h-56 {
   max-height: 14rem;

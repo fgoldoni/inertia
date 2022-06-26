@@ -254,6 +254,7 @@ __webpack_require__.r(__webpack_exports__);
     // '#myID' selector css
     init: function init() {
       var phoneNumber = document.querySelector(this.input);
+      if (!phoneNumber) return;
       var iti = intl_tel_input__WEBPACK_IMPORTED_MODULE_0___default()(phoneNumber, {
         nationalMode: true,
         geoIpLookup: function geoIpLookup(success, failure) {
@@ -1184,7 +1185,7 @@ var _hoisted_11 = {
   "class": "col-span-1"
 };
 var _hoisted_12 = {
-  "class": "relative w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden"
+  "class": "relative w-full aspect-w-10 aspect-h-4 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden"
 };
 var _hoisted_13 = ["src"];
 var _hoisted_14 = ["onClick"];

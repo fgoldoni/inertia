@@ -233,6 +233,7 @@ __webpack_require__.r(__webpack_exports__);
     // '#myID' selector css
     init: function init() {
       var phoneNumber = document.querySelector(this.input);
+      if (!phoneNumber) return;
       var iti = intl_tel_input__WEBPACK_IMPORTED_MODULE_0___default()(phoneNumber, {
         nationalMode: true,
         geoIpLookup: function geoIpLookup(success, failure) {

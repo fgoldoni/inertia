@@ -1,15 +1,15 @@
 <script setup>
-import {ref, reactive, onMounted} from 'vue'
+import {ref, reactive} from 'vue'
 import LoadingButton from '@/Shared/LoadingButton'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
+import JetInputPhone from '@/Jetstream/JetInputPhone.vue';
 import { Errors } from '@/Plugins/errors'
 import ImageUpload from '@/Shared/ImageUpload'
 import JetTextarea from '@/Jetstream/Textarea'
-import internationalNumber from '@/Plugins/internationalNumber'
-import 'intl-tel-input/build/css/intlTelInput.css'
+
 
 const props = defineProps({
     editing: Object,
@@ -36,9 +36,6 @@ const closeModal = () => {
     document.querySelector('#cancelButtonRef').click()
 }
 
-onMounted(() => {
-    internationalNumber('#phone').init();
-})
 
 const onSubmit = () => {
     form.processing = true;
@@ -172,22 +169,7 @@ const onSubmit = () => {
 
                                                             </div>
 
-                                                            <div class="col-span-1 sm:col-span-2">
-
-                                                                <JetLabel for="phone" value="Phone"/>
-
-                                                                <JetInput
-                                                                    id="phone"
-                                                                    name="phone"
-                                                                    v-model="form.phone"
-                                                                    type="text"
-                                                                    class="mt-1 block w-full"
-                                                                    placeholder="Phone"
-                                                                    required
-                                                                    autofocus/>
-
-                                                                <JetInputError :message="form.errors.get('phone')" class="mt-2"/>
-                                                            </div>
+                                                            <JetInputPhone :error="form.errors.get('phone')"></JetInputPhone>
 
                                                         </div>
 

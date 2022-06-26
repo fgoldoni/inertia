@@ -39,6 +39,7 @@ return new class extends Migration {
 
             $table->datetime('live_at')->nullable();
             $table->string('address')->nullable();
+            $table->string('zip')->nullable();
             $table->text('iframe')->nullable();
             $table->integer('view_count')->default(0);
 

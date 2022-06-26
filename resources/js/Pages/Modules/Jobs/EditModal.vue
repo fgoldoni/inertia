@@ -162,18 +162,18 @@ const onSubmit = () => {
 
                                                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
+                                                            <div class="col-span-1 sm:col-span-2">
+                                                                <ValidationErrors :errors="form.errors.all()" class="mb-4" />
+                                                            </div>
 
-                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
 
-                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                                            <BaseDisclosure :title="__('Name & Description')" defaultOpen>
+
+                                                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                                                                     <div class="col-span-1 sm:col-span-2">
-                                                                        <ValidationErrors :errors="form.errors.all()" class="mb-4" />
-                                                                    </div>
 
-                                                                    <div class="col-span-1 sm:col-span-2">
-
-                                                                        <JetLabel for="name" value="Job Title" />
+                                                                        <JetLabel for="name" value="Job Title" required/>
 
                                                                         <JetInput
                                                                             id="name"
@@ -181,7 +181,7 @@ const onSubmit = () => {
                                                                             v-model="form.name"
                                                                             type="text"
                                                                             class="mt-1 block w-full"
-
+                                                                            required
                                                                             autofocus/>
 
                                                                         <JetInputError :message="form.errors.get('name')" class="mt-2"/>
@@ -189,15 +189,16 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <JetLabel for="content" value="Job Description" />
+                                                                        <JetLabel for="content" value="Job Description" required/>
 
                                                                         <JetTextarea
                                                                             id="content"
                                                                             name="content"
                                                                             v-model="form.content"
                                                                             type="text"
+                                                                            required
                                                                             class="mt-1 block w-full"
-                                                                            />
+                                                                        />
 
                                                                         <div class="mt-3 flex items-center justify-between">
                                                                             <a href="#" class="group inline-flex items-start text-sm space-x-2 text-gray-500 hover:text-gray-900">
@@ -211,7 +212,33 @@ const onSubmit = () => {
 
                                                                 </div>
 
-                                                            </div>
+                                                            </BaseDisclosure>
+
+
+                                                            <BaseDisclosure :title="__('Assets')" defaultOpen>
+
+                                                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
+
+                                                                    <div class="col-span-1">
+
+                                                                        <JetLabel :value="__('Logo')" class="mb-2"/>
+
+                                                                        <AvatarInput v-model="form.avatar" :default-src="form.defaultSrc"></AvatarInput>
+
+                                                                    </div>
+
+                                                                    <div class="col-span-1">
+
+                                                                        <JetLabel :value="__('Featured Image')" class="mb-2"/>
+
+                                                                        <ImageUpload v-model="form.files"></ImageUpload>
+
+                                                                        <JetInputError :message="form.errors.get('files')" class="mt-2"/>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </BaseDisclosure>
 
                                                             <BaseDisclosure :title="__('Companies & Areas')">
 
@@ -383,7 +410,7 @@ const onSubmit = () => {
                                                                         <JetInputError :message="form.errors.get('address')" class="mt-2"/>
                                                                     </div>
 
-                                                                    <div class="col-span-1">
+                                                                    <div class="col-span-1 sm:col-span-2">
 
                                                                         <BaseComboboxes v-model="form.country_id" placeholder="No category" api-url="api.countries.index" label="Country" :default-value="props.editing.country?.name" key="select-country"></BaseComboboxes>
 
@@ -397,6 +424,21 @@ const onSubmit = () => {
 
                                                                         <JetInputError :message="form.errors.get('city_id')" class="mt-2"/>
 
+                                                                    </div>
+
+                                                                    <div class="col-span-1">
+
+                                                                        <JetLabel for="zip" :value="__('Postal / Zip code')" />
+
+                                                                        <JetInput
+                                                                            id="zip"
+                                                                            name="zip"
+                                                                            v-model="form.zip"
+                                                                            type="text"
+                                                                            class="mt-1 block w-full"
+                                                                        />
+
+                                                                        <JetInputError :message="form.errors.get('zip')" class="mt-2"/>
                                                                     </div>
 
                                                                     <div class="col-span-1 sm:col-span-2">
@@ -440,31 +482,6 @@ const onSubmit = () => {
                                                     <div class="col-span-1">
 
                                                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
-
-                                                            <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
-
-                                                                <div class="p-4 grid grid-cols-1 gap-4 sm:grid-cols-1">
-
-                                                                    <div class="col-span-1">
-
-                                                                        <JetLabel :value="__('Assets')" class="mb-2"/>
-
-                                                                        <AvatarInput v-model="form.avatar" :default-src="form.defaultSrc"></AvatarInput>
-
-                                                                    </div>
-
-                                                                    <div class="col-span-1">
-
-                                                                        <JetLabel :value="__('Featured Image')" class="mb-2"/>
-
-                                                                        <ImageUpload v-model="form.files"></ImageUpload>
-
-                                                                        <JetInputError :message="form.errors.get('files')" class="mt-2"/>
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
 
                                                             <div class="bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2">
 

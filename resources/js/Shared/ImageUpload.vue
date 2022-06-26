@@ -51,7 +51,7 @@ onMounted(() => {
 
             <ul role="list" class="grid grid-cols-1 gap-x-4 gap-y-8" :class="{ 'sm:grid-cols-2 sm:gap-x-6': useMedia.media.length > 1 }">
                 <li v-for="(item, index) in useMedia.media" :key="index">
-                    <div class="relative w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                    <div class="relative w-full aspect-w-10 aspect-h-4 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
                         <img v-if="item.uploaded" :src="item.url" alt="" class="object-cover w-full pointer-events-none group-hover:opacity-75" />
 
                         <button v-if="item.uploaded" @click="useMedia.doRemoveFile(index, item)" type="button" class="absolute inset-0 top-0 left-0 h-4 w-4 rounded-full hover:bg-rose-500 hover:bg-opacity-25 focus:outline-none text-rose-500 transition duration-200 cursor-pointer">

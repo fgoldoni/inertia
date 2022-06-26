@@ -5,12 +5,16 @@ import { MinusSmIcon, PlusSmIcon } from '@heroicons/vue/solid'
 
 const props = defineProps({
     title: String,
+    defaultOpen: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 </script>
 
 <template>
-    <Disclosure as="div"  key="salary-disclosure" class="border-t border-gray-200 p-6 bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2" v-slot="{ open }">
+    <Disclosure as="div" :defaultOpen="props.defaultOpen" key="salary-disclosure" class="border-t border-gray-200 p-6 bg-white rounded-lg shadow-md  border-2 border-secondary-200 col-span-1 sm:col-span-2" v-slot="{ open }">
         <h3 class="-my-3 flow-root">
             <DisclosureButton class="rounded-lg bg-secondary-100 px-4 py-3 w-full flex items-center justify-between text-sm text-secondary-500 hover:text-secondary-600">
                 <span class="font-medium text-gray-900">
