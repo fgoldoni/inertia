@@ -275,7 +275,7 @@ const onSubmit = () => {
 
                                                                         <BaseListbox :options="job.data.companies" v-model="form.company_id"  placeholder="Companies"  label="Companies"/>
 
-                                                                        <JetInputError :message="form.errors.get('company')" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('company_id')" class="mt-2"/>
 
                                                                     </div>
 

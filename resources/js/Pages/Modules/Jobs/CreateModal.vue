@@ -40,7 +40,7 @@ const form = reactive({
     id: props.editing.id,
     name: props.editing.name,
     content: props.editing.content,
-    company: props.editing.company_id,
+    company_id: props.editing.company_id,
 
     area: props.editing.categories?.find(element => element.type === "area")?.id,
     industry: props.editing.categories?.find(element => element.type === "industry")?.id,
@@ -95,7 +95,7 @@ const onSubmit = () => {
         name: form.name,
         content: form.content,
 
-        company: form.company,
+        company_id: form.company_id,
         area: form.area,
         industry: form.industry,
 
@@ -273,9 +273,9 @@ const onSubmit = () => {
 
                                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                                        <BaseListbox :options="job.data.companies" v-model="form.company"  placeholder="Companies"  label="Companies"/>
+                                                                        <BaseListbox :options="job.data.companies" v-model="form.company_id"  placeholder="Companies"  label="Companies"/>
 
-                                                                        <JetInputError :message="form.errors.get('company')" class="mt-2"/>
+                                                                        <JetInputError :message="form.errors.get('company_id')" class="mt-2"/>
 
                                                                     </div>
 

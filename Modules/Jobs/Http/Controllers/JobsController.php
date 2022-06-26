@@ -51,21 +51,21 @@ class JobsController extends Controller
         Inertia::basePageRoute(route('admin.jobs.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
-            'editing' => $this->jobsRepository->make([
+            'editing' => new JobResource($this->jobsRepository->make([
                 'id' => null,
                 'name' => 'test' . uniqid(),
                 'content' => 'test',
-                'email' => 'test' . uniqid() . '@test.com',
+                'negotiable' => false,
                 'phone' => '+4915736795436',
                 'online' => true
-            ])
+            ]))
         ]);
     }
 
     public function store(StoreJobRequest $request)
     {
         $job = $this->jobsRepository->create(array_merge(
-            $request->only('name', 'content', 'avatar_path', 'salary_type', 'state'),
+            $request->only('name', 'content', 'avatar_path', 'salary_min', 'salary_max', 'salary_type', 'state', 'country_id', 'city_id'),
             [
                 'user_id' => $request->user()->id,
                 'company_id' => $request->get('company')
@@ -78,7 +78,7 @@ class JobsController extends Controller
 
 
         $this->jobsRepository->sync($job->id, 'categories', array_merge(
-            $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type'),
+            $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'country_id', 'city_id'),
             $request->get('skills', []),
             $request->get('benefits', []),
             $request->get('responsibilities', []),
@@ -112,7 +112,7 @@ class JobsController extends Controller
     {
 
          $job = $this->jobsRepository->update($job->id, array_merge(
-             $request->only('name', 'content', 'avatar_path', 'salary_type', 'state', 'company_id'),
+             $request->only('name', 'content', 'avatar_path', 'salary_min', 'salary_max', 'salary_type', 'state', 'country_id', 'city_id'),
              []
          ));
 

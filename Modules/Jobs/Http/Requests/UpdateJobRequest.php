@@ -29,7 +29,7 @@ class UpdateJobRequest extends FormRequest
             'job_type' => ['nullable', Rule::exists('categories', 'id')],
             'job_level' => ['nullable', Rule::exists('categories', 'id')],
             'apply_type' => ['nullable', Rule::exists('categories', 'id')],
-            'negotiable' => ['required', 'boolean'],
+            'negotiable' => ['nullable', 'boolean'],
             'address' => ['nullable'],
             'iframe' => ['nullable'],
             'state' => [new Enum(JobState::class)],

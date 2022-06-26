@@ -776,7 +776,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       id: props.editing.id,
       name: props.editing.name,
       content: props.editing.content,
-      company: props.editing.company_id,
+      company_id: props.editing.company_id,
       area: (_props$editing$catego = props.editing.categories) === null || _props$editing$catego === void 0 ? void 0 : (_props$editing$catego2 = _props$editing$catego.find(function (element) {
         return element.type === "area";
       })) === null || _props$editing$catego2 === void 0 ? void 0 : _props$editing$catego2.id,
@@ -850,7 +850,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post(route('admin.jobs.store'), lodash_pickBy__WEBPACK_IMPORTED_MODULE_19___default()(_objectSpread(_objectSpread({
         name: form.name,
         content: form.content,
-        company: form.company,
+        company_id: form.company_id,
         area: form.area,
         industry: form.industry,
         salary_min: form.salary_min,
@@ -2234,16 +2234,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
                         options: $setup.job.data.companies,
-                        modelValue: $setup.form.company,
+                        modelValue: $setup.form.company_id,
                         "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-                          return $setup.form.company = $event;
+                          return $setup.form.company_id = $event;
                         }),
                         placeholder: "Companies",
                         label: "Companies"
                       }, null, 8
                       /* PROPS */
                       , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                        message: $setup.form.errors.get('company'),
+                        message: $setup.form.errors.get('company_id'),
                         "class": "mt-2"
                       }, null, 8
                       /* PROPS */

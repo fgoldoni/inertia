@@ -36,6 +36,7 @@ class JobFactory extends Factory
             'salary_min' => $this->faker->randomElement([38000, 40000, 45000, 50000, 55000, 60000, 65000]),
             'salary_max' => $this->faker->randomElement([70000, 75000, 80000, 85000, 90000]),
             'address' => $this->faker->address,
+            'zip' => $this->faker->postcode,
         ];
     }
 }

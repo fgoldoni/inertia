@@ -2235,7 +2235,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                       }, null, 8
                       /* PROPS */
                       , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                        message: $setup.form.errors.get('company'),
+                        message: $setup.form.errors.get('company_id'),
                         "class": "mt-2"
                       }, null, 8
                       /* PROPS */

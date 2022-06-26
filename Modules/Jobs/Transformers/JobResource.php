@@ -22,7 +22,19 @@ class JobResource extends JsonResource
             'state' => $this->state,
             'avatar_path' => $this->avatar_path,
             'company_id' => $this->company_id,
-            'content' => $this->content,
+            'company' => $this->company,
+            'country_id' => $this->country_id,
+            'division_id' => $this->division_id,
+            'city_id' => $this->city_id,
+            'closing_to' => $this->closing_to,
+            'address' => $this->address,
+            'iframe' => $this->iframe,
+
+            'categories' => $this->categories,
+            'country' => $this->country,
+            'city' => $this->city,
+            'division' => $this->division,
+            'attachments' => $this->attachments,
         ];
     }
 }
