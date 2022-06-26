@@ -22,6 +22,7 @@ import {useMedia} from "@/Composables/UseMedia";
 import {useAvatar} from "@/Composables/UseAvatar";
 import pickBy from "lodash/pickBy";
 import {Errors} from "@/Plugins/errors";
+import { ElNotification } from 'element-plus'
 
 
 const { data: job, doFetchData: doFetchJob } = useJobs()
@@ -65,6 +66,12 @@ const form = reactive({
     state: props.editing.state,
     closing_to: props.editing.closing_to,
 
+    skills: {
+        responsibilities: props.editing.categories.filter(element => element.type === "responsibility").map(element => element.id),
+        skills: props.editing.categories.filter(element => element.type === "skill").map(element => element.id),
+        benefits: props.editing.categories.filter(element => element.type === "benefit").map(element => element.id)
+    },
+
     defaultSrc: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(props.editing.name) + '&color=7F9CF5&background=EBF4FF',
     avatar: props.editing.avatar_path,
     errors: new Errors(),
@@ -79,7 +86,6 @@ onMounted(() => {
 
 
 const closeModal = () => {
-    isOpen.value = false
     document.querySelector('#cancelButtonRef').click()
 }
 
@@ -117,11 +123,19 @@ const onSubmit = () => {
         closing_to: form.closing_to,
         apply_type: form.apply_type,
 
+        ...form.skills,
+
         avatar_path: useAvatar.value.media?.avatar_path,
         files: useMedia.value.doMediaFetchIds(),
         ...props.filters
     })).then((response) => {
         form.processing = false;
+        ElNotification({
+            title: 'Great!',
+            message: response.data.message,
+            type: 'success',
+        })
+        closeModal()
     }).catch(error => {
         form.processing = false;
         form.errors.record(error.response.data.errors);
@@ -180,7 +194,7 @@ const onSubmit = () => {
                                                             </div>
 
 
-                                                            <BaseDisclosure :title="__('Name & Description')" defaultOpen>
+                                                            <BaseDisclosure :title="__('Name & Description')" default-open>
 
                                                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
@@ -228,7 +242,7 @@ const onSubmit = () => {
                                                             </BaseDisclosure>
 
 
-                                                            <BaseDisclosure :title="__('Assets')" defaultOpen>
+                                                            <BaseDisclosure :title="__('Assets')">
 
                                                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 
@@ -483,7 +497,7 @@ const onSubmit = () => {
 
                                                             <BaseDisclosure :title="__('Responsibilities, Skills & Benefits')">
 
-                                                                <Skills :options="job.data" :editing="props.editing"></Skills>
+                                                                <Skills :options="job.data" :editing="props.editing" v-model="form.skills"></Skills>
 
                                                             </BaseDisclosure>
 

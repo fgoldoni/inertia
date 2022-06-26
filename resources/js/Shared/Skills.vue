@@ -1,7 +1,7 @@
 <template>
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 space-y-4">
 
-        <div class="mt-8 col-span-1 sm:col-span-2">
+        <div class="col-span-1 sm:col-span-2">
 
             <h3 class="text-sm font-medium text-gray-900">Key Responsibilities</h3>
 
@@ -64,7 +64,7 @@
 
         <div class="col-span-1 sm:col-span-2" v-if="mem.name == 'Responsibilities'">
 
-            <BaseListbox :options="props.options.responsibilities" v-model="form.responsibilities"  placeholder="Select Responsibilities" label="Select Responsibilities" multiple/>
+            <BaseListbox :options="props.options.responsibilities" v-model="form.responsibilities" placeholder="Select Responsibilities" label="Select Responsibilities" multiple/>
 
         </div>
 
@@ -80,39 +80,8 @@
 
         </div>
 
-
         <div class="col-span-1 sm:col-span-2">
-
-            <form action="#" class="relative">
-                <div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
-                    <label for="description" class="sr-only">Description</label>
-                    <textarea rows="4" name="description" id="description" class="block w-full border-0 pt-2.5 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm" placeholder="Write a description..." />
-
-                    <!-- Spacer element to match the height of the toolbar -->
-                    <div aria-hidden="true">
-                        <div class="py-2">
-                            <div class="h-9" />
-                        </div>
-                        <div class="h-px" />
-                        <div class="py-2">
-                            <div class="py-px">
-                                <div class="h-9" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="absolute bottom-0 inset-x-px">
-                    <!-- Actions: These are just examples to demonstrate the concept, replace/wire these up however makes sense for your project. -->
-
-                    <div class="border-t border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3">
-                        <div class="flex-shrink-0">
-                            <button type="submit" class="uppercase inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add Custom</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
+            <Information :text="'Please follow this link to add the new ' + mem.name" :url-text="'Add ' +  mem.name" :url="route('admin.categories.index')"></Information>
         </div>
 
     </div>
@@ -120,27 +89,31 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import BaseListbox from '@/Shared/BaseListbox'
+import Information from '@/Shared/Information'
 
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 
 const props = defineProps({
     editing: Object,
     options: Object,
+    modelValue: [Object, Array],
 });
+
+const emit = defineEmits(['update:modelValue']);
 
 const responsibilities = computed(() => props.options.responsibilities.filter(element => form.responsibilities.includes(element.id)))
 const benefits = computed(() => props.options.benefits.filter(element => form.benefits.includes(element.id)))
 const skills = computed(() => props.options.skills.filter(element => form.skills.includes(element.id)))
 
 const form = reactive({
-    responsibilities: props.editing.categories.filter(element => element.type === "responsibility").map(element => element.id),
-    skills: props.editing.categories.filter(element => element.type === "skill").map(element => element.id),
-    benefits: props.editing.categories.filter(element => element.type === "benefit").map(element => element.id),
+    responsibilities: props.modelValue.responsibilities,
+    skills: props.modelValue.skills,
+    benefits: props.modelValue.benefits,
 })
 
-
+watch(form, () => emit('update:modelValue', form));
 
 const memoryOptions = [
     { name: 'Responsibilities', inStock: true },
@@ -149,29 +122,4 @@ const memoryOptions = [
 ]
 
 const mem = ref(memoryOptions[0])
-
-const assignees = [
-    { name: 'Unassigned', value: null },
-    {
-        name: 'Wade Cooper',
-        value: 'wade-cooper',
-        avatar:
-            'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    // More items...
-]
-const labels = [
-    { name: 'Unlabelled', value: null },
-    { name: 'Engineering', value: 'engineering' },
-    // More items...
-]
-const dueDates = [
-    { name: 'No due date', value: null },
-    { name: 'Today', value: 'today' },
-    // More items...
-]
-
-const assigned = ref(assignees[0])
-const labelled = ref(labels[0])
-const dated = ref(dueDates[0])
 </script>

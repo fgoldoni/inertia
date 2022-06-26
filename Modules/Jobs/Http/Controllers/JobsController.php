@@ -114,11 +114,15 @@ class JobsController extends Controller
             $job->attachments()->save($item);
         });
 
-        $this->jobsRepository->sync($job->id, 'categories', $request->only('area'));
+        $this->jobsRepository->sync($job->id, 'categories', array_merge(
+            $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type'),
+            $request->get('skills'),
+            $request->get('benefits'),
+            $request->get('responsibilities'),
+        ));
 
         return $this->response
-            ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
-            ->flash(__('Great! You have accepted the invitation to join the :team team.', ['team' => 'Job']));
+            ->json(['message' => __('The Job (:item) has been successfully updated', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
     public function destroy($selected)
