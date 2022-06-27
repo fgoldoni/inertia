@@ -22,7 +22,6 @@ class Where
     {
     }
 
-
     public function apply($model): Builder
     {
         return $model->when($this->value, fn ($query) => $query->where($this->column, $this->value));

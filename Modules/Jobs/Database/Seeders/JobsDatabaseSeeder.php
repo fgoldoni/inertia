@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Jobs\Database\Seeders;
 
 use Faker\Generator as Faker;
@@ -35,7 +34,6 @@ class JobsDatabaseSeeder extends Seeder
 
             return [];
         })->create(['live_at' => $faker->dateTimeInInterval('now', '-1 days')])->each(function ($job) {
-
             $this->syncCategories($job);
 
             $job->company_id = Company::where('user_id', $job->user_id)->inRandomOrder()->first()?->id;
@@ -57,9 +55,7 @@ class JobsDatabaseSeeder extends Seeder
 
             return [];
         })->create(['live_at' => $faker->dateTimeInInterval('-1 days', '-2 days')])->each(function ($job) {
-
             $this->syncCategories($job);
-
         });
 
         Job::factory(100)->state(function (array $attributes) {

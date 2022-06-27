@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Jobs\Entities;
 
 use App\Traits\BelongsToUser;
@@ -11,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
 use Modules\Attachments\Traits\AttachableTrait;
 use Modules\Companies\Entities\Company;
 use Modules\Countries\Entities\City;
@@ -20,7 +18,6 @@ use Modules\Countries\Entities\Division;
 use Modules\Jobs\Database\factories\JobFactory;
 use Modules\Jobs\Enums\JobState;
 use Modules\Jobs\Enums\SalaryType;
-use Nicolaslopezj\Searchable\SearchableTrait;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
@@ -28,7 +25,6 @@ use Spatie\Translatable\HasTranslations;
 class Job extends Model
 {
     use HasFactory, HasSlug, HasAvatar, HasTranslations, Categorizable, BelongsToUser, SoftDeletes, WithinDays, JobAttribute, AttachableTrait;
-
 
     protected $guarded = [];
 

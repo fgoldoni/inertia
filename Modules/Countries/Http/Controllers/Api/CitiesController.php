@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Countries\Http\Controllers\Api;
 
 use App\Repositories\Criteria\EagerLoad;
@@ -13,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Countries\Repositories\Contracts\CitiesRepository;
-use Modules\Countries\Repositories\Contracts\CountriesRepository;
 
 class CitiesController extends Controller
 {
@@ -25,8 +23,7 @@ class CitiesController extends Controller
     {
         $cities = [];
 
-        if (strlen($request->get('search')) > 2) {
-
+        if (strlen((string) $request->get('search')) > 2) {
             $cities = $this->citiesRepository->withCriteria([
                 new WhereLike(['world_cities.id', 'world_cities.name', 'world_cities.full_name'], $request->get('search')),
                 new Where('country_id', $request->get('country_id')),
@@ -34,9 +31,7 @@ class CitiesController extends Controller
                 new EagerLoad(['country:id,name,emoji', 'division:id,name']),
                 new Limit(10),
             ])->all(['id', 'name', 'country_id', 'division_id']);
-
         }
-
 
         return $this->response->json(['data' => $cities], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
@@ -52,7 +47,6 @@ class CitiesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      * @return Renderable
      */
     public function store(Request $request)
@@ -82,7 +76,6 @@ class CitiesController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Renderable
      */

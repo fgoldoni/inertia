@@ -1,13 +1,8 @@
 <?php
-
 namespace Modules\Jobs\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Repositories\Criteria\ByUser;
-use App\Repositories\Criteria\EagerLoad;
-use App\Repositories\Criteria\OrderBy;
-use App\Repositories\Criteria\Select;
-use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -15,7 +10,6 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 use Modules\Companies\Repositories\Contracts\CompaniesRepository;
-use Modules\Jobs\Entities\Job;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 use Modules\Roles\Repositories\Contracts\RolesRepository;
 
@@ -41,14 +35,12 @@ class JobsController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      * @return Renderable
      */
     public function store(Request $request)
     {
         //
     }
-
 
     public function show(User $user)
     {
@@ -60,7 +52,6 @@ class JobsController extends Controller
         $result['companies'] = $this->companiesRepository->withCriteria([
             new ByUser($user->id)
         ])->all(['id', 'name', 'user_id']);
-
 
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
@@ -77,7 +68,6 @@ class JobsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Renderable
      */

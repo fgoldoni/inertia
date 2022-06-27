@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Countries\Http\Controllers\Api;
 
 use App\Repositories\Criteria\OrderBy;
@@ -9,10 +8,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Categories\Repositories\Contracts\CategoriesRepository;
-use Modules\Countries\Repositories\Contracts\CitiesRepository;
 use Modules\Countries\Repositories\Contracts\CountriesRepository;
-use Modules\Countries\Repositories\Contracts\DivisionsRepository;
 
 class CountriesController extends Controller
 {
@@ -41,7 +37,6 @@ class CountriesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      * @return Renderable
      */
     public function store(Request $request)
@@ -71,7 +66,6 @@ class CountriesController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Renderable
      */

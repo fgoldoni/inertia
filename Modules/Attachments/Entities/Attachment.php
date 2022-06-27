@@ -30,7 +30,7 @@ class Attachment extends Model
     public function size(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value/1000,
+            get: fn ($value) => $value / 1000,
         );
     }
 

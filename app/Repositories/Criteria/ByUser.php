@@ -8,9 +8,7 @@
  */
 namespace App\Repositories\Criteria;
 
-use App\Flag;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ByUser.
@@ -23,7 +21,6 @@ class ByUser implements CriterionInterface
     public function __construct(private readonly int $userId)
     {
     }
-
 
     public function apply($model): Builder
     {

@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Jobs\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -40,4 +39,3 @@ class JobFactory extends Factory
         ];
     }
 }
-

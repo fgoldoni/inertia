@@ -51,10 +51,13 @@ php-cs-2: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Attachments/Entities --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Attachments/Http --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Attachments/Providers --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Jobs/Database --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Jobs/Entities --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Jobs/Http --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Jobs/Providers --diff
 
 rector: ## PRS2 Validation
 	./vendor/bin/rector process
-	./vendor/bin/rector process --dry-run
 
 server: ## Load phpMyAdmin server
 	 /usr/bin/php7.4 -S localhost:$(PORT) -t ../../phpMyAdmin

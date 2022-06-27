@@ -17,11 +17,13 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/Modules/Users/Entities',
         __DIR__ . '/Modules/Users/Http',
         __DIR__ . '/Modules/Users/Providers',
+        __DIR__ . '/Modules/Users/Repositories',
 
         __DIR__ . '/Modules/Roles/Database',
         __DIR__ . '/Modules/Roles/Entities',
         __DIR__ . '/Modules/Roles/Http',
         __DIR__ . '/Modules/Roles/Providers',
+        __DIR__ . '/Modules/Roles/Repositories',
 
         __DIR__ . '/Modules/Categories/Database',
         __DIR__ . '/Modules/Categories/Entities',

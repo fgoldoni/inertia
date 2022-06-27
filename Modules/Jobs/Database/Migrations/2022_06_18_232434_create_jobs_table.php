@@ -8,8 +8,8 @@ use Modules\Jobs\Enums\JobState;
 use Modules\Jobs\Enums\SalaryType;
 
 return new class extends Migration {
-
     use \App\Traits\Database\Migration;
+
     /**
      * Run the migrations.
      *

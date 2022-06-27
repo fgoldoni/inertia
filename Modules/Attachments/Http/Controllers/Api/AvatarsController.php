@@ -1,10 +1,7 @@
 <?php
-
 namespace Modules\Attachments\Http\Controllers\Api;
 
-use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Where;
-use App\Repositories\Criteria\WhereNot;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -16,13 +13,13 @@ use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 use Modules\Companies\Repositories\Contracts\CompaniesRepository;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
-use Modules\Roles\Repositories\Contracts\RolesRepository;
 
 class AvatarsController extends Controller
 {
     public function __construct(private readonly ResponseFactory $response, private readonly AttachmentsRepository $attachmentsRepository, private readonly JobsRepository $jobsRepository, private readonly CompaniesRepository $companiesRepository, private readonly CategoriesRepository $categoriesRepository)
     {
     }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -41,12 +38,13 @@ class AvatarsController extends Controller
         return view('attachments::create');
     }
 
-
     public function store(StoreAvatarRequest $request)
     {
+        $attachment = [];
+
         $file = $request->file('file');
 
-        $request->file('file')->store(now()->format('Y') . '/' . now()->format('m'),  config('app.system.disks.avatars'));
+        $request->file('file')->store(now()->format('Y') . '/' . now()->format('m'), config('app.system.disks.avatars'));
 
         $attachment['filename'] = now()->format('Y') . '/' . now()->format('m') . '/' . $file->hashName();
 
@@ -75,7 +73,6 @@ class AvatarsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Renderable
      */
@@ -83,7 +80,6 @@ class AvatarsController extends Controller
     {
         //
     }
-
 
     public function destroy($filename)
     {

@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Jobs\Http\Controllers;
 
 use App\Repositories\Criteria\ByUser;
@@ -9,7 +8,6 @@ use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -17,7 +15,6 @@ use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Jobs\Entities\Job;
-use Modules\Jobs\Enums\SalaryType;
 use Modules\Jobs\Http\Requests\StoreJobRequest;
 use Modules\Jobs\Http\Requests\UpdateJobRequest;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
@@ -76,7 +73,6 @@ class JobsController extends Controller
             $job->attachments()->save($item);
         });
 
-
         $this->jobsRepository->sync($job->id, 'categories', array_merge(
             $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'country_id', 'city_id'),
             $request->get('skills', []),
@@ -86,7 +82,6 @@ class JobsController extends Controller
 
         return $this->response->json(['message' => __('The Job (:item) has been successfully created', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
-
 
     public function show($id)
     {
@@ -104,18 +99,16 @@ class JobsController extends Controller
                 new EagerLoad(['user:id,name', 'company:id,name', 'categories:id,name,type', 'country:id,name,emoji', 'city:id,name', 'division:id,name', 'attachments' => function ($query) {
                     $query->select(['id', 'name', 'filename', 'disk', 'attachable_id', 'attachable_type'])->where('attachments.disk', config('app.system.disks.uploads'));
                 }]),
-            ])->find($job->id, ['id', 'name', 'content', 'address', 'salary_min', 'salary_max', 'negotiable', 'salary_type', 'iframe', 'avatar_path', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at']))
+            ])->find($job->id, ['id', 'name', 'content', 'slug', 'address', 'salary_min', 'salary_max', 'negotiable', 'salary_type', 'iframe', 'avatar_path', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at']))
         ]);
     }
 
     public function update(UpdateJobRequest $request, Job $job)
     {
-
-         $job = $this->jobsRepository->update($job->id, array_merge(
-             $request->only('name', 'content', 'avatar_path', 'salary_min', 'salary_max', 'salary_type', 'state', 'country_id', 'city_id'),
-             []
-         ));
-
+        $job = $this->jobsRepository->update($job->id, array_merge(
+            $request->only('name', 'content', 'avatar_path', 'salary_min', 'salary_max', 'salary_type', 'state', 'country_id', 'city_id'),
+            []
+        ));
 
         $this->attachmentsRepository->findWhereIn('id', $request->get('files'))->each(function ($item, $key) use ($job) {
             $job->attachments()->save($item);

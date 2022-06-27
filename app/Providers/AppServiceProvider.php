@@ -52,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
             'message' => session()->flash('success', $message),
         ]);
 
-        RedirectResponse::macro('flash', fn($message) => $this->with('flash', [
+        RedirectResponse::macro('flash', fn ($message) => $this->with('flash', [
             'style' => 'success',
             'message' => session()->flash('success', $message),
         ]));
