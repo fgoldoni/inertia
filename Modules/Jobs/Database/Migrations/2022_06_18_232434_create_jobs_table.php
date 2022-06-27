@@ -8,6 +8,8 @@ use Modules\Jobs\Enums\JobState;
 use Modules\Jobs\Enums\SalaryType;
 
 return new class extends Migration {
+
+    use \App\Traits\Database\Migration;
     /**
      * Run the migrations.
      *
@@ -28,6 +30,8 @@ return new class extends Migration {
             $table->boolean('negotiable')->default(true);
             $table->string('state')->default((JobState::Draft)->value);
             $table->string('avatar_path', 2048)->nullable();
+
+            $this->addSeoFields($table);
 
             $table->foreignId('company_id')->nullable()->index()->references('id')->on('companies')->onDelete('cascade');
             $table->foreignId('user_id')->unsigned()->index()->references('id')->on('users')->onDelete('cascade');

@@ -84,7 +84,7 @@ class JobsController extends Controller
             $request->get('responsibilities', []),
         ));
 
-        return $this->response->json(['message' => __('The Job (:item) has been successfully updated', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
+        return $this->response->json(['message' => __('The Job (:item) has been successfully created', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
 
@@ -128,8 +128,7 @@ class JobsController extends Controller
             $request->get('responsibilities', []),
         ));
 
-        return $this->response
-            ->json(['message' => __('The Job (:item) has been successfully updated', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
+        return $this->response->json(['message' => __('The Job (:item) has been successfully updated', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
     public function destroy($selected)

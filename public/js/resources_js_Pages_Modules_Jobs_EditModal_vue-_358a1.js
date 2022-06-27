@@ -612,7 +612,10 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var __returned__ = {};
+    var props = __props;
+    var __returned__ = {
+      props: props
+    };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
       value: true
@@ -2023,37 +2026,96 @@ var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_48 = {
-  "class": "col-span-1"
+  "class": "bg-white rounded-lg shadow-md divide-y divide-secondary-200 dark:bg-secondary-800 dark:divide-secondary-700 shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
 };
 var _hoisted_49 = {
-  "class": "grid grid-cols-1 gap-4 sm:grid-cols-1"
+  "class": "px-4 py-5 sm:p-6"
 };
 var _hoisted_50 = {
-  "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
+  "class": "flex items-center justify-between"
 };
 var _hoisted_51 = {
-  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
+  "class": "text-lg leading-6 font-medium text-secondary-900 dark:text-white"
 };
 var _hoisted_52 = {
-  "class": "col-span-1"
+  type: "button",
+  "class": "text-sm leading-5 bg-transparent outline-none focus:outline-none text-primary-600 hover:text-primary-700 dark:text-primary-500/50"
 };
 var _hoisted_53 = {
+  "class": "mt-5"
+};
+var _hoisted_54 = {
+  "class": "text-sm leading-5 text-secondary-500 dark:text-secondary-400"
+};
+
+var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "flex flex-col"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-base text-primary-800 font-medium leading-6 dark:text-primary-500/50"
+}, "Clear Lace Glue (38ml)"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "mt-1 text-green-600 text-sm leading-5 dark:text-green-500/50"
+}, "https://privileged-beauty.com/products/38ml-waterproof-lace-wig"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "mt-1 text-secondary-500 text-sm leading-5 dark:text-secondary-400"
+}, "Description Our Super Bonding Glue last much longer, is magical and designed to hold. It's made for people who are active, sweaty and needs a strong application. It provides a secure and strong hold without damaging your natural hairline, as many others do.")], -1
+/* HOISTED */
+);
+
+var _hoisted_56 = {
+  "class": "px-4 py-5 sm:px-6 space-y-5"
+};
+var _hoisted_57 = {
+  "class": "grid grid-cols-1 gap-4 sm:grid-cols-2 space-y-4"
+};
+var _hoisted_58 = {
+  "class": "col-span-1 sm:col-span-2"
+};
+var _hoisted_59 = {
+  "class": "col-span-1 sm:col-span-2"
+};
+var _hoisted_60 = {
+  "class": "mt-3 flex items-center justify-between"
+};
+var _hoisted_61 = {
+  href: "#",
+  "class": "group inline-flex items-start text-sm space-x-2 text-gray-500 hover:text-gray-900"
+};
+
+var _hoisted_62 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " 160 characters. ", -1
+/* HOISTED */
+);
+
+var _hoisted_63 = {
+  "class": "col-span-1"
+};
+var _hoisted_64 = {
+  "class": "grid grid-cols-1 gap-4 sm:grid-cols-1"
+};
+var _hoisted_65 = {
+  "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
+};
+var _hoisted_66 = {
+  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
+};
+var _hoisted_67 = {
+  "class": "col-span-1"
+};
+var _hoisted_68 = {
   "class": "col-span-1"
 };
 
-var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "mt-2 text-sm leading-5 text-secondary-500 dark:text-secondary-400"
 }, " Specify a deadline date so that your job are scheduled on your store. ", -1
 /* HOISTED */
 );
 
-var _hoisted_55 = {
+var _hoisted_70 = {
   "class": "grid grid-cols-1 gap-4 sm:grid-cols-1"
 };
-var _hoisted_56 = {
+var _hoisted_71 = {
   "class": "col-span-1"
 };
-var _hoisted_57 = {
+var _hoisted_72 = {
   "class": "bg-secondary-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2101,7 +2163,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   return [$setup.job.data ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
                     key: 0,
                     onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.onSubmit, ["prevent"]),
-                    onKeydown: _cache[24] || (_cache[24] = function ($event) {
+                    onKeydown: _cache[26] || (_cache[26] = function ($event) {
                       return $setup.form.errors.clear($event.target.name);
                     })
                   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DialogTitle"], {
@@ -2612,13 +2674,63 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
                   }, 8
                   /* PROPS */
-                  , ["title"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_51, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Search engine listing preview')), 1
+                  /* TEXT */
+                  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_52, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Edit SEO preview')), 1
+                  /* TEXT */
+                  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Add a title and description to see how this collection might appear in a search engine listing.')), 1
+                  /* TEXT */
+                  ), _hoisted_55])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                    "for": "seo_title",
+                    value: "Seo Title"
+                  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
+                    id: "seo_title",
+                    name: "name",
+                    modelValue: $setup.form.seo_title,
+                    "onUpdate:modelValue": _cache[22] || (_cache[22] = function ($event) {
+                      return $setup.form.seo_title = $event;
+                    }),
+                    type: "text",
+                    "class": "mt-1 block w-full"
+                  }, null, 8
+                  /* PROPS */
+                  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.get('seo_title'),
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                    "for": "content",
+                    value: "Seo Description",
+                    optional: "160 characters"
+                  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetTextarea"], {
+                    id: "seo_description",
+                    name: "seo_description",
+                    modelValue: $setup.form.seo_description,
+                    "onUpdate:modelValue": _cache[23] || (_cache[23] = function ($event) {
+                      return $setup.form.seo_description = $event;
+                    }),
+                    type: "text",
+                    required: "",
+                    "class": "mt-1 block w-full"
+                  }, null, 8
+                  /* PROPS */
+                  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["QuestionMarkCircleIcon"], {
+                    "class": "flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500",
+                    "aria-hidden": "true"
+                  }), _hoisted_62])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.get('seo_description'),
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_63, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_64, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
                     options: $setup.job.data.states,
                     modelValue: $setup.form.state,
-                    "onUpdate:modelValue": _cache[22] || (_cache[22] = function ($event) {
+                    "onUpdate:modelValue": _cache[24] || (_cache[24] = function ($event) {
                       return $setup.form.state = $event;
                     }),
-                    placeholder: "Publish"
+                    placeholder: "Publish",
+                    label: "Publish"
                   }, null, 8
                   /* PROPS */
                   , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
@@ -2626,11 +2738,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "class": "mt-2"
                   }, null, 8
                   /* PROPS */
-                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
                     value: _ctx.__('Application Deadline Date')
                   }, null, 8
                   /* PROPS */
-                  , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DatePicker"]), _hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                  , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DatePicker"]), _hoisted_69, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
                     message: $setup.form.errors.get('closing_to'),
                     "class": "mt-2"
                   }, null, 8
@@ -2639,16 +2751,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     title: _ctx.__('Job Apply Types')
                   }, {
                     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_70, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
                         options: $setup.job.data.applyTypes,
                         modelValue: $setup.form.apply_type,
-                        "onUpdate:modelValue": _cache[23] || (_cache[23] = function ($event) {
+                        "onUpdate:modelValue": _cache[25] || (_cache[25] = function ($event) {
                           return $setup.form.apply_type = $event;
                         }),
-                        placeholder: _ctx.__('Job Apply Types')
+                        placeholder: _ctx.__('Job Apply Types'),
+                        label: _ctx.__('Job Apply Types')
                       }, null, 8
                       /* PROPS */
-                      , ["options", "modelValue", "placeholder"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                      , ["options", "modelValue", "placeholder", "label"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
                         message: $setup.form.errors.get('apply_type'),
                         "class": "mt-2"
                       }, null, 8
@@ -2682,7 +2795,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
                   }, 8
                   /* PROPS */
-                  , ["title"])])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingButton"], {
+                  , ["title"])])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_72, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingButton"], {
                     type: "submit",
                     loading: $setup.form.processing,
                     "class": "uppercase w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm"

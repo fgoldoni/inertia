@@ -1,5 +1,5 @@
 <script setup>
-defineProps({
+const props = defineProps({
     value: String,
     required: {
         type: Boolean,
