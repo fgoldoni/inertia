@@ -1,16 +1,13 @@
 <?php
-
 namespace Modules\Dashboard\Http\Controllers;
 
 use App\Models\User;
-use App\Repositories\Criteria\Where;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
-use Modules\Dashboard\Entities\DashboardUser;
 use Modules\Dashboard\Http\Requests\UpdateDashboardUserRequest;
 use Modules\Dashboard\Repositories\Contracts\DashboardUserRepository;
 use Modules\Users\Repositories\Contracts\UsersRepository;
@@ -69,13 +66,9 @@ class DashboardUserController extends Controller
         return view('dashboard::edit');
     }
 
-
     public function update(UpdateDashboardUserRequest $request, User $user)
     {
-
-
-        foreach ($request->get('layouts') as $layout)
-        {
+        foreach ($request->get('layouts') as $layout) {
             $this->dashboardUserRepository->update($layout['id'], [
                 'x' => $layout['x'],
                 'y' => $layout['y'],

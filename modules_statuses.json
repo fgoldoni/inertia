@@ -6,5 +6,7 @@
     "Countries": true,
     "Companies": true,
     "Jobs": true,
-    "Dashboard": true
+    "Dashboard": true,
+    "Activities": true,
+    "Tags": true
 }

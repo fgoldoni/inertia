@@ -18,13 +18,15 @@ use Modules\Countries\Entities\Division;
 use Modules\Jobs\Database\factories\JobFactory;
 use Modules\Jobs\Enums\JobState;
 use Modules\Jobs\Enums\SalaryType;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
 class Job extends Model
 {
-    use HasFactory, HasSlug, HasAvatar, HasTranslations, Categorizable, BelongsToUser, SoftDeletes, WithinDays, JobAttribute, AttachableTrait;
+    use HasFactory, HasSlug, HasAvatar, HasTranslations, Categorizable, BelongsToUser, SoftDeletes, WithinDays, JobAttribute, AttachableTrait, LogsActivity;
 
     protected $guarded = [];
 
@@ -80,5 +82,11 @@ class Job extends Model
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class)->withDefault(['name' => '']);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['name', 'content']);
     }
 }

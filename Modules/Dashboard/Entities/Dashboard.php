@@ -16,7 +16,6 @@ class Dashboard extends Model
         return \Modules\Dashboard\Database\factories\DashboardFactory::new();
     }
 
-
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class)->as('layout')

@@ -2,13 +2,8 @@
 namespace Modules\Dashboard\Http\Controllers;
 
 use App\Repositories\Criteria\ByUser;
-use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Where;
-use App\Repositories\Criteria\WhereHas;
-use App\Repositories\Criteria\WhereRelation;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
@@ -27,7 +22,8 @@ class DashboardController extends Controller
         private readonly UsersRepository $usersRepository,
         private readonly ResponseFactory $response,
         private readonly Redirector $redirect
-    ){}
+    ) {
+    }
 
     public function index(Request $request)
     {
@@ -47,36 +43,30 @@ class DashboardController extends Controller
         ]);
     }
 
-
     public function create()
     {
         return view('dashboard::create');
     }
-
 
     public function store(Request $request)
     {
         //
     }
 
-
     public function show($id)
     {
         return view('dashboard::show');
     }
-
 
     public function edit($id)
     {
         return view('dashboard::edit');
     }
 
-
     public function update(Request $request, $id)
     {
         //
     }
-
 
     public function destroy($id)
     {

@@ -59,6 +59,10 @@ php-cs-2: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Dashboard/Entities --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Dashboard/Http --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Dashboard/Providers --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Activities/Database --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Activities/Entities --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Activities/Http --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Activities/Providers --diff
 
 rector: ## PRS2 Validation
 	./vendor/bin/rector process

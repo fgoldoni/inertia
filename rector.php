@@ -9,38 +9,12 @@ use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        __DIR__ . '/app/Http',
-        __DIR__ . '/app/Traits',
-        __DIR__ . '/database',
 
-        __DIR__ . '/Modules/Users/Database',
-        __DIR__ . '/Modules/Users/Entities',
-        __DIR__ . '/Modules/Users/Http',
-        __DIR__ . '/Modules/Users/Providers',
-        __DIR__ . '/Modules/Users/Repositories',
-
-        __DIR__ . '/Modules/Roles/Database',
-        __DIR__ . '/Modules/Roles/Entities',
-        __DIR__ . '/Modules/Roles/Http',
-        __DIR__ . '/Modules/Roles/Providers',
-        __DIR__ . '/Modules/Roles/Repositories',
-
-        __DIR__ . '/Modules/Categories/Database',
-        __DIR__ . '/Modules/Categories/Entities',
-        __DIR__ . '/Modules/Categories/Http',
-        __DIR__ . '/Modules/Categories/Providers',
-
-
-        __DIR__ . '/Modules/Countries/Database',
-        __DIR__ . '/Modules/Countries/Entities',
-        __DIR__ . '/Modules/Countries/Http',
-        __DIR__ . '/Modules/Countries/Providers',
-
-
-        __DIR__ . '/Modules/Attachments/Database',
-        __DIR__ . '/Modules/Attachments/Entities',
-        __DIR__ . '/Modules/Attachments/Http',
-        __DIR__ . '/Modules/Attachments/Providers',
+        __DIR__ . '/Modules/Activities/Database',
+        __DIR__ . '/Modules/Activities/Entities',
+        __DIR__ . '/Modules/Activities/Http',
+        __DIR__ . '/Modules/Activities/Providers',
+        __DIR__ . '/Modules/Activities/Repositories',
     ]);
 
     // register a single rule

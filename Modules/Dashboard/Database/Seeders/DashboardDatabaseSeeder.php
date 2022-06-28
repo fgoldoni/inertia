@@ -3,7 +3,6 @@ namespace Modules\Dashboard\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Modules\Dashboard\Entities\Dashboard;
 
 class DashboardDatabaseSeeder extends Seeder
@@ -38,7 +37,6 @@ class DashboardDatabaseSeeder extends Seeder
             ],
         ]);
 
-
         $dashboard = Dashboard::create([
             'name' => 'Application',
         ]);
@@ -59,7 +57,6 @@ class DashboardDatabaseSeeder extends Seeder
                 'component' => 'ApplicationComponent'
             ],
         ]);
-
 
         $dashboard = Dashboard::create([
             'name' => 'Review',
@@ -103,7 +100,6 @@ class DashboardDatabaseSeeder extends Seeder
             ],
         ]);
 
-
         $dashboard = Dashboard::create([
             'name' => 'Users',
         ]);
@@ -124,8 +120,6 @@ class DashboardDatabaseSeeder extends Seeder
                 'component' => 'UsersComponent'
             ],
         ]);
-
-
 
         $dashboard = Dashboard::create([
             'name' => 'Shortlisted',

@@ -16,6 +16,7 @@ import BaseComboboxes from '@/Shared/BaseComboboxes'
 import BasePackages from '@/Shared/BasePackages'
 import Tags from '@/Shared/Tags'
 import Skills from '@/Shared/Skills'
+import Logs from '@/Shared/Logs'
 import Seo from '@/Shared/Seo'
 import BaseDisclosure from '@/Components/BaseDisclosure'
 import { useJobs } from '@/Composables/UseJobs'
@@ -24,6 +25,19 @@ import {useAvatar} from "@/Composables/UseAvatar";
 import pickBy from "lodash/pickBy";
 import {Errors} from "@/Plugins/errors";
 import { ElNotification } from 'element-plus'
+import { OfficeBuildingIcon, UserIcon } from '@heroicons/vue/solid'
+
+const tabs = [
+    { name: 'Edit Modal', key: 'edit_modal', icon: UserIcon },
+    { name: 'Logs', key: 'logs', icon: OfficeBuildingIcon },
+]
+
+const currentTab = ref('edit_modal')
+
+const currentTabF = (value) => {
+    debugger
+    document.querySelector('#cancelButtonRef').click()
+}
 
 
 const { data: job, doFetchData: doFetchJob } = useJobs()
@@ -161,31 +175,46 @@ const onSubmit = () => {
                 <div class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity md:block" />
             </TransitionChild>
 
-            <div class="fixed z-10 inset-0 overflow-y-auto">
+            <div class="fixed z-10 inset-0 overflow-y-auto" v-if="job.data">
+
 
                 <div class="flex items-stretch md:items-center justify-center min-h-full text-center md:px-2 lg:px-4">
 
                     <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enter-to="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 md:scale-100" leave-to="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
 
-                        <DialogPanel class="flex text-base bg-secondary-100 text-left transform transition w-full md:max-w-4xl md:px-4 md:my-8 lg:max-w-6xl">
+                        <DialogPanel class="text-base bg-secondary-100 text-left transform transition w-full md:max-w-4xl md:px-4 md:my-8 lg:max-w-6xl">
 
+                            <div class="sm:hidden">
+                                <label for="tabs" class="sr-only">Select a tab</label>
+                                <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+                                <select id="tabs" name="tabs" class="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" v-model="currentTab">
+                                    <option v-for="tab in tabs" :key="tab.name" :value="tab.key">{{ tab.name }}</option>
+                                </select>
+                            </div>
+                            <div class="hidden sm:block">
+                                <div class="border-b border-gray-200">
+                                    <nav class="px-4 -mb-px flex space-x-8" aria-label="Tabs">
+                                        <a v-for="tab in tabs" :key="tab.name" href="javascript:;" @click="currentTab = tab.key" :class="[tab.key === currentTab ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300', 'group inline-flex items-center py-4 px-1 border-b-2 font-medium text-sm']" :aria-current="tab.key === currentTab ? 'page' : undefined">
+                                            <component :is="tab.icon" :class="[tab.key === currentTab ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500', '-ml-0.5 mr-2 h-5 w-5']" aria-hidden="true" />
+                                            <span>{{ tab.name }}</span>
+                                        </a>
+                                    </nav>
+                                </div>
+                            </div>
 
-                            <form @submit.prevent="onSubmit" v-if="job.data" @keydown="form.errors.clear($event.target.name)">
-
-                                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-
-                                    <div>
-
-                                        <div class="mb-3">
-
-                                            <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900">
-
-                                                {{ __('Edit Modal') }}
-
-                                            </DialogTitle>
-
+                            <div class="px-8 pt-5 pb-4 sm:p-6 sm:pb-4" v-if="currentTab === 'logs'">
+                                <div>
+                                    <div class="grid grid-cols-1">
+                                        <div class="col-span-1">
+                                            <Logs :options="props.editing.logs"></Logs>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" v-if="currentTab === 'edit_modal'">
+                                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                    <div>
                                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
 
                                             <div class="col-span-1 sm:col-span-3">

@@ -1245,6 +1245,15 @@ select {
 .ml-16 {
   margin-left: 4rem;
 }
+.-mb-px {
+  margin-bottom: -1px;
+}
+.-ml-0\.5 {
+  margin-left: -0.125rem;
+}
+.-ml-0 {
+  margin-left: -0px;
+}
 .block {
   display: block;
 }
@@ -2008,6 +2017,10 @@ select {
 .py-3\.5 {
   padding-top: 0.875rem;
   padding-bottom: 0.875rem;
+}
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 .pt-6 {
   padding-top: 1.5rem;

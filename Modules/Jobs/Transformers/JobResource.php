@@ -3,9 +3,14 @@
 namespace Modules\Jobs\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 
 class JobResource extends JsonResource
 {
+    public function __construct($resource)
+    {
+        parent::__construct($resource);
+    }
 
     public function toArray($request)
     {
@@ -35,6 +40,9 @@ class JobResource extends JsonResource
             'city' => $this->city,
             'division' => $this->division,
             'attachments' => $this->attachments,
+
+
+            'logs' => app(ActivitiesRepository::class)->byModel($this),
         ];
     }
 }

@@ -2,18 +2,14 @@
 import {onMounted, ref, defineAsyncComponent} from "vue";
 import { usePage } from '@inertiajs/inertia-vue3';
 
-
 const props = defineProps({
     rowData: Object,
     data: Object,
 });
 
-
 const layout = ref(props.rowData.map((e) => e.layout))
 
 const setDefineAsyncComponent = (path) => defineAsyncComponent(() =>import(`@modules/Dashboard/Components/${path}.vue`))
-
-
 
 const draggable = ref(true)
 const resizable = ref(true)

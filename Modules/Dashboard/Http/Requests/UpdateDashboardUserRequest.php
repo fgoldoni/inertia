@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Dashboard\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -16,8 +15,8 @@ class UpdateDashboardUserRequest extends FormRequest
     {
         return [
             'layouts.*.user_id' => ['required', 'integer', Rule::exists('dashboard_user')->where(function ($query) {
-                    return $query->where('user_id', auth()->user()->id);
-                })
+                return $query->where('user_id', auth()->user()->id);
+            })
             ],
             'layouts.*.x' => ['required', 'integer'],
             'layouts.*.y' => ['required', 'integer'],
