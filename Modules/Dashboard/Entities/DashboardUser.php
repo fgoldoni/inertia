@@ -9,4 +9,13 @@ class DashboardUser extends Pivot
     protected $guarded = [];
 
     public $incrementing = true;
+
+    protected $appends = [
+        'i',
+    ];
+    public function getIAttribute()
+    {
+        return $this->id;
+    }
+
 }

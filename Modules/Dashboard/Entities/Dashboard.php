@@ -19,6 +19,9 @@ class Dashboard extends Model
 
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(User::class)->using(DashboardUser::class)->withTimestamps();
+        return $this->belongsToMany(User::class)->as('layout')
+            ->using(DashboardUser::class)
+            ->withPivot('id', 'x', 'y', 'w', 'h', 'component')
+            ->withTimestamps();
     }
 }

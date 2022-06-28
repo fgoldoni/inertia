@@ -17,91 +17,156 @@ class DashboardDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $d = Dashboard::create([
+        $dashboard = Dashboard::create([
             'name' => 'Jobs',
-            'x' => 0,
-            'y' => 0,
-            'w' => 2,
-            'h' => 2,
-            'i' => 0,
-            'component' => 'JobsComponent',
         ]);
 
-        $d->users()->attach([1, 2, 3]);
+        $dashboard->users()->attach([
+            1 => [
+                'x' => 0,
+                'y' => 0,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'JobsComponent'
+            ],
+            2 => [
+                'x' => 0,
+                'y' => 0,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'JobsComponent'
+            ],
+        ]);
 
 
-
-        DB::table('dashboards')->insert([
+        $dashboard = Dashboard::create([
             'name' => 'Application',
-            'x' => 2,
-            'y' => 0,
-            'w' => 2,
-            'h' => 2,
-            'i' => 1,
-            'component' => 'ApplicationComponent',
-            'created_at' => now(),
-            'updated_at' => now()
         ]);
 
-        DB::table('dashboards')->insert([
+        $dashboard->users()->attach([
+            1 => [
+                'x' => 4,
+                'y' => 0,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'ApplicationComponent'
+            ],
+            2 => [
+                'x' => 4,
+                'y' => 0,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'ApplicationComponent'
+            ],
+        ]);
+
+
+        $dashboard = Dashboard::create([
             'name' => 'Review',
-            'x' => 4,
-            'y' => 0,
-            'w' => 2,
-            'h' => 2,
-            'i' => 2,
-            'component' => 'ReviewComponent',
-            'created_at' => now(),
-            'updated_at' => now()
         ]);
 
-        DB::table('dashboards')->insert([
+        $dashboard->users()->attach([
+            1 => [
+                'x' => 8,
+                'y' => 0,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'ReviewComponent'
+            ],
+            2 => [
+                'x' => 8,
+                'y' => 0,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'ReviewComponent'
+            ],
+        ]);
+
+        $dashboard = Dashboard::create([
             'name' => 'Companies',
-            'x' => 0,
-            'y' => 4,
-            'w' => 2,
-            'h' => 2,
-            'i' => 3,
-            'component' => 'CompaniesComponent',
-            'created_at' => now(),
-            'updated_at' => now()
+        ]);
+
+        $dashboard->users()->attach([
+            1 => [
+                'x' => 0,
+                'y' => 4,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'CompaniesComponent'
+            ],
+            2 => [
+                'x' => 0,
+                'y' => 4,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'CompaniesComponent'
+            ],
         ]);
 
 
-        DB::table('dashboards')->insert([
+        $dashboard = Dashboard::create([
             'name' => 'Users',
-            'x' => 6,
-            'y' => 0,
-            'w' => 2,
-            'h' => 2,
-            'i' => 4,
-            'component' => 'UsersComponent',
-            'created_at' => now(),
-            'updated_at' => now()
         ]);
 
-        DB::table('dashboards')->insert([
+        $dashboard->users()->attach([
+            1 => [
+                'x' => 4,
+                'y' => 4,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'UsersComponent'
+            ],
+            2 => [
+                'x' => 4,
+                'y' => 4,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'UsersComponent'
+            ],
+        ]);
+
+
+
+        $dashboard = Dashboard::create([
             'name' => 'Shortlisted',
-            'x' => 8,
-            'y' => 0,
-            'w' => 2,
-            'h' => 2,
-            'i' => 5,
-            'component' => 'ShortlistedComponent',
-            'created_at' => now(),
-            'updated_at' => now()
         ]);
 
-        DB::table('dashboards')->insert([
+        $dashboard->users()->attach([
+            1 => [
+                'x' => 8,
+                'y' => 4,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'ShortlistedComponent'
+            ],
+            2 => [
+                'x' => 8,
+                'y' => 4,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'ShortlistedComponent'
+            ],
+        ]);
+
+        $dashboard = Dashboard::create([
             'name' => 'Teams',
-            'x' => 0,
-            'y' => 2,
-            'w' => 2,
-            'h' => 2,
-            'i' => 6,
-            'component' => 'TeamsComponent',
-            'created_at' => now(),
-            'updated_at' => now()
+        ]);
+
+        $dashboard->users()->attach([
+            1 => [
+                'x' => 0,
+                'y' => 8,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'TeamsComponent'
+            ],
+            2 => [
+                'x' => 0,
+                'y' => 8,
+                'w' => 4,
+                'h' => 4,
+                'component' => 'TeamsComponent'
+            ],
         ]);
     }
 }

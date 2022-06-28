@@ -19,15 +19,8 @@ return new class extends Migration {
         Schema::create('dashboards', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->smallInteger('x');
-            $table->smallInteger('y');
-            $table->smallInteger('w');
-            $table->smallInteger('h');
-            $table->integer('i');
-            $table->string('component');
 
             $table->softDeletes();
-
             $table->timestamps();
         });
 
@@ -35,6 +28,11 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->unsigned()->index()->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('dashboard_id')->unsigned()->index()->references('id')->on('dashboards')->onDelete('cascade');
+            $table->smallInteger('x');
+            $table->smallInteger('y');
+            $table->smallInteger('w');
+            $table->smallInteger('h');
+            $table->string('component');
 
             $table->timestamps();
         });

@@ -110,6 +110,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function dashboards(): BelongsToMany
     {
-        return $this->belongsToMany(Dashboard::class)->using(DashboardUser::class)->withTimestamps();
+        return $this->belongsToMany(Dashboard::class)
+            ->as('layout')
+            ->using(DashboardUser::class)
+            ->withPivot('id', 'x', 'y', 'w', 'h', 'component')
+            ->withTimestamps();
     }
 }
