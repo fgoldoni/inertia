@@ -4,7 +4,6 @@ namespace Modules\Dashboard\Entities;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Dashboard extends Model
 {
@@ -18,8 +17,8 @@ class Dashboard extends Model
     }
 
 
-    public function users(): BelongsToMany
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->using(DashboardUser::class)->withTimestamps();
     }
 }

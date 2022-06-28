@@ -17,6 +17,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Dashboard\Entities\Dashboard;
+use Modules\Dashboard\Entities\DashboardUser;
 use Modules\Users\Collections\UserCollection;
 use Modules\Users\Entities\Session;
 use Spatie\Permission\Traits\HasRoles;
@@ -109,6 +110,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function dashboards(): BelongsToMany
     {
-        return $this->belongsToMany(Dashboard::class);
+        return $this->belongsToMany(Dashboard::class)->using(DashboardUser::class)->withTimestamps();
     }
 }

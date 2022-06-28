@@ -35,41 +35,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ArrowSmDownIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ArrowSmUpIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/UsersIcon.js");
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'Index',
+  props: {
+    rowData: Object
+  },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
+    var props = __props;
+    var stats = [{
+      id: 1,
+      name: 'Total Subscribers',
+      stat: '71,897',
+      icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+      change: '122',
+      changeType: 'increase'
+    }];
     var layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([{
       x: 0,
       y: 0,
-      w: 2,
-      h: 2,
+      w: 4,
+      h: 4,
       i: "0"
-    }, {
-      x: 2,
-      y: 0,
-      w: 2,
-      h: 2,
-      i: "1"
     }, {
       x: 4,
       y: 0,
-      w: 2,
-      h: 2,
-      i: "2"
-    }, {
-      x: 6,
-      y: 0,
-      w: 2,
-      h: 2,
-      i: "3"
+      w: 4,
+      h: 4,
+      i: "1"
     }, {
       x: 8,
       y: 0,
-      w: 2,
-      h: 2,
+      w: 4,
+      h: 4,
+      i: "2"
+    }, {
+      x: 0,
+      y: 4,
+      w: 4,
+      h: 4,
+      i: "3"
+    }, {
+      x: 4,
+      y: 4,
+      w: 4,
+      h: 4,
       i: "4"
     }]);
     var draggable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
@@ -82,12 +99,12 @@ __webpack_require__.r(__webpack_exports__);
 
     var addItem = function addItem() {
       layout.value.push({
-        x: layout.value.length * 2 % (colNum.value || 12),
+        x: layout.value.length * 4 % (colNum.value || 12),
         y: layout.value.length + (colNum.value || 12),
         // puts it at the bottom
-        w: 2,
-        h: 2,
-        i: '' + index.value
+        w: 4,
+        h: 4,
+        i: index.value
       }); // Increment the counter to ensure key is always unique.
 
       index.value++;
@@ -101,6 +118,8 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var __returned__ = {
+      stats: stats,
+      props: props,
       layout: layout,
       draggable: draggable,
       resizable: resizable,
@@ -109,7 +128,10 @@ __webpack_require__.r(__webpack_exports__);
       addItem: addItem,
       removeItem: removeItem,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
-      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref
+      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      ArrowSmDownIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__["default"],
+      ArrowSmUpIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__["default"],
+      UsersIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -153,9 +175,38 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Resizable ");
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" vghjhj ");
+var _hoisted_8 = {
+  "class": "absolute bg-indigo-500 rounded-md p-3"
+};
+var _hoisted_9 = {
+  "class": "ml-16 text-sm font-medium text-gray-500 truncate"
+};
+var _hoisted_10 = {
+  "class": "ml-16 pb-6 flex items-baseline sm:pb-7"
+};
+var _hoisted_11 = {
+  "class": "text-2xl font-semibold text-gray-900"
+};
+var _hoisted_12 = {
+  "class": "sr-only"
+};
+var _hoisted_13 = {
+  "class": "absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6"
+};
+var _hoisted_14 = {
+  "class": "text-sm"
+};
+var _hoisted_15 = {
+  href: "#",
+  "class": "font-medium text-indigo-600 hover:text-indigo-500"
+};
 
-var _hoisted_9 = ["onClick"];
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" View all");
+
+var _hoisted_17 = {
+  "class": "sr-only"
+};
+var _hoisted_18 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_grid_item = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("grid-item");
 
@@ -208,14 +259,46 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           i: item.i
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+            return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.stats, function (item) {
+              return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+                key: item.id,
+                "class": "relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden"
+              }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("dt", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(item.icon), {
+                "class": "h-6 w-6 text-white",
+                "aria-hidden": "true"
+              }))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.name), 1
+              /* TEXT */
+              )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("dd", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.stat), 1
+              /* TEXT */
+              ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+                "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([item.changeType === 'increase' ? 'text-green-600' : 'text-red-600', 'ml-2 flex items-baseline text-sm font-semibold'])
+              }, [item.changeType === 'increase' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ArrowSmUpIcon"], {
+                key: 0,
+                "class": "self-center flex-shrink-0 h-5 w-5 text-green-500",
+                "aria-hidden": "true"
+              })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ArrowSmDownIcon"], {
+                key: 1,
+                "class": "self-center flex-shrink-0 h-5 w-5 text-red-500",
+                "aria-hidden": "true"
+              })), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.changeType === 'increase' ? 'Increased' : 'Decreased') + " by ", 1
+              /* TEXT */
+              ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.change), 1
+              /* TEXT */
+              )], 2
+              /* CLASS */
+              ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.name) + " stats", 1
+              /* TEXT */
+              )])])])])]);
+            }), 64
+            /* STABLE_FRAGMENT */
+            )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
               "class": "remove",
               onClick: function onClick($event) {
                 return $setup.removeItem(item.i);
               }
             }, "x", 8
             /* PROPS */
-            , _hoisted_9)];
+            , _hoisted_18)];
           }),
           _: 2
           /* DYNAMIC */

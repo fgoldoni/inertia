@@ -4,6 +4,7 @@ namespace Modules\Dashboard\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Dashboard\Entities\Dashboard;
 
 class DashboardDatabaseSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class DashboardDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        DB::table('dashboards')->insert([
+        $d = Dashboard::create([
             'name' => 'Jobs',
             'x' => 0,
             'y' => 0,
@@ -24,9 +25,10 @@ class DashboardDatabaseSeeder extends Seeder
             'h' => 2,
             'i' => 0,
             'component' => 'JobsComponent',
-            'created_at' => now(),
-            'updated_at' => now()
         ]);
+
+        $d->users()->attach([1, 2, 3]);
+
 
 
         DB::table('dashboards')->insert([

@@ -35,6 +35,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->unsigned()->index()->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('dashboard_id')->unsigned()->index()->references('id')->on('dashboards')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
