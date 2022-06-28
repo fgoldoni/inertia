@@ -5,6 +5,7 @@ import { usePage } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
     rowData: Object,
+    data: Object,
 });
 
 
@@ -65,7 +66,7 @@ const removeItem = (val) => {
                        :h="item.h"
                        :i="item.i"
             >
-                <component :is="setDefineAsyncComponent(item.component)"/>
+                <component :is="setDefineAsyncComponent(item.component)" v-bind="props.data"/>
                 <span class="remove" @click="removeItem(item.i)">x</span>
             </grid-item>
         </grid-layout>
@@ -95,22 +96,14 @@ const removeItem = (val) => {
     cursor: pointer;
 }
 
-.vue-grid-layout {
-    background: #eee;
-}
-
 .vue-grid-item:not(.vue-grid-placeholder) {
     background: #ccc;
-    border: 1px solid black;
 }
 
 .vue-grid-item .resizing {
     opacity: 0.9;
 }
 
-.vue-grid-item .static {
-    background: #cce;
-}
 
 .vue-grid-item .text {
     font-size: 24px;

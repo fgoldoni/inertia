@@ -2,8 +2,8 @@
 <template>
     <div v-for="item in stats" :key="item.id" class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 w-full h-full shadow overflow-hidden">
         <dt>
-            <div class="absolute bg-indigo-500 rounded-md p-3">
-                <component :is="item.icon" class="h-6 w-6 text-white" aria-hidden="true" />
+            <div class="absolute bg-primary-200 rounded-md p-3">
+                <BriefcaseIcon class="h-6 w-6 text-primary-700" aria-hidden="true" />
             </div>
             <p class="ml-16 text-sm font-medium text-gray-500 truncate">{{ item.name }}</p>
         </dt>
@@ -30,9 +30,15 @@
 
 <script setup>
 import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/vue/solid'
-import { UsersIcon } from '@heroicons/vue/outline'
+import { BriefcaseIcon } from '@heroicons/vue/outline'
+
+const props = defineProps({
+    jobs: Object,
+});
 
 const stats = [
-    { id: 1, name: 'Total Subscribers', stat: '71,897', icon: UsersIcon, change: '122', changeType: 'increase' },
+    { id: 1, name: 'Total Jobs', stat: props.jobs, change: '122', changeType: 'increase' },
 ]
+
+
 </script>

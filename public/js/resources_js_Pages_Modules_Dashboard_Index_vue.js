@@ -17,7 +17,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.layoutJSON {\n    background: #ddd;\n    border: 1px solid black;\n    margin-top: 10px;\n    padding: 10px;\n}\n.columns {\n    -moz-columns: 120px;\n    columns: 120px;\n}\n\n/*************************************/\n.remove {\n    position: absolute;\n    right: 2px;\n    top: 0;\n    cursor: pointer;\n}\n.vue-grid-layout {\n    background: #eee;\n}\n.vue-grid-item:not(.vue-grid-placeholder) {\n    background: #ccc;\n    border: 1px solid black;\n}\n.vue-grid-item .resizing {\n    opacity: 0.9;\n}\n.vue-grid-item .static {\n    background: #cce;\n}\n.vue-grid-item .text {\n    font-size: 24px;\n    text-align: center;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    margin: auto;\n    height: 100%;\n    width: 100%;\n}\n.vue-grid-item .no-drag {\n    height: 100%;\n    width: 100%;\n}\n.vue-grid-item .minMax {\n    font-size: 12px;\n}\n.vue-grid-item .add {\n    cursor: pointer;\n}\n.vue-draggable-handle {\n    position: absolute;\n    width: 20px;\n    height: 20px;\n    top: 0;\n    left: 0;\n    background: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><circle cx='5' cy='5' r='5' fill='#999999'/></svg>\") no-repeat;\n    background-position: bottom right;\n    padding: 0 8px 8px 0;\n    background-repeat: no-repeat;\n    background-origin: content-box;\n    box-sizing: border-box;\n    cursor: pointer;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.layoutJSON {\n    background: #ddd;\n    border: 1px solid black;\n    margin-top: 10px;\n    padding: 10px;\n}\n.columns {\n    -moz-columns: 120px;\n    columns: 120px;\n}\n\n/*************************************/\n.remove {\n    position: absolute;\n    right: 2px;\n    top: 0;\n    cursor: pointer;\n}\n.vue-grid-item:not(.vue-grid-placeholder) {\n    background: #ccc;\n}\n.vue-grid-item .resizing {\n    opacity: 0.9;\n}\n.vue-grid-item .text {\n    font-size: 24px;\n    text-align: center;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    margin: auto;\n    height: 100%;\n    width: 100%;\n}\n.vue-grid-item .no-drag {\n    height: 100%;\n    width: 100%;\n}\n.vue-grid-item .minMax {\n    font-size: 12px;\n}\n.vue-grid-item .add {\n    cursor: pointer;\n}\n.vue-draggable-handle {\n    position: absolute;\n    width: 20px;\n    height: 20px;\n    top: 0;\n    left: 0;\n    background: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><circle cx='5' cy='5' r='5' fill='#999999'/></svg>\") no-repeat;\n    background-position: bottom right;\n    padding: 0 8px 8px 0;\n    background-repeat: no-repeat;\n    background-origin: content-box;\n    box-sizing: border-box;\n    cursor: pointer;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42,7 +42,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'Index',
   props: {
-    rowData: Object
+    rowData: Object,
+    data: Object
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
@@ -194,7 +195,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           i: item.i
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($setup.setDefineAsyncComponent(item.component)))), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+            return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($setup.setDefineAsyncComponent(item.component)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeProps)((0,vue__WEBPACK_IMPORTED_MODULE_0__.guardReactiveProps)($setup.props.data)), null, 16
+            /* FULL_PROPS */
+            )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
               "class": "remove",
               onClick: function onClick($event) {
                 return $setup.removeItem(item.i);
