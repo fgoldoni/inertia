@@ -130,6 +130,6 @@ class JobsController extends Controller
             new WhereKey(explode(',', (string) $selected))
         ])->deleteAll();
 
-        return $this->response->json(['message' => __('Job deleted successfully.')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
+        return $this->response->json(['message' => __('The Job(s) has been successfully deleted')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
     }
 }

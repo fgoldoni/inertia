@@ -186,6 +186,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Mixins_UseModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Mixins/UseModal */ "./resources/js/Mixins/UseModal.js");
 /* harmony import */ var _Layouts_App__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Layouts/App */ "./resources/js/Layouts/App.vue");
 /* harmony import */ var _Mixins_translations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Mixins/translations */ "./resources/js/Mixins/translations.js");
+/* harmony import */ var vue_grid_layout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-grid-layout */ "./node_modules/vue-grid-layout/dist/vue-grid-layout.common.js");
+/* harmony import */ var vue_grid_layout__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vue_grid_layout__WEBPACK_IMPORTED_MODULE_7__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 var _window$document$getE;
@@ -195,6 +197,7 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -252,7 +255,7 @@ var appName = ((_window$document$getE = window.document.getElementsByTagName('ti
       methods: {
         route: route
       }
-    }).component('Link', _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link).component('Head', _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head).mixin(_Mixins_UseModal__WEBPACK_IMPORTED_MODULE_4__.useModal).mixin(_Mixins_translations__WEBPACK_IMPORTED_MODULE_6__.translations).mount(el);
+    }).component('Link', _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link).component('Head', _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head).mixin(_Mixins_UseModal__WEBPACK_IMPORTED_MODULE_4__.useModal).mixin(_Mixins_translations__WEBPACK_IMPORTED_MODULE_6__.translations).use((vue_grid_layout__WEBPACK_IMPORTED_MODULE_7___default())).mount(el);
   }
 });
 _inertiajs_progress__WEBPACK_IMPORTED_MODULE_3__.InertiaProgress.init({
@@ -1910,6 +1913,11 @@ var map = {
 		"./resources/js/Pages/Modules/Countries/Index.vue",
 		"/js/vendor",
 		"node_modules_unplugin_dist_webpack_loaders_transform_js_ruleSet_1_rules_26_use_0_node_modules-8736d7"
+	],
+	"./Modules/Dashboard/Index.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Index.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Index_vue"
 	],
 	"./Modules/Divisions/Datatables/CustomActions.vue": [
 		"./resources/js/Pages/Modules/Divisions/Datatables/CustomActions.vue",

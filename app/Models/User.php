@@ -5,6 +5,7 @@ use Grosv\LaravelPasswordlessLogin\Traits\PasswordlessLogin;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,6 +16,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Dashboard\Entities\Dashboard;
 use Modules\Users\Collections\UserCollection;
 use Modules\Users\Entities\Session;
 use Spatie\Permission\Traits\HasRoles;
@@ -103,5 +105,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function newCollection(array $models = []): Collection
     {
         return new UserCollection($models);
+    }
+
+    public function dashboards(): BelongsToMany
+    {
+        return $this->belongsToMany(Dashboard::class);
     }
 }

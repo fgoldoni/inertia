@@ -55,6 +55,10 @@ php-cs-2: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Jobs/Entities --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Jobs/Http --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Jobs/Providers --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Dashboard/Database --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Dashboard/Entities --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Dashboard/Http --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Dashboard/Providers --diff
 
 rector: ## PRS2 Validation
 	./vendor/bin/rector process
@@ -83,6 +87,7 @@ refresh: migrate ## refresh + php artisan module:seed Admin & php artisan module
 	php artisan world:init
 	php artisan module:seed Companies
 	php artisan module:seed Jobs
+	php artisan module:seed Dashboard
 	## php artisan module:seed Posts
 	## php artisan module:seed Events
 	## php artisan module:seed Tickets

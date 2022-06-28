@@ -12,6 +12,9 @@ import Layout from '@/Layouts/App'
 
 import {translations} from '@/Mixins/translations'
 
+import VueGridLayout from 'vue-grid-layout'
+
+
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
 createInertiaApp({
@@ -41,6 +44,8 @@ createInertiaApp({
             .mixin(useModal)
 
             .mixin(translations)
+
+            .use(VueGridLayout)
 
             .mount(el);
     },

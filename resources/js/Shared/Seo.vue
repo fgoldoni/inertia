@@ -36,7 +36,7 @@ watch(form, () => emit('update:modelValue', form));
 
         <div class="flex items-center justify-between">
             <h3 class="text-lg leading-6 font-medium text-secondary-900 dark:text-white">{{ __('Search engine listing preview') }}</h3>
-            <button  type="button" @click="isOpen = !isOpen" class="text-sm leading-5 bg-transparent outline-none focus:outline-none text-primary-600 hover:text-primary-700 dark:text-primary-500/50">{{ __('Edit SEO preview') }}</button>
+            <button v-if="!isOpen" type="button" @click="isOpen = !isOpen" class="text-sm leading-5 bg-transparent outline-none focus:outline-none text-primary-600 hover:text-primary-700 dark:text-primary-500/50">{{ __('Edit SEO preview') }}</button>
         </div>
 
 
