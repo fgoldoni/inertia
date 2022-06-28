@@ -1,5 +1,6 @@
 <script setup>
 import {onMounted, ref, defineAsyncComponent} from "vue";
+import { usePage } from '@inertiajs/inertia-vue3';
 
 
 const props = defineProps({
@@ -15,13 +16,14 @@ const setDefineAsyncComponent = (path) => defineAsyncComponent(() =>import(`@mod
 
 const draggable = ref(true)
 const resizable = ref(true)
+const responsive = ref(true)
 const colNum = ref(12)
 const index = ref(0)
 
 onMounted(() => index.value = layout.value.length);
 
-const movedEvent = (i, newX, newY) => {
-    axios.put(route('admin.dashboard.update', i), {x: newX, y: newY})
+const layoutUpdatedEvent = (newLayout) => {
+    axios.put(route('admin.dashboard.user.update', usePage().props.value.auth.user?.id), { layouts: newLayout})
         .then((res) => {})
         .catch((error) => {})
         .finally(() => {})
@@ -50,8 +52,10 @@ const removeItem = (val) => {
                      :row-height="30"
                      :is-draggable="draggable"
                      :is-resizable="resizable"
+                     :responsive="responsive"
                      :vertical-compact="true"
                      :use-css-transforms="true"
+                     @layout-updated="layoutUpdatedEvent"
         >
             <grid-item v-for="item in layout"
                        :static="item.static"
@@ -60,7 +64,6 @@ const removeItem = (val) => {
                        :w="item.w"
                        :h="item.h"
                        :i="item.i"
-                       @moved="movedEvent"
             >
                 <component :is="setDefineAsyncComponent(item.component)"/>
                 <span class="remove" @click="removeItem(item.i)">x</span>

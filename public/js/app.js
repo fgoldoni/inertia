@@ -1914,10 +1914,40 @@ var map = {
 		"/js/vendor",
 		"node_modules_unplugin_dist_webpack_loaders_transform_js_ruleSet_1_rules_26_use_0_node_modules-8736d7"
 	],
+	"./Modules/Dashboard/Components/ApplicationComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/ApplicationComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_ApplicationComponent_vue"
+	],
+	"./Modules/Dashboard/Components/CompaniesComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/CompaniesComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_CompaniesComponent_vue"
+	],
 	"./Modules/Dashboard/Components/JobsComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/JobsComponent.vue",
 		"/js/vendor",
 		"resources_js_Pages_Modules_Dashboard_Components_JobsComponent_vue"
+	],
+	"./Modules/Dashboard/Components/ReviewComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/ReviewComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_ReviewComponent_vue"
+	],
+	"./Modules/Dashboard/Components/ShortlistedComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/ShortlistedComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_ShortlistedComponent_vue"
+	],
+	"./Modules/Dashboard/Components/TeamsComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/TeamsComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_TeamsComponent_vue"
+	],
+	"./Modules/Dashboard/Components/UsersComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/UsersComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_UsersComponent_vue"
 	],
 	"./Modules/Dashboard/Index.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Index.vue",

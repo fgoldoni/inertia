@@ -13,8 +13,13 @@
 
 
 use Modules\Dashboard\Http\Controllers\DashboardController;
+use Modules\Dashboard\Http\Controllers\DashboardUserController;
 
 Route::prefix('admin')->middleware(['auth', 'verified', 'permission:access_dashboard'])->as('admin.')->group(function () {
     Route::resource('dashboard', DashboardController::class)->except([ 'destroy' ]);
     Route::delete('dashboard/{selected}', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
+});
+
+Route::prefix('admin')->middleware(['auth', 'verified', 'permission:access_dashboard'])->as('admin.')->group(function () {
+    Route::put('/dashboard/user/{id}', [DashboardUserController::class, 'update'])->name('dashboard.user.update');
 });

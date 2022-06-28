@@ -36,6 +36,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'Index',
@@ -58,16 +60,18 @@ __webpack_require__.r(__webpack_exports__);
 
     var draggable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
     var resizable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
+    var responsive = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
     var colNum = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(12);
     var index = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       return index.value = layout.value.length;
     });
 
-    var movedEvent = function movedEvent(i, newX, newY) {
-      axios.put(route('admin.dashboard.update', i), {
-        x: newX,
-        y: newY
+    var layoutUpdatedEvent = function layoutUpdatedEvent(newLayout) {
+      var _usePage$props$value$;
+
+      axios.put(route('admin.dashboard.user.update', (_usePage$props$value$ = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage)().props.value.auth.user) === null || _usePage$props$value$ === void 0 ? void 0 : _usePage$props$value$.id), {
+        layouts: newLayout
       }).then(function (res) {})["catch"](function (error) {})["finally"](function () {});
     };
 
@@ -84,13 +88,15 @@ __webpack_require__.r(__webpack_exports__);
       setDefineAsyncComponent: setDefineAsyncComponent,
       draggable: draggable,
       resizable: resizable,
+      responsive: responsive,
       colNum: colNum,
       index: index,
-      movedEvent: movedEvent,
+      layoutUpdatedEvent: layoutUpdatedEvent,
       removeItem: removeItem,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
-      defineAsyncComponent: vue__WEBPACK_IMPORTED_MODULE_0__.defineAsyncComponent
+      defineAsyncComponent: vue__WEBPACK_IMPORTED_MODULE_0__.defineAsyncComponent,
+      usePage: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -172,8 +178,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "row-height": 30,
     "is-draggable": $setup.draggable,
     "is-resizable": $setup.resizable,
+    responsive: $setup.responsive,
     "vertical-compact": true,
-    "use-css-transforms": true
+    "use-css-transforms": true,
+    onLayoutUpdated: $setup.layoutUpdatedEvent
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.layout, function (item) {
@@ -183,8 +191,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           y: item.y,
           w: item.w,
           h: item.h,
-          i: item.i,
-          onMoved: $setup.movedEvent
+          i: item.i
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
             return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($setup.setDefineAsyncComponent(item.component)))), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
@@ -211,7 +218,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["layout", "col-num", "is-draggable", "is-resizable"])]);
+  , ["layout", "col-num", "is-draggable", "is-resizable", "responsive"])]);
 }
 
 /***/ }),
@@ -329,10 +336,40 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./ApplicationComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/ApplicationComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_ApplicationComponent_vue"
+	],
+	"./CompaniesComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/CompaniesComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_CompaniesComponent_vue"
+	],
 	"./JobsComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/JobsComponent.vue",
 		"/js/vendor",
 		"resources_js_Pages_Modules_Dashboard_Components_JobsComponent_vue"
+	],
+	"./ReviewComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/ReviewComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_ReviewComponent_vue"
+	],
+	"./ShortlistedComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/ShortlistedComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_ShortlistedComponent_vue"
+	],
+	"./TeamsComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/TeamsComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_TeamsComponent_vue"
+	],
+	"./UsersComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/UsersComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_UsersComponent_vue"
 	]
 };
 function webpackAsyncContext(req) {
