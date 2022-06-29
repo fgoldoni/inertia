@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Users\Notifications;
 
 use Grosv\LaravelPasswordlessLogin\PasswordlessLogin;
@@ -14,7 +13,6 @@ class AdminSendCredentials extends Notification
     public function __construct(public string $password)
     {
     }
-
 
     public function via($notifiable)
     {
@@ -32,6 +30,7 @@ class AdminSendCredentials extends Notification
             ->action('Login', PasswordlessLogin::forUser($notifiable)->generate())
             ->line(__('After logging in you need to change your password by clicking on your name in the upper right corner of the admin area'));
     }
+
     /**
      * Get the array representation of the notification.
      *

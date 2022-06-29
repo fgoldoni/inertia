@@ -10,11 +10,12 @@ use Rector\Set\ValueObject\LevelSetList;
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
 
-        __DIR__ . '/Modules/Dashboard/Database',
-        __DIR__ . '/Modules/Dashboard/Entities',
-        __DIR__ . '/Modules/Dashboard/Http',
-        __DIR__ . '/Modules/Dashboard/Providers',
-        __DIR__ . '/Modules/Dashboard/Repositories',
+        __DIR__ . '/Modules/Users/Database',
+        __DIR__ . '/Modules/Users/Entities',
+        __DIR__ . '/Modules/Users/Http',
+        __DIR__ . '/Modules/Users/Providers',
+        __DIR__ . '/Modules/Users/Repositories',
+        __DIR__ . '/Modules/Users/Listeners',
     ]);
 
     // register a single rule

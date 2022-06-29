@@ -163,13 +163,17 @@ class UsersController extends Controller
 
     public function destroy($selected)
     {
-        $this->usersRepository->withCriteria([
+        $items = $this->usersRepository->withCriteria([
             new WhereKey(explode(',', (string) $selected)),
             new WhereNot('users.id', auth()->user()->id),
             new WhereHas('roles', function (Builder $query) {
                 $query->whereNot('roles.name', config('app.system.users.roles.administrator'));
             })
-        ])->deleteAll();
+        ])->get();
+
+        foreach ($items as $item) {
+            $item->delete();
+        }
 
         return $this->response->json(['message' => __('User deleted successfully.')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
     }
