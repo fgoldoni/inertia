@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => bcrypt('00000000'),
             'remember_token' => Str::random(10),
+            'created_at' => $this->faker->dateTimeInInterval('-7 days', '+7 days'),
         ];
     }
 

@@ -121,9 +121,13 @@ class JobsController extends Controller
 
     public function destroy($selected)
     {
-        $this->jobsRepository->withCriteria([
+        $items = $this->jobsRepository->withCriteria([
             new WhereKey(explode(',', (string) $selected))
-        ])->deleteAll();
+        ])->get();
+
+        foreach ($items as $item) {
+            $item->delete();
+        }
 
         return $this->response->json(['message' => __('The Job(s) has been successfully deleted')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
     }

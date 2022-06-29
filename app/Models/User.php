@@ -20,6 +20,7 @@ use Modules\Dashboard\Entities\Dashboard;
 use Modules\Dashboard\Entities\DashboardUser;
 use Modules\Users\Collections\UserCollection;
 use Modules\Users\Entities\Session;
+use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -34,6 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasRoles;
     use PasswordlessLogin;
     use Impersonate;
+    use CausesActivity;
 
     /**
      * The attributes that are mass assignable.

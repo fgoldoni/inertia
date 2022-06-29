@@ -32,6 +32,7 @@
         "@headlessui/vue": "^1.6.4",
         "@heroicons/vue": "^1.0.6",
         "element-plus": "^2.2.6",
+        "highcharts-vue": "^1.4.0",
         "intl-tel-input": "^17.0.16",
         "moment": "^2.29.3",
         "vue-grid-layout": "3.0.0-beta1",

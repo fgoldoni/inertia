@@ -1,7 +1,7 @@
 import {CalendarIcon, ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, UsersIcon, CubeIcon} from "@heroicons/vue/outline";
 
 export const navigation = [
-    { name: 'Dashboard', href: 'dashboard', icon: HomeIcon, current: route().current('dashboard') },
+    { name: 'Dashboard', href: 'admin.dashboard.index', icon: HomeIcon, current: route().current('admin.dashboard.index') },
     { name: 'Team', href: 'dashboard', icon: UsersIcon, current: false },
     { name: 'Users', href: 'admin.users.index', icon: HomeIcon, current: route().current('admin.users.index') },
     { name: 'Roles & Permissions', href: 'admin.roles.index', icon: CubeIcon, current: route().current('admin.roles.index') },

@@ -25,14 +25,10 @@ const layoutUpdatedEvent = (newLayout) => {
         .catch((error) => {})
         .finally(() => {})
 }
-
-const removeItem = (val) => {
-    const index = layout.value.map(item => item.i).indexOf(val);
-    layout.value.splice(index, 1);
-}
 </script>
 
 <template>
+    <Head title="Dashboard"></Head>
     <div>
         <div class="layoutJSON">
             Displayed as <code>[x, y, w, h]</code>:
@@ -63,7 +59,6 @@ const removeItem = (val) => {
                        :i="item.i"
             >
                 <component :is="setDefineAsyncComponent(item.component)" v-bind="{data :props.data}"/>
-                <span class="remove" @click="removeItem(item.i)">x</span>
             </grid-item>
         </grid-layout>
     </div>

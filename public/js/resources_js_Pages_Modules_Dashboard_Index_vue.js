@@ -76,13 +76,6 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {})["catch"](function (error) {})["finally"](function () {});
     };
 
-    var removeItem = function removeItem(val) {
-      var index = layout.value.map(function (item) {
-        return item.i;
-      }).indexOf(val);
-      layout.value.splice(index, 1);
-    };
-
     var __returned__ = {
       props: props,
       layout: layout,
@@ -93,7 +86,6 @@ __webpack_require__.r(__webpack_exports__);
       colNum: colNum,
       index: index,
       layoutUpdatedEvent: layoutUpdatedEvent,
-      removeItem: removeItem,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       defineAsyncComponent: vue__WEBPACK_IMPORTED_MODULE_0__.defineAsyncComponent,
@@ -142,13 +134,16 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Resizable ");
 
-var _hoisted_8 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
+
   var _component_grid_item = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("grid-item");
 
   var _component_grid_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("grid-layout");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, _hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.layout, function (item) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
+    title: "Dashboard"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, _hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.layout, function (item) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "layoutItem",
       key: item.i
@@ -199,14 +194,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               data: $setup.props.data
             })), null, 16
             /* FULL_PROPS */
-            )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-              "class": "remove",
-              onClick: function onClick($event) {
-                return $setup.removeItem(item.i);
-              }
-            }, "x", 8
-            /* PROPS */
-            , _hoisted_8)];
+            ))];
           }),
           _: 2
           /* DYNAMIC */
@@ -223,7 +211,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["layout", "col-num", "is-draggable", "is-resizable", "responsive"])]);
+  , ["layout", "col-num", "is-draggable", "is-resizable", "responsive"])])], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -344,7 +334,7 @@ var map = {
 	"./ActivitiesComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ActivitiesComponent.vue",
 		"/js/vendor",
-		"resources_js_Pages_Modules_Dashboard_Components_ActivitiesComponent_vue"
+		"resources_js_Pages_Modules_Dashboard_Components_ActivitiesComponent_vue-_170b0"
 	],
 	"./ApplicationComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ApplicationComponent.vue",
@@ -363,7 +353,13 @@ var map = {
 	],
 	"./JobsNotificationComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/JobsNotificationComponent.vue",
-		"resources_js_Pages_Modules_Dashboard_Components_JobsNotificationComponent_vue"
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Dashboard_Components_Jo-d3db70"
+	],
+	"./RegisteredWithinDaysComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/RegisteredWithinDaysComponent.vue",
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Dashboard_Components_Re-f65e2e"
 	],
 	"./ReviewComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ReviewComponent.vue",

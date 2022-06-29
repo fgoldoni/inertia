@@ -191,20 +191,42 @@ class DashboardDatabaseSeeder extends Seeder
 
         $dashboard->users()->attach([
             1 => [
-                'x' => 8,
-                'y' => 8,
-                'w' => 4,
-                'h' => 8,
+                'x' => 0,
+                'y' => 16,
+                'w' => 6,
+                'h' => 10,
                 'component' => 'JobsNotificationComponent'
             ],
             2 => [
-                'x' => 8,
-                'y' => 8,
-                'w' => 4,
-                'h' => 8,
+                'x' => 0,
+                'y' => 16,
+                'w' => 6,
+                'h' => 10,
                 'component' => 'JobsNotificationComponent'
             ],
         ]);
+
+        $dashboard = Dashboard::create([
+            'name' => 'RegisteredWithinDays',
+        ]);
+
+        $dashboard->users()->attach([
+            1 => [
+                'x' => 6,
+                'y' => 16,
+                'w' => 6,
+                'h' => 10,
+                'component' => 'RegisteredWithinDaysComponent'
+            ],
+            2 => [
+                'x' => 6,
+                'y' => 16,
+                'w' => 6,
+                'h' => 10,
+                'component' => 'RegisteredWithinDaysComponent'
+            ],
+        ]);
+
 
     }
 }

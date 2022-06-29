@@ -89,9 +89,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var navigation = [{
   name: 'Dashboard',
-  href: 'dashboard',
+  href: 'admin.dashboard.index',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__["default"],
-  current: route().current('dashboard')
+  current: route().current('admin.dashboard.index')
 }, {
   name: 'Team',
   href: 'dashboard',
@@ -1917,7 +1917,7 @@ var map = {
 	"./Modules/Dashboard/Components/ActivitiesComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ActivitiesComponent.vue",
 		"/js/vendor",
-		"resources_js_Pages_Modules_Dashboard_Components_ActivitiesComponent_vue"
+		"resources_js_Pages_Modules_Dashboard_Components_ActivitiesComponent_vue-_170b0"
 	],
 	"./Modules/Dashboard/Components/ApplicationComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ApplicationComponent.vue",
@@ -1936,7 +1936,13 @@ var map = {
 	],
 	"./Modules/Dashboard/Components/JobsNotificationComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/JobsNotificationComponent.vue",
-		"resources_js_Pages_Modules_Dashboard_Components_JobsNotificationComponent_vue"
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Dashboard_Components_Jo-d3db70"
+	],
+	"./Modules/Dashboard/Components/RegisteredWithinDaysComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/RegisteredWithinDaysComponent.vue",
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Dashboard_Components_Re-f65e2e"
 	],
 	"./Modules/Dashboard/Components/ReviewComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ReviewComponent.vue",

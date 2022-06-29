@@ -2,12 +2,21 @@
 namespace Modules\Dashboard\Http\Controllers;
 
 use App\Repositories\Criteria\ByUser;
+use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\GroupBy;
+use App\Repositories\Criteria\Latest;
+use App\Repositories\Criteria\RegisteredWithinDays;
+use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\Where;
+use App\Repositories\Criteria\WhereIsAdmin;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
+use Modules\Activities\Transformers\ActivityResource;
 use Modules\Companies\Repositories\Contracts\CompaniesRepository;
 use Modules\Dashboard\Repositories\Contracts\DashboardRepository;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
@@ -19,6 +28,7 @@ class DashboardController extends Controller
         private readonly DashboardRepository $dashboardRepository,
         private readonly JobsRepository $jobsRepository,
         private readonly CompaniesRepository $companiesRepository,
+        private readonly ActivitiesRepository $activitiesRepository,
         private readonly UsersRepository $usersRepository,
         private readonly ResponseFactory $response,
         private readonly Redirector $redirect
@@ -29,16 +39,29 @@ class DashboardController extends Controller
     {
         return Inertia::render('Modules/Dashboard/Index', [
             'filters' => $request->only(['search', 'perPage', 'page', 'field', 'direction']),
-            'rowData' => $this->usersRepository->withCriteria([
-                new Where('id', auth()->user()->id),
-            ])->first()->dashboards()->get(),
+            'rowData' => auth()->user()->dashboards()->get(),
             'data' => [
+                'users' => $this->usersRepository->withCriteria([
+                    new Select(DB::raw('count(*) as items_count, DATE(created_at) AS date')),
+                    new RegisteredWithinDays(30),
+                    new GroupBy('date'),
+                ])->get(),
                 'jobs' => $this->jobsRepository->withCriteria([
                     new ByUser(auth()->user()->id),
                 ])->count(),
                 'companies' => $this->companiesRepository->withCriteria([
                     new ByUser(auth()->user()->id),
                 ])->count(),
+                'logs' => ActivityResource::collection($this->activitiesRepository->withCriteria([
+                    new EagerLoad(['causer']),
+                    new Latest(),
+                    new WhereIsAdmin('causer_id', auth()->user()->id),
+                ])->get()),
+                'chart' => $this->jobsRepository->withCriteria([
+                    new Select(DB::raw('count(*) as user_count, DATE(closing_to) AS date')),
+                    new GroupBy('date'),
+                    new ByUser(auth()->user()->id),
+                ])->get(),
             ]
         ]);
     }
