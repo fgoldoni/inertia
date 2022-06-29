@@ -163,7 +163,6 @@ class DashboardDatabaseSeeder extends Seeder
             ],
         ]);
 
-
         $dashboard = Dashboard::create([
             'name' => 'Activities',
         ]);
@@ -226,7 +225,5 @@ class DashboardDatabaseSeeder extends Seeder
                 'component' => 'RegisteredWithinDaysComponent'
             ],
         ]);
-
-
     }
 }

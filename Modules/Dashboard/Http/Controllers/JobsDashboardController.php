@@ -1,10 +1,8 @@
 <?php
-
 namespace Modules\Dashboard\Http\Controllers;
 
 use App\Repositories\Criteria\ByUser;
 use App\Repositories\Criteria\GroupBy;
-use App\Repositories\Criteria\RegisteredWithinDays;
 use App\Repositories\Criteria\Select;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
@@ -16,7 +14,6 @@ use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 use Modules\Companies\Repositories\Contracts\CompaniesRepository;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 use Modules\Roles\Repositories\Contracts\RolesRepository;
-use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class JobsDashboardController extends Controller
 {
@@ -46,7 +43,6 @@ class JobsDashboardController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      * @return Renderable
      */
     public function store(Request $request)
@@ -76,7 +72,6 @@ class JobsDashboardController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Renderable
      */

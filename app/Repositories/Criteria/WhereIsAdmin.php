@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -12,7 +10,6 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class WhereIsAdmin
 {
-
     public function __construct(private readonly string $column, private readonly ?string $value = null)
     {
     }

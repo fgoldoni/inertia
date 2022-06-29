@@ -14,9 +14,7 @@ class UpdateDashboardUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'layouts.*.user_id' => ['required', 'integer', Rule::exists('dashboard_user')->where(function ($query) {
-                return $query->where('user_id', auth()->user()->id);
-            })
+            'layouts.*.user_id' => ['required', 'integer', Rule::exists('dashboard_user')->where(fn($query) => $query->where('user_id', auth()->user()->id))
             ],
             'layouts.*.x' => ['required', 'integer'],
             'layouts.*.y' => ['required', 'integer'],

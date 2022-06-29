@@ -2,6 +2,7 @@
 
 namespace Modules\Companies\Http\Controllers;
 
+use App\Repositories\Criteria\ByUser;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;
@@ -33,6 +34,7 @@ class CompaniesController extends Controller
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'rowData' => $this->companiesRepository->withCriteria([
                 new Select('id', 'name', 'email', 'phone', 'user_id', 'online', 'created_at', 'updated_at'),
+                new ByUser(auth()->user()->id),
                 new WhereLike(['companies.id', 'companies.name', 'companies.email', 'companies.content'], $this->request->get('search')),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
                 new EagerLoad(['user:id,name', 'jobs:id,company_id']),

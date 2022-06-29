@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -20,5 +18,4 @@ class WhereRelation
     {
         return $model->whereRelation($this->relation, $this->column, $this->op, $this->value);
     }
-
 }

@@ -7,7 +7,6 @@ use App\Repositories\Criteria\GroupBy;
 use App\Repositories\Criteria\Latest;
 use App\Repositories\Criteria\RegisteredWithinDays;
 use App\Repositories\Criteria\Select;
-use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereIsAdmin;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
@@ -54,6 +53,7 @@ class DashboardController extends Controller
 
     public function loadData()
     {
+        $result = [];
         $result['activities'] = ActivityResource::collection($this->activitiesRepository->withCriteria([
             new EagerLoad(['causer']),
             new Latest(),

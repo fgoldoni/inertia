@@ -32,8 +32,6 @@ class Job extends Model
 
     public array $translatable = ['name'];
 
-
-
     protected $casts = [
         'state' => JobState::class,
         'salary_type' => SalaryType::class,
@@ -89,7 +87,7 @@ class Job extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->setDescriptionForEvent(fn(string $eventName) => "Job has been {$eventName}")
+            ->setDescriptionForEvent(fn (string $eventName) => "Job has been {$eventName}")
             ->useLogName('job')
             ->logOnly(['name', 'content', 'salary_min', 'content', 'salary_max', 'seo_title', 'seo_description', 'company_id', 'closing_to', 'address'])
             ->logOnlyDirty()
