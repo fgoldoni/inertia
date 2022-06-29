@@ -20,7 +20,9 @@ use Modules\Dashboard\Entities\Dashboard;
 use Modules\Dashboard\Entities\DashboardUser;
 use Modules\Users\Collections\UserCollection;
 use Modules\Users\Entities\Session;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -36,6 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use PasswordlessLogin;
     use Impersonate;
     use CausesActivity;
+    use LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -82,7 +85,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isAdministrator(): bool
     {
-        return $this->hasRole(config('app.system.users.roles.administrator'));
+        return false;
     }
 
     public function sessions(): HasMany
@@ -117,5 +120,15 @@ class User extends Authenticatable implements MustVerifyEmail
             ->using(DashboardUser::class)
             ->withPivot('id', 'x', 'y', 'w', 'h', 'component')
             ->withTimestamps();
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->setDescriptionForEvent(fn (string $eventName) => "User has been {$eventName}")
+            ->useLogName('job')
+            ->logOnly(['name', 'email', 'phone'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }

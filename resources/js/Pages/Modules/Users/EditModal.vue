@@ -250,52 +250,26 @@ const onSubmit = () => {
 
                                                                 <div class="col-span-1">
 
-                                                                    <div class="space-y-5">
+                                                                    <div class="prose prose-sm text-gray-500" v-if="props.editing.verified">
+                                                                        <ul role="list">
+                                                                            <li>Verified</li>
+                                                                            <li>Last login on: {{ props.editing.lastLogin }}</li>
+                                                                            <li>Created on: <time datetime="2020-12-02" v-text="props.editing.created_at"></time></li>
+                                                                        </ul>
+                                                                    </div>
 
-                                                                        <div class="flex items-center space-x-2"
-                                                                             v-if="props.editing.verified">
+                                                                    <div class="space-y-5" v-else>
 
-                                                                            <LockOpenIcon class="h-5 w-5 text-green-500"
-                                                                                          aria-hidden="true"/>
-
-                                                                            <span
-                                                                                class="text-green-700 text-sm font-medium">Verified</span>
-
-                                                                        </div>
-
-                                                                        <div class="flex items-center space-x-2" v-else>
+                                                                        <div class="flex items-center space-x-2">
 
                                                                             <SwitchGroup as="div" class="flex items-center">
                                                                                 <Switch v-model="form.verified" :class="[form.verified ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
                                                                                     <span aria-hidden="true" :class="[form.verified ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
                                                                                 </Switch>
                                                                                 <SwitchLabel as="span" class="ml-3">
-                                                                                    <span class="text-sm font-medium text-gray-900">Mark as verified</span>
+                                                                                    <span class="text-sm font-medium text-gray-500">Mark as verified</span>
                                                                                 </SwitchLabel>
                                                                             </SwitchGroup>
-
-                                                                        </div>
-
-                                                                        <div class="flex items-center space-x-2">
-
-                                                                            <AcademicCapIcon class="h-5 w-5 text-gray-400"
-                                                                                             aria-hidden="true"/>
-
-                                                                            <span class="text-gray-900 text-sm font-medium">4 Job(s)</span>
-                                                                        </div>
-
-                                                                        <div
-                                                                            class="flex items-center space-x-2 whitespace-nowrap">
-
-                                                                            <CalendarIcon class="h-5 w-5 text-gray-400"
-                                                                                          aria-hidden="true"/>
-
-                                                                            <span class="text-gray-900 text-sm font-medium">
-
-                                                                            Created on <time datetime="2020-12-02"
-                                                                                             v-text="props.editing.created_at"></time>
-
-                                                                        </span>
 
                                                                         </div>
 

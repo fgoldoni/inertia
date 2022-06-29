@@ -132,7 +132,11 @@ class UsersController extends Controller
         Inertia::basePageRoute(route('admin.users.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
-            'editing' => new UserCollection($user->load('roles:id'))
+            'editing' => new UserCollection($this->usersRepository->withCriteria([
+                new EagerLoad(['roles:id,name,display_name', 'sessions' => function ($query) {
+                    $query->orderBy('last_activity', 'desc')->limit(1);
+                }]),
+            ])->find($user->id))
         ]);
     }
 
