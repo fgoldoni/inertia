@@ -58,11 +58,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.rowData.map(function (e) {
       return e.layout;
     }));
-    var params = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(_objectSpread({
-      data: null,
-      activities: null,
-      users: null
-    }, props.data));
+    var params = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({});
 
     var setDefineAsyncComponent = function setDefineAsyncComponent(path) {
       return (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineAsyncComponent)({
@@ -81,13 +77,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var index = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       index.value = layout.value.length;
-      axios.get(route('activities.dashboard.index')).then(function (res) {
-        return params.value.activities = res.data.data;
-      })["catch"](function (error) {
-        return console.log(error);
-      })["finally"](function () {});
-      axios.get(route('users.dashboard.index')).then(function (res) {
-        return params.value.users = res.data.data;
+      axios.get(route('admin.dashboard.load.data')).then(function (res) {
+        return params.value = _objectSpread(_objectSpread({}, res.data.data), props.data);
       })["catch"](function (error) {
         return console.log(error);
       })["finally"](function () {});
@@ -216,7 +207,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           i: item.i
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [$setup.params.users ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($setup.setDefineAsyncComponent(item.component)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeProps)((0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
+            return [$setup.params.jobs ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($setup.setDefineAsyncComponent(item.component)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeProps)((0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
               key: 0
             }, {
               data: $setup.params

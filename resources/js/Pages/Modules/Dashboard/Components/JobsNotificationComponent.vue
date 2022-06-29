@@ -38,14 +38,14 @@ const chartOptions = ref({
 const generateData =  (items) => {
     let data = []
     items.forEach((item, index) => {
-        data.push([moment(item.date, 'YYYY-MM-DD').utc(+1).valueOf(), item.user_count])
+        data.push([moment(item.date, 'YYYY-MM-DD').utc(+1).valueOf(), item.items_count])
     })
 
     return data
 }
 
 onMounted(() => {
-    chartOptions.value.series[0].data = generateData(props.data.chart)
+    chartOptions.value.series[0].data = generateData(props.data.jobs)
 })
 
 </script>

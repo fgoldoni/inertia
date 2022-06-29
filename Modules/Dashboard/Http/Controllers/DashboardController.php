@@ -11,6 +11,7 @@ use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereIsAdmin;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
@@ -41,19 +42,37 @@ class DashboardController extends Controller
             'filters' => $request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'rowData' => auth()->user()->dashboards()->get(),
             'data' => [
-                'jobs' => $this->jobsRepository->withCriteria([
+                'jobs_count' => $this->jobsRepository->withCriteria([
                     new ByUser(auth()->user()->id),
                 ])->count(),
-                'companies' => $this->companiesRepository->withCriteria([
+                'companies_count' => $this->companiesRepository->withCriteria([
                     new ByUser(auth()->user()->id),
                 ])->count(),
-                'chart' => $this->jobsRepository->withCriteria([
-                    new Select(DB::raw('count(*) as user_count, DATE(closing_to) AS date')),
-                    new GroupBy('date'),
-                    new ByUser(auth()->user()->id),
-                ])->get(),
             ]
         ]);
+    }
+
+    public function loadData()
+    {
+        $result['activities'] = ActivityResource::collection($this->activitiesRepository->withCriteria([
+            new EagerLoad(['causer']),
+            new Latest(),
+            new WhereIsAdmin('causer_id', auth()->user()->id),
+        ])->get());
+
+        $result['users'] = $this->usersRepository->withCriteria([
+            new Select(DB::raw('count(*) as items_count, DATE(created_at) AS date')),
+            new RegisteredWithinDays(30),
+            new GroupBy('date'),
+        ])->get();
+
+        $result['jobs'] = $this->jobsRepository->withCriteria([
+            new Select(DB::raw('count(*) as items_count, DATE(closing_to) AS date')),
+            new GroupBy('date'),
+            new ByUser(auth()->user()->id),
+        ])->get();
+
+        return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
     public function create()

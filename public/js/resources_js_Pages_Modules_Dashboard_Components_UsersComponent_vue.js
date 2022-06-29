@@ -28,7 +28,7 @@ __webpack_require__.r(__webpack_exports__);
     var stats = [{
       id: 1,
       name: 'Total Companies',
-      stat: props.data.jobs,
+      stat: props.data.companies_count,
       change: '122',
       changeType: 'increase'
     }];

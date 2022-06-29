@@ -2,8 +2,8 @@
 <template>
     <div v-for="item in stats" :key="item.id" class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 w-full h-full shadow overflow-hidden">
         <dt>
-            <div class="absolute bg-primary-200 rounded-md p-3">
-                <CubeIcon class="h-6 w-6 text-primary-700" aria-hidden="true" />
+            <div class="absolute bg-purple-200 rounded-md p-3">
+                <CubeIcon class="h-6 w-6 text-purple-700" aria-hidden="true" />
             </div>
             <p class="ml-16 text-sm font-medium text-gray-500 truncate">{{ item.name }}</p>
         </dt>
@@ -37,7 +37,7 @@ const props = defineProps({
 });
 
 const stats = [
-    { id: 1, name: 'Total Companies', stat: props.data.jobs, change: '122', changeType: 'increase' },
+    { id: 1, name: 'Total Companies', stat: props.data.companies_count, change: '122', changeType: 'increase' },
 ]
 
 

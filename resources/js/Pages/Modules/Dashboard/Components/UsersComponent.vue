@@ -37,7 +37,7 @@ const props = defineProps({
 });
 
 const stats = [
-    { id: 1, name: 'Total Companies', stat: props.data.jobs, change: '122', changeType: 'increase' },
+    { id: 1, name: 'Total Companies', stat: props.data.companies_count, change: '122', changeType: 'increase' },
 ]
 
 

@@ -2,19 +2,37 @@
 
 namespace Modules\Dashboard\Http\Controllers;
 
+use App\Repositories\Criteria\ByUser;
+use App\Repositories\Criteria\GroupBy;
+use App\Repositories\Criteria\RegisteredWithinDays;
+use App\Repositories\Criteria\Select;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Modules\Categories\Repositories\Contracts\CategoriesRepository;
+use Modules\Companies\Repositories\Contracts\CompaniesRepository;
+use Modules\Jobs\Repositories\Contracts\JobsRepository;
+use Modules\Roles\Repositories\Contracts\RolesRepository;
+use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class JobsDashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
+    public function __construct(private readonly ResponseFactory $response, private readonly JobsRepository $jobsRepository, private readonly RolesRepository $rolesRepository, private readonly CompaniesRepository $companiesRepository, private readonly CategoriesRepository $categoriesRepository)
+    {
+    }
+
     public function index()
     {
-        return view('dashboard::index');
+        $result = $this->jobsRepository->withCriteria([
+            new Select(DB::raw('count(*) as items_count, DATE(closing_to) AS date')),
+            new GroupBy('date'),
+            new ByUser(auth()->user()->id),
+        ])->get();
+
+        return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
     /**

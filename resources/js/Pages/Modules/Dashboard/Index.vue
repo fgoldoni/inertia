@@ -9,13 +9,7 @@ const props = defineProps({
 
 const layout = ref(props.rowData.map((e) => e.layout))
 
-const params =  ref({
-    data: null,
-    activities: null,
-    users: null,
-    ...props.data
-
-})
+const params =  ref({})
 
 const setDefineAsyncComponent = (path) => defineAsyncComponent( {
 
@@ -36,11 +30,7 @@ onMounted(() => {
     index.value = layout.value.length
 
 
-    axios.get(route('activities.dashboard.index')).then((res) => (params.value.activities = res.data.data))
-        .catch((error) => console.log(error))
-        .finally(() => {})
-
-    axios.get(route('users.dashboard.index')).then((res) => (params.value.users = res.data.data))
+    axios.get(route('admin.dashboard.load.data')).then((res) => (params.value = {...res.data.data, ...props.data}))
         .catch((error) => console.log(error))
         .finally(() => {})
 });
@@ -84,7 +74,7 @@ const layoutUpdatedEvent = (newLayout) => {
                        :h="item.h"
                        :i="item.i"
             >
-                <component :is="setDefineAsyncComponent(item.component)" v-bind="{data : params}" v-if="params.users"/>
+                <component :is="setDefineAsyncComponent(item.component)" v-bind="{data : params}" v-if="params.jobs"/>
             </grid-item>
         </grid-layout>
     </div>

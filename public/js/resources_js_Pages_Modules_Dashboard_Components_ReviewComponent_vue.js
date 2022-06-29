@@ -28,7 +28,7 @@ __webpack_require__.r(__webpack_exports__);
     var stats = [{
       id: 1,
       name: 'Total Companies',
-      stat: props.data.jobs,
+      stat: props.data.companies_count,
       change: '122',
       changeType: 'increase'
     }];
@@ -62,7 +62,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "absolute bg-primary-200 rounded-md p-3"
+  "class": "absolute bg-purple-200 rounded-md p-3"
 };
 var _hoisted_2 = {
   "class": "ml-16 text-sm font-medium text-gray-500 truncate"
@@ -98,7 +98,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: item.id,
       "class": "relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 w-full h-full shadow overflow-hidden"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("dt", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CubeIcon"], {
-      "class": "h-6 w-6 text-primary-700",
+      "class": "h-6 w-6 text-purple-700",
       "aria-hidden": "true"
     })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.name), 1
     /* TEXT */
