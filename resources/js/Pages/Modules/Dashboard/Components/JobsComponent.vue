@@ -33,11 +33,11 @@ import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/vue/solid'
 import { BriefcaseIcon } from '@heroicons/vue/outline'
 
 const props = defineProps({
-    jobs: Object,
+    data: Object,
 });
 
 const stats = [
-    { id: 1, name: 'Total Jobs', stat: props.jobs, change: '122', changeType: 'increase' },
+    { id: 1, name: 'Total Jobs', stat: props.data.jobs, change: '122', changeType: 'increase' },
 ]
 
 

@@ -19,7 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'JobsComponent',
   props: {
-    jobs: Object
+    data: Object
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
@@ -28,7 +28,7 @@ __webpack_require__.r(__webpack_exports__);
     var stats = [{
       id: 1,
       name: 'Total Jobs',
-      stat: props.jobs,
+      stat: props.data.jobs,
       change: '122',
       changeType: 'increase'
     }];

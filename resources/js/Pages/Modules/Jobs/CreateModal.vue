@@ -123,7 +123,9 @@ const onSubmit = () => {
         closing_to: form.closing_to,
         apply_type: form.apply_type,
 
-        ...form.skills,
+        ...form.skills.benefits,
+        ...form.skills.responsibilities,
+        ...form.skills.skills,
 
         avatar_path: useAvatar.value.media?.avatar_path,
         files: useMedia.value.doMediaFetchIds(),

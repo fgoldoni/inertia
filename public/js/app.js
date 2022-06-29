@@ -1914,6 +1914,11 @@ var map = {
 		"/js/vendor",
 		"node_modules_unplugin_dist_webpack_loaders_transform_js_ruleSet_1_rules_26_use_0_node_modules-8736d7"
 	],
+	"./Modules/Dashboard/Components/ActivitiesComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/ActivitiesComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_ActivitiesComponent_vue"
+	],
 	"./Modules/Dashboard/Components/ApplicationComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ApplicationComponent.vue",
 		"/js/vendor",
@@ -1928,6 +1933,10 @@ var map = {
 		"./resources/js/Pages/Modules/Dashboard/Components/JobsComponent.vue",
 		"/js/vendor",
 		"resources_js_Pages_Modules_Dashboard_Components_JobsComponent_vue"
+	],
+	"./Modules/Dashboard/Components/JobsNotificationComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/JobsNotificationComponent.vue",
+		"resources_js_Pages_Modules_Dashboard_Components_JobsNotificationComponent_vue"
 	],
 	"./Modules/Dashboard/Components/ReviewComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ReviewComponent.vue",

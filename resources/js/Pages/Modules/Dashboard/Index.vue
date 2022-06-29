@@ -62,7 +62,7 @@ const removeItem = (val) => {
                        :h="item.h"
                        :i="item.i"
             >
-                <component :is="setDefineAsyncComponent(item.component)" v-bind="props.data"/>
+                <component :is="setDefineAsyncComponent(item.component)" v-bind="{data :props.data}"/>
                 <span class="remove" @click="removeItem(item.i)">x</span>
             </grid-item>
         </grid-layout>

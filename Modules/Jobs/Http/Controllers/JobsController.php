@@ -63,7 +63,7 @@ class JobsController extends Controller
     public function store(StoreJobRequest $request)
     {
         $job = $this->jobsRepository->create(array_merge(
-            $request->only('name', 'content', 'avatar_path', 'salary_min', 'salary_max', 'salary_type', 'state', 'country_id', 'city_id'),
+            $request->only('name', 'content', 'avatar_path', 'salary_min', 'salary_max', 'salary_type', 'state', 'country_id', 'city_id', 'company_id'),
             [
                 'user_id' => $request->user()->id,
                 'company_id' => $request->get('company')
@@ -75,10 +75,7 @@ class JobsController extends Controller
         });
 
         $this->jobsRepository->sync($job->id, 'categories', array_merge(
-            $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'country_id', 'city_id'),
-            $request->get('skills', []),
-            $request->get('benefits', []),
-            $request->get('responsibilities', []),
+            $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'skills', 'benefits', 'responsibilities'),
         ));
 
         return $this->response->json(['message' => __('The Job (:item) has been successfully created', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
@@ -107,7 +104,7 @@ class JobsController extends Controller
     public function update(UpdateJobRequest $request, Job $job)
     {
         $job = $this->jobsRepository->update($job->id, array_merge(
-            $request->only('name', 'content', 'avatar_path', 'salary_min', 'salary_max', 'salary_type', 'state', 'country_id', 'city_id'),
+            $request->only('name', 'content', 'avatar_path', 'salary_min', 'salary_max', 'salary_type', 'state', 'country_id', 'city_id', 'company_id'),
             []
         ));
 
@@ -116,10 +113,7 @@ class JobsController extends Controller
         });
 
         $this->jobsRepository->sync($job->id, 'categories', array_merge(
-            $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type'),
-            $request->get('skills', []),
-            $request->get('benefits', []),
-            $request->get('responsibilities', []),
+            $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'skills', 'benefits', 'responsibilities'),
         ));
 
         return $this->response->json(['message' => __('The Job (:item) has been successfully updated', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);

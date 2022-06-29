@@ -195,7 +195,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           i: item.i
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($setup.setDefineAsyncComponent(item.component)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeProps)((0,vue__WEBPACK_IMPORTED_MODULE_0__.guardReactiveProps)($setup.props.data)), null, 16
+            return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($setup.setDefineAsyncComponent(item.component)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeProps)((0,vue__WEBPACK_IMPORTED_MODULE_0__.guardReactiveProps)({
+              data: $setup.props.data
+            })), null, 16
             /* FULL_PROPS */
             )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
               "class": "remove",
@@ -339,6 +341,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./ActivitiesComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/ActivitiesComponent.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Dashboard_Components_ActivitiesComponent_vue"
+	],
 	"./ApplicationComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ApplicationComponent.vue",
 		"/js/vendor",
@@ -353,6 +360,10 @@ var map = {
 		"./resources/js/Pages/Modules/Dashboard/Components/JobsComponent.vue",
 		"/js/vendor",
 		"resources_js_Pages_Modules_Dashboard_Components_JobsComponent_vue"
+	],
+	"./JobsNotificationComponent.vue": [
+		"./resources/js/Pages/Modules/Dashboard/Components/JobsNotificationComponent.vue",
+		"resources_js_Pages_Modules_Dashboard_Components_JobsNotificationComponent_vue"
 	],
 	"./ReviewComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ReviewComponent.vue",

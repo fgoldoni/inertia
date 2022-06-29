@@ -33,11 +33,11 @@ import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/vue/solid'
 import { CubeIcon } from '@heroicons/vue/outline'
 
 const props = defineProps({
-    companies: Object,
+    data: Object,
 });
 
 const stats = [
-    { id: 1, name: 'Total Companies', stat: props.companies, change: '122', changeType: 'increase' },
+    { id: 1, name: 'Total Companies', stat: props.data.jobs, change: '122', changeType: 'increase' },
 ]
 
 

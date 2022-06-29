@@ -89,7 +89,7 @@ class Job extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['name', 'content'])
+            ->logOnly(['name', 'content', 'salary_min', 'content', 'salary_max', 'seo_title', 'seo_description', 'company_id', 'closing_to', 'address'])
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }
