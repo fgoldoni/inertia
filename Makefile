@@ -83,7 +83,7 @@ refresh: migrate ## refresh + php artisan module:seed Admin & php artisan module
 	## php artisan world:init
 	## php artisan module:migrate-refresh Categories
 	## php artisan module:migrate-refresh Companies
-	## php artisan module:migrate-refresh Jobs
+	## php artisan module:migrate-refresh Dashboard
 	php artisan db:seed
 	php artisan module:seed Roles
 	php artisan module:seed Users

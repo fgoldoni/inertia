@@ -1,18 +1,18 @@
 <template>
-    <div class="grid grid-cols-1 w-full overflow-auto">
-        <el-table :data="props.options">
+    <div class="grid grid-cols-1 w-full overflow-auto h-80">
+        <el-table :data="props.options" stripe size="large">
             <el-table-column type="expand">
                 <template #default="props">
                     <div class="px-8">
-                        <p v-for="(value, key) in props.row.properties">{{ __('tables.' + key) }} : <span v-html="value"></span></p>
+                        <p v-for="(value, key) in props.row.properties"><span class="capitalize">{{ __(key) }}</span> : <span v-html="value"></span></p>
                     </div>
                 </template>
             </el-table-column>
-            <el-table-column :label="__('tables.date')" prop="created_at" sortable>
+            <el-table-column :label="__('Date')" prop="created_at" sortable>
             </el-table-column>
-            <el-table-column :label="__('tables.name')" prop="causer">
+            <el-table-column :label="__('User')" prop="causer">
             </el-table-column>
-            <el-table-column :label="__('tables.activity')" prop="description">
+            <el-table-column :label="__('Action')" prop="description">
             </el-table-column>
         </el-table>
     </div>

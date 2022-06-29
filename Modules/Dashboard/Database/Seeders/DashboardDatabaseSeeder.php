@@ -162,5 +162,49 @@ class DashboardDatabaseSeeder extends Seeder
                 'component' => 'TeamsComponent'
             ],
         ]);
+
+
+        $dashboard = Dashboard::create([
+            'name' => 'Activities',
+        ]);
+
+        $dashboard->users()->attach([
+            1 => [
+                'x' => 4,
+                'y' => 8,
+                'w' => 4,
+                'h' => 8,
+                'component' => 'ActivitiesComponent'
+            ],
+            2 => [
+                'x' => 4,
+                'y' => 8,
+                'w' => 4,
+                'h' => 8,
+                'component' => 'ActivitiesComponent'
+            ],
+        ]);
+
+        $dashboard = Dashboard::create([
+            'name' => 'JobsNotification',
+        ]);
+
+        $dashboard->users()->attach([
+            1 => [
+                'x' => 8,
+                'y' => 8,
+                'w' => 4,
+                'h' => 8,
+                'component' => 'JobsNotificationComponent'
+            ],
+            2 => [
+                'x' => 8,
+                'y' => 8,
+                'w' => 4,
+                'h' => 8,
+                'component' => 'JobsNotificationComponent'
+            ],
+        ]);
+
     }
 }

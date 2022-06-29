@@ -32,6 +32,8 @@ class Job extends Model
 
     public array $translatable = ['name'];
 
+
+
     protected $casts = [
         'state' => JobState::class,
         'salary_type' => SalaryType::class,
@@ -87,6 +89,8 @@ class Job extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['name', 'content']);
+            ->logOnly(['name', 'content'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }
