@@ -847,11 +847,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }];
     var currentTab = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('edit_modal');
 
-    var currentTabF = function currentTabF(value) {
-      debugger;
-      document.querySelector('#cancelButtonRef').click();
-    };
-
     var _useJobs = (0,_Composables_UseJobs__WEBPACK_IMPORTED_MODULE_18__.useJobs)(),
         job = _useJobs.data,
         doFetchJob = _useJobs.doFetchData;
@@ -979,7 +974,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var __returned__ = {
       tabs: tabs,
       currentTab: currentTab,
-      currentTabF: currentTabF,
       job: job,
       doFetchJob: doFetchJob,
       props: props,
@@ -2067,7 +2061,7 @@ var _hoisted_1 = {
   "class": "flex items-center justify-between"
 };
 var _hoisted_2 = {
-  "class": "block font-medium text-sm text-gray-700"
+  "class": "block font-medium text-sm text-gray-500"
 };
 var _hoisted_3 = {
   key: 0

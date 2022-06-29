@@ -1646,7 +1646,7 @@ var _hoisted_1 = {
   "class": "flex items-center justify-between"
 };
 var _hoisted_2 = {
-  "class": "block font-medium text-sm text-gray-700"
+  "class": "block font-medium text-sm text-gray-500"
 };
 var _hoisted_3 = {
   key: 0

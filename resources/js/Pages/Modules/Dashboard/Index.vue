@@ -46,16 +46,6 @@ const layoutUpdatedEvent = (newLayout) => {
 <template>
     <Head title="Dashboard"></Head>
     <div>
-        <div class="layoutJSON">
-            Displayed as <code>[x, y, w, h]</code>:
-            <div class="columns">
-                <div class="layoutItem" v-for="item in layout" :key="item.i">
-                    <b>{{item.i}}</b>: [{{item.x}}, {{item.y}}, {{item.w}}, {{item.h}}]
-                </div>
-            </div>
-        </div>
-        <input type="checkbox" v-model="draggable" /> Draggable
-        <input type="checkbox" v-model="resizable" /> Resizable
         <grid-layout :layout.sync="layout"
                      :col-num="colNum"
                      :row-height="30"

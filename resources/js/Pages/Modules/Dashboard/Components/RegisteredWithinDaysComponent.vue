@@ -1,5 +1,5 @@
 <template>
-    <div class="relative w-full h-full overflow-auto">
+    <div class="relative w-full h-full overflow-auto scrollbar-thin scrollbar-thumb-secondary-600 scrollbar-track-secondary-200">
         <Chart :options="chartOptions"></Chart>
     </div>
 </template>

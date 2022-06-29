@@ -66,7 +66,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "relative bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6 w-full h-full shadow overflow-auto"
+  "class": "relative bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6 w-full h-full shadow overflow-auto scrollbar-thin scrollbar-thumb-secondary-500 scrollbar-track-secondary-100"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {

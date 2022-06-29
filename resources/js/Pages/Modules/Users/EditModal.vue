@@ -1,14 +1,14 @@
 <script setup>
 import {ref, computed, onMounted, reactive} from 'vue'
 import {Link} from "@inertiajs/inertia-vue3";
-import {CalendarIcon, LockOpenIcon, AcademicCapIcon} from '@heroicons/vue/solid'
+import {CalendarIcon, LockOpenIcon, AcademicCapIcon, XIcon} from '@heroicons/vue/solid'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import pickBy from 'lodash/pickBy'
 import zxcvbn from 'zxcvbn'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
+import ValidationErrors from '@/Shared/ValidationErrors';
 import BaseListbox from '@/Shared/BaseListbox'
 import internationalNumber from '@/Plugins/internationalNumber'
 import 'intl-tel-input/build/css/intlTelInput.css'
@@ -17,6 +17,9 @@ import { Errors } from "@/Plugins/errors";
 import LoadingButton from '@/Shared/LoadingButton'
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 import { useFetch } from '@/Composables/UseFetch'
+import JetInputPhone from '@/Jetstream/JetInputPhone.vue';
+import BaseDisclosure from '@/Components/BaseDisclosure'
+
 
 const props = defineProps({
     editing: Object,
@@ -80,60 +83,40 @@ const onSubmit = () => {
 </script>
 
 <template>
-    <TransitionRoot as="template"
-                    :show="isOpen"
-                    enter="transition-opacity duration-500"
-                    enter-from="opacity-0"
-                    enter-to="opacity-100"
-                    leave="transition-opacity duration-500"
-                    leave-from="opacity-100"
-                    leave-to="opacity-0">
+    <TransitionRoot as="template" :show="isOpen">
+        <Dialog as="div" class="relative z-10">
 
-        <Dialog as="div" class="relative z-10" @close="closeModal">
-
-            <TransitionChild as="template"
-                             enter="transition-opacity ease-linear duration-300"
-                             enter-from="opacity-0"
-                             enter-to="opacity-100"
-                             leave="transition-opacity ease-linear duration-300"
-                             leave-from="opacity-100"
-                             leave-to="opacity-0">
-
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"/>
-
+            <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
+                <div class="hidden fixed inset-0 bg-secondary-500 bg-opacity-75 transition-opacity md:block" />
             </TransitionChild>
 
             <div class="fixed z-10 inset-0 overflow-y-auto">
 
-                <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+                <div class="flex items-stretch md:items-center justify-center min-h-full text-center md:px-2 lg:px-4">
 
-                    <TransitionChild as="template"
-                                     enter="transition ease-in-out duration-300 transform"
-                                     enter-from="-translate-x-full"
-                                     enter-to="translate-x-0"
-                                     leave="transition ease-in-out duration-300 transform"
-                                     leave-from="translate-x-0"
-                                     leave-to="-translate-x-full">
+                    <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enter-to="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 md:scale-100" leave-to="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
 
-                        <DialogPanel
-                            class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-4xl sm:w-full">
+                        <DialogPanel class="relative text-base bg-secondary-100 text-left transform transition w-full md:max-w-4xl md:px-4 md:my-8 lg:max-w-6xl">
 
                             <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
 
-                                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
                                     <div>
 
-                                        <JetValidationErrors class="mb-4"/>
-
                                         <div class="mb-3">
+                                            <div class="flex items-center justify-between">
+                                                <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900">
 
-                                            <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900">
+                                                    {{ __('Edit Modal') }}
 
-                                                {{ __('Edit Modal') }}
+                                                </DialogTitle>
 
-                                            </DialogTitle>
-
+                                                <Link :href="props.basePageRoute" preserve-state preserve-scroll class="absolute top-0 right-4 text-secondary-400 hover:text-secondary-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8">
+                                                    <span class="sr-only">Close</span>
+                                                    <XIcon class="h-6 w-6" aria-hidden="true" />
+                                                </Link>
+                                            </div>
                                         </div>
 
                                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -144,101 +127,93 @@ const onSubmit = () => {
 
                                                     <div class="col-span-1 sm:col-span-2">
 
-                                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                                            <div class="col-span-1">
+                                                        <div class="col-span-1 sm:col-span-2" v-if="form.errors.any()">
+                                                            <ValidationErrors :errors="form.errors.all()" class="mb-4" />
+                                                        </div>
 
-                                                                <JetLabel for="name" value="Name"/>
+                                                        <BaseDisclosure :title="__('Name & Description')" default-open>
 
-                                                                <JetInput
-                                                                    id="name"
-                                                                    name="name"
-                                                                    v-model="form.name"
-                                                                    type="text"
-                                                                    class="mt-1 block w-full"
-                                                                    required
-                                                                    autofocus/>
+                                                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
-                                                                <JetInputError :message="form.errors.get('name')" class="mt-2"/>
-                                                            </div>
+                                                                <div class="col-span-1">
 
-                                                            <div class="col-span-1">
+                                                                    <JetLabel for="name" value="Name"/>
 
-                                                                <BaseListbox :options="roles.data" v-if="roles.data" v-model="form.role"  placeholder="Select roles"/>
+                                                                    <JetInput
+                                                                        id="name"
+                                                                        name="name"
+                                                                        v-model="form.name"
+                                                                        type="text"
+                                                                        class="mt-1 block w-full"
+                                                                        required
+                                                                        autofocus/>
 
-                                                                <JetInputError :message="form.errors.get('role')" class="mt-2"/>
-                                                            </div>
+                                                                    <JetInputError :message="form.errors.get('name')" class="mt-2"/>
+                                                                </div>
 
-                                                            <div class="col-span-1 sm:col-span-2">
+                                                                <div class="col-span-1">
 
-                                                                <JetLabel for="email" value="Email"/>
+                                                                    <BaseListbox :options="roles.data" v-if="roles.data" v-model="form.role"  placeholder="__('Select roles')" :label="__('Select roles')"/>
 
-                                                                <JetInput
-                                                                    id="email"
-                                                                    name="email"
-                                                                    v-model="form.email"
-                                                                    type="text"
-                                                                    class="mt-1 block w-full"
-                                                                    required/>
+                                                                    <JetInputError :message="form.errors.get('role')" class="mt-2"/>
+                                                                </div>
 
-                                                                <JetInputError :message="form.errors.get('email')" class="mt-2"/>
+                                                                <div class="col-span-1 sm:col-span-2">
 
-                                                            </div>
+                                                                    <JetLabel for="email" value="Email"/>
 
-                                                            <div class="col-span-1 sm:col-span-2">
+                                                                    <JetInput
+                                                                        id="email"
+                                                                        name="email"
+                                                                        v-model="form.email"
+                                                                        type="text"
+                                                                        class="mt-1 block w-full"
+                                                                        required/>
 
-                                                                <JetLabel for="phone" value="Phone"/>
-
-                                                                <JetInput
-                                                                    id="phone"
-                                                                    name="phone"
-                                                                    v-model="form.phone"
-                                                                    type="text"
-                                                                    class="mt-1 block w-full"
-                                                                    placeholder="Phone"
-                                                                    required
-                                                                    autofocus/>
-
-                                                                <JetInputError :message="form.errors.get('phone')" class="mt-2"/>
-                                                            </div>
-
-                                                            <div class="col-span-1 sm:col-span-2">
-
-                                                                <div class="flex items-center justify-between">
-
-                                                                    <JetLabel for="password" value="Password"/>
-                                                                    <div
-                                                                        class="flex items-center divide-x divide-secondary-200 dark:divide-secondary-600">
-
-                                                                        <button @click="generate" type="button"
-                                                                                class="pr-2 text-primary-600 text-sm font-medium leading-5 hover:text-primary-500 hover:underline dark:text-primary-500/50">
-
-                                                                            {{ __('Generate') }}
-
-                                                                        </button>
-
-                                                                        <button @click="showPassword = !showPassword"
-                                                                                v-text="showPassword ? __('Hide') : __('Show')"
-                                                                                type="button"
-                                                                                class="pl-2 text-sm text-leading-5 text-primary-600 hover:text-primary-700 focus:outline-none focus:text-primary-700 hover:underline dark:text-primary-500/50">
-
-                                                                        </button>
-
-                                                                    </div>
+                                                                    <JetInputError :message="form.errors.get('email')" class="mt-2"/>
 
                                                                 </div>
 
-                                                                <JetInput
-                                                                    id="password"
-                                                                    name="password"
-                                                                    v-model="form.password"
-                                                                    :type="showPassword ? 'text' : 'password'"
-                                                                    class="mt-1 block w-full"
-                                                                    autocomplete="new-password"
-                                                                />
-                                                                <JetInputError :message="form.errors.get('password')" class="mt-2"/>
-                                                            </div>
+                                                                <JetInputPhone :error="form.errors.get('phone')" v-model="form.phone"></JetInputPhone>
 
-                                                            <div class="col-span-1 sm:col-span-2">
+                                                                <div class="col-span-1 sm:col-span-2">
+
+                                                                    <div class="flex items-center justify-between">
+
+                                                                        <JetLabel for="password" value="Password"/>
+                                                                        <div
+                                                                            class="flex items-center divide-x divide-secondary-200 dark:divide-secondary-600">
+
+                                                                            <button @click="generate" type="button"
+                                                                                    class="pr-2 text-primary-600 text-sm font-medium leading-5 hover:text-primary-500 hover:underline dark:text-primary-500/50">
+
+                                                                                {{ __('Generate') }}
+
+                                                                            </button>
+
+                                                                            <button @click="showPassword = !showPassword"
+                                                                                    v-text="showPassword ? __('Hide') : __('Show')"
+                                                                                    type="button"
+                                                                                    class="pl-2 text-sm text-leading-5 text-primary-600 hover:text-primary-700 focus:outline-none focus:text-primary-700 hover:underline dark:text-primary-500/50">
+
+                                                                            </button>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <JetInput
+                                                                        id="password"
+                                                                        name="password"
+                                                                        v-model="form.password"
+                                                                        :type="showPassword ? 'text' : 'password'"
+                                                                        class="mt-1 block w-full"
+                                                                        autocomplete="new-password"
+                                                                    />
+                                                                    <JetInputError :message="form.errors.get('password')" class="mt-2"/>
+                                                                </div>
+
+                                                                <div class="col-span-1 sm:col-span-2">
 
                                                                 <span class="text-sm">
 
@@ -253,67 +228,76 @@ const onSubmit = () => {
 
                                                                 </span>
 
-                                                                <progress :value="score" max="4"
-                                                                          class="w-full"></progress>
+                                                                    <progress :value="score" max="4"
+                                                                              class="w-full"></progress>
+
+                                                                </div>
 
                                                             </div>
 
-                                                        </div>
+                                                        </BaseDisclosure>
+
+
+
 
                                                     </div>
 
-                                                    <div class="bg-secondary-100 col-span-1">
+                                                    <div class="col-span-1">
 
-                                                        <div class="p-8 grid grid-cols-1 gap-4 sm:grid-cols-1">
+                                                        <BaseDisclosure :title="__('Name & Description')" default-open>
 
-                                                            <div class="col-span-1">
+                                                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 
-                                                                <div class="space-y-5">
+                                                                <div class="col-span-1">
 
-                                                                    <div class="flex items-center space-x-2"
-                                                                         v-if="props.editing.verified">
+                                                                    <div class="space-y-5">
 
-                                                                        <LockOpenIcon class="h-5 w-5 text-green-500"
-                                                                                      aria-hidden="true"/>
+                                                                        <div class="flex items-center space-x-2"
+                                                                             v-if="props.editing.verified">
 
-                                                                        <span
-                                                                            class="text-green-700 text-sm font-medium">Verified</span>
+                                                                            <LockOpenIcon class="h-5 w-5 text-green-500"
+                                                                                          aria-hidden="true"/>
 
-                                                                    </div>
+                                                                            <span
+                                                                                class="text-green-700 text-sm font-medium">Verified</span>
 
-                                                                    <div class="flex items-center space-x-2" v-else>
+                                                                        </div>
 
-                                                                        <SwitchGroup as="div" class="flex items-center">
-                                                                            <Switch v-model="form.verified" :class="[form.verified ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
-                                                                                <span aria-hidden="true" :class="[form.verified ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
-                                                                            </Switch>
-                                                                            <SwitchLabel as="span" class="ml-3">
-                                                                                <span class="text-sm font-medium text-gray-900">Mark as verified</span>
-                                                                            </SwitchLabel>
-                                                                        </SwitchGroup>
+                                                                        <div class="flex items-center space-x-2" v-else>
 
-                                                                    </div>
+                                                                            <SwitchGroup as="div" class="flex items-center">
+                                                                                <Switch v-model="form.verified" :class="[form.verified ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
+                                                                                    <span aria-hidden="true" :class="[form.verified ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
+                                                                                </Switch>
+                                                                                <SwitchLabel as="span" class="ml-3">
+                                                                                    <span class="text-sm font-medium text-gray-900">Mark as verified</span>
+                                                                                </SwitchLabel>
+                                                                            </SwitchGroup>
 
-                                                                    <div class="flex items-center space-x-2">
+                                                                        </div>
 
-                                                                        <AcademicCapIcon class="h-5 w-5 text-gray-400"
-                                                                                         aria-hidden="true"/>
+                                                                        <div class="flex items-center space-x-2">
 
-                                                                        <span class="text-gray-900 text-sm font-medium">4 Job(s)</span>
-                                                                    </div>
+                                                                            <AcademicCapIcon class="h-5 w-5 text-gray-400"
+                                                                                             aria-hidden="true"/>
 
-                                                                    <div
-                                                                        class="flex items-center space-x-2 whitespace-nowrap">
+                                                                            <span class="text-gray-900 text-sm font-medium">4 Job(s)</span>
+                                                                        </div>
 
-                                                                        <CalendarIcon class="h-5 w-5 text-gray-400"
-                                                                                      aria-hidden="true"/>
+                                                                        <div
+                                                                            class="flex items-center space-x-2 whitespace-nowrap">
 
-                                                                        <span class="text-gray-900 text-sm font-medium">
+                                                                            <CalendarIcon class="h-5 w-5 text-gray-400"
+                                                                                          aria-hidden="true"/>
+
+                                                                            <span class="text-gray-900 text-sm font-medium">
 
                                                                             Created on <time datetime="2020-12-02"
                                                                                              v-text="props.editing.created_at"></time>
 
                                                                         </span>
+
+                                                                        </div>
 
                                                                     </div>
 
@@ -321,7 +305,7 @@ const onSubmit = () => {
 
                                                             </div>
 
-                                                        </div>
+                                                        </BaseDisclosure>
 
                                                     </div>
 

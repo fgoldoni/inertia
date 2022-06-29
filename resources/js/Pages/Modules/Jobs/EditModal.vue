@@ -34,11 +34,6 @@ const tabs = [
 
 const currentTab = ref('edit_modal')
 
-const currentTabF = (value) => {
-    debugger
-    document.querySelector('#cancelButtonRef').click()
-}
-
 
 const { data: job, doFetchData: doFetchJob } = useJobs()
 

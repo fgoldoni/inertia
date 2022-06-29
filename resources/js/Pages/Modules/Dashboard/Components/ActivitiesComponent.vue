@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-    <div class="relative bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6 w-full h-full shadow overflow-auto">
+    <div class="relative bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6 w-full h-full shadow overflow-auto scrollbar-thin scrollbar-thumb-secondary-500 scrollbar-track-secondary-100">
         <h3 class="text-lg font-medium text-gray-900">Activities</h3>
         <div class="flow-root mt-5">
             <ul role="list" class="-mb-8">
