@@ -1,5 +1,5 @@
 <script setup>
-import {ExternalLinkIcon} from '@heroicons/vue/outline';
+import {ArrowRightIcon} from '@heroicons/vue/outline';
 
 const props = defineProps({
     row: Object,
@@ -25,8 +25,8 @@ const props = defineProps({
 
                 </p>
 
-                <a :href="route('impersonate', props.row.id)" v-if="props.row.can.impersonate">
-                    <ExternalLinkIcon class="flex-shrink-0 h-5 w-5 text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300" aria-hidden="true"/>
+                <a :href="route('impersonate', props.row.id)" v-if="props.row.can.impersonate" class="text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300">
+                    Login As &#x2192;
                 </a>
 
 
