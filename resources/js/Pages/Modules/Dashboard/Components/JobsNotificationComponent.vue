@@ -13,7 +13,6 @@ const props = defineProps({
     data: Object,
 });
 
-const tt = ref([])
 
 const chartOptions = ref({
     chart: {

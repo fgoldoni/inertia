@@ -9,7 +9,22 @@ const props = defineProps({
 
 const layout = ref(props.rowData.map((e) => e.layout))
 
-const setDefineAsyncComponent = (path) => defineAsyncComponent(() =>import(`@modules/Dashboard/Components/${path}.vue`))
+const params =  ref({
+    data: null,
+    activities: null,
+    users: null,
+    ...props.data
+
+})
+
+const setDefineAsyncComponent = (path) => defineAsyncComponent( {
+
+    loader: () => import(`@modules/Dashboard/Components/${path}.vue`),
+
+    delay: 500,
+
+    timeout: 3000
+})
 
 const draggable = ref(true)
 const resizable = ref(true)
@@ -17,7 +32,18 @@ const responsive = ref(true)
 const colNum = ref(12)
 const index = ref(0)
 
-onMounted(() => index.value = layout.value.length);
+onMounted(() => {
+    index.value = layout.value.length
+
+
+    axios.get(route('activities.dashboard.index')).then((res) => (params.value.activities = res.data.data))
+        .catch((error) => console.log(error))
+        .finally(() => {})
+
+    axios.get(route('users.dashboard.index')).then((res) => (params.value.users = res.data.data))
+        .catch((error) => console.log(error))
+        .finally(() => {})
+});
 
 const layoutUpdatedEvent = (newLayout) => {
     axios.put(route('admin.dashboard.user.update', usePage().props.value.auth.user?.id), { layouts: newLayout})
@@ -58,7 +84,7 @@ const layoutUpdatedEvent = (newLayout) => {
                        :h="item.h"
                        :i="item.i"
             >
-                <component :is="setDefineAsyncComponent(item.component)" v-bind="{data :props.data}"/>
+                <component :is="setDefineAsyncComponent(item.component)" v-bind="{data : params}" v-if="params.users"/>
             </grid-item>
         </grid-layout>
     </div>

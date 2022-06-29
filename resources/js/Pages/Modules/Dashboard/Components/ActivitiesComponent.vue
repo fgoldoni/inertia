@@ -4,9 +4,9 @@
         <h3 class="text-lg font-medium text-gray-900">Activities</h3>
         <div class="flow-root mt-5">
             <ul role="list" class="-mb-8">
-                <li v-for="(event, eventIdx) in props.data.logs" :key="event.id">
+                <li v-for="(event, eventIdx) in props.data.activities" :key="event.id" v-if="props.data.activities">
                     <div class="relative pb-8">
-                        <span v-if="eventIdx !== props.data.logs.length - 1" class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
+                        <span v-if="eventIdx !== props.data.activities.length - 1" class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
                         <div class="relative flex space-x-3">
                             <div>
                               <span :class="['bg-secondary-100 h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white']">
@@ -39,15 +39,13 @@ const props = defineProps({
     data: Object,
 });
 
-
-
 const setIcon = (icon) => {
 
-
-    if (icon === 'deleted') return TrashIcon;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    if (icon === 'deleted') return TrashIcon;
     if (icon === 'updated') return RefreshIcon;
     if (icon === 'created') return CheckIcon;
 
     return CheckIcon;
 }
+
 </script>

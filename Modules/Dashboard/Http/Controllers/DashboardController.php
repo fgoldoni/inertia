@@ -41,22 +41,12 @@ class DashboardController extends Controller
             'filters' => $request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'rowData' => auth()->user()->dashboards()->get(),
             'data' => [
-                'users' => $this->usersRepository->withCriteria([
-                    new Select(DB::raw('count(*) as items_count, DATE(created_at) AS date')),
-                    new RegisteredWithinDays(30),
-                    new GroupBy('date'),
-                ])->get(),
                 'jobs' => $this->jobsRepository->withCriteria([
                     new ByUser(auth()->user()->id),
                 ])->count(),
                 'companies' => $this->companiesRepository->withCriteria([
                     new ByUser(auth()->user()->id),
                 ])->count(),
-                'logs' => ActivityResource::collection($this->activitiesRepository->withCriteria([
-                    new EagerLoad(['causer']),
-                    new Latest(),
-                    new WhereIsAdmin('causer_id', auth()->user()->id),
-                ])->get()),
                 'chart' => $this->jobsRepository->withCriteria([
                     new Select(DB::raw('count(*) as user_count, DATE(closing_to) AS date')),
                     new GroupBy('date'),

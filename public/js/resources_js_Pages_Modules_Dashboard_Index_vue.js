@@ -37,6 +37,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -52,10 +58,19 @@ __webpack_require__.r(__webpack_exports__);
     var layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.rowData.map(function (e) {
       return e.layout;
     }));
+    var params = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(_objectSpread({
+      data: null,
+      activities: null,
+      users: null
+    }, props.data));
 
     var setDefineAsyncComponent = function setDefineAsyncComponent(path) {
-      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineAsyncComponent)(function () {
-        return __webpack_require__("./resources/js/Pages/Modules/Dashboard/Components lazy recursive ^\\.\\/.*\\.vue$")("./".concat(path, ".vue"));
+      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineAsyncComponent)({
+        loader: function loader() {
+          return __webpack_require__("./resources/js/Pages/Modules/Dashboard/Components lazy recursive ^\\.\\/.*\\.vue$")("./".concat(path, ".vue"));
+        },
+        delay: 500,
+        timeout: 3000
       });
     };
 
@@ -65,7 +80,17 @@ __webpack_require__.r(__webpack_exports__);
     var colNum = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(12);
     var index = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      return index.value = layout.value.length;
+      index.value = layout.value.length;
+      axios.get(route('activities.dashboard.index')).then(function (res) {
+        return params.value.activities = res.data.data;
+      })["catch"](function (error) {
+        return console.log(error);
+      })["finally"](function () {});
+      axios.get(route('users.dashboard.index')).then(function (res) {
+        return params.value.users = res.data.data;
+      })["catch"](function (error) {
+        return console.log(error);
+      })["finally"](function () {});
     });
 
     var layoutUpdatedEvent = function layoutUpdatedEvent(newLayout) {
@@ -79,6 +104,7 @@ __webpack_require__.r(__webpack_exports__);
     var __returned__ = {
       props: props,
       layout: layout,
+      params: params,
       setDefineAsyncComponent: setDefineAsyncComponent,
       draggable: draggable,
       resizable: resizable,
@@ -190,11 +216,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           i: item.i
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($setup.setDefineAsyncComponent(item.component)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeProps)((0,vue__WEBPACK_IMPORTED_MODULE_0__.guardReactiveProps)({
-              data: $setup.props.data
+            return [$setup.params.users ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)($setup.setDefineAsyncComponent(item.component)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeProps)((0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
+              key: 0
+            }, {
+              data: $setup.params
             })), null, 16
             /* FULL_PROPS */
-            ))];
+            )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
           }),
           _: 2
           /* DYNAMIC */

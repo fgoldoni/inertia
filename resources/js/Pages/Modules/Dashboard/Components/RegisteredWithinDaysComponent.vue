@@ -13,8 +13,6 @@ const props = defineProps({
     data: Object,
 });
 
-const tt = ref([])
-
 const chartOptions = ref({
     chart: {
         type: 'line'
@@ -41,7 +39,6 @@ const generateData =  (items) => {
     items.forEach((item, index) => {
         data.push([moment(item.date, 'YYYY-MM-DD').utc(+1).valueOf(), item.items_count])
     })
-
     return data
 }
 
