@@ -27,12 +27,16 @@ class EventsSubscriber
 
     public function handleUserDeleted(User $user)
     {
-        info('handleUserDeleted');
+        $admin = $this->fetchByRole(config('app.system.users.roles.administrator'));
+
+        Notification::send($admin, new UserDeletedEvent($user));
     }
 
     public function handleUserRestored(User $user)
     {
-        info('handleUserRestored');
+        $admin = $this->fetchByRole(config('app.system.users.roles.administrator'));
+
+        Notification::send($admin, new UserDeletedEvent($user));
     }
 
     public function fetchByRole(string $role)
