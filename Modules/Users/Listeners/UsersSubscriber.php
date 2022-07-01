@@ -3,9 +3,11 @@ namespace Modules\Users\Listeners;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Notification;
+use Modules\Users\Notifications\UserCretedEvent;
 use Modules\Users\Notifications\UserDeletedEvent;
+use Modules\Users\Notifications\UserRestoredEvent;
 
-class EventsSubscriber
+class UsersSubscriber
 {
     public function __construct(private readonly User $user)
     {
@@ -22,7 +24,7 @@ class EventsSubscriber
     {
         $admin = $this->fetchByRole(config('app.system.users.roles.administrator'));
 
-        Notification::send($admin, new UserDeletedEvent($user));
+        Notification::send($admin, new UserCretedEvent($user));
     }
 
     public function handleUserDeleted(User $user)
@@ -36,7 +38,7 @@ class EventsSubscriber
     {
         $admin = $this->fetchByRole(config('app.system.users.roles.administrator'));
 
-        Notification::send($admin, new UserDeletedEvent($user));
+        Notification::send($admin, new UserRestoredEvent($user));
     }
 
     public function fetchByRole(string $role)

@@ -71,8 +71,7 @@ const onSubmit = () => {
         closeModal();
     }).catch(error => {
         form.processing = false;
-        debugger
-        form.errors.record(error.response.data.errors);
+        form.errors.onFailed(error);
     });
 
 };

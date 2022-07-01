@@ -2,7 +2,7 @@
 namespace Modules\Users\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Modules\Users\Listeners\EventsSubscriber;
+use Modules\Users\Listeners\UsersSubscriber;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -12,6 +12,6 @@ class EventServiceProvider extends ServiceProvider
     }
 
     protected $subscribe = [
-        EventsSubscriber::class
+        UsersSubscriber::class
     ];
 }

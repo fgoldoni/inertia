@@ -23,11 +23,17 @@ use Modules\Users\Notifications\AdminSendCredentials;
 use Modules\Users\Repositories\Contracts\UsersRepository;
 use Modules\Users\Transformers\UserCollection;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UsersController extends Controller
 {
-    public function __construct(private readonly UsersRepository $usersRepository, private readonly RolesRepository $rolesRepository, private readonly Request $request, private readonly Redirector $redirect, private readonly ResponseFactory $response)
-    {
+    public function __construct(
+        private readonly UsersRepository $usersRepository,
+        private readonly RolesRepository $rolesRepository,
+        private readonly Request $request,
+        private readonly Redirector $redirect,
+        private readonly ResponseFactory $response
+    ) {
     }
 
     public function index(array $modalProps = [])

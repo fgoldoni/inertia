@@ -16,6 +16,9 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/Modules/Users/Providers',
         __DIR__ . '/Modules/Users/Repositories',
         __DIR__ . '/Modules/Users/Listeners',
+        __DIR__ . '/Modules/Users/Observers',
+        __DIR__ . '/Modules/Users/Policies',
+        __DIR__ . '/Modules/Users/Notifications',
     ]);
 
     // register a single rule

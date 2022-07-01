@@ -35,6 +35,10 @@ php-cs: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Providers --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Notifications --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Listeners --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Observers --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Policies --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Notifications --diff
+
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Database --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Entities --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Http --diff

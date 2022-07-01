@@ -9,11 +9,8 @@ class UserDeletedEvent extends Notification
 {
     use Queueable;
 
-    private User $user;
-
-    public function __construct(User $user)
+    public function __construct(private readonly User $user)
     {
-        $this->user = $user;
     }
 
     public function via($notifiable)
@@ -25,21 +22,21 @@ class UserDeletedEvent extends Notification
     {
         if ($this->user?->isForceDeleting()) {
             return [
-                'title'    => 'Delete User Permanently',
-                'msg'      => 'Event ' . $this->user?->name . ' has been deleted permanently by ' . auth()->user()?->name,
-                'url'      => '#',
-                'icon'     => 'InfoIcon',
-                'time'     => $this->user?->created_at->format('c'),
+                'title' => 'Delete User Permanently',
+                'msg' => 'Event ' . $this->user?->name . ' has been deleted permanently by ' . auth()->user()?->name,
+                'url' => '#',
+                'icon' => 'InfoIcon',
+                'time' => $this->user?->created_at->format('c'),
                 'category' => 'danger',
             ];
         }
 
         return [
-            'title'    => 'Delete User',
-            'msg'      => 'User ' . $this->user?->name . ' has been Deleted by ' . auth()->user()?->name,
-            'url'      => '#',
-            'icon'     => 'InfoIcon',
-            'time'     => $this->user?->created_at->format('c'),
+            'title' => 'Delete User',
+            'msg' => 'User ' . $this->user?->name . ' has been Deleted by ' . auth()->user()?->name,
+            'url' => '#',
+            'icon' => 'InfoIcon',
+            'time' => $this->user?->created_at->format('c'),
             'category' => 'warning',
         ];
     }

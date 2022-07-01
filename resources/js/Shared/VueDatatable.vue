@@ -8,6 +8,7 @@ import {useForm} from "@inertiajs/inertia-vue3";
 import SearchFilter from '@/Components/SearchFilter';
 import pickBy from "lodash/pickBy";
 import ConfirmModal from '@/Shared/ConfirmModal';
+import {ElNotification} from "element-plus";
 
 const props = defineProps({
     config: Object,
@@ -66,6 +67,11 @@ const onCloseModal = (state) => {
         confirmingUserDeletion.value = false;
     }).catch(error => {
         confirmingUserDeletion.value = false;
+        ElNotification({
+            title: error.response.statusText,
+            message: error.response.data.message,
+            type: 'error',
+        })
     });
 };
 

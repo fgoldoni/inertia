@@ -9,14 +9,13 @@ export const useAvatar = ref({
 
     baseUrl : document.querySelector('meta[name="baseUrl"]').content,
 
-    push (item) {
+    push(item) {
         this.media = item
     },
 
     doRemoveFile(defaultSrc) {
 
         if (this.media.avatar_path) {
-
             axios.delete(route('api.avatars.destroy', encodeURIComponent(this.media.avatar_path)))
                 .then(() => {
                     this.media.avatar_path = null
@@ -31,7 +30,7 @@ export const useAvatar = ref({
         }
     },
 
-    doLoadFile (filename, defaultSrc) {
+    doLoadFile(filename, defaultSrc) {
 
         let avatar_url = defaultSrc
         let avatar_path = null
@@ -41,25 +40,22 @@ export const useAvatar = ref({
             avatar_path = filename
         }
 
-            this.push({
-            id: null,
-            file: null,
-            avatar_url: avatar_url,
-            avatar_path: avatar_path,
-            progress: 100,
-            error: null,
-            uploaded: true,
-        });
+        this.push(
+            {
+                id: null,
+                file: null,
+                avatar_url: avatar_url,
+                avatar_path: avatar_path,
+                progress: 100,
+                error: null,
+                uploaded: true,
+            }
+        );
     },
 
     doSubmitFile(file) {
-
         let form = new FormData;
-
         form.append('file', file);
-
-
-
 
         axios.post(route('api.avatars.store'), form)
             .then((res) => {

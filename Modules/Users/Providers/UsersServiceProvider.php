@@ -1,7 +1,9 @@
 <?php
 namespace Modules\Users\Providers;
 
+use App\Models\User;
 use Illuminate\Support\ServiceProvider;
+use Modules\Users\Observers\UserObserver;
 
 class UsersServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,8 @@ class UsersServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        User::observe(UserObserver::class);
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();

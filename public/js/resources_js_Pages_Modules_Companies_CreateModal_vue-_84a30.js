@@ -12,8 +12,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "useMedia": () => (/* binding */ useMedia)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
-/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_1__);
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -27,21 +25,18 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
-
 var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
   multiple: false,
   dragging: false,
   media: [],
   error: null,
-  doMediaFetchIds: function doMediaFetchIds(id) {
+  doMediaFetchIds: function doMediaFetchIds() {
     var _this$media;
 
-    return [].concat(_toConsumableArray((_this$media = this.media) === null || _this$media === void 0 ? void 0 : _this$media.filter(function (item) {
+    return (_this$media = this.media) === null || _this$media === void 0 ? void 0 : _this$media.filter(function (item) {
       return !item.error;
     }).map(function (item) {
       return item.id;
-    })), _toConsumableArray(id)).filter(function (e) {
-      return !!e;
     });
   },
   doRemoveFile: function doRemoveFile(index, item) {
@@ -112,9 +107,11 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
     });
   },
   doSubmitFiles: function doSubmitFiles() {
+    var _this4 = this;
+
     this.media.filter(function (media) {
       return !media.uploaded;
-    }).forEach(function (media) {
+    }).forEach(function (media, index) {
       var form = new FormData();
       form.append('file', media.file);
       axios.post(route('api.attachments.store'), form, {
@@ -125,11 +122,18 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
         media.id = res.data.data.id;
         media.url = res.data.data.url;
         media.uploaded = true;
+        _this4.error = null;
       })["catch"](function (error) {
         media.error = "Upload failed. Please try again later.";
 
         if ((error === null || error === void 0 ? void 0 : error.response.status) === 422) {
           media.error = error.response.data.errors.file[0];
+        }
+
+        if (!_this4.multiple) {
+          _this4.media.splice(index, 1);
+
+          _this4.error = media.error;
         }
       });
     });
@@ -148,13 +152,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Errors": () => (/* binding */ Errors)
 /* harmony export */ });
+/* harmony import */ var element_plus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! element-plus */ "./node_modules/element-plus/es/components/notification/index2.mjs");
+/* harmony import */ var element_plus_es_components_notification_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! element-plus/es/components/notification/style/css */ "./node_modules/element-plus/es/components/notification/style/css.mjs");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
-// eslint-disable-next-line
+
+
+ // eslint-disable-next-line
+
 var Errors = /*#__PURE__*/function () {
   function Errors() {
     _classCallCheck(this, Errors);
@@ -179,7 +188,9 @@ var Errors = /*#__PURE__*/function () {
   }, {
     key: "clear",
     value: function clear(field) {
-      if (this.errors !== undefined && this.errors[field]) delete this.errors[field];
+      if (this.errors !== undefined && this.errors[field]) {
+        delete this.errors[field];
+      }
     }
   }, {
     key: "drop",
@@ -224,6 +235,32 @@ var Errors = /*#__PURE__*/function () {
 
       return msg;
     }
+  }, {
+    key: "onFailed",
+    value: function onFailed(error) {
+      if (error.response !== undefined && error.response.hasOwnProperty('data') && error.response.data.hasOwnProperty('errors')) {
+        this.record(error.response.data.errors);
+      } else if (error.response !== undefined && error.response.hasOwnProperty('data') && error.response.data.hasOwnProperty('message')) {
+        (0,element_plus__WEBPACK_IMPORTED_MODULE_1__.ElNotification)({
+          title: error.response.statusText,
+          message: error.response.data.message,
+          type: 'error'
+        });
+      } else if (error.hasOwnProperty('message')) {
+        (0,element_plus__WEBPACK_IMPORTED_MODULE_1__.ElNotification)({
+          title: 'Error !',
+          message: error.message,
+          type: 'error'
+        });
+      } else {
+        (0,element_plus__WEBPACK_IMPORTED_MODULE_1__.ElNotification)({
+          title: 'Error !',
+          message: 'Service not answer, Please contact your Support',
+          type: 'error'
+        });
+        console.log(error);
+      }
+    }
   }]);
 
   return Errors;
@@ -250,6 +287,7 @@ __webpack_require__.r(__webpack_exports__);
     // '#myID' selector css
     init: function init() {
       var phoneNumber = document.querySelector(this.input);
+      if (!phoneNumber) return;
       var iti = intl_tel_input__WEBPACK_IMPORTED_MODULE_0___default()(phoneNumber, {
         nationalMode: true,
         geoIpLookup: function geoIpLookup(success, failure) {
@@ -290,7 +328,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'Input',
   props: {
-    modelValue: String,
+    modelValue: [String, Number],
     name: {
       type: String,
       "default": ''
@@ -384,7 +422,10 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var __returned__ = {};
+    var props = __props;
+    var __returned__ = {
+      props: props
+    };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
       value: true
@@ -722,7 +763,7 @@ var _hoisted_1 = {
   "class": "flex items-center justify-between"
 };
 var _hoisted_2 = {
-  "class": "block font-medium text-sm text-gray-700"
+  "class": "block font-medium text-sm text-gray-500"
 };
 var _hoisted_3 = {
   key: 0
@@ -1180,7 +1221,7 @@ var _hoisted_11 = {
   "class": "col-span-1"
 };
 var _hoisted_12 = {
-  "class": "relative w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden"
+  "class": "relative w-full aspect-w-10 aspect-h-4 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden"
 };
 var _hoisted_13 = ["src"];
 var _hoisted_14 = ["onClick"];
@@ -1195,8 +1236,16 @@ var _hoisted_17 = {
   key: 3,
   "class": "text-xs text-rose-500"
 };
+var _hoisted_18 = {
+  key: 2,
+  "class": "col-span-1"
+};
+var _hoisted_19 = {
+  key: 0,
+  "class": "text-xs text-rose-500"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$setup.props.multiple || !$setup.useMedia.media.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [$setup.props.multiple || !$setup.useMedia.media.length || $setup.useMedia.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onDrop: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       var _$setup$useMedia;
 
@@ -1268,7 +1317,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 2
   /* CLASS */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.useMedia.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [$setup.useMedia.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.useMedia.error), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),

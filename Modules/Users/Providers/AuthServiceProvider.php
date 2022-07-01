@@ -1,27 +1,18 @@
 <?php
 namespace Modules\Users\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Models\User;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Modules\Users\Policies\UserPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
+    protected $policies = [
+        User::class => UserPolicy::class
+    ];
 
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
+    public function boot()
     {
-        return [];
+        $this->registerPolicies();
     }
 }
