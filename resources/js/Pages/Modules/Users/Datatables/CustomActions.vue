@@ -21,7 +21,7 @@ const props = defineProps({
 
                                     </span>
 
-        <Link v-else-if="props.row.can.edit && ! props.row.isAdministrator"
+        <Link v-else-if="props.row.can.edit && ! props.row.isAdministrator && !props.row.deleted_at"
               :href="route('admin.users.edit', {'user': props.row.id})"
               preserve-state
               preserve-scroll

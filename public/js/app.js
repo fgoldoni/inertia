@@ -2045,7 +2045,7 @@ var map = {
 	"./Modules/Users/Datatables/CustomName.vue": [
 		"./resources/js/Pages/Modules/Users/Datatables/CustomName.vue",
 		"/js/vendor",
-		"resources_js_Pages_Modules_Users_Datatables_CustomName_vue"
+		"resources_js_Pages_Modules_Users_Datatables_CustomName_vue-_12fb0"
 	],
 	"./Modules/Users/Datatables/CustomRole.vue": [
 		"./resources/js/Pages/Modules/Users/Datatables/CustomRole.vue",

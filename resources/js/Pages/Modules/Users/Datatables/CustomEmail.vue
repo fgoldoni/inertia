@@ -27,7 +27,7 @@ const sendEmailVerificationNotification = (id) => {
 
         <div class="group inline-flex space-x-2 truncate text-sm cursor-pointer">
 
-            <ShieldCheckIcon v-if="props.row.verified" class="flex-shrink-0 h-5 w-5 text-green-500 group-hover:text-green-700" aria-hidden="true"/>
+            <ShieldCheckIcon v-if="props.row.verified && !props.row.deleted_at" class="flex-shrink-0 h-5 w-5 text-green-500 group-hover:text-green-700" aria-hidden="true"/>
             <ShieldExclamationIcon v-else class="flex-shrink-0 h-5 w-5 text-rose-500 group-hover:text-rose-700" aria-hidden="true"/>
 
             <p class="text-gray-500 truncate group-hover:text-gray-900">

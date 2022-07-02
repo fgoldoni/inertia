@@ -11,7 +11,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/ArrowRightIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/RefreshIcon.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'CustomName',
@@ -22,9 +26,28 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
+    var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+      processing: false
+    });
+
+    var restore = function restore(id) {
+      form.processing = true;
+      return axios.put(route('admin.users.restore', id)).then(function (response) {
+        form.processing = false;
+        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.reload({
+          only: ["flash"]
+        });
+        console.log(response.data.message);
+      });
+    };
+
     var __returned__ = {
       props: props,
-      ArrowRightIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__["default"]
+      form: form,
+      restore: restore,
+      RefreshIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
+      reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
+      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -61,10 +84,8 @@ var _hoisted_4 = {
 var _hoisted_5 = {
   "class": "group inline-flex space-x-2 truncate text-sm"
 };
-var _hoisted_6 = {
-  "class": "font-medium text-gray-900 truncate group-hover:text-gray-900"
-};
-var _hoisted_7 = ["href"];
+var _hoisted_6 = ["href"];
+var _hoisted_7 = ["disabled"];
 var _hoisted_8 = {
   "class": "text-sm leading-5 text-secondary-500 dark:text-secondary-400"
 };
@@ -75,14 +96,37 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     alt: ""
   }, null, 8
   /* PROPS */
-  , _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.name), 1
-  /* TEXT */
+  , _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.props.row.deleted_at ? 'text-negative-500' : 'text-gray-900', 'font-medium truncate group-hover:text-gray-900'])
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.name), 3
+  /* TEXT, CLASS */
   ), $setup.props.row.can.impersonate && !(_ctx.$page.props.user.id === $setup.props.row.id) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
     key: 0,
     href: _ctx.route('impersonate', $setup.props.row.id),
     "class": "text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300"
   }, " Login As → ", 8
   /* PROPS */
+  , _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.props.row.deleted_at ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $setup.restore($setup.props.row.id);
+    }),
+    key: 'restore' + $setup.props.row.id,
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["group inline-flex items-center space-x-2 truncate text-sm text-blue-700", {
+      'cursor-not-allowed': $setup.form.processing
+    }]),
+    disabled: $setup.form.processing
+  }, [$setup.form.processing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["RefreshIcon"], {
+    key: 0,
+    "class": "animate-spin flex-shrink-0 h-5 w-5 text-secondary-400 group-hover:text-secondary-500",
+    "aria-hidden": "true"
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+      'opacity-25': $setup.form.processing
+    }, "underline group-hover:text-blue-900 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300"])
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Restore')), 3
+  /* TEXT, CLASS */
+  )], 10
+  /* CLASS, PROPS */
   , _hoisted_7)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, "Registered on " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.created_at), 1
   /* TEXT */
   )])]);

@@ -9,6 +9,7 @@ use App\Repositories\Criteria\WhereHas;
 use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WhereNot;
+use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -55,6 +56,7 @@ class UsersController extends Controller
                 new EagerLoad(['roles:id,name,display_name', 'sessions' => function ($query) {
                     $query->orderBy('last_activity', 'desc')->limit(1);
                 }]),
+                new WithTrashed(),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
             ])->paginate()
                 ->withQueryString()
@@ -68,10 +70,12 @@ class UsersController extends Controller
                     'isAdministrator' => $user->isAdministrator(),
                     'access' => $user->isAdministrator() ? __('Full') : __('Limited'),
                     'created_at' => $user->created_at?->formatLocalized('%d %B, %Y'),
+                    'deleted_at' => $user->deleted_at,
                     'verified' => $user->hasVerifiedEmail(),
                     'can' => [
                         'impersonate' => $this->request->user()->canImpersonate()
-                            && $user->canBeImpersonated(),
+                            && $user->canBeImpersonated()
+                            && !$user->trashed(),
                         'delete' => $this->request->user()->hasPermissionTo('edit_users'),
                         'edit' => $this->request->user()->hasPermissionTo('edit_users'),
                     ],
@@ -152,6 +156,7 @@ class UsersController extends Controller
                 new EagerLoad(['roles:id,name,display_name', 'sessions' => function ($query) {
                     $query->orderBy('last_activity', 'desc')->limit(1);
                 }]),
+                new WithTrashed(),
             ])->find($user->id))
         ]);
     }
@@ -184,14 +189,24 @@ class UsersController extends Controller
             new WhereNot('users.id', auth()->user()->id),
             new WhereHas('roles', function (Builder $query) {
                 $query->whereNot('roles.name', config('app.system.users.roles.administrator'));
-            })
+            }),
+            new WithTrashed(),
         ])->get();
 
         foreach ($items as $item) {
-            $item->delete();
+            if ($item->trashed()) {
+                $item->forceDelete();
+            } else {
+                $item->delete();
+            }
         }
 
-        return $this->response->json(['message' => __('User deleted successfully.')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
+        return $this->response->json(
+            ['message' => __('The User(s) has been successfully deleted')],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 
     public function sendEmailVerificationNotification(Request $request, User $user)
@@ -205,5 +220,19 @@ class UsersController extends Controller
         return $this->response
             ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
             ->flash(__('The verification link has been successfully sent to :email', ['email' => $user->email]));
+    }
+
+    public function restore(int $id)
+    {
+        $user = $this->usersRepository->withCriteria([
+            new WithTrashed(),
+        ])->restore($id);
+
+        return $this->response->json(
+            ['message' => __('The User (:item) has been successfully updated', ['item' => $user->name])],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 }

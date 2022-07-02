@@ -1,7 +1,7 @@
 <script setup>
 import {ref, computed, onMounted, reactive} from 'vue'
 import {Link} from "@inertiajs/inertia-vue3";
-import {XIcon} from '@heroicons/vue/solid'
+import {XIcon} from '@heroicons/vue/outline'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import pickBy from 'lodash/pickBy'
 import zxcvbn from 'zxcvbn'
@@ -106,13 +106,7 @@ const onSubmit = () => {
                                     <div>
 
                                         <div class="mb-3">
-                                            <div class="flex items-center justify-between">
-                                                <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900">
-
-                                                    {{ __('Edit Modal') }}
-
-                                                </DialogTitle>
-
+                                            <div class="flex items-center justify-end">
                                                 <Link :href="props.basePageRoute" preserve-state preserve-scroll class="absolute top-0 right-4 text-secondary-400 hover:text-secondary-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8">
                                                     <span class="sr-only">Close</span>
                                                     <XIcon class="h-6 w-6" aria-hidden="true" />
@@ -132,7 +126,7 @@ const onSubmit = () => {
                                                             <ValidationErrors :errors="form.errors.all()" class="mb-4" />
                                                         </div>
 
-                                                        <BaseDisclosure :title="__('Name & Description')" default-open>
+                                                        <BaseDisclosure :title="__('Edit Modal')" default-open>
 
                                                             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 

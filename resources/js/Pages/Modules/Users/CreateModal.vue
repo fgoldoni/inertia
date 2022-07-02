@@ -1,7 +1,8 @@
 <script setup>
 import {ref, computed, onMounted, reactive, nextTick} from 'vue'
-import {useForm, Link} from "@inertiajs/inertia-vue3";
+import {Link} from "@inertiajs/inertia-vue3";
 import LoadingButton from '@/Shared/LoadingButton'
+import {XIcon} from '@heroicons/vue/outline'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
 import pickBy from 'lodash/pickBy'
 import zxcvbn from 'zxcvbn'
@@ -102,15 +103,8 @@ const onSubmit = () => {
                                 <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
                                     <div>
-
                                         <div class="mb-3">
-                                            <div class="flex items-center justify-between">
-                                                <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900">
-
-                                                    {{ __('Edit Modal') }}
-
-                                                </DialogTitle>
-
+                                            <div class="flex items-center justify-end">
                                                 <Link :href="props.basePageRoute" preserve-state preserve-scroll class="absolute top-0 right-4 text-secondary-400 hover:text-secondary-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8">
                                                     <span class="sr-only">Close</span>
                                                     <XIcon class="h-6 w-6" aria-hidden="true" />
@@ -130,7 +124,7 @@ const onSubmit = () => {
                                                             <ValidationErrors :errors="form.errors.all()" class="mb-4" />
                                                         </div>
 
-                                                        <BaseDisclosure :title="__('Name & Description')" default-open>
+                                                        <BaseDisclosure :title="__('Create Modal')" default-open>
 
                                                             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
@@ -152,7 +146,7 @@ const onSubmit = () => {
 
                                                                 <div class="col-span-1">
 
-                                                                    <BaseListbox :options="roles.data" v-if="roles.data" v-model="form.role" placeholder="Select roles"/>
+                                                                    <BaseListbox :options="roles.data" v-if="roles.data" v-model="form.role" placeholder="Select roles" label="Select roles"/>
 
                                                                     <JetInputError :message="form.errors.get('role')" class="mt-2"/>
                                                                 </div>
