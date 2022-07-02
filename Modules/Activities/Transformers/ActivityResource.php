@@ -30,10 +30,10 @@ class ActivityResource extends JsonResource
 
     private function color(string $event)
     {
-        if ($event === 'updated') return 'text-primary-400';
-        if ($event === 'created') return 'text-green-400';
-        if ($event === 'deleted') return 'text-rose-500';
+        if ($event === 'updated') return 'bg-pink-500';
+        if ($event === 'created') return 'bg-blue-500';
+        if ($event === 'deleted') return 'bg-rose-500';
 
-        return  'bg-primary-500';
+        return  'bg-blue-500';
     }
 }

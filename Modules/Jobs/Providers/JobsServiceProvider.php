@@ -2,6 +2,8 @@
 namespace Modules\Jobs\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Jobs\Entities\Job;
+use Modules\Jobs\Observers\JobObserver;
 
 class JobsServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,8 @@ class JobsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Job::observe(JobObserver::class);
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
@@ -37,6 +41,8 @@ class JobsServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
+        $this->app->register(AuthServiceProvider::class);
+        $this->app->register(EventServiceProvider::class);
     }
 
     /**

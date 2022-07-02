@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Jobs\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Repositories\Criteria\ByUser;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
@@ -10,7 +11,6 @@ use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
@@ -23,7 +23,14 @@ use Modules\Jobs\Transformers\JobResource;
 
 class JobsController extends Controller
 {
-    public function __construct(private readonly JobsRepository $jobsRepository, private readonly ActivitiesRepository $activitiesRepository, private readonly AttachmentsRepository $attachmentsRepository, private readonly ResponseFactory $response, private readonly Request $request, private readonly Redirector $redirect)
+    public function __construct(
+        private readonly JobsRepository $jobsRepository,
+        private readonly ActivitiesRepository $activitiesRepository,
+        private readonly AttachmentsRepository $attachmentsRepository,
+        private readonly ResponseFactory $response,
+        private readonly Request $request,
+        private readonly Redirector $redirect
+    )
     {
     }
 
@@ -44,6 +51,8 @@ class JobsController extends Controller
 
     public function create(Request $request)
     {
+        $this->authorize('create', Job::class);
+
         Inertia::modal('Modules/Jobs/CreateModal');
 
         Inertia::basePageRoute(route('admin.jobs.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
@@ -88,6 +97,8 @@ class JobsController extends Controller
 
     public function edit(Request $request, Job $job)
     {
+        $this->authorize('edit', $job);
+
         Inertia::modal('Modules/Jobs/EditModal');
 
         Inertia::basePageRoute(route('admin.jobs.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));

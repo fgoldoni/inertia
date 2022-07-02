@@ -1,7 +1,7 @@
 <script setup>
 import {ref, computed, onMounted, reactive} from 'vue'
 import {Link} from "@inertiajs/inertia-vue3";
-import {CalendarIcon, LockOpenIcon, AcademicCapIcon, XIcon} from '@heroicons/vue/solid'
+import {XIcon} from '@heroicons/vue/solid'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import pickBy from 'lodash/pickBy'
 import zxcvbn from 'zxcvbn'
@@ -83,6 +83,7 @@ const onSubmit = () => {
 </script>
 
 <template>
+
     <TransitionRoot as="template" :show="isOpen">
         <Dialog as="div" class="relative z-10">
 
@@ -237,41 +238,34 @@ const onSubmit = () => {
 
                                                         </BaseDisclosure>
 
-
-
-
                                                     </div>
 
                                                     <div class="col-span-1">
 
-                                                        <BaseDisclosure :title="__('Name & Description')" default-open>
+                                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 
-                                                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
+                                                            <div class="col-span-1">
 
-                                                                <div class="col-span-1">
+                                                                <div class="prose prose-sm text-gray-500" v-if="props.editing.verified">
+                                                                    <ul role="list">
+                                                                        <li>Verified</li>
+                                                                        <li>Last login on: {{ props.editing.lastLogin }}</li>
+                                                                        <li>Created on: <time datetime="2020-12-02" v-text="props.editing.created_at"></time></li>
+                                                                    </ul>
+                                                                </div>
 
-                                                                    <div class="prose prose-sm text-gray-500" v-if="props.editing.verified">
-                                                                        <ul role="list">
-                                                                            <li>Verified</li>
-                                                                            <li>Last login on: {{ props.editing.lastLogin }}</li>
-                                                                            <li>Created on: <time datetime="2020-12-02" v-text="props.editing.created_at"></time></li>
-                                                                        </ul>
-                                                                    </div>
+                                                                <div class="space-y-5" v-else>
 
-                                                                    <div class="space-y-5" v-else>
+                                                                    <div class="flex items-center space-x-2">
 
-                                                                        <div class="flex items-center space-x-2">
-
-                                                                            <SwitchGroup as="div" class="flex items-center">
-                                                                                <Switch v-model="form.verified" :class="[form.verified ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
-                                                                                    <span aria-hidden="true" :class="[form.verified ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
-                                                                                </Switch>
-                                                                                <SwitchLabel as="span" class="ml-3">
-                                                                                    <span class="text-sm font-medium text-gray-500">Mark as verified</span>
-                                                                                </SwitchLabel>
-                                                                            </SwitchGroup>
-
-                                                                        </div>
+                                                                        <SwitchGroup as="div" class="flex items-center">
+                                                                            <Switch v-model="form.verified" :class="[form.verified ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
+                                                                                <span aria-hidden="true" :class="[form.verified ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
+                                                                            </Switch>
+                                                                            <SwitchLabel as="span" class="ml-3">
+                                                                                <span class="text-sm font-medium text-gray-500">Mark as verified</span>
+                                                                            </SwitchLabel>
+                                                                        </SwitchGroup>
 
                                                                     </div>
 
@@ -279,7 +273,7 @@ const onSubmit = () => {
 
                                                             </div>
 
-                                                        </BaseDisclosure>
+                                                        </div>
 
                                                     </div>
 

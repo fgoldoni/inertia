@@ -1,5 +1,16 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
+const colorSaveList = [];
+const extendeColors = {};
+
+for (const key in colors) {
+    extendeColors[key] = colors[key];
+
+    [100, 200, 300, 400, 500, 600, 700, 800, 900].forEach(colorValue => {
+        colorSaveList.push(`text-${key}-${colorValue}`);
+        colorSaveList.push(`bg-${key}-${colorValue}`);
+    });
+}
 
 module.exports = {
     content: [
@@ -9,6 +20,8 @@ module.exports = {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
     ],
+
+    safelist: colorSaveList,
 
     theme: {
         extend: {

@@ -9,8 +9,8 @@
                         <span v-if="eventIdx !== props.data.activities.length - 1" class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
                         <div class="relative flex space-x-3">
                             <div>
-                              <span :class="['bg-secondary-100 h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white']">
-                                  <component :is="setIcon(event.event)" :class="[event.iconBackground, 'h-4 w-4']" aria-hidden="true" />
+                               <span :class="[event.iconBackground, 'h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white']">
+                                  <component :is="setIcon(event.event)" class="text-white h-4 w-4" aria-hidden="true" />
                               </span>
                             </div>
                             <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { CheckIcon, TrashIcon, RefreshIcon, UserIcon, ThumbUpIcon } from '@heroicons/vue/solid'
+import { CheckIcon, TrashIcon, RefreshIcon } from '@heroicons/vue/solid'
 
 const props = defineProps({
     data: Object,

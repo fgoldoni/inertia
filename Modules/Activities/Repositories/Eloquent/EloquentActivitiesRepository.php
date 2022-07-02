@@ -36,7 +36,8 @@ class EloquentActivitiesRepository extends RepositoryAbstract implements Activit
             if (!empty($item['properties']) && $activity->causer_id && $activity->causer()->first()) {
                 $causer = $activity->causer()->first();
                 $item['description'] = $activity->description;
-                $item['causer'] = is_null($activity->causer_id) ? 'System' : (($causer) ? $causer->name : 'Not existing causer ' . $activity->causer_id);
+                $item['causer'] = is_null($activity->causer_id)
+                    ? 'System' : (($causer) ? $causer->name : 'Not existing causer ' . $activity->causer_id);
                 $item['updated_at'] = $activity->updated_at;
                 $item['created_at'] = Carbon::parse($activity->created_at)->format('d, M Y H:i');
                 $items[] = $item;
