@@ -91,7 +91,6 @@ class Permission extends SpatiePermission
             'can_be_removed' => false,
         ]);
 
-
         self::query()->firstOrCreate([
             'name' => 'force_delete_' . $item,
             'group_name' => $group ?? $item,

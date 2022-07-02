@@ -8,7 +8,6 @@
  */
 namespace App\Repositories\Criteria;
 
-use App\Flag;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 

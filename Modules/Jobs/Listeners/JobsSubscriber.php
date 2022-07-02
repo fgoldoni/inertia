@@ -1,7 +1,7 @@
 <?php
-
 namespace Modules\Jobs\Listeners;
 
+use App\Models\User;
 use Modules\Jobs\Entities\Job;
 use Illuminate\Support\Facades\Notification;
 use Modules\Jobs\Notifications\JobCreatedNotification;
@@ -44,6 +44,6 @@ class JobsSubscriber
 
     public function fetchByRole(string $role)
     {
-        return Job::role($role)->get();
+        return User::role($role)->get();
     }
 }

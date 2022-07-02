@@ -1,13 +1,11 @@
 <?php
-
 namespace Modules\Jobs\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class JobRestoreNotification extends Notification
+class JobRestoredNotification extends Notification
 {
     use Queueable;
 

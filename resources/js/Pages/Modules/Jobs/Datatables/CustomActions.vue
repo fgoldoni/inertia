@@ -11,6 +11,7 @@ const props = defineProps({
 <template>
     <div>
         <Link
+              v-if="$page.props.can.edit && !props.row.deleted_at"
               :href="route('admin.jobs.edit', props.row.id)"
               preserve-state
               preserve-scroll

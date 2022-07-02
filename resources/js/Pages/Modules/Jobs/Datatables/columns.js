@@ -17,7 +17,7 @@ export default [
         title: 'Owner',
     },
     {
-        name: 'state',
+        name: '__component:Jobs/Datatables/CustomState',
         title: 'Status',
         sortField: 'state'
     },

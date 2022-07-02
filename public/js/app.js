@@ -1989,6 +1989,10 @@ var map = {
 		"./resources/js/Pages/Modules/Jobs/Datatables/CustomOwner.vue",
 		"resources_js_Pages_Modules_Jobs_Datatables_CustomOwner_vue"
 	],
+	"./Modules/Jobs/Datatables/CustomState.vue": [
+		"./resources/js/Pages/Modules/Jobs/Datatables/CustomState.vue",
+		"resources_js_Pages_Modules_Jobs_Datatables_CustomState_vue"
+	],
 	"./Modules/Jobs/Datatables/CustomUpdatedAt.vue": [
 		"./resources/js/Pages/Modules/Jobs/Datatables/CustomUpdatedAt.vue",
 		"/js/vendor",

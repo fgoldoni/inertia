@@ -30,11 +30,11 @@ class UserCreatedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'title'    => 'New User',
-            'msg'      => 'User ' . $this->user->name . ' has been successfully created',
-            'url'      => '#',
-            'icon'     => 'GiftIcon',
-            'time'     => $this->user->created_at->format('c'),
+            'title' => 'New User',
+            'msg' => 'User ' . $this->user->name . ' has been successfully created',
+            'url' => '#',
+            'icon' => 'GiftIcon',
+            'time' => $this->user->created_at->format('c'),
             'category' => 'primary',
         ];
     }

@@ -44,10 +44,11 @@ class UsersController extends Controller
         ]);
 
         Inertia::share('can', fn (Request $request) => $request->user() ? [
-                'is_impersonated' => $request->user()->isImpersonated(),
-                'create' => $request->user()->can('create', User::class),
-            ] : null);
-
+            'is_impersonated' => $request->user()->isImpersonated(),
+            'create' => $request->user()->can('create', User::class),
+            'edit' => $this->request->user()->hasPermissionTo('edit_users'),
+            'delete' => $this->request->user()->hasPermissionTo('delete_users'),
+        ] : null);
 
         return Inertia::render('Modules/Users/Index', array_merge([
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),

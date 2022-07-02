@@ -3,7 +3,6 @@ namespace Modules\Users\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use phpDocumentor\Reflection\Utils;
 
 class UserPolicy
 {
@@ -24,7 +23,7 @@ class UserPolicy
     public function update(User $user, User $model = null): bool
     {
         return ($user->hasPermissionTo('update_users')
-            &&   !$model->hasRole(config('app.system.users.roles.administrator')))
+            && !$model->hasRole(config('app.system.users.roles.administrator')))
             || ((int) $user->id === (int) $model->id);
     }
 
@@ -36,7 +35,7 @@ class UserPolicy
     public function delete(User $user, User $model): bool
     {
         return ($user->hasPermissionTo('delete_users')
-                &&   !$model->hasRole(config('app.system.users.roles.administrator')))
+                && !$model->hasRole(config('app.system.users.roles.administrator')))
             || ((int) $user->id === (int) $model->id);
     }
 

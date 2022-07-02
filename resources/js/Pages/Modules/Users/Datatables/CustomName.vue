@@ -46,7 +46,7 @@ const restore = (id) => {
 
             <div class="group inline-flex space-x-2 truncate text-sm">
 
-                <p :class="[props.row.deleted_at ? 'text-negative-500' : 'text-gray-900', 'font-medium truncate group-hover:text-gray-900']">
+                <p :class="[props.row.deleted_at ? 'text-negative-500 line-through' : 'text-gray-900', 'font-medium truncate group-hover:text-gray-900']">
 
                     {{ props.row.name }}
 

@@ -153,7 +153,7 @@ const onCloseModal = (state) => {
                     <div class="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5">
                         <div v-if="selectedRow.length > 0" class="absolute top-0 left-12 flex h-12 items-center space-x-3 bg-secondary-50 sm:left-16">
                             <button type="button" class="inline-flex items-center rounded border border-secondary-300 bg-white px-2.5 py-1.5 text-xs font-medium text-secondary-700 shadow-sm hover:bg-secondary-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"> CSV (Coming soon)</button>
-                            <button v-if="props.config.createUrl" type="button" @click="confirmingUserDeletion = true" class="inline-flex items-center rounded border border-negative-300 bg-negative-50 px-2.5 py-1.5 text-xs font-medium text-negative-700 shadow-sm hover:bg-negative-100 focus:outline-none focus:ring-2 focus:ring-negative-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30">Delete all</button>
+                            <button v-if="props.config.createUrl && $page.props.can.delete" type="button" @click="confirmingUserDeletion = true" class="inline-flex items-center rounded border border-negative-300 bg-negative-50 px-2.5 py-1.5 text-xs font-medium text-negative-700 shadow-sm hover:bg-negative-100 focus:outline-none focus:ring-2 focus:ring-negative-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30">Delete all</button>
                         </div>
                         <table class="min-w-full table-fixed divide-y divide-secondary-300">
                             <thead class="bg-secondary-50">

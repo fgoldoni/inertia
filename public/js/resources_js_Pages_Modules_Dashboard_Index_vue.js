@@ -308,7 +308,7 @@ var map = {
 	"./ActivitiesComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ActivitiesComponent.vue",
 		"/js/vendor",
-		"resources_js_Pages_Modules_Dashboard_Components_ActivitiesComponent_vue-_170b0"
+		"resources_js_Pages_Modules_Dashboard_Components_ActivitiesComponent_vue"
 	],
 	"./ApplicationComponent.vue": [
 		"./resources/js/Pages/Modules/Dashboard/Components/ApplicationComponent.vue",

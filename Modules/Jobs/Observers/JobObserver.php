@@ -19,7 +19,11 @@ class JobObserver
     public function updating(Job $job)
     {
         if (auth()->check()) {
-            abort_if(auth()->user()->cannot('update', $job), 403, 'The user does not have the right permissions to perform an action. Please contact your Support');
+            abort_if(
+                auth()->user()->cannot('update', $job),
+                403,
+                'The user does not have the right permissions to perform an action. Please contact your Support'
+            );
         }
     }
 

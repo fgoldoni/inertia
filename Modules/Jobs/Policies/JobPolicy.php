@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Jobs\Policies;
 
 use App\Models\User;

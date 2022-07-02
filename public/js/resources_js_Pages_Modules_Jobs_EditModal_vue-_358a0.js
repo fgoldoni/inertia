@@ -1000,7 +1000,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         closeModal();
       })["catch"](function (error) {
         form.processing = false;
-        form.errors.record(error.response.data.errors);
+        form.errors.onFailed(error);
       });
     };
 

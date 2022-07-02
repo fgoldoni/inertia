@@ -188,7 +188,9 @@ var Errors = /*#__PURE__*/function () {
   }, {
     key: "clear",
     value: function clear(field) {
-      if (this.errors !== undefined && this.errors[field]) delete this.errors[field];
+      if (this.errors !== undefined && this.errors[field]) {
+        delete this.errors[field];
+      }
     }
   }, {
     key: "drop",

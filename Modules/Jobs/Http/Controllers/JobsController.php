@@ -8,6 +8,7 @@ use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
+use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -30,20 +31,27 @@ class JobsController extends Controller
         private readonly ResponseFactory $response,
         private readonly Request $request,
         private readonly Redirector $redirect
-    )
-    {
+    ) {
     }
 
     public function index(array $modalProps = [])
     {
+        Inertia::share('can', fn (Request $request) => $request->user() ? [
+            'is_impersonated' => $request->user()->isImpersonated(),
+            'create' => $request->user()->can('create', Job::class),
+            'edit' => $this->request->user()->hasPermissionTo('edit_jobs'),
+            'delete' => $this->request->user()->hasPermissionTo('delete_jobs'),
+        ] : null);
+
         return Inertia::render('Modules/Jobs/Index', array_merge([
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'rowData' => $this->jobsRepository->withCriteria([
-                new Select('id', 'name', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at'),
+                new Select('id', 'name', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at', 'deleted_at'),
                 new WhereLike(['jobs.id', 'jobs.name'], $this->request->get('search')),
                 new ByUser(auth()->user()->id),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
                 new EagerLoad(['user:id,name', 'company:id,name', 'categories:id,name,type', 'country:id,name,emoji', 'city:id,name', 'division:id,name']),
+                new WithTrashed(),
             ])->paginate()->withQueryString(),
 
         ], $modalProps));
@@ -127,19 +135,48 @@ class JobsController extends Controller
             $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'skills', 'benefits', 'responsibilities'),
         ));
 
-        return $this->response->json(['message' => __('The Job (:item) has been successfully updated', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
+        return $this->response->json(
+            ['message' => __('The Job (:item) has been successfully updated', ['item' => $job->name])],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 
     public function destroy($selected)
     {
         $items = $this->jobsRepository->withCriteria([
-            new WhereKey(explode(',', (string) $selected))
+            new WhereKey(explode(',', (string) $selected)),
+            new WithTrashed(),
         ])->get();
 
         foreach ($items as $item) {
-            $item->delete();
+            if ($item->trashed()) {
+                $item->forceDelete();
+            } else {
+                $item->delete();
+            }
         }
 
-        return $this->response->json(['message' => __('The Job(s) has been successfully deleted')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
+        return $this->response->json(
+            ['message' => __('The Job(s) has been successfully deleted')],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
+    }
+
+    public function restore(int $id)
+    {
+        $job = $this->jobsRepository->withCriteria([
+            new WithTrashed(),
+        ])->restore($id);
+
+        return $this->response->json(
+            ['message' => __('The Job (:item) has been successfully restored', ['item' => $job->name])],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 }

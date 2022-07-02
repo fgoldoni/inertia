@@ -1,6 +1,132 @@
 "use strict";
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Modules_Users_Datatables_CustomName_vue"],{
 
+/***/ "./resources/js/Plugins/errors.js":
+/*!****************************************!*\
+  !*** ./resources/js/Plugins/errors.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Errors": () => (/* binding */ Errors)
+/* harmony export */ });
+/* harmony import */ var element_plus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! element-plus */ "./node_modules/element-plus/es/components/notification/index2.mjs");
+/* harmony import */ var element_plus_es_components_notification_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! element-plus/es/components/notification/style/css */ "./node_modules/element-plus/es/components/notification/style/css.mjs");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+
+
+ // eslint-disable-next-line
+
+var Errors = /*#__PURE__*/function () {
+  function Errors() {
+    _classCallCheck(this, Errors);
+
+    this.errors = {};
+  }
+
+  _createClass(Errors, [{
+    key: "get",
+    value: function get(field) {
+      if (this.errors[field]) {
+        return this.errors[field][0];
+      }
+    }
+  }, {
+    key: "getWithMutator",
+    value: function getWithMutator(field, mutator) {
+      if (this.errors[field]) {
+        return this.errors[field][0].replace(field, mutator);
+      }
+    }
+  }, {
+    key: "clear",
+    value: function clear(field) {
+      if (this.errors !== undefined && this.errors[field]) {
+        delete this.errors[field];
+      }
+    }
+  }, {
+    key: "drop",
+    value: function drop() {
+      this.errors = {};
+    }
+  }, {
+    key: "has",
+    value: function has(field) {
+      return this.errors.hasOwnProperty(field);
+    }
+  }, {
+    key: "first",
+    value: function first(field) {
+      if (this.errors[field]) {
+        return this.errors[field];
+      }
+    }
+  }, {
+    key: "any",
+    value: function any() {
+      return Object.keys(this.errors).length > 0;
+    }
+  }, {
+    key: "all",
+    value: function all() {
+      return this.any() ? this.errors : [];
+    }
+  }, {
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors;
+    }
+  }, {
+    key: "getErrors",
+    value: function getErrors() {
+      var msg = '';
+
+      for (var field in this.errors) {
+        msg += this.errors[field][0] + '<br/>';
+      }
+
+      return msg;
+    }
+  }, {
+    key: "onFailed",
+    value: function onFailed(error) {
+      if (error.response !== undefined && error.response.hasOwnProperty('data') && error.response.data.hasOwnProperty('errors')) {
+        this.record(error.response.data.errors);
+      } else if (error.response !== undefined && error.response.hasOwnProperty('data') && error.response.data.hasOwnProperty('message')) {
+        (0,element_plus__WEBPACK_IMPORTED_MODULE_1__.ElNotification)({
+          title: error.response.statusText,
+          message: error.response.data.message,
+          type: 'error'
+        });
+      } else if (error.hasOwnProperty('message')) {
+        (0,element_plus__WEBPACK_IMPORTED_MODULE_1__.ElNotification)({
+          title: 'Error !',
+          message: error.message,
+          type: 'error'
+        });
+      } else {
+        (0,element_plus__WEBPACK_IMPORTED_MODULE_1__.ElNotification)({
+          title: 'Error !',
+          message: 'Service not answer, Please contact your Support',
+          type: 'error'
+        });
+        console.log(error);
+      }
+    }
+  }]);
+
+  return Errors;
+}();
+
+/***/ }),
+
 /***/ "./node_modules/unplugin/dist/webpack/loaders/transform.js??ruleSet[1].rules[26].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Modules/Users/Datatables/CustomName.vue?vue&type=script&setup=true&lang=js":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/unplugin/dist/webpack/loaders/transform.js??ruleSet[1].rules[26].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Modules/Users/Datatables/CustomName.vue?vue&type=script&setup=true&lang=js ***!
@@ -11,9 +137,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/RefreshIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/RefreshIcon.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var element_plus__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! element-plus */ "./node_modules/element-plus/es/components/notification/index2.mjs");
+/* harmony import */ var element_plus_es_components_notification_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! element-plus/es/components/notification/style/css */ "./node_modules/element-plus/es/components/notification/style/css.mjs");
+/* harmony import */ var _Plugins_errors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Plugins/errors */ "./resources/js/Plugins/errors.js");
+
+
+
+
+
+
 
 
 
@@ -27,17 +162,25 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      processing: false
+      processing: false,
+      errors: new _Plugins_errors__WEBPACK_IMPORTED_MODULE_3__.Errors()
     });
 
     var restore = function restore(id) {
       form.processing = true;
       return axios.put(route('admin.users.restore', id)).then(function (response) {
         form.processing = false;
-        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.reload({
-          only: ["flash"]
+        (0,element_plus__WEBPACK_IMPORTED_MODULE_4__.ElNotification)({
+          title: 'Great!',
+          message: response.data.message,
+          type: 'success'
         });
-        console.log(response.data.message);
+        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.reload({
+          only: ["rowData"]
+        });
+      })["catch"](function (error) {
+        form.processing = false;
+        form.errors.record(error.response.data.errors);
       });
     };
 
@@ -45,9 +188,11 @@ __webpack_require__.r(__webpack_exports__);
       props: props,
       form: form,
       restore: restore,
-      RefreshIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
+      RefreshIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_5__["default"],
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
-      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia
+      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia,
+      ElNotification: element_plus__WEBPACK_IMPORTED_MODULE_4__.ElNotification,
+      Errors: _Plugins_errors__WEBPACK_IMPORTED_MODULE_3__.Errors
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,

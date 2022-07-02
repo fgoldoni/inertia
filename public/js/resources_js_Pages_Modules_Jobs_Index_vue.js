@@ -25,7 +25,7 @@ __webpack_require__.r(__webpack_exports__);
   name: '__component:Jobs/Datatables/CustomOwner',
   title: 'Owner'
 }, {
-  name: 'state',
+  name: '__component:Jobs/Datatables/CustomState',
   title: 'Status',
   sortField: 'state'
 }, {

@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Modules_Jobs_Datatables_CustomActions_vue-_9bdd1"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Modules_Jobs_Datatables_CustomActions_vue"],{
 
 /***/ "./node_modules/unplugin/dist/webpack/loaders/transform.js??ruleSet[1].rules[26].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Modules/Jobs/Datatables/CustomActions.vue?vue&type=script&setup=true&lang=js":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
