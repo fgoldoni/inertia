@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Users\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
@@ -11,7 +12,6 @@ use App\Repositories\Criteria\WhereNot;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -23,7 +23,6 @@ use Modules\Users\Notifications\AdminSendCredentials;
 use Modules\Users\Repositories\Contracts\UsersRepository;
 use Modules\Users\Transformers\UserCollection;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UsersController extends Controller
 {
@@ -42,6 +41,12 @@ class UsersController extends Controller
             'direction' => ['in:asc,desc'],
             'field' => ['in:id,name,email']
         ]);
+
+        Inertia::share('can', fn (Request $request) => $request->user() ? [
+                'is_impersonated' => $request->user()->isImpersonated(),
+                'create' => $request->user()->can('create', User::class),
+            ] : null);
+
 
         return Inertia::render('Modules/Users/Index', array_merge([
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
@@ -65,7 +70,8 @@ class UsersController extends Controller
                     'created_at' => $user->created_at?->formatLocalized('%d %B, %Y'),
                     'verified' => $user->hasVerifiedEmail(),
                     'can' => [
-                        'impersonate' => $this->request->user()->canImpersonate() && $user->canBeImpersonated(),
+                        'impersonate' => $this->request->user()->canImpersonate()
+                            && $user->canBeImpersonated(),
                         'delete' => $this->request->user()->hasPermissionTo('edit_users'),
                         'edit' => $this->request->user()->hasPermissionTo('edit_users'),
                     ],
@@ -89,6 +95,8 @@ class UsersController extends Controller
 
     public function create()
     {
+        $this->authorize('create', User::class);
+
         Inertia::modal('Modules/Users/CreateModal');
 
         Inertia::basePageRoute(route('admin.users.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
@@ -133,6 +141,8 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
+        $this->authorize('edit', $user);
+
         Inertia::modal('Modules/Users/EditModal');
 
         Inertia::basePageRoute(route('admin.users.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));

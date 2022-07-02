@@ -84,12 +84,12 @@ const onCloseModal = (state) => {
                 <h1 class="text-xl font-semibold text-gray-900">{{ props.config.title }}</h1>
                 <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
             </div>
-            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none" v-if="props.config.createUrl">
+            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none" v-if="props.config.createUrl && $page.props.can.create">
                 <Link :href="props.config.createUrl"
                       preserve-state
                       preserve-scroll
                       :data="pickBy({... params(), ...{ page: props.filters.page }})"
-                      class="uppercase inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                      class="uppercase inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
 
                     <PlusIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true"/>
 
@@ -122,7 +122,7 @@ const onCloseModal = (state) => {
                     <div class="col-span-1 sm:col-span-2 lg:col-start-3">
 
                         <select v-model="form.perPage"
-                                class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md">
 
                             <option value="5">05</option>
 
@@ -147,8 +147,8 @@ const onCloseModal = (state) => {
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div class="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5">
                         <div v-if="selectedRow.length > 0" class="absolute top-0 left-12 flex h-12 items-center space-x-3 bg-gray-50 sm:left-16">
-                            <button type="button" class="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"> CSV (Coming soon)</button>
-                            <button v-if="props.config.createUrl" type="button" @click="confirmingUserDeletion = true" class="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30">Delete all</button>
+                            <button type="button" class="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"> CSV (Coming soon)</button>
+                            <button v-if="props.config.createUrl" type="button" @click="confirmingUserDeletion = true" class="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30">Delete all</button>
                         </div>
                         <table class="min-w-full table-fixed divide-y divide-gray-300">
                             <thead class="bg-gray-50">
@@ -156,7 +156,7 @@ const onCloseModal = (state) => {
                                     <template v-for="(value, key) in fields">
 
                                         <th v-if="value['name'] === '__checkbox'" scope="col" class="relative w-12 px-6 sm:w-16 sm:px-8">
-                                            <input type="checkbox" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6" :checked="indeterminate || selectedRow.length === props.rowData.data.length" :indeterminate="indeterminate" @change="selectedRow = $event.target.checked ? props.rowData.data.map((r) => r.id) : []" />
+                                            <input type="checkbox" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500 sm:left-6" :checked="indeterminate || selectedRow.length === props.rowData.data.length" :indeterminate="indeterminate" @change="selectedRow = $event.target.checked ? props.rowData.data.map((r) => r.id) : []" />
                                         </th>
 
                                         <th v-else-if="value['name'] === 'id'" @click="sort(value)" scope="col" class="w-12 sm:w-16 py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
@@ -219,11 +219,11 @@ const onCloseModal = (state) => {
                                 <template v-for="(value, key) in fields">
 
                                     <td v-if="fields[key]['name'] === '__checkbox'" class="relative w-12 px-6 sm:w-16 sm:px-8">
-                                        <div v-if="selectedRow.includes(row.id)" class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"></div>
-                                        <input type="checkbox" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6" :value="row.id" v-model="selectedRow" />
+                                        <div v-if="selectedRow.includes(row.id)" class="absolute inset-y-0 left-0 w-0.5 bg-primary-600"></div>
+                                        <input type="checkbox" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500 sm:left-6" :value="row.id" v-model="selectedRow" />
                                     </td>
 
-                                    <td v-else-if="key === 1" :class="['whitespace-nowrap py-4 pr-3 text-sm font-medium', selectedRow.includes(row.id) ? 'text-indigo-600' : 'text-gray-900']">
+                                    <td v-else-if="key === 1" :class="['whitespace-nowrap py-4 pr-3 text-sm font-medium', selectedRow.includes(row.id) ? 'text-primary-600' : 'text-gray-900']">
 
                                         {{ row[fields[key]['name']] }}
 

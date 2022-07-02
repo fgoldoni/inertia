@@ -5,7 +5,7 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
-class UserDeletedEvent extends Notification
+class UserDeletedNotification extends Notification
 {
     use Queueable;
 
@@ -23,7 +23,7 @@ class UserDeletedEvent extends Notification
         if ($this->user?->isForceDeleting()) {
             return [
                 'title' => 'Delete User Permanently',
-                'msg' => 'Event ' . $this->user?->name . ' has been deleted permanently by ' . auth()->user()?->name,
+                'msg' => 'User ' . $this->user?->name . ' has been deleted permanently by ' . auth()->user()?->name,
                 'url' => '#',
                 'icon' => 'InfoIcon',
                 'time' => $this->user?->created_at->format('c'),

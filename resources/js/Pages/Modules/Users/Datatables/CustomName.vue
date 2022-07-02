@@ -25,7 +25,7 @@ const props = defineProps({
 
                 </p>
 
-                <a :href="route('impersonate', props.row.id)" v-if="props.row.can.impersonate" class="text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300">
+                <a :href="route('impersonate', props.row.id)" v-if="props.row.can.impersonate && !($page.props.user.id === props.row.id)" class="text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300">
                     Login As &#x2192;
                 </a>
 

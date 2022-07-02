@@ -60,6 +60,14 @@ class Permission extends SpatiePermission
         ]);
 
         self::query()->firstOrCreate([
+            'name' => 'update_' . $item,
+            'group_name' => $group ?? $item,
+            'display_name' => __('Update :item', ['item' => ucfirst($item)]),
+            'description' => __('This permission allow you to edit the content of a record of :item.', ['item' => $item]),
+            'can_be_removed' => false,
+        ]);
+
+        self::query()->firstOrCreate([
             'name' => 'create_' . $item,
             'group_name' => $group ?? $item,
             'display_name' => __('Create :item', ['item' => ucfirst($item)]),
@@ -71,6 +79,23 @@ class Permission extends SpatiePermission
             'name' => 'delete_' . $item,
             'group_name' => $group ?? $item,
             'display_name' => __('Delete :item', ['item' => ucfirst($item)]),
+            'description' => __('This permission allow you to removed a record of :item.', ['item' => $item]),
+            'can_be_removed' => false,
+        ]);
+
+        self::query()->firstOrCreate([
+            'name' => 'restore_' . $item,
+            'group_name' => $group ?? $item,
+            'display_name' => __('Restore :item', ['item' => ucfirst($item)]),
+            'description' => __('This permission allow you to removed a record of :item.', ['item' => $item]),
+            'can_be_removed' => false,
+        ]);
+
+
+        self::query()->firstOrCreate([
+            'name' => 'force_delete_' . $item,
+            'group_name' => $group ?? $item,
+            'display_name' => __('Force Delete :item', ['item' => ucfirst($item)]),
             'description' => __('This permission allow you to removed a record of :item.', ['item' => $item]),
             'can_be_removed' => false,
         ]);
