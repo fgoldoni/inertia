@@ -42,7 +42,6 @@ class DashboardController extends Controller
             'rowData' => auth()->user()->dashboards()->get(),
             'data' => [
                 'jobs_count' => $this->jobsRepository->withCriteria([
-                    new ByUser(auth()->user()->id),
                 ])->count(),
                 'companies_count' => $this->companiesRepository->withCriteria([
                     new ByUser(auth()->user()->id),
@@ -69,7 +68,6 @@ class DashboardController extends Controller
         $result['jobs'] = $this->jobsRepository->withCriteria([
             new Select(DB::raw('count(*) as items_count, DATE(closing_to) AS date')),
             new GroupBy('date'),
-            new ByUser(auth()->user()->id),
         ])->get();
 
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
