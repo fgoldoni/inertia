@@ -1,5 +1,4 @@
 <script setup>
-import {ExternalLinkIcon} from '@heroicons/vue/outline';
 import moment from 'moment'
 
 const props = defineProps({
@@ -8,9 +7,13 @@ const props = defineProps({
 </script>
 
 <template>
-<div>
-    {{ moment(row.updated_at, moment.ISO_8601).format('DD MMMM, YYYY') }}
-</div>
+    <div>
+        <div className="text-gray-900">Registered on {{
+                moment(row.created_at, moment.ISO_8601).format('DD MMMM, YYYY')
+            }}
+        </div>
+        <div className="text-gray-500">Last Modified: {{ moment(row.updated_at, moment.ISO_8601).fromNow() }}</div>
+    </div>
 </template>
 
 

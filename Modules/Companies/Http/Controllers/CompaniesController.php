@@ -7,6 +7,7 @@ use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
+use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,6 +16,7 @@ use Modules\Companies\Entities\Company;
 use Modules\Companies\Http\Requests\UpdateCompanyRequest;
 use Modules\Companies\Http\Requests\StoreCompanyRequest;
 use Modules\Companies\Repositories\Contracts\CompaniesRepository;
+use Modules\Jobs\Entities\Job;
 
 class CompaniesController extends Controller
 {
@@ -24,13 +26,21 @@ class CompaniesController extends Controller
 
     public function index(array $modalProps = [])
     {
+        Inertia::share('can', fn (Request $request) => $request->user() ? [
+            'is_impersonated' => $request->user()->isImpersonated(),
+            'create' => $request->user()->can('create', Company::class),
+            'edit' => $this->request->user()->hasPermissionTo('edit_companies'),
+            'delete' => $this->request->user()->hasPermissionTo('delete_companies'),
+        ] : null);
+
         return Inertia::render('Modules/Companies/Index', array_merge([
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'rowData' => $this->companiesRepository->withCriteria([
-                new Select('id', 'name', 'email', 'phone', 'user_id', 'online', 'created_at', 'updated_at'),
+                new Select('id', 'name', 'email', 'phone', 'user_id', 'online', 'created_at', 'updated_at', 'deleted_at'),
                 new WhereLike(['companies.id', 'companies.name', 'companies.email', 'companies.content'], $this->request->get('search')),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
                 new EagerLoad(['user:id,name', 'jobs:id,company_id']),
+                new WithTrashed(),
             ])->paginate()->withQueryString(),
 
         ], $modalProps));
@@ -38,6 +48,8 @@ class CompaniesController extends Controller
 
     public function create(Request $request)
     {
+        $this->authorize('create', Company::class);
+
         Inertia::modal('Modules/Companies/CreateModal');
 
         Inertia::basePageRoute(route('admin.companies.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
@@ -75,6 +87,8 @@ class CompaniesController extends Controller
 
     public function edit(Request $request, Company $company)
     {
+        $this->authorize('edit', $company);
+
         Inertia::modal('Modules/Companies/EditModal');
 
         Inertia::basePageRoute(route('admin.companies.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
@@ -90,17 +104,49 @@ class CompaniesController extends Controller
     {
         $company = $this->companiesRepository->update($company->id, $request->only('name', 'content', 'email', 'phone', 'online'));
 
-        return $this->response
-            ->json([], Response::HTTP_OK, [], JSON_NUMERIC_CHECK)
-            ->flash(__(':company updated successfully!', ['company' => $company->name]));
+        return $this->response->json(
+            ['message' => __('The Company (:item) has been successfully updated', ['item' => $company->name])],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 
     public function destroy($selected)
     {
-        $this->companiesRepository->withCriteria([
-            new WhereKey(explode(',', (string) $selected))
-        ])->deleteAll();
+        $items = $this->companiesRepository->withCriteria([
+            new WhereKey(explode(',', (string) $selected)),
+            new WithTrashed(),
+        ])->get();
 
-        return $this->response->json(['message' => __('Company deleted successfully.')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);
+
+        foreach ($items as $item) {
+            if ($item->trashed()) {
+                $item->forceDelete();
+            } else {
+                $item->delete();
+            }
+        }
+
+        return $this->response->json(
+            ['message' => __('The Companies has been successfully deleted')],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
+    }
+
+    public function restore(int $id)
+    {
+        $company = $this->companiesRepository->withCriteria([
+            new WithTrashed(),
+        ])->restore($id);
+
+        return $this->response->json(
+            ['message' => __('The Company (:item) has been successfully restored', ['item' => $company->name])],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 }
