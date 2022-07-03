@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[3723],{53723:(t,e,s)=>{s.r(e),s.d(e,{default:()=>n});var c=s(94865),r={class:"text-right float-right"};const n={__name:"CustomAccess",props:{row:Object},setup:function(t){var e=t;return function(t,s){return(0,c.openBlock)(),(0,c.createElementBlock)("span",r,(0,c.toDisplayString)(e.row.access),1)}}}}}]);
