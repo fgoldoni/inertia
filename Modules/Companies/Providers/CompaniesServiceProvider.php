@@ -1,9 +1,9 @@
 <?php
-
 namespace Modules\Companies\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
+use Modules\Companies\Entities\Company;
+use Modules\Companies\Observers\CompanyObserver;
 
 class CompaniesServiceProvider extends ServiceProvider
 {
@@ -24,6 +24,8 @@ class CompaniesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Company::observe(CompanyObserver::class);
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
@@ -37,6 +39,8 @@ class CompaniesServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(AuthServiceProvider::class);
+        $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
     }
@@ -52,7 +56,8 @@ class CompaniesServiceProvider extends ServiceProvider
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+            module_path($this->moduleName, 'Config/config.php'),
+            $this->moduleNameLower
         );
     }
 

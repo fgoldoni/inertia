@@ -47,7 +47,6 @@ php-cs: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Listeners --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Observers --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Policies --diff
-	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Notifications --diff
 
 php-cs-2: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Database --diff
@@ -71,6 +70,15 @@ php-cs-2: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Jobs/Observers --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Jobs/Policies --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Jobs/Notifications --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Companies/Database --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Companies/Entities --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Companies/Http --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Companies/Providers --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Companies/Notifications --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Companies/Listeners --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Companies/Observers --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Companies/Policies --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Companies/Notifications --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Dashboard/Database --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Dashboard/Entities --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Dashboard/Http --diff
@@ -106,8 +114,8 @@ refresh: migrate ## refresh + php artisan module:seed Admin & php artisan module
 	php artisan module:seed Categories
 	php artisan world:init
 	php artisan module:seed Companies
-	php artisan module:seed Jobs
 	php artisan module:seed Dashboard
+	php artisan module:seed Jobs
 	## php artisan module:seed Posts
 	## php artisan module:seed Events
 	## php artisan module:seed Tickets

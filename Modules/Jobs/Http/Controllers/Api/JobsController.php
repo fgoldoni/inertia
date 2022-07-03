@@ -2,7 +2,6 @@
 namespace Modules\Jobs\Http\Controllers\Api;
 
 use App\Models\User;
-use App\Repositories\Criteria\ByUser;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -50,8 +49,7 @@ class JobsController extends Controller
         $result['salaryTypes'] = $this->jobsRepository->salaryTypes();
         $result['roles'] = $this->rolesRepository->all(['id', 'name']);
         $result['companies'] = $this->companiesRepository->withCriteria([
-            new ByUser($user->id)
-        ])->all(['id', 'name', 'user_id']);
+        ])->all(['id', 'name', 'user_id', 'team_id']);
 
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }

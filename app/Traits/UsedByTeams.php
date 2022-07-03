@@ -14,12 +14,12 @@ trait UsedByTeams
             static::teamGuard();
 
             if (!auth()->user()->hasRole(config('app.system.users.roles.administrator'))) {
-                $builder->where($builder->getQuery()->from.'.team_id', auth()->user()->currentTeam->getKey());
+                $builder->where($builder->getQuery()->from . '.team_id', auth()->user()->currentTeam->getKey());
             }
         });
 
         static::saving(function (Model $model) {
-            if (! isset($model->team_id)) {
+            if (!isset($model->team_id)) {
                 static::teamGuard();
 
                 $model->team_id = auth()->user()->currentTeam->getKey();
@@ -29,19 +29,18 @@ trait UsedByTeams
 
     public function scopeAllTeams(Builder $query): Builder
     {
-        return $query->withoutGlobalScope(Team::class);
+        return $query->withoutGlobalScope('team');
     }
-
 
     public function team()
     {
         return $this->belongsTo(Team::class);
     }
 
-
     protected static function teamGuard()
     {
-        if (auth()->guest() || ! auth()->user()->currentTeam) {
+        if (auth()->guest() || !auth()->user()->currentTeam) {
+            dd(auth()->guard('we'));
             throw new Exception('No authenticated user with selected team present.');
         }
     }

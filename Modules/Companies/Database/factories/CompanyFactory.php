@@ -1,9 +1,7 @@
 <?php
-
 namespace Modules\Companies\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\Companies\Enums\CompanyState;
 
 class CompanyFactory extends Factory
 {
@@ -21,14 +19,16 @@ class CompanyFactory extends Factory
      */
     public function definition()
     {
+        $userId = $this->faker->numberBetween(1, 10);
+
         return [
             'name' => $this->faker->company,
             'content' => $this->faker->sentence,
             'email' => $this->faker->email,
             'phone' => $this->faker->phoneNumber,
-            'user_id' => $this->faker->numberBetween(1, 10),
-            'online' =>  $this->faker->boolean,
+            'user_id' => $userId,
+            'team_id' => $userId,
+            'online' => $this->faker->boolean,
         ];
     }
 }
-

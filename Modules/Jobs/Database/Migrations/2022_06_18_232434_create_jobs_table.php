@@ -35,7 +35,6 @@ return new class extends Migration {
 
             $this->addTeamField($table);
 
-
             $table->foreignId('company_id')->nullable()->index()->references('id')->on('companies')->onDelete('cascade');
             $table->foreignId('user_id')->unsigned()->index()->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('country_id')->nullable()->unsigned()->index()->references('id')->on('world_countries')->cascadeOnDelete();

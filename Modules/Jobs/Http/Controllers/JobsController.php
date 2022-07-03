@@ -2,7 +2,6 @@
 namespace Modules\Jobs\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Criteria\ByUser;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;

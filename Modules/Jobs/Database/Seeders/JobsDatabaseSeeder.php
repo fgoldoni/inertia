@@ -36,74 +36,9 @@ class JobsDatabaseSeeder extends Seeder
         })->create(['live_at' => $faker->dateTimeInInterval('now', '-1 days')])->each(function ($job) {
             $this->syncCategories($job);
 
-            $job->company_id = Company::where('user_id', $job->user_id)->inRandomOrder()->first()?->id;
+            $job->company_id = Company::allTeams()->where('team_id', $job->team_id)->inRandomOrder()->first()?->id;
 
             $job->save();
-        });
-
-        Job::factory(100)->state(function (array $attributes) {
-            $city = City::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
-            $division = Division::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
-
-            if ($city) {
-                return ['city_id' => $city->id];
-            } else {
-                if ($division) {
-                    return ['division_id' => $division->id];
-                }
-            }
-
-            return [];
-        })->create(['live_at' => $faker->dateTimeInInterval('-1 days', '-2 days')])->each(function ($job) {
-            $this->syncCategories($job);
-        });
-
-        Job::factory(100)->state(function (array $attributes) {
-            $city = City::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
-            $division = Division::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
-
-            if ($city) {
-                return ['city_id' => $city->id];
-            } else {
-                if ($division) {
-                    return ['division_id' => $division->id];
-                }
-            }
-
-            return [];
-        })->create(['live_at' => $faker->dateTimeInInterval('-2 days', '-7 days')]);
-
-        Job::factory(100)->state(function (array $attributes) {
-            $city = City::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
-            $division = Division::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
-
-            if ($city) {
-                return ['city_id' => $city->id];
-            } else {
-                if ($division) {
-                    return ['division_id' => $division->id];
-                }
-            }
-
-            return [];
-        })->create(['live_at' => $faker->dateTimeInInterval('-7 days', '-30 days')])->each(function ($job) {
-            $this->syncCategories($job);
-        });
-
-        Job::factory(100)->state(function (array $attributes) {
-            $city = City::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
-            $division = Division::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
-
-            if ($city) {
-                return ['city_id' => $city->id];
-            } else {
-                if ($division) {
-                    return ['division_id' => $division->id];
-                }
-            }
-            return [];
-        })->create(['live_at' => $faker->dateTimeInInterval('-30 days', '-60 days')])->each(function ($job) {
-            $this->syncCategories($job);
         });
     }
 

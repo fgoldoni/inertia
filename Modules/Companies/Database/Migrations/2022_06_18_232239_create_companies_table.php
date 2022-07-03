@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
-    use DisableForeignKeys, TruncateTable;
+return new class extends Migration {
+    use DisableForeignKeys;
+    use TruncateTable;
+    use \App\Traits\Database\Migration;
+
     /**
      * Run the migrations.
      *
@@ -25,6 +27,8 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();
             $table->boolean('online')->nullable();
+
+            $this->addTeamField($table);
 
             $table->string('avatar_path', 2048)->nullable();
 

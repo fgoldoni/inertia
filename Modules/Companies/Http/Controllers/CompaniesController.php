@@ -1,21 +1,15 @@
 <?php
-
 namespace Modules\Companies\Http\Controllers;
 
-use App\Repositories\Criteria\ByUser;
+use App\Http\Controllers\Controller;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;
-use App\Repositories\Criteria\WhereHas;
 use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
-use App\Repositories\Criteria\WhereNot;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Inertia\Inertia;
 use Modules\Companies\Entities\Company;
 use Modules\Companies\Http\Requests\UpdateCompanyRequest;
@@ -34,7 +28,6 @@ class CompaniesController extends Controller
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'rowData' => $this->companiesRepository->withCriteria([
                 new Select('id', 'name', 'email', 'phone', 'user_id', 'online', 'created_at', 'updated_at'),
-                new ByUser(auth()->user()->id),
                 new WhereLike(['companies.id', 'companies.name', 'companies.email', 'companies.content'], $this->request->get('search')),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
                 new EagerLoad(['user:id,name', 'jobs:id,company_id']),
@@ -70,12 +63,10 @@ class CompaniesController extends Controller
             ]
         ));
 
-
         return $this->response
             ->json([], Response::HTTP_CREATED, [], JSON_NUMERIC_CHECK)
             ->flash(__(':company successfully added!', ['company' => $company->name]));
     }
-
 
     public function show($id)
     {

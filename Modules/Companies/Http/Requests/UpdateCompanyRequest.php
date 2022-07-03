@@ -1,10 +1,8 @@
 <?php
-
 namespace Modules\Companies\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 use Modules\Users\Rules\Phone;
 
 class UpdateCompanyRequest extends FormRequest
