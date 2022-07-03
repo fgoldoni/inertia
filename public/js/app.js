@@ -272,7 +272,7 @@ window._ = (lodash__WEBPACK_IMPORTED_MODULE_0___default());
 
 window.axios = (axios__WEBPACK_IMPORTED_MODULE_1___default());
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['Authorization'] = 'Bearer bMcVP4Hd6Hkp8BqvtEiW5LensPZGwkf7YlH0MVef';
+window.axios.defaults.headers.common['Authorization'] = 'Bearer zXz1VXk3N3MXXdwGoxocGDCjYKO4VE3HILSxL1gT';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

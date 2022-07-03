@@ -12,7 +12,7 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-window.axios.defaults.headers.common['Authorization'] = 'Bearer bMcVP4Hd6Hkp8BqvtEiW5LensPZGwkf7YlH0MVef';
+window.axios.defaults.headers.common['Authorization'] = 'Bearer zXz1VXk3N3MXXdwGoxocGDCjYKO4VE3HILSxL1gT';
 
 
 /**
