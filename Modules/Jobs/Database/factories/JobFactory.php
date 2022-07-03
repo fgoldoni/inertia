@@ -21,12 +21,15 @@ class JobFactory extends Factory
      */
     public function definition()
     {
+        $userId = $this->faker->numberBetween(1, 10);
+
         return [
             'name' => $this->faker->jobTitle,
             'phone' => $this->faker->phoneNumber,
             'view_count' => $this->faker->numberBetween(0, 100),
             'content' => $this->faker->sentence(100),
-            'user_id' => $this->faker->numberBetween(1, 10),
+            'user_id' => $userId,
+            'team_id' => $userId,
             'country_id' => $this->faker->numberBetween(1, 200),
             'state' => $this->faker->randomElement([JobState::Draft, JobState::Published, JobState::Archived, JobState::Hold]),
             'salary_type' => $this->faker->randomElement([SalaryType::Day, SalaryType::Hour, SalaryType::Month, SalaryType::Year]),

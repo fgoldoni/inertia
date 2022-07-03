@@ -26,4 +26,12 @@ trait Migration
         $table->string('seo_title', 60)->nullable();
         $table->string('seo_description', 160)->nullable();
     }
+
+    /**
+     * Create fields common to seo.
+     */
+    public function addTeamField(Blueprint $table): void
+    {
+        $table->foreignId('team_id')->nullable()->constrained();
+    }
 }

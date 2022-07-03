@@ -23,17 +23,17 @@ class JobPolicy
 
     public function update(User $user, Job $model = null): bool
     {
-        return $user->hasPermissionTo('update_jobs') && ((int)$user->id === (int)$model->user_id);
+        return $user->hasPermissionTo('update_jobs') && ((int)$user->currentTeam->id === (int)$model->team_id);
     }
 
     public function edit(User $user, Job $model): bool
     {
-        return $user->hasPermissionTo('edit_jobs') && ((int) $user->id === (int) $model->user_id);
+        return $user->hasPermissionTo('edit_jobs') && ((int) $user->currentTeam->id === (int) $model->team_id);
     }
 
     public function delete(User $user, Job $model): bool
     {
-        return $user->hasPermissionTo('delete_jobs') && ((int) $user->id === (int) $model->user_id);
+        return $user->hasPermissionTo('delete_jobs') && ((int) $user->currentTeam->id === (int) $model->team_id);
     }
 
     public function forceDelete(User $user): bool

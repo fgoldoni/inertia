@@ -233,7 +233,7 @@ var _hoisted_3 = {
 };
 var _hoisted_4 = ["disabled"];
 var _hoisted_5 = {
-  "class": "inline-block rounded-full bg-indigo-100 px-2 text-xs font-semibold leading-5 text-indigo-800"
+  "class": "inline-block rounded-full bg-secondary-100 px-2 text-xs font-semibold leading-5 text-secondary-800"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _$setup$props$row$cit;

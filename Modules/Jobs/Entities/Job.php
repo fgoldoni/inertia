@@ -5,6 +5,7 @@ use App\Traits\BelongsToUser;
 use App\Traits\Categorizable;
 use App\Traits\HasAvatar;
 use App\Traits\JobAttribute;
+use App\Traits\UsedByTeams;
 use App\Traits\WithinDays;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,7 +27,18 @@ use Spatie\Translatable\HasTranslations;
 
 class Job extends Model
 {
-    use HasFactory, HasSlug, HasAvatar, HasTranslations, Categorizable, BelongsToUser, SoftDeletes, WithinDays, JobAttribute, AttachableTrait, LogsActivity;
+    use HasFactory;
+    use HasSlug;
+    use HasAvatar;
+    use HasTranslations;
+    use Categorizable;
+    use BelongsToUser;
+    use SoftDeletes;
+    use WithinDays;
+    use JobAttribute;
+    use AttachableTrait;
+    use LogsActivity;
+    use UsedByTeams;
 
     protected $guarded = [];
 

@@ -48,7 +48,6 @@ class JobsController extends Controller
             'rowData' => $this->jobsRepository->withCriteria([
                 new Select('id', 'name', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at', 'deleted_at'),
                 new WhereLike(['jobs.id', 'jobs.name'], $this->request->get('search')),
-                new ByUser(auth()->user()->id),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
                 new EagerLoad(['user:id,name', 'company:id,name', 'categories:id,name,type', 'country:id,name,emoji', 'city:id,name', 'division:id,name']),
                 new WithTrashed(),
