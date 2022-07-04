@@ -27,6 +27,8 @@ class Team extends JetstreamTeam
      */
     protected $fillable = [
         'name',
+        'subdomain',
+        'display_name',
         'personal_team',
     ];
 

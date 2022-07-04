@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Users\Database\Seeders;
 
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,10 @@ class SeedFakeUsersTableSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         $user = User::factory()->withPersonalTeam()->create(['name' => 'Admin SG', 'email' => 'admin@admin.com']);
+
+        Team::where('id', $user->currentTeam->id)
+            ->first()
+            ->update(['subdomain' => 'ebony', 'display_name' => 'Wedo37']);
 
         $user->assignRole(config('app.system.users.roles.administrator'));
 

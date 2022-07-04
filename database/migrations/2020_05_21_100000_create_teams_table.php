@@ -16,6 +16,8 @@ return new class() extends Migration {
             $table->id();
             $table->foreignId('user_id')->index();
             $table->string('name');
+            $table->string('display_name')->nullable();
+            $table->string('subdomain')->unique()->nullable();
             $table->boolean('personal_team');
             $table->timestamps();
         });

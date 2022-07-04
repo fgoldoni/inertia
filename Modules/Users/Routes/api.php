@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Users\Http\Controllers\Api\TeamController;
 use Modules\Users\Http\Controllers\Api\UsersController;
 
 /*
@@ -17,4 +18,10 @@ use Modules\Users\Http\Controllers\Api\UsersController;
 
 Route::controller(UsersController::class)->prefix('users')->name('api.users.')->group(function () {
     Route::get('/', 'index')->name('index');
+});
+
+Route::controller(TeamController::class)->prefix('teams')->name('api.teams.')->group(function () {
+    Route::get('{subdomain}', 'index')
+        ->name('index')
+        ->where('subdomain', '[a-z]+');
 });
