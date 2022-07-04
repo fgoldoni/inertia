@@ -70,6 +70,13 @@ export class Errors {
     {
         if (error.response !== undefined && error.response.hasOwnProperty('data') && error.response.data.hasOwnProperty('errors')) {
             this.record(error.response.data.errors)
+            if (error.response.data.hasOwnProperty('message')) {
+                ElNotification({
+                    title: error.response.statusText,
+                    message: error.response.data.message,
+                    type: 'error',
+                })
+            }
         } else if (error.response !== undefined && error.response.hasOwnProperty('data') && error.response.data.hasOwnProperty('message')) {
             ElNotification({
                 title: error.response.statusText,

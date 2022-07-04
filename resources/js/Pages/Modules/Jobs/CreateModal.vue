@@ -140,7 +140,7 @@ const onSubmit = () => {
         closeModal()
     }).catch(error => {
         form.processing = false;
-        form.errors.record(error.response.data.errors);
+        form.errors.onFailed(error);
     });
 
 };
@@ -191,7 +191,7 @@ const onSubmit = () => {
 
                                                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
-                                                            <div class="col-span-1 sm:col-span-2">
+                                                            <div class="col-span-1 sm:col-span-2" v-if="form.errors.any()">
                                                                 <ValidationErrors :errors="form.errors.all()" class="mb-4" />
                                                             </div>
 

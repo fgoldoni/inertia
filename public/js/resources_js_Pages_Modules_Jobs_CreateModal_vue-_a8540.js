@@ -524,6 +524,14 @@ var Errors = /*#__PURE__*/function () {
     value: function onFailed(error) {
       if (error.response !== undefined && error.response.hasOwnProperty('data') && error.response.data.hasOwnProperty('errors')) {
         this.record(error.response.data.errors);
+
+        if (error.response.data.hasOwnProperty('message')) {
+          (0,element_plus__WEBPACK_IMPORTED_MODULE_1__.ElNotification)({
+            title: error.response.statusText,
+            message: error.response.data.message,
+            type: 'error'
+          });
+        }
       } else if (error.response !== undefined && error.response.hasOwnProperty('data') && error.response.data.hasOwnProperty('message')) {
         (0,element_plus__WEBPACK_IMPORTED_MODULE_1__.ElNotification)({
           title: error.response.statusText,
@@ -981,7 +989,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         closeModal();
       })["catch"](function (error) {
         form.processing = false;
-        form.errors.record(error.response.data.errors);
+        form.errors.onFailed(error);
       });
     };
 
@@ -2011,6 +2019,7 @@ var _hoisted_11 = {
   "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
 };
 var _hoisted_12 = {
+  key: 0,
   "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_13 = {
@@ -2222,12 +2231,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     _: 1
                     /* STABLE */
 
-                  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ValidationErrors"], {
+                  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [$setup.form.errors.any() ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ValidationErrors"], {
                     errors: $setup.form.errors.all(),
                     "class": "mb-4"
                   }, null, 8
                   /* PROPS */
-                  , ["errors"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                  , ["errors"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
                     title: _ctx.__('Name & Description'),
                     "default-open": ""
                   }, {
