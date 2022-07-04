@@ -2178,40 +2178,36 @@ var _hoisted_3 = {
   "class": "flex items-stretch md:items-center justify-center min-h-full text-center md:px-2 lg:px-4"
 };
 var _hoisted_4 = {
-  "class": "flex items-center justify-between"
+  "class": "px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
 };
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "sr-only"
-}, "Close", -1
-/* HOISTED */
-);
-
-var _hoisted_6 = {
+var _hoisted_5 = {
   "class": "sm:hidden"
 };
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "tabs",
   "class": "sr-only"
 }, "Select a tab", -1
 /* HOISTED */
 );
 
-var _hoisted_8 = ["value"];
-var _hoisted_9 = {
+var _hoisted_7 = ["value"];
+var _hoisted_8 = {
   "class": "hidden sm:block"
 };
-var _hoisted_10 = {
+var _hoisted_9 = {
   "class": "border-b border-secondary-200"
 };
-var _hoisted_11 = {
+var _hoisted_10 = {
   "class": "px-4 -mb-px flex space-x-8",
   "aria-label": "Tabs"
 };
-var _hoisted_12 = ["onClick", "aria-current"];
+var _hoisted_11 = ["onClick", "aria-current"];
+var _hoisted_12 = {
+  key: 0
+};
 var _hoisted_13 = {
-  "class": "px-8 pt-5 pb-4 sm:p-6 sm:pb-4"
+  "class": "px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
 };
 var _hoisted_14 = {
   "class": "grid grid-cols-1"
@@ -2219,64 +2215,64 @@ var _hoisted_14 = {
 var _hoisted_15 = {
   "class": "col-span-1"
 };
-var _hoisted_16 = ["onSubmit"];
-var _hoisted_17 = {
+var _hoisted_16 = {
+  key: 1
+};
+var _hoisted_17 = ["onSubmit"];
+var _hoisted_18 = {
   "class": "px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
 };
-var _hoisted_18 = {
+var _hoisted_19 = {
   "class": "grid grid-cols-1 gap-4 sm:grid-cols-3"
 };
-var _hoisted_19 = {
+var _hoisted_20 = {
   "class": "col-span-1 sm:col-span-3"
 };
-var _hoisted_20 = {
+var _hoisted_21 = {
   "class": "grid grid-cols-1 gap-6 sm:grid-cols-3"
 };
-var _hoisted_21 = {
+var _hoisted_22 = {
   "class": "col-span-1 sm:col-span-2"
 };
-var _hoisted_22 = {
+var _hoisted_23 = {
   "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
 };
-var _hoisted_23 = {
+var _hoisted_24 = {
   key: 0,
   "class": "col-span-1 sm:col-span-2"
 };
-var _hoisted_24 = {
-  "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
-};
 var _hoisted_25 = {
-  "class": "col-span-1 sm:col-span-2"
+  "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
 };
 var _hoisted_26 = {
   "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_27 = {
-  "class": "mt-3 flex items-center justify-between"
+  "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_28 = {
+  "class": "mt-3 flex items-center justify-between"
+};
+var _hoisted_29 = {
   href: "#",
   "class": "group inline-flex items-start text-sm space-x-2 text-secondary-500 hover:text-secondary-900"
 };
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " Some HTML is okay. ", -1
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " Some HTML is okay. ", -1
 /* HOISTED */
 );
 
-var _hoisted_30 = {
-  "class": "grid grid-cols-1 gap-4 sm:grid-cols-1"
-};
 var _hoisted_31 = {
-  "class": "col-span-1"
+  "class": "grid grid-cols-1 gap-4 sm:grid-cols-1"
 };
 var _hoisted_32 = {
   "class": "col-span-1"
 };
 var _hoisted_33 = {
-  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-2"
+  "class": "col-span-1"
 };
 var _hoisted_34 = {
-  "class": "col-span-1 sm:col-span-2"
+  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-2"
 };
 var _hoisted_35 = {
   "class": "col-span-1 sm:col-span-2"
@@ -2285,113 +2281,116 @@ var _hoisted_36 = {
   "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_37 = {
-  "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
+  "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_38 = {
-  "class": "col-span-1"
+  "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
 };
 var _hoisted_39 = {
   "class": "col-span-1"
 };
 var _hoisted_40 = {
+  "class": "col-span-1"
+};
+var _hoisted_41 = {
   "class": "col-span-1 sm:col-span-2"
 };
 
-var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "text-sm font-medium text-secondary-500"
 }, "Negotiable Salary", -1
 /* HOISTED */
 );
 
-var _hoisted_42 = {
-  "class": "col-span-1 sm:col-span-2"
-};
 var _hoisted_43 = {
-  "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
+  "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_44 = {
-  "class": "col-span-1 sm:col-span-2"
+  "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
 };
 var _hoisted_45 = {
-  "class": "col-span-1"
+  "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_46 = {
   "class": "col-span-1"
 };
 var _hoisted_47 = {
-  "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
+  "class": "col-span-1"
 };
 var _hoisted_48 = {
-  "class": "col-span-1 sm:col-span-2"
+  "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
 };
 var _hoisted_49 = {
   "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_50 = {
-  "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
+  "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_51 = {
-  "class": "col-span-1 sm:col-span-2"
+  "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
 };
 var _hoisted_52 = {
   "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_53 = {
-  "class": "col-span-1"
+  "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_54 = {
   "class": "col-span-1"
 };
 var _hoisted_55 = {
-  "class": "col-span-1 sm:col-span-2"
+  "class": "col-span-1"
 };
 var _hoisted_56 = {
-  "class": "mt-3 flex items-center justify-between"
+  "class": "col-span-1 sm:col-span-2"
 };
 var _hoisted_57 = {
+  "class": "mt-3 flex items-center justify-between"
+};
+var _hoisted_58 = {
   href: "#",
   "class": "group inline-flex items-start text-sm space-x-2 text-secondary-500 hover:text-secondary-900"
 };
 
-var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " Some HTML is okay. ", -1
+var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " Some HTML is okay. ", -1
 /* HOISTED */
 );
 
-var _hoisted_59 = {
+var _hoisted_60 = {
   "class": "bg-white rounded-lg shadow-md divide-y divide-secondary-200 dark:bg-secondary-800 dark:divide-secondary-700 shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
 };
-var _hoisted_60 = {
-  "class": "col-span-1"
-};
 var _hoisted_61 = {
-  "class": "grid grid-cols-1 gap-4 sm:grid-cols-1"
+  "class": "col-span-1"
 };
 var _hoisted_62 = {
-  "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
+  "class": "grid grid-cols-1 gap-4 sm:grid-cols-1"
 };
 var _hoisted_63 = {
-  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
+  "class": "bg-white rounded-lg shadow-md border-2 border-secondary-200 col-span-1 sm:col-span-2"
 };
 var _hoisted_64 = {
-  "class": "col-span-1"
+  "class": "p-4 grid grid-cols-1 gap-4 sm:grid-cols-1"
 };
 var _hoisted_65 = {
   "class": "col-span-1"
 };
+var _hoisted_66 = {
+  "class": "col-span-1"
+};
 
-var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "mt-2 text-sm leading-5 text-secondary-500 dark:text-secondary-400"
 }, " Specify a deadline date so that your job are scheduled on your store. ", -1
 /* HOISTED */
 );
 
-var _hoisted_67 = {
+var _hoisted_68 = {
   "class": "grid grid-cols-1 gap-4 sm:grid-cols-1"
 };
-var _hoisted_68 = {
+var _hoisted_69 = {
   "class": "col-span-1"
 };
-var _hoisted_69 = {
+var _hoisted_70 = {
   "class": "bg-secondary-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2436,24 +2435,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 "class": "relative text-base bg-secondary-100 text-left transform transition w-full md:max-w-4xl md:px-4 md:my-8 lg:max-w-6xl"
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-                    href: $setup.props.basePageRoute,
-                    "preserve-state": "",
-                    "preserve-scroll": "",
-                    "class": "absolute top-0 right-4 text-secondary-400 hover:text-secondary-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
-                  }, {
-                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                      return [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["XIcon"], {
-                        "class": "h-6 w-6",
-                        "aria-hidden": "true"
-                      })];
-                    }),
-                    _: 1
-                    /* STABLE */
-
-                  }, 8
-                  /* PROPS */
-                  , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Use an \"onChange\" listener to redirect the user to the selected tab URL. "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Use an \"onChange\" listener to redirect the user to the selected tab URL. "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
                     id: "tabs",
                     name: "tabs",
                     "class": "block w-full focus:ring-primary-500 focus:border-primary-500 border-secondary-300 rounded-md",
@@ -2466,12 +2448,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                       value: tab.key
                     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tab.name), 9
                     /* TEXT, PROPS */
-                    , _hoisted_8);
+                    , _hoisted_7);
                   }), 64
                   /* STABLE_FRAGMENT */
                   ))], 512
                   /* NEED_PATCH */
-                  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.currentTab]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tabs, function (tab) {
+                  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.currentTab]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tabs, function (tab) {
                     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
                       key: tab.name,
                       href: "javascript:;",
@@ -2489,664 +2471,630 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     /* TEXT */
                     )], 10
                     /* CLASS, PROPS */
-                    , _hoisted_12);
+                    , _hoisted_11);
                   }), 64
                   /* STABLE_FRAGMENT */
-                  ))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TransitionRoot"], {
-                    show: $setup.currentTab === 'logs',
-                    enter: "transition duration-100 ease-out",
-                    "enter-from": "transform scale-95 opacity-0",
-                    "enter-to": "transform scale-100 opacity-100",
-                    leave: "transition duration-75 ease-out",
-                    "leave-from": "transform scale-100 opacity-100",
-                    "leave-to": "transform scale-95 opacity-0"
+                  ))])])])]), $setup.currentTab === 'logs' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Logs"], {
+                    options: $setup.props.editing.logs
+                  }, null, 8
+                  /* PROPS */
+                  , ["options"])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.currentTab === 'edit_modal' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+                    onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.onSubmit, ["prevent"]),
+                    onKeydown: _cache[26] || (_cache[26] = function ($event) {
+                      return $setup.form.errors.clear($event.target.name);
+                    })
+                  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [$setup.form.errors.any() ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ValidationErrors"], {
+                    errors: $setup.form.errors.all(),
+                    "class": "mb-4"
+                  }, null, 8
+                  /* PROPS */
+                  , ["errors"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                    title: _ctx.__('Name & Description'),
+                    "default-open": ""
                   }, {
                     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Logs"], {
-                        options: $setup.props.editing.logs
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                        "for": "name",
+                        value: "Job Title",
+                        required: ""
+                      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
+                        id: "name",
+                        name: "name",
+                        modelValue: $setup.form.name,
+                        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+                          return $setup.form.name = $event;
+                        }),
+                        type: "text",
+                        "class": "mt-1 block w-full",
+                        required: "",
+                        autofocus: ""
                       }, null, 8
                       /* PROPS */
-                      , ["options"])])])])])];
+                      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('name'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                        "for": "content",
+                        value: "Job Description",
+                        required: ""
+                      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetTextarea"], {
+                        id: "content",
+                        name: "content",
+                        modelValue: $setup.form.content,
+                        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+                          return $setup.form.content = $event;
+                        }),
+                        type: "text",
+                        required: "",
+                        "class": "mt-1 block w-full"
+                      }, null, 8
+                      /* PROPS */
+                      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["QuestionMarkCircleIcon"], {
+                        "class": "flex-shrink-0 h-5 w-5 text-secondary-400 group-hover:text-secondary-500",
+                        "aria-hidden": "true"
+                      }), _hoisted_30])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('content'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])])])];
                     }),
                     _: 1
                     /* STABLE */
 
                   }, 8
                   /* PROPS */
-                  , ["show"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TransitionRoot"], {
-                    show: $setup.currentTab === 'edit_modal',
-                    enter: "transition duration-100 ease-out",
-                    "enter-from": "transform scale-95 opacity-0",
-                    "enter-to": "transform scale-100 opacity-100",
-                    leave: "transition duration-75 ease-out",
-                    "leave-from": "transform scale-100 opacity-100",
-                    "leave-to": "transform scale-95 opacity-0"
+                  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                    title: _ctx.__('Assets')
                   }, {
                     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-                        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.onSubmit, ["prevent"]),
-                        onKeydown: _cache[26] || (_cache[26] = function ($event) {
-                          return $setup.form.errors.clear($event.target.name);
-                        })
-                      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [$setup.form.errors.any() ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ValidationErrors"], {
-                        errors: $setup.form.errors.all(),
-                        "class": "mb-4"
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                        value: _ctx.__('Logo'),
+                        "class": "mb-2"
                       }, null, 8
                       /* PROPS */
-                      , ["errors"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
-                        title: _ctx.__('Name & Description'),
-                        "default-open": ""
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                            "for": "name",
-                            value: "Job Title",
-                            required: ""
-                          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
-                            id: "name",
-                            name: "name",
-                            modelValue: $setup.form.name,
-                            "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-                              return $setup.form.name = $event;
-                            }),
-                            type: "text",
-                            "class": "mt-1 block w-full",
-                            required: "",
-                            autofocus: ""
-                          }, null, 8
-                          /* PROPS */
-                          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('name'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                            "for": "content",
-                            value: "Job Description",
-                            required: ""
-                          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetTextarea"], {
-                            id: "content",
-                            name: "content",
-                            modelValue: $setup.form.content,
-                            "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-                              return $setup.form.content = $event;
-                            }),
-                            type: "text",
-                            required: "",
-                            "class": "mt-1 block w-full"
-                          }, null, 8
-                          /* PROPS */
-                          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["QuestionMarkCircleIcon"], {
-                            "class": "flex-shrink-0 h-5 w-5 text-secondary-400 group-hover:text-secondary-500",
-                            "aria-hidden": "true"
-                          }), _hoisted_29])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('content'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])])])];
+                      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AvatarInput"], {
+                        modelValue: $setup.form.avatar,
+                        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+                          return $setup.form.avatar = $event;
                         }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
+                        "default-src": $setup.form.defaultSrc
+                      }, null, 8
                       /* PROPS */
-                      , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
-                        title: _ctx.__('Assets')
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                            value: _ctx.__('Logo'),
-                            "class": "mb-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AvatarInput"], {
-                            modelValue: $setup.form.avatar,
-                            "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-                              return $setup.form.avatar = $event;
-                            }),
-                            "default-src": $setup.form.defaultSrc
-                          }, null, 8
-                          /* PROPS */
-                          , ["modelValue", "default-src"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                            value: _ctx.__('Featured Image'),
-                            "class": "mb-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ImageUpload"], {
-                            modelValue: $setup.form.files,
-                            "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-                              return $setup.form.files = $event;
-                            })
-                          }, null, 8
-                          /* PROPS */
-                          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('files'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])])])];
+                      , ["modelValue", "default-src"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                        value: _ctx.__('Featured Image'),
+                        "class": "mb-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ImageUpload"], {
+                        modelValue: $setup.form.files,
+                        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+                          return $setup.form.files = $event;
+                        })
+                      }, null, 8
+                      /* PROPS */
+                      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('files'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])])])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }, 8
+                  /* PROPS */
+                  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                    title: _ctx.__('Companies & Areas')
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                        options: $setup.job.data.companies,
+                        modelValue: $setup.form.company_id,
+                        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+                          return $setup.form.company_id = $event;
                         }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
+                        placeholder: "Companies",
+                        label: "Companies"
+                      }, null, 8
                       /* PROPS */
-                      , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
-                        title: _ctx.__('Companies & Areas')
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
-                            options: $setup.job.data.companies,
-                            modelValue: $setup.form.company_id,
-                            "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-                              return $setup.form.company_id = $event;
-                            }),
-                            placeholder: "Companies",
-                            label: "Companies"
-                          }, null, 8
-                          /* PROPS */
-                          , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('company_id'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
-                            options: $setup.job.data.areas,
-                            modelValue: $setup.form.area,
-                            "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-                              return $setup.form.area = $event;
-                            }),
-                            placeholder: "Areas",
-                            label: "Areas"
-                          }, null, 8
-                          /* PROPS */
-                          , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('area'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
-                            options: $setup.job.data.industries,
-                            modelValue: $setup.form.industry,
-                            "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
-                              return $setup.form.industry = $event;
-                            }),
-                            placeholder: "Industries",
-                            label: "Industries"
-                          }, null, 8
-                          /* PROPS */
-                          , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('industry'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])])])];
+                      , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('company_id'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                        options: $setup.job.data.areas,
+                        modelValue: $setup.form.area,
+                        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+                          return $setup.form.area = $event;
                         }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
+                        placeholder: "Areas",
+                        label: "Areas"
+                      }, null, 8
                       /* PROPS */
-                      , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
-                        title: _ctx.__('Salaries')
+                      , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('area'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                        options: $setup.job.data.industries,
+                        modelValue: $setup.form.industry,
+                        "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+                          return $setup.form.industry = $event;
+                        }),
+                        placeholder: "Industries",
+                        label: "Industries"
+                      }, null, 8
+                      /* PROPS */
+                      , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('industry'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])])])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }, 8
+                  /* PROPS */
+                  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                    title: _ctx.__('Salaries')
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                        "for": "salary_min",
+                        value: "Min. Salary"
+                      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
+                        id: "salary_min",
+                        name: "salary_min",
+                        modelValue: $setup.form.salary_min,
+                        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+                          return $setup.form.salary_min = $event;
+                        }),
+                        type: "number",
+                        "class": "mt-1 block w-full"
+                      }, null, 8
+                      /* PROPS */
+                      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('salary_min'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                        "for": "salary_max",
+                        value: "Max. Salary"
+                      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
+                        id: "salary_max",
+                        name: "salary_max",
+                        modelValue: $setup.form.salary_max,
+                        "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+                          return $setup.form.salary_max = $event;
+                        }),
+                        type: "number",
+                        "class": "mt-1 block w-full"
+                      }, null, 8
+                      /* PROPS */
+                      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('salary_max'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SwitchGroup"], {
+                        as: "div",
+                        "class": "flex items-center whitespace-nowrap"
                       }, {
                         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                            "for": "salary_min",
-                            value: "Min. Salary"
-                          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
-                            id: "salary_min",
-                            name: "salary_min",
-                            modelValue: $setup.form.salary_min,
-                            "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-                              return $setup.form.salary_min = $event;
+                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Switch"], {
+                            modelValue: $setup.form.negotiable,
+                            "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+                              return $setup.form.negotiable = $event;
                             }),
-                            type: "number",
-                            "class": "mt-1 block w-full"
-                          }, null, 8
-                          /* PROPS */
-                          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('salary_min'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                            "for": "salary_max",
-                            value: "Max. Salary"
-                          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
-                            id: "salary_max",
-                            name: "salary_max",
-                            modelValue: $setup.form.salary_max,
-                            "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-                              return $setup.form.salary_max = $event;
-                            }),
-                            type: "number",
-                            "class": "mt-1 block w-full"
-                          }, null, 8
-                          /* PROPS */
-                          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('salary_max'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SwitchGroup"], {
-                            as: "div",
-                            "class": "flex items-center whitespace-nowrap"
+                            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.form.negotiable ? 'bg-primary-600' : 'bg-secondary-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'])
                           }, {
                             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Switch"], {
-                                modelValue: $setup.form.negotiable,
-                                "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-                                  return $setup.form.negotiable = $event;
-                                }),
-                                "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.form.negotiable ? 'bg-primary-600' : 'bg-secondary-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500'])
-                              }, {
-                                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-                                    "aria-hidden": "true",
-                                    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.form.negotiable ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'])
-                                  }, null, 2
-                                  /* CLASS */
-                                  )];
-                                }),
-                                _: 1
-                                /* STABLE */
-
-                              }, 8
-                              /* PROPS */
-                              , ["modelValue", "class"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SwitchLabel"], {
-                                as: "span",
-                                "class": "ml-3"
-                              }, {
-                                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                                  return [_hoisted_41];
-                                }),
-                                _: 1
-                                /* STABLE */
-
-                              })];
+                              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+                                "aria-hidden": "true",
+                                "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.form.negotiable ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'])
+                              }, null, 2
+                              /* CLASS */
+                              )];
                             }),
                             _: 1
                             /* STABLE */
 
-                          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('negotiable'),
-                            "class": "mt-2"
-                          }, null, 8
+                          }, 8
                           /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
-                            options: $setup.job.data.salaryTypes,
-                            modelValue: $setup.form.salary_type,
-                            "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
-                              return $setup.form.salary_type = $event;
+                          , ["modelValue", "class"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SwitchLabel"], {
+                            as: "span",
+                            "class": "ml-3"
+                          }, {
+                            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                              return [_hoisted_42];
                             }),
-                            placeholder: "Salary Types",
-                            label: "Salary Types"
-                          }, null, 8
-                          /* PROPS */
-                          , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('salary_type'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])])])];
+                            _: 1
+                            /* STABLE */
+
+                          })];
                         }),
                         _: 1
                         /* STABLE */
 
-                      }, 8
-                      /* PROPS */
-                      , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
-                        title: _ctx.__('Experiences & Career')
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
-                            options: $setup.job.data.jobTypes,
-                            modelValue: $setup.form.job_type,
-                            "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
-                              return $setup.form.job_type = $event;
-                            }),
-                            placeholder: "Job Type",
-                            label: "Job Type"
-                          }, null, 8
-                          /* PROPS */
-                          , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('job_type'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
-                            options: $setup.job.data.experiences,
-                            modelValue: $setup.form.experience,
-                            "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
-                              return $setup.form.experience = $event;
-                            }),
-                            placeholder: "Experiences",
-                            label: "Experiences"
-                          }, null, 8
-                          /* PROPS */
-                          , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('experience'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
-                            options: $setup.job.data.careerLevels,
-                            modelValue: $setup.form.career_level,
-                            "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
-                              return $setup.form.career_level = $event;
-                            }),
-                            placeholder: "Career Level",
-                            label: "Career Level"
-                          }, null, 8
-                          /* PROPS */
-                          , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('career_level'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])])])];
-                        }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
-                      /* PROPS */
-                      , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
-                        title: _ctx.__('Gender & Qualification')
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
-                            options: $setup.job.data.genders,
-                            modelValue: $setup.form.gender,
-                            "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
-                              return $setup.form.gender = $event;
-                            }),
-                            placeholder: "Gender",
-                            label: "Gender"
-                          }, null, 8
-                          /* PROPS */
-                          , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('gender'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
-                            options: $setup.job.data.jobLevels,
-                            modelValue: $setup.form.job_level,
-                            "onUpdate:modelValue": _cache[16] || (_cache[16] = function ($event) {
-                              return $setup.form.job_level = $event;
-                            }),
-                            placeholder: _ctx.__('Qualification'),
-                            label: _ctx.__('Qualification')
-                          }, null, 8
-                          /* PROPS */
-                          , ["options", "modelValue", "placeholder", "label"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('job_level'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])])])];
-                        }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
-                      /* PROPS */
-                      , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
-                        title: _ctx.__('Friendly Address')
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          var _$setup$props$editing, _$setup$props$editing2;
-
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                            "for": "address",
-                            value: "Friendly Address"
-                          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
-                            id: "address",
-                            name: "address",
-                            modelValue: $setup.form.address,
-                            "onUpdate:modelValue": _cache[17] || (_cache[17] = function ($event) {
-                              return $setup.form.address = $event;
-                            }),
-                            type: "text",
-                            "class": "mt-1 block w-full"
-                          }, null, 8
-                          /* PROPS */
-                          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('address'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseComboboxes"], {
-                            modelValue: $setup.form.country_id,
-                            "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
-                              return $setup.form.country_id = $event;
-                            }),
-                            placeholder: "No category",
-                            "api-url": "api.countries.index",
-                            label: "Country",
-                            "default-value": (_$setup$props$editing = $setup.props.editing.country) === null || _$setup$props$editing === void 0 ? void 0 : _$setup$props$editing.name,
-                            key: "select-country"
-                          }, null, 8
-                          /* PROPS */
-                          , ["modelValue", "default-value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('country_id'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseComboboxes"], {
-                            modelValue: $setup.form.city_id,
-                            "onUpdate:modelValue": _cache[19] || (_cache[19] = function ($event) {
-                              return $setup.form.city_id = $event;
-                            }),
-                            "country-id": $setup.form.country_id,
-                            placeholder: "No city",
-                            "api-url": "api.cities.index",
-                            label: "City",
-                            "default-value": (_$setup$props$editing2 = $setup.props.editing.city) === null || _$setup$props$editing2 === void 0 ? void 0 : _$setup$props$editing2.name,
-                            key: "select-city"
-                          }, null, 8
-                          /* PROPS */
-                          , ["modelValue", "country-id", "default-value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('city_id'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                            "for": "zip",
-                            value: _ctx.__('Postal / Zip code')
-                          }, null, 8
-                          /* PROPS */
-                          , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
-                            id: "zip",
-                            name: "zip",
-                            modelValue: $setup.form.zip,
-                            "onUpdate:modelValue": _cache[20] || (_cache[20] = function ($event) {
-                              return $setup.form.zip = $event;
-                            }),
-                            type: "text",
-                            "class": "mt-1 block w-full"
-                          }, null, 8
-                          /* PROPS */
-                          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('zip'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                            "for": "iframe",
-                            value: "iFrame"
-                          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetTextarea"], {
-                            id: "iframe",
-                            name: "iframe",
-                            modelValue: $setup.form.iframe,
-                            "onUpdate:modelValue": _cache[21] || (_cache[21] = function ($event) {
-                              return $setup.form.iframe = $event;
-                            }),
-                            type: "text",
-                            "class": "mt-1 block w-full"
-                          }, null, 8
-                          /* PROPS */
-                          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["QuestionMarkCircleIcon"], {
-                            "class": "flex-shrink-0 h-5 w-5 text-secondary-400 group-hover:text-secondary-500",
-                            "aria-hidden": "true"
-                          }), _hoisted_58])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('iframe'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])])])];
-                        }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
-                      /* PROPS */
-                      , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
-                        title: _ctx.__('Responsibilities, Skills & Benefits')
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Skills"], {
-                            options: $setup.job.data,
-                            editing: $setup.props.editing,
-                            modelValue: $setup.form.skills,
-                            "onUpdate:modelValue": _cache[22] || (_cache[22] = function ($event) {
-                              return $setup.form.skills = $event;
-                            })
-                          }, null, 8
-                          /* PROPS */
-                          , ["options", "editing", "modelValue"])];
-                        }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
-                      /* PROPS */
-                      , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Seo"], {
-                        editing: $setup.props.editing,
-                        modelValue: $setup.form.seo,
-                        "onUpdate:modelValue": _cache[23] || (_cache[23] = function ($event) {
-                          return $setup.form.seo = $event;
-                        })
+                      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('negotiable'),
+                        "class": "mt-2"
                       }, null, 8
                       /* PROPS */
-                      , ["editing", "modelValue"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_63, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_64, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
-                        options: $setup.job.data.states,
-                        modelValue: $setup.form.state,
-                        "onUpdate:modelValue": _cache[24] || (_cache[24] = function ($event) {
-                          return $setup.form.state = $event;
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                        options: $setup.job.data.salaryTypes,
+                        modelValue: $setup.form.salary_type,
+                        "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
+                          return $setup.form.salary_type = $event;
                         }),
-                        placeholder: "Publish",
-                        label: "Publish"
+                        placeholder: "Salary Types",
+                        label: "Salary Types"
                       }, null, 8
                       /* PROPS */
                       , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                        message: $setup.form.errors.get('state'),
+                        message: $setup.form.errors.get('salary_type'),
                         "class": "mt-2"
                       }, null, 8
                       /* PROPS */
-                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
-                        value: _ctx.__('Application Deadline Date')
-                      }, null, 8
-                      /* PROPS */
-                      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DatePicker"]), _hoisted_66, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                        message: $setup.form.errors.get('closing_to'),
-                        "class": "mt-2"
-                      }, null, 8
-                      /* PROPS */
-                      , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
-                        title: _ctx.__('Job Apply Types')
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
-                            options: $setup.job.data.applyTypes,
-                            modelValue: $setup.form.apply_type,
-                            "onUpdate:modelValue": _cache[25] || (_cache[25] = function ($event) {
-                              return $setup.form.apply_type = $event;
-                            }),
-                            placeholder: _ctx.__('Job Apply Types'),
-                            label: _ctx.__('Job Apply Types')
-                          }, null, 8
-                          /* PROPS */
-                          , ["options", "modelValue", "placeholder", "label"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
-                            message: $setup.form.errors.get('apply_type'),
-                            "class": "mt-2"
-                          }, null, 8
-                          /* PROPS */
-                          , ["message"])])])];
-                        }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
-                      /* PROPS */
-                      , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
-                        title: _ctx.__('Jobs Tags')
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Tags"])];
-                        }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
-                      /* PROPS */
-                      , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
-                        title: _ctx.__('Your Packages')
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BasePackages"])];
-                        }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
-                      /* PROPS */
-                      , ["title"])])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_69, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingButton"], {
-                        type: "submit",
-                        loading: $setup.form.processing,
-                        "class": "uppercase w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm"
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Save')), 1
-                          /* TEXT */
-                          )];
-                        }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
-                      /* PROPS */
-                      , ["loading"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-                        href: $setup.props.basePageRoute,
-                        "preserve-state": "",
-                        "preserve-scroll": "",
-                        "class": "uppercase mt-3 w-full inline-flex justify-center rounded-md border border-secondary-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-secondary-700 hover:bg-secondary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
-                        id: "cancelButtonRef",
-                        ref: "cancelButtonRef"
-                      }, {
-                        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Cancel')), 1
-                          /* TEXT */
-                          )];
-                        }),
-                        _: 1
-                        /* STABLE */
-
-                      }, 8
-                      /* PROPS */
-                      , ["href"])])], 40
-                      /* PROPS, HYDRATE_EVENTS */
-                      , _hoisted_16)];
+                      , ["message"])])])];
                     }),
                     _: 1
                     /* STABLE */
 
                   }, 8
                   /* PROPS */
-                  , ["show"])];
+                  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                    title: _ctx.__('Experiences & Career')
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                        options: $setup.job.data.jobTypes,
+                        modelValue: $setup.form.job_type,
+                        "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
+                          return $setup.form.job_type = $event;
+                        }),
+                        placeholder: "Job Type",
+                        label: "Job Type"
+                      }, null, 8
+                      /* PROPS */
+                      , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('job_type'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                        options: $setup.job.data.experiences,
+                        modelValue: $setup.form.experience,
+                        "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
+                          return $setup.form.experience = $event;
+                        }),
+                        placeholder: "Experiences",
+                        label: "Experiences"
+                      }, null, 8
+                      /* PROPS */
+                      , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('experience'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                        options: $setup.job.data.careerLevels,
+                        modelValue: $setup.form.career_level,
+                        "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+                          return $setup.form.career_level = $event;
+                        }),
+                        placeholder: "Career Level",
+                        label: "Career Level"
+                      }, null, 8
+                      /* PROPS */
+                      , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('career_level'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])])])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }, 8
+                  /* PROPS */
+                  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                    title: _ctx.__('Gender & Qualification')
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                        options: $setup.job.data.genders,
+                        modelValue: $setup.form.gender,
+                        "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
+                          return $setup.form.gender = $event;
+                        }),
+                        placeholder: "Gender",
+                        label: "Gender"
+                      }, null, 8
+                      /* PROPS */
+                      , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('gender'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                        options: $setup.job.data.jobLevels,
+                        modelValue: $setup.form.job_level,
+                        "onUpdate:modelValue": _cache[16] || (_cache[16] = function ($event) {
+                          return $setup.form.job_level = $event;
+                        }),
+                        placeholder: _ctx.__('Qualification'),
+                        label: _ctx.__('Qualification')
+                      }, null, 8
+                      /* PROPS */
+                      , ["options", "modelValue", "placeholder", "label"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('job_level'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])])])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }, 8
+                  /* PROPS */
+                  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                    title: _ctx.__('Friendly Address')
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      var _$setup$props$editing, _$setup$props$editing2;
+
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                        "for": "address",
+                        value: "Friendly Address"
+                      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
+                        id: "address",
+                        name: "address",
+                        modelValue: $setup.form.address,
+                        "onUpdate:modelValue": _cache[17] || (_cache[17] = function ($event) {
+                          return $setup.form.address = $event;
+                        }),
+                        type: "text",
+                        "class": "mt-1 block w-full"
+                      }, null, 8
+                      /* PROPS */
+                      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('address'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseComboboxes"], {
+                        modelValue: $setup.form.country_id,
+                        "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
+                          return $setup.form.country_id = $event;
+                        }),
+                        placeholder: "No category",
+                        "api-url": "api.countries.index",
+                        label: "Country",
+                        "default-value": (_$setup$props$editing = $setup.props.editing.country) === null || _$setup$props$editing === void 0 ? void 0 : _$setup$props$editing.name,
+                        key: "select-country"
+                      }, null, 8
+                      /* PROPS */
+                      , ["modelValue", "default-value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('country_id'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseComboboxes"], {
+                        modelValue: $setup.form.city_id,
+                        "onUpdate:modelValue": _cache[19] || (_cache[19] = function ($event) {
+                          return $setup.form.city_id = $event;
+                        }),
+                        "country-id": $setup.form.country_id,
+                        placeholder: "No city",
+                        "api-url": "api.cities.index",
+                        label: "City",
+                        "default-value": (_$setup$props$editing2 = $setup.props.editing.city) === null || _$setup$props$editing2 === void 0 ? void 0 : _$setup$props$editing2.name,
+                        key: "select-city"
+                      }, null, 8
+                      /* PROPS */
+                      , ["modelValue", "country-id", "default-value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('city_id'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                        "for": "zip",
+                        value: _ctx.__('Postal / Zip code')
+                      }, null, 8
+                      /* PROPS */
+                      , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInput"], {
+                        id: "zip",
+                        name: "zip",
+                        modelValue: $setup.form.zip,
+                        "onUpdate:modelValue": _cache[20] || (_cache[20] = function ($event) {
+                          return $setup.form.zip = $event;
+                        }),
+                        type: "text",
+                        "class": "mt-1 block w-full"
+                      }, null, 8
+                      /* PROPS */
+                      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('zip'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                        "for": "iframe",
+                        value: "iFrame"
+                      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetTextarea"], {
+                        id: "iframe",
+                        name: "iframe",
+                        modelValue: $setup.form.iframe,
+                        "onUpdate:modelValue": _cache[21] || (_cache[21] = function ($event) {
+                          return $setup.form.iframe = $event;
+                        }),
+                        type: "text",
+                        "class": "mt-1 block w-full"
+                      }, null, 8
+                      /* PROPS */
+                      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["QuestionMarkCircleIcon"], {
+                        "class": "flex-shrink-0 h-5 w-5 text-secondary-400 group-hover:text-secondary-500",
+                        "aria-hidden": "true"
+                      }), _hoisted_59])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('iframe'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])])])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }, 8
+                  /* PROPS */
+                  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                    title: _ctx.__('Responsibilities, Skills & Benefits')
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Skills"], {
+                        options: $setup.job.data,
+                        editing: $setup.props.editing,
+                        modelValue: $setup.form.skills,
+                        "onUpdate:modelValue": _cache[22] || (_cache[22] = function ($event) {
+                          return $setup.form.skills = $event;
+                        })
+                      }, null, 8
+                      /* PROPS */
+                      , ["options", "editing", "modelValue"])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }, 8
+                  /* PROPS */
+                  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Seo"], {
+                    editing: $setup.props.editing,
+                    modelValue: $setup.form.seo,
+                    "onUpdate:modelValue": _cache[23] || (_cache[23] = function ($event) {
+                      return $setup.form.seo = $event;
+                    })
+                  }, null, 8
+                  /* PROPS */
+                  , ["editing", "modelValue"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_63, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_64, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                    options: $setup.job.data.states,
+                    modelValue: $setup.form.state,
+                    "onUpdate:modelValue": _cache[24] || (_cache[24] = function ($event) {
+                      return $setup.form.state = $event;
+                    }),
+                    placeholder: "Publish",
+                    label: "Publish"
+                  }, null, 8
+                  /* PROPS */
+                  , ["options", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.get('state'),
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+                    value: _ctx.__('Application Deadline Date')
+                  }, null, 8
+                  /* PROPS */
+                  , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DatePicker"]), _hoisted_67, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                    message: $setup.form.errors.get('closing_to'),
+                    "class": "mt-2"
+                  }, null, 8
+                  /* PROPS */
+                  , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                    title: _ctx.__('Job Apply Types')
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_69, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseListbox"], {
+                        options: $setup.job.data.applyTypes,
+                        modelValue: $setup.form.apply_type,
+                        "onUpdate:modelValue": _cache[25] || (_cache[25] = function ($event) {
+                          return $setup.form.apply_type = $event;
+                        }),
+                        placeholder: _ctx.__('Job Apply Types'),
+                        label: _ctx.__('Job Apply Types')
+                      }, null, 8
+                      /* PROPS */
+                      , ["options", "modelValue", "placeholder", "label"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetInputError"], {
+                        message: $setup.form.errors.get('apply_type'),
+                        "class": "mt-2"
+                      }, null, 8
+                      /* PROPS */
+                      , ["message"])])])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }, 8
+                  /* PROPS */
+                  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                    title: _ctx.__('Jobs Tags')
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Tags"])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }, 8
+                  /* PROPS */
+                  , ["title"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BaseDisclosure"], {
+                    title: _ctx.__('Your Packages')
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BasePackages"])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }, 8
+                  /* PROPS */
+                  , ["title"])])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_70, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["LoadingButton"], {
+                    type: "submit",
+                    loading: $setup.form.processing,
+                    "class": "uppercase w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Save')), 1
+                      /* TEXT */
+                      )];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }, 8
+                  /* PROPS */
+                  , ["loading"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+                    href: $setup.props.basePageRoute,
+                    "preserve-state": "",
+                    "preserve-scroll": "",
+                    "class": "uppercase mt-3 w-full inline-flex justify-center rounded-md border border-secondary-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-secondary-700 hover:bg-secondary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
+                    id: "cancelButtonRef",
+                    ref: "cancelButtonRef"
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Cancel')), 1
+                      /* TEXT */
+                      )];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }, 8
+                  /* PROPS */
+                  , ["href"])])], 40
+                  /* PROPS, HYDRATE_EVENTS */
+                  , _hoisted_17)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
                 }),
                 _: 1
                 /* STABLE */

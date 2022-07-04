@@ -181,12 +181,7 @@ const onSubmit = () => {
 
                         <DialogPanel class="relative text-base bg-secondary-100 text-left transform transition w-full md:max-w-4xl md:px-4 md:my-8 lg:max-w-6xl">
 
-                            <div class="flex items-center justify-between">
-                                <Link :href="props.basePageRoute" preserve-state preserve-scroll class="absolute top-0 right-4 text-secondary-400 hover:text-secondary-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8">
-                                    <span class="sr-only">Close</span>
-                                    <XIcon class="h-6 w-6" aria-hidden="true" />
-                                </Link>
-
+                            <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div class="sm:hidden">
                                     <label for="tabs" class="sr-only">Select a tab</label>
                                     <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
@@ -207,16 +202,9 @@ const onSubmit = () => {
                             </div>
 
 
-                            <TransitionRoot
-                                :show="currentTab === 'logs'"
-                                enter="transition duration-100 ease-out"
-                                enter-from="transform scale-95 opacity-0"
-                                enter-to="transform scale-100 opacity-100"
-                                leave="transition duration-75 ease-out"
-                                leave-from="transform scale-100 opacity-100"
-                                leave-to="transform scale-95 opacity-0">
+                            <div v-if="currentTab === 'logs'">
 
-                                <div class="px-8 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                     <div>
                                         <div class="grid grid-cols-1">
                                             <div class="col-span-1">
@@ -226,17 +214,10 @@ const onSubmit = () => {
                                     </div>
                                 </div>
 
-                            </TransitionRoot>
+                            </div>
 
 
-                            <TransitionRoot
-                                :show="currentTab === 'edit_modal'"
-                                enter="transition duration-100 ease-out"
-                                enter-from="transform scale-95 opacity-0"
-                                enter-to="transform scale-100 opacity-100"
-                                leave="transition duration-75 ease-out"
-                                leave-from="transform scale-100 opacity-100"
-                                leave-to="transform scale-95 opacity-0">
+                            <div v-if="currentTab === 'edit_modal'">
 
                                 <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
                                     <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -676,7 +657,7 @@ const onSubmit = () => {
 
                                 </form>
 
-                            </TransitionRoot>
+                            </div>
 
 
 
