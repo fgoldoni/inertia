@@ -2035,6 +2035,44 @@ var map = {
 		"/js/vendor",
 		"resources_js_Pages_Modules_Roles_Index_vue"
 	],
+	"./Modules/Teams/CreateModal.vue": [
+		"./resources/js/Pages/Modules/Teams/CreateModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Teams_CreateModal_vue-_11640"
+	],
+	"./Modules/Teams/Datatables/CustomActions.vue": [
+		"./resources/js/Pages/Modules/Teams/Datatables/CustomActions.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Teams_Datatables_CustomActions_vue-_f7c30"
+	],
+	"./Modules/Teams/Datatables/CustomName.vue": [
+		"./resources/js/Pages/Modules/Teams/Datatables/CustomName.vue",
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Teams_Datatables_Custom-d616030"
+	],
+	"./Modules/Teams/Datatables/CustomOwner.vue": [
+		"./resources/js/Pages/Modules/Teams/Datatables/CustomOwner.vue",
+		"resources_js_Pages_Modules_Teams_Datatables_CustomOwner_vue"
+	],
+	"./Modules/Teams/Datatables/CustomState.vue": [
+		"./resources/js/Pages/Modules/Teams/Datatables/CustomState.vue",
+		"resources_js_Pages_Modules_Teams_Datatables_CustomState_vue"
+	],
+	"./Modules/Teams/Datatables/CustomUpdatedAt.vue": [
+		"./resources/js/Pages/Modules/Teams/Datatables/CustomUpdatedAt.vue",
+		"/js/vendor",
+		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Teams_Datatables_Custom-6ac831"
+	],
+	"./Modules/Teams/EditModal.vue": [
+		"./resources/js/Pages/Modules/Teams/EditModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Teams_EditModal_vue-_a18d0"
+	],
+	"./Modules/Teams/Index.vue": [
+		"./resources/js/Pages/Modules/Teams/Index.vue",
+		"/js/vendor",
+		"node_modules_unplugin_dist_webpack_loaders_transform_js_ruleSet_1_rules_26_use_0_node_modules-9e40ba"
+	],
 	"./Modules/Users/CreateModal.vue": [
 		"./resources/js/Pages/Modules/Users/CreateModal.vue",
 		"/js/vendor",
