@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Teams\Http\Requests\TeamRequest;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
-use Modules\Teams\Transformers\TeamResource;
+use Modules\Teams\Transformers\ApiTeamResource;
 
 class TeamsController extends Controller
 {
@@ -24,7 +24,7 @@ class TeamsController extends Controller
 
     public function index()
     {
-        $data = TeamResource::collection($this->teamsRepository->withCriteria([
+        $data = ApiTeamResource::collection($this->teamsRepository->withCriteria([
             new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
             new Has('users'),
             new WithTrashed(),
@@ -45,7 +45,7 @@ class TeamsController extends Controller
 
     public function show(TeamRequest $request, string $subdomain)
     {
-        $data = new TeamResource($this->teamsRepository->withCriteria([
+        $data = new ApiTeamResource($this->teamsRepository->withCriteria([
             new Where('subdomain', $subdomain)
         ])->first());
 

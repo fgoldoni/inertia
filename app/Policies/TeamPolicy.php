@@ -9,6 +9,13 @@ class TeamPolicy
 {
     use HandlesAuthorization;
 
+    public function before(User $user, $ability)
+    {
+        if ($user->hasRole(config('app.system.users.roles.administrator'))) {
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -16,7 +23,7 @@ class TeamPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        return $user->hasPermissionTo('browse_teams');
     }
 
     /**
@@ -36,17 +43,13 @@ class TeamPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->hasPermissionTo('create_teams');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @return mixed
-     */
+
     public function update(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        return  $user->hasPermissionTo('update_teams') && $user->ownsTeam($team);
     }
 
     /**
@@ -79,13 +82,18 @@ class TeamPolicy
         return $user->ownsTeam($team);
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @return mixed
-     */
-    public function delete(User $user, Team $team)
+    public function delete(User $user, Team $model): bool
     {
-        return $user->ownsTeam($team);
+        return $user->hasPermissionTo('delete_teams') && $user->ownsTeam($model);
+    }
+
+    public function forceDelete(User $user): bool
+    {
+        return $user->hasPermissionTo('force_delete_teams');
+    }
+
+    public function restore(User $user): bool
+    {
+        return $user->hasPermissionTo('restore_teams');
     }
 }

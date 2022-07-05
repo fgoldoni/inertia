@@ -53,7 +53,7 @@ class Team extends JetstreamTeam
         return LogOptions::defaults()
             ->setDescriptionForEvent(fn (string $eventName) => "Team has been {$eventName}")
             ->useLogName('Team')
-            ->logOnly(['name', 'subdomain'])
+            ->logOnly(['name', 'display_name', 'subdomain'])
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }

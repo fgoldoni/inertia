@@ -20,6 +20,7 @@ use Modules\Companies\Entities\Company;
 use Modules\Companies\Http\Requests\UpdateCompanyRequest;
 use Modules\Teams\Http\Requests\UpdateTeamRequest;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
+use Modules\Teams\Transformers\TeamResource;
 
 class TeamsController extends Controller
 {
@@ -36,6 +37,8 @@ class TeamsController extends Controller
 
     public function index(array $modalProps = [])
     {
+        $this->authorize('viewAny', Team::class);
+
         Inertia::share('can', fn (Request $request) => $request->user() ? [
             'is_impersonated' => $request->user()->isImpersonated(),
             'create' => $request->user()->can('create', Team::class),
@@ -76,30 +79,21 @@ class TeamsController extends Controller
         ], $modalProps));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
+
     public function create()
     {
+        $this->authorize('create', Team::class);
+
         return view('teams::create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
+
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
+
     public function show($id)
     {
         return view('teams::show');
@@ -107,7 +101,7 @@ class TeamsController extends Controller
 
     public function edit(Request $request, Team $team)
     {
-        $this->authorize('edit', $team);
+        $this->authorize('view', $team);
 
         Inertia::modal('Modules/Teams/EditModal');
 
@@ -116,10 +110,10 @@ class TeamsController extends Controller
         );
 
         return $this->index([
-            'editing' => $this->teamsRepository->withCriteria([
-                new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
+            'editing' => new TeamResource($this->teamsRepository->withCriteria([
+                new EagerLoad(['owner:id,name,email,profile_photo_path', 'users', 'activities']),
                 new WithTrashed(),
-            ])->find($team->id),
+            ])->find($team->id)),
             'availableRoles' => array_values(Jetstream::$roles),
         ]);
     }

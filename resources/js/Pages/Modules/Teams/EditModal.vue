@@ -5,6 +5,7 @@ import { XIcon } from '@heroicons/vue/outline'
 import Tabs from '@/Shared/Tabs'
 import TeamOwnerComponent from '@/Components/TeamOwnerComponent'
 import AddTeamMemberComponent from '@/Components/AddTeamMemberComponent'
+import Logs from '@/Shared/Logs'
 
 const props = defineProps({
     editing: Object,
@@ -13,6 +14,8 @@ const props = defineProps({
     basePageRoute: String,
 });
 const open = ref(true)
+
+const currentTab = ref('edit')
 
 </script>
 
@@ -40,12 +43,12 @@ const open = ref(true)
                             </div>
 
                             <div class="px-4 pt-10 pb-4 sm:p-6 sm:pb-4">
-                                <Tabs></Tabs>
+                                <Tabs v-model="currentTab"></Tabs>
                             </div>
 
                             <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
-                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                                <div v-if="currentTab === 'edit'" class="grid grid-cols-1 gap-4 sm:grid-cols-3">
 
                                     <div class="col-span-1 sm:col-span-3">
 
@@ -82,6 +85,12 @@ const open = ref(true)
                                     </div>
 
                                 </div>
+
+                                <div v-if="currentTab === 'logs'" class="grid grid-cols-1">
+                                    <Logs :options="props.editing.logs"></Logs>
+                                </div>
+
+
 
                             </div>
 

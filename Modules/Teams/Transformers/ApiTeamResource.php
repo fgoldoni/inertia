@@ -5,8 +5,14 @@ namespace Modules\Teams\Transformers;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 
-class TeamResource extends JsonResource
+class ApiTeamResource extends JsonResource
 {
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request
+     * @return array
+     */
     public function toArray($request)
     {
         return [
@@ -14,8 +20,6 @@ class TeamResource extends JsonResource
             'name' => $this->name,
             'display_name' => $this->display_name,
             'subdomain' => $this->subdomain,
-
-            'logs' => app(ActivitiesRepository::class)->byModel($this),
         ];
     }
 }

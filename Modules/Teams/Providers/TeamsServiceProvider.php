@@ -1,7 +1,9 @@
 <?php
 namespace Modules\Teams\Providers;
 
+use App\Models\Team;
 use Illuminate\Support\ServiceProvider;
+use Modules\Teams\Observers\TeamObserver;
 
 class TeamsServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,8 @@ class TeamsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Team::observe(TeamObserver::class);
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
@@ -38,7 +42,6 @@ class TeamsServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
-        $this->app->register(AuthServiceProvider::class);
     }
 
     /**

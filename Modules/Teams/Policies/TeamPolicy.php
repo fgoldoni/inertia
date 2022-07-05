@@ -18,31 +18,32 @@ class TeamPolicy
 
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('create_jobs');
+        dd($user);
+        return $user->hasPermissionTo('create_teams');
     }
 
     public function update(User $user, Team $model = null): bool
     {
-        return $user->hasPermissionTo('update_jobs') && ((int)$user->currentTeam->id === (int)$model->team_id);
+        return $user->hasPermissionTo('update_teams') && ((int)$user->currentTeam->id === (int)$model->team_id);
     }
 
     public function edit(User $user, Team $model): bool
     {
-        return $user->hasPermissionTo('edit_jobs') && ((int) $user->currentTeam->id === (int) $model->team_id);
+        return $user->hasPermissionTo('edit_teams') && $user->ownsTeam($model);
     }
 
     public function delete(User $user, Team $model): bool
     {
-        return $user->hasPermissionTo('delete_jobs') && ((int) $user->currentTeam->id === (int) $model->team_id);
+        return $user->hasPermissionTo('delete_teams') && ((int) $user->currentTeam->id === (int) $model->team_id);
     }
 
     public function forceDelete(User $user): bool
     {
-        return $user->hasPermissionTo('force_delete_jobs');
+        return $user->hasPermissionTo('force_delete_teams');
     }
 
     public function restore(User $user): bool
     {
-        return $user->hasPermissionTo('restore_jobs');
+        return $user->hasPermissionTo('restore_teams');
     }
 }
