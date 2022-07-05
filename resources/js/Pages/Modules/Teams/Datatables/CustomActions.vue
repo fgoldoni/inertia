@@ -12,11 +12,11 @@ const props = defineProps({
     <div>
         <Link
               v-if="$page.props.can.edit && !props.row.deleted_at"
-              :href="route('admin.jobs.edit', props.row.id)"
+              :href="route('admin.teams.edit', props.row.id)"
               preserve-state
               preserve-scroll
               :data="pickBy(props.row.params)"
-              :only="['editing', 'modal', 'basePageRoute', 'states']"
+              :only="['editing', 'modal', 'basePageRoute', 'availableRoles']"
               class="group flex flex-row-reverse items-center hover:shadow-2xl ml-2">
 
             <PencilAltIcon

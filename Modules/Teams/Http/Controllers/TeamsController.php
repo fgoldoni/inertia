@@ -2,6 +2,7 @@
 
 namespace Modules\Teams\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Has;
@@ -12,12 +13,13 @@ use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
+use Laravel\Jetstream\Jetstream;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
+use Modules\Companies\Entities\Company;
 use Modules\Companies\Repositories\Contracts\CompaniesRepository;
 use Modules\Jobs\Entities\Job;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
@@ -77,7 +79,6 @@ class TeamsController extends Controller
         return Inertia::render('Modules/Teams/Index', array_merge([
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'rowData' => $paginator,
-
         ], $modalProps));
     }
 
@@ -111,14 +112,23 @@ class TeamsController extends Controller
         return view('teams::show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
+    public function edit(Request $request, Team $team)
     {
-        return view('teams::edit');
+        $this->authorize('edit', $team);
+
+        Inertia::modal('Modules/Teams/EditModal');
+
+        Inertia::basePageRoute(
+            route('admin.teams.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction']))
+        );
+
+        return $this->index([
+            'editing' => $this->teamsRepository->withCriteria([
+                new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
+                new WithTrashed(),
+            ])->find($team->id),
+            'availableRoles' => array_values(Jetstream::$roles),
+        ]);
     }
 
     /**

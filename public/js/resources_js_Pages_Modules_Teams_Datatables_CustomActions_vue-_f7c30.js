@@ -61,11 +61,11 @@ var _hoisted_1 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_ctx.$page.props.can.edit && !$setup.props.row.deleted_at ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Link"], {
     key: 0,
-    href: _ctx.route('admin.jobs.edit', $setup.props.row.id),
+    href: _ctx.route('admin.teams.edit', $setup.props.row.id),
     "preserve-state": "",
     "preserve-scroll": "",
     data: $setup.pickBy($setup.props.row.params),
-    only: ['editing', 'modal', 'basePageRoute', 'states'],
+    only: ['editing', 'modal', 'basePageRoute', 'availableRoles'],
     "class": "group flex flex-row-reverse items-center hover:shadow-2xl ml-2"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {

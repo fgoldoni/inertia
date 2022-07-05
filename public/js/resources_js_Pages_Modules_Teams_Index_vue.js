@@ -57,9 +57,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   title: 'Teams',
-  apiUrl: route('admin.jobs.index'),
-  createUrl: route('admin.jobs.create'),
-  deleteUri: 'admin.jobs.destroy',
+  apiUrl: route('admin.teams.index'),
+  createUrl: route('admin.teams.create'),
+  deleteUri: 'admin.teams.destroy',
   perPage: 5,
   fields: _columns__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
