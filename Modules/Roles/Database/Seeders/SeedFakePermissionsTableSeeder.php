@@ -43,6 +43,7 @@ class SeedFakePermissionsTableSeeder extends Seeder
         Permission::generate('attachments');
         Permission::generate('companies');
         Permission::generate('jobs');
+        Permission::generate('teams');
 
         $this->enableForeignKeys();
     }

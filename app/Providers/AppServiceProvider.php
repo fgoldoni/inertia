@@ -14,6 +14,7 @@ use Modules\Dashboard\Providers\DashboardServiceProvider;
 use Modules\Jobs\Providers\JobsServiceProvider;
 use Modules\Roles\Providers\RolesServiceProvider;
 use Modules\Tags\Providers\TagsServiceProvider;
+use Modules\Teams\Providers\TeamsServiceProvider;
 use Modules\Users\Providers\UsersServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(DashboardServiceProvider::class);
         $this->app->register(ActivitiesServiceProvider::class);
         $this->app->register(TagsServiceProvider::class);
+        $this->app->register(TeamsServiceProvider::class);
     }
 
     /**

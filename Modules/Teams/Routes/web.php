@@ -1,16 +1,10 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::prefix('teams')->group(function() {
-    Route::get('/', 'TeamsController@index');
+use Modules\Teams\Http\Controllers\TeamsController;
+
+Route::prefix('admin')->middleware(['auth', 'verified', 'permission:browse_teams'])->as('admin.')->group(function () {
+    Route::resource('teams', TeamsController::class)->except([ 'destroy' ]);
+    Route::delete('teams/{selected}', [TeamsController::class, 'destroy'])->name('teams.destroy');
+    Route::put('teams/{id}/restore', [TeamsController::class, 'restore'])->name('teams.restore');
 });

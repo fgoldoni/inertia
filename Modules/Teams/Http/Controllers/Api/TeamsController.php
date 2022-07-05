@@ -8,8 +8,8 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Teams\Http\Requests\TeamRequest;
+use Modules\Teams\Repositories\Contracts\TeamsRepository;
 use Modules\Teams\Transformers\TeamResource;
-use Modules\Users\Repositories\Contracts\TeamsRepository;
 
 class TeamsController extends Controller
 {

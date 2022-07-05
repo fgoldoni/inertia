@@ -80,9 +80,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "userNavigation": () => (/* binding */ userNavigation)
 /* harmony export */ });
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/HomeIcon.js");
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/CubeIcon.js");
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/FolderIcon.js");
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/ChartBarIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/UsersIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/ShieldCheckIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/ViewGridAddIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/ShareIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/GlobeIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/SparklesIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/MapIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/CubeIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/AcademicCapIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/DocumentSearchIcon.js");
 
 var navigation = [{
   name: 'Dashboard',
@@ -92,47 +99,52 @@ var navigation = [{
 }, {
   name: 'Users',
   href: 'admin.users.index',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
   current: route().current('admin.users.index')
 }, {
   name: 'Roles & Permissions',
   href: 'admin.roles.index',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
   current: route().current('admin.roles.index')
+}, {
+  name: 'Teams',
+  href: 'admin.teams.index',
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
+  current: route().current('admin.teams.index')
 }, {
   name: 'Categories',
   href: 'admin.categories.index',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__["default"],
   current: route().current('admin.categories.index')
 }, {
   name: 'Countries',
   href: 'admin.countries.index',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_5__["default"],
   current: route().current('admin.countries.index')
 }, {
   name: 'Divisions',
   href: 'admin.divisions.index',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_6__["default"],
   current: route().current('admin.divisions.index')
 }, {
   name: 'Cities',
   href: 'admin.cities.index',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_7__["default"],
   current: route().current('admin.cities.index')
 }, {
   name: 'Companies',
   href: 'admin.companies.index',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_8__["default"],
   current: route().current('admin.companies.index')
 }, {
   name: 'Jobs',
   href: 'admin.jobs.index',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_9__["default"],
   current: route().current('admin.jobs.index')
 }, {
   name: 'Telescope',
   href: 'telescope',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_3__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_10__["default"],
   current: false
 }];
 var userNavigation = [{
