@@ -3,7 +3,10 @@
 namespace Modules\Teams\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\Has;
 use App\Repositories\Criteria\Where;
+use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -22,7 +25,11 @@ class TeamsController extends Controller
 
     public function index()
     {
-        $data = TeamResource::collection($this->teamsRepository->all());
+        $data = TeamResource::collection($this->teamsRepository->withCriteria([
+            new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
+            new Has('users'),
+            new WithTrashed(),
+        ])->all());
 
         return $this->response->json(['data' => $data], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }

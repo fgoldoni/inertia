@@ -50,13 +50,16 @@ const restore = (id) => {
 
                 <p class="flex items-center truncate space-x-2 font-medium text-gray-900 truncate group-hover:text-gray-900">
 
-                <div :class="[props.row.online ? 'bg-green-400' : 'bg-secondary-200', 'flex-shrink-0 w-2.5 h-2.5 rounded-full']" aria-hidden="true"></div>
+                    <div :class="[props.row.belongsToTeam ? 'bg-green-400' : 'bg-secondary-200', 'flex-shrink-0 w-2.5 h-2.5 rounded-full']" aria-hidden="true"></div>
 
-                <span>{{ props.row.name }} <span class="text-gray-500 font-normal" v-if="props.row.parent">in {{ props.row.parent.name }}</span></span>
+                    <span>{{ props.row.name }}</span>
 
                 </p>
 
-                <Link :href="route('admin.categories.edit', props.row.id)"
+                <span v-if="props.row.isCurrentTeam" class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-green-100 text-green-800"> Current </span>
+
+
+                <Link :href="route('admin.teams.edit', props.row.id)"
                       preserve-state
                       preserve-scroll
                       :data="pickBy(props.row.params)"
@@ -67,7 +70,8 @@ const restore = (id) => {
 
             </div>
 
-            <div class="text-sm leading-5 text-secondary-500 dark:text-secondary-400">Registered on  {{ moment(props.row.created_at, moment.ISO_8601).format('DD MMM, YYYY') }}</div>
+            <div class="text-sm leading-5 text-secondary-500 dark:text-secondary-400" v-if="props.row.ownsTeam">Owner</div>
+            <div class="text-sm leading-5 text-secondary-500 dark:text-secondary-400" v-else-if="props.row.belongsToTeam">Member</div>
 
         </div>
 

@@ -4,6 +4,7 @@ namespace Modules\Teams\Http\Controllers;
 
 use App\Models\Team;
 use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\Has;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;
 use App\Repositories\Criteria\WhereLike;
@@ -22,6 +23,7 @@ use Modules\Jobs\Entities\Job;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 use Modules\Roles\Repositories\Contracts\RolesRepository;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
+use Modules\Teams\Transformers\TeamResource;
 
 class TeamsController extends Controller
 {
@@ -45,12 +47,36 @@ class TeamsController extends Controller
             'delete' => $this->request->user()->hasPermissionTo('delete_teams'),
         ] : null);
 
+        $paginator = $this->teamsRepository->withCriteria([
+            new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
+            new WithTrashed(),
+        ])->paginate()
+            ->withQueryString()
+            ->through(fn ($team) => [
+                'id' => $team->id,
+                'name' => $team->name,
+                'display_name' => $team->display_name,
+                'ownsTeam' => auth()->user()->ownsTeam($team),
+                'belongsToTeam' => auth()->user()->belongsToTeam($team),
+                'isCurrentTeam' => auth()->user()->isCurrentTeam($team),
+                'members' => $team->allUsers(),
+                'subdomain' => $team->subdomain,
+                'created_at' => $team->created_at,
+                'updated_at' => $team->updated_at,
+                'deleted_at' => $team->deleted_at,
+            ]);
+
+        if (!auth()->user()->isAdministrator()) {
+            $teams = $paginator->getCollection();
+
+            $filteredCollection = $teams->filter(fn ($team) => $team['belongsToTeam']);
+
+            $paginator->setCollection($filteredCollection);
+        }
+
         return Inertia::render('Modules/Teams/Index', array_merge([
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
-            'rowData' => $this->teamsRepository->withCriteria([
-                new EagerLoad(['owner:id,name,email']),
-                new WithTrashed(),
-            ])->paginate()->withQueryString(),
+            'rowData' => $paginator,
 
         ], $modalProps));
     }

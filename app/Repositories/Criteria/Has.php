@@ -1,6 +1,8 @@
 <?php
 namespace App\Repositories\Criteria;
 
+use Illuminate\Database\Eloquent\Builder;
+
 /**
  * Class Has.
  */
