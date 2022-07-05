@@ -3882,6 +3882,7 @@ var _hoisted_5 = {
   "class": "text-sm text-blue-700 lowercase"
 };
 var _hoisted_6 = {
+  key: 0,
   "class": "mt-3 text-sm md:mt-0 md:ml-6"
 };
 var _hoisted_7 = ["href"];
@@ -3898,15 +3899,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "aria-hidden": "true"
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.text), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    href: $props.url,
+  ), $setup.props.url ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: $setup.props.url,
     target: "_blank",
     "class": "whitespace-nowrap font-medium text-blue-700 hover:text-blue-600 lowercase"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.urlText) + " ", 1
   /* TEXT */
   ), _hoisted_8], 8
   /* PROPS */
-  , _hoisted_7)])])])]);
+  , _hoisted_7)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]);
 }
 
 /***/ }),

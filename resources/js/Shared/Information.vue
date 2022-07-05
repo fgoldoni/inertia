@@ -7,8 +7,8 @@
             </div>
             <div class="ml-3 flex-1 md:flex md:justify-between">
                 <p class="text-sm text-blue-700 lowercase">{{ props.text }}</p>
-                <p class="mt-3 text-sm md:mt-0 md:ml-6">
-                    <a :href="url" target="_blank" class="whitespace-nowrap font-medium text-blue-700 hover:text-blue-600 lowercase">{{ props.urlText }} <span aria-hidden="true">&rarr;</span></a>
+                <p class="mt-3 text-sm md:mt-0 md:ml-6" v-if="props.url">
+                    <a :href="props.url" target="_blank" class="whitespace-nowrap font-medium text-blue-700 hover:text-blue-600 lowercase">{{ props.urlText }} <span aria-hidden="true">&rarr;</span></a>
                 </p>
             </div>
         </div>

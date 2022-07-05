@@ -1601,6 +1601,9 @@ select {
 .w-2\.5 {
   width: 0.625rem;
 }
+.w-1\/4 {
+  width: 25%;
+}
 .min-w-0 {
   min-width: 0px;
 }
@@ -3121,6 +3124,9 @@ select {
 }
 .pb-12 {
   padding-bottom: 3rem;
+}
+.pt-10 {
+  padding-top: 2.5rem;
 }
 .text-left {
   text-align: left;
@@ -5362,6 +5368,14 @@ select {
 
   .sm\:pb-7 {
     padding-bottom: 1.75rem;
+  }
+
+  .sm\:pt-4 {
+    padding-top: 1rem;
+  }
+
+  .sm\:pr-4 {
+    padding-right: 1rem;
   }
 
   .sm\:text-left {
