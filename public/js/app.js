@@ -1753,38 +1753,47 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./API/Index.vue": [
 		"./resources/js/Pages/API/Index.vue",
+		"/js/vendor",
 		"resources_js_Pages_API_Index_vue"
 	],
 	"./API/Partials/ApiTokenManager.vue": [
 		"./resources/js/Pages/API/Partials/ApiTokenManager.vue",
+		"/js/vendor",
 		"resources_js_Pages_API_Partials_ApiTokenManager_vue"
 	],
 	"./Auth/ConfirmPassword.vue": [
 		"./resources/js/Pages/Auth/ConfirmPassword.vue",
+		"/js/vendor",
 		"resources_js_Pages_Auth_ConfirmPassword_vue"
 	],
 	"./Auth/ForgotPassword.vue": [
 		"./resources/js/Pages/Auth/ForgotPassword.vue",
+		"/js/vendor",
 		"resources_js_Pages_Auth_ForgotPassword_vue"
 	],
 	"./Auth/Login.vue": [
 		"./resources/js/Pages/Auth/Login.vue",
+		"/js/vendor",
 		"resources_js_Pages_Auth_Login_vue"
 	],
 	"./Auth/Register.vue": [
 		"./resources/js/Pages/Auth/Register.vue",
+		"/js/vendor",
 		"resources_js_Pages_Auth_Register_vue"
 	],
 	"./Auth/ResetPassword.vue": [
 		"./resources/js/Pages/Auth/ResetPassword.vue",
+		"/js/vendor",
 		"resources_js_Pages_Auth_ResetPassword_vue"
 	],
 	"./Auth/TwoFactorChallenge.vue": [
 		"./resources/js/Pages/Auth/TwoFactorChallenge.vue",
+		"/js/vendor",
 		"resources_js_Pages_Auth_TwoFactorChallenge_vue"
 	],
 	"./Auth/VerifyEmail.vue": [
 		"./resources/js/Pages/Auth/VerifyEmail.vue",
+		"/js/vendor",
 		"resources_js_Pages_Auth_VerifyEmail_vue"
 	],
 	"./Dashboard.vue": [
@@ -2125,30 +2134,37 @@ var map = {
 	],
 	"./Profile/Partials/LogoutOtherBrowserSessionsForm.vue": [
 		"./resources/js/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue",
+		"/js/vendor",
 		"resources_js_Pages_Profile_Partials_LogoutOtherBrowserSessionsForm_vue"
 	],
 	"./Profile/Partials/TwoFactorAuthenticationForm.vue": [
 		"./resources/js/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue",
+		"/js/vendor",
 		"resources_js_Pages_Profile_Partials_TwoFactorAuthenticationForm_vue"
 	],
 	"./Profile/Partials/UpdatePasswordForm.vue": [
 		"./resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue",
+		"/js/vendor",
 		"resources_js_Pages_Profile_Partials_UpdatePasswordForm_vue"
 	],
 	"./Profile/Partials/UpdateProfileInformationForm.vue": [
 		"./resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue",
+		"/js/vendor",
 		"resources_js_Pages_Profile_Partials_UpdateProfileInformationForm_vue"
 	],
 	"./Profile/Show.vue": [
 		"./resources/js/Pages/Profile/Show.vue",
+		"/js/vendor",
 		"resources_js_Pages_Profile_Show_vue"
 	],
 	"./Teams/Create.vue": [
 		"./resources/js/Pages/Teams/Create.vue",
+		"/js/vendor",
 		"resources_js_Pages_Teams_Create_vue"
 	],
 	"./Teams/Partials/CreateTeamForm.vue": [
 		"./resources/js/Pages/Teams/Partials/CreateTeamForm.vue",
+		"/js/vendor",
 		"resources_js_Pages_Teams_Partials_CreateTeamForm_vue"
 	],
 	"./Teams/Partials/DeleteTeamForm.vue": [
@@ -2157,14 +2173,17 @@ var map = {
 	],
 	"./Teams/Partials/TeamMemberManager.vue": [
 		"./resources/js/Pages/Teams/Partials/TeamMemberManager.vue",
+		"/js/vendor",
 		"resources_js_Pages_Teams_Partials_TeamMemberManager_vue"
 	],
 	"./Teams/Partials/UpdateTeamNameForm.vue": [
 		"./resources/js/Pages/Teams/Partials/UpdateTeamNameForm.vue",
+		"/js/vendor",
 		"resources_js_Pages_Teams_Partials_UpdateTeamNameForm_vue"
 	],
 	"./Teams/Show.vue": [
 		"./resources/js/Pages/Teams/Show.vue",
+		"/js/vendor",
 		"resources_js_Pages_Teams_Show_vue"
 	],
 	"./TermsOfService.vue": [

@@ -43,39 +43,33 @@ const open = ref(true)
                                 <Tabs></Tabs>
                             </div>
 
+                            <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
+                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
 
-                            <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
+                                    <div class="col-span-1 sm:col-span-3">
 
-                                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
 
-                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                                            <div class="col-span-1 sm:col-span-2">
 
-                                        <div class="col-span-1 sm:col-span-3">
+                                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
-                                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+                                                    <TeamOwnerComponent :team="props.editing"></TeamOwnerComponent>
 
-                                                <div class="col-span-1 sm:col-span-2">
-
-                                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-
-                                                        <TeamOwnerComponent :team="props.editing"></TeamOwnerComponent>
-
-                                                        <AddTeamMemberComponent :team="props.editing"  :available-roles="props.availableRoles"></AddTeamMemberComponent>
-
-                                                    </div>
+                                                    <AddTeamMemberComponent :team="props.editing"  :available-roles="props.availableRoles"></AddTeamMemberComponent>
 
                                                 </div>
 
-                                                <div class="col-span-1">
+                                            </div>
 
-                                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
+                                            <div class="col-span-1">
 
-                                                        <div class="col-span-1">
+                                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 
-                                                           xcxbfxd
+                                                    <div class="col-span-1">
 
-                                                        </div>
+                                                        xcxbfxd
 
                                                     </div>
 
@@ -85,11 +79,11 @@ const open = ref(true)
 
                                         </div>
 
-                                   </div>
+                                    </div>
 
                                 </div>
 
-                            </form>
+                            </div>
 
                         </DialogPanel>
                     </TransitionChild>

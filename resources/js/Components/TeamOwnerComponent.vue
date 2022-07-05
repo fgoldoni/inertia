@@ -5,8 +5,15 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetTextarea from '@/Jetstream/Textarea'
 import JetInputError from '@/Jetstream/InputError.vue';
-import ValidationErrors from '@/Shared/ValidationErrors';
+
+import FormSection from '@/Shared/FormSection';
 import {Errors} from "@/Plugins/errors";
+import JetButton from '@/Jetstream/Button';
+import pickBy from "lodash/pickBy";
+import {useAvatar} from "@/Composables/UseAvatar";
+import {useMedia} from "@/Composables/UseMedia";
+import {ElNotification} from "element-plus";
+
 
 const props = defineProps({
     team: Object,
@@ -22,16 +29,32 @@ const form = reactive({
     processing: false,
 })
 
+const updateTeamOwner = () => {
+    form.processing = true;
+
+    axios.put(route('admin.teams.update', form.id), pickBy({
+        name: form.name,
+        subdomain: form.subdomain,
+        display_name: form.display_name,
+    })).then((response) => {
+        form.processing = false;
+        ElNotification({
+            title: 'Great!',
+            message: response.data.message,
+            type: 'success',
+        })
+    }).catch(error => {
+        form.processing = false;
+        form.errors.onFailed(error);
+    });
+}
+
 </script>
 
 <template>
-    <BaseDisclosure :title="__('Team Owner')" default-open>
+    <FormSection :title="__('Team Owner')" :errors="form.errors" @submitted="updateTeamOwner">
 
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-
-            <div class="col-span-1 sm:col-span-2" v-if="form.errors.any()">
-                <ValidationErrors :errors="form.errors.all()" class="mb-4" />
-            </div>
+        <template #form>
 
             <div class="col-span-1">
 
@@ -52,7 +75,6 @@ const form = reactive({
             </div>
 
             <div class="col-span-1">
-
 
                 <JetLabel for="name" :value="__('Display Name')" required/>
 
@@ -78,11 +100,15 @@ const form = reactive({
                     <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> .wedo37.com </span>
                 </div>
 
-                <JetInputError :message="form.errors.get('display_name')" class="mt-2"/>
+                <JetInputError :message="form.errors.get('subdomain')" class="mt-2"/>
 
             </div>
+        </template>
 
-        </div>
-
-    </BaseDisclosure>
+        <template #actions>
+            <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Save
+            </JetButton>
+        </template>
+    </FormSection>
 </template>

@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Teams\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -34,12 +33,10 @@ class TeamsController extends Controller
         return $this->response->json(['data' => $data], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
-
     public function create()
     {
         return view('teams::create');
     }
-
 
     public function store(Request $request)
     {
@@ -55,19 +52,15 @@ class TeamsController extends Controller
         return $this->response->json(['data' => $data], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
-
-
     public function edit($id)
     {
         return view('teams::edit');
     }
 
-
     public function update(Request $request, $id)
     {
         //
     }
-
 
     public function destroy($id)
     {

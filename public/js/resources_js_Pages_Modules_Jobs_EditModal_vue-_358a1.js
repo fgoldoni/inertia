@@ -3879,7 +3879,7 @@ var _hoisted_4 = {
   "class": "ml-3 flex-1 md:flex md:justify-between"
 };
 var _hoisted_5 = {
-  "class": "text-sm text-blue-700 lowercase"
+  "class": "text-sm text-blue-700"
 };
 var _hoisted_6 = {
   key: 0,

@@ -1,18 +1,15 @@
 <?php
-
 namespace Modules\Teams\Http\Controllers;
 
+use App\Actions\Jetstream\UpdateTeamName;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Repositories\Criteria\EagerLoad;
-use App\Repositories\Criteria\Has;
-use App\Repositories\Criteria\OrderBy;
-use App\Repositories\Criteria\Select;
-use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
 use Laravel\Jetstream\Jetstream;
@@ -20,12 +17,9 @@ use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 use Modules\Companies\Entities\Company;
-use Modules\Companies\Repositories\Contracts\CompaniesRepository;
-use Modules\Jobs\Entities\Job;
-use Modules\Jobs\Repositories\Contracts\JobsRepository;
-use Modules\Roles\Repositories\Contracts\RolesRepository;
+use Modules\Companies\Http\Requests\UpdateCompanyRequest;
+use Modules\Teams\Http\Requests\UpdateTeamRequest;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
-use Modules\Teams\Transformers\TeamResource;
 
 class TeamsController extends Controller
 {
@@ -82,7 +76,6 @@ class TeamsController extends Controller
         ], $modalProps));
     }
 
-
     /**
      * Show the form for creating a new resource.
      * @return Renderable
@@ -131,15 +124,17 @@ class TeamsController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateTeamRequest $request, Team $team)
     {
-        //
+        $team = $this->teamsRepository
+            ->update($team->id, $request->only('name', 'display_name', 'subdomain'));
+
+        return $this->response->json(
+            ['message' => __('The Company (:item) has been successfully updated', ['item' => $team->name])],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 
     /**

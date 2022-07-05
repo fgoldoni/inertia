@@ -43,10 +43,15 @@ php-cs: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Entities --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Http --diff
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Providers --diff
-	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Notifications --diff
-	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Listeners --diff
-	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Observers --diff
-	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Roles/Policies --diff
+
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Teams/Database --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Teams/Entities --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Teams/Http --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Teams/Providers --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Teams/Notifications --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Teams/Listeners --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Teams/Observers --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Teams/Policies --diff
 
 php-cs-2: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Database --diff

@@ -48,7 +48,6 @@ class Team extends JetstreamTeam
         'deleted' => TeamDeleted::class,
     ];
 
-
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
