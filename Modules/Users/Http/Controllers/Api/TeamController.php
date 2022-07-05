@@ -23,11 +23,9 @@ class TeamController extends Controller
     ) {
     }
 
-    public function index(TeamRequest $request, string $subdomain)
+    public function index()
     {
-        $data = new TeamResource($this->teamsRepository->withCriteria([
-            new Where('subdomain', $subdomain)
-        ])->first());
+        $data = TeamResource::collection($this->teamsRepository->all());
 
         return $this->response->json(['data' => $data], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
@@ -52,15 +50,16 @@ class TeamController extends Controller
         //
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+
+    public function show(TeamRequest $request, string $subdomain)
     {
-        return view('users::show');
+        $data = new TeamResource($this->teamsRepository->withCriteria([
+            new Where('subdomain', $subdomain)
+        ])->first());
+
+        return $this->response->json(['data' => $data], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
+
 
     /**
      * Show the form for editing the specified resource.

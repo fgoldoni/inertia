@@ -21,7 +21,10 @@ Route::controller(UsersController::class)->prefix('users')->name('api.users.')->
 });
 
 Route::controller(TeamController::class)->prefix('teams')->name('api.teams.')->group(function () {
-    Route::get('{subdomain}', 'index')
-        ->name('index')
+    Route::get('{subdomain}', 'show')
+        ->name('show')
         ->where('subdomain', '[a-z]+');
+
+    Route::get('', 'index')
+        ->name('index');
 });
