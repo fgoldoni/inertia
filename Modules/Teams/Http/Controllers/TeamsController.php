@@ -1,26 +1,20 @@
 <?php
-namespace Modules\Jobs\Http\Controllers\Api;
 
-use App\Models\User;
-use Illuminate\Contracts\Routing\ResponseFactory;
+namespace Modules\Teams\Http\Controllers;
+
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Categories\Repositories\Contracts\CategoriesRepository;
-use Modules\Companies\Repositories\Contracts\CompaniesRepository;
-use Modules\Jobs\Repositories\Contracts\JobsRepository;
-use Modules\Roles\Repositories\Contracts\RolesRepository;
 
-class JobsController extends Controller
+class TeamsController extends Controller
 {
-    public function __construct(private readonly ResponseFactory $response, private readonly JobsRepository $jobsRepository, private readonly RolesRepository $rolesRepository, private readonly CompaniesRepository $companiesRepository, private readonly CategoriesRepository $categoriesRepository)
-    {
-    }
-
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
     public function index()
     {
-        return view('jobs::index');
+        return view('teams::index');
     }
 
     /**
@@ -29,11 +23,12 @@ class JobsController extends Controller
      */
     public function create()
     {
-        return view('jobs::create');
+        return view('teams::create');
     }
 
     /**
      * Store a newly created resource in storage.
+     * @param Request $request
      * @return Renderable
      */
     public function store(Request $request)
@@ -41,8 +36,14 @@ class JobsController extends Controller
         //
     }
 
-    public function show(int $id)
+    /**
+     * Show the specified resource.
+     * @param int $id
+     * @return Renderable
+     */
+    public function show($id)
     {
+        return view('teams::show');
     }
 
     /**
@@ -52,11 +53,12 @@ class JobsController extends Controller
      */
     public function edit($id)
     {
-        return view('jobs::edit');
+        return view('teams::edit');
     }
 
     /**
      * Update the specified resource in storage.
+     * @param Request $request
      * @param int $id
      * @return Renderable
      */

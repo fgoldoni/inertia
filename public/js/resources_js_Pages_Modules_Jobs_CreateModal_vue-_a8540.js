@@ -254,7 +254,7 @@ function useJobs() {
             case 0:
               processing.value = true;
               _context.next = 3;
-              return axios.get(route('api.jobs.show', (_usePage$props$value$ = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage)().props.value.auth.user) === null || _usePage$props$value$ === void 0 ? void 0 : _usePage$props$value$.id)).then(function (res) {
+              return axios.get(route('admin.jobs.show', (_usePage$props$value$ = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage)().props.value.auth.user) === null || _usePage$props$value$ === void 0 ? void 0 : _usePage$props$value$.id)).then(function (res) {
                 return data.value = res.data;
               })["catch"](function (err) {
                 return error.value = err;

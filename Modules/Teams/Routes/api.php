@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use Modules\Users\Http\Controllers\Api\TeamController;
-use Modules\Users\Http\Controllers\Api\UsersController;
+use Modules\Teams\Http\Controllers\Api\TeamsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +14,15 @@ use Modules\Users\Http\Controllers\Api\UsersController;
 |
 */
 
+Route::middleware('auth:api')->get('/teams', function (Request $request) {
+    return $request->user();
+});
 
-Route::controller(UsersController::class)->prefix('users')->name('api.users.')->group(function () {
-    Route::get('/', 'index')->name('index');
+Route::controller(TeamsController::class)->prefix('teams')->name('api.teams.')->group(function () {
+    Route::get('{subdomain}', 'show')
+        ->name('show')
+        ->where('subdomain', '[a-z]+');
+
+    Route::get('', 'index')
+        ->name('index');
 });

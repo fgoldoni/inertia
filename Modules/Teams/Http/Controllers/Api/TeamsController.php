@@ -1,20 +1,17 @@
 <?php
 
-namespace Modules\Users\Http\Controllers\Api;
+namespace Modules\Teams\Http\Controllers\Api;
 
-use App\Repositories\Criteria\Limit;
+use App\Http\Controllers\Controller;
 use App\Repositories\Criteria\Where;
-use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
-use Modules\Users\Http\Requests\TeamRequest;
+use Modules\Teams\Http\Requests\TeamRequest;
+use Modules\Teams\Transformers\TeamResource;
 use Modules\Users\Repositories\Contracts\TeamsRepository;
-use Modules\Users\Transformers\TeamResource;
 
-class TeamController extends Controller
+class TeamsController extends Controller
 {
     public function __construct(
         private readonly ResponseFactory $response,
@@ -31,25 +28,16 @@ class TeamController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
     public function create()
     {
-        return view('users::create');
+        return view('teams::create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
+
     public function store(Request $request)
     {
         //
     }
-
 
     public function show(TeamRequest $request, string $subdomain)
     {
@@ -61,32 +49,19 @@ class TeamController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
+
     public function edit($id)
     {
-        return view('users::edit');
+        return view('teams::edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
+
     public function destroy($id)
     {
         //

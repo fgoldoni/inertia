@@ -8,5 +8,6 @@
     "Jobs": true,
     "Dashboard": true,
     "Activities": true,
-    "Tags": true
+    "Tags": true,
+    "Teams": true
 }

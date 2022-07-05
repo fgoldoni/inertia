@@ -2,6 +2,7 @@
 namespace Modules\Jobs\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Select;
@@ -15,11 +16,14 @@ use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
+use Modules\Categories\Repositories\Contracts\CategoriesRepository;
+use Modules\Companies\Repositories\Contracts\CompaniesRepository;
 use Modules\Jobs\Entities\Job;
 use Modules\Jobs\Http\Requests\StoreJobRequest;
 use Modules\Jobs\Http\Requests\UpdateJobRequest;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 use Modules\Jobs\Transformers\JobResource;
+use Modules\Roles\Repositories\Contracts\RolesRepository;
 
 class JobsController extends Controller
 {
@@ -27,6 +31,9 @@ class JobsController extends Controller
         private readonly JobsRepository $jobsRepository,
         private readonly ActivitiesRepository $activitiesRepository,
         private readonly AttachmentsRepository $attachmentsRepository,
+        private readonly CategoriesRepository $categoriesRepository,
+        private readonly RolesRepository $rolesRepository,
+        private readonly CompaniesRepository $companiesRepository,
         private readonly ResponseFactory $response,
         private readonly Request $request,
         private readonly Redirector $redirect
@@ -96,9 +103,18 @@ class JobsController extends Controller
         return $this->response->json(['message' => __('The Job (:item) has been successfully created', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
-    public function show($id)
+    public function show(User $user)
     {
-        return view('jobs::show');
+        $result = $this->jobsRepository->initCategories($this->categoriesRepository
+                ->get(['id', 'name', 'type']));
+
+        $result['states'] = $this->jobsRepository->getStates();
+        $result['salaryTypes'] = $this->jobsRepository->salaryTypes();
+        $result['roles'] = $this->rolesRepository->all(['id', 'name']);
+        $result['companies'] = $this->companiesRepository->withCriteria([
+        ])->all(['id', 'name', 'user_id', 'team_id']);
+
+        return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
     public function edit(Request $request, Job $job)

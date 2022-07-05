@@ -27,7 +27,13 @@ class SeedFakeUsersTableSeeder extends Seeder
 
         $user->assignRole(config('app.system.users.roles.administrator'));
 
-        $user = User::factory()->withPersonalTeam()->create(['name' => 'Manager SG', 'trial_ends_at' => now()->addDays(14), 'email' => 'fotsa.goldoni@yahoo.fr']);
+        $user = User::factory()
+            ->withPersonalTeam()
+            ->create([
+                'name' => 'Manager SG',
+                'trial_ends_at' => now()->addDays(14),
+                'email' => 'fotsa.goldoni@yahoo.fr'
+            ]);
 
         $user->assignRole(config('app.system.users.roles.manager'));
 
