@@ -6,6 +6,7 @@ import Tabs from '@/Shared/Tabs'
 import TeamOwnerComponent from '@/Components/TeamOwnerComponent'
 import AddTeamMemberComponent from '@/Components/AddTeamMemberComponent'
 import PendingTeamInvitationsComponent from '@/Components/PendingTeamInvitationsComponent'
+import AssetsComponent from '@/Components/AssetsComponent'
 import Logs from '@/Shared/Logs'
 import {Inertia} from "@inertiajs/inertia";
 
@@ -72,6 +73,8 @@ const close = () => {
                                                     <AddTeamMemberComponent v-model="team"  :available-roles="props.availableRoles"></AddTeamMemberComponent>
 
                                                     <PendingTeamInvitationsComponent v-model="team"></PendingTeamInvitationsComponent>
+
+                                                    <AssetsComponent v-model="team"></AssetsComponent>
 
 
                                                 </div>

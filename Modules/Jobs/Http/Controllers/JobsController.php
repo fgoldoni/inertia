@@ -127,10 +127,47 @@ class JobsController extends Controller
 
         return $this->index([
             'editing' => new JobResource($this->jobsRepository->withCriteria([
-                new EagerLoad(['user:id,name', 'activities', 'company:id,name', 'categories:id,name,type', 'country:id,name,emoji', 'city:id,name', 'division:id,name', 'attachments' => function ($query) {
-                    $query->select(['id', 'name', 'filename', 'disk', 'attachable_id', 'attachable_type'])->where('attachments.disk', config('app.system.disks.uploads'));
-                }]),
-            ])->find($job->id, ['id', 'name', 'content', 'slug', 'address', 'salary_min', 'salary_max', 'negotiable', 'salary_type', 'iframe', 'avatar_path', 'state', 'user_id', 'company_id', 'country_id', 'division_id', 'user_id', 'city_id', 'created_at', 'updated_at'])),
+                new EagerLoad([
+                    'user:id,name',
+                    'activities',
+                    'company:id,name',
+                    'categories:id,name,type',
+                    'country:id,name,emoji',
+                    'city:id,name',
+                    'division:id,name',
+                    'attachments' => function ($query) {
+                        $query->select([
+                            'id',
+                            'name',
+                            'filename',
+                            'disk',
+                            'attachable_id',
+                            'attachable_type'
+                        ])->where('attachments.disk', config('app.system.disks.uploads'));
+                    }
+                ]),
+            ])->find($job->id, [
+                'id',
+                'name',
+                'content',
+                'slug',
+                'address',
+                'salary_min',
+                'salary_max',
+                'negotiable',
+                'salary_type',
+                'iframe',
+                'avatar_path',
+                'state',
+                'user_id',
+                'company_id',
+                'country_id',
+                'division_id',
+                'user_id',
+                'city_id',
+                'created_at',
+                'updated_at'
+            ])),
         ]);
     }
 

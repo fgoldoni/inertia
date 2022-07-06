@@ -1,12 +1,14 @@
 <?php
 namespace App\Models;
 
+use App\Traits\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
+use Modules\Attachments\Traits\AttachableTrait;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -15,6 +17,8 @@ class Team extends JetstreamTeam
     use HasFactory;
     use SoftDeletes;
     use LogsActivity;
+    use HasAvatar;
+    use AttachableTrait;
 
     /**
      * The attributes that should be cast.
@@ -35,6 +39,11 @@ class Team extends JetstreamTeam
         'subdomain',
         'display_name',
         'personal_team',
+        'avatar_path',
+    ];
+
+    protected $appends = [
+        'avatar_url',
     ];
 
     /**

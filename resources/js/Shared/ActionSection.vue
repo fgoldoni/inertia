@@ -1,6 +1,8 @@
 <script setup>
 import BaseDisclosure from '@/Components/BaseDisclosure'
 import ValidationErrors from '@/Shared/ValidationErrors';
+import {useMedia} from "@/Composables/UseMedia";
+import {useAvatar} from "@/Composables/UseAvatar";
 
 const props = defineProps({
     title: String,
@@ -21,10 +23,8 @@ const props = defineProps({
                 <ValidationErrors :errors="props.errors.all()" class="mb-4" />
             </div>
 
-            <div class="mt-5 md:mt-0 col-span-1 sm:col-span-2">
-                <div class="px-4 py-5 sm:p-6 bg-white shadow-md sm:rounded-lg">
-                    <slot name="content" />
-                </div>
+            <div class="col-span-1 sm:col-span-2">
+                <slot name="content" />
             </div>
 
         </div>

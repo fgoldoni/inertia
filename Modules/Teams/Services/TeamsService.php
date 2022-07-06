@@ -23,7 +23,22 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
     public function findTeam(int $id): TeamResource
     {
         return new TeamResource($this->repository->withCriteria([
-            new EagerLoad(['owner:id,name,email,profile_photo_path', 'users', 'activities', 'teamInvitations']),
+            new EagerLoad([
+                'owner:id,name,email,profile_photo_path',
+                'users',
+                'activities',
+                'teamInvitations',
+                'attachments' => function ($query) {
+                    $query->select([
+                        'id',
+                        'name',
+                        'filename',
+                        'disk',
+                        'attachable_id',
+                        'attachable_type'
+                    ])->where('attachments.disk', config('app.system.disks.uploads'));
+                }
+            ]),
             new WithTrashed(),
         ])->find($id));
     }
