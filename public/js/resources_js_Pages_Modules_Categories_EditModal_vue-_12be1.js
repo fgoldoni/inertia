@@ -192,7 +192,12 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
   doLoadFiles: function doLoadFiles(files) {
     var _this2 = this;
 
-    if (!this.multiple) files = [files[0]];
+    this.media = [];
+
+    if (!this.multiple) {
+      files = [files[0]];
+    }
+
     files.forEach(function (file) {
       _this2.push({
         id: file.id,

@@ -8,11 +8,15 @@ const fileRef = ref(null);
 
 const props = defineProps({
     modelValue: [String, File],
-    defaultSrc: String
+    defaultSrc: String,
+    model: {
+        type: String,
+        default: 'Modules\\Jobs\\Entities\\Job'
+    }
 });
 
 onMounted(() => {
-    useAvatar.value.doLoadFile(props.modelValue, props.defaultSrc);
+    useAvatar.value.doLoadFile(props.modelValue, props.defaultSrc, props.model);
 })
 
 

@@ -70,12 +70,11 @@ const close = () => {
 
                                                     <TeamOwnerComponent v-model="team" default-open></TeamOwnerComponent>
 
+                                                    <AssetsComponent v-model="team"></AssetsComponent>
+
                                                     <AddTeamMemberComponent v-model="team"  :available-roles="props.availableRoles"></AddTeamMemberComponent>
 
                                                     <PendingTeamInvitationsComponent v-model="team"></PendingTeamInvitationsComponent>
-
-                                                    <AssetsComponent v-model="team"></AssetsComponent>
-
 
                                                 </div>
 

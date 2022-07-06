@@ -19,8 +19,3 @@ Route::controller(AttachmentsController::class)->prefix('attachments')->name('ap
     Route::post('/', 'store')->name('store');
     Route::delete('/{attachment}', 'destroy')->name('destroy');
 });
-
-Route::controller(AvatarsController::class)->prefix('avatars')->name('api.avatars.')->group(function () {
-    Route::post('/', 'store')->name('store');
-    Route::delete('/{filename}/destroy', 'destroy')->name('destroy');
-});

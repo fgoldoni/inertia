@@ -24,7 +24,10 @@ var useAvatar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
     var _this = this;
 
     if (this.media.avatar_path) {
-      axios["delete"](route('api.avatars.destroy', encodeURIComponent(this.media.avatar_path))).then(function () {
+      axios["delete"](route('admin.attachments.avatars.destroy', {
+        filename: encodeURIComponent(this.media.avatar_path),
+        model: this.media.model
+      })).then(function () {
         _this.media.avatar_path = null;
         _this.media.avatar_url = defaultSrc;
       })["catch"](function (error) {
@@ -37,6 +40,7 @@ var useAvatar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
     }
   },
   doLoadFile: function doLoadFile(filename, defaultSrc) {
+    var model = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'Modules\\Jobs\\Entities\\Job';
     var avatar_url = defaultSrc;
     var avatar_path = null;
 
@@ -48,6 +52,7 @@ var useAvatar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
     this.push({
       id: null,
       file: null,
+      model: model,
       avatar_url: avatar_url,
       avatar_path: avatar_path,
       progress: 100,
@@ -60,10 +65,11 @@ var useAvatar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
 
     var form = new FormData();
     form.append('file', file);
-    axios.post(route('api.avatars.store'), form).then(function (res) {
+    axios.post(route('admin.attachments.avatars.store'), form).then(function (res) {
       _this2.push({
         avatar_url: "".concat(_this2.baseUrl, "/avatars/").concat(res.data.data.filename),
         avatar_path: res.data.data.filename,
+        model: _this2.media.model,
         progress: 100,
         error: null,
         uploaded: true
@@ -343,7 +349,12 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
   doLoadFiles: function doLoadFiles(files) {
     var _this2 = this;
 
-    if (!this.multiple) files = [files[0]];
+    this.media = [];
+
+    if (!this.multiple) {
+      files = [files[0]];
+    }
+
     files.forEach(function (file) {
       _this2.push({
         id: file.id,
@@ -1092,7 +1103,11 @@ __webpack_require__.r(__webpack_exports__);
   __name: 'AvatarInput',
   props: {
     modelValue: [String, File],
-    defaultSrc: String
+    defaultSrc: String,
+    model: {
+      type: String,
+      "default": 'Modules\\Jobs\\Entities\\Job'
+    }
   },
   emits: ["update:modelValue"],
   setup: function setup(__props, _ref) {
@@ -1102,7 +1117,7 @@ __webpack_require__.r(__webpack_exports__);
     var props = __props;
     var fileRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_1__.useAvatar.value.doLoadFile(props.modelValue, props.defaultSrc);
+      _Composables_UseAvatar__WEBPACK_IMPORTED_MODULE_1__.useAvatar.value.doLoadFile(props.modelValue, props.defaultSrc, props.model);
     });
 
     var browse = function browse() {
@@ -2568,7 +2583,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
                           return $setup.form.avatar = $event;
                         }),
-                        "default-src": $setup.form.defaultSrc
+                        "default-src": $setup.form.defaultSrc,
+                        model: "Modules\\Jobs\\Entities\\Job"
                       }, null, 8
                       /* PROPS */
                       , ["modelValue", "default-src"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {

@@ -16,8 +16,6 @@ const props = defineProps({
     modelValue: [Object, Array],
 });
 
-const emit = defineEmits(["update:modelValue"]);
-
 const form = reactive({
     id: props.modelValue.id,
     defaultSrc: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(props.modelValue.name) + '&color=7F9CF5&background=EBF4FF',
@@ -29,7 +27,6 @@ const form = reactive({
 })
 
 const updateTeamOwner = () => {
-    debugger
     axios.put(route('admin.teams.assets.update', form.id), pickBy({
         avatar_path: useAvatar.value.media?.avatar_path,
         files: useMedia.value.doMediaFetchIds(),
@@ -42,8 +39,6 @@ const updateTeamOwner = () => {
             message: response.data.message,
             type: 'success',
         })
-
-        emit('update:modelValue', response.data.team)
 
     }).catch(error => {
         form.processing = false;
@@ -60,7 +55,7 @@ const updateTeamOwner = () => {
 
                 <JetLabel :value="__('Logo')" class="mb-2"/>
 
-                <AvatarInput v-model="form.avatar" :default-src="form.defaultSrc"></AvatarInput>
+                <AvatarInput v-model="form.avatar" :default-src="form.defaultSrc" model='App\Models\Team'></AvatarInput>
 
             </div>
 

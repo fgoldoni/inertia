@@ -33,10 +33,12 @@ export const useMedia = ref({
         }
     },
 
-    doLoadFiles (files) {
+    doLoadFiles(files) {
+        this.media = []
 
-
-        if (!this.multiple) files = [files[0]]
+        if (!this.multiple) {
+            files = [files[0]]
+        }
 
         files.forEach(file => {
 

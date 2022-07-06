@@ -1406,6 +1406,9 @@ select {
 .-mt-px {
   margin-top: -1px;
 }
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
 .-mr-12 {
   margin-right: -3rem;
 }
@@ -1432,9 +1435,6 @@ select {
 }
 .-ml-0 {
   margin-left: -0px;
-}
-.mb-2 {
-  margin-bottom: 0.5rem;
 }
 .mr-1 {
   margin-right: 0.25rem;
@@ -4063,10 +4063,6 @@ select {
 .text-negative-400 {
   --tw-text-opacity: 1;
   color: rgb(251 113 133 / var(--tw-text-opacity));
-}
-.text-primary-300 {
-  --tw-text-opacity: 1;
-  color: rgb(249 168 212 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;

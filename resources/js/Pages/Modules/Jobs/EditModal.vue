@@ -295,7 +295,7 @@ const onSubmit = () => {
 
                                                                             <JetLabel :value="__('Logo')" class="mb-2"/>
 
-                                                                            <AvatarInput v-model="form.avatar" :default-src="form.defaultSrc"></AvatarInput>
+                                                                            <AvatarInput v-model="form.avatar" :default-src="form.defaultSrc" model='Modules\Jobs\Entities\Job'></AvatarInput>
 
                                                                         </div>
 
