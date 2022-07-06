@@ -132,7 +132,7 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
     this.media.splice(index, 1);
 
     if (item.id) {
-      axios["delete"](route('api.attachments.destroy', item.id))["catch"](function (error) {
+      axios["delete"](route('admin.attachments.destroy', item.id))["catch"](function (error) {
         _this.media.splice(index, 0, item);
 
         _this.media.error = "Upload failed. Please try again later.";
@@ -206,7 +206,7 @@ var useMedia = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
     }).forEach(function (media, index) {
       var form = new FormData();
       form.append('file', media.file);
-      axios.post(route('api.attachments.store'), form, {
+      axios.post(route('admin.attachments.store'), form, {
         onUploadProgress: function onUploadProgress(event) {
           media.progress = Math.round(event.loaded * 100 / event.total);
         }

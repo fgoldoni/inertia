@@ -20,7 +20,7 @@ export const useMedia = ref({
 
         if (item.id) {
 
-            axios.delete(route('api.attachments.destroy', item.id))
+            axios.delete(route('admin.attachments.destroy', item.id))
                 .catch(error => {
                     this.media.splice(index, 0, item)
 
@@ -101,7 +101,7 @@ export const useMedia = ref({
 
             form.append('file', media.file);
 
-            axios.post(route('api.attachments.store'), form, {
+            axios.post(route('admin.attachments.store'), form, {
                 onUploadProgress: (event) => {
                     media.progress = Math.round(event.loaded * 100 / event.total);
                 },

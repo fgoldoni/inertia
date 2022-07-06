@@ -14,8 +14,3 @@ use Modules\Attachments\Http\Controllers\Api\AvatarsController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::controller(AttachmentsController::class)->prefix('attachments')->name('api.attachments.')->group(function () {
-    Route::post('/', 'store')->name('store');
-    Route::delete('/{attachment}', 'destroy')->name('destroy');
-});
