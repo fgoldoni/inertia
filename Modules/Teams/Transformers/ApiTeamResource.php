@@ -15,11 +15,14 @@ class ApiTeamResource extends JsonResource
      */
     public function toArray($request)
     {
+        $image = $this->attachments->value('url')
+            ?? "https://images.unsplash.com/photo-1533693706533-57740e69765d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2700&amp;q=80";
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'avatar' => $this->avatar_url,
-            'image' => $this->attachments->value('url'),
+            'image' => $image,
             'display_name' => $this->display_name,
             'subdomain' => $this->subdomain,
         ];

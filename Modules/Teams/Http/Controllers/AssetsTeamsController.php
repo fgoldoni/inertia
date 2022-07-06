@@ -12,6 +12,7 @@ use Illuminate\Routing\Redirector;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
+use Modules\Teams\Http\Requests\UpdateAssetsTeamRequest;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
 use Modules\Teams\Services\Contracts\TeamsServiceInterface;
 
@@ -73,7 +74,7 @@ class AssetsTeamsController extends Controller
         return view('teams::edit');
     }
 
-    public function update(Request $request, Team $team)
+    public function update(UpdateAssetsTeamRequest $request, Team $team)
     {
         $team = $this->teamsRepository->update($team->id, $request->only('avatar_path'));
 

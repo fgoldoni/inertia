@@ -5,7 +5,7 @@ namespace Modules\Teams\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateAssetsTeamRequesst extends FormRequest
+class UpdateAssetsTeamRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -19,7 +19,7 @@ class UpdateAssetsTeamRequesst extends FormRequest
             'files.*' => ['required', 'max:2048',
                 Rule::exists('attachments', 'id')
                     ->where(function ($query) {
-                        //$query->where('user_id', request()->user()->id);
+                        $query->where('user_id', request()->user()->id);
                     })
             ],
         ];
