@@ -57,6 +57,7 @@ class TeamsController extends Controller
                 'id' => $team->id,
                 'name' => $team->name,
                 'display_name' => $team->display_name,
+                'owner' => $team->owner?->name,
                 'ownsTeam' => auth()->user()->ownsTeam($team),
                 'belongsToTeam' => auth()->user()->belongsToTeam($team),
                 'isCurrentTeam' => auth()->user()->isCurrentTeam($team),

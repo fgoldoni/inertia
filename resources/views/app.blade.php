@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="baseUrl" content="{{ env('APP_URL') }}">
+        <meta name="frontendDomain" content="{{ env('FRONTEND_DOMAIN') }}">
+        <meta name="frontendHttp" content="{{ env('FRONTEND_HTTP', 'http://') }}">
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 

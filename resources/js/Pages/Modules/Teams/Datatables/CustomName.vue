@@ -1,7 +1,7 @@
 <script setup>
 import {ExternalLinkIcon, RefreshIcon} from '@heroicons/vue/outline';
 import pickBy from "lodash/pickBy";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import {Errors} from "@/Plugins/errors";
 import {ElNotification} from "element-plus";
 import {Inertia} from "@inertiajs/inertia";
@@ -10,6 +10,13 @@ import moment from 'moment'
 const props = defineProps({
     row: Object,
 });
+
+
+const frontendDomain = document.querySelector('meta[name="frontendDomain"]').content
+
+const frontendHttp = document.querySelector('meta[name="frontendHttp"]').content
+
+const preview = ref(frontendHttp + props.row.subdomain + frontendDomain)
 
 const form = reactive({
     processing: false,
@@ -70,8 +77,9 @@ const restore = (id) => {
 
             </div>
 
-            <div class="text-sm leading-5 text-secondary-500 dark:text-secondary-400" v-if="props.row.ownsTeam">Owner</div>
-            <div class="text-sm leading-5 text-secondary-500 dark:text-secondary-400" v-else-if="props.row.belongsToTeam">Member</div>
+            <a :href="preview" target="_blank" class="text-sm block leading-5 text-secondary-700 dark:text-secondary-400 underline">
+                {{ preview }}
+            </a>
 
         </div>
 

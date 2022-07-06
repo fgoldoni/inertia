@@ -22,12 +22,11 @@ __webpack_require__.r(__webpack_exports__);
   title: 'Name',
   sortField: 'name'
 }, {
-  name: 'subdomain',
-  title: 'domain',
-  sortField: 'subdomain'
+  name: '__component:Teams/Datatables/CustomOwner',
+  title: 'Owner'
 }, {
   name: 'display_name',
-  title: 'display_name',
+  title: 'Display Name',
   sortField: 'display_name'
 }, {
   name: '__component:Teams/Datatables/CustomMember',

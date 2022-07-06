@@ -2063,9 +2063,9 @@ var map = {
 		"/js/vendor",
 		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Teams_Datatables_Custom-d616030"
 	],
-	"./Modules/Teams/Datatables/CustomState.vue": [
-		"./resources/js/Pages/Modules/Teams/Datatables/CustomState.vue",
-		"resources_js_Pages_Modules_Teams_Datatables_CustomState_vue"
+	"./Modules/Teams/Datatables/CustomOwner.vue": [
+		"./resources/js/Pages/Modules/Teams/Datatables/CustomOwner.vue",
+		"resources_js_Pages_Modules_Teams_Datatables_CustomOwner_vue"
 	],
 	"./Modules/Teams/Datatables/CustomUpdatedAt.vue": [
 		"./resources/js/Pages/Modules/Teams/Datatables/CustomUpdatedAt.vue",
