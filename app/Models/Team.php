@@ -4,7 +4,6 @@ namespace App\Models;
 use App\Traits\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
@@ -73,6 +72,6 @@ class Team extends JetstreamTeam
      */
     protected function defaultAvatarUrl(): string
     {
-        return  Storage::disk($this->avatarDisk())->url('logo.png');
+        return  asset('images/logo.png');
     }
 }
