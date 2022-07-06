@@ -5,7 +5,9 @@ import { XIcon } from '@heroicons/vue/outline'
 import Tabs from '@/Shared/Tabs'
 import TeamOwnerComponent from '@/Components/TeamOwnerComponent'
 import AddTeamMemberComponent from '@/Components/AddTeamMemberComponent'
+import PendingTeamInvitationsComponent from '@/Components/PendingTeamInvitationsComponent'
 import Logs from '@/Shared/Logs'
+import {Inertia} from "@inertiajs/inertia";
 
 const props = defineProps({
     editing: Object,
@@ -16,6 +18,10 @@ const props = defineProps({
 const open = ref(true)
 
 const currentTab = ref('edit')
+
+const close = () => {
+    Inertia.get(props.basePageRoute, {}, {replace: true, preserveState: true, preserveScroll: true})
+}
 
 </script>
 
@@ -36,7 +42,7 @@ const currentTab = ref('edit')
 
 
                             <div class="absolute top-0 right-0 pt-2 pr-4 sm:pt-4 sm:pr-4">
-                                <button type="button" class="text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" @click="open = false">
+                                <button type="button" class="text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" @click="close">
                                     <span class="sr-only">Close</span>
                                     <XIcon class="h-6 w-6" aria-hidden="true" />
                                 </button>
@@ -58,9 +64,12 @@ const currentTab = ref('edit')
 
                                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
-                                                    <TeamOwnerComponent :team="props.editing"></TeamOwnerComponent>
+                                                    <TeamOwnerComponent :team="props.editing" default-open></TeamOwnerComponent>
 
                                                     <AddTeamMemberComponent :team="props.editing"  :available-roles="props.availableRoles"></AddTeamMemberComponent>
+
+                                                    <PendingTeamInvitationsComponent :team="props.editing"></PendingTeamInvitationsComponent>
+
 
                                                 </div>
 
@@ -89,8 +98,6 @@ const currentTab = ref('edit')
                                 <div v-if="currentTab === 'logs'" class="grid grid-cols-1">
                                     <Logs :options="props.editing.logs"></Logs>
                                 </div>
-
-
 
                             </div>
 

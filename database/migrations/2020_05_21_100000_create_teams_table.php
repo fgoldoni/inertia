@@ -29,8 +29,6 @@ return new class() extends Migration {
             $table->string('phone')->nullable();
             $table->boolean('online')->nullable();
 
-            $this->addTeamField($table);
-
             $table->string('avatar_path', 2048)->nullable();
 
             $table->softDeletes();

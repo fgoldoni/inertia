@@ -5300,6 +5300,10 @@ select {
     border-radius: 0.375rem;
   }
 
+  .sm\:rounded-xl {
+    border-radius: 0.75rem;
+  }
+
   .sm\:rounded-tl-md {
     border-top-left-radius: 0.375rem;
   }

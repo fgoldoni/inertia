@@ -111,7 +111,7 @@ class TeamsController extends Controller
 
         return $this->index([
             'editing' => new TeamResource($this->teamsRepository->withCriteria([
-                new EagerLoad(['owner:id,name,email,profile_photo_path', 'users', 'activities']),
+                new EagerLoad(['owner:id,name,email,profile_photo_path', 'users', 'activities', 'teamInvitations']),
                 new WithTrashed(),
             ])->find($team->id)),
             'availableRoles' => array_values(Jetstream::$roles),

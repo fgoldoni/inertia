@@ -3597,7 +3597,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "rounded-md bg-blue-50 p-4"
+  "class": "rounded-md bg-primary-50 p-4"
 };
 var _hoisted_2 = {
   "class": "flex"
@@ -3609,7 +3609,7 @@ var _hoisted_4 = {
   "class": "ml-3 flex-1 md:flex md:justify-between"
 };
 var _hoisted_5 = {
-  "class": "text-sm text-blue-700"
+  "class": "text-sm text-primary-700"
 };
 var _hoisted_6 = {
   key: 0,
@@ -3625,14 +3625,14 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["InformationCircleIcon"], {
-    "class": "h-5 w-5 text-blue-400",
+    "class": "h-5 w-5 text-primary-400",
     "aria-hidden": "true"
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.text), 1
   /* TEXT */
   ), $setup.props.url ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: $setup.props.url,
     target: "_blank",
-    "class": "whitespace-nowrap font-medium text-blue-700 hover:text-blue-600 lowercase"
+    "class": "whitespace-nowrap font-medium text-primary-700 hover:text-primary-600 lowercase"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.urlText) + " ", 1
   /* TEXT */
   ), _hoisted_8], 8

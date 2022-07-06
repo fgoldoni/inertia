@@ -14,6 +14,7 @@ class TeamResource extends JsonResource
             'name' => $this->name,
             'display_name' => $this->display_name,
             'subdomain' => $this->subdomain,
+            'teamInvitations' => $this->teamInvitations,
 
             'logs' => app(ActivitiesRepository::class)->byModel($this),
         ];

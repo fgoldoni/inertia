@@ -6,6 +6,10 @@ import ValidationErrors from '@/Shared/ValidationErrors';
 const props = defineProps({
     title: String,
     errors: Object,
+    defaultOpen: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 defineEmits(['submitted']);
@@ -14,7 +18,7 @@ const hasActions = computed(() => !! useSlots().actions);
 </script>
 
 <template>
-    <BaseDisclosure :title="title" default-open>
+    <BaseDisclosure :title="title" :default-open="props.defaultOpen">
         <form @submit.prevent="$emit('submitted')" @keydown="props.errors.clear($event.target.name)">
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">

@@ -1,13 +1,15 @@
 <script setup>
-import {ref, reactive, onMounted} from 'vue'
-import BaseDisclosure from '@/Components/BaseDisclosure'
+import {reactive} from 'vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
-import JetTextarea from '@/Jetstream/Textarea'
 import JetInputError from '@/Jetstream/InputError.vue';
-import ValidationErrors from '@/Shared/ValidationErrors';
+import FormSection from '@/Shared/FormSection';
+import Information from '@/Shared/Information';
 import {Errors} from "@/Plugins/errors";
-import Information from '@/Shared/Information'
+import JetButton from '@/Jetstream/Button';
+import pickBy from "lodash/pickBy";
+import {ElNotification} from "element-plus";
+
 
 const props = defineProps({
     team: Object,
@@ -16,23 +18,37 @@ const props = defineProps({
 
 const form = reactive({
     id: props.team.id,
-    email: props.team.email,
-    role: props.team.role,
+    email: '',
+    role: null,
 
     errors: new Errors(),
     processing: false,
 })
+
+const updateTeamOwner = () => {
+    form.processing = true;
+
+    axios.post(route('admin.teams.members.store', form.id), pickBy({
+        email: form.email,
+        role: form.role,
+    })).then((response) => {
+        form.processing = false;
+        ElNotification({
+            title: 'Great!',
+            message: response.data.message,
+            type: 'success',
+        })
+    }).catch(error => {
+        form.processing = false;
+        form.errors.onFailed(error);
+    });
+}
 </script>
 
 <template>
-    <BaseDisclosure :title="__('Add Team Member')">
+    <FormSection :title="__('Team Owner')" :errors="form.errors" @submitted="updateTeamOwner">
 
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-
-            <div class="col-span-1 sm:col-span-2" v-if="form.errors.any()">
-                <ValidationErrors :errors="form.errors.all()" class="mb-4" />
-            </div>
-
+        <template #form>
             <div class="col-span-1 sm:col-span-2">
                 <Information text="Please provide the email address of the person you would like to add to this team."></Information>
             </div>
@@ -58,7 +74,7 @@ const form = reactive({
                 <div v-if="props.availableRoles.length > 0" class="col-span-6 lg:col-span-4">
                     <JetLabel for="roles" value="Role" />
 
-                    <JetInputError :message="form.errors.get('display_name')" class="mt-2"/>
+                    <JetInputError :message="form.errors.get('role')" class="mt-2"/>
 
                     <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
                         <button
@@ -97,8 +113,13 @@ const form = reactive({
                     </div>
                 </div>
             </div>
+        </template>
 
-        </div>
+        <template #actions>
+            <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Save
+            </JetButton>
+        </template>
 
-    </BaseDisclosure>
+    </FormSection>
 </template>

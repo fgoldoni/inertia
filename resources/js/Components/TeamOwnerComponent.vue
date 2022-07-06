@@ -1,17 +1,12 @@
 <script setup>
-import {ref, reactive, onMounted} from 'vue'
-import BaseDisclosure from '@/Components/BaseDisclosure'
+import {reactive} from 'vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
-import JetTextarea from '@/Jetstream/Textarea'
 import JetInputError from '@/Jetstream/InputError.vue';
-
 import FormSection from '@/Shared/FormSection';
 import {Errors} from "@/Plugins/errors";
 import JetButton from '@/Jetstream/Button';
 import pickBy from "lodash/pickBy";
-import {useAvatar} from "@/Composables/UseAvatar";
-import {useMedia} from "@/Composables/UseMedia";
 import {ElNotification} from "element-plus";
 
 
@@ -52,7 +47,7 @@ const updateTeamOwner = () => {
 </script>
 
 <template>
-    <FormSection :title="__('Team Owner')" :errors="form.errors" @submitted="updateTeamOwner">
+    <FormSection :title="__('Team Owner')" :errors="form.errors" @submitted="updateTeamOwner" default-open>
 
         <template #form>
 
