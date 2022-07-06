@@ -15,6 +15,9 @@ const props = defineProps({
     availableRoles: Array,
     basePageRoute: String,
 });
+
+const team = ref(props.editing)
+
 const open = ref(true)
 
 const currentTab = ref('edit')
@@ -64,11 +67,11 @@ const close = () => {
 
                                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
-                                                    <TeamOwnerComponent :team="props.editing" default-open></TeamOwnerComponent>
+                                                    <TeamOwnerComponent v-model="team" default-open></TeamOwnerComponent>
 
-                                                    <AddTeamMemberComponent :team="props.editing"  :available-roles="props.availableRoles"></AddTeamMemberComponent>
+                                                    <AddTeamMemberComponent v-model="team"  :available-roles="props.availableRoles"></AddTeamMemberComponent>
 
-                                                    <PendingTeamInvitationsComponent :team="props.editing"></PendingTeamInvitationsComponent>
+                                                    <PendingTeamInvitationsComponent v-model="team"></PendingTeamInvitationsComponent>
 
 
                                                 </div>
@@ -96,7 +99,7 @@ const close = () => {
                                 </div>
 
                                 <div v-if="currentTab === 'logs'" class="grid grid-cols-1">
-                                    <Logs :options="props.editing.logs"></Logs>
+                                    <Logs :options="team.logs"></Logs>
                                 </div>
 
                             </div>

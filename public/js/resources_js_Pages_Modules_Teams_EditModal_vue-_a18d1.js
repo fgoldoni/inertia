@@ -174,15 +174,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'AddTeamMemberComponent',
   props: {
-    team: Object,
+    modelValue: [Object, Array],
     availableRoles: Object
   },
+  emits: ["update:modelValue"],
   setup: function setup(__props, _ref) {
-    var expose = _ref.expose;
+    var expose = _ref.expose,
+        emit = _ref.emit;
     expose();
     var props = __props;
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      id: props.team.id,
+      id: props.modelValue.id,
       email: '',
       role: null,
       errors: new _Plugins_errors__WEBPACK_IMPORTED_MODULE_6__.Errors(),
@@ -201,6 +203,7 @@ __webpack_require__.r(__webpack_exports__);
           message: response.data.message,
           type: 'success'
         });
+        emit('update:modelValue', response.data.team);
       })["catch"](function (error) {
         form.processing = false;
         form.errors.onFailed(error);
@@ -209,6 +212,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var __returned__ = {
       props: props,
+      emit: emit,
       form: form,
       updateTeamOwner: updateTeamOwner,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
@@ -304,14 +308,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'PendingTeamInvitationsComponent',
   props: {
-    team: Object
+    modelValue: [Object, Array]
   },
+  emits: ["update:modelValue"],
   setup: function setup(__props, _ref) {
-    var expose = _ref.expose;
+    var expose = _ref.expose,
+        emit = _ref.emit;
     expose();
     var props = __props;
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
-      id: props.team.id,
+      id: props.modelValue.id,
       errors: new _Plugins_errors__WEBPACK_IMPORTED_MODULE_2__.Errors(),
       processing: false
     });
@@ -324,6 +330,7 @@ __webpack_require__.r(__webpack_exports__);
           message: response.data.message,
           type: 'success'
         });
+        emit('update:modelValue', response.data.team);
       })["catch"](function (error) {
         form.processing = false;
         form.errors.onFailed(error);
@@ -332,6 +339,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var __returned__ = {
       props: props,
+      emit: emit,
       form: form,
       cancelTeamInvitation: cancelTeamInvitation,
       ActionSection: _Shared_ActionSection__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -386,17 +394,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'TeamOwnerComponent',
   props: {
-    team: Object
+    modelValue: [Object, Array]
   },
+  emits: ["update:modelValue"],
   setup: function setup(__props, _ref) {
-    var expose = _ref.expose;
+    var expose = _ref.expose,
+        emit = _ref.emit;
     expose();
     var props = __props;
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      id: props.team.id,
-      name: props.team.name,
-      subdomain: props.team.subdomain,
-      display_name: props.team.display_name,
+      id: props.modelValue.id,
+      name: props.modelValue.name,
+      subdomain: props.modelValue.subdomain,
+      display_name: props.modelValue.display_name,
       errors: new _Plugins_errors__WEBPACK_IMPORTED_MODULE_5__.Errors(),
       processing: false
     });
@@ -414,6 +424,7 @@ __webpack_require__.r(__webpack_exports__);
           message: response.data.message,
           type: 'success'
         });
+        emit('update:modelValue', response.data.team);
       })["catch"](function (error) {
         form.processing = false;
         form.errors.onFailed(error);
@@ -422,6 +433,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var __returned__ = {
       props: props,
+      emit: emit,
       form: form,
       updateTeamOwner: updateTeamOwner,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
@@ -648,6 +660,7 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
+    var team = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.editing);
     var open = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
     var currentTab = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('edit');
 
@@ -661,6 +674,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var __returned__ = {
       props: props,
+      team: team,
       open: open,
       currentTab: currentTab,
       close: close,
@@ -1267,7 +1281,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     errors: $setup.form.errors
   }, {
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.team.teamInvitations, function (invitation) {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.props.modelValue.teamInvitations, function (invitation) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: invitation.id,
           "class": "flex items-center justify-between"
@@ -1693,21 +1707,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   }, null, 8
                   /* PROPS */
                   , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [$setup.currentTab === 'edit' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TeamOwnerComponent"], {
-                    team: $setup.props.editing,
+                    modelValue: $setup.team,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+                      return $setup.team = $event;
+                    }),
                     "default-open": ""
                   }, null, 8
                   /* PROPS */
-                  , ["team"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AddTeamMemberComponent"], {
-                    team: $setup.props.editing,
+                  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AddTeamMemberComponent"], {
+                    modelValue: $setup.team,
+                    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+                      return $setup.team = $event;
+                    }),
                     "available-roles": $setup.props.availableRoles
                   }, null, 8
                   /* PROPS */
-                  , ["team", "available-roles"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["PendingTeamInvitationsComponent"], {
-                    team: $setup.props.editing
+                  , ["modelValue", "available-roles"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["PendingTeamInvitationsComponent"], {
+                    modelValue: $setup.team,
+                    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+                      return $setup.team = $event;
+                    })
                   }, null, 8
                   /* PROPS */
-                  , ["team"])])]), _hoisted_13])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.currentTab === 'logs' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Logs"], {
-                    options: $setup.props.editing.logs
+                  , ["modelValue"])])]), _hoisted_13])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.currentTab === 'logs' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Logs"], {
+                    options: $setup.team.logs
                   }, null, 8
                   /* PROPS */
                   , ["options"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];

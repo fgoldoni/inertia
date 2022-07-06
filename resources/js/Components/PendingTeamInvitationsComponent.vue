@@ -5,11 +5,13 @@ import {Errors} from "@/Plugins/errors";
 import {ElNotification} from "element-plus";
 
 const props = defineProps({
-    team: Object,
+    modelValue: [Object, Array],
 });
 
+const emit = defineEmits(["update:modelValue"]);
+
 const form = reactive({
-    id: props.team.id,
+    id: props.modelValue.id,
 
     errors: new Errors(),
     processing: false,
@@ -18,12 +20,17 @@ const form = reactive({
 const cancelTeamInvitation = (invitation) => {
     axios.delete(route('admin.teams.invitations.destroy', invitation))
         .then((response) => {
+
             form.processing = false;
+
             ElNotification({
                 title: 'Great!',
                 message: response.data.message,
                 type: 'success',
             })
+
+            emit('update:modelValue', response.data.team)
+
         }).catch(error => {
         form.processing = false;
         form.errors.onFailed(error);
@@ -36,7 +43,7 @@ const cancelTeamInvitation = (invitation) => {
 
         <template #content>
             <div class="space-y-6">
-                <div v-for="invitation in team.teamInvitations" :key="invitation.id" class="flex items-center justify-between">
+                <div v-for="invitation in props.modelValue.teamInvitations" :key="invitation.id" class="flex items-center justify-between">
                     <div class="text-gray-500">
                         {{ invitation.email }}
                     </div>

@@ -11,14 +11,16 @@ import {ElNotification} from "element-plus";
 
 
 const props = defineProps({
-    team: Object,
+    modelValue: [Object, Array],
 });
 
+const emit = defineEmits(["update:modelValue"]);
+
 const form = reactive({
-    id: props.team.id,
-    name: props.team.name,
-    subdomain: props.team.subdomain,
-    display_name: props.team.display_name,
+    id: props.modelValue.id,
+    name: props.modelValue.name,
+    subdomain: props.modelValue.subdomain,
+    display_name: props.modelValue.display_name,
 
     errors: new Errors(),
     processing: false,
@@ -32,12 +34,17 @@ const updateTeamOwner = () => {
         subdomain: form.subdomain,
         display_name: form.display_name,
     })).then((response) => {
+
         form.processing = false;
+
         ElNotification({
             title: 'Great!',
             message: response.data.message,
             type: 'success',
         })
+
+        emit('update:modelValue', response.data.team)
+
     }).catch(error => {
         form.processing = false;
         form.errors.onFailed(error);

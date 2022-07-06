@@ -10,14 +10,15 @@ import JetButton from '@/Jetstream/Button';
 import pickBy from "lodash/pickBy";
 import {ElNotification} from "element-plus";
 
-
 const props = defineProps({
-    team: Object,
+    modelValue: [Object, Array],
     availableRoles: Object,
 });
 
+const emit = defineEmits(["update:modelValue"]);
+
 const form = reactive({
-    id: props.team.id,
+    id: props.modelValue.id,
     email: '',
     role: null,
 
@@ -32,12 +33,17 @@ const updateTeamOwner = () => {
         email: form.email,
         role: form.role,
     })).then((response) => {
+
         form.processing = false;
+
         ElNotification({
             title: 'Great!',
             message: response.data.message,
             type: 'success',
         })
+
+        emit('update:modelValue', response.data.team)
+
     }).catch(error => {
         form.processing = false;
         form.errors.onFailed(error);
