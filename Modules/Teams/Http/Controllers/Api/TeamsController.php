@@ -46,6 +46,11 @@ class TeamsController extends Controller
     public function show(TeamRequest $request, string $subdomain)
     {
         $data = new ApiTeamResource($this->teamsRepository->withCriteria([
+            new EagerLoad([
+                'attachments' => function ($query) {
+                    $query->where('attachments.disk', config('app.system.disks.uploads'));
+                }
+            ]),
             new Where('subdomain', $subdomain)
         ])->first());
 

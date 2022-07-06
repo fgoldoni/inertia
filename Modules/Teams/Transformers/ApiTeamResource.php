@@ -18,6 +18,8 @@ class ApiTeamResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'avatar' => $this->avatar_url,
+            'image' => $this->attachments->value('url'),
             'display_name' => $this->display_name,
             'subdomain' => $this->subdomain,
         ];
