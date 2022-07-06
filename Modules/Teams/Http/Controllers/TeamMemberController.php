@@ -16,11 +16,13 @@ use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
+use Modules\Teams\Services\Contracts\TeamsServiceInterface;
 
 class TeamMemberController extends Controller
 {
     public function __construct(
         private readonly TeamsRepository $teamsRepository,
+        private readonly TeamsServiceInterface $teamsService,
         private readonly ActivitiesRepository $activitiesRepository,
         private readonly AttachmentsRepository $attachmentsRepository,
         private readonly CategoriesRepository $categoriesRepository,
@@ -65,7 +67,10 @@ class TeamMemberController extends Controller
         }
 
         return $this->response->json(
-            ['message' => __('The invitation has been successfully sent')],
+            [
+                'team' => $this->teamsService->findTeam($team->id),
+                'message' => __('The Invitation has been successfully sent')
+            ],
             Response::HTTP_OK,
             [],
             JSON_NUMERIC_CHECK

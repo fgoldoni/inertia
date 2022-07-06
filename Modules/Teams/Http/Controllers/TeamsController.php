@@ -20,12 +20,14 @@ use Modules\Companies\Entities\Company;
 use Modules\Companies\Http\Requests\UpdateCompanyRequest;
 use Modules\Teams\Http\Requests\UpdateTeamRequest;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
+use Modules\Teams\Services\Contracts\TeamsServiceInterface;
 use Modules\Teams\Transformers\TeamResource;
 
 class TeamsController extends Controller
 {
     public function __construct(
         private readonly TeamsRepository $teamsRepository,
+        private readonly TeamsServiceInterface $teamsService,
         private readonly ActivitiesRepository $activitiesRepository,
         private readonly AttachmentsRepository $attachmentsRepository,
         private readonly CategoriesRepository $categoriesRepository,
@@ -110,10 +112,7 @@ class TeamsController extends Controller
         );
 
         return $this->index([
-            'editing' => new TeamResource($this->teamsRepository->withCriteria([
-                new EagerLoad(['owner:id,name,email,profile_photo_path', 'users', 'activities', 'teamInvitations']),
-                new WithTrashed(),
-            ])->find($team->id)),
+            'editing' => $this->teamsService->findTeam($team->id),
             'availableRoles' => array_values(Jetstream::$roles),
         ]);
     }
@@ -124,7 +123,10 @@ class TeamsController extends Controller
             ->update($team->id, $request->only('name', 'display_name', 'subdomain'));
 
         return $this->response->json(
-            ['message' => __('The Company (:item) has been successfully updated', ['item' => $team->name])],
+            [
+                'team' => $this->teamsService->findTeam($team->id),
+                'message' => __('The Company (:item) has been successfully updated', ['item' => $team->name])
+            ],
             Response::HTTP_OK,
             [],
             JSON_NUMERIC_CHECK

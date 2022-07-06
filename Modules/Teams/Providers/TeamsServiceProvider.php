@@ -4,6 +4,8 @@ namespace Modules\Teams\Providers;
 use App\Models\Team;
 use Illuminate\Support\ServiceProvider;
 use Modules\Teams\Observers\TeamObserver;
+use Modules\Teams\Services\Contracts\TeamsServiceInterface;
+use Modules\Teams\Services\TeamsService;
 
 class TeamsServiceProvider extends ServiceProvider
 {
@@ -25,6 +27,8 @@ class TeamsServiceProvider extends ServiceProvider
     public function boot()
     {
         Team::observe(TeamObserver::class);
+
+        $this->app->bind(TeamsServiceInterface::class, TeamsService::class);
 
         $this->registerTranslations();
         $this->registerConfig();

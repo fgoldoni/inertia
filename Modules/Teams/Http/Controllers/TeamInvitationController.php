@@ -15,11 +15,13 @@ use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
+use Modules\Teams\Services\Contracts\TeamsServiceInterface;
 
 class TeamInvitationController extends Controller
 {
     public function __construct(
         private readonly TeamsRepository $teamsRepository,
+        private readonly TeamsServiceInterface $teamsService,
         private readonly ActivitiesRepository $activitiesRepository,
         private readonly AttachmentsRepository $attachmentsRepository,
         private readonly CategoriesRepository $categoriesRepository,
@@ -91,7 +93,10 @@ class TeamInvitationController extends Controller
         $invitation->delete();
 
         return $this->response->json(
-            ['message' => __('The Invitation has been successfully canceled')],
+            [
+                'team' => $this->teamsService->findTeam($invitation->team->id),
+                'message' => __('The Invitation has been successfully canceled')
+            ],
             Response::HTTP_OK,
             [],
             JSON_NUMERIC_CHECK

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: goldoni
- * Date: 24.09.18
- * Time: 21:30.
- */
 namespace App\Repositories;
 
 use App\Exceptions\ModelException;
