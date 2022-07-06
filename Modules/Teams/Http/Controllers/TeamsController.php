@@ -1,7 +1,6 @@
 <?php
 namespace Modules\Teams\Http\Controllers;
 
-use App\Actions\Jetstream\UpdateTeamName;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Repositories\Criteria\EagerLoad;
@@ -16,12 +15,9 @@ use Laravel\Jetstream\Jetstream;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
-use Modules\Companies\Entities\Company;
-use Modules\Companies\Http\Requests\UpdateCompanyRequest;
 use Modules\Teams\Http\Requests\UpdateTeamRequest;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
 use Modules\Teams\Services\Contracts\TeamsServiceInterface;
-use Modules\Teams\Transformers\TeamResource;
 
 class TeamsController extends Controller
 {
@@ -83,7 +79,6 @@ class TeamsController extends Controller
         ], $modalProps));
     }
 
-
     public function create()
     {
         $this->authorize('create', Team::class);
@@ -91,12 +86,10 @@ class TeamsController extends Controller
         return view('teams::create');
     }
 
-
     public function store(Request $request)
     {
         //
     }
-
 
     public function show($id)
     {

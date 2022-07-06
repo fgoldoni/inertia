@@ -1,15 +1,12 @@
 <?php
-
 namespace Modules\Teams\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Gate;
 use Laravel\Jetstream\TeamInvitation;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
@@ -47,7 +44,6 @@ class TeamInvitationController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      * @return Renderable
      */
     public function store(Request $request)
@@ -77,7 +73,6 @@ class TeamInvitationController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Renderable
      */

@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Repositories;
 
-use App\Exceptions\ModelException;
 use App\Repositories\Contracts\RepositoryInterface;
 use App\Repositories\Criteria\CriteriaInterface;
 use Exception;

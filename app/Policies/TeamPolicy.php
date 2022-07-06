@@ -46,7 +46,6 @@ class TeamPolicy
         return $user->hasPermissionTo('create_teams');
     }
 
-
     public function update(User $user, Team $team)
     {
         return  $user->hasPermissionTo('update_teams') && $user->ownsTeam($team);

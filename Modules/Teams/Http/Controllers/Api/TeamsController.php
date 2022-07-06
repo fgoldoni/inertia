@@ -3,9 +3,7 @@ namespace Modules\Teams\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Criteria\EagerLoad;
-use App\Repositories\Criteria\Has;
 use App\Repositories\Criteria\Where;
-use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

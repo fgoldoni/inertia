@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Teams\Http\Controllers;
 
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -99,7 +98,6 @@ class TeamMemberController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Renderable
      */

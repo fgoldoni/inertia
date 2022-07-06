@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Traits\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
@@ -65,5 +66,13 @@ class Team extends JetstreamTeam
             ->logOnly(['name', 'display_name', 'subdomain'])
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
+    }
+
+    /**
+     * Get the default avatar photo URL if no avatar photo has been uploaded.
+     */
+    protected function defaultAvatarUrl(): string
+    {
+        return  Storage::disk($this->avatarDisk())->url('logo.png');
     }
 }

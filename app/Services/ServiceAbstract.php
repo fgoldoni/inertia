@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Services;
 
 use App\Repositories\RepositoryAbstract;
@@ -16,7 +15,6 @@ abstract class ServiceAbstract implements ServiceInterface
     {
         $this->repository = $this->resolveRepository();
     }
-
 
     abstract protected function repository();
 
