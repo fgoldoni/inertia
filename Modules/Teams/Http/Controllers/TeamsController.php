@@ -4,10 +4,13 @@ namespace Modules\Teams\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\Has;
+use App\Repositories\Criteria\WhereHas;
 use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
@@ -46,15 +49,27 @@ class TeamsController extends Controller
             'delete' => $this->request->user()->hasPermissionTo('delete_teams'),
         ] : null);
 
-        $paginator = $this->teamsRepository->withCriteria([
-            new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
-            new WhereLike(
-                ['teams.id', 'teams.name', 'teams.display_name', 'teams.subdomain'],
-                $this->request->get('search')
-            ),
-            new WithTrashed(),
-        ])->paginate()
-            ->withQueryString()
+        if (auth()->user()->isAdministrator()) {
+            $paginator = $this->teamsRepository->withCriteria([
+                new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
+                new WhereLike(
+                    ['teams.id', 'teams.name', 'teams.display_name', 'teams.subdomain'],
+                    $this->request->get('search')
+                ),
+                new WithTrashed(),
+            ])->paginate();
+        } else {
+            $paginator = $this->teamsRepository->withCriteria([
+                new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
+                new WhereLike(
+                    ['teams.id', 'teams.name', 'teams.display_name', 'teams.subdomain'],
+                    $this->request->get('search')
+                ),
+                new Has('users')
+            ])->paginate();
+        }
+
+        $teams = $paginator->withQueryString()
             ->through(fn ($team) => [
                 'id' => $team->id,
                 'name' => $team->name,
@@ -71,17 +86,9 @@ class TeamsController extends Controller
                 'deleted_at' => $team->deleted_at,
             ]);
 
-        if (!auth()->user()->isAdministrator()) {
-            $teams = $paginator->getCollection();
-
-            $filteredCollection = $teams->filter(fn ($team) => $team['belongsToTeam']);
-
-            $paginator->setCollection($filteredCollection);
-        }
-
         return Inertia::render('Modules/Teams/Index', array_merge([
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
-            'rowData' => $paginator,
+            'rowData' => $teams,
         ], $modalProps));
     }
 
