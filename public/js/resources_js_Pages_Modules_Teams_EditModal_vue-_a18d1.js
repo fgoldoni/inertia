@@ -2327,7 +2327,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createSlots)({
     form: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Information"], {
-        text: "hhh"
+        text: "You just have a read only access for the Team"
       })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
         "for": "name",
         value: _ctx.__('Name'),
@@ -2692,14 +2692,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "default-open": ""
                   }, null, 8
                   /* PROPS */
-                  , ["modelValue", "permissions"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AssetsComponent"], {
+                  , ["modelValue", "permissions"]), $setup.props.permissions.canUpdateTeam ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["AssetsComponent"], {
+                    key: 0,
                     modelValue: $setup.team,
                     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
                       return $setup.team = $event;
                     })
                   }, null, 8
                   /* PROPS */
-                  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AddTeamMemberComponent"], {
+                  , ["modelValue"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.props.permissions.canUpdateTeam ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["AddTeamMemberComponent"], {
+                    key: 1,
                     modelValue: $setup.team,
                     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
                       return $setup.team = $event;
@@ -2707,8 +2709,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     "available-roles": $setup.props.availableRoles
                   }, null, 8
                   /* PROPS */
-                  , ["modelValue", "available-roles"]), $setup.team.teamInvitations.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["PendingTeamInvitationsComponent"], {
-                    key: 0,
+                  , ["modelValue", "available-roles"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.team.teamInvitations.length && $setup.props.permissions.canUpdateTeam ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["PendingTeamInvitationsComponent"], {
+                    key: 2,
                     modelValue: $setup.team,
                     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
                       return $setup.team = $event;
@@ -2717,7 +2719,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   }, null, 8
                   /* PROPS */
                   , ["modelValue", "permissions"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.team.members.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["TeamMembersComponent"], {
-                    key: 1,
+                    key: 3,
                     modelValue: $setup.team,
                     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
                       return $setup.team = $event;

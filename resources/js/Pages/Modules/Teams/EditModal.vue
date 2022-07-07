@@ -74,11 +74,11 @@ const close = () => {
 
                                                     <TeamOwnerComponent v-model="team" :permissions="props.permissions" default-open></TeamOwnerComponent>
 
-                                                    <AssetsComponent v-model="team"></AssetsComponent>
+                                                    <AssetsComponent v-model="team" v-if="props.permissions.canUpdateTeam"></AssetsComponent>
 
-                                                    <AddTeamMemberComponent v-model="team"  :available-roles="props.availableRoles"></AddTeamMemberComponent>
+                                                    <AddTeamMemberComponent v-model="team"  :available-roles="props.availableRoles" v-if="props.permissions.canUpdateTeam"></AddTeamMemberComponent>
 
-                                                    <PendingTeamInvitationsComponent v-model="team" v-if="team.teamInvitations.length" :permissions="props.permissions"></PendingTeamInvitationsComponent>
+                                                    <PendingTeamInvitationsComponent v-model="team" v-if="team.teamInvitations.length && props.permissions.canUpdateTeam" :permissions="props.permissions"></PendingTeamInvitationsComponent>
 
                                                     <TeamMembersComponent v-model="team" :available-roles="props.availableRoles" :permissions="props.permissions" v-if="team.members.length"></TeamMembersComponent>
 

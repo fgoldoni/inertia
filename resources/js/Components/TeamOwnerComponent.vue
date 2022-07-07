@@ -61,7 +61,7 @@ const updateTeamOwner = () => {
         <template #form>
 
             <div class="col-span-1 sm:col-span-2">
-                <Information text="hhh"></Information>
+                <Information text="You just have a read only access for the Team"></Information>
             </div>
             <div class="col-span-1">
 
