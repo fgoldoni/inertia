@@ -52,7 +52,7 @@ const updateTeamOwner = () => {
 </script>
 
 <template>
-    <FormSection :title="__('Team Owner')" :errors="form.errors" @submitted="updateTeamOwner">
+    <FormSection :title="__('Add Team Member')" :errors="form.errors" @submitted="updateTeamOwner">
 
         <template #form>
             <div class="col-span-1 sm:col-span-2">

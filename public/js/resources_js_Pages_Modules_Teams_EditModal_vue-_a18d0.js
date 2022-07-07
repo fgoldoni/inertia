@@ -1643,7 +1643,7 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["FormSection"], {
-    title: _ctx.__('Team Owner'),
+    title: _ctx.__('Add Team Member'),
     errors: $setup.form.errors,
     onSubmitted: $setup.updateTeamOwner
   }, {
