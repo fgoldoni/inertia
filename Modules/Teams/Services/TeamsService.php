@@ -25,7 +25,7 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
         return new TeamResource($this->repository->withCriteria([
             new EagerLoad([
                 'owner:id,name,email,profile_photo_path',
-                'users',
+                'users:id,name,email',
                 'activities',
                 'teamInvitations',
                 'attachments' => function ($query) {

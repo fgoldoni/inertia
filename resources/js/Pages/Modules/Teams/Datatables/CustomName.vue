@@ -77,7 +77,7 @@ const restore = (id) => {
 
             </div>
 
-            <a :href="preview" target="_blank" class="text-sm block leading-5 text-secondary-700 dark:text-secondary-400 underline">
+            <a :href="preview + '/cache/clear'" target="_blank" class="text-sm block leading-5 text-secondary-700 dark:text-secondary-400 underline">
                 {{ preview }}
             </a>
 

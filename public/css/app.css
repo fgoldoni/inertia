@@ -1305,6 +1305,12 @@ select {
 .z-30 {
   z-index: 30;
 }
+.order-2 {
+  order: 2;
+}
+.order-1 {
+  order: 1;
+}
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
@@ -1333,6 +1339,10 @@ select {
 .-mx-4 {
   margin-left: -1rem;
   margin-right: -1rem;
+}
+.-mx-8 {
+  margin-left: -2rem;
+  margin-right: -2rem;
 }
 .ml-3 {
   margin-left: 0.75rem;
@@ -1447,6 +1457,12 @@ select {
 }
 .mr-1\.5 {
   margin-right: 0.375rem;
+}
+.-mt-1 {
+  margin-top: -0.25rem;
+}
+.-mt-8 {
+  margin-top: -2rem;
 }
 .block {
   display: block;
@@ -1598,6 +1614,9 @@ select {
 .w-2\.5 {
   width: 0.625rem;
 }
+.w-3 {
+  width: 0.75rem;
+}
 .min-w-0 {
   min-width: 0px;
 }
@@ -1726,6 +1745,24 @@ select {
 .animate-spin {
   -webkit-animation: spin 1s linear infinite;
           animation: spin 1s linear infinite;
+}
+@-webkit-keyframes ping {
+
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+@keyframes ping {
+
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+.animate-ping {
+  -webkit-animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+          animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 .cursor-default {
   cursor: default;
@@ -4178,6 +4215,9 @@ select {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity));
 }
+.ring-slate-900\/10 {
+  --tw-ring-color: rgb(15 23 42 / 0.1);
+}
 .ring-opacity-5 {
   --tw-ring-opacity: 0.05;
 }
@@ -5002,6 +5042,11 @@ select {
     background-color: rgb(51 65 85 / var(--tw-bg-opacity));
   }
 
+  .dark\:bg-slate-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+  }
+
   .dark\:text-secondary-400 {
     --tw-text-opacity: 1;
     color: rgb(148 163 184 / var(--tw-text-opacity));
@@ -5023,6 +5068,10 @@ select {
   .dark\:text-secondary-500 {
     --tw-text-opacity: 1;
     color: rgb(100 116 139 / var(--tw-text-opacity));
+  }
+
+  .dark\:ring-slate-200\/20 {
+    --tw-ring-color: rgb(226 232 240 / 0.2);
   }
 
   .dark\:hover\:text-rose-500:hover {
@@ -5151,6 +5200,10 @@ select {
     height: 100%;
   }
 
+  .sm\:h-8 {
+    height: 2rem;
+  }
+
   .sm\:w-10 {
     width: 2.5rem;
   }
@@ -5165,6 +5218,10 @@ select {
 
   .sm\:w-16 {
     width: 4rem;
+  }
+
+  .sm\:w-8 {
+    width: 2rem;
   }
 
   .sm\:max-w-md {
@@ -5393,6 +5450,11 @@ select {
   .sm\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .sm\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .sm\:leading-6 {

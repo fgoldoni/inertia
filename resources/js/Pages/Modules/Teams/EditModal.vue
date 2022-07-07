@@ -6,6 +6,8 @@ import Tabs from '@/Shared/Tabs'
 import TeamOwnerComponent from '@/Components/TeamOwnerComponent'
 import AddTeamMemberComponent from '@/Components/AddTeamMemberComponent'
 import PendingTeamInvitationsComponent from '@/Components/PendingTeamInvitationsComponent'
+import LivePreviewComponent from '@/Components/LivePreviewComponent'
+import MembersStatsComponent from '@/Components/MembersStatsComponent'
 import AssetsComponent from '@/Components/AssetsComponent'
 import Logs from '@/Shared/Logs'
 import {Inertia} from "@inertiajs/inertia";
@@ -85,8 +87,13 @@ const close = () => {
                                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
 
                                                     <div class="col-span-1">
+                                                        <LivePreviewComponent v-model="team"></LivePreviewComponent>
+                                                    </div>
 
-                                                        xcxbfxd
+                                                    <div class="col-span-1">
+
+                                                        <MembersStatsComponent v-model="team"></MembersStatsComponent>
+
 
                                                     </div>
 
