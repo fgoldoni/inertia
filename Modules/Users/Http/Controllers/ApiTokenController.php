@@ -74,7 +74,7 @@ class ApiTokenController extends Controller
 
         return $this->response->json(
             ['message' => __('We have e-mailed your login link!')],
-            Response::HTTP_CREATED,
+            Response::HTTP_OK,
             [],
             JSON_NUMERIC_CHECK
         );
