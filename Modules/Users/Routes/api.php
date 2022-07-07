@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Modules\Users\Http\Controllers\Api\TeamController;
 use Modules\Users\Http\Controllers\Api\UsersController;
+use Modules\Users\Http\Controllers\ApiTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,10 @@ use Modules\Users\Http\Controllers\Api\UsersController;
 
 Route::controller(UsersController::class)->prefix('users')->name('api.users.')->group(function () {
     Route::get('/', 'index')->name('index');
+});
+
+
+Route::controller(ApiTokenController::class)->prefix('sanctum/token')->name('api.sanctum.token.')->group(function () {
+    Route::post('', 'store')->name('store');
+    Route::post('link', 'link')->name('link');
 });

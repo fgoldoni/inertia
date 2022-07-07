@@ -11,8 +11,12 @@ namespace Modules\Users\Repositories\Eloquent;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Repositories\Criteria\Where;
 use App\Repositories\RepositoryAbstract;
+use Illuminate\Support\Facades\Notification;
 use Jenssegers\Agent\Agent;
+use Laravel\Sanctum\NewAccessToken;
+use Modules\Users\Notifications\LoginLinkNotification;
 use Modules\Users\Repositories\Contracts\UsersRepository;
 
 /**
@@ -40,5 +44,17 @@ class EloquentUsersRepository extends RepositoryAbstract implements UsersReposit
         return tap(new Agent, function ($agent) use ($session) {
             $agent->setUserAgent($session->user_agent);
         });
+    }
+
+    public function isExist(string $email): bool
+    {
+        return $this->withCriteria([
+            new Where('email', $email)
+        ])->exists();
+    }
+
+    public function sendLoginLink(User $user, NewAccessToken $token, string $host)
+    {
+        Notification::send($user, new LoginLinkNotification($user, $token, $host));
     }
 }
