@@ -6,6 +6,7 @@ import Tabs from '@/Shared/Tabs'
 import TeamOwnerComponent from '@/Components/TeamOwnerComponent'
 import AddTeamMemberComponent from '@/Components/AddTeamMemberComponent'
 import PendingTeamInvitationsComponent from '@/Components/PendingTeamInvitationsComponent'
+import TeamMembersComponent from '@/Components/TeamMembersComponent'
 import LivePreviewComponent from '@/Components/LivePreviewComponent'
 import MembersStatsComponent from '@/Components/MembersStatsComponent'
 import AssetsComponent from '@/Components/AssetsComponent'
@@ -16,6 +17,7 @@ const props = defineProps({
     editing: Object,
     filters: Object,
     availableRoles: Array,
+    permissions: Object,
     basePageRoute: String,
 });
 
@@ -70,13 +72,15 @@ const close = () => {
 
                                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
-                                                    <TeamOwnerComponent v-model="team" default-open></TeamOwnerComponent>
+                                                    <TeamOwnerComponent v-model="team" :permissions="props.permissions" default-open></TeamOwnerComponent>
 
                                                     <AssetsComponent v-model="team"></AssetsComponent>
 
                                                     <AddTeamMemberComponent v-model="team"  :available-roles="props.availableRoles"></AddTeamMemberComponent>
 
-                                                    <PendingTeamInvitationsComponent v-model="team"></PendingTeamInvitationsComponent>
+                                                    <PendingTeamInvitationsComponent v-model="team" v-if="team.teamInvitations.length" :permissions="props.permissions"></PendingTeamInvitationsComponent>
+
+                                                    <TeamMembersComponent v-model="team" :available-roles="props.availableRoles" :permissions="props.permissions" v-if="team.members.length"></TeamMembersComponent>
 
                                                 </div>
 

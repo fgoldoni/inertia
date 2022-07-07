@@ -4,6 +4,7 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
 import FormSection from '@/Shared/FormSection';
+import Information from '@/Shared/Information';
 import {Errors} from "@/Plugins/errors";
 import JetButton from '@/Jetstream/Button';
 import pickBy from "lodash/pickBy";
@@ -12,6 +13,7 @@ import {ElNotification} from "element-plus";
 
 const props = defineProps({
     modelValue: [Object, Array],
+    permissions: Object,
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -58,6 +60,9 @@ const updateTeamOwner = () => {
 
         <template #form>
 
+            <div class="col-span-1 sm:col-span-2">
+                <Information text="hhh"></Information>
+            </div>
             <div class="col-span-1">
 
 
@@ -70,6 +75,7 @@ const updateTeamOwner = () => {
                     type="text"
                     class="mt-1 block w-full"
                     required
+                    :disabled="!props.permissions.canUpdateTeam"
                     autofocus/>
 
                 <JetInputError :message="form.errors.get('name')" class="mt-2"/>
@@ -86,6 +92,7 @@ const updateTeamOwner = () => {
                     v-model="form.display_name"
                     type="text"
                     class="mt-1 block w-full"
+                    :disabled="!props.permissions.canUpdateTeam"
                     required/>
 
                 <JetInputError :message="form.errors.get('display_name')" class="mt-2"/>
@@ -98,7 +105,7 @@ const updateTeamOwner = () => {
 
                 <div class="mt-1 flex rounded-md shadow-sm">
                     <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> https:// </span>
-                    <input type="text" name="subdomain" id="subdomain"  v-model="form.subdomain" class="focus:ring-primary-500 focus:border-primary-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300" placeholder="example" />
+                    <input type="text" name="subdomain" id="subdomain"  v-model="form.subdomain" class="focus:ring-primary-500 focus:border-primary-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300" :disabled="!props.permissions.canUpdateTeam" placeholder="example" />
                     <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> .wedo37.com </span>
                 </div>
 
@@ -107,7 +114,7 @@ const updateTeamOwner = () => {
             </div>
         </template>
 
-        <template #actions>
+        <template v-if="props.permissions.canUpdateTeam" #actions>
             <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Save
             </JetButton>

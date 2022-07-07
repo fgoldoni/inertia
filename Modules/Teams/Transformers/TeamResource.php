@@ -17,7 +17,7 @@ class TeamResource extends JsonResource
             'teamInvitations' => $this->teamInvitations,
             'avatar_path' => $this->avatar_path,
             'attachments' => $this->attachments,
-            'members' => $this->allUsers(),
+            'members' => $this->users,
 
             'logs' => app(ActivitiesRepository::class)->byModel($this),
         ];

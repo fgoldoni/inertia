@@ -11,6 +11,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Laravel\Jetstream\Jetstream;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
@@ -114,6 +115,12 @@ class TeamsController extends Controller
         return $this->index([
             'editing' => $this->teamsService->findTeam($team->id),
             'availableRoles' => array_values(Jetstream::$roles),
+            'permissions' => [
+                'canAddTeamMembers' => Gate::check('addTeamMember', $team),
+                'canDeleteTeam' => Gate::check('delete', $team),
+                'canRemoveTeamMembers' => Gate::check('removeTeamMember', $team),
+                'canUpdateTeam' => Gate::check('update', $team),
+            ],
         ]);
     }
 

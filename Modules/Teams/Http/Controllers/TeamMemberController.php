@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
+use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
@@ -106,13 +107,24 @@ class TeamMemberController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+    public function destroy(Request $request, $teamId, $userId)
     {
-        //
+        $team = Jetstream::newTeamModel()->findOrFail($teamId);
+
+        app(RemovesTeamMembers::class)->remove(
+            $request->user(),
+            $team,
+            $user = Jetstream::findUserByIdOrFail($userId)
+        );
+
+        return $this->response->json(
+            [
+                'team' => $this->teamsService->findTeam($team->id),
+                'message' => __('The Membership has been successfully canceled')
+            ],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 }

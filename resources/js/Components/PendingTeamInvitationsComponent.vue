@@ -6,6 +6,7 @@ import {ElNotification} from "element-plus";
 
 const props = defineProps({
     modelValue: [Object, Array],
+    permissions: Object,
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -53,7 +54,7 @@ const cancelTeamInvitation = (invitation) => {
                             <div class="flex items-center">
                                 <!-- Cancel Team Invitation -->
                                 <button
-                                    v-if="true"
+                                    v-if="props.permissions.canRemoveTeamMembers"
                                     class="cursor-pointer ml-6 text-sm text-red-600 focus:outline-none"
                                     @click="cancelTeamInvitation(invitation)"
                                 >

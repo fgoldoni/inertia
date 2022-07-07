@@ -12,6 +12,10 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'permission:browse_teams
     Route::put('teams/{id}/restore', [TeamsController::class, 'restore'])->name('teams.restore');
 
     Route::post('/teams/{team}/members', [TeamMemberController::class, 'store'])->name('teams.members.store');
+    Route::delete(
+        '/teams/{team}/members/{user}',
+        [TeamMemberController::class, 'destroy']
+    )->name('teams.members.destroy');
 
     Route::delete('/teams/invitations/{invitation}', [TeamInvitationController::class, 'destroy'])
         ->name('teams.invitations.destroy');
