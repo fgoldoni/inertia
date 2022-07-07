@@ -4,6 +4,7 @@ namespace Modules\Teams\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
@@ -46,6 +47,10 @@ class TeamsController extends Controller
 
         $paginator = $this->teamsRepository->withCriteria([
             new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
+            new WhereLike(
+                ['teams.id', 'teams.name', 'teams.display_name', 'teams.subdomain'],
+                $this->request->get('search')
+            ),
             new WithTrashed(),
         ])->paginate()
             ->withQueryString()

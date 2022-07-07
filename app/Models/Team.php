@@ -66,12 +66,4 @@ class Team extends JetstreamTeam
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }
-
-    /**
-     * Get the default avatar photo URL if no avatar photo has been uploaded.
-     */
-    protected function defaultAvatarUrl(): string
-    {
-        return  asset('images/logo.png');
-    }
 }
