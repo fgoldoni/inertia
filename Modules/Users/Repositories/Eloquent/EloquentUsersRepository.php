@@ -15,6 +15,7 @@ use App\Repositories\Criteria\Where;
 use App\Repositories\RepositoryAbstract;
 use Illuminate\Support\Facades\Notification;
 use Jenssegers\Agent\Agent;
+use Laravel\Jetstream\Jetstream;
 use Laravel\Sanctum\NewAccessToken;
 use Modules\Users\Notifications\LoginLinkNotification;
 use Modules\Users\Repositories\Contracts\UsersRepository;
@@ -56,5 +57,13 @@ class EloquentUsersRepository extends RepositoryAbstract implements UsersReposit
     public function sendLoginLink(User $user, NewAccessToken $token, string $host)
     {
         Notification::send($user, new LoginLinkNotification($user, $token, $host));
+    }
+
+    public function createToken(User $user): NewAccessToken
+    {
+        return $user->createToken(
+            $user->name,
+            Jetstream::$defaultPermissions
+        );
     }
 }

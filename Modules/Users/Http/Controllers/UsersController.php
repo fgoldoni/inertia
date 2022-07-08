@@ -121,8 +121,7 @@ class UsersController extends Controller
             $request->only('name', 'email', 'phone'),
             [
                 'email_verified_at' => now(),
-                'password' => bcrypt($request->get('password')),
-                'api_token' => Str::random(60)
+                'password' => bcrypt($request->get('password'))
             ]
         ));
 

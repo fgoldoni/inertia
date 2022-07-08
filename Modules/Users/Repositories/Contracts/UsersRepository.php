@@ -14,4 +14,6 @@ interface UsersRepository
     public function isExist(string $email): bool;
 
     public function sendLoginLink(User $user, NewAccessToken $token, string $host);
+
+    public function createToken(User $user): NewAccessToken;
 }

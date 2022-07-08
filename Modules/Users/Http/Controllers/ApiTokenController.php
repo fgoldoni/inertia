@@ -1,13 +1,17 @@
 <?php
 namespace Modules\Users\Http\Controllers;
 
+use App\Models\Team;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Jetstream;
+use Modules\Teams\Repositories\Contracts\TeamsRepository;
 use Modules\Users\Http\Requests\LinkApiTokenRequest;
 use Modules\Users\Http\Requests\StoreApiTokenRequest;
 use Modules\Users\Repositories\Contracts\UsersRepository;
@@ -17,6 +21,7 @@ class ApiTokenController extends Controller
 {
     public function __construct(
         private readonly UsersRepository $usersRepository,
+        private readonly TeamsRepository $teamsRepository,
         private readonly ResponseFactory $response
     ) {
     }
@@ -61,16 +66,28 @@ class ApiTokenController extends Controller
     public function link(LinkApiTokenRequest $request)
     {
 
+        $team = $this->teamsRepository->teamFromHost($request->get('host'));
+
         if ($this->usersRepository->isExist($request->email)) {
             $user = $this->usersRepository->findWhereFirst('email', $request->email);
+        } else {
+            $user = $this->usersRepository->create(array_merge(
+                $request->only('email'),
+                [
+                    'name' => "{$team->display_name} User",
+                    'email_verified_at' => now(),
+                    'password' => bcrypt(Str::random(8)),
+                ]
+            ));
 
-            $token = $user->createToken(
-                $user->name,
-                Jetstream::$defaultPermissions
-            );
-
-            $this->usersRepository->sendLoginLink($user, $token, $request->get('host'));
+            $user->syncRoles(config('app.system.users.roles.default'));
         }
+
+        $token = $this->usersRepository->createToken($user);
+
+        $this->teamsRepository->attachUser($team, $user);
+
+        $this->usersRepository->sendLoginLink($user, $token, $request->get('host'));
 
         return $this->response->json(
             ['message' => __('We have e-mailed your login link!')],
