@@ -1,7 +1,8 @@
 import { ref } from 'vue'
 import pickBy from "lodash/pickBy";
 
-export function useUsers() {
+export function useUsers()
+{
 
     const data = ref({
         data: null
@@ -11,7 +12,7 @@ export function useUsers() {
 
     const processing = ref(false)
 
-    const doFetchData = async (params) => {
+    const doFetchData = async(params) => {
         processing.value = true
 
         await axios.get(route('api.users.index', pickBy(params))).then((res) => (data.value = res.data))
