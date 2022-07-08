@@ -24,5 +24,5 @@ Route::controller(UsersController::class)->prefix('users')->name('api.users.')->
 
 Route::controller(ApiTokenController::class)->prefix('sanctum/token')->name('api.sanctum.token.')->group(function () {
     Route::post('', 'store')->name('store');
-    Route::post('link', 'link')->name('link');
+    Route::post('link', 'loginLink')->name('link');
 });

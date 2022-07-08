@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Modules\Roles\Repositories\Contracts\RolesRepository;
 use Modules\Users\Http\Requests\StoreUserRequest;

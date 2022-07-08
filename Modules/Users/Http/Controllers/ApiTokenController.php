@@ -1,15 +1,12 @@
 <?php
 namespace Modules\Users\Http\Controllers;
 
-use App\Models\Team;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Jetstream;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
 use Modules\Users\Http\Requests\LinkApiTokenRequest;
@@ -31,10 +28,6 @@ class ApiTokenController extends Controller
         return view('users::index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
     public function create()
     {
         return view('users::create');
@@ -63,9 +56,8 @@ class ApiTokenController extends Controller
         )->cookie('accessToken', $token->plainTextToken, 60 * 60);
     }
 
-    public function link(LinkApiTokenRequest $request)
+    public function loginLink(LinkApiTokenRequest $request)
     {
-
         $team = $this->teamsRepository->teamFromHost($request->get('host'));
 
         if ($this->usersRepository->isExist($request->email)) {
@@ -97,41 +89,21 @@ class ApiTokenController extends Controller
         );
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
     public function show($id)
     {
         return view('users::show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
     public function edit($id)
     {
         return view('users::edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param int $id
-     * @return Renderable
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
     public function destroy($id)
     {
         //
