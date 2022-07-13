@@ -202,8 +202,6 @@ var appName = ((_window$document$getE = window.document.getElementsByTagName('ti
   },
   resolve: function () {
     var _resolve = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(name) {
-      var _page$layout;
-
       var page;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
@@ -214,10 +212,9 @@ var appName = ((_window$document$getE = window.document.getElementsByTagName('ti
 
             case 2:
               page = _context.sent["default"];
-              (_page$layout = page.layout) !== null && _page$layout !== void 0 ? _page$layout : page.layout = _Layouts_App__WEBPACK_IMPORTED_MODULE_5__["default"];
               return _context.abrupt("return", page);
 
-            case 5:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -244,7 +241,7 @@ var appName = ((_window$document$getE = window.document.getElementsByTagName('ti
       methods: {
         route: route
       }
-    }).component('Link', _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link).component('Head', _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head).mixin(_Mixins_UseModal__WEBPACK_IMPORTED_MODULE_4__.useModal).mixin(_Mixins_translations__WEBPACK_IMPORTED_MODULE_6__.translations).use((vue_grid_layout__WEBPACK_IMPORTED_MODULE_7___default())).mount(el);
+    }).component('Link', _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link).component('Head', _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head).component('AppLayout', _Layouts_App__WEBPACK_IMPORTED_MODULE_5__["default"]).mixin(_Mixins_UseModal__WEBPACK_IMPORTED_MODULE_4__.useModal).mixin(_Mixins_translations__WEBPACK_IMPORTED_MODULE_6__.translations).use((vue_grid_layout__WEBPACK_IMPORTED_MODULE_7___default())).mount(el);
   }
 });
 _inertiajs_progress__WEBPACK_IMPORTED_MODULE_3__.InertiaProgress.init({
@@ -2061,7 +2058,7 @@ var map = {
 	"./Modules/Teams/Datatables/CustomName.vue": [
 		"./resources/js/Pages/Modules/Teams/Datatables/CustomName.vue",
 		"/js/vendor",
-		"node_modules_moment_locale_sync_recursive_-resources_js_Pages_Modules_Teams_Datatables_Custom-d616030"
+		"resources_js_Pages_Modules_Teams_Datatables_CustomName_vue-_7c430"
 	],
 	"./Modules/Teams/Datatables/CustomOwner.vue": [
 		"./resources/js/Pages/Modules/Teams/Datatables/CustomOwner.vue",

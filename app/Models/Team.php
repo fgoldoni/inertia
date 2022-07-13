@@ -66,4 +66,14 @@ class Team extends JetstreamTeam
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }
+
+    /**
+     * Get all of the team's users including its owner.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function allUsers()
+    {
+        return $this->users->isNotEmpty() ? $this->users->merge([$this->owner]) : collect([$this->owner])->filter();
+    }
 }

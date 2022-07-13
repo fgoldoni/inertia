@@ -1,17 +1,18 @@
 <script setup>
 import {ref, reactive, onMounted} from 'vue'
 import {Link} from "@inertiajs/inertia-vue3";
-import LoadingButton from '@/Shared/LoadingButton'
+import LoadingButton from '@/Shared/LoadingButton.vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import { Errors } from '@/Plugins/errors'
-import { useFetch } from '@/Composables/UseFetch'
-import Assigned from '@/Shared/Assigned'
-import {CalendarIcon, LockOpenIcon, AcademicCapIcon, TrashIcon} from '@heroicons/vue/solid'
+import { Errors } from '@/Plugins/errors.js'
+import { useFetch } from '@/Composables/UseFetch.js'
+import Assigned from '@/Shared/Assigned.vue'
+import {TrashIcon} from '@heroicons/vue/solid'
 import pickBy from "lodash/pickBy";
 import moment from 'moment'
+import {ElNotification} from "element-plus";
 
 
 const props = defineProps({
@@ -55,9 +56,14 @@ const onSubmit = () => {
         display_name: form.display_name,
         permissions: form.selectedRow,
         users: form.users
-    })).then(() => {
+    })).then((response) => {
         form.processing = false;
-        setIsOpen();
+
+        ElNotification({
+            title: 'Great!',
+            message: response.data.message,
+            type: 'success',
+        })
     }).catch(error => {
         form.processing = false;
         form.errors.record(error.response.data.errors);
@@ -179,7 +185,7 @@ const onSubmit = () => {
                                                                             <div class="px-4 py-1 divide-y divide-secondary-200 dark:divide-secondary-700">
                                                                                 <div v-for="(permission, key) in permissions" class="flex items-center justify-between py-2">
                                                                                     <div class="flex items-center space-x-3 cursor-pointer">
-                                                                                        <input :id="'permission_' + permission.id"  :name="'permission_' + permission.id" :value="permission.id" type="checkbox" v-model="form.selectedRow" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                                                                                        <input :id="'permission_' + permission.id"  :name="'permission_' + permission.id" :value="permission.id" type="checkbox" v-model="form.selectedRow" class="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300 rounded" />
 
                                                                                         <JetLabel :for="'permission_' + permission.id" :value="permission.display_name"/>
                                                                                     </div>

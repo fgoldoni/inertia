@@ -1,7 +1,7 @@
 <script setup>
 import {CameraIcon, XIcon} from '@heroicons/vue/outline'
 import {ref, watch, onMounted} from "vue";
-import {useAvatar} from '@/Composables/UseAvatar'
+import {useAvatar} from '@/Composables/UseAvatar.js'
 
 const emit = defineEmits(["update:modelValue"]);
 const fileRef = ref(null);

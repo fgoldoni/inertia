@@ -1,23 +1,21 @@
 <script setup>
-import {ref, computed, onMounted, reactive, nextTick} from 'vue'
+import {ref, computed, onMounted, reactive } from 'vue'
 import {Link} from "@inertiajs/inertia-vue3";
-import LoadingButton from '@/Shared/LoadingButton'
+import LoadingButton from '@/Shared/LoadingButton.vue'
 import {XIcon} from '@heroicons/vue/outline'
-import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
-import pickBy from 'lodash/pickBy'
+import {Dialog, DialogPanel, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
 import zxcvbn from 'zxcvbn'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import BaseListbox from '@/Shared/BaseListbox'
-import internationalNumber from '@/Plugins/internationalNumber'
-import 'intl-tel-input/build/css/intlTelInput.css'
-import {generatePassword, strengthLevels} from '@/Plugins/generatePassword'
-import { Errors } from '@/Plugins/errors'
-import { useFetch } from '@/Composables/UseFetch'
-import BaseDisclosure from '@/Components/BaseDisclosure'
-import ValidationErrors from '@/Shared/ValidationErrors';
-import JetInputPhone from '@/Jetstream/JetInputPhone.vue';
+import BaseListbox from '@/Shared/BaseListbox.vue'
+import internationalNumber from '@/Plugins/internationalNumber.js'
+import {generatePassword, strengthLevels} from '@/Plugins/generatePassword.js'
+import { Errors } from '@/Plugins/errors.js'
+import { useFetch } from '@/Composables/UseFetch.js'
+import BaseDisclosure from '@/Components/BaseDisclosure.vue'
+import ValidationErrors from '@/Shared/ValidationErrors.vue';
+import JetInputPhone from '@/Jetstream/InputPhone.vue';
 
 
 const props = defineProps({

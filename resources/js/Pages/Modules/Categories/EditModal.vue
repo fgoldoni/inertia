@@ -1,15 +1,15 @@
 <script setup>
 import {ref, reactive} from 'vue'
 import {Link} from "@inertiajs/inertia-vue3";
-import LoadingButton from '@/Shared/LoadingButton'
+import LoadingButton from '@/Shared/LoadingButton.vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
-import JetTextarea from '@/Jetstream/Textarea'
+import JetTextarea from '@/Jetstream/Textarea.vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import { Errors } from '@/Plugins/errors'
-import BaseComboboxes from '@/Shared/BaseComboboxes'
-import ImageUpload from '@/Shared/ImageUpload'
+import { Errors } from '@/Plugins/errors.js'
+import BaseComboboxes from '@/Shared/BaseComboboxes.vue'
+import ImageUpload from '@/Shared/ImageUpload.vue'
 
 const props = defineProps({
     editing: Object,

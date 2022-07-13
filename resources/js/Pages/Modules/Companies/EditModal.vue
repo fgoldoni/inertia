@@ -1,19 +1,19 @@
 <script setup>
 import {ref, reactive} from 'vue'
-import LoadingButton from '@/Shared/LoadingButton'
-import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
+import LoadingButton from '@/Shared/LoadingButton.vue'
+import {Dialog, DialogPanel, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import JetInputPhone from '@/Jetstream/JetInputPhone.vue';
-import { Errors } from '@/Plugins/errors'
-import ImageUpload from '@/Shared/ImageUpload'
-import JetTextarea from '@/Jetstream/Textarea'
+import JetInputPhone from '@/Jetstream/InputPhone.vue';
+import { Errors } from '@/Plugins/errors.js'
+import ImageUpload from '@/Shared/ImageUpload.vue'
+import JetTextarea from '@/Jetstream/Textarea.vue'
 import {ElNotification} from "element-plus";
 import {DocumentTextIcon, PencilAltIcon, XIcon} from "@heroicons/vue/solid";
-import Logs from '@/Shared/Logs'
-import ValidationErrors from '@/Shared/ValidationErrors';
-import BaseDisclosure from '@/Components/BaseDisclosure'
+import Logs from '@/Shared/Logs.vue'
+import ValidationErrors from '@/Shared/ValidationErrors.vue';
+import BaseDisclosure from '@/Components/BaseDisclosure.vue'
 
 const props = defineProps({
     editing: Object,

@@ -2,12 +2,12 @@
 import {ref, computed, watch, defineAsyncComponent} from 'vue'
 import {SortDescendingIcon, SortAscendingIcon, PlusIcon} from '@heroicons/vue/outline';
 import debounce from "lodash/debounce";
-import Pagination from '@/Components/Pagination';
+import Pagination from '@/Components/Pagination.vue';
 import {Inertia} from "@inertiajs/inertia";
 import {useForm} from "@inertiajs/inertia-vue3";
-import SearchFilter from '@/Components/SearchFilter';
+import SearchFilter from '@/Components/SearchFilter.vue';
 import pickBy from "lodash/pickBy";
-import ConfirmModal from '@/Shared/ConfirmModal';
+import ConfirmModal from '@/Shared/ConfirmModal.vue';
 import {ElNotification} from "element-plus";
 
 const props = defineProps({
@@ -37,7 +37,7 @@ const selectedRow = ref([])
 const checked = ref(false)
 const indeterminate = computed(() => selectedRow.value.length > 0 && selectedRow.value.length < props.rowData.data.length)
 
-const setDefineAsyncComponent = (path) => defineAsyncComponent(() =>import(`@modules/${path}.vue`))
+const setDefineAsyncComponent = (path) => defineAsyncComponent(() =>import(`../Pages/Modules/${path}.vue`))
 
 const reset = () => {
     form.page = ref(null)

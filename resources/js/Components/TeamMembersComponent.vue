@@ -1,5 +1,5 @@
 <script setup>
-import ActionSection from '@/Shared/ActionSection';
+import ActionSection from '@/Shared/ActionSection.vue';
 import {reactive} from "vue";
 import {Errors} from "@/Plugins/errors";
 import {ElNotification} from "element-plus";

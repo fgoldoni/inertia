@@ -1,14 +1,14 @@
 <script setup>
 import {ref, reactive, onMounted} from 'vue'
-import LoadingButton from '@/Shared/LoadingButton'
+import LoadingButton from '@/Shared/LoadingButton.vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import { Errors } from '@/Plugins/errors'
-import ImageUpload from '@/Shared/ImageUpload'
-import JetTextarea from '@/Jetstream/Textarea'
-import internationalNumber from '@/Plugins/internationalNumber'
+import { Errors } from '@/Plugins/errors.js'
+import ImageUpload from '@/Shared/ImageUpload.vue'
+import JetTextarea from '@/Jetstream/Textarea.vue'
+import internationalNumber from '@/Plugins/internationalNumber.js'
 import 'intl-tel-input/build/css/intlTelInput.css'
 
 const props = defineProps({

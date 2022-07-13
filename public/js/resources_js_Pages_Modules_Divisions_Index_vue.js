@@ -62,8 +62,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Shared_VueDatatable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Shared/VueDatatable */ "./resources/js/Shared/VueDatatable.vue");
-/* harmony import */ var _Pages_Modules_Divisions_Datatables_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Modules/Divisions/Datatables/config */ "./resources/js/Pages/Modules/Divisions/Datatables/config.js");
+/* harmony import */ var _Shared_VueDatatable_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Shared/VueDatatable.vue */ "./resources/js/Shared/VueDatatable.vue");
+/* harmony import */ var _Pages_Modules_Divisions_Datatables_config_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Modules/Divisions/Datatables/config.js */ "./resources/js/Pages/Modules/Divisions/Datatables/config.js");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -72,8 +72,8 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var __returned__ = {
-      VueDatatable: _Shared_VueDatatable__WEBPACK_IMPORTED_MODULE_0__["default"],
-      config: _Pages_Modules_Divisions_Datatables_config__WEBPACK_IMPORTED_MODULE_1__["default"]
+      VueDatatable: _Shared_VueDatatable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+      config: _Pages_Modules_Divisions_Datatables_config_js__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -98,17 +98,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
+  var _component_AppLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AppLayout");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AppLayout, {
     title: "Divisions"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["VueDatatable"], (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
-    config: $setup.config
-  }, _ctx.$page.props), null, 16
-  /* FULL_PROPS */
-  , ["config"])], 64
-  /* STABLE_FRAGMENT */
-  );
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["VueDatatable"], (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
+        config: $setup.config
+      }, _ctx.$page.props), null, 16
+      /* FULL_PROPS */
+      , ["config"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  });
 }
 
 /***/ }),

@@ -1,11 +1,10 @@
 <script setup>
-import VueDatatable from '@/Shared/VueDatatable';
-import config from '@/Pages/Modules/Cities/Datatables/config'
+import VueDatatable from '@/Shared/VueDatatable.vue';
+import config from '@/Pages/Modules/Cities/Datatables/config.js'
 </script>
 
 <template>
-
-    <Head title="Cities"></Head>
-
-    <VueDatatable :config="config" v-bind="$page.props"></VueDatatable>
+    <AppLayout title="Cities">
+        <VueDatatable :config="config" v-bind="$page.props"></VueDatatable>
+    </AppLayout>
 </template>

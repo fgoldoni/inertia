@@ -1,11 +1,11 @@
 <script setup>
 import {ref, reactive} from 'vue'
-import LoadingButton from '@/Shared/LoadingButton'
+import LoadingButton from '@/Shared/LoadingButton.vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import { Errors } from '@/Plugins/errors'
+import { Errors } from '@/Plugins/errors.js'
 
 const props = defineProps({
     editing: Object,

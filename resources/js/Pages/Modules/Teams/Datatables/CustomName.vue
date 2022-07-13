@@ -1,11 +1,10 @@
 <script setup>
-import {ExternalLinkIcon, RefreshIcon} from '@heroicons/vue/outline';
+import {ExternalLinkIcon } from '@heroicons/vue/outline';
 import pickBy from "lodash/pickBy";
 import {reactive, ref} from "vue";
-import {Errors} from "@/Plugins/errors";
+import {Errors} from "@/Plugins/errors.js";
 import {ElNotification} from "element-plus";
 import {Inertia} from "@inertiajs/inertia";
-import moment from 'moment'
 
 const props = defineProps({
     row: Object,

@@ -1,5 +1,4 @@
 <script setup>
-import {ExternalLinkIcon} from '@heroicons/vue/outline';
 import moment from 'moment'
 
 const props = defineProps({

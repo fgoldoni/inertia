@@ -1,16 +1,16 @@
 <script setup>
-import FormSection from '@/Shared/FormSection';
+import FormSection from '@/Shared/FormSection.vue';
 import {reactive} from "vue";
-import {Errors} from "@/Plugins/errors";
+import {Errors} from "@/Plugins/errors.js";
 import {ElNotification} from "element-plus";
 import JetLabel from '@/Jetstream/Label.vue'
-import ImageUpload from '@/Shared/ImageUpload'
-import AvatarInput from '@/Shared/AvatarInput'
+import ImageUpload from '@/Shared/ImageUpload.vue'
+import AvatarInput from '@/Shared/AvatarInput.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import JetButton from '@/Jetstream/Button';
+import JetButton from '@/Jetstream/Button.vue';
 import pickBy from "lodash/pickBy";
-import {useAvatar} from "@/Composables/UseAvatar";
-import {useMedia} from "@/Composables/UseMedia";
+import {useAvatar} from "@/Composables/UseAvatar.js";
+import {useMedia} from "@/Composables/UseMedia.js";
 
 const props = defineProps({
     modelValue: [Object, Array],

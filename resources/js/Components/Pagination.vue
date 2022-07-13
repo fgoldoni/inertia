@@ -33,7 +33,6 @@
 </template>
 
 <script setup>
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 import { Link } from "@inertiajs/inertia-vue3"
 import { computed } from 'vue';
 

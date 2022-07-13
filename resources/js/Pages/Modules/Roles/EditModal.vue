@@ -1,6 +1,6 @@
 <script setup>
 import {ref, reactive, onMounted} from 'vue'
-import LoadingButton from '@/Shared/LoadingButton'
+import LoadingButton from '@/Shared/LoadingButton.vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
@@ -9,9 +9,14 @@ import { Errors } from '@/Plugins/errors'
 import {TrashIcon} from '@heroicons/vue/solid'
 import pickBy from "lodash/pickBy";
 import { InformationCircleIcon } from '@heroicons/vue/solid'
-import { useFetch } from '@/Composables/UseFetch'
+import { useFetch } from '@/Composables/UseFetch.js'
 import moment from 'moment'
-import Assigned from '@/Shared/Assigned'
+import Assigned from '@/Shared/Assigned.vue'
+import Tabs from '@/Shared/Tabs.vue'
+import Logs from '@/Shared/Logs.vue'
+import {XIcon} from '@heroicons/vue/outline'
+import {Inertia} from "@inertiajs/inertia";
+import {ElNotification} from "element-plus";
 
 const { data: permissions, doFetchData: doFetchPermissions } = useFetch()
 
@@ -22,6 +27,8 @@ const props = defineProps({
 
 
 const isOpen = ref(true)
+const currentTab = ref('edit')
+const model = ref(props.editing)
 
 const form = reactive({
     id: props.editing.id,
@@ -39,9 +46,8 @@ onMounted(() => {
 
 const onAssigned = (value) => form.users = value
 
-const setIsOpen = () => {
-    isOpen.value = false
-    document.querySelector('#cancelButtonRef').click()
+const close = () => {
+    Inertia.get(props.basePageRoute, {}, {replace: true, preserveState: true, preserveScroll: true})
 }
 
 const onSubmit = () => {
@@ -53,8 +59,16 @@ const onSubmit = () => {
         permissions: form.selectedRow,
         users: [...props.editing.users.map((r) => r.id), ...form.users]
     })).then((response) => {
-        setIsOpen()
         form.processing = false;
+
+        ElNotification({
+            title: 'Great!',
+            message: response.data.message,
+            type: 'success',
+        })
+
+        model.value = response.data.model
+
     }).catch(error => {
         form.processing = false;
         form.errors.record(error.response.data.errors);
@@ -64,45 +78,33 @@ const onSubmit = () => {
 </script>
 
 <template>
-    <TransitionRoot as="template"
-                    :show="isOpen"
-                    enter="transition-opacity duration-500"
-                    enter-from="opacity-0"
-                    enter-to="opacity-100"
-                    leave="transition-opacity duration-500"
-                    leave-from="opacity-100"
-                    leave-to="opacity-0">
+    <TransitionRoot as="template" :show="isOpen">
+        <Dialog as="div" class="relative z-10">
 
-        <Dialog as="div" class="relative z-10" @close="setIsOpen">
-
-            <TransitionChild as="template"
-                             enter="ease-out duration-300"
-                             enter-from="opacity-0"
-                             enter-to="opacity-100"
-                             leave="ease-in duration-200"
-                             leave-from="opacity-100"
-                             leave-to="opacity-0">
-
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"/>
-
+            <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
+                <div class="hidden fixed inset-0 bg-secondary-500 bg-opacity-75 transition-opacity md:block" />
             </TransitionChild>
 
             <div class="fixed z-10 inset-0 overflow-y-auto">
 
-                <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+                <div class="flex items-stretch md:items-center justify-center min-h-full text-center md:px-2 lg:px-4">
 
-                    <TransitionChild as="template"
-                                     enter="ease-out duration-300"
-                                     enter-from="-opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                     enter-to="opacity-100 translate-y-0 sm:scale-100"
-                                     leave="ease-in duration-200"
-                                     leave-from="opacity-100 translate-y-0 sm:scale-100"
-                                     leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                    <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 md:translate-y-0 md:scale-95" enter-to="opacity-100 translate-y-0 md:scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 md:scale-100" leave-to="opacity-0 translate-y-4 md:translate-y-0 md:scale-95">
 
-                        <DialogPanel
-                            class="relative bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full">
+                        <DialogPanel class="relative text-base bg-secondary-100 text-left transform transition w-full md:max-w-4xl md:px-4 md:my-8 lg:max-w-6xl">
 
-                            <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
+                            <div class="absolute top-0 right-0 pt-2 pr-4 sm:pt-4 sm:pr-4">
+                                <Link :href="props.basePageRoute" preserve-state preserve-scroll class="text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" @click="close">
+                                    <span class="sr-only">Close</span>
+                                    <XIcon class="h-6 w-6" aria-hidden="true" />
+                                </Link>
+                            </div>
+
+                            <div class="px-4 pt-10 pb-4 sm:p-0">
+                                <Tabs v-model="currentTab"></Tabs>
+                            </div>
+
+                            <form @submit.prevent="onSubmit" v-if="currentTab === 'edit'" @keydown="form.errors.clear($event.target.name)">
 
                                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
@@ -227,7 +229,7 @@ const onSubmit = () => {
 
                                                                                     <div class="flex items-center space-x-3 cursor-pointer">
 
-                                                                                        <input :id="'permission_' + permission.id"  :name="'permission_' + permission.id" :value="permission.id" type="checkbox" v-model="form.selectedRow" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                                                                                        <input :id="'permission_' + permission.id"  :name="'permission_' + permission.id" :value="permission.id" type="checkbox" v-model="form.selectedRow" class="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300 rounded" />
 
                                                                                         <JetLabel :for="'permission_' + permission.id" :value="permission.display_name"/>
 
@@ -317,6 +319,10 @@ const onSubmit = () => {
                                 </div>
 
                             </form>
+
+                            <div v-if="currentTab === 'logs'" class="grid grid-cols-1">
+                                <Logs :options="model.logs"></Logs>
+                            </div>
 
                         </DialogPanel>
 

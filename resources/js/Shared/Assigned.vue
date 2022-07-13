@@ -3,8 +3,8 @@ import { ref ,watch } from 'vue'
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxLabel, ComboboxOption, ComboboxOptions} from '@headlessui/vue'
 import debounce from "lodash/debounce";
-import { useUsers } from '@/Composables/UseUsers'
-import UsersList from '@/Components/UsersList'
+import { useUsers } from '@/Composables/UseUsers.js'
+import UsersList from '@/Components/UsersList.vue'
 
 const { data: users, doFetchData: doFetchUsers, doMapData, doMergeData } = useUsers()
 

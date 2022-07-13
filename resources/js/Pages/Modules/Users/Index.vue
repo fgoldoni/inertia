@@ -1,11 +1,11 @@
 <script setup>
-import VueDatatable from '@/Shared/VueDatatable';
-import config from '@/Pages/Modules/Users/Datatables/config'
+import VueDatatable from '@/Shared/VueDatatable.vue';
+import config from '@/Pages/Modules/Users/Datatables/config.js'
+
 </script>
 
 <template>
-
-    <Head title="Users"></Head>
-
-    <VueDatatable :config="config" v-bind="$page.props"></VueDatatable>
+    <AppLayout title="Users">
+        <VueDatatable :config="config" v-bind="$page.props"></VueDatatable>
+    </AppLayout>
 </template>

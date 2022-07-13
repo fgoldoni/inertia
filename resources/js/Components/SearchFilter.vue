@@ -39,5 +39,3 @@ const onModelValue = (value) => {
     </div>
 
 </template>
-
-

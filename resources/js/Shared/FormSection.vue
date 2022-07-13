@@ -1,7 +1,7 @@
 <script setup>
 import { computed, useSlots } from 'vue';
-import BaseDisclosure from '@/Components/BaseDisclosure'
-import ValidationErrors from '@/Shared/ValidationErrors';
+import BaseDisclosure from '@/Components/BaseDisclosure.vue'
+import ValidationErrors from '@/Shared/ValidationErrors.vue';
 
 const props = defineProps({
     title: String,

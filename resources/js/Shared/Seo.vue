@@ -2,7 +2,7 @@
 import {reactive, watch, ref} from "vue"
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
-import JetTextarea from '@/Jetstream/Textarea'
+import JetTextarea from '@/Jetstream/Textarea.vue'
 import { QuestionMarkCircleIcon } from '@heroicons/vue/solid'
 import { TransitionRoot } from '@headlessui/vue'
 

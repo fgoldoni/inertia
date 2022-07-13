@@ -3,10 +3,10 @@ import {reactive} from 'vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import FormSection from '@/Shared/FormSection';
-import Information from '@/Shared/Information';
+import FormSection from '@/Shared/FormSection.vue';
+import Information from '@/Shared/Information.vue';
 import {Errors} from "@/Plugins/errors";
-import JetButton from '@/Jetstream/Button';
+import JetButton from '@/Jetstream/Button.vue';
 import pickBy from "lodash/pickBy";
 import {ElNotification} from "element-plus";
 

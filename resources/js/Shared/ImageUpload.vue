@@ -1,6 +1,6 @@
 <script setup>
 import {XIcon} from '@heroicons/vue/outline'
-import {useMedia} from '@/Composables/UseMedia'
+import {useMedia} from '@/Composables/UseMedia.js'
 import {ref, onMounted} from "vue";
 
 const fileUpload = ref(null);

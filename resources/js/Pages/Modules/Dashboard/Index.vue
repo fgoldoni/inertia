@@ -1,6 +1,7 @@
 <script setup>
 import {onMounted, ref, defineAsyncComponent} from "vue";
 import { usePage } from '@inertiajs/inertia-vue3';
+import AppLayout from '@/Layouts/App.vue';
 
 const props = defineProps({
     rowData: Object,
@@ -13,7 +14,7 @@ const params =  ref({})
 
 const setDefineAsyncComponent = (path) => defineAsyncComponent( {
 
-    loader: () => import(`@modules/Dashboard/Components/${path}.vue`),
+    loader: () => import(`./Components/${path}.vue`),
 
     delay: 500,
 
@@ -44,30 +45,31 @@ const layoutUpdatedEvent = (newLayout) => {
 </script>
 
 <template>
-    <Head title="Dashboard"></Head>
-    <div>
-        <grid-layout :layout.sync="layout"
-                     :col-num="colNum"
-                     :row-height="30"
-                     :is-draggable="draggable"
-                     :is-resizable="resizable"
-                     :responsive="responsive"
-                     :vertical-compact="true"
-                     :use-css-transforms="true"
-                     @layout-updated="layoutUpdatedEvent"
-        >
-            <grid-item v-for="item in layout"
-                       :static="item.static"
-                       :x="item.x"
-                       :y="item.y"
-                       :w="item.w"
-                       :h="item.h"
-                       :i="item.i"
+    <AppLayout title="Dashboard">
+        <div>
+            <grid-layout :layout.sync="layout"
+                         :col-num="colNum"
+                         :row-height="30"
+                         :is-draggable="draggable"
+                         :is-resizable="resizable"
+                         :responsive="responsive"
+                         :vertical-compact="true"
+                         :use-css-transforms="true"
+                         @layout-updated="layoutUpdatedEvent"
             >
-                <component :is="setDefineAsyncComponent(item.component)" v-bind="{data : params}" v-if="params.jobs"/>
-            </grid-item>
-        </grid-layout>
-    </div>
+                <grid-item v-for="item in layout"
+                           :static="item.static"
+                           :x="item.x"
+                           :y="item.y"
+                           :w="item.w"
+                           :h="item.h"
+                           :i="item.i"
+                >
+                    <component :is="setDefineAsyncComponent(item.component)" v-bind="{data : params}" v-if="params.jobs"/>
+                </grid-item>
+            </grid-layout>
+        </div>
+    </AppLayout>
 </template>
 
 <style>

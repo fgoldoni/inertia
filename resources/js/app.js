@@ -8,7 +8,7 @@ import {InertiaProgress} from '@inertiajs/progress'
 
 import {useModal} from '@/Mixins/UseModal'
 
-import Layout from '@/Layouts/App'
+import AppLayout from '@/Layouts/App'
 
 import {translations} from '@/Mixins/translations'
 
@@ -25,7 +25,6 @@ createInertiaApp({
 
         let page = (await import(`./Pages/${name}.vue`)).default
 
-        page.layout ??= Layout;
 
         return page;
     },
@@ -40,6 +39,8 @@ createInertiaApp({
             .component('Link', Link)
 
             .component('Head', Head)
+
+            .component('AppLayout', AppLayout)
 
             .mixin(useModal)
 

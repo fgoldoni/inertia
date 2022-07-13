@@ -1,7 +1,7 @@
 <script setup>
-import ActionSection from '@/Shared/ActionSection';
+import ActionSection from '@/Shared/ActionSection.vue';
 import {reactive} from "vue";
-import {Errors} from "@/Plugins/errors";
+import {Errors} from "@/Plugins/errors.js";
 import {ElNotification} from "element-plus";
 
 const props = defineProps({

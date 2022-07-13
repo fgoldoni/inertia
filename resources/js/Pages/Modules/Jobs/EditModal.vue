@@ -1,31 +1,31 @@
 <script setup>
 import {ref, reactive, onMounted} from 'vue'
-import LoadingButton from '@/Shared/LoadingButton'
-import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
+import LoadingButton from '@/Shared/LoadingButton.vue'
+import {Dialog, DialogPanel, TransitionChild, TransitionRoot, Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
 import { QuestionMarkCircleIcon } from '@heroicons/vue/solid'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
-import JetTextarea from '@/Jetstream/Textarea'
+import JetTextarea from '@/Jetstream/Textarea.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
-import ValidationErrors from '@/Shared/ValidationErrors';
-import ImageUpload from '@/Shared/ImageUpload'
-import BaseListbox from '@/Shared/BaseListbox'
-import DatePicker from '@/Shared/DatePicker'
-import AvatarInput from '@/Shared/AvatarInput'
-import BaseComboboxes from '@/Shared/BaseComboboxes'
-import BasePackages from '@/Shared/BasePackages'
-import Tags from '@/Shared/Tags'
-import Skills from '@/Shared/Skills'
-import Logs from '@/Shared/Logs'
-import Seo from '@/Shared/Seo'
-import BaseDisclosure from '@/Components/BaseDisclosure'
-import { useJobs } from '@/Composables/UseJobs'
-import {useMedia} from "@/Composables/UseMedia";
-import {useAvatar} from "@/Composables/UseAvatar";
+import ValidationErrors from '@/Shared/ValidationErrors.vue';
+import ImageUpload from '@/Shared/ImageUpload.vue'
+import BaseListbox from '@/Shared/BaseListbox.vue'
+import DatePicker from '@/Shared/DatePicker.vue'
+import AvatarInput from '@/Shared/AvatarInput.vue'
+import BaseComboboxes from '@/Shared/BaseComboboxes.vue'
+import BasePackages from '@/Shared/BasePackages.vue'
+import Tags from '@/Shared/Tags.vue'
+import Skills from '@/Shared/Skills.vue'
+import Logs from '@/Shared/Logs.vue'
+import Seo from '@/Shared/Seo.vue'
+import BaseDisclosure from '@/Components/BaseDisclosure.vue'
+import { useJobs } from '@/Composables/UseJobs.js'
+import {useMedia} from "@/Composables/UseMedia.js";
+import {useAvatar} from "@/Composables/UseAvatar.js";
 import pickBy from "lodash/pickBy";
-import {Errors} from "@/Plugins/errors";
+import {Errors} from "@/Plugins/errors.js";
 import { ElNotification } from 'element-plus'
-import { DocumentTextIcon, PencilAltIcon, XIcon } from '@heroicons/vue/solid'
+import { DocumentTextIcon, PencilAltIcon } from '@heroicons/vue/solid'
 
 const tabs = [
     { name: 'Edit Modal', key: 'edit_modal', icon: PencilAltIcon },

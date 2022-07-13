@@ -90,8 +90,8 @@
 
 <script setup>
 import { ref, reactive, computed, watch } from 'vue'
-import BaseListbox from '@/Shared/BaseListbox'
-import Information from '@/Shared/Information'
+import BaseListbox from '@/Shared/BaseListbox.vue'
+import Information from '@/Shared/Information.vue'
 
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 

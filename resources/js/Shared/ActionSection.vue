@@ -1,8 +1,6 @@
 <script setup>
-import BaseDisclosure from '@/Components/BaseDisclosure'
-import ValidationErrors from '@/Shared/ValidationErrors';
-import {useMedia} from "@/Composables/UseMedia";
-import {useAvatar} from "@/Composables/UseAvatar";
+import BaseDisclosure from '@/Components/BaseDisclosure.vue'
+import ValidationErrors from '@/Shared/ValidationErrors.vue';
 
 const props = defineProps({
     title: String,

@@ -1,6 +1,7 @@
 <script setup>
 const props = defineProps({
     value: String,
+    for: String,
     required: {
         type: Boolean,
         default: false,
@@ -15,7 +16,7 @@ const props = defineProps({
 <template>
     <div class="flex items-center justify-between">
 
-        <label class="block font-medium text-sm text-gray-500">
+        <label class="block font-medium text-sm text-gray-500" :for="props.for">
 
             <span v-if="value">{{ value }} <span class="text-rose-500" v-if="required">*</span></span>
 

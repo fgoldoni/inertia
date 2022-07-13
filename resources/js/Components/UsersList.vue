@@ -1,6 +1,6 @@
 <script setup>
 import {ref, computed} from "vue"
-import { useUsers } from '@/Composables/UseUsers'
+import { useUsers } from '@/Composables/UseUsers.js'
 
 const props = defineProps({
     items: {

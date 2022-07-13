@@ -1,11 +1,10 @@
 <script setup>
-import VueDatatable from '@/Shared/VueDatatable';
-import config from '@/Pages/Modules/Divisions/Datatables/config'
+import VueDatatable from '@/Shared/VueDatatable.vue';
+import config from '@/Pages/Modules/Divisions/Datatables/config.js'
 </script>
 
 <template>
-
-    <Head title="Divisions"></Head>
-
-    <VueDatatable :config="config" v-bind="$page.props"></VueDatatable>
+    <AppLayout title="Divisions">
+        <VueDatatable :config="config" v-bind="$page.props"></VueDatatable>
+    </AppLayout>
 </template>
