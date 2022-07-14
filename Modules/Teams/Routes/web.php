@@ -2,6 +2,7 @@
 
 
 use Modules\Teams\Http\Controllers\AssetsTeamsController;
+use Modules\Teams\Http\Controllers\TeamColorController;
 use Modules\Teams\Http\Controllers\TeamInvitationController;
 use Modules\Teams\Http\Controllers\TeamMemberController;
 use Modules\Teams\Http\Controllers\TeamsController;
@@ -23,4 +24,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'permission:browse_teams
 
     Route::put('/teams/assets/{team}', [AssetsTeamsController::class, 'update'])
         ->name('teams.assets.update');
+
+    Route::put('/teams/color/{team}', [TeamColorController::class, 'update'])
+        ->name('teams.color.update');
 });

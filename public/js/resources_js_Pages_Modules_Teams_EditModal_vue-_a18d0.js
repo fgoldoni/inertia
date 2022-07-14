@@ -632,7 +632,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/radio-group/radio-group.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/radio-group/radio-group.js");
+/* harmony import */ var _Plugins_errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Plugins/errors */ "./resources/js/Plugins/errors.js");
+/* harmony import */ var element_plus__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! element-plus */ "./node_modules/element-plus/es/components/notification/index2.mjs");
+/* harmony import */ var element_plus_es_components_notification_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! element-plus/es/components/notification/style/css */ "./node_modules/element-plus/es/components/notification/style/css.mjs");
+/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
+/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -640,40 +652,53 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     modelValue: [Object, Array]
   },
+  emits: ["update:modelValue"],
   setup: function setup(__props, _ref) {
-    var expose = _ref.expose;
+    var expose = _ref.expose,
+        emit = _ref.emit;
     expose();
     var props = __props;
-    var colors = [{
-      name: 'Pink',
-      bgColor: 'bg-pink-500',
-      selectedColor: 'ring-pink-500'
-    }, {
-      name: 'Purple',
-      bgColor: 'bg-purple-500',
-      selectedColor: 'ring-purple-500'
-    }, {
-      name: 'Blue',
-      bgColor: 'bg-blue-500',
-      selectedColor: 'ring-blue-500'
-    }, {
-      name: 'Green',
-      bgColor: 'bg-green-500',
-      selectedColor: 'ring-green-500'
-    }, {
-      name: 'Yellow',
-      bgColor: 'bg-yellow-500',
-      selectedColor: 'ring-yellow-500'
-    }];
-    var selectedColor = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(colors[1]);
+    var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+      id: props.modelValue.id,
+      errors: new _Plugins_errors__WEBPACK_IMPORTED_MODULE_1__.Errors(),
+      processing: false
+    });
+    var color = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return props.modelValue.color;
+    });
+
+    var updateTeamColor = function updateTeamColor(color) {
+      form.processing = true;
+      axios.put(route('admin.teams.color.update', form.id), lodash_pickBy__WEBPACK_IMPORTED_MODULE_3___default()({
+        color: color
+      })).then(function (response) {
+        form.processing = false;
+        (0,element_plus__WEBPACK_IMPORTED_MODULE_4__.ElNotification)({
+          title: 'Great!',
+          message: response.data.message,
+          type: 'success'
+        });
+        emit('update:modelValue', response.data.team);
+      })["catch"](function (error) {
+        form.processing = false;
+        form.errors.onFailed(error);
+      });
+    };
+
     var __returned__ = {
       props: props,
-      colors: colors,
-      selectedColor: selectedColor,
-      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
-      RadioGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.RadioGroup,
-      RadioGroupLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.RadioGroupLabel,
-      RadioGroupOption: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.RadioGroupOption
+      emit: emit,
+      form: form,
+      color: color,
+      updateTeamColor: updateTeamColor,
+      reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
+      computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
+      RadioGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_5__.RadioGroup,
+      RadioGroupLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_5__.RadioGroupLabel,
+      RadioGroupOption: _headlessui_vue__WEBPACK_IMPORTED_MODULE_5__.RadioGroupOption,
+      Errors: _Plugins_errors__WEBPACK_IMPORTED_MODULE_1__.Errors,
+      ElNotification: element_plus__WEBPACK_IMPORTED_MODULE_4__.ElNotification,
+      pickBy: (lodash_pickBy__WEBPACK_IMPORTED_MODULE_3___default())
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -2183,10 +2208,12 @@ var _hoisted_2 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["RadioGroup"], {
-    modelValue: $setup.selectedColor,
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $setup.selectedColor = $event;
-    })
+    modelValue: $setup.color,
+    "onUpdate:modelValue": [_cache[0] || (_cache[0] = function ($event) {
+      return $setup.color = $event;
+    }), _cache[1] || (_cache[1] = function ($event) {
+      return $setup.updateTeamColor($event);
+    })]
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroupLabel"], {
@@ -2198,11 +2225,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.colors, function (color) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroupOption"], {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.props.modelValue.colors, function (color) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["RadioGroupOption"], {
           as: "template",
-          key: color.name,
-          value: color
+          key: color.id,
+          value: color.id
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
             var active = _ref.active,
@@ -2238,8 +2265,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, 1032
         /* PROPS, DYNAMIC_SLOTS */
         , ["value"]);
-      }), 64
-      /* STABLE_FRAGMENT */
+      }), 128
+      /* KEYED_FRAGMENT */
       ))])];
     }),
     _: 1

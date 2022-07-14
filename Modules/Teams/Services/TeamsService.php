@@ -64,23 +64,66 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
 
     public function colors(): Collection
     {
+        $pink = (ColorType::Pink)->value;
+
+        $purple = (ColorType::Purple)->value;
+
+        $blue = (ColorType::Blue)->value;
+
+        $green = (ColorType::Green)->value;
+
+        $yellow = (ColorType::Yellow)->value;
+
+        $teal = (ColorType::Teal)->value;
+
+        $indigo = (ColorType::Indigo)->value;
+
         return collect([
             [
-                'id' => (ColorType::Teal)->value,
-                'name' => ucfirst((ColorType::Teal)->value),
+                'id' => $pink,
+                'name' => ucfirst($pink),
+                'bgColor' => "bg-$pink-500",
+                'selectedColor' => "ring-$pink-500",
             ],
             [
-                'id' => (ColorType::Indigo)->value,
-                'name' => ucfirst((ColorType::Indigo)->value),
+                'id' => $purple,
+                'name' => ucfirst($purple),
+                'bgColor' => "bg-$purple-500",
+                'selectedColor' => "ring-$purple-500",
             ],
             [
-                'id' => (ColorType::Pink)->value,
-                'name' => ucfirst((ColorType::Pink)->value),
+                'id' => $blue,
+                'name' => ucfirst($blue),
+                'bgColor' => "bg-$blue-500",
+                'selectedColor' => "ring-$blue-500",
             ],
             [
-                'id' => (ColorType::Purple)->value,
-                'name' => ucfirst((ColorType::Purple)->value),
-            ]
+                'id' => $green,
+                'name' => ucfirst($green),
+                'bgColor' => "bg-$green-500",
+                'selectedColor' => "ring-$green-500",
+            ],
+            [
+                'id' => $yellow,
+                'name' => ucfirst($yellow),
+                'bgColor' => "bg-$yellow-500",
+                'selectedColor' => "ring-$yellow-500",
+            ],
+            [
+                'id' => $teal,
+                'name' => ucfirst($teal),
+                'bgColor' => "bg-$teal-500",
+                'selectedColor' => "ring-$teal-500",
+            ],
+
+            [
+                'id' => $indigo,
+                'name' => ucfirst($indigo),
+                'bgColor' => "bg-$indigo-500",
+                'selectedColor' => "ring-$indigo-500",
+            ],
+
+
         ]);
     }
 }

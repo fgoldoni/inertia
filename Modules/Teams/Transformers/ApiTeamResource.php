@@ -30,6 +30,7 @@ class ApiTeamResource extends JsonResource
             'image' => $image,
             'display_name' => $this->display_name,
             'subdomain' => $this->subdomain,
+            'color' => $this->color->value,
             'areas' => Category::has('jobs')
                 ->withCount(['jobs' => fn ($query) => $query->published()])
                 ->area()

@@ -1,11 +1,7 @@
 <?php
 namespace Modules\Teams\Enums;
 
-/**
- * Class JobState
- *
- * @package \App\Enums
- */
+
 enum ColorType: string
 {
     case Teal = 'teal';
@@ -21,4 +17,8 @@ enum ColorType: string
     case Cyan = 'cyan';
 
     case Fuchsia = 'fuchsia';
+
+    case Green = 'green';
+
+    case Yellow = 'yellow';
 }
