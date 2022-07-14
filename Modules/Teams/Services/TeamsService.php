@@ -72,11 +72,31 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
 
         $green = (ColorType::Green)->value;
 
+        $cyan = (ColorType::Cyan)->value;
+
         $yellow = (ColorType::Yellow)->value;
 
         $teal = (ColorType::Teal)->value;
 
         $indigo = (ColorType::Indigo)->value;
+
+        $red = (ColorType::Red)->value;
+
+        $amber = (ColorType::Amber)->value;
+
+        $lime = (ColorType::Lime)->value;
+
+        $rose = (ColorType::Rose)->value;
+
+        $slate = (ColorType::Slate)->value;
+
+        $fuchsia = (ColorType::Fuchsia)->value;
+
+        $stone = (ColorType::Stone)->value;
+
+        $violet = (ColorType::Violet)->value;
+
+
 
         return collect([
             [
@@ -104,6 +124,12 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
                 'selectedColor' => "ring-$green-500",
             ],
             [
+                'id' => $cyan,
+                'name' => ucfirst($cyan),
+                'bgColor' => "bg-$cyan-500",
+                'selectedColor' => "ring-$cyan-500",
+            ],
+            [
                 'id' => $yellow,
                 'name' => ucfirst($yellow),
                 'bgColor' => "bg-$yellow-500",
@@ -115,7 +141,6 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
                 'bgColor' => "bg-$teal-500",
                 'selectedColor' => "ring-$teal-500",
             ],
-
             [
                 'id' => $indigo,
                 'name' => ucfirst($indigo),
@@ -123,7 +148,54 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
                 'selectedColor' => "ring-$indigo-500",
             ],
 
-
+            [
+                'id' => $red,
+                'name' => ucfirst($red),
+                'bgColor' => "bg-$red-500",
+                'selectedColor' => "ring-$red-500",
+            ],
+            [
+                'id' => $amber,
+                'name' => ucfirst($amber),
+                'bgColor' => "bg-$amber-500",
+                'selectedColor' => "ring-$amber-500",
+            ],
+            [
+                'id' => $lime,
+                'name' => ucfirst($lime),
+                'bgColor' => "bg-$lime-500",
+                'selectedColor' => "ring-$lime-500",
+            ],
+            [
+                'id' => $rose,
+                'name' => ucfirst($rose),
+                'bgColor' => "bg-$rose-500",
+                'selectedColor' => "ring-$rose-500",
+            ],
+            [
+                'id' => $slate,
+                'name' => ucfirst($slate),
+                'bgColor' => "bg-$slate-500",
+                'selectedColor' => "ring-$slate-500",
+            ],
+            [
+                'id' => $fuchsia,
+                'name' => ucfirst($fuchsia),
+                'bgColor' => "bg-$fuchsia-500",
+                'selectedColor' => "ring-$fuchsia-500",
+            ],
+            [
+                'id' => $stone,
+                'name' => ucfirst($stone),
+                'bgColor' => "bg-$stone-500",
+                'selectedColor' => "ring-$stone-500",
+            ],
+            [
+                'id' => $violet,
+                'name' => ucfirst($violet),
+                'bgColor' => "bg-$violet-500",
+                'selectedColor' => "ring-$violet-500",
+            ],
         ]);
     }
 }

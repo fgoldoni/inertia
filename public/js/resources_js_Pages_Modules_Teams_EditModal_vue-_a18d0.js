@@ -632,12 +632,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/radio-group/radio-group.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/radio-group/radio-group.js");
 /* harmony import */ var _Plugins_errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Plugins/errors */ "./resources/js/Plugins/errors.js");
-/* harmony import */ var element_plus__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! element-plus */ "./node_modules/element-plus/es/components/notification/index2.mjs");
+/* harmony import */ var element_plus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! element-plus */ "./node_modules/element-plus/es/components/notification/index2.mjs");
 /* harmony import */ var element_plus_es_components_notification_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! element-plus/es/components/notification/style/css */ "./node_modules/element-plus/es/components/notification/style/css.mjs");
 /* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
 /* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var lodash_chunk__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash/chunk */ "./node_modules/lodash/chunk.js");
+/* harmony import */ var lodash_chunk__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash_chunk__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -673,7 +676,7 @@ __webpack_require__.r(__webpack_exports__);
         color: color
       })).then(function (response) {
         form.processing = false;
-        (0,element_plus__WEBPACK_IMPORTED_MODULE_4__.ElNotification)({
+        (0,element_plus__WEBPACK_IMPORTED_MODULE_5__.ElNotification)({
           title: 'Great!',
           message: response.data.message,
           type: 'success'
@@ -693,12 +696,13 @@ __webpack_require__.r(__webpack_exports__);
       updateTeamColor: updateTeamColor,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
-      RadioGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_5__.RadioGroup,
-      RadioGroupLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_5__.RadioGroupLabel,
-      RadioGroupOption: _headlessui_vue__WEBPACK_IMPORTED_MODULE_5__.RadioGroupOption,
+      RadioGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_6__.RadioGroup,
+      RadioGroupLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_6__.RadioGroupLabel,
+      RadioGroupOption: _headlessui_vue__WEBPACK_IMPORTED_MODULE_6__.RadioGroupOption,
       Errors: _Plugins_errors__WEBPACK_IMPORTED_MODULE_1__.Errors,
-      ElNotification: element_plus__WEBPACK_IMPORTED_MODULE_4__.ElNotification,
-      pickBy: (lodash_pickBy__WEBPACK_IMPORTED_MODULE_3___default())
+      ElNotification: element_plus__WEBPACK_IMPORTED_MODULE_5__.ElNotification,
+      pickBy: (lodash_pickBy__WEBPACK_IMPORTED_MODULE_3___default()),
+      chunk: (lodash_chunk__WEBPACK_IMPORTED_MODULE_4___default())
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -2206,6 +2210,9 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_2 = {
   "class": "mt-4 flex items-center space-x-3"
 };
+var _hoisted_3 = {
+  "class": "space-y-12"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["RadioGroup"], {
     modelValue: $setup.color,
@@ -2225,48 +2232,52 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.props.modelValue.colors, function (color) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["RadioGroupOption"], {
-          as: "template",
-          key: color.id,
-          value: color.id
-        }, {
-          "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
-            var active = _ref.active,
-                checked = _ref.checked;
-            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-              "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([color.selectedColor, active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'])
-            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroupLabel"], {
-              as: "span",
-              "class": "sr-only"
-            }, {
-              "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(color.name), 1
-                /* TEXT */
-                )];
-              }),
-              _: 2
-              /* DYNAMIC */
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.chunk($setup.props.modelValue.colors, 4), function (colors) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(colors, function (color) {
+          return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["RadioGroupOption"], {
+            as: "template",
+            key: color.id,
+            value: color.id
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
+              var active = _ref.active,
+                  checked = _ref.checked;
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+                "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([color.selectedColor, active && checked ? 'ring ring-offset-1' : '', !active && checked ? 'ring-2' : '', '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'])
+              }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RadioGroupLabel"], {
+                as: "span",
+                "class": "sr-only"
+              }, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(color.name), 1
+                  /* TEXT */
+                  )];
+                }),
+                _: 2
+                /* DYNAMIC */
 
-            }, 1024
-            /* DYNAMIC_SLOTS */
-            ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-              "aria-hidden": "true",
-              "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([color.bgColor, 'h-8 w-8 border border-black border-opacity-10 rounded-full'])
-            }, null, 2
-            /* CLASS */
-            )], 2
-            /* CLASS */
-            )];
-          }),
-          _: 2
-          /* DYNAMIC */
+              }, 1024
+              /* DYNAMIC_SLOTS */
+              ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+                "aria-hidden": "true",
+                "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([color.bgColor, 'h-8 w-8 border border-black border-opacity-10 rounded-full'])
+              }, null, 2
+              /* CLASS */
+              )], 2
+              /* CLASS */
+              )];
+            }),
+            _: 2
+            /* DYNAMIC */
 
-        }, 1032
-        /* PROPS, DYNAMIC_SLOTS */
-        , ["value"]);
-      }), 128
-      /* KEYED_FRAGMENT */
+          }, 1032
+          /* PROPS, DYNAMIC_SLOTS */
+          , ["value"]);
+        }), 128
+        /* KEYED_FRAGMENT */
+        ))]);
+      }), 256
+      /* UNKEYED_FRAGMENT */
       ))])];
     }),
     _: 1

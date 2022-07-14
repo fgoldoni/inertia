@@ -28,7 +28,7 @@ return new class() extends Migration {
             $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();
             $table->boolean('online')->nullable();
-            $table->string('color')->default('teal');
+            $table->string('color')->default('pink');
 
             $table->string('avatar_path', 2048)->nullable();
 

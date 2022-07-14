@@ -14,11 +14,25 @@ enum ColorType: string
 
     case Blue = 'blue';
 
-    case Cyan = 'cyan';
-
     case Fuchsia = 'fuchsia';
 
     case Green = 'green';
 
     case Yellow = 'yellow';
+
+    case Red = 'red';
+
+    case Amber = 'amber';
+
+    case Lime = 'lime';
+
+    case Rose = 'rose';
+
+    case Slate = 'slate';
+
+    case Cyan = 'cyan';
+
+    case Stone = 'stone';
+
+    case Violet = 'violet';
 }
