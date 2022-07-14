@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/teams', function (Request $request) {
 Route::controller(TeamsController::class)->prefix('teams')->name('api.teams.')->group(function () {
     Route::get('{subdomain}', 'show')
         ->name('show')
-        ->where('subdomain', '[a-z]+');
+        ->where('subdomain', '[a-z\-]+');
 
     Route::get('', 'index')
         ->name('index');

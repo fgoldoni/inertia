@@ -7,6 +7,7 @@ use App\Traits\HasAvatar;
 use App\Traits\JobAttribute;
 use App\Traits\UsedByTeams;
 use App\Traits\WithinDays;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,7 @@ use Modules\Companies\Entities\Company;
 use Modules\Countries\Entities\City;
 use Modules\Countries\Entities\Country;
 use Modules\Countries\Entities\Division;
+use Modules\Jobs\Builders\JobBuilder;
 use Modules\Jobs\Database\factories\JobFactory;
 use Modules\Jobs\Enums\JobState;
 use Modules\Jobs\Enums\SalaryType;
@@ -104,5 +106,11 @@ class Job extends Model
             ->logOnly(['name', 'content', 'salary_min', 'content', 'salary_max', 'seo_title', 'seo_description', 'company_id', 'closing_to', 'address'])
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
+    }
+
+    #[Pure]
+    public function newEloquentBuilder($query): Builder
+    {
+        return new JobBuilder($query);
     }
 }

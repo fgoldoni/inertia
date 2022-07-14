@@ -11,7 +11,7 @@ class UpdateTeamRequest extends FormRequest
         return [
             'name' => ['required', 'max:100'],
             'display_name' => ['required', 'max:100'],
-            'subdomain' => ['required', 'max:100', 'alpha', Rule::unique('teams')->ignore($this->team->id)],
+            'subdomain' => ['required', 'max:100', 'alpha_dash', Rule::unique('teams')->ignore($this->team->id)],
         ];
     }
 

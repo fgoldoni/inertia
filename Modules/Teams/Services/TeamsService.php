@@ -2,8 +2,8 @@
 
 namespace Modules\Teams\Services;
 
-use App\Models\Team;
 use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\Has;
 use App\Repositories\Criteria\WithTrashed;
 use App\Services\ServiceAbstract;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
@@ -41,5 +41,22 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
             ]),
             new WithTrashed(),
         ])->find($id));
+    }
+
+    public function allOptionsTeams()
+    {
+        if (auth()->user()->isAdministrator()) {
+            return $this->repository->withCriteria([
+                new WithTrashed(),
+            ])->get(['id', 'name', 'display_name']);
+        } else {
+            return auth()->user()->allTeams()->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'name' => $item->name,
+                    'display_name' => $item->display_name,
+                ];
+            });
+        }
     }
 }

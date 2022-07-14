@@ -37,6 +37,7 @@ class UpdateJobRequest extends FormRequest
             'responsibilities' => ['nullable', 'array', Rule::exists('categories', 'id')],
             'gender' => ['nullable', 'max:256'],
             'city_id' => ['required', Rule::exists('world_cities', 'id')],
+            'team_id' => ['required', Rule::exists('teams', 'id')],
             'country_id' => ['required', Rule::exists('world_countries', 'id')],
             'avatar_path' => ['nullable', 'max:256'],
             'files.*' => ['nullable', 'max:2048',

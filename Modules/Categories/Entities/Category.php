@@ -9,6 +9,7 @@ use Modules\Categories\Builders\CategoryBuilder;
 use Modules\Categories\Collections\CategoryCollection;
 use Modules\Categories\Database\factories\CategoryFactory;
 use Modules\Categories\Enums\CategoryType;
+use Modules\Jobs\Entities\Job;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
@@ -38,6 +39,20 @@ class Category extends Model
     {
         return $this->morphedByMany($class, 'categorizable', 'categorizables', 'category_id', 'categorizable_id', 'id', 'id');
     }
+
+    public function jobs()
+    {
+        return $this->morphedByMany(
+            Job::class,
+            'categorizable',
+            'categorizables',
+            'category_id',
+            'categorizable_id',
+            'id',
+            'id'
+        );
+    }
+
 
     public function getSlugOptions() : SlugOptions
     {

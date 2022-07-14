@@ -41,6 +41,8 @@ class JobResource extends JsonResource
             'division' => $this->division,
             'attachments' => $this->attachments,
 
+            'team_id' => $this->team_id,
+
 
             'logs' => app(ActivitiesRepository::class)->byModel($this),
         ];

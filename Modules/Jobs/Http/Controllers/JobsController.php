@@ -24,11 +24,13 @@ use Modules\Jobs\Http\Requests\UpdateJobRequest;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 use Modules\Jobs\Transformers\JobResource;
 use Modules\Roles\Repositories\Contracts\RolesRepository;
+use Modules\Teams\Services\Contracts\TeamsServiceInterface;
 
 class JobsController extends Controller
 {
     public function __construct(
         private readonly JobsRepository $jobsRepository,
+        private readonly TeamsServiceInterface $teamsService,
         private readonly ActivitiesRepository $activitiesRepository,
         private readonly AttachmentsRepository $attachmentsRepository,
         private readonly CategoriesRepository $categoriesRepository,
@@ -131,6 +133,7 @@ class JobsController extends Controller
         $result['states'] = $this->jobsRepository->getStates();
         $result['salaryTypes'] = $this->jobsRepository->salaryTypes();
         $result['roles'] = $this->rolesRepository->all(['id', 'name']);
+        $result['teams'] = $this->teamsService->allOptionsTeams();
         $result['companies'] = $this->companiesRepository->withCriteria([
         ])->all(['id', 'name', 'user_id', 'team_id']);
 
@@ -184,6 +187,7 @@ class JobsController extends Controller
                 'country_id',
                 'division_id',
                 'user_id',
+                'team_id',
                 'city_id',
                 'created_at',
                 'updated_at'
@@ -194,7 +198,19 @@ class JobsController extends Controller
     public function update(UpdateJobRequest $request, Job $job)
     {
         $job = $this->jobsRepository->update($job->id, array_merge(
-            $request->only('name', 'content', 'avatar_path', 'salary_min', 'salary_max', 'salary_type', 'state', 'country_id', 'city_id', 'company_id'),
+            $request->only(
+                'name',
+                'content',
+                'avatar_path',
+                'salary_min',
+                'salary_max',
+                'salary_type',
+                'state',
+                'country_id',
+                'city_id',
+                'company_id',
+                'team_id'
+            ),
             []
         ));
 

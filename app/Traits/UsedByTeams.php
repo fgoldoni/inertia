@@ -13,8 +13,11 @@ trait UsedByTeams
         static::addGlobalScope('team', function (Builder $builder) {
             static::teamGuard();
 
-            if (!auth()->user()->hasRole(config('app.system.users.roles.administrator'))) {
-                $builder->where($builder->getQuery()->from . '.team_id', auth()->user()->currentTeam->getKey());
+            if (!auth()->user()?->hasRole(config('app.system.users.roles.administrator'))) {
+                $builder->where(
+                    $builder->getQuery()->from . '.team_id',
+                    session()->get('team-id', auth()->user()?->currentTeam->getKey())
+                );
             }
         });
 
@@ -22,7 +25,7 @@ trait UsedByTeams
             if (!isset($model->team_id)) {
                 static::teamGuard();
 
-                $model->team_id = auth()->user()->currentTeam->getKey();
+                $model->team_id = session()->get('team-id', auth()->user()->currentTeam->getKey());
             }
         });
     }
@@ -39,8 +42,7 @@ trait UsedByTeams
 
     protected static function teamGuard()
     {
-        if (auth()->guest() || !auth()->user()->currentTeam) {
-            dd(auth()->guard('we'));
+        if ((auth()->guest() || !auth()->user()?->currentTeam) && !session()->has('team-id')) {
             throw new Exception('No authenticated user with selected team present.');
         }
     }

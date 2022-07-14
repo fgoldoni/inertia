@@ -7,4 +7,6 @@ use Modules\Teams\Transformers\TeamResource;
 interface TeamsServiceInterface
 {
     public function findTeam(int $id): TeamResource;
+
+    public function allOptionsTeams();
 }

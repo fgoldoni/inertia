@@ -7,6 +7,7 @@ use App\Repositories\Criteria\Where;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Categories\Entities\Category;
 use Modules\Teams\Http\Requests\TeamRequest;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
 use Modules\Teams\Transformers\ApiTeamResource;
@@ -22,13 +23,15 @@ class TeamsController extends Controller
 
     public function index()
     {
-        $data = ApiTeamResource::collection($this->teamsRepository->withCriteria([
+        $data['team'] = ApiTeamResource::collection($this->teamsRepository->withCriteria([
             new EagerLoad([
                 'attachments' => function ($query) {
                     $query->where('attachments.disk', config('app.system.disks.uploads'));
                 }
             ]),
         ])->all());
+
+
 
         return $this->response->json(['data' => $data], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
