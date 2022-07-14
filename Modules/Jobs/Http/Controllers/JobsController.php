@@ -119,7 +119,7 @@ class JobsController extends Controller
         });
 
         $this->jobsRepository->sync($job->id, 'categories', array_merge(
-            $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'skills', 'benefits', 'responsibilities'),
+            $request->only('area', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'skills', 'benefits', 'responsibilities'),
         ));
 
         return $this->response->json(['message' => __('The Job (:item) has been successfully created', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
@@ -219,7 +219,7 @@ class JobsController extends Controller
         });
 
         $this->jobsRepository->sync($job->id, 'categories', array_merge(
-            $request->only('area', 'industry', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'skills', 'benefits', 'responsibilities'),
+            $request->only('area', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'skills', 'benefits', 'responsibilities'),
         ));
 
         return $this->response->json(

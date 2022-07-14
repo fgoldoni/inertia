@@ -10,6 +10,7 @@
 namespace Modules\Categories\Repositories\Eloquent;
 
 use App\Repositories\RepositoryAbstract;
+use Illuminate\Database\Eloquent\Collection;
 use Modules\Categories\Entities\Category;
 use Modules\Categories\Entities\Role;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
@@ -22,5 +23,10 @@ class EloquentCategoriesRepository extends RepositoryAbstract implements Categor
     public function model(): string
     {
         return Category::class;
+    }
+
+    public function industries($columns = ['*']): Collection
+    {
+        return $this->model->industry()->get($columns);
     }
 }

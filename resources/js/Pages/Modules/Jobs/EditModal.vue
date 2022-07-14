@@ -50,7 +50,6 @@ const form = reactive({
     company_id: props.editing.company_id,
 
     area: props.editing.categories?.find(element => element.type === "area")?.id,
-    industry: props.editing.categories?.find(element => element.type === "industry")?.id,
     job_type: props.editing.categories?.find(element => element.type === "jobType")?.id,
     job_level: props.editing.categories?.find(element => element.type === "jobLevel")?.id,
     gender: props.editing.categories?.find(element => element.type === "gender")?.id,
@@ -111,7 +110,6 @@ const onSubmit = () => {
 
         company_id: form.company_id,
         area: form.area,
-        industry: form.industry,
 
         salary_min: form.salary_min,
         salary_max: form.salary_max,
@@ -318,14 +316,6 @@ const onSubmit = () => {
                                                                             <BaseListbox :options="job.data.areas" v-model="form.area" placeholder="Areas" label="Areas"/>
 
                                                                             <JetInputError :message="form.errors.get('area')" class="mt-2"/>
-
-                                                                        </div>
-
-                                                                        <div class="col-span-1 sm:col-span-2">
-
-                                                                            <BaseListbox :options="job.data.industries" v-model="form.industry" placeholder="Industries" label="Industries"/>
-
-                                                                            <JetInputError :message="form.errors.get('industry')" class="mt-2"/>
 
                                                                         </div>
 

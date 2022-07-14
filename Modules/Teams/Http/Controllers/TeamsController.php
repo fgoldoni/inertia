@@ -134,6 +134,10 @@ class TeamsController extends Controller
         $team = $this->teamsRepository
             ->update($team->id, $request->only('name', 'display_name', 'subdomain'));
 
+        $this->teamsRepository->sync($team->id, 'categories', array_merge(
+            $request->only('industry'),
+        ));
+
         return $this->response->json(
             [
                 'team' => $this->teamsService->findTeam($team->id),

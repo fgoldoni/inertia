@@ -21,7 +21,6 @@ class UpdateJobRequest extends FormRequest
             'content' => ['required', 'min:4'],
             'company_id' => ['required', Rule::exists('companies', 'id')],
             'area' => ['nullable', Rule::exists('categories', 'id')],
-            'industry' => ['nullable', Rule::exists('categories', 'id')],
             'salary_min' => ['required', 'integer'],
             'salary_max' => ['required', 'integer'],
             'salary_type' => [new Enum(SalaryType::class)],

@@ -9,6 +9,7 @@ import {Errors} from "@/Plugins/errors";
 import JetButton from '@/Jetstream/Button.vue';
 import pickBy from "lodash/pickBy";
 import {ElNotification} from "element-plus";
+import BaseListbox from '@/Shared/BaseListbox.vue'
 
 
 const props = defineProps({
@@ -23,6 +24,7 @@ const form = reactive({
     name: props.modelValue.name,
     subdomain: props.modelValue.subdomain,
     display_name: props.modelValue.display_name,
+    industry: props.modelValue.categories?.find(element => element.type === "industry")?.id,
 
     errors: new Errors(),
     processing: false,
@@ -35,6 +37,7 @@ const updateTeamOwner = () => {
         name: form.name,
         subdomain: form.subdomain,
         display_name: form.display_name,
+        industry: form.industry,
     })).then((response) => {
 
         form.processing = false;
@@ -96,6 +99,14 @@ const updateTeamOwner = () => {
                     required/>
 
                 <JetInputError :message="form.errors.get('display_name')" class="mt-2"/>
+
+            </div>
+
+            <div class="col-span-1 sm:col-span-2">
+
+                <BaseListbox :options="props.modelValue.industries" v-model="form.industry" placeholder="Industries" label="Industries"/>
+
+                <JetInputError :message="form.errors.get('industry')" class="mt-2"/>
 
             </div>
 

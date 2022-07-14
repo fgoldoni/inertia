@@ -8,6 +8,7 @@ import AddTeamMemberComponent from '@/Components/AddTeamMemberComponent.vue'
 import PendingTeamInvitationsComponent from '@/Components/PendingTeamInvitationsComponent.vue'
 import TeamMembersComponent from '@/Components/TeamMembersComponent.vue'
 import LivePreviewComponent from '@/Components/LivePreviewComponent.vue'
+import ColorPickerComponent from '@/Components/ColorPickerComponent.vue'
 import MembersStatsComponent from '@/Components/MembersStatsComponent.vue'
 import AssetsComponent from '@/Components/AssetsComponent.vue'
 import Logs from '@/Shared/Logs.vue'
@@ -92,6 +93,10 @@ const close = () => {
 
                                                     <div class="col-span-1">
                                                         <LivePreviewComponent v-model="team"></LivePreviewComponent>
+                                                    </div>
+
+                                                    <div class="col-span-1">
+                                                        <ColorPickerComponent v-model="team"></ColorPickerComponent>
                                                     </div>
 
                                                     <div class="col-span-1">

@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Traits\Categorizable;
 use App\Traits\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,6 +10,7 @@ use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use Modules\Attachments\Traits\AttachableTrait;
+use Modules\Teams\Enums\ColorType;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -19,6 +21,7 @@ class Team extends JetstreamTeam
     use LogsActivity;
     use HasAvatar;
     use AttachableTrait;
+    use Categorizable;
 
     /**
      * The attributes that should be cast.
@@ -27,6 +30,7 @@ class Team extends JetstreamTeam
      */
     protected $casts = [
         'personal_team' => 'boolean',
+        'color' => ColorType::class,
     ];
 
     /**

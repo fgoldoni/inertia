@@ -54,7 +54,6 @@ class EloquentJobsRepository extends RepositoryAbstract implements JobsRepositor
     {
         return [
             'areas' => $categories->areas(),
-            'industries' => array_values($categories->industries()->toArray()),
             'jobTypes' => array_values($categories->jobTypes()->toArray()),
             'jobLevels' => array_values($categories->jobLevels()->toArray()),
             'genders' => array_values($categories->genders()->toArray()),
