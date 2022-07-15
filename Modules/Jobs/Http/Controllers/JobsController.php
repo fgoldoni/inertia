@@ -127,8 +127,7 @@ class JobsController extends Controller
 
     public function show(User $user)
     {
-        $result = $this->jobsRepository->initCategories($this->categoriesRepository
-                ->get(['id', 'name', 'type']));
+        $result = $this->jobsRepository->initCategories($this->categoriesRepository->get(['id', 'name', 'type']));
 
         $result['states'] = $this->jobsRepository->getStates();
         $result['salaryTypes'] = $this->jobsRepository->salaryTypes();

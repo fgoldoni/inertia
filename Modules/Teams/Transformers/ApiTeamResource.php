@@ -5,6 +5,7 @@ namespace Modules\Teams\Transformers;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Categories\Entities\Category;
+use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 
 class ApiTeamResource extends JsonResource
 {
@@ -31,6 +32,8 @@ class ApiTeamResource extends JsonResource
             'display_name' => $this->display_name,
             'subdomain' => $this->subdomain,
             'color' => $this->color->value,
+            'jobTypes' => array_values(app()->make(CategoriesRepository::class)
+                ->get(['id', 'name', 'type'])->jobTypes()->toArray()),
             'areas' => Category::has('jobs')
                 ->withCount(['jobs' => fn ($query) => $query->published()])
                 ->area()
