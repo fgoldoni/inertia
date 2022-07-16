@@ -50,7 +50,8 @@ class Job extends Model
         'state' => JobState::class,
         'salary_type' => SalaryType::class,
         'negotiable' => 'boolean',
-        'closing_to' => 'date'
+        'live_at' => 'datetime',
+        'closing_to' => 'date',
     ];
 
     protected $appends = [

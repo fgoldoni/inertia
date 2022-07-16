@@ -58,6 +58,7 @@ class JobsController extends Controller
                     'id',
                     'name',
                     'state',
+                    'address',
                     'user_id',
                     'company_id',
                     'country_id',
@@ -107,7 +108,19 @@ class JobsController extends Controller
     public function store(StoreJobRequest $request)
     {
         $job = $this->jobsRepository->create(array_merge(
-            $request->only('name', 'content', 'avatar_path', 'salary_min', 'salary_max', 'salary_type', 'state', 'country_id', 'city_id', 'company_id'),
+            $request->only(
+                'name',
+                'content',
+                'address',
+                'avatar_path',
+                'salary_min',
+                'salary_max',
+                'salary_type',
+                'state',
+                'country_id',
+                'city_id',
+                'company_id'
+            ),
             [
                 'user_id' => $request->user()->id,
                 'company_id' => $request->get('company')
@@ -200,6 +213,7 @@ class JobsController extends Controller
             $request->only(
                 'name',
                 'content',
+                'address',
                 'avatar_path',
                 'salary_min',
                 'salary_max',

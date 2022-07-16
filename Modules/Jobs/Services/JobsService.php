@@ -3,13 +3,14 @@
 namespace Modules\Jobs\Services;
 
 use App\Repositories\Criteria\EagerLoad;
-use App\Repositories\Criteria\OrderBy;
-use App\Repositories\Criteria\Select;
+use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereLike;
-use App\Repositories\Criteria\WithTrashed;
 use App\Services\ServiceAbstract;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Modules\Jobs\Enums\JobState;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 use Modules\Jobs\Services\Contracts\JobsServiceInterface;
+use Modules\Jobs\Transformers\ApiJobResource;
 
 /**
  * Class JobsService.
@@ -21,19 +22,20 @@ class JobsService extends ServiceAbstract implements JobsServiceInterface
         return JobsRepository::class;
     }
 
-    public function get()
+    public function apiJobs(): AnonymousResourceCollection
     {
-        $this->repository->withCriteria([
+        return ApiJobResource::collection($this->repository->withCriteria([
             new WhereLike(['jobs.id', 'jobs.name'], request()->get('search')),
-            new OrderBy(request()->get('field', ''), request()->get('direction')),
+            new Where('state', (JobState::Published)->value),
             new EagerLoad([
                 'user:id,name',
+                'team:id,name,display_name',
                 'company:id,name',
                 'categories:id,name,type',
                 'country:id,name,emoji',
                 'city:id,name',
                 'division:id,name'
             ]),
-        ])->paginate();
+        ])->get());
     }
 }
