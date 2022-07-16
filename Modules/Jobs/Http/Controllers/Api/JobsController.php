@@ -10,17 +10,22 @@ use Illuminate\Routing\Controller;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 use Modules\Companies\Repositories\Contracts\CompaniesRepository;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
+use Modules\Jobs\Services\Contracts\JobsServiceInterface;
 use Modules\Roles\Repositories\Contracts\RolesRepository;
 
 class JobsController extends Controller
 {
-    public function __construct(private readonly ResponseFactory $response, private readonly JobsRepository $jobsRepository, private readonly RolesRepository $rolesRepository, private readonly CompaniesRepository $companiesRepository, private readonly CategoriesRepository $categoriesRepository)
-    {
+    public function __construct(
+        private readonly ResponseFactory $response,
+        private readonly JobsServiceInterface $jobsService,
+    ) {
     }
 
     public function index()
     {
-        return view('jobs::index');
+        $result = $this->jobsService->get();
+
+        return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
     /**

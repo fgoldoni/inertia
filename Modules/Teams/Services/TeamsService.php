@@ -16,7 +16,7 @@ use Modules\Teams\Transformers\TeamResource;
  */
 class TeamsService extends ServiceAbstract implements TeamsServiceInterface
 {
-    protected function repository()
+    protected function repository(): string
     {
         return TeamsRepository::class;
     }

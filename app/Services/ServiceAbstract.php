@@ -16,7 +16,7 @@ abstract class ServiceAbstract implements ServiceInterface
         $this->repository = $this->resolveRepository();
     }
 
-    abstract protected function repository();
+    abstract protected function repository(): string;
 
     protected function resolveRepository()
     {
