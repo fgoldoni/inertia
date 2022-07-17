@@ -3,6 +3,7 @@
 namespace Modules\Jobs\Services;
 
 use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\Filters;
 use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereLike;
 use App\Services\ServiceAbstract;
@@ -25,6 +26,7 @@ class JobsService extends ServiceAbstract implements JobsServiceInterface
     public function apiJobs(): AnonymousResourceCollection
     {
         return ApiJobResource::collection($this->repository->withCriteria([
+            new Filters(request()->get('filters')),
             new WhereLike(['jobs.id', 'jobs.name'], request()->get('search')),
             new Where('state', (JobState::Published)->value),
             new EagerLoad([

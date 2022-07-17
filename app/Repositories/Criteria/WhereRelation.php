@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class WhereRelation
 {
-    public function __construct(private readonly string $relation, private string $column, private string $op, private string $value)
+    public function __construct(private readonly string $relation, private readonly string $column, private readonly string $op, private readonly string $value)
     {
     }
 

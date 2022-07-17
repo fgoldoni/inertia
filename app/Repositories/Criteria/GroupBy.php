@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class GroupBy
 {
-    public function __construct(private ?string $column = null)
+    public function __construct(private readonly ?string $column = null)
     {
     }
 

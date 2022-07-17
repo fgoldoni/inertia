@@ -15,4 +15,14 @@ class JobBuilder extends Builder
     {
         return $this->where('state', JobState::Published);
     }
+
+    public function registeredWithinDays($days)
+    {
+        return $this->where('created_at', '>=', now()->subDays($days)->startOfDay());
+    }
+
+    public function liveWithinDays($days)
+    {
+        return $this->where('live_at', '>=', now()->subDays($days)->startOfDay());
+    }
 }

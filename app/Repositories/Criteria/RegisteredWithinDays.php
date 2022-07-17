@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class RegisteredWithinDays
 {
-    public function __construct(private ?int $days = null)
+    public function __construct(private readonly ?int $days = null)
     {
     }
 
