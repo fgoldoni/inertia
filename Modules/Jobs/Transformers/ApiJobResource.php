@@ -30,6 +30,7 @@ class ApiJobResource extends JsonResource
                 'name' => $this->company->name
             ],
             'job_type' => $this->categories->jobTypes()->value('name'),
+            'view_count' => $this->view_count,
         ];
     }
 }

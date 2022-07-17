@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 use Modules\Companies\Repositories\Contracts\CompaniesRepository;
 use Modules\Jobs\Entities\Job;
+use Modules\Jobs\Events\JobViewCountEvent;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 use Modules\Jobs\Services\Contracts\JobsServiceInterface;
 use Modules\Roles\Repositories\Contracts\RolesRepository;
@@ -49,6 +50,8 @@ class JobsController extends Controller
 
     public function show(Job $job)
     {
+        JobViewCountEvent::dispatch($job);
+
         $result = $this->jobsService->apiJob($job->id);
 
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
