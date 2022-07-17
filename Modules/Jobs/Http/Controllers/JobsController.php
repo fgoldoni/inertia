@@ -107,6 +107,21 @@ class JobsController extends Controller
 
     public function store(StoreJobRequest $request)
     {
+        $categories = array_merge(
+            $request->only(
+                'area',
+                'job_type',
+                'experience',
+                'career_level',
+                'gender',
+                'job_level',
+                'apply_type',
+            ),
+            $request->get('skills'),
+            $request->get('benefits'),
+            $request->get('responsibilities'),
+        );
+        dd($categories);
         $job = $this->jobsRepository->create(array_merge(
             $request->only(
                 'name',
@@ -127,13 +142,14 @@ class JobsController extends Controller
             ]
         ));
 
-        $this->attachmentsRepository->findWhereIn('id', $request->get('files'))->each(function ($item, $key) use ($job) {
+        $this->attachmentsRepository->findWhereIn(
+            'id',
+            $request->get('files')
+        )->each(function ($item, $key) use ($job) {
             $job->attachments()->save($item);
         });
 
-        $this->jobsRepository->sync($job->id, 'categories', array_merge(
-            $request->only('area', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'skills', 'benefits', 'responsibilities'),
-        ));
+        $this->jobsRepository->sync($job->id, 'categories', $categories);
 
         return $this->response->json(['message' => __('The Job (:item) has been successfully created', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
@@ -209,6 +225,21 @@ class JobsController extends Controller
 
     public function update(UpdateJobRequest $request, Job $job)
     {
+        $categories = array_merge(
+            $request->only(
+                'area',
+                'job_type',
+                'experience',
+                'career_level',
+                'gender',
+                'job_level',
+                'apply_type',
+            ),
+            $request->get('skills'),
+            $request->get('benefits'),
+            $request->get('responsibilities'),
+        );
+
         $job = $this->jobsRepository->update($job->id, array_merge(
             $request->only(
                 'name',
@@ -224,16 +255,16 @@ class JobsController extends Controller
                 'company_id',
                 'team_id'
             ),
-            []
+            [
+                'negotiable' => $request->get('negotiable', false)
+            ]
         ));
 
         $this->attachmentsRepository->findWhereIn('id', $request->get('files'))->each(function ($item, $key) use ($job) {
             $job->attachments()->save($item);
         });
 
-        $this->jobsRepository->sync($job->id, 'categories', array_merge(
-            $request->only('area', 'job_type', 'experience', 'career_level', 'gender', 'job_level', 'apply_type', 'skills', 'benefits', 'responsibilities'),
-        ));
+        $this->jobsRepository->sync($job->id, 'categories', $categories);
 
         return $this->response->json(
             ['message' => __('The Job (:item) has been successfully updated', ['item' => $job->name])],

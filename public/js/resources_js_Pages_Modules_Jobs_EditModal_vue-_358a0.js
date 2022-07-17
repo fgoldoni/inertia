@@ -971,7 +971,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var onSubmit = function onSubmit() {
       var _useAvatar$value$medi;
 
-      axios.put(route('admin.jobs.update', form.id), lodash_pickBy__WEBPACK_IMPORTED_MODULE_22___default()(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
+      axios.put(route('admin.jobs.update', form.id), lodash_pickBy__WEBPACK_IMPORTED_MODULE_22___default()(_objectSpread(_objectSpread({
         name: form.name,
         content: form.content,
         company_id: form.company_id,
@@ -994,7 +994,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         state: form.state,
         closing_to: form.closing_to,
         apply_type: form.apply_type
-      }, form.skills.benefits), form.skills.responsibilities), form.skills.skills), {}, {
+      }, form.skills), {}, {
         avatar_path: (_useAvatar$value$medi = _Composables_UseAvatar_js__WEBPACK_IMPORTED_MODULE_21__.useAvatar.value.media) === null || _useAvatar$value$medi === void 0 ? void 0 : _useAvatar$value$medi.avatar_path,
         files: _Composables_UseMedia_js__WEBPACK_IMPORTED_MODULE_20__.useMedia.value.doMediaFetchIds()
       }, props.filters))).then(function (response) {
