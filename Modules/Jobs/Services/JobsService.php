@@ -6,6 +6,7 @@ use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Filters;
 use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereLike;
+use App\Repositories\Criteria\WherePublished;
 use App\Services\ServiceAbstract;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Modules\Jobs\Enums\JobState;
@@ -28,7 +29,7 @@ class JobsService extends ServiceAbstract implements JobsServiceInterface
         return ApiJobResource::collection($this->repository->withCriteria([
             new Filters(request()->get('filters')),
             new WhereLike(['jobs.id', 'jobs.name'], request()->get('search')),
-            new Where('state', (JobState::Published)->value),
+            new WherePublished(),
             new EagerLoad([
                 'user:id,name',
                 'team:id,name,display_name',
@@ -39,5 +40,23 @@ class JobsService extends ServiceAbstract implements JobsServiceInterface
                 'division:id,name'
             ]),
         ])->get());
+    }
+
+    public function apiJob(int $id): ApiJobResource
+    {
+        return new ApiJobResource($this->repository->withCriteria([
+            new Filters(request()->get('filters')),
+            new WhereLike(['jobs.id', 'jobs.name'], request()->get('search')),
+            new WherePublished(),
+            new EagerLoad([
+                'user:id,name',
+                'team:id,name,display_name',
+                'company:id,name',
+                'categories:id,name,type',
+                'country:id,name,emoji',
+                'city:id,name',
+                'division:id,name'
+            ]),
+        ])->find($id));
     }
 }

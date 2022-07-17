@@ -13,7 +13,7 @@ class JobBuilder extends Builder
 {
     public function published()
     {
-        return $this->where('state', JobState::Published);
+        return $this->where('state', (JobState::Published)->value);
     }
 
     public function registeredWithinDays($days)

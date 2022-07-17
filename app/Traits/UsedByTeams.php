@@ -10,6 +10,10 @@ trait UsedByTeams
 {
     protected static function bootUsedByTeams()
     {
+        if (request()->hasHeader('X-Team-Id')) {
+            session()->put('team-id', request()->header('X-Team-Id'));
+        }
+
         static::addGlobalScope('team', function (Builder $builder) {
             static::teamGuard();
 

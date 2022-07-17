@@ -14,7 +14,6 @@ use Modules\Jobs\Http\Controllers\Api\JobsController;
 |
 */
 
-Route::middleware('team')->controller(JobsController::class)->prefix('jobs')->name('api.jobs.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/{user}', 'show')->name('show');
+Route::as('api.')->group(function () {
+       Route::resource('jobs', JobsController::class);
 });
