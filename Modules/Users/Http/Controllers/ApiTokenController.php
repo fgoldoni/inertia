@@ -82,7 +82,7 @@ class ApiTokenController extends Controller
         $this->usersRepository->sendLoginLink($user, $token, $request->get('host'));
 
         return $this->response->json(
-            ['message' => __('We have e-mailed your login link!')],
+            ['message' => __('We have e-mailed your login link on :email.', ['email' => $user->email])],
             Response::HTTP_OK,
             [],
             JSON_NUMERIC_CHECK
