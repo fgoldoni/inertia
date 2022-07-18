@@ -3,6 +3,7 @@
 namespace Modules\Applicants\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 
 class ApplicantsResource extends JsonResource
 {
@@ -28,6 +29,8 @@ class ApplicantsResource extends JsonResource
             'user_id' => $this->user_id,
             'created_at' => $this->created_at->format('d, M Y'),
             'candidate' => $this->candidate,
+
+            'logs' => app(ActivitiesRepository::class)->byModel($this),
         ];
     }
 }

@@ -366,8 +366,8 @@ __webpack_require__.r(__webpack_exports__);
 
     var updateApplicantStatus = function updateApplicantStatus() {
       form.processing = true;
-      axios.put(route('admin.applicants.update', form.id), lodash_pickBy__WEBPACK_IMPORTED_MODULE_6___default()({
-        status: props.modelValue.status
+      axios.put(route('admin.applicants.status.update', form.id), lodash_pickBy__WEBPACK_IMPORTED_MODULE_6___default()({
+        status: form.status
       })).then(function (response) {
         form.processing = false;
         (0,element_plus__WEBPACK_IMPORTED_MODULE_8__.ElNotification)({
@@ -463,21 +463,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Input.vue */ "./resources/js/Jetstream/Input.vue");
-/* harmony import */ var _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Label.vue */ "./resources/js/Jetstream/Label.vue");
-/* harmony import */ var _Jetstream_InputError_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/InputError.vue */ "./resources/js/Jetstream/InputError.vue");
-/* harmony import */ var _Shared_FormSection_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Shared/FormSection.vue */ "./resources/js/Shared/FormSection.vue");
-/* harmony import */ var _Shared_BaseListbox_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Shared/BaseListbox.vue */ "./resources/js/Shared/BaseListbox.vue");
-/* harmony import */ var _Plugins_errors_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Plugins/errors.js */ "./resources/js/Plugins/errors.js");
-/* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
-/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var element_plus__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! element-plus */ "./node_modules/element-plus/es/components/notification/index2.mjs");
-/* harmony import */ var element_plus_es_components_notification_style_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! element-plus/es/components/notification/style/css */ "./node_modules/element-plus/es/components/notification/style/css.mjs");
-/* harmony import */ var _Composables_UseFetch_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Composables/UseFetch.js */ "./resources/js/Composables/UseFetch.js");
-/* harmony import */ var _Jetstream_InputPhone_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Jetstream/InputPhone.vue */ "./resources/js/Jetstream/InputPhone.vue");
-/* harmony import */ var _Jetstream_Textarea_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Jetstream/Textarea.vue */ "./resources/js/Jetstream/Textarea.vue");
-
+/* harmony import */ var _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Label.vue */ "./resources/js/Jetstream/Label.vue");
+/* harmony import */ var _Jetstream_InputError_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/InputError.vue */ "./resources/js/Jetstream/InputError.vue");
+/* harmony import */ var _Shared_FormSection_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Shared/FormSection.vue */ "./resources/js/Shared/FormSection.vue");
+/* harmony import */ var _Shared_BaseListbox_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Shared/BaseListbox.vue */ "./resources/js/Shared/BaseListbox.vue");
+/* harmony import */ var _Plugins_errors_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Plugins/errors.js */ "./resources/js/Plugins/errors.js");
+/* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
+/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var element_plus__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! element-plus */ "./node_modules/element-plus/es/components/notification/index2.mjs");
+/* harmony import */ var element_plus_es_components_notification_style_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! element-plus/es/components/notification/style/css */ "./node_modules/element-plus/es/components/notification/style/css.mjs");
+/* harmony import */ var _Composables_UseFetch_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Composables/UseFetch.js */ "./resources/js/Composables/UseFetch.js");
+/* harmony import */ var _Jetstream_InputPhone_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Jetstream/InputPhone.vue */ "./resources/js/Jetstream/InputPhone.vue");
+/* harmony import */ var _Jetstream_Textarea_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Jetstream/Textarea.vue */ "./resources/js/Jetstream/Textarea.vue");
 
 
 
@@ -506,7 +504,7 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
 
-    var _useFetch = (0,_Composables_UseFetch_js__WEBPACK_IMPORTED_MODULE_10__.useFetch)(),
+    var _useFetch = (0,_Composables_UseFetch_js__WEBPACK_IMPORTED_MODULE_9__.useFetch)(),
         items = _useFetch.data,
         doFetchData = _useFetch.doFetchData;
 
@@ -515,24 +513,24 @@ __webpack_require__.r(__webpack_exports__);
     });
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       id: props.modelValue.id,
-      status: props.modelValue.status,
       message: props.modelValue.message,
       phone: props.modelValue.phone,
       job_id: props.modelValue.job_id,
       user_id: props.modelValue.user_id,
-      errors: new _Plugins_errors_js__WEBPACK_IMPORTED_MODULE_6__.Errors(),
+      errors: new _Plugins_errors_js__WEBPACK_IMPORTED_MODULE_5__.Errors(),
       processing: false
     });
 
     var updateApplicant = function updateApplicant() {
       form.processing = true;
-      axios.put(route('admin.applicants.update', form.id), lodash_pickBy__WEBPACK_IMPORTED_MODULE_8___default()({
-        status: props.modelValue.status,
-        message: props.modelValue.message,
-        phone: props.modelValue.phone
+      axios.put(route('admin.applicants.update', form.id), lodash_pickBy__WEBPACK_IMPORTED_MODULE_7___default()({
+        message: form.message,
+        phone: form.phone,
+        job_id: form.job_id,
+        user_id: form.user_id
       })).then(function (response) {
         form.processing = false;
-        (0,element_plus__WEBPACK_IMPORTED_MODULE_13__.ElNotification)({
+        (0,element_plus__WEBPACK_IMPORTED_MODULE_12__.ElNotification)({
           title: 'Great!',
           message: response.data.message,
           type: 'success'
@@ -551,22 +549,19 @@ __webpack_require__.r(__webpack_exports__);
       emit: emit,
       form: form,
       updateApplicant: updateApplicant,
-      computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
-      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
-      JetInput: _Jetstream_Input_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-      JetLabel: _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-      JetInputError: _Jetstream_InputError_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-      FormSection: _Shared_FormSection_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-      BaseListbox: _Shared_BaseListbox_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-      Errors: _Plugins_errors_js__WEBPACK_IMPORTED_MODULE_6__.Errors,
-      JetButton: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-      pickBy: (lodash_pickBy__WEBPACK_IMPORTED_MODULE_8___default()),
-      ElNotification: element_plus__WEBPACK_IMPORTED_MODULE_13__.ElNotification,
-      useFetch: _Composables_UseFetch_js__WEBPACK_IMPORTED_MODULE_10__.useFetch,
-      JetInputPhone: _Jetstream_InputPhone_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
-      JetTextarea: _Jetstream_Textarea_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
+      JetLabel: _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+      JetInputError: _Jetstream_InputError_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+      FormSection: _Shared_FormSection_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+      BaseListbox: _Shared_BaseListbox_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+      Errors: _Plugins_errors_js__WEBPACK_IMPORTED_MODULE_5__.Errors,
+      JetButton: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+      pickBy: (lodash_pickBy__WEBPACK_IMPORTED_MODULE_7___default()),
+      ElNotification: element_plus__WEBPACK_IMPORTED_MODULE_12__.ElNotification,
+      useFetch: _Composables_UseFetch_js__WEBPACK_IMPORTED_MODULE_9__.useFetch,
+      JetInputPhone: _Jetstream_InputPhone_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+      JetTextarea: _Jetstream_Textarea_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -1269,7 +1264,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["FormSection"], {
     title: _ctx.__('Update Status'),
     errors: $setup.form.errors,
-    onSubmitted: _ctx.updateApplicant,
+    onSubmitted: $setup.updateApplicantStatus,
     "default-open": ""
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createSlots)({
     form: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -1315,7 +1310,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   } : 0]), 1032
   /* PROPS, DYNAMIC_SLOTS */
-  , ["title", "errors", "onSubmitted"]);
+  , ["title", "errors"]);
 }
 
 /***/ }),
@@ -1881,7 +1876,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   }, null, 8
                   /* PROPS */
                   , ["modelValue", "states"])])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.currentTab === 'logs' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Logs"], {
-                    options: _ctx.team.logs
+                    options: $setup.applicant.logs
                   }, null, 8
                   /* PROPS */
                   , ["options"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];

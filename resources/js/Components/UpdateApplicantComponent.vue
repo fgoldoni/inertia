@@ -1,6 +1,5 @@
 <script setup>
-import {computed, onMounted, reactive, ref} from 'vue'
-import JetInput from '@/Jetstream/Input.vue'
+import {onMounted, reactive} from 'vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
 import FormSection from '@/Shared/FormSection.vue';
@@ -29,7 +28,6 @@ const emit = defineEmits(["update:modelValue"]);
 
 const form = reactive({
     id: props.modelValue.id,
-    status: props.modelValue.status,
     message: props.modelValue.message,
     phone: props.modelValue.phone,
     job_id: props.modelValue.job_id,
@@ -46,9 +44,10 @@ const updateApplicant = () => {
     form.processing = true;
 
     axios.put(route('admin.applicants.update', form.id), pickBy({
-        status: props.modelValue.status,
-        message: props.modelValue.message,
-        phone: props.modelValue.phone,
+        message: form.message,
+        phone: form.phone,
+        job_id: form.job_id,
+        user_id: form.user_id,
     })).then((response) => {
 
         form.processing = false;
@@ -103,8 +102,6 @@ const updateApplicant = () => {
 
                 <JetInputError :message="form.errors.get('message')" class="mt-2"/>
             </div>
-
-
 
             <JetInputPhone :error="form.errors.get('phone')" v-model="form.phone"></JetInputPhone>
 

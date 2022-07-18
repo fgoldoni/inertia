@@ -92,7 +92,7 @@ const close = () => {
                                 </div>
 
                                 <div v-if="currentTab === 'logs'" class="grid grid-cols-1">
-                                    <Logs :options="team.logs"></Logs>
+                                    <Logs :options="applicant.logs"></Logs>
                                 </div>
 
                             </div>

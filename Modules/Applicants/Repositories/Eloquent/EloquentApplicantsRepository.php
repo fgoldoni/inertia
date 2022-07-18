@@ -29,13 +29,15 @@ class EloquentApplicantsRepository extends RepositoryAbstract implements Applica
     {
         return collect([
             [
-                'id' => (Status::Pending)->value,
-                'name' => ucfirst((Status::Pending)->value),
-            ],
-            [
                 'id' => (Status::Approved)->value,
                 'name' => ucfirst((Status::Approved)->value),
             ],
+
+            [
+                'id' => (Status::Pending)->value,
+                'name' => ucfirst((Status::Pending)->value),
+            ],
+
             [
                 'id' => (Status::Rejected)->value,
                 'name' => ucfirst((Status::Rejected)->value),

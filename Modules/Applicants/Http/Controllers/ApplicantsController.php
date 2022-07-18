@@ -19,10 +19,13 @@ use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Applicants\Entities\Applicant;
+use Modules\Applicants\Http\Requests\UpdateApplicantRequest;
+use Modules\Applicants\Http\Requests\UpdateApplicantStatusRequest;
 use Modules\Applicants\Repositories\Contracts\ApplicantsRepository;
 use Modules\Applicants\Transformers\ApplicantsResource;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Jobs\Entities\Job;
+use Modules\Jobs\Http\Requests\UpdateJobRequest;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 use Modules\Jobs\Transformers\JobResource;
 use Modules\Users\Repositories\Contracts\UsersRepository;
@@ -139,16 +142,56 @@ class ApplicantsController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateApplicantRequest $request, Applicant $applicant)
     {
-        //
+
+        $applicant = $this->applicantsRepository->update(
+            $applicant->id,
+            $request->only(
+                'user_id',
+                'job_id',
+                'phone',
+                'message',
+            )
+        );
+
+
+        return $this->response->json(
+            [
+                'model' => new ApplicantsResource($applicant->load([
+                    'candidate',
+                    'job' => fn($query) => $query->with('city')
+                ])),
+                'message' => __('The Company (:item) has been successfully updated', ['item' => 'applicant'])
+            ],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
+
+    public function updateStatus(UpdateApplicantStatusRequest $request, Applicant $applicant)
+    {
+        $applicant = $this->applicantsRepository->update(
+            $applicant->id,
+            $request->only('status')
+        );
+
+
+        return $this->response->json(
+            [
+                'model' => new ApplicantsResource($applicant->load([
+                    'candidate',
+                    'job' => fn($query) => $query->with('city')
+                ])),
+                'message' => __('The Status has been successfully updated')
+            ],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
+    }
+
 
     /**
      * Remove the specified resource from storage.

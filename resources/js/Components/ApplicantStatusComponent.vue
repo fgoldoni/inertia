@@ -31,8 +31,8 @@ const updateApplicantStatus = () => {
 
     form.processing = true;
 
-    axios.put(route('admin.applicants.update', form.id), pickBy({
-        status: props.modelValue.status,
+    axios.put(route('admin.applicants.status.update', form.id), pickBy({
+        status: form.status,
     })).then((response) => {
 
         form.processing = false;
@@ -53,7 +53,7 @@ const updateApplicantStatus = () => {
 </script>
 
 <template>
-    <FormSection :title="__('Update Status')" :errors="form.errors" @submitted="updateApplicant" default-open>
+    <FormSection :title="__('Update Status')" :errors="form.errors" @submitted="updateApplicantStatus" default-open>
 
         <template #form>
 
