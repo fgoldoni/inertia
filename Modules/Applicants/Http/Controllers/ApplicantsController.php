@@ -56,7 +56,12 @@ class ApplicantsController extends Controller
         return Inertia::render('Modules/Applicants/Index', array_merge([
             'filters' => $this->request->only(['search', 'perPage', 'page', 'field', 'direction']),
             'rowData' => $this->applicantsRepository->withCriteria([
-                new WhereLike(['jobs.id', 'jobs.phone'], $this->request->get('search')),
+                new WhereLike([
+                    'applicants.id',
+                    'applicants.user_id',
+                    'applicants.job_id',
+                    'applicants.status',
+                ], $this->request->get('search')),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
                 new EagerLoad([
                     'candidate:id,name,email',
