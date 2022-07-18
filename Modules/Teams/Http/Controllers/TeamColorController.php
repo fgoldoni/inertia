@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Teams\Http\Controllers;
 
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -7,7 +6,6 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Teams\Http\Requests\UpdateColorTeamRequesst;
 use Modules\Teams\Http\Requests\UpdateColorTeamRequest;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
 use Modules\Teams\Services\Contracts\TeamsServiceInterface;
@@ -65,12 +63,9 @@ class TeamColorController extends Controller
         return view('teams::edit');
     }
 
-
-
     public function update(UpdateColorTeamRequest $request, $id)
     {
         $team = $this->teamsRepository->update($id, $request->only('color'));
-
 
         return $this->response->json(
             [

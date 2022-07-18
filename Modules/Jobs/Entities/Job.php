@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Jobs\Entities;
 
+use App\Models\User;
 use App\Traits\BelongsToUser;
 use App\Traits\Categorizable;
 use App\Traits\HasAvatar;
@@ -11,7 +12,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Applicants\Entities\Applicant;
 use Modules\Attachments\Traits\AttachableTrait;
 use Modules\Companies\Entities\Company;
 use Modules\Countries\Entities\City;
@@ -113,5 +116,16 @@ class Job extends Model
     public function newEloquentBuilder($query): Builder
     {
         return new JobBuilder($query);
+    }
+
+
+    public function candidates(): belongsToMany
+    {
+        return $this->belongsToMany(User::class, 'applicants', 'job_id', 'user_id')
+            ->using(Applicant::class)
+            ->as('candidates')
+            ->withPivot('phone', 'message')
+            ->withoutGlobalScopes()
+            ->withTimestamps();
     }
 }

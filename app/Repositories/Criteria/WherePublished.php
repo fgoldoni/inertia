@@ -15,11 +15,9 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class WherePublished
 {
-
     public function __construct()
     {
     }
-
 
     public function apply($model): Builder
     {

@@ -142,6 +142,16 @@ var navigation = [{
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_9__["default"],
   current: route().current('admin.jobs.index')
 }, {
+  name: 'Resumes',
+  href: 'admin.resumes.index',
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_9__["default"],
+  current: route().current('admin.resumes.index')
+}, {
+  name: 'Applies',
+  href: 'admin.applicants.index',
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_9__["default"],
+  current: route().current('admin.applicants.index')
+}, {
   name: 'Telescope',
   href: 'telescope',
   icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_10__["default"],
@@ -1796,6 +1806,48 @@ var map = {
 	"./Dashboard.vue": [
 		"./resources/js/Pages/Dashboard.vue",
 		"resources_js_Pages_Dashboard_vue"
+	],
+	"./Modules/Applicants/CreateModal.vue": [
+		"./resources/js/Pages/Modules/Applicants/CreateModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Applicants_CreateModal_vue-_b5870"
+	],
+	"./Modules/Applicants/Datatables/CustomAccess.vue": [
+		"./resources/js/Pages/Modules/Applicants/Datatables/CustomAccess.vue",
+		"resources_js_Pages_Modules_Applicants_Datatables_CustomAccess_vue"
+	],
+	"./Modules/Applicants/Datatables/CustomActions.vue": [
+		"./resources/js/Pages/Modules/Applicants/Datatables/CustomActions.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Applicants_Datatables_CustomActions_vue-_91bb0"
+	],
+	"./Modules/Applicants/Datatables/CustomEmail.vue": [
+		"./resources/js/Pages/Modules/Applicants/Datatables/CustomEmail.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Applicants_Datatables_CustomEmail_vue"
+	],
+	"./Modules/Applicants/Datatables/CustomLastLogin.vue": [
+		"./resources/js/Pages/Modules/Applicants/Datatables/CustomLastLogin.vue",
+		"resources_js_Pages_Modules_Applicants_Datatables_CustomLastLogin_vue"
+	],
+	"./Modules/Applicants/Datatables/CustomName.vue": [
+		"./resources/js/Pages/Modules/Applicants/Datatables/CustomName.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Applicants_Datatables_CustomName_vue-_5b500"
+	],
+	"./Modules/Applicants/Datatables/CustomRole.vue": [
+		"./resources/js/Pages/Modules/Applicants/Datatables/CustomRole.vue",
+		"resources_js_Pages_Modules_Applicants_Datatables_CustomRole_vue"
+	],
+	"./Modules/Applicants/EditModal.vue": [
+		"./resources/js/Pages/Modules/Applicants/EditModal.vue",
+		"/js/vendor",
+		"resources_js_Pages_Modules_Applicants_EditModal_vue-_cfac0"
+	],
+	"./Modules/Applicants/Index.vue": [
+		"./resources/js/Pages/Modules/Applicants/Index.vue",
+		"/js/vendor",
+		"node_modules_unplugin_dist_webpack_loaders_transform_js_ruleSet_1_rules_26_use_0_node_modules-a0b226"
 	],
 	"./Modules/Categories/CreateModal.vue": [
 		"./resources/js/Pages/Modules/Categories/CreateModal.vue",

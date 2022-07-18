@@ -7,11 +7,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use Inertia\ResponseFactory;
 use Modules\Activities\Providers\ActivitiesServiceProvider;
+use Modules\Applicants\Providers\ApplicantsServiceProvider;
 use Modules\Attachments\Providers\AttachmentsServiceProvider;
 use Modules\Categories\Providers\CategoriesServiceProvider;
 use Modules\Companies\Providers\CompaniesServiceProvider;
 use Modules\Dashboard\Providers\DashboardServiceProvider;
 use Modules\Jobs\Providers\JobsServiceProvider;
+use Modules\Resumes\Providers\ResumesServiceProvider;
 use Modules\Roles\Providers\RolesServiceProvider;
 use Modules\Tags\Providers\TagsServiceProvider;
 use Modules\Teams\Providers\TeamsServiceProvider;
@@ -36,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(ActivitiesServiceProvider::class);
         $this->app->register(TagsServiceProvider::class);
         $this->app->register(TeamsServiceProvider::class);
+        $this->app->register(ApplicantsServiceProvider::class);
+        $this->app->register(ResumesServiceProvider::class);
     }
 
     /**

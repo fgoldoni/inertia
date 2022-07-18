@@ -1,0 +1,13 @@
+{
+    "name": "Applicants",
+    "alias": "applicants",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Applicants\\Providers\\ApplicantsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

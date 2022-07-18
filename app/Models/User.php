@@ -17,8 +17,10 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Applicants\Entities\Applicant;
 use Modules\Dashboard\Entities\Dashboard;
 use Modules\Dashboard\Entities\DashboardUser;
+use Modules\Jobs\Entities\Job;
 use Modules\Users\Collections\UserCollection;
 use Modules\Users\Entities\Session;
 use Spatie\Activitylog\LogOptions;
@@ -132,5 +134,15 @@ class User extends Authenticatable implements MustVerifyEmail
             ->logOnly(['name', 'email', 'phone'])
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
+    }
+
+    public function applicants(): belongsToMany
+    {
+        return $this->belongsToMany(Job::class, 'applicants', 'user_id', 'job_id')
+            ->using(Applicant::class)
+            ->as('applicants')
+            ->withPivot('phone', 'message')
+            ->withoutGlobalScopes()
+            ->withTimestamps();
     }
 }

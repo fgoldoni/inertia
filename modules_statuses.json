@@ -9,5 +9,8 @@
     "Dashboard": true,
     "Activities": true,
     "Tags": true,
-    "Teams": true
+    "Teams": true,
+    "Resumes": true,
+    "Applies": true,
+    "Applicants": true
 }

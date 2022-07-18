@@ -46,9 +46,9 @@ class Filters
 
             $query = $model->when(
                 $this->filters['categories'],
-                fn($query, $categories) => $query->whereHas(
+                fn ($query, $categories) => $query->whereHas(
                     'categories',
-                    fn(Builder $query) => $query->whereIn('categories.id', $categories)
+                    fn (Builder $query) => $query->whereIn('categories.id', $categories)
                 )
             );
         }
@@ -58,7 +58,7 @@ class Filters
 
             $query = $model->when(
                 $this->filters['days'],
-                fn($query, $days) => $query->liveWithinDays($days)
+                fn ($query, $days) => $query->liveWithinDays($days)
             );
         }
 
