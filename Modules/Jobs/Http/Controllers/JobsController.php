@@ -244,6 +244,7 @@ class JobsController extends Controller
             $request->only(
                 'name',
                 'content',
+                'iframe',
                 'address',
                 'avatar_path',
                 'salary_min',

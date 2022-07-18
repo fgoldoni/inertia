@@ -24,6 +24,7 @@ class ApiJobResource extends JsonResource
             'salary_max' => $this->salary_max,
             'salary_type' => $this->salary_type,
             'negotiable' => $this->negotiable,
+            'iframe' => $this->iframe,
             'closing_to' => $this->closing_to?->format('d, M Y'),
             'live_at' => $this->live_at?->diffForHumans(),
             'team' => [
