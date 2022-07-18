@@ -18,9 +18,9 @@ return new class extends Migration {
             $table->foreignId('user_id')->unsigned()->index()->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('job_id')->unsigned()->index()->references('id')->on('jobs')->onDelete('cascade');
             $table->string('phone')->nullable();
+            $table->string('status')->default('pending');
             $table->text('message')->nullable();
 
-            $table->softDeletes();
             $table->timestamps();
         });
     }

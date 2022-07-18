@@ -1,4 +1,4 @@
-import {ShieldCheckIcon, MapIcon, AcademicCapIcon, DocumentSearchIcon, SparklesIcon, ShareIcon, FolderIcon, HomeIcon, UsersIcon, GlobeIcon, CubeIcon, ViewGridAddIcon} from "@heroicons/vue/outline";
+import {ShieldCheckIcon, MapIcon, IdentificationIcon, LightningBoltIcon, AcademicCapIcon, DocumentSearchIcon, SparklesIcon, ShareIcon, FolderIcon, HomeIcon, UsersIcon, GlobeIcon, CubeIcon, ViewGridAddIcon} from "@heroicons/vue/outline";
 
 export const navigation = [
     { name: 'Dashboard', href: 'admin.dashboard.index', icon: HomeIcon, current: route().current('admin.dashboard.index') },
@@ -11,8 +11,8 @@ export const navigation = [
     { name: 'Cities', href: 'admin.cities.index', icon: MapIcon, current: route().current('admin.cities.index') },
     { name: 'Companies', href: 'admin.companies.index', icon: CubeIcon, current: route().current('admin.companies.index') },
     { name: 'Jobs', href: 'admin.jobs.index', icon: AcademicCapIcon, current: route().current('admin.jobs.index') },
-    { name: 'Resumes', href: 'admin.resumes.index', icon: AcademicCapIcon, current: route().current('admin.resumes.index') },
-    { name: 'Applies', href: 'admin.applicants.index', icon: AcademicCapIcon, current: route().current('admin.applicants.index') },
+    { name: 'Resumes', href: 'admin.resumes.index', icon: IdentificationIcon, current: route().current('admin.resumes.index') },
+    { name: 'Applied Jobs', href: 'admin.applicants.index', icon: LightningBoltIcon, current: route().current('admin.applicants.index') },
     { name: 'Telescope', href: 'telescope', icon: DocumentSearchIcon, current: false },
 ]
 

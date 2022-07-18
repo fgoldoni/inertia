@@ -89,7 +89,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/MapIcon.js");
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/CubeIcon.js");
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/AcademicCapIcon.js");
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/DocumentSearchIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/IdentificationIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/LightningBoltIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/DocumentSearchIcon.js");
 
 var navigation = [{
   name: 'Dashboard',
@@ -144,17 +146,17 @@ var navigation = [{
 }, {
   name: 'Resumes',
   href: 'admin.resumes.index',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_9__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_10__["default"],
   current: route().current('admin.resumes.index')
 }, {
-  name: 'Applies',
+  name: 'Applied Jobs',
   href: 'admin.applicants.index',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_9__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_11__["default"],
   current: route().current('admin.applicants.index')
 }, {
   name: 'Telescope',
   href: 'telescope',
-  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_10__["default"],
+  icon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_12__["default"],
   current: false
 }];
 var userNavigation = [{
@@ -1812,32 +1814,26 @@ var map = {
 		"/js/vendor",
 		"resources_js_Pages_Modules_Applicants_CreateModal_vue-_b5870"
 	],
-	"./Modules/Applicants/Datatables/CustomAccess.vue": [
-		"./resources/js/Pages/Modules/Applicants/Datatables/CustomAccess.vue",
-		"resources_js_Pages_Modules_Applicants_Datatables_CustomAccess_vue"
-	],
 	"./Modules/Applicants/Datatables/CustomActions.vue": [
 		"./resources/js/Pages/Modules/Applicants/Datatables/CustomActions.vue",
 		"/js/vendor",
 		"resources_js_Pages_Modules_Applicants_Datatables_CustomActions_vue-_91bb0"
 	],
-	"./Modules/Applicants/Datatables/CustomEmail.vue": [
-		"./resources/js/Pages/Modules/Applicants/Datatables/CustomEmail.vue",
-		"/js/vendor",
-		"resources_js_Pages_Modules_Applicants_Datatables_CustomEmail_vue"
+	"./Modules/Applicants/Datatables/CustomCandidate.vue": [
+		"./resources/js/Pages/Modules/Applicants/Datatables/CustomCandidate.vue",
+		"resources_js_Pages_Modules_Applicants_Datatables_CustomCandidate_vue"
 	],
-	"./Modules/Applicants/Datatables/CustomLastLogin.vue": [
-		"./resources/js/Pages/Modules/Applicants/Datatables/CustomLastLogin.vue",
-		"resources_js_Pages_Modules_Applicants_Datatables_CustomLastLogin_vue"
+	"./Modules/Applicants/Datatables/CustomCreatedAt.vue": [
+		"./resources/js/Pages/Modules/Applicants/Datatables/CustomCreatedAt.vue",
+		"resources_js_Pages_Modules_Applicants_Datatables_CustomCreatedAt_vue"
 	],
-	"./Modules/Applicants/Datatables/CustomName.vue": [
-		"./resources/js/Pages/Modules/Applicants/Datatables/CustomName.vue",
-		"/js/vendor",
-		"resources_js_Pages_Modules_Applicants_Datatables_CustomName_vue-_5b500"
+	"./Modules/Applicants/Datatables/CustomJob.vue": [
+		"./resources/js/Pages/Modules/Applicants/Datatables/CustomJob.vue",
+		"resources_js_Pages_Modules_Applicants_Datatables_CustomJob_vue"
 	],
-	"./Modules/Applicants/Datatables/CustomRole.vue": [
-		"./resources/js/Pages/Modules/Applicants/Datatables/CustomRole.vue",
-		"resources_js_Pages_Modules_Applicants_Datatables_CustomRole_vue"
+	"./Modules/Applicants/Datatables/CustomStatus.vue": [
+		"./resources/js/Pages/Modules/Applicants/Datatables/CustomStatus.vue",
+		"resources_js_Pages_Modules_Applicants_Datatables_CustomStatus_vue"
 	],
 	"./Modules/Applicants/EditModal.vue": [
 		"./resources/js/Pages/Modules/Applicants/EditModal.vue",

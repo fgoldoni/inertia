@@ -237,50 +237,24 @@ var _hoisted_4 = {
 var _hoisted_5 = {
   "class": "group inline-flex space-x-2 truncate text-sm"
 };
-var _hoisted_6 = ["href"];
-var _hoisted_7 = ["disabled"];
-var _hoisted_8 = {
+var _hoisted_6 = {
+  "class": "text-gray-900 font-medium truncate group-hover:text-gray-900"
+};
+var _hoisted_7 = {
   "class": "text-sm leading-5 text-secondary-500 dark:text-secondary-400"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _$setup$props$row$job, _$setup$props$row$job2, _$setup$props$row$job3;
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     "class": "h-10 w-10 rounded-full",
-    src: $setup.props.row.image,
+    src: (_$setup$props$row$job = $setup.props.row.job) === null || _$setup$props$row$job === void 0 ? void 0 : _$setup$props$row$job.avatar_url,
     alt: ""
   }, null, 8
   /* PROPS */
-  , _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.props.row.deleted_at ? 'text-negative-500 line-through' : 'text-gray-900', 'font-medium truncate group-hover:text-gray-900'])
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.name), 3
-  /* TEXT, CLASS */
-  ), $setup.props.row.can.impersonate && !(_ctx.$page.props.user.id === $setup.props.row.id) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
-    key: 0,
-    href: _ctx.route('impersonate', $setup.props.row.id),
-    "class": "text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300"
-  }, " Login As → ", 8
-  /* PROPS */
-  , _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.props.row.deleted_at ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $setup.restore($setup.props.row.id);
-    }),
-    key: 'restore' + $setup.props.row.id,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["group inline-flex items-center space-x-2 truncate text-sm text-blue-700", {
-      'cursor-not-allowed': $setup.form.processing
-    }]),
-    disabled: $setup.form.processing
-  }, [$setup.form.processing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["RefreshIcon"], {
-    key: 0,
-    "class": "animate-spin flex-shrink-0 h-5 w-5 text-secondary-400 group-hover:text-secondary-500",
-    "aria-hidden": "true"
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'opacity-25': $setup.form.processing
-    }, "underline group-hover:text-blue-900 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300"])
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Restore')), 3
-  /* TEXT, CLASS */
-  )], 10
-  /* CLASS, PROPS */
-  , _hoisted_7)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, "Registered on " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.created_at), 1
+  , _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$props$row$job2 = $setup.props.row.job) === null || _$setup$props$row$job2 === void 0 ? void 0 : _$setup$props$row$job2.name), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$props$row$job3 = $setup.props.row.job) === null || _$setup$props$row$job3 === void 0 ? void 0 : _$setup$props$row$job3.address), 1
   /* TEXT */
   )])]);
 }

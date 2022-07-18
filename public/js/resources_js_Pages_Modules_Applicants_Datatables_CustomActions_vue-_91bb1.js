@@ -13,7 +13,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/PencilAltIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/UserCircleIcon.js");
 /* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
 /* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_1__);
 
@@ -32,7 +31,6 @@ __webpack_require__.r(__webpack_exports__);
       props: props,
       Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Link,
       PencilAltIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__["default"],
-      UserCircleIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__["default"],
       pickBy: (lodash_pickBy__WEBPACK_IMPORTED_MODULE_1___default())
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -58,39 +56,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  key: 0,
-  "class": "group flex items-center flex-row-reverse text-sm leading-5 text-secondary-500 text-right dark:text-secondary-400"
-};
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "text-gray-500 truncate group-hover:text-gray-900"
-}, "Me", -1
-/* HOISTED */
-);
-
-var _hoisted_3 = {
   "class": "sr-only"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_ctx.$page.props.user.id === $setup.props.row.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["UserCircleIcon"], {
-    "class": "flex-shrink-0 h-5 w-5 text-green-500 group-hover:text-green-700 mr-1",
-    "aria-hidden": "true"
-  })])) : $setup.props.row.can.edit && !$setup.props.row.isAdministrator && !$setup.props.row.deleted_at ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Link"], {
-    key: 1,
-    href: _ctx.route('admin.users.edit', {
-      'user': $setup.props.row.id
-    }),
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_ctx.$page.props.can.edit ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Link"], {
+    key: 0,
+    href: _ctx.route('admin.applicants.edit', $setup.props.row.id),
     "preserve-state": "",
     "preserve-scroll": "",
     data: $setup.pickBy($setup.props.row.params),
-    only: ['editing', 'modal', 'basePageRoute'],
-    "class": "group flex flex-row-reverse items-center hover:shadow-2xl"
+    only: ['editing', 'modal', 'basePageRoute', 'states'],
+    "class": "group flex flex-row-reverse items-center hover:shadow-2xl ml-2"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["PencilAltIcon"], {
         "class": "flex-shrink-0 h-5 w-5 text-primary-500 group-hover:text-primary-700 mr-1 transition ease-in-out delay-150 group-hover:-translate-y-1 group-hover:scale-125 duration-300",
         "aria-hidden": "true"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.name), 1
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_1, ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.name), 1
       /* TEXT */
       )];
     }),

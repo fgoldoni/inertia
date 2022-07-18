@@ -19,16 +19,16 @@ class ApplicantsDatabaseSeeder extends Seeder
         $job = Job::withoutGlobalScope('team')->first();
 
         $job->candidates()->attach([
-            1 => [
-                'phone' => 000000000,
+            14 => [
+                'phone' => '+4917777777777',
                 'message' => 'message',
             ],
-            2 => [
-                'phone' => 000000000,
+            15 => [
+                'phone' => '+4917777777777',
                 'message' => 'message',
             ],
-            3 => [
-                'phone' => 000000000,
+            16 => [
+                'phone' => '+4917777777777',
                 'message' => 'message',
             ],
         ]);

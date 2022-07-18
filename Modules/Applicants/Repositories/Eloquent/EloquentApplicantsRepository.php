@@ -10,7 +10,9 @@
 namespace Modules\Applicants\Repositories\Eloquent;
 
 use App\Repositories\RepositoryAbstract;
+use Illuminate\Support\Collection;
 use Modules\Applicants\Entities\Applicant;
+use Modules\Applicants\Enums\Status;
 use Modules\Applicants\Repositories\Contracts\ApplicantsRepository;
 
 /**
@@ -21,5 +23,23 @@ class EloquentApplicantsRepository extends RepositoryAbstract implements Applica
     public function model(): string
     {
         return Applicant::class;
+    }
+
+    public function getStates(): Collection
+    {
+        return collect([
+            [
+                'id' => (Status::Pending)->value,
+                'name' => ucfirst((Status::Pending)->value),
+            ],
+            [
+                'id' => (Status::Approved)->value,
+                'name' => ucfirst((Status::Approved)->value),
+            ],
+            [
+                'id' => (Status::Rejected)->value,
+                'name' => ucfirst((Status::Rejected)->value),
+            ],
+        ]);
     }
 }

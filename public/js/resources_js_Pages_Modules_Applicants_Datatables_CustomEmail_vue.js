@@ -86,42 +86,12 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "text-gray-500 truncate group-hover:text-gray-900"
 };
-var _hoisted_4 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$setup.props.row.verified && !$setup.props.row.deleted_at ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ShieldCheckIcon"], {
-    key: 0,
-    "class": "flex-shrink-0 h-5 w-5 text-green-500 group-hover:text-green-700",
-    "aria-hidden": "true"
-  })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ShieldExclamationIcon"], {
-    key: 1,
-    "class": "flex-shrink-0 h-5 w-5 text-rose-500 group-hover:text-rose-700",
-    "aria-hidden": "true"
-  })), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.email), 1
+  var _$setup$props$row$can;
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$setup$props$row$can = $setup.props.row.candidate) === null || _$setup$props$row$can === void 0 ? void 0 : _$setup$props$row$can.name), 1
   /* TEXT */
-  )])]), !$setup.props.row.verified ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $setup.sendEmailVerificationNotification($setup.props.row.id);
-    }),
-    key: 'email' + $setup.props.row.id,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mt-2 group inline-flex items-center space-x-2 truncate text-sm text-primary-700", {
-      'cursor-not-allowed': $setup.form.processing
-    }]),
-    disabled: $setup.form.processing
-  }, [$setup.form.processing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["RefreshIcon"], {
-    key: 0,
-    "class": "animate-spin flex-shrink-0 h-5 w-5 text-secondary-400 group-hover:text-secondary-500",
-    "aria-hidden": "true"
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'opacity-25': $setup.form.processing
-    }, "underline text-gray-500 truncate group-hover:text-gray-900"])
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Resend Verification Email')), 3
-  /* TEXT, CLASS */
-  )], 10
-  /* CLASS, PROPS */
-  , _hoisted_4)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
-  /* STABLE_FRAGMENT */
-  );
+  )])]);
 }
 
 /***/ }),

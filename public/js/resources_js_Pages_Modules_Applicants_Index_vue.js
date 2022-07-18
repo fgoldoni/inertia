@@ -18,22 +18,19 @@ __webpack_require__.r(__webpack_exports__);
   title: 'ID',
   sortField: 'id'
 }, {
-  name: '__component:Applicants/Datatables/CustomName',
-  title: 'Name',
-  sortField: 'name'
+  name: '__component:Applicants/Datatables/CustomJob',
+  title: 'Job'
 }, {
-  name: '__component:Applicants/Datatables/CustomEmail',
-  title: 'Email',
-  sortField: 'email'
+  name: '__component:Applicants/Datatables/CustomCandidate',
+  title: 'Candidate'
 }, {
-  name: '__component:Applicants/Datatables/CustomRole',
-  title: 'Role'
+  name: '__component:Applicants/Datatables/CustomCreatedAt',
+  title: 'Date Applied',
+  sortField: 'created_at'
 }, {
-  name: '__component:Applicants/Datatables/CustomLastLogin',
-  title: 'Last Login'
-}, {
-  name: '__component:Applicants/Datatables/CustomAccess',
-  title: 'Access'
+  name: '__component:Applicants/Datatables/CustomStatus',
+  title: 'Status',
+  sortField: 'status'
 }, {
   name: '__component:Applicants/Datatables/CustomActions',
   title: '__actions'
@@ -54,7 +51,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _columns__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./columns */ "./resources/js/Pages/Modules/Applicants/Datatables/columns.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  title: 'Users',
+  title: 'Applied Jobs',
   apiUrl: route('admin.applicants.index'),
   createUrl: route('admin.applicants.create'),
   deleteUri: 'admin.applicants.destroy',
@@ -113,7 +110,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_AppLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AppLayout");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AppLayout, {
-    title: "Applicants"
+    title: "Applied Jobs"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["VueDatatable"], (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
