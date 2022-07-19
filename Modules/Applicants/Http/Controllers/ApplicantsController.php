@@ -3,29 +3,28 @@ namespace Modules\Applicants\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Criteria\EagerLoad;
-use App\Repositories\Criteria\Has;
 use App\Repositories\Criteria\OrderBy;
-use App\Repositories\Criteria\Published;
-use App\Repositories\Criteria\Select;
+use App\Repositories\Criteria\WhereHas;
 use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WherePublished;
 use App\Repositories\Criteria\WhereUser;
-use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Applicants\Entities\Applicant;
+use Modules\Applicants\Enums\Status;
 use Modules\Applicants\Http\Requests\UpdateApplicantRequest;
 use Modules\Applicants\Http\Requests\UpdateApplicantStatusRequest;
 use Modules\Applicants\Repositories\Contracts\ApplicantsRepository;
 use Modules\Applicants\Transformers\ApplicantsResource;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Jobs\Entities\Job;
-use Modules\Jobs\Http\Requests\UpdateJobRequest;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 use Modules\Jobs\Transformers\JobResource;
 use Modules\Users\Repositories\Contracts\UsersRepository;
@@ -65,8 +64,13 @@ class ApplicantsController extends Controller
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
                 new EagerLoad([
                     'candidate:id,name,email',
-                    'job' => fn($query) => $query->with('city'),
+                    'job' => function (BelongsTo $query) {
+                        $query->with(['city']);
+                    },
                 ]),
+                new WhereHas('job', function (Builder $query) {
+                    $query->where('jobs.team_id', auth()->user()->currentTeam->id);
+                })
             ])->paginate()->withQueryString()
                 ->through(fn ($applicant) => [
                     'id' => $applicant->id,
@@ -84,18 +88,34 @@ class ApplicantsController extends Controller
         ], $modalProps));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
+    public function create(Request $request)
     {
-        return view('applicants::create');
+        $this->authorize('create', Applicant::class);
+
+        Inertia::modal('Modules/Applicants/CreateModal');
+
+        Inertia::basePageRoute(
+            route(
+                'admin.applicants.index',
+                $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])
+            )
+        );
+
+        return $this->index([
+            'states' => $this->applicantsRepository->getStates(),
+            'editing' => new ApplicantsResource($this->applicantsRepository->make([
+                'id' => null,
+                'job_id' => null,
+                'user_id' => null,
+                'phone' => '+4915736795436',
+                'message' => null,
+                'status' => Status::Pending
+            ]))
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      * @return Renderable
      */
     public function store(Request $request)
@@ -103,9 +123,9 @@ class ApplicantsController extends Controller
         //
     }
 
-
-    public function show($id)
+    public function show($applicant = null)
     {
+        $result = [];
         $result['jobs'] = $this->jobsRepository
             ->withCriteria([new WherePublished()])->get(['jobs.id', 'jobs.name', 'jobs.team_id']);
 
@@ -117,8 +137,6 @@ class ApplicantsController extends Controller
             $result['candidates'] = auth()->user()->currentTeam()->first()
                 ->users()->role(config('app.system.users.roles.default'))->get(['users.id', 'users.name']);
         }
-
-
 
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
@@ -141,15 +159,17 @@ class ApplicantsController extends Controller
             'editing' => new ApplicantsResource($this->applicantsRepository->withCriteria([
                 new EagerLoad([
                     'candidate:id,name,email',
-                    'job' => fn($query) => $query->with('city'),
+                    'job' => fn ($query) => $query->with('city'),
                 ]),
+                new WhereHas('job', function (Builder $query) {
+                    $query->where('jobs.team_id', auth()->user()->currentTeam->id);
+                }),
             ])->find($applicant->id)),
         ]);
     }
 
     public function update(UpdateApplicantRequest $request, Applicant $applicant)
     {
-
         $applicant = $this->applicantsRepository->update(
             $applicant->id,
             $request->only(
@@ -160,12 +180,11 @@ class ApplicantsController extends Controller
             )
         );
 
-
         return $this->response->json(
             [
                 'model' => new ApplicantsResource($applicant->load([
                     'candidate',
-                    'job' => fn($query) => $query->with('city')
+                    'job' => fn ($query) => $query->with('city')
                 ])),
                 'message' => __('The Company (:item) has been successfully updated', ['item' => 'applicant'])
             ],
@@ -182,12 +201,11 @@ class ApplicantsController extends Controller
             $request->only('status')
         );
 
-
         return $this->response->json(
             [
                 'model' => new ApplicantsResource($applicant->load([
                     'candidate',
-                    'job' => fn($query) => $query->with('city')
+                    'job' => fn ($query) => $query->with('city')
                 ])),
                 'message' => __('The Status has been successfully updated')
             ],
@@ -196,7 +214,6 @@ class ApplicantsController extends Controller
             JSON_NUMERIC_CHECK
         );
     }
-
 
     /**
      * Remove the specified resource from storage.

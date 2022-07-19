@@ -35,6 +35,10 @@ class SeedFakeUsersTableSeeder extends Seeder
                 'email' => 'fotsa.goldoni@yahoo.fr'
             ]);
 
+        Team::where('id', 2)
+            ->first()
+            ->update(['subdomain' => 'sam-festival', 'display_name' => 'Sam Festival']);
+
         $user->assignRole(config('app.system.users.roles.manager'));
 
         $users = User::factory(10)->withPersonalTeam()->create(['trial_ends_at' => now()->addDays(14)]);

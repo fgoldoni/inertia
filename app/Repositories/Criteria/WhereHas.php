@@ -8,20 +8,16 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class WhereHas
 {
-    /**
-     * WhereHas constructor.
-     *
-     * @param $closure
-     */
     public function __construct(private readonly string $relation, private $closure)
     {
     }
 
-    /**
-     * @param $model
-     */
     public function apply($model): Builder
     {
+        if (auth()->user()->hasRole(config('app.system.users.roles.administrator'))) {
+            return $model->newQuery();
+        }
+
         return $model->whereHas($this->relation, $this->closure);
     }
 }
