@@ -27,7 +27,7 @@ class ApplicantCreatedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**

@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('type')->nullable();
             $table->string('filename')->nullable();
             $table->string('disk')->default(config('app.system.disks.uploads'));
             $table->string('mime_type')->nullable();
