@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Resumes\Http\Controllers\Api\ResumesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/resumes', function (Request $request) {
-    return $request->user();
+Route::as('api.')->group(function () {
+    Route::resource('resumes', ResumesController::class);
 });

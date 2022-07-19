@@ -51,6 +51,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'resumes' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/resumes'),
+            'url' => env('APP_URL').'/resumes',
+            'visibility' => 'public',
+        ],
+
         'avatars' => [
             'driver' => 'local',
             'root' => storage_path('app/public/avatars'),
@@ -86,6 +93,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('uploads') => storage_path('app/public/uploads'),
+        public_path('resumes') => storage_path('app/public/resumes'),
         public_path('avatars') => storage_path('app/public/avatars'),
     ],
 

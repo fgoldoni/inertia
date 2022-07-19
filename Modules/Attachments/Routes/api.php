@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
 use Modules\Attachments\Http\Controllers\Api\AttachmentsController;
-use Modules\Attachments\Http\Controllers\Api\AvatarsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,3 +12,6 @@ use Modules\Attachments\Http\Controllers\Api\AvatarsController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::as('api.')->group(function () {
+    Route::resource('attachments', AttachmentsController::class);
+});
