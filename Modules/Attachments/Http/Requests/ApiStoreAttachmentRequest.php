@@ -16,10 +16,7 @@ class ApiStoreAttachmentRequest extends FormRequest
         return [
             'disk' => ['nullable', 'string', 'in:uploads,avatars'],
             'type' => ['nullable', 'string', 'in:resumes,avatars'],
-            'attachment' => [
-                'required',
-                'max:10000'
-            ]
+            'attachment' => 'required|file|mimes:doc,docx,pdf|max:10000'
         ];
     }
 
