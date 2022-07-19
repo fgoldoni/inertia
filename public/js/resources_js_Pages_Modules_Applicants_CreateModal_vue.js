@@ -68,14 +68,20 @@ var _hoisted_11 = {
 var _hoisted_12 = {
   "class": "grid grid-cols-1 gap-4 sm:grid-cols-2"
 };
-var _hoisted_13 = {
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "col-span-1"
-};
-var _hoisted_14 = {
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "grid grid-cols-1 gap-4 sm:grid-cols-1"
-};
-var _hoisted_15 = {
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "col-span-1"
+})])], -1
+/* HOISTED */
+);
+
+var _hoisted_14 = {
+  key: 1,
+  "class": "grid grid-cols-1"
 };
 function render(_ctx, _cache) {
   var _component_TransitionChild = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TransitionChild");
@@ -88,7 +94,7 @@ function render(_ctx, _cache) {
 
   var _component_StoreApplicantComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("StoreApplicantComponent");
 
-  var _component_ApplicantStatusComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ApplicantStatusComponent");
+  var _component_Logs = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Logs");
 
   var _component_DialogPanel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DialogPanel");
 
@@ -98,7 +104,7 @@ function render(_ctx, _cache) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_TransitionRoot, {
     as: "template",
-    show: _ctx.isOpen
+    show: _ctx.isOpen && _ctx.data.data
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dialog, {
@@ -165,18 +171,16 @@ function render(_ctx, _cache) {
                     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
                       return _ctx.applicant = $event;
                     }),
+                    states: _ctx.states,
+                    data: _ctx.data.data,
                     "default-open": ""
                   }, null, 8
                   /* PROPS */
-                  , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ApplicantStatusComponent, {
-                    modelValue: _ctx.applicant,
-                    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-                      return _ctx.applicant = $event;
-                    }),
-                    states: _ctx.props.states
+                  , ["modelValue", "states", "data"])])]), _hoisted_13])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.currentTab === 'logs' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Logs, {
+                    options: _ctx.applicant.logs
                   }, null, 8
                   /* PROPS */
-                  , ["modelValue", "states"])])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
+                  , ["options"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
                 }),
                 _: 1
                 /* STABLE */

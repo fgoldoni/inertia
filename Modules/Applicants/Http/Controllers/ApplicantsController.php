@@ -5,9 +5,11 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\WhereHas;
+use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WherePublished;
 use App\Repositories\Criteria\WhereUser;
+use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,6 +21,7 @@ use Inertia\Inertia;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Applicants\Entities\Applicant;
 use Modules\Applicants\Enums\Status;
+use Modules\Applicants\Http\Requests\StoreApplicantRequest;
 use Modules\Applicants\Http\Requests\UpdateApplicantRequest;
 use Modules\Applicants\Http\Requests\UpdateApplicantStatusRequest;
 use Modules\Applicants\Repositories\Contracts\ApplicantsRepository;
@@ -114,13 +117,27 @@ class ApplicantsController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @return Renderable
-     */
-    public function store(Request $request)
+
+    public function store(StoreApplicantRequest $request)
     {
-        //
+        $this->applicantsRepository->create(
+            $request->only(
+                'user_id',
+                'job_id',
+                'phone',
+                'status',
+                'message',
+            )
+        );
+
+        return $this->response->json(
+            [
+                'message' => __('The (:item) has been successfully created', ['item' => 'applicant'])
+            ],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 
     public function show($applicant = null)
@@ -215,13 +232,21 @@ class ApplicantsController extends Controller
         );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+    public function destroy($selected)
     {
-        //
+        $items = $this->applicantsRepository->withCriteria([
+            new WhereKey(explode(',', (string) $selected))
+        ])->get();
+
+        foreach ($items as $item) {
+            $item->delete();
+        }
+
+        return $this->response->json(
+            ['message' => __('The Applicant(s) has been successfully deleted')],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 }

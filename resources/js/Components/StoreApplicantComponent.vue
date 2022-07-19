@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, reactive} from 'vue'
+import {reactive} from 'vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue';
 import FormSection from '@/Shared/FormSection.vue';
@@ -8,25 +8,20 @@ import {Errors} from "@/Plugins/errors.js";
 import JetButton from '@/Jetstream/Button.vue';
 import pickBy from "lodash/pickBy";
 import {ElNotification} from "element-plus";
-import { useFetch } from '@/Composables/UseFetch.js'
 import JetInputPhone from '@/Jetstream/InputPhone.vue';
 import JetTextarea from '@/Jetstream/Textarea.vue'
 
 const props = defineProps({
-    modelValue: [Object, Array]
+    modelValue: [Object, Array],
+    states: [Object, Array],
+    data: [Object, Array],
+    enabled: [Boolean]
 });
 
-
-const { data: items, doFetchData } = useFetch()
-
-onMounted(() => {
-    doFetchData(route('admin.applicants.show', 0))
-})
-
-const emit = defineEmits(["update:modelValue"]);
-
+const emit = defineEmits(["close"]);
 
 const form = reactive({
+    status: props.modelValue.status,
     message: props.modelValue.message,
     phone: props.modelValue.phone,
     job_id: props.modelValue.job_id,
@@ -47,6 +42,7 @@ const storeApplicant = () => {
         phone: form.phone,
         job_id: form.job_id,
         user_id: form.user_id,
+        enabled: props.enabled,
     })).then((response) => {
 
         form.processing = false;
@@ -57,7 +53,7 @@ const storeApplicant = () => {
             type: 'success',
         })
 
-        emit('update:modelValue', response.data.model)
+        emit('close')
 
     }).catch(error => {
         form.processing = false;
@@ -67,13 +63,13 @@ const storeApplicant = () => {
 </script>
 
 <template>
-    <FormSection :title="__('Store Applicant')" :errors="form.errors" @submitted="storeApplicant" default-open v-if="items.data">
+    <FormSection :title="__('Store Applicant')" :errors="form.errors" @submitted="storeApplicant" default-open>
 
         <template #form>
 
             <div class="col-span-1 sm:col-span-2">
 
-                <BaseListbox :options="items.data.candidates" v-if="items.data.candidates" v-model="form.user_id"  :placeholder="__('Select candidate')" :label="__('Select candidate')"/>
+                <BaseListbox :options="data.candidates" v-if="data.candidates" v-model="form.user_id"  :placeholder="__('Select candidate')" :label="__('Select candidate')"/>
 
                 <JetInputError :message="form.errors.get('user_id')" class="mt-2"/>
 
@@ -81,7 +77,7 @@ const storeApplicant = () => {
 
             <div class="col-span-1 sm:col-span-2">
 
-                <BaseListbox :options="items.data.jobs" v-if="items.data.jobs" v-model="form.job_id"  :placeholder="__('Select job')" :label="__('Select job')"/>
+                <BaseListbox :options="data.jobs" v-if="data.jobs" v-model="form.job_id"  :placeholder="__('Select job')" :label="__('Select job')"/>
 
                 <JetInputError :message="form.errors.get('job_id')" class="mt-2"/>
 
@@ -100,6 +96,14 @@ const storeApplicant = () => {
 
 
                 <JetInputError :message="form.errors.get('message')" class="mt-2"/>
+            </div>
+
+            <div class="col-span-1 sm:col-span-2">
+
+                <BaseListbox :options="props.states" v-model="form.status"  :placeholder="__('Select status')" :label="__('Select status')"/>
+
+                <JetInputError :message="form.errors.get('status')" class="mt-2"/>
+
             </div>
 
             <JetInputPhone :error="form.errors.get('phone')" v-model="form.phone"></JetInputPhone>
