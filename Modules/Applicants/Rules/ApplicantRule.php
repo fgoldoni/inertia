@@ -2,36 +2,31 @@
 
 namespace Modules\Applicants\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Contracts\Validation\InvokableRule;
 use Illuminate\Support\Facades\DB;
 
-class ApplicantRule implements Rule
+class ApplicantRule implements InvokableRule
 {
-    private int $user_id;
-    private int $job_id;
 
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct(int $user_id, int $job_id)
+    private ?int $jobId;
+
+    public function __construct(?int $jobId = null)
     {
-        $this->user_id = $user_id;
-        $this->job_id = $job_id;
+        $this->jobId = $jobId;
+    }
+
+    public function __invoke($attribute, $value, $fail)
+    {
+        if ($this->isExist($value)) {
+            $fail('The applicant has already existed.');
+        }
     }
 
 
-    public function passes($attribute, $value)
+    private function isExist($value): bool
     {
-        return !DB::table('applicants')->where('user_id', $this->user_id)
-            ->where('job_id', $this->job_id)
+        return DB::table('applicants')->where('user_id', $value)
+            ->where('job_id', $this->jobId)
             ->exists();
-    }
-
-
-    public function message()
-    {
-        return __('The applicant has already existed.');
     }
 }
