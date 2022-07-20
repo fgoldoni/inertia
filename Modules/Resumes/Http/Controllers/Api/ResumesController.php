@@ -4,12 +4,15 @@ namespace Modules\Resumes\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Repositories\Criteria\Where;
+use App\Repositories\Criteria\WhereKey;
+use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
+use Modules\Attachments\Transformers\ApiAttachmentsResource;
 use Modules\Jobs\Services\Contracts\JobsServiceInterface;
 
 class ResumesController extends Controller
@@ -22,11 +25,11 @@ class ResumesController extends Controller
 
     public function index()
     {
-        $result = $this->attachmentsRepository->withCriteria([
+        $result = ApiAttachmentsResource::collection($this->attachmentsRepository->withCriteria([
             new Where('attachable_type', User::class),
             new Where('attachable_id', auth()->user()->id),
             new Where('type', 'resumes'),
-        ])->all();
+        ])->all());
 
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
@@ -81,13 +84,21 @@ class ResumesController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $items = $this->attachmentsRepository->withCriteria([
+            new WhereKey($request->selected)
+        ])->get();
+
+        foreach ($items as $item) {
+            $item->delete();
+        }
+
+        return $this->response->json(
+            ['message' => __('The Resume(s) has been successfully deleted')],
+            Response::HTTP_NO_CONTENT,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 }
