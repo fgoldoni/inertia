@@ -20,7 +20,7 @@ trait UsedByTeams
             if (!auth()->user()?->hasRole(config('app.system.users.roles.administrator'))) {
                 $builder->where(
                     $builder->getQuery()->from . '.team_id',
-                    session()->get('team-id', auth()->user()?->currentTeam->getKey())
+                    session()->get(config('app.system.sessions.keys.team'), auth()->user()?->currentTeam?->getKey())
                 );
             }
         });

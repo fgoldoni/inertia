@@ -4,7 +4,9 @@ namespace Modules\Applicants\Entities;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Applicants\Enums\Status;
+use Modules\Attachments\Traits\AttachableTrait;
 use Modules\Jobs\Entities\Job;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -12,6 +14,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Applicant extends Pivot
 {
     use LogsActivity;
+    use AttachableTrait;
+    use SoftDeletes;
 
     protected $table = 'applicants';
 

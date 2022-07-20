@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Applicants\Http\Controllers\Api\ApplicantsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/applicants', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->as('api.')->group(function () {
+    Route::resource('applicants', ApplicantsController::class)->except(['destroy']);
+    Route::delete('applicants/destroy', [ApplicantsController::class, 'destroy'])->name('applicants.destroy');
 });

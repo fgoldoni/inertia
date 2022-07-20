@@ -9,9 +9,7 @@ use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WherePublished;
 use App\Repositories\Criteria\WhereUser;
-use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
@@ -26,10 +24,9 @@ use Modules\Applicants\Http\Requests\UpdateApplicantRequest;
 use Modules\Applicants\Http\Requests\UpdateApplicantStatusRequest;
 use Modules\Applicants\Repositories\Contracts\ApplicantsRepository;
 use Modules\Applicants\Transformers\ApplicantsResource;
+use Modules\Applicants\Transformers\CandidateResource;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
-use Modules\Jobs\Entities\Job;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
-use Modules\Jobs\Transformers\JobResource;
 use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class ApplicantsController extends Controller
@@ -85,7 +82,10 @@ class ApplicantsController extends Controller
                     'status' => $applicant->status,
                     'phone' => $applicant->phone,
                     'created_at' => $applicant->created_at->format('d, M Y'),
-                    'candidate' => $applicant->candidate,
+                    'candidate' =>  [
+                        'id' => $applicant->candidate->id,
+                        'name' => $applicant->candidate->name . ' ( ' . $applicant->candidate->email . ' ) ',
+                    ],
                 ]),
 
         ], $modalProps));
@@ -117,7 +117,6 @@ class ApplicantsController extends Controller
         ]);
     }
 
-
     public function store(StoreApplicantRequest $request)
     {
         $this->applicantsRepository->create(
@@ -147,12 +146,13 @@ class ApplicantsController extends Controller
             ->withCriteria([new WherePublished()])->get(['jobs.id', 'jobs.name', 'jobs.team_id']);
 
         if (auth()->user()->isAdministrator()) {
-            $result['candidates'] = $this->usersRepository
+            $result['candidates'] = CandidateResource::collection($this->usersRepository
                 ->withCriteria([new WhereUser()])
-                ->get(['users.id', 'users.name']);
+                ->get(['users.id', 'users.name', 'users.email']));
         } else {
-            $result['candidates'] = auth()->user()->currentTeam()->first()
-                ->users()->role(config('app.system.users.roles.default'))->get(['users.id', 'users.name']);
+            $result['candidates'] = CandidateResource::collection(auth()->user()->currentTeam()->first()
+                ->users()->role(config('app.system.users.roles.default'))
+                ->get(['users.id', 'users.name', 'users.email']));
         }
 
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);

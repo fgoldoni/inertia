@@ -28,7 +28,10 @@ class ApplicantsResource extends JsonResource
             'job_id' => $this->job_id,
             'user_id' => $this->user_id,
             'created_at' => $this->created_at?->format('d, M Y'),
-            'candidate' => $this->candidate,
+            'candidate' => [
+                'id' => $this->candidate->id,
+                'name' => $this->candidate->name . ' ( ' . $this->candidate->email . ' ) ',
+            ],
 
             'logs' => app(ActivitiesRepository::class)->byModel($this),
         ];

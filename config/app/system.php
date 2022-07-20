@@ -27,6 +27,11 @@ return [
             'permissions' => 'permissions',
         ],
     ],
+    'sessions' => [
+        'keys' => [
+            'team' => 'team-id',
+        ],
+    ],
     'disks' => [
         'uploads' => 'uploads',
         'avatars' => 'avatars',

@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->string('status')->default('pending');
             $table->text('message')->nullable();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }
