@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Storage;
 use Modules\Attachments\Http\Requests\ApiStoreAttachmentRequest;
 use Modules\Attachments\Http\Requests\StoreAttachmentRequest;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
+use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class AttachmentsController extends Controller
 {
     public function __construct(
         private readonly ResponseFactory $response,
         private readonly AttachmentsRepository $attachmentsRepository,
+        private readonly UsersRepository $usersRepository,
     ) {
     }
     public function index()
@@ -51,6 +53,8 @@ class AttachmentsController extends Controller
             'user_id' => $request->get('user_id'),
             'size' => $request->get('user_id'),
         ]);
+
+        $this->usersRepository->find($request->user()->id)->attachments()->save($attachment);
 
         return $this->response->json(['data' => $attachment], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }

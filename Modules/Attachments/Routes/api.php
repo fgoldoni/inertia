@@ -12,6 +12,6 @@ use Modules\Attachments\Http\Controllers\Api\AttachmentsController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::as('api.')->group(function () {
+Route::middleware('auth:sanctum')->as('api.')->group(function () {
     Route::resource('attachments', AttachmentsController::class);
 });

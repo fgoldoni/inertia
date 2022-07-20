@@ -2,6 +2,8 @@
 
 namespace Modules\Resumes\Http\Controllers\Api;
 
+use App\Models\User;
+use App\Repositories\Criteria\Where;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -20,7 +22,11 @@ class ResumesController extends Controller
 
     public function index()
     {
-        $result = $this->attachmentsRepository->all();
+        $result = $this->attachmentsRepository->withCriteria([
+            new Where('attachable_type', User::class),
+            new Where('attachable_id', auth()->user()->id),
+            new Where('type', 'resumes'),
+        ])->all();
 
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }

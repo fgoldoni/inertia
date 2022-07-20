@@ -18,6 +18,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Applicants\Entities\Applicant;
+use Modules\Attachments\Traits\AttachableTrait;
 use Modules\Dashboard\Entities\Dashboard;
 use Modules\Dashboard\Entities\DashboardUser;
 use Modules\Jobs\Entities\Job;
@@ -43,6 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use CausesActivity;
     use LogsActivity;
     use SoftDeletes;
+    use AttachableTrait;
 
     /**
      * The attributes that are mass assignable.

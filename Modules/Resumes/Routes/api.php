@@ -14,6 +14,6 @@ use Modules\Resumes\Http\Controllers\Api\ResumesController;
 |
 */
 
-Route::as('api.')->group(function () {
+Route::middleware('auth:sanctum')->as('api.')->group(function () {
     Route::resource('resumes', ResumesController::class);
 });
