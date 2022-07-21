@@ -10,7 +10,8 @@ use Rector\Set\ValueObject\LevelSetList;
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
 
-        __DIR__ . '/Modules/Countries'
+        __DIR__ . '/Modules/Teams',
+        __DIR__ . '/Modules/Users',
     ]);
 
     // register a single rule

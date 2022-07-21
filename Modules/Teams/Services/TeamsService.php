@@ -52,13 +52,11 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
                 new WithTrashed(),
             ])->get(['id', 'name', 'display_name']);
         } else {
-            return auth()->user()->allTeams()->map(function ($item) {
-                return [
-                    'id' => $item->id,
-                    'name' => $item->name,
-                    'display_name' => $item->display_name,
-                ];
-            });
+            return auth()->user()->allTeams()->map(fn($item) => [
+                'id' => $item->id,
+                'name' => $item->name,
+                'display_name' => $item->display_name,
+            ]);
         }
     }
 

@@ -14,9 +14,7 @@ use Modules\Teams\Http\Controllers\Api\TeamsController;
 |
 */
 
-Route::middleware('auth:api')->get('/teams', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')->get('/teams', fn(Request $request) => $request->user());
 
 Route::controller(TeamsController::class)->prefix('teams')->name('api.teams.')->group(function () {
     Route::get('{subdomain}', 'show')

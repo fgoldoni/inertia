@@ -38,15 +38,11 @@ class ApiTeamResource extends JsonResource
                 ->withCount(['jobs' => fn ($query) => $query->published()])
                 ->area()
                 ->positionAsc()
-                ->get()->map(function ($item) {
-                    return [
-                        'id' => $item->id,
-                        'name' => $item->name,
-                        'jobs_count' => $item->jobs_count,
-                    ];
-                })->filter(function ($item) {
-                    return $item['jobs_count'] > 0;
-                })
+                ->get()->map(fn($item) => [
+                    'id' => $item->id,
+                    'name' => $item->name,
+                    'jobs_count' => $item->jobs_count,
+                ])->filter(fn($item) => $item['jobs_count'] > 0)
         ];
     }
 }

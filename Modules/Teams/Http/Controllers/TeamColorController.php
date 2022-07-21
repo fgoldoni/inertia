@@ -35,7 +35,6 @@ class TeamColorController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      * @return Renderable
      */
     public function store(Request $request)

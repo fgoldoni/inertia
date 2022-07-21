@@ -11,10 +11,7 @@ class JobViewCountEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public Job $job;
-
-    public function __construct(Job $job)
+    public function __construct(public Job $job)
     {
-        $this->job = $job;
     }
 }

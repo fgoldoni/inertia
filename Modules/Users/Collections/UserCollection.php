@@ -14,8 +14,6 @@ class UserCollection extends Collection
 {
     public function groupByLetter(): UserCollection|\Illuminate\Support\Collection
     {
-        return $this->sortBy('name')->groupBy(function($item) {
-            return $item['name'][0];
-        });
+        return $this->sortBy('name')->groupBy(fn($item) => $item['name'][0]);
     }
 }

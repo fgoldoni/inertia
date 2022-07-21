@@ -22,6 +22,7 @@ class TeamsController extends Controller
 
     public function index()
     {
+        $data = [];
         $data['team'] = ApiTeamResource::collection($this->teamsRepository->withCriteria([
             new EagerLoad([
                 'attachments' => function ($query) {
