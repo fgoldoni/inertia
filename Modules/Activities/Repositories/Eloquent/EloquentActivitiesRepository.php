@@ -55,7 +55,7 @@ class EloquentActivitiesRepository extends RepositoryAbstract implements Activit
         if (isset($attributes)) {
             if (isset($old)) {
                 foreach ($attributes as $key => $property) {
-                    if (0 !== mb_strlen($property) || 0 !== mb_strlen($old[$key])) {
+                    if (0 !== mb_strlen((string) $property) || 0 !== mb_strlen((string) $old[$key])) {
                         $items[$key] = "<s>{$old[$key]}</s>  {$property}";
                     }
                 }

@@ -21,19 +21,12 @@ class AttachmentsController extends Controller
         private readonly UsersRepository $usersRepository,
     ) {
     }
+
     public function index()
     {
         return view('attachments::index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('attachments::create');
-    }
 
     public function store(ApiStoreAttachmentRequest $request)
     {
@@ -83,7 +76,6 @@ class AttachmentsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Renderable
      */

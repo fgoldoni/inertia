@@ -1,7 +1,6 @@
 <?php
 namespace Modules\Applicants\Http\Controllers\Api;
 
-use App\Models\User;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereHas;
@@ -69,7 +68,6 @@ class ApplicantsController extends Controller
     {
         return view('applicants::create');
     }
-
 
     public function store(ApiStoreApplicantStatusRequest $request)
     {
@@ -142,7 +140,6 @@ class ApplicantsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
      * @param int $id
      * @return Renderable
      */
@@ -156,7 +153,6 @@ class ApplicantsController extends Controller
         $items = $this->applicantsRepository->withCriteria([
             new WhereKey($request->selected)
         ])->get();
-
 
         foreach ($items as $item) {
             $item->delete();

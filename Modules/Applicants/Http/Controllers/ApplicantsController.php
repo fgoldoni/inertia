@@ -82,7 +82,7 @@ class ApplicantsController extends Controller
                     'status' => $applicant->status,
                     'phone' => $applicant->phone,
                     'created_at' => $applicant->created_at->format('d, M Y'),
-                    'candidate' =>  [
+                    'candidate' => [
                         'id' => $applicant->candidate->id,
                         'name' => $applicant->candidate->name . ' ( ' . $applicant->candidate->email . ' ) ',
                     ],

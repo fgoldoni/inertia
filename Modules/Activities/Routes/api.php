@@ -13,6 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/activities', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')->get('/activities', fn(Request $request) => $request->user());

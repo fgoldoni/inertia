@@ -39,7 +39,7 @@ class Attachment extends Model
      */
     protected function defaultAvatarUrl(): string
     {
-        return 'https://ui-uploads.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
+        return 'https://ui-uploads.com/api/?name=' . urlencode((string) $this->name) . '&color=7F9CF5&background=EBF4FF';
     }
 
     /**

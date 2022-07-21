@@ -8,11 +8,8 @@ use Illuminate\Support\Facades\DB;
 class ApplicantRule implements InvokableRule
 {
 
-    private ?int $jobId;
-
-    public function __construct(?int $jobId = null)
+    public function __construct(private readonly ?int $jobId = null)
     {
-        $this->jobId = $jobId;
     }
 
     public function __invoke($attribute, $value, $fail)
