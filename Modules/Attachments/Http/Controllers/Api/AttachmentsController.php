@@ -50,11 +50,13 @@ class AttachmentsController extends Controller
             'disk' => $request->get('disk', config('app.system.disks.uploads')),
             'filename' => $fileName,
             'mime_type' => $request->get('mime_type'),
-            'user_id' => $request->get('user_id'),
-            'size' => $request->get('user_id'),
+            'user_id' => $request->get('user_id', null),
+            'size' => $request->get('size'),
         ]);
 
-        $this->usersRepository->find($request->user()->id)->attachments()->save($attachment);
+        if ($request->user_id) {
+            $this->usersRepository->find($request->user_id)->attachments()->save($attachment);
+        }
 
         return $this->response->json(['data' => $attachment], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }

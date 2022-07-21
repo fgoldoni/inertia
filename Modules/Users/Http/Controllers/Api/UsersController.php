@@ -11,8 +11,11 @@ use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class UsersController extends Controller
 {
-    public function __construct(private readonly ResponseFactory $response, private readonly UsersRepository $usersRepository, private readonly Request $request)
-    {
+    public function __construct(
+        private readonly ResponseFactory $response,
+        private readonly UsersRepository $usersRepository,
+        private readonly Request $request
+    ) {
     }
 
     public function index()

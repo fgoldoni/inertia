@@ -15,6 +15,10 @@ use Modules\Applicants\Http\Controllers\Api\ApplicantsController;
 */
 
 Route::middleware('auth:sanctum')->as('api.')->group(function () {
-    Route::resource('applicants', ApplicantsController::class)->except(['destroy']);
+    Route::resource('applicants', ApplicantsController::class)->except(['destroy', 'store']);
     Route::delete('applicants/destroy', [ApplicantsController::class, 'destroy'])->name('applicants.destroy');
+});
+
+Route::as('api.')->group(function () {
+    Route::post('applicants', [ApplicantsController::class, 'store'])->name('applicants.store');
 });

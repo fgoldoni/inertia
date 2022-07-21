@@ -13,5 +13,9 @@ use Modules\Attachments\Http\Controllers\Api\AttachmentsController;
 |
 */
 Route::middleware('auth:sanctum')->as('api.')->group(function () {
-    Route::resource('attachments', AttachmentsController::class);
+    Route::resource('attachments', AttachmentsController::class)->except([ 'store' ]);
+});
+
+Route::as('api.')->group(function () {
+    Route::post('attachments', [AttachmentsController::class, 'store'])->name('attachments.store');
 });
