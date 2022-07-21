@@ -11,7 +11,6 @@
 |
 */
 
-
 use Modules\Applicants\Http\Controllers\ApplicantsController;
 
 Route::prefix('admin')
@@ -24,4 +23,3 @@ Route::prefix('admin')
         Route::put('applicants/status/{applicant}/update', [ApplicantsController::class, 'updateStatus'])
             ->name('applicants.status.update');
     });
-

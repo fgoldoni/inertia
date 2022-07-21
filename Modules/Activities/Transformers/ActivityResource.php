@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Activities\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -30,9 +29,15 @@ class ActivityResource extends JsonResource
 
     private function color(string $event)
     {
-        if ($event === 'updated') return 'bg-pink-500';
-        if ($event === 'created') return 'bg-blue-500';
-        if ($event === 'deleted') return 'bg-rose-500';
+        if ($event === 'updated') {
+            return 'bg-pink-500';
+        }
+        if ($event === 'created') {
+            return 'bg-blue-500';
+        }
+        if ($event === 'deleted') {
+            return 'bg-rose-500';
+        }
 
         return  'bg-blue-500';
     }

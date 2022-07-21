@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Resumes\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;

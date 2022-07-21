@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use Modules\Dashboard\Http\Controllers\ActivitiesDashboardController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,4 +10,3 @@ use Modules\Dashboard\Http\Controllers\ActivitiesDashboardController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-

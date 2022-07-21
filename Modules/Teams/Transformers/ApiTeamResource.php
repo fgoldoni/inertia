@@ -1,9 +1,7 @@
 <?php
-
 namespace Modules\Teams\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Categories\Entities\Category;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 
@@ -20,7 +18,7 @@ class ApiTeamResource extends JsonResource
         session()->put('team-id', $this->id);
 
         $image = $this->attachments->value('url')
-            ?? "https://images.unsplash.com/photo-1533693706533-57740e69765d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2700&amp;q=80";
+            ?? 'https://images.unsplash.com/photo-1533693706533-57740e69765d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2700&amp;q=80';
 
         $avatar = $this->avatar_path ? $this->avatar_url : asset('images/logo.png');
 
@@ -38,11 +36,11 @@ class ApiTeamResource extends JsonResource
                 ->withCount(['jobs' => fn ($query) => $query->published()])
                 ->area()
                 ->positionAsc()
-                ->get()->map(fn($item) => [
+                ->get()->map(fn ($item) => [
                     'id' => $item->id,
                     'name' => $item->name,
                     'jobs_count' => $item->jobs_count,
-                ])->filter(fn($item) => $item['jobs_count'] > 0)
+                ])->filter(fn ($item) => $item['jobs_count'] > 0)
         ];
     }
 }

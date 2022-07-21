@@ -16,7 +16,6 @@ use Modules\Companies\Entities\Company;
 use Modules\Companies\Http\Requests\UpdateCompanyRequest;
 use Modules\Companies\Http\Requests\StoreCompanyRequest;
 use Modules\Companies\Repositories\Contracts\CompaniesRepository;
-use Modules\Jobs\Entities\Job;
 
 class CompaniesController extends Controller
 {
@@ -118,7 +117,6 @@ class CompaniesController extends Controller
             new WhereKey(explode(',', (string) $selected)),
             new WithTrashed(),
         ])->get();
-
 
         foreach ($items as $item) {
             if ($item->trashed()) {

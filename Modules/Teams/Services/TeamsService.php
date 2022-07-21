@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Teams\Services;
 
 use App\Repositories\Criteria\EagerLoad;
@@ -52,7 +51,7 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
                 new WithTrashed(),
             ])->get(['id', 'name', 'display_name']);
         } else {
-            return auth()->user()->allTeams()->map(fn($item) => [
+            return auth()->user()->allTeams()->map(fn ($item) => [
                 'id' => $item->id,
                 'name' => $item->name,
                 'display_name' => $item->display_name,
@@ -93,8 +92,6 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
         $stone = (ColorType::Stone)->value;
 
         $violet = (ColorType::Violet)->value;
-
-
 
         return collect([
             [

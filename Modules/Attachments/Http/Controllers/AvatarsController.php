@@ -1,9 +1,6 @@
 <?php
-
 namespace Modules\Attachments\Http\Controllers;
 
-use App\Models\Team;
-use App\Repositories\Criteria\Where;
 use Exception;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
@@ -14,11 +11,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use Modules\Attachments\Http\Requests\StoreAvatarRequest;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
-use Modules\Categories\Repositories\Contracts\CategoriesRepository;
-use Modules\Companies\Repositories\Contracts\CompaniesRepository;
-use Modules\Jobs\Entities\Job;
-use Modules\Jobs\Repositories\Contracts\JobsRepository;
-use Modules\Teams\Repositories\Contracts\TeamsRepository;
 
 class AvatarsController extends Controller
 {
@@ -59,18 +51,15 @@ class AvatarsController extends Controller
         return $this->response->json(['data' => $attachment], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
-
     public function show($id)
     {
         return view('attachments::show');
     }
 
-
     public function edit($id)
     {
         return view('attachments::edit');
     }
-
 
     public function update(Request $request, $id)
     {

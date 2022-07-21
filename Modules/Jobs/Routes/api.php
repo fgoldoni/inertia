@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Modules\Jobs\Http\Controllers\Api\JobsController;
 
 /*
@@ -15,5 +14,5 @@ use Modules\Jobs\Http\Controllers\Api\JobsController;
 */
 
 Route::as('api.')->group(function () {
-       Route::resource('jobs', JobsController::class);
+    Route::resource('jobs', JobsController::class);
 });

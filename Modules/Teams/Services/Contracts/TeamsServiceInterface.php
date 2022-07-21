@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Teams\Services\Contracts;
 
 use Illuminate\Support\Collection;

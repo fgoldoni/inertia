@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Modules\Roles\Http\Controllers\Api\PermissionsController;
 use Modules\Roles\Http\Controllers\Api\RolesController;
 
@@ -14,7 +13,6 @@ use Modules\Roles\Http\Controllers\Api\RolesController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 
 Route::controller(PermissionsController::class)->prefix('permissions')->name('api.permissions.')->group(function () {
     Route::get('/', 'index')->name('index');

@@ -1,8 +1,6 @@
 <?php
-
 namespace Modules\Jobs\Repositories\Contracts;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 interface JobsRepository

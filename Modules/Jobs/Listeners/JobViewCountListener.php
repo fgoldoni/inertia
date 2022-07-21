@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Jobs\Listeners;
 
 use Modules\Jobs\Events\JobViewCountEvent;

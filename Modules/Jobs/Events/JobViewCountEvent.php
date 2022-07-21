@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Jobs\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;

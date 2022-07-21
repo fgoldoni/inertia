@@ -1,15 +1,12 @@
 <?php
-
 namespace Modules\Jobs\Services;
 
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Filters;
-use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WherePublished;
 use App\Services\ServiceAbstract;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Modules\Jobs\Enums\JobState;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 use Modules\Jobs\Services\Contracts\JobsServiceInterface;
 use Modules\Jobs\Transformers\ApiJobResource;

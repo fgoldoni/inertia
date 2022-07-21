@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Attachments\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -18,7 +17,6 @@ trait AttachableTrait
             }
         });
     }
-
 
     public function attachments(): MorphMany
     {

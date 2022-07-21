@@ -6,7 +6,6 @@
  * Date: 24.09.18
  * Time: 21:18.
  */
-
 namespace Modules\Users\Repositories\Eloquent;
 
 use App\Models\Team;
@@ -29,7 +28,6 @@ class EloquentUsersRepository extends RepositoryAbstract implements UsersReposit
     {
         return User::class;
     }
-
 
     public function createTeam(User $user)
     {

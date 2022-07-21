@@ -16,7 +16,7 @@ use Modules\Companies\Http\Controllers\CompaniesController;
 Route::prefix('admin')
     ->middleware(['auth', 'verified', 'permission:browse_companies'])
     ->as('admin.')->group(function () {
-        Route::resource('companies', CompaniesController::class)->except([ 'destroy' ]);
+        Route::resource('companies', CompaniesController::class)->except(['destroy']);
         Route::delete('companies/{selected}', [CompaniesController::class, 'destroy'])->name('companies.destroy');
         Route::put('companies/{id}/restore', [CompaniesController::class, 'restore'])->name('companies.restore');
     });

@@ -1,12 +1,9 @@
 <?php
-
 namespace Modules\Users\Transformers;
-
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
 use Modules\Roles\Entities\Role;
-use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class UserCollection extends JsonResource
 {

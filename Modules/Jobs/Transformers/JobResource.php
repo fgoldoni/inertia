@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Jobs\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -42,7 +41,6 @@ class JobResource extends JsonResource
             'attachments' => $this->attachments,
 
             'team_id' => $this->team_id,
-
 
             'logs' => app(ActivitiesRepository::class)->byModel($this),
         ];

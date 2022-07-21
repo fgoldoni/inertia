@@ -118,7 +118,6 @@ class Job extends Model
         return new JobBuilder($query);
     }
 
-
     public function candidates(): belongsToMany
     {
         return $this->belongsToMany(User::class, 'applicants', 'job_id', 'user_id')

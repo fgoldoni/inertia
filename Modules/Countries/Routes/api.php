@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Modules\Countries\Http\Controllers\Api\CitiesController;
 use Modules\Countries\Http\Controllers\Api\CountriesController;
 use Modules\Countries\Http\Controllers\Api\DivisionsController;

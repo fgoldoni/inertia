@@ -28,8 +28,8 @@ phpcs: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users/Providers --diff
 
 php-cs: ## PRS2 Validation
-	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app --diff
-	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Applicants --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Tags --diff
+	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Users --diff
 
 php-cs-2: ## PRS2 Validation
 	../tools/php-cs-fixer/vendor/bin/php-cs-fixer fix Modules/Countries/Database --diff

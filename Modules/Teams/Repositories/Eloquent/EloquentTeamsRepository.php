@@ -6,7 +6,6 @@
  * Date: 24.09.18
  * Time: 21:18.
  */
-
 namespace Modules\Teams\Repositories\Eloquent;
 
 use App\Models\Team;

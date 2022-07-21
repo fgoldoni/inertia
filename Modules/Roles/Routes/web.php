@@ -13,7 +13,6 @@
 
 use Modules\Roles\Http\Controllers\RolesController;
 
-
 Route::prefix('admin')->middleware(['auth', 'verified', 'permission:browse_roles'])->as('admin.')->group(function () {
     Route::resource('roles', RolesController::class);
 });

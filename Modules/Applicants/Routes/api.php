@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Modules\Applicants\Http\Controllers\Api\ApplicantsController;
 
 /*

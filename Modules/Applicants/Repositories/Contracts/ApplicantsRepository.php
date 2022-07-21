@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Applicants\Repositories\Contracts;
 
 use Illuminate\Support\Collection;

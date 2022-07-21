@@ -9,9 +9,6 @@ use Illuminate\Routing\Controller;
 use Modules\Attachments\Entities\Attachment;
 use Modules\Attachments\Http\Requests\StoreAttachmentRequest;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
-use Modules\Categories\Repositories\Contracts\CategoriesRepository;
-use Modules\Companies\Repositories\Contracts\CompaniesRepository;
-use Modules\Roles\Repositories\Contracts\RolesRepository;
 
 class AttachmentsController extends Controller
 {
@@ -20,6 +17,7 @@ class AttachmentsController extends Controller
         private readonly AttachmentsRepository $attachmentsRepository,
     ) {
     }
+
     public function index()
     {
         return view('attachments::index');

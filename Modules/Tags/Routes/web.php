@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('tags')->group(function() {
+Route::prefix('tags')->group(function () {
     Route::get('/', 'TagsController@index');
 });

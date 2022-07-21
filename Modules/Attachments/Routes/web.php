@@ -11,7 +11,6 @@
 |
 */
 
-
 use Modules\Attachments\Http\Controllers\AttachmentsController;
 use Modules\Attachments\Http\Controllers\AvatarsController;
 

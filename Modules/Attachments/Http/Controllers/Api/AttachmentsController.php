@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Attachments\Http\Controllers\Api;
 
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -9,7 +8,6 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use Modules\Attachments\Http\Requests\ApiStoreAttachmentRequest;
-use Modules\Attachments\Http\Requests\StoreAttachmentRequest;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Users\Repositories\Contracts\UsersRepository;
 
@@ -27,7 +25,6 @@ class AttachmentsController extends Controller
         return view('attachments::index');
     }
 
-
     public function store(ApiStoreAttachmentRequest $request)
     {
         $fileName = Storage::disk(config('app.system.disks.uploads'))
@@ -38,7 +35,7 @@ class AttachmentsController extends Controller
             );
 
         $attachment = $this->attachmentsRepository->create([
-            'name' =>$request->get('name'),
+            'name' => $request->get('name'),
             'type' => $request->get('type'),
             'disk' => $request->get('disk', config('app.system.disks.uploads')),
             'filename' => $fileName,

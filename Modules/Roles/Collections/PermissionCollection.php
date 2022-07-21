@@ -1,6 +1,4 @@
 <?php
-
-
 namespace Modules\Roles\Collections;
 
 use Illuminate\Database\Eloquent\Collection;

@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Modules\Resumes\Http\Controllers\Api\ResumesController;
 
 /*
@@ -15,6 +14,6 @@ use Modules\Resumes\Http\Controllers\Api\ResumesController;
 */
 
 Route::middleware('auth:sanctum')->as('api.')->group(function () {
-    Route::resource('resumes', ResumesController::class)->except([ 'destroy' ]);
+    Route::resource('resumes', ResumesController::class)->except(['destroy']);
     Route::delete('resumes/destroy', [ResumesController::class, 'destroy'])->name('resumes.destroy');
 });

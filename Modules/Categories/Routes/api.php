@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Modules\Categories\Http\Controllers\Api\CategoriesController;
 
 /*

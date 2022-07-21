@@ -1,11 +1,9 @@
 <?php
-
 namespace Modules\Resumes\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereKey;
-use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -13,7 +11,6 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Attachments\Transformers\ApiAttachmentsResource;
-use Modules\Jobs\Services\Contracts\JobsServiceInterface;
 
 class ResumesController extends Controller
 {

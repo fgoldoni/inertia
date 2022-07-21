@@ -6,13 +6,11 @@
  * Date: 24.09.18
  * Time: 21:18.
  */
-
 namespace Modules\Categories\Repositories\Eloquent;
 
 use App\Repositories\RepositoryAbstract;
 use Illuminate\Database\Eloquent\Collection;
 use Modules\Categories\Entities\Category;
-use Modules\Categories\Entities\Role;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 
 /**

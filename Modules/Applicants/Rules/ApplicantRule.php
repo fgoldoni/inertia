@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Applicants\Rules;
 
 use Illuminate\Contracts\Validation\InvokableRule;
@@ -7,7 +6,6 @@ use Illuminate\Support\Facades\DB;
 
 class ApplicantRule implements InvokableRule
 {
-
     public function __construct(private readonly ?int $jobId = null)
     {
     }
@@ -18,7 +16,6 @@ class ApplicantRule implements InvokableRule
             $fail('The applicant has already existed.');
         }
     }
-
 
     private function isExist($value): bool
     {

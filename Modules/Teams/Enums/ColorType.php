@@ -1,7 +1,6 @@
 <?php
 namespace Modules\Teams\Enums;
 
-
 enum ColorType: string
 {
     case Teal = 'teal';
