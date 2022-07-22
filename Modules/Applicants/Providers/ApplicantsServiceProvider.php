@@ -2,6 +2,8 @@
 namespace Modules\Applicants\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Applicants\Entities\Applicant;
+use Modules\Applicants\Observers\ApplicantObserver;
 
 class ApplicantsServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,8 @@ class ApplicantsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Applicant::observe(ApplicantObserver::class);
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();

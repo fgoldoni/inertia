@@ -1,47 +1,55 @@
 <?php
 namespace Modules\Applicants\Notifications;
 
+use App\Models\Team;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Modules\Applicants\Entities\Applicant;
+use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class ApplicantCreatedNotification extends Notification
 {
     use Queueable;
 
     /**
-     * Create a new notification instance.
-     *
-     * @return void
+     * @var \Modules\Applicants\Entities\Applicant
      */
-    public function __construct()
+    private Applicant $applicant;
+    /**
+     * @var \App\Models\Team
+     */
+    private Team $team;
+
+
+    public function __construct(Applicant $applicant, Team $team)
     {
-        //
+        $this->applicant = $applicant;
+        $this->team = $team;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param mixed $notifiable
-     * @return array
-     */
+
     public function via($notifiable)
     {
-        return ['database'];
+        return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
+
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', 'https://laravel.com')
-                    ->line('Thank you for using our application!');
+        $token = app()->make(UsersRepository::class)->createToken($notifiable)->plainTextToken;
+
+        $url = $this->url($token);
+
+        return (new MailMessage())
+            ->from($this->team->display_name)
+            ->subject(
+                __(
+                    'Welcome to the :team! Your application request was successfully created.',
+                    ['team' => $this->team->display_name]
+                )
+            )
+            ->view('emails.users.created', ['homeUrl' => $url, 'url' => $url]);
     }
 
     /**
@@ -55,5 +63,10 @@ class ApplicantCreatedNotification extends Notification
         return [
             //
         ];
+    }
+
+    private function url($token): string
+    {
+        return  env('FRONTEND_HTTP') . $this->team->subdomain . env('FRONTEND_DOMAIN') . '/token/' . $token;
     }
 }

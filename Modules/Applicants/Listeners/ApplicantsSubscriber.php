@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Notification;
 use Modules\Applicants\Notifications\ApplicantCreatedNotification;
 use Modules\Applicants\Notifications\ApplicantDeletedNotification;
 use Modules\Applicants\Notifications\ApplicantRestoredNotification;
+use Modules\Teams\Repositories\Contracts\TeamsRepository;
 
 class ApplicantsSubscriber
 {
@@ -25,7 +26,11 @@ class ApplicantsSubscriber
     {
         $admin = $this->fetchByRole(config('app.system.users.roles.administrator'));
 
-        Notification::send($admin, new ApplicantCreatedNotification($applicant));
+        $team = app()->make(TeamsRepository::class)->find(session(config('app.system.sessions.keys.team')));
+
+        $applicant->candidate()->first()->notify(new ApplicantCreatedNotification($applicant, $team));
+
+        Notification::send($admin, new ApplicantCreatedNotification($applicant, $team));
     }
 
     public function handleApplicantDeleted(Applicant $applicant)
