@@ -42,7 +42,7 @@ class ApplicantCreatedNotification extends Notification
         $url = $this->url($token);
 
         return (new MailMessage())
-            ->from($this->team->display_name)
+            ->from(env('MAIL_FROM_ADDRESS'), $this->team->display_name)
             ->subject(
                 __(
                     'Welcome to the :team! Your application request was successfully created.',
