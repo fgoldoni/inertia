@@ -34,6 +34,7 @@ class ApplicantsResource extends JsonResource
 
             'attachments' => $this->attachments->map(fn($attachment) => [
                 'id' => $attachment->id,
+                'name' => $attachment->name,
                 'mime_type' => $attachment->mime_type,
                 'url' => $attachment->url
             ]),

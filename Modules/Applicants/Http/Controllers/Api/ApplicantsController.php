@@ -113,6 +113,7 @@ class ApplicantsController extends Controller
     {
         $applicant = new ApplicantsResource($this->applicantsRepository->withCriteria([
             new EagerLoad([
+                'attachments',
                 'candidate:id,name,email',
                 'job' => fn ($query) => $query->with('city'),
             ]),
