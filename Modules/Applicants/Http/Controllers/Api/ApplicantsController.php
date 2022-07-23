@@ -5,6 +5,8 @@ use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereHas;
 use App\Repositories\Criteria\WhereKey;
+use App\Repositories\Criteria\WherePublished;
+use App\Repositories\Criteria\WhereUser;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
@@ -13,9 +15,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
+use Modules\Applicants\Entities\Applicant;
 use Modules\Applicants\Http\Requests\ApiStoreApplicantStatusRequest;
 use Modules\Applicants\Repositories\Contracts\ApplicantsRepository;
 use Modules\Applicants\Transformers\Api\ApplicantsResource;
+use Modules\Applicants\Transformers\CandidateResource;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
 use Modules\Users\Repositories\Contracts\UsersRepository;
@@ -43,13 +47,7 @@ class ApplicantsController extends Controller
                     },
                 ]),
                 new WhereHas('job', function (Builder $query) {
-                    $query->where(
-                        'jobs.team_id',
-                        session(
-                            config('app.system.sessions.keys.team'),
-                            auth()->user()->currentTeam?->id
-                        )
-                    );
+                    $query->with(['company', 'city']);
                 }),
                 new WhereHas('candidate', function (Builder $query) {
                     $query->where('users.id', auth()->user()->id);
@@ -58,15 +56,6 @@ class ApplicantsController extends Controller
         );
 
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('applicants::create');
     }
 
     public function store(ApiStoreApplicantStatusRequest $request)
@@ -110,7 +99,9 @@ class ApplicantsController extends Controller
         return $this->response->json(
             [
                 'message' => __('The (:item) has been successfully created', ['item' => 'applicant']),
-                'applicant' => new ApplicantsResource($applicant->fresh()->load(['job', 'candidate', 'attachments']))
+                'applicant' => new ApplicantsResource(
+                    $applicant->fresh()->load(['job.company', 'candidate', 'attachments'])
+                )
             ],
             Response::HTTP_OK,
             [],
@@ -118,31 +109,28 @@ class ApplicantsController extends Controller
         );
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+    public function show(Applicant $applicant)
     {
-        return view('applicants::show');
+        $applicant = new ApplicantsResource($this->applicantsRepository->withCriteria([
+            new EagerLoad([
+                'candidate:id,name,email',
+                'job' => fn ($query) => $query->with('city'),
+            ]),
+            new WhereHas('job', function (Builder $query) {
+                $query->where(
+                    'jobs.team_id',
+                    session(
+                        config('app.system.sessions.keys.team'),
+                        auth()->user()->currentTeam?->id
+                    )
+                )->with(['team', 'company', 'categories']);
+            }),
+        ])->find($applicant->id));
+
+
+        return $this->response->json(['data' => $applicant], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('applicants::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param int $id
-     * @return Renderable
-     */
     public function update(Request $request, $id)
     {
         //

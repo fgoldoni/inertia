@@ -2,6 +2,7 @@
 namespace Modules\Applicants\Transformers\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Jobs\Transformers\ApiJobResource;
 
 class ApplicantsResource extends JsonResource
 {
@@ -15,23 +16,27 @@ class ApplicantsResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'job_id' => $this->job->id,
-            'job_name' => $this->job->name,
-            'job_city' => $this->job->city?->name,
-            'job_country_emoji' => $this->job->country?->emoji,
-            'job_avatar_url' => $this->job->avatar_url,
+            'job' => new ApiJobResource($this->job),
             'status' => $this->status,
             'phone' => $this->phone,
             'message' => $this->message,
             'job_id' => $this->job_id,
             'user_id' => $this->user_id,
-            'created_at' => $this->created_at?->format('d, M Y h:m'),
-            'candidate_id' => $this->candidate->id,
-            'candidate_name' => $this->candidate->name,
-            'candidate_email' => $this->candidate->email,
-            'candidate_profile_photo_url' => $this->candidate->profile_photo_url,
-            'mime_type' => $this->attachments->value('mime_type'),
-            'url' => $this->attachments->value('url'),
+            'created_at' => $this->created_at?->format('d, M Y'),
+            'company' => [
+                'id' => $this->job->company->id,
+                'name' => $this->job->company->name,
+            ],
+            'candidate' => [
+                'id' => $this->candidate->id,
+                'name' => $this->candidate->name . ' ( ' . $this->candidate->email . ' ) ',
+            ],
+
+            'attachments' => $this->attachments->map(fn($attachment) => [
+                'id' => $attachment->id,
+                'mime_type' => $attachment->mime_type,
+                'url' => $attachment->url
+            ]),
         ];
     }
 }
