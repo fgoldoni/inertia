@@ -17,7 +17,7 @@ class CommentFactory extends Factory
      */
     public function definition()
     {
-        $userId = $this->faker->numberBetween(1, 10);
+        $userId = $this->faker->numberBetween(1, 5);
 
         return [
             'content' => $this->faker->sentence(10),
