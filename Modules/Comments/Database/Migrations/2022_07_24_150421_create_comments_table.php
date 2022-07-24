@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
+    use DisableForeignKeys, TruncateTable;
     /**
      * Run the migrations.
      *
@@ -34,6 +35,11 @@ return new class extends Migration
      */
     public function down()
     {
+
+        $this->disableForeignKeys();
+
         Schema::dropIfExists('comments');
+
+        $this->enableForeignKeys();
     }
 };
