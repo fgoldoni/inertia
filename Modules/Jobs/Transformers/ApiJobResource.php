@@ -38,6 +38,7 @@ class ApiJobResource extends JsonResource
             'skills' => $this->categories->skills()->pluck('name'),
             'benefits' => $this->categories->benefits()->pluck('name'),
             'view_count' => $this->view_count,
+            'tags' => $this->tags->pluck('name'),
         ];
     }
 }

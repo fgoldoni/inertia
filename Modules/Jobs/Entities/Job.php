@@ -24,6 +24,7 @@ use Modules\Jobs\Builders\JobBuilder;
 use Modules\Jobs\Database\factories\JobFactory;
 use Modules\Jobs\Enums\JobState;
 use Modules\Jobs\Enums\SalaryType;
+use Modules\Tags\Traits\TaggableTrait;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Sluggable\HasSlug;
@@ -44,6 +45,7 @@ class Job extends Model
     use AttachableTrait;
     use LogsActivity;
     use UsedByTeams;
+    use TaggableTrait;
 
     protected $guarded = [];
 

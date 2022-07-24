@@ -132,7 +132,7 @@ class ApplicantsController extends Controller
                         config('app.system.sessions.keys.team'),
                         auth()->user()->currentTeam?->id
                     )
-                )->with(['team', 'company', 'categories']);
+                )->with(['team', 'company', 'categories', 'tags:id,name']);
             }),
         ])->find($applicant->id));
 

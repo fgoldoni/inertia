@@ -1669,11 +1669,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'Tags',
+  props: {
+    modelValue: {
+      type: [Array],
+      "default": []
+    },
+    error: String
+  },
+  emits: ["update:modelValue"],
   setup: function setup(__props, _ref) {
-    var expose = _ref.expose;
+    var expose = _ref.expose,
+        emit = _ref.emit;
     expose();
+    var props = __props;
+    var dynamicTags = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      if (Object.entries(props.modelValue).length !== 0) {
+        return JSON.parse(JSON.stringify(props.modelValue));
+      }
+
+      return [];
+    });
     var inputValue = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
-    var dynamicTags = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(['Php', 'Laravel', 'Mysql']);
     var inputVisible = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var InputRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
 
@@ -1691,6 +1707,7 @@ __webpack_require__.r(__webpack_exports__);
     var handleInputConfirm = function handleInputConfirm() {
       if (inputValue.value) {
         dynamicTags.value.push(inputValue.value);
+        emit('update:modelValue', dynamicTags.value);
       }
 
       inputVisible.value = false;
@@ -1698,8 +1715,10 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var __returned__ = {
-      inputValue: inputValue,
+      props: props,
+      emit: emit,
       dynamicTags: dynamicTags,
+      inputValue: inputValue,
       inputVisible: inputVisible,
       InputRef: InputRef,
       handleClose: handleClose,
@@ -1707,6 +1726,7 @@ __webpack_require__.r(__webpack_exports__);
       handleInputConfirm: handleInputConfirm,
       nextTick: vue__WEBPACK_IMPORTED_MODULE_0__.nextTick,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
       ElInput: element_plus__WEBPACK_IMPORTED_MODULE_4__.ElInput,
       ElTag: element_plus__WEBPACK_IMPORTED_MODULE_5__.ElTag,
       ElButton: element_plus__WEBPACK_IMPORTED_MODULE_6__.ElButton
@@ -3959,6 +3979,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.inputValue = $event;
     }),
     "class": "ml-1 w-20",
+    type: "text",
     size: "small",
     onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)($setup.handleInputConfirm, ["enter"]),
     onBlur: $setup.handleInputConfirm

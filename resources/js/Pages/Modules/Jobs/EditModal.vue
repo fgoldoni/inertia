@@ -73,6 +73,8 @@ const form = reactive({
     team_id: props.editing.team_id,
     closing_to: props.editing.closing_to,
 
+    tags: props.editing.tags,
+
     skills: {
         responsibilities: props.editing.categories?.filter(element => element.type === "responsibility").map(element => element.id),
         skills: props.editing.categories?.filter(element => element.type === "skill").map(element => element.id),
@@ -103,7 +105,6 @@ const close = () => {
 }
 
 const onSubmit = () => {
-
     axios.put(route('admin.jobs.update', form.id), pickBy({
         name: form.name,
         content: form.content,
@@ -133,6 +134,8 @@ const onSubmit = () => {
 
         iframe: form.iframe,
         state: form.state,
+
+        tags: form.tags,
 
         closing_to: form.closing_to,
         apply_type: form.apply_type,
@@ -204,7 +207,7 @@ const onSubmit = () => {
 
                             <div v-if="currentTab === 'edit'">
 
-                                <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
+                                <form @keydown="form.errors.clear($event.target.name)">
                                     <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
                                         <div>
@@ -596,7 +599,7 @@ const onSubmit = () => {
 
                                                                 <BaseDisclosure :title="__('Jobs Tags')">
 
-                                                                    <Tags></Tags>
+                                                                    <Tags v-model="form.tags"></Tags>
 
                                                                 </BaseDisclosure>
 
@@ -622,7 +625,7 @@ const onSubmit = () => {
 
                                     <div class="bg-secondary-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
 
-                                        <LoadingButton type="submit" :loading="form.processing"
+                                        <LoadingButton type="button" :loading="form.processing" @click="onSubmit"
                                                        class="uppercase w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm">
 
                                             {{ __('Save') }}

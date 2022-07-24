@@ -121,7 +121,7 @@ class JobsController extends Controller
             $request->get('benefits'),
             $request->get('responsibilities'),
         );
-        dd($categories);
+
         $job = $this->jobsRepository->create(array_merge(
             $request->only(
                 'name',
@@ -151,7 +151,10 @@ class JobsController extends Controller
 
         $this->jobsRepository->sync($job->id, 'categories', $categories);
 
-        return $this->response->json(['message' => __('The Job (:item) has been successfully created', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
+        $job->saveTags($request->get('tags', []));
+
+        return $this->response
+            ->json(['message' => __('The Job (:item) has been successfully created', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
     public function show(User $user)
@@ -185,6 +188,7 @@ class JobsController extends Controller
                     'categories:id,name,type',
                     'country:id,name,emoji',
                     'city:id,name',
+                    'tags:id,name',
                     'division:id,name',
                     'attachments' => function ($query) {
                         $query->select([
@@ -261,11 +265,15 @@ class JobsController extends Controller
             ]
         ));
 
-        $this->attachmentsRepository->findWhereIn('id', $request->get('files'))->each(function ($item, $key) use ($job) {
-            $job->attachments()->save($item);
-        });
+        $this->attachmentsRepository
+            ->findWhereIn('id', $request->get('files'))
+            ->each(function ($item, $key) use ($job) {
+                $job->attachments()->save($item);
+            });
 
         $this->jobsRepository->sync($job->id, 'categories', $categories);
+
+        $job->saveTags($request->get('tags', []));
 
         return $this->response->json(
             ['message' => __('The Job (:item) has been successfully updated', ['item' => $job->name])],

@@ -35,6 +35,7 @@ class JobResource extends JsonResource
             'iframe' => $this->iframe,
 
             'categories' => $this->categories,
+            'tags' => $this->tags->pluck('name'),
             'country' => $this->country,
             'city' => $this->city,
             'division' => $this->division,

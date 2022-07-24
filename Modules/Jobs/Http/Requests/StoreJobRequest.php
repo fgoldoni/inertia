@@ -44,6 +44,7 @@ class StoreJobRequest extends FormRequest
                         //$query->where('user_id', request()->user()->id);
                     })
             ],
+            'tags'       => 'array',
         ];
     }
 

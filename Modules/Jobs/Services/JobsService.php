@@ -52,7 +52,8 @@ class JobsService extends ServiceAbstract implements JobsServiceInterface
                 'categories:id,name,type',
                 'country:id,name,emoji',
                 'city:id,name',
-                'division:id,name'
+                'division:id,name',
+                'tags:id,name'
             ]),
         ])->find($id));
     }

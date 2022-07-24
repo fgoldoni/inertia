@@ -14,6 +14,7 @@
         ref="InputRef"
         v-model="inputValue"
         class="ml-1 w-20"
+        type="text"
         size="small"
         @keyup.enter="handleInputConfirm"
         @blur="handleInputConfirm"
@@ -24,11 +25,29 @@
 </template>
 
 <script setup>
-import { nextTick, ref } from 'vue'
+import { nextTick, ref, computed } from 'vue'
 import { ElInput, ElTag, ElButton } from 'element-plus'
 
+
+const props = defineProps({
+    modelValue: {
+        type: [Array],
+        default: [],
+    },
+    error: String
+});
+
+const emit = defineEmits(["update:modelValue"]);
+
+const dynamicTags = computed(() => {
+    if (Object.entries(props.modelValue).length !== 0) {
+        return  JSON.parse(JSON.stringify(props.modelValue))
+    }
+
+    return [];
+});
+
 const inputValue = ref('')
-const dynamicTags = ref(['Php', 'Laravel', 'Mysql'])
 const inputVisible = ref(false)
 const InputRef = ref(null)
 
@@ -46,6 +65,7 @@ const showInput = () => {
 const handleInputConfirm = () => {
     if (inputValue.value) {
         dynamicTags.value.push(inputValue.value)
+        emit('update:modelValue', dynamicTags.value)
     }
     inputVisible.value = false
     inputValue.value = ''
