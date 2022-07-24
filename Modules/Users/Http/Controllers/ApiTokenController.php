@@ -79,7 +79,7 @@ class ApiTokenController extends Controller
 
         $this->teamsRepository->attachUser($team, $user);
 
-        $this->usersRepository->sendLoginLink($user, $token, $request->get('host'));
+        $this->usersRepository->sendLoginLink($team, $user, $token, $request->get('host'));
 
         return $this->response->json(
             ['message' => __('We have e-mailed your login link on :email.', ['email' => $user->email])],

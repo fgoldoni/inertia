@@ -15,7 +15,8 @@ class ApiStoreApplicantStatusRequest extends FormRequest
             'email' => ['required', 'email', new RealEmail()],
             'job_id' => ['required', Rule::exists('jobs', 'id')],
             'phone' => ['required', 'min:6', new Phone()],
-            'resume' => ['required', 'integer', Rule::exists('attachments', 'id')],
+            'resumes' => ['required', 'array'],
+            'resumes.*' => ['required', 'integer', Rule::exists('attachments', 'id')],
         ];
     }
 

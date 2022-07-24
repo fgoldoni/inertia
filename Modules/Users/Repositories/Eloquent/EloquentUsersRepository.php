@@ -52,9 +52,9 @@ class EloquentUsersRepository extends RepositoryAbstract implements UsersReposit
         ])->exists();
     }
 
-    public function sendLoginLink(User $user, NewAccessToken $token, string $host)
+    public function sendLoginLink(Team $team, User $user, NewAccessToken $token, string $host)
     {
-        Notification::send($user, new LoginLinkNotification($user, $token, $host));
+        Notification::send($user, new LoginLinkNotification($team, $user, $token, $host));
     }
 
     public function createToken(User $user): NewAccessToken

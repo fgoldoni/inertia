@@ -12,11 +12,13 @@
                     </p>
 
                     <p style="line-height: 24px; margin-bottom:20px;">
-                        Thank you for requesting your access data {{ $team?->display_name }}. You can easily log in to your profile via the following link.
+                        You have successfully applied for the position  {{ $applicant->job?->name }}. One of our specialists in this category will contact you shortly.
+                        <br><br>
+                        By clicking on the following link, you can connect to the job search portal:
                         <br><br>
                         <a href="{{ $url }}">Login Link</a>
                         <br><br>
-                        Thank you for using our {{ $team?->display_name }}!.
+                        Thank you for using our {{ $team?->display_name }} Portal!.
                     </p>
 
                     @include('emails.layouts.footer', ['url' => $url])

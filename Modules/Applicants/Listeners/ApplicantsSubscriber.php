@@ -28,9 +28,9 @@ class ApplicantsSubscriber
 
         $team = app()->make(TeamsRepository::class)->find(session(config('app.system.sessions.keys.team')));
 
-        $applicant->candidate()->first()->notify(new ApplicantCreatedNotification($applicant, $team));
+        $applicant->candidate()->first()->notify(new ApplicantCreatedNotification($applicant->load('job'), $team));
 
-        Notification::send($admin, new ApplicantCreatedNotification($applicant, $team));
+        //Notification::send($admin, new ApplicantCreatedNotification($applicant->load('job'), $team));
     }
 
     public function handleApplicantDeleted(Applicant $applicant)

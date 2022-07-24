@@ -26,7 +26,7 @@
                             <tr>
                                 <td style="color: #7f7f7f;text-align: center;">
                                     <a href="{{ $homeUrl }}">
-                                        <img width="200" class="navbar-brand" src="{{ asset('/images/logo.png') }}">
+                                        <img width="200" class="navbar-brand" src="{{ $team?->avatar_url }}">
                                     </a>
                                     <hr style="background: #e7e7e7;border: none;height: 1px;margin-top: 30px;"/>
                                 </td>

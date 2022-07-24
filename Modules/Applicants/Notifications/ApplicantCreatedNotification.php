@@ -12,20 +12,9 @@ class ApplicantCreatedNotification extends Notification
 {
     use Queueable;
 
-    /**
-     * @var \Modules\Applicants\Entities\Applicant
-     */
-    private Applicant $applicant;
-    /**
-     * @var \App\Models\Team
-     */
-    private Team $team;
 
-
-    public function __construct(Applicant $applicant, Team $team)
+    public function __construct(private readonly Applicant $applicant, private readonly Team $team)
     {
-        $this->applicant = $applicant;
-        $this->team = $team;
     }
 
 
@@ -39,17 +28,19 @@ class ApplicantCreatedNotification extends Notification
     {
         $token = app()->make(UsersRepository::class)->createToken($notifiable)->plainTextToken;
 
-        $url = $this->url($token);
+        [$homeUrl, $url] = $this->urls($token);
 
         return (new MailMessage())
             ->from(env('MAIL_FROM_ADDRESS'), $this->team->display_name)
             ->subject(
                 __(
-                    'Welcome to the :team! Your application request was successfully created.',
+                    'Welcome to :team! Your application request was successfully created.',
                     ['team' => $this->team->display_name]
                 )
             )
-            ->view('emails.users.created', ['homeUrl' => $url, 'url' => $url]);
+            ->view('emails.applicants.created', [
+                'team' => $this->team, 'applicant' => $this->applicant, 'homeUrl' => $homeUrl, 'url' => $url
+            ]);
     }
 
     /**
@@ -65,8 +56,21 @@ class ApplicantCreatedNotification extends Notification
         ];
     }
 
+    private function urls(string $token): array
+    {
+        $baseUrl = $this->url($token);
+
+        $homeUrl = $baseUrl . '/token/' . $token;
+
+        $to = $baseUrl . '/applicants/' . $this->applicant->id;
+
+        $url = $homeUrl . '?' . http_build_query(['to' => $to]);
+
+        return [$homeUrl, $url];
+    }
+
     private function url($token): string
     {
-        return  env('FRONTEND_HTTP') . $this->team->subdomain . env('FRONTEND_DOMAIN') . '/token/' . $token;
+        return  env('FRONTEND_HTTP') . $this->team->subdomain . env('FRONTEND_DOMAIN');
     }
 }

@@ -2,8 +2,10 @@
 namespace Modules\Applicants\Http\Controllers\Api;
 
 use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereHas;
+use App\Repositories\Criteria\WhereIn;
 use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WherePublished;
 use App\Repositories\Criteria\WhereUser;
@@ -39,6 +41,7 @@ class ApplicantsController extends Controller
     {
         $result = ApplicantsResource::collection(
             $this->applicantsRepository->withCriteria([
+                new OrderBy('applicants.id', 'desc'),
                 new EagerLoad([
                     'attachments' => fn ($query) => $query->where('attachments.type', 'resumes'),
                     'candidate:id,name,email',
@@ -75,26 +78,31 @@ class ApplicantsController extends Controller
             ]
         ));
 
-        $attachment = $this->attachmentsRepository->withCriteria([
+        $attachments = $this->attachmentsRepository->withCriteria([
             new Where('type', 'resumes'),
-        ])->find($request->resume);
+            new WhereIn('attachments.id', $request->resumes),
+        ])->get();
 
-        if (!$attachment->attachable_type) {
-            $applicant->attachments()->save($attachment);
+        $attachments->each(function ($attachment) use ($applicant, $user) {
+            if (!$attachment->attachable_type) {
+                $applicant->attachments()->save($attachment);
 
-            if (!$attachment->user_id) {
-                $attachment->user_id = $user->id;
-                $attachment->save();
+                if (!$attachment->user_id) {
+                    $attachment->user_id = $user->id;
+                    $attachment->save();
+                }
+            } else {
+                $newAttachment = $attachment->replicate();
+                $applicant->attachments()->save($newAttachment);
+
+                $newAttachment->created_at = now();
+                $newAttachment->updated_at = now();
+                $newAttachment->user_id = $user->id;
+                $newAttachment->save();
             }
-        } else {
-            $newAttachment = $attachment->replicate();
-            $applicant->attachments()->save($newAttachment);
+        });
 
-            $newAttachment->created_at = now();
-            $newAttachment->updated_at = now();
-            $newAttachment->user_id = $user->id;
-            $newAttachment->save();
-        }
+
 
         return $this->response->json(
             [
