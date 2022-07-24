@@ -19,7 +19,11 @@ class CommentsDatabaseSeeder extends Seeder
         Model::unguard();
 
         Comment::withoutEvents(function () {
-            Comment::factory(50)->create(['commentable_type' => Applicant::class]);
+            Comment::factory(15)->create(['commentable_type' => Applicant::class]);
+            Comment::factory(50)->create([
+                'commentable_type' => Applicant::class,
+                'reply' => random_int(1, 10)
+            ]);
         });
     }
 }
