@@ -4,6 +4,7 @@ namespace Modules\Comments\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Applicants\Entities\Applicant;
 use Modules\Comments\Entities\Comment;
 
 class CommentsDatabaseSeeder extends Seeder
@@ -17,6 +18,8 @@ class CommentsDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        Comment::factory(50)->create();
+        Comment::withoutEvents(function () {
+            Comment::factory(50)->create(['commentable_type' => Applicant::class]);
+        });
     }
 }

@@ -3,10 +3,12 @@ namespace Modules\Applicants\Entities;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Applicants\Enums\Status;
 use Modules\Attachments\Traits\AttachableTrait;
+use Modules\Comments\Entities\Comment;
 use Modules\Jobs\Entities\Job;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -45,5 +47,10 @@ class Applicant extends Pivot
             ->logOnly(['user_id', 'job_id', 'phone', 'message', 'status'])
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
+    }
+
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

@@ -23,6 +23,18 @@ class ApplicantsResource extends JsonResource
             'job_id' => $this->job_id,
             'user_id' => $this->user_id,
             'created_at' => $this->created_at?->format('d, M Y'),
+            'comments' => $this->comments->map(fn($comment) => [
+                'id' => $comment->id,
+                'content' => $comment->content,
+                'reply' => $comment->reply,
+                'created_at' => $comment->created_at->diffForHumans(),
+                'user' => [
+                    'id' => $comment->user->id,
+                    'name' => $comment->user->name,
+                    'email' => $comment->user->email,
+                    'avatar_url' => $comment->user->avatar_url,
+                ]
+            ]),
             'company' => [
                 'id' => $this->job->company->id,
                 'name' => $this->job->company->name,

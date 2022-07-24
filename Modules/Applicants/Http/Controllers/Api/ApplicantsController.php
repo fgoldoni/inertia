@@ -45,6 +45,7 @@ class ApplicantsController extends Controller
                 new EagerLoad([
                     'attachments' => fn ($query) => $query->where('attachments.type', 'resumes'),
                     'candidate:id,name,email',
+                    'comments.user',
                     'job' => function (BelongsTo $query) {
                         $query->with(['city', 'country']);
                     },
