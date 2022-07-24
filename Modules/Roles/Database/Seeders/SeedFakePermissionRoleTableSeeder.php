@@ -26,6 +26,22 @@ class SeedFakePermissionRoleTableSeeder extends Seeder
 
         $administrator->permissions()->sync($permissions->pluck('id')->all());
 
+        $manager = Role::query()->where('name', config('app.system.users.roles.manager'))->firstOrFail();
+
+        $permissions = Permission::where('group_name', 'teams')->all();
+
+        $manager->permissions()->sync($permissions->pluck('id')->all());
+
+        $default = Role::query()->where('name', config('app.system.users.roles.default'))->firstOrFail();
+
+        $permissions = Permission::where('group_name', 'applicants')->all();
+
+        $default->permissions()->sync($permissions->pluck('id')->all());
+
+        $permissions = Permission::where('group_name', 'comments')->all();
+
+        $default->permissions()->sync($permissions->pluck('id')->all());
+
         $this->enableForeignKeys();
     }
 }

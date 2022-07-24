@@ -15,22 +15,5 @@ class ApplicantsDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
-        $job = Job::withoutGlobalScope('team')->first();
-
-        $job->candidates()->attach([
-            14 => [
-                'phone' => '+4917777777777',
-                'message' => 'message',
-            ],
-            15 => [
-                'phone' => '+4917777777777',
-                'message' => 'message',
-            ],
-            16 => [
-                'phone' => '+4917777777777',
-                'message' => 'message',
-            ],
-        ]);
     }
 }
