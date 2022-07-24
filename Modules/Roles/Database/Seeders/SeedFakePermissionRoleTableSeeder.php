@@ -28,19 +28,35 @@ class SeedFakePermissionRoleTableSeeder extends Seeder
 
         $manager = Role::query()->where('name', config('app.system.users.roles.manager'))->firstOrFail();
 
-        $permissions = Permission::where('group_name', 'teams')->all();
+        $permissions = Permission::where('group_name', 'teams')->get();
 
-        $manager->permissions()->sync($permissions->pluck('id')->all());
+        $manager->permissions()->attach($permissions->pluck('id')->all());
+
+        $permissions = Permission::where('group_name', 'applicants')->get();
+
+        $manager->permissions()->attach($permissions->pluck('id')->all());
+
+        $permissions = Permission::where('group_name', 'comments')->get();
+
+        $manager->permissions()->attach($permissions->pluck('id')->all());
+
+        $permissions = Permission::where('group_name', 'resumes')->get();
+
+        $manager->permissions()->attach($permissions->pluck('id')->all());
 
         $default = Role::query()->where('name', config('app.system.users.roles.default'))->firstOrFail();
 
-        $permissions = Permission::where('group_name', 'applicants')->all();
+        $permissions = Permission::where('group_name', 'applicants')->get();
 
-        $default->permissions()->sync($permissions->pluck('id')->all());
+        $default->permissions()->attach($permissions->pluck('id')->all());
 
-        $permissions = Permission::where('group_name', 'comments')->all();
+        $permissions = Permission::where('group_name', 'comments')->get();
 
-        $default->permissions()->sync($permissions->pluck('id')->all());
+        $default->permissions()->attach($permissions->pluck('id')->all());
+
+        $permissions = Permission::where('group_name', 'resumes')->get();
+
+        $default->permissions()->attach($permissions->pluck('id')->all());
 
         $this->enableForeignKeys();
     }
