@@ -13,9 +13,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Applicants\Entities\Applicant;
 use Modules\Attachments\Traits\AttachableTrait;
+use Modules\Comments\Entities\Comment;
 use Modules\Companies\Entities\Company;
 use Modules\Countries\Entities\City;
 use Modules\Countries\Entities\Country;
@@ -128,5 +130,10 @@ class Job extends Model
             ->withPivot('phone', 'message')
             ->withoutGlobalScopes()
             ->withTimestamps();
+    }
+
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

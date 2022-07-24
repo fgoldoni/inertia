@@ -4,6 +4,7 @@ namespace Modules\Comments\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Comments\Entities\Comment;
 
 class CommentsDatabaseSeeder extends Seeder
 {
@@ -16,6 +17,6 @@ class CommentsDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        Comment::factory(50)->create();
     }
 }

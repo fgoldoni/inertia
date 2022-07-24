@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Comments\Http\Controllers\Api\CommentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/comments', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->as('api.')->group(function () {
+    Route::resource('comments', CommentsController::class)->except(['destroy']);
+    Route::delete('comments/destroy', [CommentsController::class, 'destroy'])->name('comments.destroy');
 });

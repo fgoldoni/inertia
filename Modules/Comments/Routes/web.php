@@ -11,6 +11,13 @@
 |
 */
 
-Route::prefix('comments')->group(function() {
-    Route::get('/', 'CommentsController@index');
-});
+use Modules\Comments\Http\Controllers\CommentsController;
+
+Route::prefix('admin')
+    ->middleware(['auth', 'verified', 'permission:browse_comments'])
+    ->as('admin.')
+    ->group(function () {
+        Route::resource('comments', CommentsController::class)->except(['destroy']);
+        Route::delete('comments/{selected}', [CommentsController::class, 'destroy'])->name('comments.destroy');
+        Route::put('comments/{id}/restore', [CommentsController::class, 'restore'])->name('comments.restore');
+    });

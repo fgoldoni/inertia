@@ -16,6 +16,11 @@ class CommentPolicy
         }
     }
 
+    public function viewAny(User $user)
+    {
+        return $user->hasPermissionTo('browse_comments');
+    }
+
     public function create(User $user): bool
     {
         return $user->hasPermissionTo('create_comments');
