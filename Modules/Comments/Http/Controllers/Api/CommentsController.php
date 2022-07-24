@@ -5,6 +5,7 @@ namespace Modules\Comments\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
+use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereHas;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
@@ -16,6 +17,7 @@ use Modules\Applicants\Repositories\Contracts\ApplicantsRepository;
 use Modules\Applicants\Transformers\Api\ApplicantsResource;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Comments\Entities\Comment;
+use Modules\Comments\Http\Requests\ApiViewCommentRequest;
 use Modules\Comments\Repositories\Contracts\CommentsRepository;
 use Modules\Comments\Transformers\ApiCommentsResource;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
@@ -29,14 +31,25 @@ class CommentsController extends Controller
     ) {
     }
 
-    public function index()
+    public function index(ApiViewCommentRequest $request)
     {
         $this->authorize('viewAny', Comment::class);
 
-        $comments = ApiCommentsResource::collection(
+        $comments = Comment::transform(
             $this->commentsRepository->withCriteria([
-                new OrderBy('comments.id', 'desc'),
-            ])->all()
+                new EagerLoad(['user:id,name,email,profile_photo_path']),
+                new OrderBy('comments.id', 'asc'),
+                new Where('comments.commentable_type', $request->model),
+                new Where('comments.commentable_id', $request->modelId),
+            ])->all([
+                'id',
+                'content',
+                'commentable_type',
+                'commentable_id',
+                'reply',
+                'user_id',
+                'created_at',
+            ])
         );
 
         return $this->response->json(['data' => $comments], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);

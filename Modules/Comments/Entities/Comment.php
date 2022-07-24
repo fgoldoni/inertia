@@ -3,10 +3,13 @@
 namespace Modules\Comments\Entities;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Carbon;
 use Modules\Comments\Database\factories\CommentFactory;
 
 class Comment extends Model
@@ -28,6 +31,24 @@ class Comment extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public static function transform(Collection $comments): array
+    {
+        $records = [];
+        $byId = [];
+
+        foreach ($comments as $comment) {
+            if ($comment->reply) {
+                $byId[$comment->reply]->attributes['replies'][] = $comment;
+            } else {
+                $comment->attributes['replies'] = [];
+                $byId[$comment->id] = $comment;
+                $records[] = $comment;
+            }
+        }
+
+        return array_reverse($records);
     }
 
     public static function allFor($model, $modelId): array
@@ -60,5 +81,12 @@ class Comment extends Model
         } else {
             return false;
         }
+    }
+
+    protected function createdAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($value)->diffForHumans(),
+        );
     }
 }
