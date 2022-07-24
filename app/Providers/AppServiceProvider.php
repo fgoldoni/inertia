@@ -10,6 +10,7 @@ use Modules\Activities\Providers\ActivitiesServiceProvider;
 use Modules\Applicants\Providers\ApplicantsServiceProvider;
 use Modules\Attachments\Providers\AttachmentsServiceProvider;
 use Modules\Categories\Providers\CategoriesServiceProvider;
+use Modules\Comments\Providers\CommentsServiceProvider;
 use Modules\Companies\Providers\CompaniesServiceProvider;
 use Modules\Dashboard\Providers\DashboardServiceProvider;
 use Modules\Jobs\Providers\JobsServiceProvider;
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(TeamsServiceProvider::class);
         $this->app->register(ApplicantsServiceProvider::class);
         $this->app->register(ResumesServiceProvider::class);
+        $this->app->register(CommentsServiceProvider::class);
     }
 
     /**

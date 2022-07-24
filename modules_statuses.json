@@ -12,5 +12,6 @@
     "Teams": true,
     "Resumes": true,
     "Applies": true,
-    "Applicants": true
+    "Applicants": true,
+    "Comments": true
 }
