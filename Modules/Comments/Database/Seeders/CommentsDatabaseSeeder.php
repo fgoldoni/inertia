@@ -19,11 +19,13 @@ class CommentsDatabaseSeeder extends Seeder
         Model::unguard();
 
         Comment::withoutEvents(function () {
-            Comment::factory(15)->create(['commentable_type' => Applicant::class]);
-            Comment::factory(50)->create([
-                'commentable_type' => Applicant::class,
-                'reply' => random_int(1, 10)
-            ]);
+            Comment::factory(25)->create(['commentable_type' => Applicant::class])->each(function ($comment) {
+                Comment::factory(random_int(1, 3))->create([
+                    'commentable_type' => $comment->commentable_type,
+                    'commentable_id' => $comment->commentable_id,
+                    'reply' => $comment->id
+                ]);
+            });
         });
     }
 }
