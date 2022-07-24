@@ -32,7 +32,7 @@ class ApplicantsResource extends JsonResource
                     'id' => $comment->user->id,
                     'name' => $comment->user->name,
                     'email' => $comment->user->email,
-                    'avatar_url' => $comment->user->avatar_url,
+                    'avatar_url' => $comment->user->profile_photo_url,
                 ]
             ]),
             'company' => [
