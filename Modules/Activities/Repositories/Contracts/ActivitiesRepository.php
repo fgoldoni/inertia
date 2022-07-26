@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Activities\Repositories\Contracts;
 
 interface ActivitiesRepository

@@ -2,6 +2,7 @@
 namespace Modules\Jobs\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Companies\Transformers\ApiCompanyResource;
 
 class ApiJobResource extends JsonResource
 {
@@ -30,9 +31,7 @@ class ApiJobResource extends JsonResource
                 'display_name' => $this->team->display_name
             ],
             'address' => $this->address,
-            'company' => [
-                'name' => $this->company->name
-            ],
+            'company' => new ApiCompanyResource($this->company),
             'job_type' => $this->categories->jobTypes()->value('name'),
             'responsibilities' => $this->categories->responsibilities()->pluck('name'),
             'skills' => $this->categories->skills()->pluck('name'),

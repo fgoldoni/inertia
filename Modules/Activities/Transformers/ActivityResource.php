@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Activities\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -19,7 +20,7 @@ class ActivityResource extends JsonResource
         return [
             'id' => $this->id,
             'event' => $this->event,
-            'description' => $this->description . ' by ',
+            'description' => $this->description.' by ',
             'date' => Carbon::parse($this->created_at)->diffForHumans(),
             'iconBackground' => $this->color($this->event),
             'href' => 'javascript:;',

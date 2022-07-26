@@ -2,6 +2,7 @@
 namespace Modules\Companies\Entities;
 
 use App\Traits\BelongsToUser;
+use App\Traits\HasAvatar;
 use App\Traits\UsedByTeams;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,13 +17,22 @@ use Spatie\Sluggable\SlugOptions;
 
 class Company extends Model
 {
-    use HasFactory, HasSlug, BelongsToUser, SoftDeletes, UsedByTeams;
+    use HasFactory;
+    use HasSlug;
+    use HasAvatar;
+    use BelongsToUser;
+    use SoftDeletes;
+    use UsedByTeams;
     use LogsActivity;
 
     protected $guarded = [];
 
     protected $casts = [
         'online' => 'boolean',
+    ];
+
+    protected $appends = [
+        'avatar_url',
     ];
 
     protected static function newFactory(): CompanyFactory
