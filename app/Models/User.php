@@ -148,4 +148,9 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withoutGlobalScopes()
             ->withTimestamps();
     }
+
+    public function jobs(): BelongsToMany
+    {
+        return $this->belongsToMany(Job::class);
+    }
 }

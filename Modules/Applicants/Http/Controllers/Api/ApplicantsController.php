@@ -50,7 +50,7 @@ class ApplicantsController extends Controller
                     },
                 ]),
                 new WhereHas('job', function (Builder $query) {
-                    $query->with(['company', 'city']);
+                    $query->with(['company.categories', 'city']);
                 }),
                 new WhereHas('candidate', function (Builder $query) {
                     $query->where('users.id', auth()->user()->id);
@@ -132,7 +132,7 @@ class ApplicantsController extends Controller
                         config('app.system.sessions.keys.team'),
                         auth()->user()->currentTeam?->id
                     )
-                )->with(['team', 'company', 'categories', 'tags:id,name']);
+                )->with(['team', 'company.categories', 'categories', 'tags:id,name']);
             }),
         ])->find($applicant->id));
 

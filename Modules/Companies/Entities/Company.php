@@ -2,6 +2,7 @@
 namespace Modules\Companies\Entities;
 
 use App\Traits\BelongsToUser;
+use App\Traits\Categorizable;
 use App\Traits\HasAvatar;
 use App\Traits\UsedByTeams;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +25,7 @@ class Company extends Model
     use SoftDeletes;
     use UsedByTeams;
     use LogsActivity;
+    use Categorizable;
 
     protected $guarded = [];
 

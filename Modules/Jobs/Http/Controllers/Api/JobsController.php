@@ -21,7 +21,6 @@ class JobsController extends Controller
     public function index()
     {
         $result = $this->jobsService->apiJobs();
-
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 

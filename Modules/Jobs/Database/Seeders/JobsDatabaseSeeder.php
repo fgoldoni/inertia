@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Jobs\Database\Seeders;
 
+use App\Models\User;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 use Modules\Categories\Entities\Category;
@@ -19,21 +20,24 @@ class JobsDatabaseSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        Job::factory(100)->state(function (array $attributes) {
+        Job::factory(500)->state(function (array $attributes) {
             $city = City::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
 
             $division = Division::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
 
+            $user = User::find($attributes['user_id']);
+
             if ($city) {
-                return ['city_id' => $city->id];
+                return ['city_id' => $city->id, 'team_id' => $user->currentTeam()->first()->id];
             } else {
                 if ($division) {
-                    return ['division_id' => $division->id];
+                    return ['division_id' => $division->id, 'team_id' => $user->currentTeam()->first()->id];
                 }
             }
 
-            return [];
-        })->create(['live_at' => $faker->dateTimeInInterval('now', '-1 days')])->each(function ($job) {
+            return ['team_id' => $user->currentTeam()->first()->id];
+        })->create(['live_at' => $faker->dateTimeInInterval('now', '-10 days')])->each(function ($job) {
+
             $this->syncCategories($job);
 
             $job->company_id = Company::allTeams()->where('team_id', $job->team_id)->inRandomOrder()->first()?->id;

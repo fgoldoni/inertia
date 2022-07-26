@@ -100,7 +100,8 @@ refresh: migrate ## refresh + php artisan module:seed Admin & php artisan module
 	php artisan module:seed Dashboard
 	php artisan module:seed Jobs
 	## php artisan module:seed Applicants
-	## php artisan module:seed Comments
+	php artisan module:seed Comments
+	php artisan module:seed Tags
 	## php artisan module:seed Events
 	## php artisan module:seed Tickets
 routes: optimize

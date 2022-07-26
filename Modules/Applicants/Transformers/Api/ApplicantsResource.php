@@ -25,15 +25,10 @@ class ApplicantsResource extends JsonResource
             'created_at' => $this->created_at?->format('d, M Y'),
             'model' => Applicant::class,
             'job' => new ApiJobResource($this->job),
-            'company' => [
-                'id' => $this->job->company->id,
-                'name' => $this->job->company->name,
-            ],
             'candidate' => [
                 'id' => $this->candidate->id,
                 'name' => $this->candidate->name . ' ( ' . $this->candidate->email . ' ) ',
             ],
-
             'attachments' => $this->attachments->map(fn($attachment) => [
                 'id' => $attachment->id,
                 'name' => $attachment->name,

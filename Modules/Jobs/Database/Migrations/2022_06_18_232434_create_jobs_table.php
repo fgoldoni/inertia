@@ -53,6 +53,11 @@ return new class extends Migration {
 
             $table->unique('slug');
         });
+
+        Schema::create('job_user', function (Blueprint $table) {
+            $table->foreignId('user_id')->unsigned()->index()->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('job_id')->unsigned()->index()->references('id')->on('jobs')->onDelete('cascade');
+        });
     }
 
     /**
@@ -64,6 +69,7 @@ return new class extends Migration {
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('jobs');
+        Schema::dropIfExists('job_user');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 };

@@ -1,9 +1,11 @@
 <?php
 namespace Modules\Roles\Database\Seeders;
 
+use App\Models\User;
 use App\Traits\Database\DisableForeignKeys;
 use App\Traits\Database\TruncateTable;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Event;
 use Modules\Roles\Entities\Permission;
 use Modules\Roles\Entities\Role;
 
@@ -18,6 +20,8 @@ class SeedFakePermissionRoleTableSeeder extends Seeder
      */
     public function run()
     {
+        Event::fake();
+
         $this->disableForeignKeys();
 
         $administrator = Role::query()->where('name', config('app.system.users.roles.administrator'))->firstOrFail();
@@ -28,36 +32,33 @@ class SeedFakePermissionRoleTableSeeder extends Seeder
 
         $manager = Role::query()->where('name', config('app.system.users.roles.manager'))->firstOrFail();
 
-        $permissions = Permission::where('group_name', 'teams')->get();
-
-        $manager->permissions()->attach($permissions->pluck('id')->all());
-
-        $permissions = Permission::where('group_name', 'applicants')->get();
-
-        $manager->permissions()->attach($permissions->pluck('id')->all());
-
-        $permissions = Permission::where('group_name', 'comments')->get();
-
-        $manager->permissions()->attach($permissions->pluck('id')->all());
-
-        $permissions = Permission::where('group_name', 'resumes')->get();
-
-        $manager->permissions()->attach($permissions->pluck('id')->all());
+        $this->attachPermission($manager, [
+            'teams',
+            'jobs',
+            'applicants',
+            'comments',
+            'resumes',
+        ]);
 
         $default = Role::query()->where('name', config('app.system.users.roles.default'))->firstOrFail();
 
-        $permissions = Permission::where('group_name', 'applicants')->get();
-
-        $default->permissions()->attach($permissions->pluck('id')->all());
-
-        $permissions = Permission::where('group_name', 'comments')->get();
-
-        $default->permissions()->attach($permissions->pluck('id')->all());
-
-        $permissions = Permission::where('group_name', 'resumes')->get();
-
-        $default->permissions()->attach($permissions->pluck('id')->all());
+        $this->attachPermission($default, [
+            'applicants',
+            'comments',
+            'resumes',
+        ]);
 
         $this->enableForeignKeys();
+    }
+
+    private function attachPermission(Role $role, array $groups): Role
+    {
+        foreach ($groups as $group) {
+            $permissions = Permission::where('group_name', $group)->get();
+
+            $role->permissions()->attach($permissions->pluck('id')->all());
+        }
+
+        return $role;
     }
 }
