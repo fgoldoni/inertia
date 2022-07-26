@@ -6,6 +6,7 @@
  * Date: 24.09.18
  * Time: 22:40.
  */
+
 namespace App\Repositories\Criteria;
 
 use App\Flag;

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Repositories\Contracts\RepositoryInterface;
@@ -35,8 +36,7 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
     }
 
     /**
-     * @param mixed ...$criteria
-     *
+     * @param  mixed  ...$criteria
      * @return $this
      */
     public function withCriteria(...$criteria)
@@ -56,8 +56,7 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
     }
 
     /**
-     * @param array $columns
-     *
+     * @param  array  $columns
      * @return mixed
      */
     public function first($columns = ['*'])
@@ -178,7 +177,7 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
     {
         $model = app()->make($this->model());
 
-        if (!$model instanceof Model) {
+        if (! $model instanceof Model) {
             throw new Exception("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
         }
 
@@ -187,7 +186,7 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
 
     private function modelNotFoundException($model)
     {
-        if (!$model) {
+        if (! $model) {
             throw (new ModelNotFoundException())->setModel($this->model->getModel()::class);
         }
     }

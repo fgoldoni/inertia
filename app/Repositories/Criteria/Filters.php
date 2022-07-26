@@ -6,6 +6,7 @@
  * Date: 18.11.18
  * Time: 15:17.
  */
+
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -35,7 +36,7 @@ class Filters
             $query = $model->when($this->filters['search'], function ($query, $search) use ($attributes) {
                 $query->where(function ($query) use ($search, $attributes) {
                     foreach (Arr::wrap($attributes) as $attribute) {
-                        $query->orWhere($attribute, 'like', '%' . $search . '%');
+                        $query->orWhere($attribute, 'like', '%'.$search.'%');
                     }
                 });
             });

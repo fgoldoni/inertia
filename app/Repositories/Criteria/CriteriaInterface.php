@@ -6,6 +6,7 @@
  * Date: 24.09.18
  * Time: 22:13.
  */
+
 namespace App\Repositories\Criteria;
 
 /**
@@ -14,8 +15,7 @@ namespace App\Repositories\Criteria;
 interface CriteriaInterface
 {
     /**
-     * @param mixed ...$criteria
-     *
+     * @param  mixed  ...$criteria
      * @return mixed
      */
     public function withCriteria(...$criteria);

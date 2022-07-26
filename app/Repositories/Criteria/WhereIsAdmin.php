@@ -1,12 +1,11 @@
 <?php
+
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class WhereIsAdmin
- *
- * @package \App\Repositories\Criteria
  */
 class WhereIsAdmin
 {

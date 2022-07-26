@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Grosv\LaravelPasswordlessLogin\Traits\PasswordlessLogin;
@@ -111,7 +112,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function canBeImpersonated(): bool
     {
-        return !$this->isAdministrator();
+        return ! $this->isAdministrator();
     }
 
     public function newCollection(array $models = []): Collection

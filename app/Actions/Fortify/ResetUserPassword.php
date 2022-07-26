@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Actions\Fortify;
 
 use Illuminate\Support\Facades\Hash;

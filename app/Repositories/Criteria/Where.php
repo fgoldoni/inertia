@@ -6,6 +6,7 @@
  * Date: 18.11.18
  * Time: 15:17.
  */
+
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;

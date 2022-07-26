@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use Modules\Attachments\Http\Requests\ApiStoreAttachmentRequest;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
+use Modules\Attachments\Transformers\ApiAttachmentsResource;
 use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class AttachmentsController extends Controller
@@ -48,7 +49,12 @@ class AttachmentsController extends Controller
             $this->usersRepository->find($request->user_id)->attachments()->save($attachment);
         }
 
-        return $this->response->json(['data' => $attachment], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
+        return $this->response->json(
+            ['data' => new ApiAttachmentsResource($attachment)],
+            Response::HTTP_OK,
+            [],
+            JSON_NUMERIC_CHECK
+        );
     }
 
     /**

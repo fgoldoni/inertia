@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Actions\Jetstream;
 
 use Illuminate\Support\Facades\DB;

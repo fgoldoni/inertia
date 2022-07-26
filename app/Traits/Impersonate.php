@@ -1,10 +1,9 @@
 <?php
+
 namespace App\Traits;
 
 /**
  * Class Impersonate
- *
- * @package \App\Traits
  */
 trait Impersonate
 {

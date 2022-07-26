@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Repositories\RepositoryAbstract;
@@ -22,7 +23,7 @@ abstract class ServiceAbstract implements ServiceInterface
     {
         $repository = app()->make($this->repository());
 
-        if (!$repository instanceof RepositoryAbstract) {
+        if (! $repository instanceof RepositoryAbstract) {
             throw new Exception("Class {$this->repository()} must be an instance of App\\Repositories\\RepositoryAbstract");
         }
 

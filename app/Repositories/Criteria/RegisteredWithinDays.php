@@ -1,12 +1,11 @@
 <?php
+
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class RegisteredWithinDays
- *
- * @package \App\Repositories\Criteria
  */
 class RegisteredWithinDays
 {

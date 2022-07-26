@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Actions\Fortify;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;

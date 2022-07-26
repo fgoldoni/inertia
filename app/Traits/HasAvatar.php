@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Traits;
 
 use Illuminate\Http\UploadedFile;
@@ -58,7 +59,7 @@ trait HasAvatar
      */
     protected function defaultAvatarUrl(): string
     {
-        return 'https://ui-avatars.com/api/?name=' . urlencode((string) $this->name) . '&color=7F9CF5&background=EBF4FF';
+        return 'https://ui-avatars.com/api/?name='.urlencode((string) $this->name).'&color=7F9CF5&background=EBF4FF';
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -6,8 +7,6 @@ use Illuminate\Support\Arr;
 
 /**
  * Class WhereLike
- *
- * @package \App\Repositories\Criteria
  */
 class WhereLike
 {
@@ -24,7 +23,7 @@ class WhereLike
         return $model->when($this->value, function ($query) use ($value, $attributes) {
             $query->where(function ($query) use ($value, $attributes) {
                 foreach (Arr::wrap($attributes) as $attribute) {
-                    $query->orWhere($attribute, 'like', '%' . $value . '%');
+                    $query->orWhere($attribute, 'like', '%'.$value.'%');
                 }
             });
         });

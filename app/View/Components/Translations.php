@@ -1,4 +1,5 @@
 <?php
+
 namespace App\View\Components;
 
 use Illuminate\Support\Arr;
@@ -43,7 +44,7 @@ class Translations extends Component
         });
 
         return view('components.translations', [
-            'translations' => $translations
+            'translations' => $translations,
         ]);
     }
 }

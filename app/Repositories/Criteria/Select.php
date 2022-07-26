@@ -6,6 +6,7 @@
  * Date: 09/10/2018
  * Time: 11:47.
  */
+
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -23,7 +24,7 @@ class Select
     /**
      * Select constructor.
      *
-     * @param mixed ...$fields
+     * @param  mixed  ...$fields
      */
     public function __construct(...$fields)
     {
