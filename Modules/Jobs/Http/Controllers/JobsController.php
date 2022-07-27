@@ -92,7 +92,12 @@ class JobsController extends Controller
 
         Inertia::modal('Modules/Jobs/CreateModal');
 
-        Inertia::basePageRoute(route('admin.jobs.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
+        Inertia::basePageRoute(
+            route(
+                'admin.jobs.index',
+                $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])
+            )
+        );
 
         return $this->index([
             'editing' => new JobResource($this->jobsRepository->make([
@@ -155,7 +160,12 @@ class JobsController extends Controller
         $job->saveTags($request->get('tags', []));
 
         return $this->response
-            ->json(['message' => __('The Job (:item) has been successfully created', ['item' => $job->name])], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
+            ->json(
+                ['message' => __('The Job (:item) has been successfully created', ['item' => $job->name])],
+                Response::HTTP_OK,
+                [],
+                JSON_NUMERIC_CHECK
+            );
     }
 
     public function show(User $user)
@@ -166,8 +176,7 @@ class JobsController extends Controller
         $result['salaryTypes'] = $this->jobsRepository->salaryTypes();
         $result['roles'] = $this->rolesRepository->all(['id', 'name']);
         $result['teams'] = $this->teamsService->allOptionsTeams();
-        $result['companies'] = $this->companiesRepository->withCriteria([
-        ])->all(['id', 'name', 'user_id', 'team_id']);
+        $result['companies'] = $this->companiesRepository->all(['id', 'name', 'user_id', 'team_id']);
 
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
@@ -178,7 +187,12 @@ class JobsController extends Controller
 
         Inertia::modal('Modules/Jobs/EditModal');
 
-        Inertia::basePageRoute(route('admin.jobs.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
+        Inertia::basePageRoute(
+            route(
+                'admin.jobs.index',
+                $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])
+            )
+        );
 
         return $this->index([
             'editing' => new JobResource($this->jobsRepository->withCriteria([

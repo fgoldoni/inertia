@@ -214,6 +214,7 @@ class TeamsController extends Controller
 
     public function restore(int $id)
     {
+        $team = null;
         $job = $this->teamsRepository->withCriteria([
             new WithTrashed(),
         ])->restore($id);
