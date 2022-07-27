@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Jobs\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -77,7 +78,7 @@ class JobsController extends Controller
                     'categories:id,name,type',
                     'country:id,name,emoji',
                     'city:id,name',
-                    'division:id,name'
+                    'division:id,name',
                 ]),
                 new WithTrashed(),
             ])->paginate()->withQueryString(),
@@ -96,12 +97,12 @@ class JobsController extends Controller
         return $this->index([
             'editing' => new JobResource($this->jobsRepository->make([
                 'id' => null,
-                'name' => 'test' . uniqid(),
+                'name' => 'test'.uniqid(),
                 'content' => 'test',
                 'negotiable' => false,
                 'phone' => '+4915736795436',
-                'online' => true
-            ]))
+                'online' => true,
+            ])),
         ]);
     }
 
@@ -138,7 +139,7 @@ class JobsController extends Controller
             ),
             [
                 'user_id' => $request->user()->id,
-                'company_id' => $request->get('company')
+                'company_id' => $request->get('company'),
             ]
         ));
 
@@ -197,9 +198,9 @@ class JobsController extends Controller
                             'filename',
                             'disk',
                             'attachable_id',
-                            'attachable_type'
+                            'attachable_type',
                         ])->where('attachments.disk', config('app.system.disks.uploads'));
-                    }
+                    },
                 ]),
             ])->find($job->id, [
                 'id',
@@ -222,7 +223,7 @@ class JobsController extends Controller
                 'team_id',
                 'city_id',
                 'created_at',
-                'updated_at'
+                'updated_at',
             ])),
         ]);
     }
@@ -261,7 +262,7 @@ class JobsController extends Controller
                 'team_id'
             ),
             [
-                'negotiable' => $request->get('negotiable', false)
+                'negotiable' => $request->get('negotiable', false),
             ]
         ));
 

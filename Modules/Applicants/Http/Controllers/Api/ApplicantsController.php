@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Applicants\Http\Controllers\Api;
 
 use App\Repositories\Criteria\EagerLoad;
@@ -7,10 +8,7 @@ use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereHas;
 use App\Repositories\Criteria\WhereIn;
 use App\Repositories\Criteria\WhereKey;
-use App\Repositories\Criteria\WherePublished;
-use App\Repositories\Criteria\WhereUser;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
@@ -21,7 +19,6 @@ use Modules\Applicants\Entities\Applicant;
 use Modules\Applicants\Http\Requests\ApiStoreApplicantStatusRequest;
 use Modules\Applicants\Repositories\Contracts\ApplicantsRepository;
 use Modules\Applicants\Transformers\Api\ApplicantsResource;
-use Modules\Applicants\Transformers\CandidateResource;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
 use Modules\Users\Repositories\Contracts\UsersRepository;
@@ -54,7 +51,7 @@ class ApplicantsController extends Controller
                 }),
                 new WhereHas('candidate', function (Builder $query) {
                     $query->where('users.id', auth()->user()->id);
-                })
+                }),
             ])->all()
         );
 
@@ -74,7 +71,7 @@ class ApplicantsController extends Controller
                 'message',
             ),
             [
-                'user_id' => $user->id
+                'user_id' => $user->id,
             ]
         ));
 
@@ -84,10 +81,10 @@ class ApplicantsController extends Controller
         ])->get();
 
         $attachments->each(function ($attachment) use ($applicant, $user) {
-            if (!$attachment->attachable_type) {
+            if (! $attachment->attachable_type) {
                 $applicant->attachments()->save($attachment);
 
-                if (!$attachment->user_id) {
+                if (! $attachment->user_id) {
                     $attachment->user_id = $user->id;
                     $attachment->save();
                 }
@@ -102,14 +99,12 @@ class ApplicantsController extends Controller
             }
         });
 
-
-
         return $this->response->json(
             [
                 'message' => __('The (:item) has been successfully created', ['item' => 'applicant']),
                 'applicant' => new ApplicantsResource(
                     $applicant->fresh()->load(['job.company', 'candidate', 'attachments'])
-                )
+                ),
             ],
             Response::HTTP_OK,
             [],
@@ -136,7 +131,6 @@ class ApplicantsController extends Controller
             }),
         ])->find($applicant->id));
 
-
         return $this->response->json(['data' => $applicant], Response::HTTP_OK, [], JSON_PRESERVE_ZERO_FRACTION);
     }
 
@@ -148,7 +142,7 @@ class ApplicantsController extends Controller
     public function destroy(Request $request)
     {
         $items = $this->applicantsRepository->withCriteria([
-            new WhereKey($request->selected)
+            new WhereKey($request->selected),
         ])->get();
 
         foreach ($items as $item) {

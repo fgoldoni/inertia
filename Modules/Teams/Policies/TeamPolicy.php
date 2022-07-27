@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Policies;
 
 use App\Models\User;
@@ -19,12 +20,13 @@ class TeamPolicy
     public function create(User $user): bool
     {
         dd($user);
+
         return $user->hasPermissionTo('create_teams');
     }
 
     public function update(User $user, Team $model = null): bool
     {
-        return $user->hasPermissionTo('update_teams') && ((int)$user->currentTeam->id === (int)$model->team_id);
+        return $user->hasPermissionTo('update_teams') && ((int) $user->currentTeam->id === (int) $model->team_id);
     }
 
     public function edit(User $user, Team $model): bool

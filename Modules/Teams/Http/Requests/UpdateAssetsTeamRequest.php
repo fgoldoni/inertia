@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -19,7 +20,7 @@ class UpdateAssetsTeamRequest extends FormRequest
                 Rule::exists('attachments', 'id')
                     ->where(function ($query) {
                         $query->where('user_id', request()->user()->id);
-                    })
+                    }),
             ],
         ];
     }

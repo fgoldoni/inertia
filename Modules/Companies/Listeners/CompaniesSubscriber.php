@@ -1,9 +1,10 @@
 <?php
+
 namespace Modules\Companies\Listeners;
 
 use App\Models\User;
-use Modules\Companies\Entities\Company;
 use Illuminate\Support\Facades\Notification;
+use Modules\Companies\Entities\Company;
 use Modules\Companies\Notifications\CompanyCreatedNotification;
 use Modules\Companies\Notifications\CompanyDeletedNotification;
 use Modules\Companies\Notifications\CompanyRestoredNotification;
@@ -16,9 +17,9 @@ class CompaniesSubscriber
 
     public function subscribe($events)
     {
-        $events->listen('eloquent.created: ' . Company::class, $this->handleCompanyCreated(...));
-        $events->listen('eloquent.deleting: ' . Company::class, $this->handleCompanyDeleted(...));
-        $events->listen('eloquent.restored: ' . Company::class, $this->handleCompanyRestored(...));
+        $events->listen('eloquent.created: '.Company::class, $this->handleCompanyCreated(...));
+        $events->listen('eloquent.deleting: '.Company::class, $this->handleCompanyDeleted(...));
+        $events->listen('eloquent.restored: '.Company::class, $this->handleCompanyRestored(...));
     }
 
     public function handleCompanyCreated(Company $company)

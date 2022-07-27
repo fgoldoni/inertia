@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Jobs\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -43,7 +44,7 @@ class UpdateJobRequest extends FormRequest
                 Rule::exists('attachments', 'id')
                 ->where(function ($query) {
                     //$query->where('user_id', request()->user()->id);
-                })
+                }),
             ],
         ];
     }

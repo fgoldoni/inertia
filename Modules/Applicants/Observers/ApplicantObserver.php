@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Applicants\Observers;
 
 use Modules\Applicants\Entities\Applicant;

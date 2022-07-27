@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Companies\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -13,8 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Inertia\Inertia;
 use Modules\Companies\Entities\Company;
-use Modules\Companies\Http\Requests\UpdateCompanyRequest;
 use Modules\Companies\Http\Requests\StoreCompanyRequest;
+use Modules\Companies\Http\Requests\UpdateCompanyRequest;
 use Modules\Companies\Repositories\Contracts\CompaniesRepository;
 
 class CompaniesController extends Controller
@@ -56,12 +57,12 @@ class CompaniesController extends Controller
         return $this->index([
             'editing' => $this->companiesRepository->make([
                 'id' => null,
-                'name' => 'test' . uniqid(),
+                'name' => 'test'.uniqid(),
                 'content' => 'test',
-                'email' => 'test' . uniqid() . '@test.com',
+                'email' => 'test'.uniqid().'@test.com',
                 'phone' => '+4915736795436',
-                'online' => true
-            ])
+                'online' => true,
+            ]),
         ]);
     }
 
@@ -70,7 +71,7 @@ class CompaniesController extends Controller
         $company = $this->companiesRepository->create(array_merge(
             $request->only('name', 'content', 'email', 'phone', 'online'),
             [
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
             ]
         ));
 
@@ -95,7 +96,7 @@ class CompaniesController extends Controller
         return $this->index([
             'editing' => $this->companiesRepository->withCriteria([
                 new EagerLoad(['jobs:id,company_id']),
-            ])->find($company->id, ['id', 'name', 'content', 'email', 'phone', 'user_id', 'online', 'created_at', 'updated_at'])
+            ])->find($company->id, ['id', 'name', 'content', 'email', 'phone', 'user_id', 'online', 'created_at', 'updated_at']),
         ]);
     }
 

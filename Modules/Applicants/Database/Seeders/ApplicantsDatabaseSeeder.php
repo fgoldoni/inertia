@@ -1,9 +1,9 @@
 <?php
+
 namespace Modules\Applicants\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Jobs\Entities\Job;
+use Illuminate\Database\Seeder;
 
 class ApplicantsDatabaseSeeder extends Seeder
 {

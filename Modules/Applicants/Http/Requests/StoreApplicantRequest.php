@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Applicants\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -22,7 +23,7 @@ class StoreApplicantRequest extends FormRequest
             'user_id' => [
                 'required',
                 Rule::exists('users', 'id'),
-                new ApplicantRule($this->job_id)
+                new ApplicantRule($this->job_id),
             ],
             'message' => ['nullable', 'min:4'],
             'phone' => ['nullable', 'min:6', new Phone()],

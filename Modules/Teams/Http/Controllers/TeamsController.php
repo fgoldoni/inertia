@@ -1,19 +1,16 @@
 <?php
+
 namespace Modules\Teams\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Repositories\Criteria\EagerLoad;
-use App\Repositories\Criteria\Has;
 use App\Repositories\Criteria\OrderBy;
-use App\Repositories\Criteria\Where;
-use App\Repositories\Criteria\WhereHas;
 use App\Repositories\Criteria\WhereKey;
 use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WhereWithoutAdmin;
 use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
@@ -23,13 +20,10 @@ use Laravel\Jetstream\Jetstream;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
-use Modules\Jobs\Entities\Job;
-use Modules\Jobs\Transformers\JobResource;
 use Modules\Teams\Http\Requests\StoreTeamRequest;
 use Modules\Teams\Http\Requests\UpdateTeamRequest;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
 use Modules\Teams\Services\Contracts\TeamsServiceInterface;
-use Modules\Teams\Transformers\TeamResource;
 
 class TeamsController extends Controller
 {
@@ -102,7 +96,7 @@ class TeamsController extends Controller
             )
         );
 
-        return $this->index([#
+        return $this->index([//
             'availableRoles' => array_values(Jetstream::$roles),
             'editing' => [
                 'id' => null,
@@ -119,10 +113,9 @@ class TeamsController extends Controller
 
                 'logs' => [],
                 'colors' => $this->teamsService->colors(),
-            ]
+            ],
         ]);
     }
-
 
     public function store(StoreTeamRequest $request)
     {
@@ -141,7 +134,7 @@ class TeamsController extends Controller
         return $this->response->json(
             [
                 'team' => $this->teamsService->findTeam($team->id),
-                'message' => __('The Team (:item) has been successfully created', ['item' => $team->name])
+                'message' => __('The Team (:item) has been successfully created', ['item' => $team->name]),
             ],
             Response::HTTP_OK,
             [],
@@ -188,7 +181,7 @@ class TeamsController extends Controller
         return $this->response->json(
             [
                 'team' => $this->teamsService->findTeam($team->id),
-                'message' => __('The Company (:item) has been successfully updated', ['item' => $team->name])
+                'message' => __('The Company (:item) has been successfully updated', ['item' => $team->name]),
             ],
             Response::HTTP_OK,
             [],

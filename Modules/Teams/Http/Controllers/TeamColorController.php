@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Http\Controllers;
 
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -26,6 +27,7 @@ class TeamColorController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -35,6 +37,7 @@ class TeamColorController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Renderable
      */
     public function store(Request $request)
@@ -44,7 +47,8 @@ class TeamColorController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -54,7 +58,8 @@ class TeamColorController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function edit($id)
@@ -69,7 +74,7 @@ class TeamColorController extends Controller
         return $this->response->json(
             [
                 'team' => $this->teamsService->findTeam($team->id),
-                'message' => __('The Color has been successfully updated to :item', ['item' => $team->color->value])
+                'message' => __('The Color has been successfully updated to :item', ['item' => $team->color->value]),
             ],
             Response::HTTP_OK,
             [],
@@ -79,7 +84,8 @@ class TeamColorController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function destroy($id)

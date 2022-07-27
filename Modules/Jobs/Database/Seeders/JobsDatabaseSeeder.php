@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Jobs\Database\Seeders;
 
 use App\Models\User;
@@ -37,7 +38,6 @@ class JobsDatabaseSeeder extends Seeder
 
             return ['team_id' => $user->currentTeam()->first()->id];
         })->create(['live_at' => $faker->dateTimeInInterval('now', '-10 days')])->each(function ($job) {
-
             $this->syncCategories($job);
 
             $job->company_id = Company::allTeams()->where('team_id', $job->team_id)->inRandomOrder()->first()?->id;
@@ -78,7 +78,7 @@ class JobsDatabaseSeeder extends Seeder
             $benefit->id,
             $experience->id,
             $careerLevel->id,
-            $applyType->id
+            $applyType->id,
         ], false);
     }
 }

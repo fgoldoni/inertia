@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Applicants\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -70,7 +71,7 @@ class ApplicantsController extends Controller
                 ]),
                 new WhereHas('job', function (Builder $query) {
                     $query->where('jobs.team_id', auth()->user()->currentTeam->id);
-                })
+                }),
             ])->paginate()->withQueryString()
                 ->through(fn ($applicant) => [
                     'id' => $applicant->id,
@@ -84,7 +85,7 @@ class ApplicantsController extends Controller
                     'created_at' => $applicant->created_at->format('d, M Y'),
                     'candidate' => [
                         'id' => $applicant->candidate->id,
-                        'name' => $applicant->candidate->name . ' ( ' . $applicant->candidate->email . ' ) ',
+                        'name' => $applicant->candidate->name.' ( '.$applicant->candidate->email.' ) ',
                     ],
                 ]),
 
@@ -112,8 +113,8 @@ class ApplicantsController extends Controller
                 'user_id' => null,
                 'phone' => '+4915736795436',
                 'message' => null,
-                'status' => Status::Pending
-            ]))
+                'status' => Status::Pending,
+            ])),
         ]);
     }
 
@@ -131,7 +132,7 @@ class ApplicantsController extends Controller
 
         return $this->response->json(
             [
-                'message' => __('The (:item) has been successfully created', ['item' => 'applicant'])
+                'message' => __('The (:item) has been successfully created', ['item' => 'applicant']),
             ],
             Response::HTTP_OK,
             [],
@@ -201,9 +202,9 @@ class ApplicantsController extends Controller
             [
                 'model' => new ApplicantsResource($applicant->load([
                     'candidate',
-                    'job' => fn ($query) => $query->with('city')
+                    'job' => fn ($query) => $query->with('city'),
                 ])),
-                'message' => __('The Company (:item) has been successfully updated', ['item' => 'applicant'])
+                'message' => __('The Company (:item) has been successfully updated', ['item' => 'applicant']),
             ],
             Response::HTTP_OK,
             [],
@@ -222,9 +223,9 @@ class ApplicantsController extends Controller
             [
                 'model' => new ApplicantsResource($applicant->load([
                     'candidate',
-                    'job' => fn ($query) => $query->with('city')
+                    'job' => fn ($query) => $query->with('city'),
                 ])),
-                'message' => __('The Status has been successfully updated')
+                'message' => __('The Status has been successfully updated'),
             ],
             Response::HTTP_OK,
             [],
@@ -235,7 +236,7 @@ class ApplicantsController extends Controller
     public function destroy($selected)
     {
         $items = $this->applicantsRepository->withCriteria([
-            new WhereKey(explode(',', (string) $selected))
+            new WhereKey(explode(',', (string) $selected)),
         ])->get();
 
         foreach ($items as $item) {

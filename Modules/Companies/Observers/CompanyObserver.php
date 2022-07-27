@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Companies\Observers;
 
 use Modules\Companies\Entities\Company;

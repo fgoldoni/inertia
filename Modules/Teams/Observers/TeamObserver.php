@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Observers;
 
 use App\Models\Team;

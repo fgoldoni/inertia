@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -27,7 +28,7 @@ class TeamsController extends Controller
             new EagerLoad([
                 'attachments' => function ($query) {
                     $query->where('attachments.disk', config('app.system.disks.uploads'));
-                }
+                },
             ]),
         ])->all());
 
@@ -50,9 +51,9 @@ class TeamsController extends Controller
             new EagerLoad([
                 'attachments' => function ($query) {
                     $query->where('attachments.disk', config('app.system.disks.uploads'));
-                }
+                },
             ]),
-            new Where('subdomain', $subdomain)
+            new Where('subdomain', $subdomain),
         ])->first());
 
         return $this->response->json(['data' => $data], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);

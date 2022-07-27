@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Jobs\Entities;
 
 use App\Models\User;
@@ -9,8 +10,8 @@ use App\Traits\JobAttribute;
 use App\Traits\UsedByTeams;
 use App\Traits\WithinDays;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -83,6 +84,7 @@ class Job extends Model
         foreach ($this->getTranslatableAttributes() as $field) {
             $attributes[$field] = $this->getTranslation($field, app()->getLocale());
         }
+
         return $attributes;
     }
 

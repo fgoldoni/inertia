@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -40,6 +41,7 @@ class TeamMemberController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -72,7 +74,7 @@ class TeamMemberController extends Controller
         return $this->response->json(
             [
                 'team' => $this->teamsService->findTeam($team->id),
-                'message' => __('The Invitation has been successfully sent')
+                'message' => __('The Invitation has been successfully sent'),
             ],
             Response::HTTP_OK,
             [],
@@ -82,7 +84,8 @@ class TeamMemberController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -92,7 +95,8 @@ class TeamMemberController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function edit($id)
@@ -102,7 +106,8 @@ class TeamMemberController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function update(Request $request, $id)
@@ -125,7 +130,7 @@ class TeamMemberController extends Controller
         return $this->response->json(
             [
                 'team' => $this->teamsService->findTeam($team->id),
-                'message' => __('The Membership has been successfully canceled')
+                'message' => __('The Membership has been successfully canceled'),
             ],
             Response::HTTP_OK,
             [],

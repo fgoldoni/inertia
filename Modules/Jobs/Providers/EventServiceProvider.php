@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Jobs\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -14,12 +15,12 @@ class EventServiceProvider extends ServiceProvider
     }
 
     protected $subscribe = [
-        JobsSubscriber::class
+        JobsSubscriber::class,
     ];
 
     protected $listen = [
         JobViewCountEvent::class => [
-            JobViewCountListener::class
-        ]
+            JobViewCountListener::class,
+        ],
     ];
 }

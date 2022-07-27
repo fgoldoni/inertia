@@ -1,9 +1,10 @@
 <?php
+
 namespace Modules\Jobs\Listeners;
 
 use App\Models\User;
-use Modules\Jobs\Entities\Job;
 use Illuminate\Support\Facades\Notification;
+use Modules\Jobs\Entities\Job;
 use Modules\Jobs\Notifications\JobCreatedNotification;
 use Modules\Jobs\Notifications\JobDeletedNotification;
 use Modules\Jobs\Notifications\JobRestoredNotification;
@@ -16,9 +17,9 @@ class JobsSubscriber
 
     public function subscribe($events)
     {
-        $events->listen('eloquent.created: ' . Job::class, $this->handleJobCreated(...));
-        $events->listen('eloquent.deleting: ' . Job::class, $this->handleJobDeleted(...));
-        $events->listen('eloquent.restored: ' . Job::class, $this->handleJobRestored(...));
+        $events->listen('eloquent.created: '.Job::class, $this->handleJobCreated(...));
+        $events->listen('eloquent.deleting: '.Job::class, $this->handleJobDeleted(...));
+        $events->listen('eloquent.restored: '.Job::class, $this->handleJobRestored(...));
     }
 
     public function handleJobCreated(Job $job)

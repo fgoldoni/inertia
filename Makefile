@@ -80,6 +80,16 @@ server: ## Load phpMyAdmin server
 test: ## phpunit test
 	./vendor/bin/phpunit --debug
 
+pint: ## phpunit test
+	 ./vendor/bin/pint Modules/Companies/Database -v
+	 ./vendor/bin/pint Modules/Companies/Entities -v
+	 ./vendor/bin/pint Modules/Companies/Http -v
+	 ./vendor/bin/pint Modules/Companies/Providers -v
+	 ./vendor/bin/pint Modules/Companies/Notifications -v
+	 ./vendor/bin/pint Modules/Companies/Listeners -v
+	 ./vendor/bin/pint Modules/Companies/Observers -v
+	 ./vendor/bin/pint Modules/Companies/Policies -v
+
 optimize: install ## optimize
 		$(PHP) artisan cache:clear & $(PHP) artisan config:clear & $(PHP) artisan route:clear & $(PHP) artisan view:clear
 

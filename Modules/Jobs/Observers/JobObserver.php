@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Jobs\Observers;
 
 use Modules\Jobs\Entities\Job;

@@ -1,9 +1,10 @@
 <?php
+
 namespace Modules\Companies\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class CompanyCreatedNotification extends Notification
 {
@@ -35,7 +36,7 @@ class CompanyCreatedNotification extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

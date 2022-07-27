@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Listeners;
 
 use App\Models\Team;
@@ -16,9 +17,9 @@ class TeamsSubscriber
 
     public function subscribe($events)
     {
-        $events->listen('eloquent.created: ' . Team::class, $this->handleTeamCreated(...));
-        $events->listen('eloquent.deleting: ' . Team::class, $this->handleTeamDeleted(...));
-        $events->listen('eloquent.restored: ' . Team::class, $this->handleTeamRestored(...));
+        $events->listen('eloquent.created: '.Team::class, $this->handleTeamCreated(...));
+        $events->listen('eloquent.deleting: '.Team::class, $this->handleTeamDeleted(...));
+        $events->listen('eloquent.restored: '.Team::class, $this->handleTeamRestored(...));
     }
 
     public function handleTeamCreated(Team $job)

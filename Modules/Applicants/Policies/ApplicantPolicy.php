@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Applicants\Policies;
 
 use App\Models\User;
@@ -24,7 +25,7 @@ class ApplicantPolicy
     public function update(User $user, Applicant $model = null): bool
     {
         return $user->hasPermissionTo('update_applicants')
-            && ((int) $user->currentTeam->id === (int)$model->job->team_id);
+            && ((int) $user->currentTeam->id === (int) $model->job->team_id);
     }
 
     public function edit(User $user, Applicant $model): bool

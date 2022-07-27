@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Companies\Policies;
 
 use App\Models\User;
@@ -23,7 +24,7 @@ class CompanyPolicy
 
     public function update(User $user, Company $model = null): bool
     {
-        return $user->hasPermissionTo('update_companies') && ((int)$user->currentTeam->id === (int)$model->team_id);
+        return $user->hasPermissionTo('update_companies') && ((int) $user->currentTeam->id === (int) $model->team_id);
     }
 
     public function edit(User $user, Company $model): bool

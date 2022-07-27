@@ -1,12 +1,11 @@
 <?php
+
 namespace Modules\Companies\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Modules\Categories\Entities\Category;
-use Modules\Categories\Enums\CategoryType;
 use Modules\Companies\Entities\Company;
-use Modules\Jobs\Entities\Job;
 
 class CompaniesDatabaseSeeder extends Seeder
 {
@@ -27,7 +26,7 @@ class CompaniesDatabaseSeeder extends Seeder
         $industry = Category::industry()->limit(10)->inRandomOrder()->first();
 
         $company->syncCategories([
-            $industry->id
+            $industry->id,
         ], false);
     }
 }

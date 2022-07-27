@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -35,6 +36,7 @@ class TeamInvitationController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -44,6 +46,7 @@ class TeamInvitationController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Renderable
      */
     public function store(Request $request)
@@ -53,7 +56,8 @@ class TeamInvitationController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -63,7 +67,8 @@ class TeamInvitationController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function edit($id)
@@ -73,7 +78,8 @@ class TeamInvitationController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function update(Request $request, $id)
@@ -90,7 +96,7 @@ class TeamInvitationController extends Controller
         return $this->response->json(
             [
                 'team' => $this->teamsService->findTeam($invitation->team->id),
-                'message' => __('The Invitation has been successfully canceled')
+                'message' => __('The Invitation has been successfully canceled'),
             ],
             Response::HTTP_OK,
             [],

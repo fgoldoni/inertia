@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Http\Controllers;
 
 use App\Models\Team;
@@ -36,6 +37,7 @@ class AssetsTeamsController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -45,6 +47,7 @@ class AssetsTeamsController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Renderable
      */
     public function store(Request $request)
@@ -54,7 +57,8 @@ class AssetsTeamsController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -64,7 +68,8 @@ class AssetsTeamsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function edit($id)
@@ -92,7 +97,8 @@ class AssetsTeamsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function destroy($id)

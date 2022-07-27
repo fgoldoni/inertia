@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Jobs\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -42,9 +43,9 @@ class StoreJobRequest extends FormRequest
                 Rule::exists('attachments', 'id')
                     ->where(function ($query) {
                         //$query->where('user_id', request()->user()->id);
-                    })
+                    }),
             ],
-            'tags'       => 'array',
+            'tags' => 'array',
         ];
     }
 

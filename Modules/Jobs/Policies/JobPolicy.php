@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Jobs\Policies;
 
 use App\Models\User;
@@ -23,7 +24,7 @@ class JobPolicy
 
     public function update(User $user, Job $model = null): bool
     {
-        return $user->hasPermissionTo('update_jobs') && ((int)$user->currentTeam->id === (int)$model->team_id);
+        return $user->hasPermissionTo('update_jobs') && ((int) $user->currentTeam->id === (int) $model->team_id);
     }
 
     public function edit(User $user, Job $model): bool
