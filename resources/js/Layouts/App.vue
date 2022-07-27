@@ -44,6 +44,15 @@ onMounted(() => {
     });
 })
 
+const switchToTeam = (team) => {
+    Inertia.put(route('current-team.update'), {
+        team_id: team.id,
+    }, {
+        preserveState: false,
+    });
+};
+
+
 
 </script>
 

@@ -14,10 +14,9 @@ import BaseListbox from '@/Shared/BaseListbox.vue'
 
 const props = defineProps({
     modelValue: [Object, Array],
-    permissions: Object,
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["closeModal"]);
 
 const form = reactive({
     id: props.modelValue.id,
@@ -30,10 +29,10 @@ const form = reactive({
     processing: false,
 })
 
-const updateTeamOwner = () => {
+const createTeam = () => {
     form.processing = true;
 
-    axios.put(route('admin.teams.update', form.id), pickBy({
+    axios.post(route('admin.teams.store'), pickBy({
         name: form.name,
         subdomain: form.subdomain,
         display_name: form.display_name,
@@ -48,7 +47,7 @@ const updateTeamOwner = () => {
             type: 'success',
         })
 
-        emit('update:modelValue', response.data.team)
+        emit('closeModal')
 
     }).catch(error => {
         form.processing = false;
@@ -59,15 +58,9 @@ const updateTeamOwner = () => {
 </script>
 
 <template>
-    <FormSection :title="__('Team Owner')" :errors="form.errors" @submitted="updateTeamOwner" default-open>
+    <FormSection :title="__('Create Team')" :errors="form.errors" @submitted="createTeam" default-open>
 
         <template #form>
-
-            <div class="col-span-1 sm:col-span-2" v-if="!props.permissions.canUpdateTeam">
-
-                <Information text="You just have a read only access for the Team"></Information>
-
-            </div>
 
             <div class="col-span-1">
 
@@ -80,7 +73,6 @@ const updateTeamOwner = () => {
                     type="text"
                     class="mt-1 block w-full"
                     required
-                    :disabled="!props.permissions.canUpdateTeam"
                     autofocus/>
 
                 <JetInputError :message="form.errors.get('name')" class="mt-2"/>
@@ -97,7 +89,6 @@ const updateTeamOwner = () => {
                     v-model="form.display_name"
                     type="text"
                     class="mt-1 block w-full"
-                    :disabled="!props.permissions.canUpdateTeam"
                     required/>
 
                 <JetInputError :message="form.errors.get('display_name')" class="mt-2"/>
@@ -118,7 +109,7 @@ const updateTeamOwner = () => {
 
                 <div class="mt-1 flex rounded-md shadow-sm">
                     <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> https:// </span>
-                    <input type="text" name="subdomain" id="subdomain"  v-model="form.subdomain" class="focus:ring-primary-500 focus:border-primary-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300" :disabled="!props.permissions.canUpdateTeam" placeholder="example" />
+                    <input type="text" name="subdomain" id="subdomain"  v-model="form.subdomain" class="focus:ring-primary-500 focus:border-primary-500 flex-1 block w-full rounded-none sm:text-sm border-gray-300" placeholder="example" />
                     <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> .wedo37.com </span>
                 </div>
 
@@ -127,7 +118,7 @@ const updateTeamOwner = () => {
             </div>
         </template>
 
-        <template v-if="props.permissions.canUpdateTeam" #actions>
+        <template #actions>
             <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Save
             </JetButton>

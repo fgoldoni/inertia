@@ -579,9 +579,19 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     });
+
+    var switchToTeam = function switchToTeam(team) {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.put(route('current-team.update'), {
+        team_id: team.id
+      }, {
+        preserveState: false
+      });
+    };
+
     var __returned__ = {
       logout: logout,
       sidebarOpen: sidebarOpen,
+      switchToTeam: switchToTeam,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia,
@@ -1551,7 +1561,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
           key: team.id,
           onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-            return _ctx.switchToTeam(team);
+            return $setup.switchToTeam(team);
           }, ["prevent"])
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetDropdownLink"], {
           as: "button"

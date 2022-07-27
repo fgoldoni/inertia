@@ -46,6 +46,7 @@ class Team extends JetstreamTeam
         'personal_team',
         'avatar_path',
         'color',
+        'user_id',
     ];
 
     protected $appends = [

@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Teams\Services;
 
+use App\Models\Team;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\WithTrashed;
 use App\Services\ServiceAbstract;
@@ -192,5 +193,16 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
                 'selectedColor' => "ring-$violet-500",
             ],
         ]);
+    }
+
+    public function create(array $attributes): Team
+    {
+        return $this->repository->create(array_merge(
+            $attributes,
+            [
+                'user_id' => auth()->user()->id,
+                'personal_team' => false,
+            ]
+        ));
     }
 }

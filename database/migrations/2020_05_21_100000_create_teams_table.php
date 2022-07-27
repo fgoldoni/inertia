@@ -24,10 +24,9 @@ return new class() extends Migration {
             $table->string('name');
             $table->string('display_name')->nullable();
             $table->string('subdomain')->unique()->nullable();
-            $table->boolean('personal_team');
-            $table->string('email')->unique()->nullable();
-            $table->string('phone')->nullable();
-            $table->boolean('online')->nullable();
+            $table->string('domain')->nullable();
+            $table->boolean('personal_team')->default(false);
+            $table->boolean('online')->default(true);
             $table->string('color')->default('pink');
 
             $table->string('avatar_path', 2048)->nullable();

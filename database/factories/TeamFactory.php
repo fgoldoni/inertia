@@ -26,6 +26,7 @@ class TeamFactory extends Factory
             'name' => $this->faker->unique()->company(),
             'user_id' => User::factory(),
             'subdomain' => Str::lower($this->faker->unique()->firstName),
+            'domain' => env('FRONTEND_DOMAIN'),
             'display_name' => $this->faker->unique()->company(),
             'personal_team' => true,
         ];

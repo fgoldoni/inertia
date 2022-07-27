@@ -1,11 +1,12 @@
 <?php
 namespace Modules\Teams\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Team;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
@@ -49,6 +50,8 @@ class TeamMemberController extends Controller
     public function store(Request $request, $teamId)
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
+
+        $this->authorize('create', Team::class);
 
         if (Features::sendsTeamInvitations()) {
             app(InvitesTeamMembers::class)->invite(
@@ -110,6 +113,8 @@ class TeamMemberController extends Controller
     public function destroy(Request $request, $teamId, $userId)
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
+
+        $this->authorize('update', $team);
 
         app(RemovesTeamMembers::class)->remove(
             $request->user(),
