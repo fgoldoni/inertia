@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Categories\Providers;
 
 use Illuminate\Support\ServiceProvider;

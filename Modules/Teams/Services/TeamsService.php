@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Services;
 
 use App\Models\Team;
@@ -37,9 +38,9 @@ class TeamsService extends ServiceAbstract implements TeamsServiceInterface
                         'filename',
                         'disk',
                         'attachable_id',
-                        'attachable_type'
+                        'attachable_type',
                     ])->where('attachments.disk', config('app.system.disks.uploads'));
-                }
+                },
             ]),
             new WithTrashed(),
         ])->find($id));

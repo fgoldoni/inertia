@@ -3,11 +3,9 @@
 namespace Modules\Comments\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ApiViewCommentRequest extends FormRequest
 {
-
     public function rules()
     {
         return [

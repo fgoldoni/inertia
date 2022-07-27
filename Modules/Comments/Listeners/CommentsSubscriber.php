@@ -17,9 +17,9 @@ class CommentsSubscriber
 
     public function subscribe($events)
     {
-        $events->listen('eloquent.created: ' . Comment::class, $this->handleCommentCreated(...));
-        $events->listen('eloquent.deleting: ' . Comment::class, $this->handleCommentDeleted(...));
-        $events->listen('eloquent.restored: ' . Comment::class, $this->handleCommentRestored(...));
+        $events->listen('eloquent.created: '.Comment::class, $this->handleCommentCreated(...));
+        $events->listen('eloquent.deleting: '.Comment::class, $this->handleCommentDeleted(...));
+        $events->listen('eloquent.restored: '.Comment::class, $this->handleCommentRestored(...));
     }
 
     public function handleCommentCreated(Comment $comment)

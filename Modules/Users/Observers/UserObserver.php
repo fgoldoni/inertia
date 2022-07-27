@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Users\Observers;
 
 use App\Models\User;

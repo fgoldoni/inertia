@@ -1,8 +1,9 @@
 <?php
+
 namespace Modules\Tags\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Modules\Tags\Entities\Tag;
 
 class TagsDatabaseSeeder extends Seeder
@@ -11,6 +12,7 @@ class TagsDatabaseSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     *
      * @throws \Exception
      */
     public function run()

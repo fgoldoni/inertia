@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Attachments\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -15,7 +16,7 @@ class ApiStoreAttachmentRequest extends FormRequest
         return [
             'disk' => ['nullable', 'string', 'in:uploads,avatars'],
             'type' => ['nullable', 'string', 'in:resumes,avatars'],
-            'attachment' => 'required|file|mimes:doc,docx,pdf|max:10000'
+            'attachment' => 'required|file|mimes:doc,docx,pdf|max:10000',
         ];
     }
 

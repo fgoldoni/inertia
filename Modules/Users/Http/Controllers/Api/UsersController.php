@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Users\Http\Controllers\Api;
 
 use App\Repositories\Criteria\Limit;
@@ -22,7 +23,7 @@ class UsersController extends Controller
     {
         $data = $this->usersRepository->withCriteria([
             new WhereLike(['users.id', 'users.name', 'users.email'], $this->request->get('search')),
-            new Limit(10)
+            new Limit(10),
         ])->get(['id', 'name', 'email', 'profile_photo_path']);
 
         return $this->response->json(['data' => $data], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
@@ -30,6 +31,7 @@ class UsersController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Response
      */
     public function store(Request $request)
@@ -39,7 +41,8 @@ class UsersController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Response
      */
     public function show($id)
@@ -49,7 +52,8 @@ class UsersController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -59,7 +63,8 @@ class UsersController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Response
      */
     public function destroy($id)

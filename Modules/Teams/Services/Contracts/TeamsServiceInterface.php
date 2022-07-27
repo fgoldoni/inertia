@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Services\Contracts;
 
 use App\Models\Team;

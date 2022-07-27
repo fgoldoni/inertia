@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Countries\Http\Controllers\Api;
 
 use Illuminate\Contracts\Support\Renderable;
@@ -9,6 +10,7 @@ class DivisionsController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
      * @return Renderable
      */
     public function index()
@@ -18,6 +20,7 @@ class DivisionsController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -27,6 +30,7 @@ class DivisionsController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Renderable
      */
     public function store(Request $request)
@@ -36,7 +40,8 @@ class DivisionsController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -46,7 +51,8 @@ class DivisionsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function edit($id)
@@ -56,7 +62,8 @@ class DivisionsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function update(Request $request, $id)
@@ -66,7 +73,8 @@ class DivisionsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function destroy($id)

@@ -1,10 +1,11 @@
 <?php
+
 namespace Modules\Users\Notifications;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class UserCreatedNotification extends Notification
 {
@@ -31,7 +32,7 @@ class UserCreatedNotification extends Notification
     {
         return [
             'title' => 'New User',
-            'msg' => 'User ' . $this->user->name . ' has been successfully created',
+            'msg' => 'User '.$this->user->name.' has been successfully created',
             'url' => '#',
             'icon' => 'GiftIcon',
             'time' => $this->user->created_at->format('c'),

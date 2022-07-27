@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Comments\Observers;
 
 use Modules\Comments\Entities\Comment;

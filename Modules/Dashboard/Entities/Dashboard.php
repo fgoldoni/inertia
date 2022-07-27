@@ -1,9 +1,10 @@
 <?php
+
 namespace Modules\Dashboard\Entities;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Dashboard extends Model
 {

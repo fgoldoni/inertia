@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Attachments\Http\Controllers\Api;
 
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -30,7 +31,7 @@ class AttachmentsController extends Controller
     {
         $fileName = Storage::disk(config('app.system.disks.uploads'))
             ->put(
-                now()->format('Y') . '/' . now()->format('m'),
+                now()->format('Y').'/'.now()->format('m'),
                 $request->file('attachment'),
                 'public'
             );
@@ -59,7 +60,8 @@ class AttachmentsController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -69,7 +71,8 @@ class AttachmentsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function edit($id)
@@ -79,7 +82,8 @@ class AttachmentsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function update(Request $request, $id)
@@ -89,7 +93,8 @@ class AttachmentsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function destroy($id)

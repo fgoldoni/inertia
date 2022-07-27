@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Attachments\Http\Controllers;
 
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -25,6 +26,7 @@ class AttachmentsController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -38,14 +40,14 @@ class AttachmentsController extends Controller
 
         $request->file('file')
             ->store(
-                now()->format('Y') . '/' . now()->format('m'),
+                now()->format('Y').'/'.now()->format('m'),
                 $request->get('disk', config('app.system.disks.uploads'))
             );
 
         $attachment = $this->attachmentsRepository->create([
             'name' => $file->getClientOriginalName(),
             'disk' => $request->get('disk', config('app.system.disks.uploads')),
-            'filename' => now()->format('Y') . '/' . now()->format('m') . '/' . $file->hashName(),
+            'filename' => now()->format('Y').'/'.now()->format('m').'/'.$file->hashName(),
             'mime_type' => $file->getMimeType(),
             'user_id' => auth()->user()->id,
             'size' => $file->getSize(),
@@ -56,7 +58,8 @@ class AttachmentsController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -66,7 +69,8 @@ class AttachmentsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function edit($id)
@@ -76,7 +80,8 @@ class AttachmentsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function update(Request $request, $id)

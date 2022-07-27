@@ -1,10 +1,11 @@
 <?php
+
 namespace Modules\Users\Database\Seeders;
 
 use App\Models\Team;
 use App\Models\User;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 
 class SeedFakeUsersTableSeeder extends Seeder
 {
@@ -32,7 +33,7 @@ class SeedFakeUsersTableSeeder extends Seeder
             ->create([
                 'name' => 'Manager SG',
                 'trial_ends_at' => now()->addDays(14),
-                'email' => 'fotsa.goldoni@yahoo.fr'
+                'email' => 'fotsa.goldoni@yahoo.fr',
             ]);
 
         Team::where('id', 2)

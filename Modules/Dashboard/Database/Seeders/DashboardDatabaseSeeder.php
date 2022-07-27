@@ -1,8 +1,9 @@
 <?php
+
 namespace Modules\Dashboard\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Modules\Dashboard\Entities\Dashboard;
 
 class DashboardDatabaseSeeder extends Seeder
@@ -26,14 +27,14 @@ class DashboardDatabaseSeeder extends Seeder
                 'y' => 0,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'JobsComponent'
+                'component' => 'JobsComponent',
             ],
             2 => [
                 'x' => 0,
                 'y' => 0,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'JobsComponent'
+                'component' => 'JobsComponent',
             ],
         ]);
 
@@ -47,14 +48,14 @@ class DashboardDatabaseSeeder extends Seeder
                 'y' => 0,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'ApplicationComponent'
+                'component' => 'ApplicationComponent',
             ],
             2 => [
                 'x' => 4,
                 'y' => 0,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'ApplicationComponent'
+                'component' => 'ApplicationComponent',
             ],
         ]);
 
@@ -68,14 +69,14 @@ class DashboardDatabaseSeeder extends Seeder
                 'y' => 0,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'ReviewComponent'
+                'component' => 'ReviewComponent',
             ],
             2 => [
                 'x' => 8,
                 'y' => 0,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'ReviewComponent'
+                'component' => 'ReviewComponent',
             ],
         ]);
 
@@ -89,14 +90,14 @@ class DashboardDatabaseSeeder extends Seeder
                 'y' => 4,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'CompaniesComponent'
+                'component' => 'CompaniesComponent',
             ],
             2 => [
                 'x' => 0,
                 'y' => 4,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'CompaniesComponent'
+                'component' => 'CompaniesComponent',
             ],
         ]);
 
@@ -110,14 +111,14 @@ class DashboardDatabaseSeeder extends Seeder
                 'y' => 4,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'UsersComponent'
+                'component' => 'UsersComponent',
             ],
             2 => [
                 'x' => 4,
                 'y' => 4,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'UsersComponent'
+                'component' => 'UsersComponent',
             ],
         ]);
 
@@ -131,14 +132,14 @@ class DashboardDatabaseSeeder extends Seeder
                 'y' => 4,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'ShortlistedComponent'
+                'component' => 'ShortlistedComponent',
             ],
             2 => [
                 'x' => 8,
                 'y' => 4,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'ShortlistedComponent'
+                'component' => 'ShortlistedComponent',
             ],
         ]);
 
@@ -152,14 +153,14 @@ class DashboardDatabaseSeeder extends Seeder
                 'y' => 8,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'TeamsComponent'
+                'component' => 'TeamsComponent',
             ],
             2 => [
                 'x' => 0,
                 'y' => 8,
                 'w' => 4,
                 'h' => 4,
-                'component' => 'TeamsComponent'
+                'component' => 'TeamsComponent',
             ],
         ]);
 
@@ -173,14 +174,14 @@ class DashboardDatabaseSeeder extends Seeder
                 'y' => 8,
                 'w' => 4,
                 'h' => 8,
-                'component' => 'ActivitiesComponent'
+                'component' => 'ActivitiesComponent',
             ],
             2 => [
                 'x' => 4,
                 'y' => 8,
                 'w' => 4,
                 'h' => 8,
-                'component' => 'ActivitiesComponent'
+                'component' => 'ActivitiesComponent',
             ],
         ]);
 
@@ -194,14 +195,14 @@ class DashboardDatabaseSeeder extends Seeder
                 'y' => 16,
                 'w' => 6,
                 'h' => 10,
-                'component' => 'JobsNotificationComponent'
+                'component' => 'JobsNotificationComponent',
             ],
             2 => [
                 'x' => 0,
                 'y' => 16,
                 'w' => 6,
                 'h' => 10,
-                'component' => 'JobsNotificationComponent'
+                'component' => 'JobsNotificationComponent',
             ],
         ]);
 
@@ -215,14 +216,14 @@ class DashboardDatabaseSeeder extends Seeder
                 'y' => 16,
                 'w' => 6,
                 'h' => 10,
-                'component' => 'RegisteredWithinDaysComponent'
+                'component' => 'RegisteredWithinDaysComponent',
             ],
             2 => [
                 'x' => 6,
                 'y' => 16,
                 'w' => 6,
                 'h' => 10,
-                'component' => 'RegisteredWithinDaysComponent'
+                'component' => 'RegisteredWithinDaysComponent',
             ],
         ]);
     }

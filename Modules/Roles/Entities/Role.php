@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Roles\Entities;
 
 use Illuminate\Support\Facades\Cache;

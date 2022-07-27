@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Roles\Http\Controllers;
 
 use App\Repositories\Criteria\EagerLoad;
@@ -60,7 +61,7 @@ class RolesController extends Controller
             'editing' => new RoleResource($this->rolesRepository->make([
                 'id' => null,
                 'name' => 'test',
-                'display_name' => 'test'
+                'display_name' => 'test',
             ])),
         ]);
     }
@@ -93,7 +94,7 @@ class RolesController extends Controller
             'editing' => new RoleResource($this->rolesRepository->withCriteria([
                 new WithCount(['users']),
                 new EagerLoad(['users' => fn ($query) => $query->select('id', 'name', 'email', 'profile_photo_path')->orderBy('name'), 'permissions']),
-            ])->find($role->id))
+            ])->find($role->id)),
         ]);
     }
 
@@ -116,8 +117,7 @@ class RolesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return Renderable
      */
     public function destroy($id)

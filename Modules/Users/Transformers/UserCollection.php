@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Users\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -22,8 +23,8 @@ class UserCollection extends JsonResource
             'phone' => $this->phone,
             'role' => $this->roles->value('id') ?? Role::where('name', config('app.system.users.roles.manager'))->first()->id,
             'created_at' => $this->created_at?->formatLocalized('%d %B, %Y'),
-            'verified' => !is_null($this->email_verified_at),
-            'lastLogin' => Carbon::createFromTimestamp($this->sessions->value('last_activity'))->diffForHumans()
+            'verified' => ! is_null($this->email_verified_at),
+            'lastLogin' => Carbon::createFromTimestamp($this->sessions->value('last_activity'))->diffForHumans(),
         ];
     }
 }

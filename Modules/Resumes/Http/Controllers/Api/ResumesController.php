@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Resumes\Http\Controllers\Api;
 
 use App\Models\User;
@@ -33,6 +34,7 @@ class ResumesController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -42,6 +44,7 @@ class ResumesController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Renderable
      */
     public function store(Request $request)
@@ -51,7 +54,8 @@ class ResumesController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -61,7 +65,8 @@ class ResumesController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function edit($id)
@@ -71,7 +76,8 @@ class ResumesController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function update(Request $request, $id)
@@ -82,7 +88,7 @@ class ResumesController extends Controller
     public function destroy(Request $request)
     {
         $items = $this->attachmentsRepository->withCriteria([
-            new WhereKey($request->selected)
+            new WhereKey($request->selected),
         ])->get();
 
         foreach ($items as $item) {

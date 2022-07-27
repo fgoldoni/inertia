@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Users\Listeners;
 
 use App\Models\User;
@@ -15,9 +16,9 @@ class UsersSubscriber
 
     public function subscribe($events)
     {
-        $events->listen('eloquent.created: ' . User::class, $this->handleUserCreated(...));
-        $events->listen('eloquent.deleting: ' . User::class, $this->handleUserDeleted(...));
-        $events->listen('eloquent.restored: ' . User::class, $this->handleUserRestored(...));
+        $events->listen('eloquent.created: '.User::class, $this->handleUserCreated(...));
+        $events->listen('eloquent.deleting: '.User::class, $this->handleUserDeleted(...));
+        $events->listen('eloquent.restored: '.User::class, $this->handleUserRestored(...));
     }
 
     public function handleUserCreated(User $user)

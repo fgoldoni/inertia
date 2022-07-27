@@ -1,10 +1,11 @@
 <?php
+
 namespace Modules\Users\Notifications;
 
 use Grosv\LaravelPasswordlessLogin\PasswordlessLogin;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class AdminSendCredentials extends Notification
 {
@@ -24,7 +25,7 @@ class AdminSendCredentials extends Notification
         return (new MailMessage())
             ->subject(__('Welcome to GJob'))
             ->greeting("Hello {$notifiable->name}")
-            ->line(__('An account has been created for you as Administrator on the website: ') . url('/'))
+            ->line(__('An account has been created for you as Administrator on the website: ').url('/'))
             ->line("Email: {$notifiable->email} - Password: {$this->password}")
             ->line(__('You can use the following link to login:'))
             ->action('Login', PasswordlessLogin::forUser($notifiable)->generate())
@@ -34,7 +35,7 @@ class AdminSendCredentials extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

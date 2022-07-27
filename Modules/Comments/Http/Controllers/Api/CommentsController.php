@@ -6,22 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Where;
-use App\Repositories\Criteria\WhereHas;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Applicants\Repositories\Contracts\ApplicantsRepository;
-use Modules\Applicants\Transformers\Api\ApplicantsResource;
-use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Comments\Entities\Comment;
 use Modules\Comments\Http\Requests\ApiViewCommentRequest;
 use Modules\Comments\Repositories\Contracts\CommentsRepository;
-use Modules\Comments\Transformers\ApiCommentsResource;
-use Modules\Teams\Repositories\Contracts\TeamsRepository;
-use Modules\Users\Repositories\Contracts\UsersRepository;
 
 class CommentsController extends Controller
 {
@@ -57,6 +48,7 @@ class CommentsController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -66,7 +58,8 @@ class CommentsController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
+     *
+     * @param  Request  $request
      * @return Renderable
      */
     public function store(Request $request)
@@ -76,7 +69,8 @@ class CommentsController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -86,7 +80,8 @@ class CommentsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function edit($id)
@@ -96,8 +91,9 @@ class CommentsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
+     *
+     * @param  Request  $request
+     * @param  int  $id
      * @return Renderable
      */
     public function update(Request $request, $id)
@@ -107,7 +103,8 @@ class CommentsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function destroy($id)

@@ -6,6 +6,7 @@
  * Date: 24.09.18
  * Time: 21:18.
  */
+
 namespace Modules\Jobs\Repositories\Eloquent;
 
 use App\Repositories\RepositoryAbstract;
@@ -43,7 +44,7 @@ class EloquentJobsRepository extends RepositoryAbstract implements JobsRepositor
             [
                 'id' => (JobState::Hold)->value,
                 'name' => ucfirst((JobState::Hold)->value),
-            ]
+            ],
         ]);
     }
 
@@ -81,7 +82,7 @@ class EloquentJobsRepository extends RepositoryAbstract implements JobsRepositor
             [
                 'id' => (SalaryType::Year)->value,
                 'name' => ucfirst((SalaryType::Year)->value),
-            ]
+            ],
         ]);
     }
 }

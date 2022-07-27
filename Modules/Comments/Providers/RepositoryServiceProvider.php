@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Comments\Providers;
 
 use Illuminate\Support\ServiceProvider;

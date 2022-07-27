@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Dashboard\Entities;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;

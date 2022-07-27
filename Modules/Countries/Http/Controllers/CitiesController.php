@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Countries\Http\Controllers;
 
 use App\Repositories\Criteria\EagerLoad;
@@ -37,6 +38,7 @@ class CitiesController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -46,6 +48,7 @@ class CitiesController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Renderable
      */
     public function store(Request $request)
@@ -55,7 +58,8 @@ class CitiesController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -73,7 +77,7 @@ class CitiesController extends Controller
             'editing' => $this->citiesRepository->withCriteria([
                 new Select('id', 'name', 'full_name', 'country_id', 'division_id'),
                 new EagerLoad(['country:id,name,emoji', 'division:id,name']),
-            ])->find($city->id, ['id', 'name', 'full_name', 'country_id'])
+            ])->find($city->id, ['id', 'name', 'full_name', 'country_id']),
         ]);
     }
 
@@ -88,7 +92,8 @@ class CitiesController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function destroy($id)

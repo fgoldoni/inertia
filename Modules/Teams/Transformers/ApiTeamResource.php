@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -40,7 +41,7 @@ class ApiTeamResource extends JsonResource
                     'id' => $item->id,
                     'name' => $item->name,
                     'jobs_count' => $item->jobs_count,
-                ])->filter(fn ($item) => $item['jobs_count'] > 0)
+                ])->filter(fn ($item) => $item['jobs_count'] > 0),
         ];
     }
 }

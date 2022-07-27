@@ -6,6 +6,7 @@
  * Date: 24.09.18
  * Time: 21:18.
  */
+
 namespace Modules\Companies\Repositories\Eloquent;
 
 use App\Repositories\RepositoryAbstract;

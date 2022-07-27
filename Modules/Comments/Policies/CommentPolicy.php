@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Comments\Policies;
 
 use App\Models\User;
@@ -28,7 +29,7 @@ class CommentPolicy
 
     public function update(User $user, Comment $model = null): bool
     {
-        return $user->hasPermissionTo('update_comments') && ((int)$user->currentTeam->id === (int)$model->team_id);
+        return $user->hasPermissionTo('update_comments') && ((int) $user->currentTeam->id === (int) $model->team_id);
     }
 
     public function edit(User $user, Comment $model): bool

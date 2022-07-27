@@ -1,10 +1,11 @@
 <?php
+
 namespace Modules\Categories\Entities;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Categories\Builders\CategoryBuilder;
 use Modules\Categories\Collections\CategoryCollection;
 use Modules\Categories\Database\factories\CategoryFactory;
@@ -53,7 +54,7 @@ class Category extends Model
         );
     }
 
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')

@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Users\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -39,7 +40,7 @@ class UsersController extends Controller
     {
         request()->validate([
             'direction' => ['in:asc,desc'],
-            'field' => ['in:id,name,email']
+            'field' => ['in:id,name,email'],
         ]);
 
         Inertia::share('can', fn (Request $request) => $request->user() ? [
@@ -75,7 +76,7 @@ class UsersController extends Controller
                     'can' => [
                         'impersonate' => $this->request->user()->canImpersonate()
                             && $user->canBeImpersonated()
-                            && !$user->trashed(),
+                            && ! $user->trashed(),
                         'delete' => $this->request->user()->hasPermissionTo('edit_users'),
                         'edit' => $this->request->user()->hasPermissionTo('edit_users'),
                     ],
@@ -108,7 +109,7 @@ class UsersController extends Controller
         return $this->index([
             'editing' => new UserCollection($this->usersRepository->make([
                 'name' => 'test',
-                'email' => 'test' . uniqid() . '@test.com',
+                'email' => 'test'.uniqid().'@test.com',
                 'phone' => '+4915736795436',
             ])),
         ]);
@@ -120,7 +121,7 @@ class UsersController extends Controller
             $request->only('name', 'email', 'phone'),
             [
                 'email_verified_at' => now(),
-                'password' => bcrypt($request->get('password'))
+                'password' => bcrypt($request->get('password')),
             ]
         ));
 
@@ -156,7 +157,7 @@ class UsersController extends Controller
                     $query->orderBy('last_activity', 'desc')->limit(1);
                 }]),
                 new WithTrashed(),
-            ])->find($user->id))
+            ])->find($user->id)),
         ]);
     }
 

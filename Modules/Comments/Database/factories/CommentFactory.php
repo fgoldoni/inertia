@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Comments\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -7,7 +8,6 @@ use Modules\Jobs\Entities\Job;
 
 class CommentFactory extends Factory
 {
-
     protected $model = Comment::class;
 
     /**

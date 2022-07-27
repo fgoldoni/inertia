@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teams\Enums;
 
 enum ColorType: string

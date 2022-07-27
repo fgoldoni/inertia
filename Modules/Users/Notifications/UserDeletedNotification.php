@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Users\Notifications;
 
 use App\Models\User;
@@ -23,7 +24,7 @@ class UserDeletedNotification extends Notification
         if ($this->user?->isForceDeleting()) {
             return [
                 'title' => 'Delete User Permanently',
-                'msg' => 'User ' . $this->user?->name . ' has been deleted permanently by ' . auth()->user()?->name,
+                'msg' => 'User '.$this->user?->name.' has been deleted permanently by '.auth()->user()?->name,
                 'url' => '#',
                 'icon' => 'InfoIcon',
                 'time' => $this->user?->created_at->format('c'),
@@ -33,7 +34,7 @@ class UserDeletedNotification extends Notification
 
         return [
             'title' => 'Delete User',
-            'msg' => 'User ' . $this->user?->name . ' has been Deleted by ' . auth()->user()?->name,
+            'msg' => 'User '.$this->user?->name.' has been Deleted by '.auth()->user()?->name,
             'url' => '#',
             'icon' => 'InfoIcon',
             'time' => $this->user?->created_at->format('c'),

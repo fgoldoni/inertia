@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Users\Http\Controllers;
 
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -37,7 +38,7 @@ class ApiTokenController extends Controller
     {
         $user = $this->usersRepository->findWhereFirst('email', $request->email);
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);

@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Roles\Http\Controllers\Api;
 
 use Illuminate\Contracts\Routing\ResponseFactory;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Dashboard\Http\Controllers;
 
 use App\Repositories\Criteria\ByUser;
@@ -46,7 +47,7 @@ class DashboardController extends Controller
                 'companies_count' => $this->companiesRepository->withCriteria([
                     new ByUser(auth()->user()->id),
                 ])->count(),
-            ]
+            ],
         ]);
     }
 

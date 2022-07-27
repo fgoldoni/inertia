@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Attachments\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,7 +15,7 @@ class StoreAttachmentRequest extends FormRequest
     {
         return [
             'disk' => ['nullable', 'string', 'in:uploads,avatars'],
-            'file' => ['required', 'mimes:jpeg,jpg,png,gif', 'max:10000']
+            'file' => ['required', 'mimes:jpeg,jpg,png,gif', 'max:10000'],
         ];
     }
 

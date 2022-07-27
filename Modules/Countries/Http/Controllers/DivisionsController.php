@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Countries\Http\Controllers;
 
 use App\Repositories\Criteria\EagerLoad;
@@ -30,7 +31,7 @@ class DivisionsController extends Controller
                 new WhereLike(['world_divisions.id', 'world_divisions.name', 'world_divisions.full_name'], $this->request->get('search')),
                 new OrderBy($this->request->get('field', ''), $this->request->get('direction')),
                 new EagerLoad(['country:id,name,emoji']),
-                new WithCount(['cities'])
+                new WithCount(['cities']),
             ])->paginate()->withQueryString(),
 
         ], $modalProps));
@@ -61,8 +62,8 @@ class DivisionsController extends Controller
             'editing' => $this->divisionsRepository->withCriteria([
                 new Select('id', 'name', 'full_name', 'country_id'),
                 new EagerLoad(['country:id,name,emoji']),
-                new WithCount(['cities'])
-            ])->find($division->id, ['id', 'name', 'full_name', 'country_id'])
+                new WithCount(['cities']),
+            ])->find($division->id, ['id', 'name', 'full_name', 'country_id']),
         ]);
     }
 

@@ -15,6 +15,7 @@ use Modules\Comments\Database\factories\CommentFactory;
 class Comment extends Model
 {
     use HasFactory;
+
     public $guarded = [];
 
     protected static function newFactory(): CommentFactory
@@ -26,7 +27,6 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
-
 
     public function user(): BelongsTo
     {
@@ -57,7 +57,7 @@ class Comment extends Model
         $byId = [];
         $records = self::where([
             'commentable_type' => $model,
-            'commentable_id' => $modelId
+            'commentable_id' => $modelId,
         ])->orderBy('id', 'asc')->get();
 
         $records->load('user');
@@ -71,6 +71,7 @@ class Comment extends Model
                 $comments[] = $record;
             }
         }
+
         return array_reverse($comments);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Attachments\Http\Controllers;
 
 use Exception;
@@ -27,6 +28,7 @@ class AvatarsController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -42,11 +44,11 @@ class AvatarsController extends Controller
 
         $request->file('file')
             ->store(
-                now()->format('Y') . '/' . now()->format('m'),
+                now()->format('Y').'/'.now()->format('m'),
                 config('app.system.disks.avatars')
             );
 
-        $attachment['filename'] = now()->format('Y') . '/' . now()->format('m') . '/' . $file->hashName();
+        $attachment['filename'] = now()->format('Y').'/'.now()->format('m').'/'.$file->hashName();
 
         return $this->response->json(['data' => $attachment], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
@@ -70,7 +72,7 @@ class AvatarsController extends Controller
     {
         $model = app()->make($model);
 
-        if (!$model instanceof Model) {
+        if (! $model instanceof Model) {
             throw new Exception("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
         }
 

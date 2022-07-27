@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Countries\Http\Controllers;
 
 use App\Repositories\Criteria\EagerLoad;
@@ -37,6 +38,7 @@ class CountriesController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Renderable
      */
     public function create()
@@ -46,6 +48,7 @@ class CountriesController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Renderable
      */
     public function store(Request $request)
@@ -55,7 +58,8 @@ class CountriesController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function show($id)
@@ -70,7 +74,7 @@ class CountriesController extends Controller
         Inertia::basePageRoute(route('admin.countries.index', $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])));
 
         return $this->index([
-            'editing' => $this->countriesRepository->find($country->id, ['id', 'name', 'full_name', 'continent_id', 'emoji', 'currency_code', 'currency_name', 'capital'])
+            'editing' => $this->countriesRepository->find($country->id, ['id', 'name', 'full_name', 'continent_id', 'emoji', 'currency_code', 'currency_name', 'capital']),
         ]);
     }
 
@@ -85,7 +89,8 @@ class CountriesController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Renderable
      */
     public function destroy($id)

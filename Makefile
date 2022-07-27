@@ -81,14 +81,7 @@ test: ## phpunit test
 	./vendor/bin/phpunit --debug
 
 pint: ## phpunit test
-	 ./vendor/bin/pint Modules/Activities/Database -v
-	 ./vendor/bin/pint Modules/Activities/Entities -v
-	 ./vendor/bin/pint Modules/Activities/Http -v
-	 ./vendor/bin/pint Modules/Activities/Providers -v
-	 ./vendor/bin/pint Modules/Activities/Notifications -v
-	 ./vendor/bin/pint Modules/Activities/Listeners -v
-	 ./vendor/bin/pint Modules/Activities/Observers -v
-	 ./vendor/bin/pint Modules/Activities/Policies -v
+	 ./vendor/bin/pint Modules/Users -v
 
 optimize: install ## optimize
 		$(PHP) artisan cache:clear & $(PHP) artisan config:clear & $(PHP) artisan route:clear & $(PHP) artisan view:clear

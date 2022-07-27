@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Roles\Database\Seeders;
 
 use App\Traits\Database\DisableForeignKeys;

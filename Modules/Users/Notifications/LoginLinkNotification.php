@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Users\Notifications;
 
 use App\Models\Team;
@@ -27,10 +28,10 @@ class LoginLinkNotification extends Notification
 
     public function toMail($notifiable)
     {
-        $url = $this->host . '/token/' . $this->token->plainTextToken;
+        $url = $this->host.'/token/'.$this->token->plainTextToken;
 
         return (new MailMessage())
-            ->subject('Welcome to ' . env('APP_NAME', 'Wedo 37'))
+            ->subject('Welcome to '.env('APP_NAME', 'Wedo 37'))
             ->view('emails.users.created', ['homeUrl' => $this->host, 'team' => $this->team, 'url' => $url]);
     }
 }

@@ -6,6 +6,7 @@
  * Date: 24.09.18
  * Time: 21:18.
  */
+
 namespace Modules\Teams\Repositories\Eloquent;
 
 use App\Models\Team;
@@ -28,7 +29,7 @@ class EloquentTeamsRepository extends RepositoryAbstract implements TeamsReposit
     {
         if ($subDomain = self::getSubDomain($host)) {
             return $this->withCriteria([
-                new Where('subdomain', $subDomain)
+                new Where('subdomain', $subDomain),
             ])->first();
         }
 
@@ -44,7 +45,7 @@ class EloquentTeamsRepository extends RepositoryAbstract implements TeamsReposit
 
     public function attachUser(?Team $team, User $user)
     {
-        if (!$user->belongsToTeam($team)) {
+        if (! $user->belongsToTeam($team)) {
             $team->users()->attach(
                 $user,
                 ['role' => 'user']

@@ -1,10 +1,11 @@
 <?php
+
 namespace Modules\Users\Notifications;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class UserRestoredNotification extends Notification
 {
@@ -31,7 +32,7 @@ class UserRestoredNotification extends Notification
     {
         return [
             'title' => 'Restore User',
-            'msg' => 'User ' . $this->user->name . ' has been successfully restored',
+            'msg' => 'User '.$this->user->name.' has been successfully restored',
             'url' => '#',
             'icon' => 'CheckCircleIcon',
             'time' => $this->user->created_at->format('c'),

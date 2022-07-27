@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Countries\Entities;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

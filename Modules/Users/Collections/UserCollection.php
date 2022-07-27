@@ -1,12 +1,11 @@
 <?php
+
 namespace Modules\Users\Collections;
 
 use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class UserCollection
- *
- * @package \Modules\Users\Collections
  */
 class UserCollection extends Collection
 {

@@ -1,7 +1,6 @@
 <?php
-namespace Modules\Comments\Repositories\Contracts;
 
-use Illuminate\Support\Collection;
+namespace Modules\Comments\Repositories\Contracts;
 
 interface CommentsRepository
 {

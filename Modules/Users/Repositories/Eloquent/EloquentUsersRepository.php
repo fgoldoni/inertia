@@ -6,6 +6,7 @@
  * Date: 24.09.18
  * Time: 21:18.
  */
+
 namespace Modules\Users\Repositories\Eloquent;
 
 use App\Models\Team;
@@ -33,7 +34,7 @@ class EloquentUsersRepository extends RepositoryAbstract implements UsersReposit
     {
         $user->ownedTeams()->save(Team::forceCreate([
             'user_id' => $user->id,
-            'name' => explode(' ', (string) $user->name, 2)[0] . "'s Team",
+            'name' => explode(' ', (string) $user->name, 2)[0]."'s Team",
             'personal_team' => true,
         ]));
     }
@@ -48,7 +49,7 @@ class EloquentUsersRepository extends RepositoryAbstract implements UsersReposit
     public function isExist(string $email): bool
     {
         return $this->withCriteria([
-            new Where('email', $email)
+            new Where('email', $email),
         ])->exists();
     }
 

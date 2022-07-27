@@ -1,9 +1,10 @@
 <?php
+
 namespace Modules\Attachments\Entities;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Storage;
 
@@ -39,7 +40,7 @@ class Attachment extends Model
      */
     protected function defaultAvatarUrl(): string
     {
-        return 'https://ui-uploads.com/api/?name=' . urlencode((string) $this->name) . '&color=7F9CF5&background=EBF4FF';
+        return 'https://ui-uploads.com/api/?name='.urlencode((string) $this->name).'&color=7F9CF5&background=EBF4FF';
     }
 
     /**

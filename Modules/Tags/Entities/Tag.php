@@ -1,8 +1,9 @@
 <?php
+
 namespace Modules\Tags\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\Jobs\Entities\Job;
 use Modules\Tags\Database\factories\TagFactory;

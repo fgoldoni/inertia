@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Categories\Http\Controllers;
 
 use App\Repositories\Criteria\EagerLoad;
@@ -47,8 +48,8 @@ class CategoriesController extends Controller
                 'seo_title' => 'test',
                 'seo_description' => 'test',
                 'seo_description' => 'test',
-                'online' => true
-            ])
+                'online' => true,
+            ]),
         ]);
     }
 
@@ -75,7 +76,7 @@ class CategoriesController extends Controller
         return $this->index([
             'editing' => $this->categoriesRepository->withCriteria([
                 new EagerLoad(['parent:id,name']),
-            ])->find($category->id, ['id', 'name', 'online', 'seo_title', 'seo_description', 'parent_id'])
+            ])->find($category->id, ['id', 'name', 'online', 'seo_title', 'seo_description', 'parent_id']),
         ]);
     }
 
@@ -91,7 +92,7 @@ class CategoriesController extends Controller
     public function destroy($selected)
     {
         $this->categoriesRepository->withCriteria([
-            new WhereKey(explode(',', (string) $selected))
+            new WhereKey(explode(',', (string) $selected)),
         ])->deleteAll();
 
         return $this->response->json(['message' => __('Category deleted successfully.')], Response::HTTP_NO_CONTENT, [], JSON_NUMERIC_CHECK);

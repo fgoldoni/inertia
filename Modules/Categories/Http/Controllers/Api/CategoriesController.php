@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Categories\Http\Controllers\Api;
 
 use App\Repositories\Criteria\OrderBy;
@@ -27,6 +28,7 @@ class CategoriesController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Response
      */
     public function store(Request $request)
@@ -36,7 +38,8 @@ class CategoriesController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Response
      */
     public function show($id)
@@ -46,7 +49,8 @@ class CategoriesController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -56,7 +60,8 @@ class CategoriesController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return Response
      */
     public function destroy($id)
