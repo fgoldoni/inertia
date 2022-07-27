@@ -22,7 +22,7 @@ class WithTrashed implements CriterionInterface
      */
     public function apply($model): Builder
     {
-        if (Auth::user()->hasRole(config('app.system.users.roles.administrator'))) {
+        if (auth()->user()->hasRole(config('app.system.users.roles.administrator'))) {
             return $model->withTrashed();
         }
 

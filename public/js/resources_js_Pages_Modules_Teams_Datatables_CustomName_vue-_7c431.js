@@ -270,33 +270,33 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "aria-hidden": "true"
   }, null, 2
   /* CLASS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.name), 1
-  /* TEXT */
-  )]), $setup.props.row.isCurrentTeam ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, " Current ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     href: _ctx.route('admin.teams.edit', $setup.props.row.id),
     "preserve-state": "",
     "preserve-scroll": "",
     data: $setup.pickBy($setup.props.row.params),
-    only: ['editing', 'modal', 'basePageRoute', 'availableRoles', 'permissions']
+    only: ['editing', 'modal', 'basePageRoute', 'availableRoles', 'permissions'],
+    "class": "inline-flex underline items-center whitespace-nowrap font-medium text-primary-700 hover:text-primary-500"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ExternalLinkIcon"], {
-        "class": "flex-shrink-0 h-5 w-5 text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300",
-        "aria-hidden": "true"
-      })];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.row.name), 1
+      /* TEXT */
+      )];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["href", "data"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  , ["href", "data"])]), $setup.props.row.isCurrentTeam ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, " Current ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: $setup.preview + '/cache/clear',
-    target: "_blank",
-    "class": "text-sm block leading-5 text-secondary-700 dark:text-secondary-400 underline"
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.preview), 9
-  /* TEXT, PROPS */
-  , _hoisted_8)])]);
+    target: "_blank"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ExternalLinkIcon"], {
+    "class": "flex-shrink-0 h-5 w-5 text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300",
+    "aria-hidden": "true"
+  })], 8
+  /* PROPS */
+  , _hoisted_8)])])]);
 }
 
 /***/ }),

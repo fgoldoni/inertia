@@ -33,6 +33,7 @@ class SeedFakePermissionRoleTableSeeder extends Seeder
         $manager = Role::query()->where('name', config('app.system.users.roles.manager'))->firstOrFail();
 
         $this->attachPermission($manager, [
+            'system',
             'teams',
             'jobs',
             'applicants',

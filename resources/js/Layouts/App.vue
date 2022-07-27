@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { Inertia } from '@inertiajs/inertia';
+import JetDropdown from '@/Jetstream/Dropdown.vue';
+import JetDropdownLink from '@/Jetstream/DropdownLink.vue';
 import JetBanner from '@/Jetstream/Banner.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import Notification from '@/Shared/Notification';
@@ -83,10 +85,12 @@ onMounted(() => {
                             </div>
                             <div class="mt-5 flex-1 h-0 overflow-y-auto">
                                 <nav class="px-2 space-y-1">
-                                    <NavLink v-for="item in navigation" :key="item.name" :href="route(item.href)" :active="route().current(item.href)">
-                                        <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
-                                        {{ item.name }}
-                                    </NavLink>
+                                    <template v-for="item in navigation" :key="item.name">
+                                        <NavLink :href="route(item.href)" :active="route().current(item.href)" v-if="$page.props.accessMenu[item.permission]">
+                                            <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
+                                            {{ item.name }}
+                                        </NavLink>
+                                    </template>
                                 </nav>
                             </div>
                             <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
@@ -114,16 +118,18 @@ onMounted(() => {
         <!-- Static sidebar for desktop -->
         <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
             <!-- Sidebar component, swap this element with another sidebar if you like -->
-            <div class="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
+            <div class="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto" v-if="$page.props.user">
                 <div class="flex items-center flex-shrink-0 px-4">
                     <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg" alt="Workflow" />
                 </div>
                 <div class="mt-5 flex-grow flex flex-col">
                     <nav class="flex-1 px-2 pb-4 space-y-1">
-                        <NavLink v-for="item in navigation" :key="item.name" :href="route(item.href)" :active="route().current(item.href)">
-                            <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
-                            {{ item.name }}
-                        </NavLink>
+                        <template v-for="item in navigation" :key="item.name">
+                            <NavLink :href="route(item.href)" :active="route().current(item.href)" v-if="$page.props.accessMenu[item.permission]">
+                                <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
+                                {{ item.name }}
+                            </NavLink>
+                        </template>
                     </nav>
                 </div>
 
@@ -166,44 +172,117 @@ onMounted(() => {
                             <BellIcon class="h-6 w-6" aria-hidden="true" />
                         </button>
 
-                        <!-- Profile dropdown -->
-                        <Menu as="div" class="ml-3 relative" v-if="$page.props.user">
-                            <div>
-                                <MenuButton class="max-w-xs bg-white flex items-center text-sm focus:outline-none border-l border-gray-800 pl-4">
-                                    <span class="sr-only">Open user menu</span>
+                        <div class="hidden sm:flex sm:items-center">
+                            <div class="ml-3 relative">
+                                <!-- Teams Dropdown -->
+                                <JetDropdown v-if="$page.props.jetstream.hasTeamFeatures" align="right" width="60">
+                                    <template #trigger>
+                                        <span class="inline-flex focus:outline-none pl-2 border-l border-gray-800">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
+                                                {{ $page.props.user.current_team.name }}
 
-                                    <p class="font-bold text-xs mr-2 text-gray-700 text-right">
-                                        {{ $page.props.user.name }}
+                                                <svg
+                                                    class="ml-2 -mr-0.5 h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
+                                                >
+                                                    <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
+                                        </span>
+                                    </template>
 
-                                        <br>
+                                    <template #content>
+                                        <div class="w-60">
+                                            <!-- Team Management -->
+                                            <template v-if="$page.props.jetstream.hasTeamFeatures">
+                                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                                    Manage Team
+                                                </div>
 
-                                        <span class="text-xs text-teal-500">  Trial Period </span>
+                                                <!-- Team Settings -->
+                                                <JetDropdownLink :href="route('teams.show', $page.props.user.current_team)">
+                                                    Team Settings
+                                                </JetDropdownLink>
 
-                                    </p>
-                                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                                </MenuButton>
+                                                <JetDropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.create')">
+                                                    Create New Team
+                                                </JetDropdownLink>
+
+                                                <div class="border-t border-gray-100" />
+
+                                                <!-- Team Switcher -->
+                                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                                    Switch Teams
+                                                </div>
+
+                                                <template v-for="team in $page.props.user.all_teams" :key="team.id">
+                                                    <form @submit.prevent="switchToTeam(team)">
+                                                        <JetDropdownLink as="button">
+                                                            <div class="flex items-center">
+                                                                <svg
+                                                                    v-if="team.id == $page.props.user.current_team_id"
+                                                                    class="mr-2 h-5 w-5 text-green-400"
+                                                                    fill="none"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round"
+                                                                    stroke-width="2"
+                                                                    stroke="currentColor"
+                                                                    viewBox="0 0 24 24"
+                                                                ><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                                                <div>{{ team.name }}</div>
+                                                            </div>
+                                                        </JetDropdownLink>
+                                                    </form>
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </JetDropdown>
                             </div>
-                            <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                                <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
 
-                                    <MenuItem v-if="$page.props.can.is_impersonated">
-                                        <a :href="route('impersonate.leave')" class="block px-4 py-2 text-sm leading-5 text-primary-700 hover:bg-primary-100 focus:outline-none focus:bg-primary-100 transition">{{ __('Leave impersonation') }}</a>
-                                    </MenuItem>
+                            <!-- Profile dropdown -->
+                            <Menu as="div" class="ml-3 relative" v-if="$page.props.user">
+                                <div>
+                                    <MenuButton class="max-w-xs bg-white flex items-center text-sm focus:outline-none border-l border-gray-800 pl-4">
+                                        <span class="sr-only">Open user menu</span>
 
-                                    <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                                        <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</a>
-                                    </MenuItem>
+                                        <p class="font-bold text-xs mr-2 text-gray-700 text-right">
+                                            {{ $page.props.user.name }}
 
-                                    <MenuItem v-slot="{ active }">
-                                        <form @submit.prevent="logout">
-                                            <DropdownLink as="button">
-                                                Log Out
-                                            </DropdownLink>
-                                        </form>
-                                    </MenuItem>
-                                </MenuItems>
-                            </transition>
-                        </Menu>
+                                            <br>
+
+                                            <span class="text-xs text-teal-500">  Trial Period </span>
+
+                                        </p>
+                                        <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                                    </MenuButton>
+                                </div>
+                                <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+                                    <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+
+                                        <MenuItem v-if="$page.props.can.is_impersonated">
+                                            <a :href="route('impersonate.leave')" class="block px-4 py-2 text-sm leading-5 text-primary-700 hover:bg-primary-100 focus:outline-none focus:bg-primary-100 transition">{{ __('Leave impersonation') }}</a>
+                                        </MenuItem>
+
+                                        <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
+                                            <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</a>
+                                        </MenuItem>
+
+                                        <MenuItem v-slot="{ active }">
+                                            <form @submit.prevent="logout">
+                                                <DropdownLink as="button">
+                                                    Log Out
+                                                </DropdownLink>
+                                            </form>
+                                        </MenuItem>
+                                    </MenuItems>
+                                </transition>
+                            </Menu>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

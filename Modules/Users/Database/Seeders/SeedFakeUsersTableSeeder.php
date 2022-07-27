@@ -23,7 +23,7 @@ class SeedFakeUsersTableSeeder extends Seeder
 
         Team::where('id', $user->currentTeam->id)
             ->first()
-            ->update(['subdomain' => 'ebony', 'display_name' => 'Wedo37']);
+            ->update(['subdomain' => 'ebony', 'display_name' => 'Ebony']);
 
         $user->assignRole(config('app.system.users.roles.administrator'));
 

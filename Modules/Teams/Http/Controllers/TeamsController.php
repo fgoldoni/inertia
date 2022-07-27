@@ -5,7 +5,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Has;
+use App\Repositories\Criteria\Where;
+use App\Repositories\Criteria\WhereHas;
 use App\Repositories\Criteria\WhereLike;
+use App\Repositories\Criteria\WhereWithoutAdmin;
 use App\Repositories\Criteria\WithTrashed;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
@@ -18,9 +21,12 @@ use Laravel\Jetstream\Jetstream;
 use Modules\Activities\Repositories\Contracts\ActivitiesRepository;
 use Modules\Attachments\Repositories\Contracts\AttachmentsRepository;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
+use Modules\Jobs\Entities\Job;
+use Modules\Jobs\Transformers\JobResource;
 use Modules\Teams\Http\Requests\UpdateTeamRequest;
 use Modules\Teams\Repositories\Contracts\TeamsRepository;
 use Modules\Teams\Services\Contracts\TeamsServiceInterface;
+use Modules\Teams\Transformers\TeamResource;
 
 class TeamsController extends Controller
 {
@@ -47,27 +53,16 @@ class TeamsController extends Controller
             'delete' => $this->request->user()->hasPermissionTo('delete_teams'),
         ] : null);
 
-        if (auth()->user()->isAdministrator()) {
-            $paginator = $this->teamsRepository->withCriteria([
-                new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
-                new WhereLike(
-                    ['teams.id', 'teams.name', 'teams.display_name', 'teams.subdomain'],
-                    $this->request->get('search')
-                ),
-                new WithTrashed(),
-            ])->paginate();
-        } else {
-            $paginator = $this->teamsRepository->withCriteria([
-                new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
-                new WhereLike(
-                    ['teams.id', 'teams.name', 'teams.display_name', 'teams.subdomain'],
-                    $this->request->get('search')
-                ),
-                new Has('users')
-            ])->paginate();
-        }
-
-        $teams = $paginator->withQueryString()
+        $teams = $this->teamsRepository->withCriteria([
+            new EagerLoad(['owner:id,name,email,profile_photo_path', 'users']),
+            new WhereLike(
+                ['teams.id', 'teams.name', 'teams.display_name', 'teams.subdomain'],
+                $this->request->get('search')
+            ),
+            new WhereWithoutAdmin('teams.user_id', auth()->user()->id),
+            new WithTrashed(),
+        ])->paginate()
+            ->withQueryString()
             ->through(fn ($team) => [
                 'id' => $team->id,
                 'name' => $team->name,
@@ -90,12 +85,39 @@ class TeamsController extends Controller
         ], $modalProps));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $this->authorize('create', Team::class);
 
-        return view('teams::create');
+        Inertia::modal('Modules/Teams/CreateModal');
+
+        Inertia::basePageRoute(
+            route(
+                'admin.teams.index',
+                $this->request->only(['search', 'perPage', 'page', 'field', 'direction'])
+            )
+        );
+
+        return $this->index([
+            'editing' => new TeamResource($this->teamsRepository->make([
+                'id' => null,
+                'name' => '',
+                'display_name' => '',
+                'subdomain' => '',
+                'teamInvitations' => [],
+                'avatar_path' => '',
+                'attachments' => [],
+                'members' => [],
+                'industries' => $this->categoriesRepository->industries(['id', 'name']),
+                'categories' => [],
+                'color' => 'teal',
+
+                'logs' => [],
+                'colors' => $this->teamsService->colors(),
+            ]))
+        ]);
     }
+
 
     public function store(Request $request)
     {

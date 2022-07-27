@@ -28,6 +28,14 @@ class SeedFakePermissionsTableSeeder extends Seeder
         ]);
 
         Permission::query()->create([
+            'name' => 'log_viewer',
+            'group_name' => 'system',
+            'display_name' => __('Access Dashboard'),
+            'description' => __('This permission allow user to access to the dashboard.'),
+            'can_be_removed' => false,
+        ]);
+
+        Permission::query()->create([
             'name' => 'impersonate',
             'group_name' => 'system',
             'display_name' => __('Impersonate User'),

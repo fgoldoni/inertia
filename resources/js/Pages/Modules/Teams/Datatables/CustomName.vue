@@ -58,27 +58,27 @@ const restore = (id) => {
 
                     <div :class="[props.row.belongsToTeam ? 'bg-green-400' : 'bg-secondary-200', 'flex-shrink-0 w-2.5 h-2.5 rounded-full']" aria-hidden="true"></div>
 
+                    <Link :href="route('admin.teams.edit', props.row.id)"
+                      preserve-state
+                      preserve-scroll
+                      :data="pickBy(props.row.params)"
+                      :only="['editing', 'modal', 'basePageRoute', 'availableRoles', 'permissions']"
+                      class="inline-flex underline items-center whitespace-nowrap font-medium text-primary-700 hover:text-primary-500">
                     <span>{{ props.row.name }}</span>
+                </Link>
 
                 </p>
 
                 <span v-if="props.row.isCurrentTeam" class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-green-100 text-green-800"> Current </span>
 
+                <a :href="preview + '/cache/clear'" target="_blank">
 
-                <Link :href="route('admin.teams.edit', props.row.id)"
-                      preserve-state
-                      preserve-scroll
-                      :data="pickBy(props.row.params)"
-                      :only="['editing', 'modal', 'basePageRoute', 'availableRoles', 'permissions']">
                     <ExternalLinkIcon class="flex-shrink-0 h-5 w-5 text-primary-500 group-hover:text-primary-700 transition ease-in-out delay-150 group-hover:scale-110 group-hover:shadow-2xl duration-300" aria-hidden="true"/>
-                </Link>
+
+                </a>
 
 
             </div>
-
-            <a :href="preview + '/cache/clear'" target="_blank" class="text-sm block leading-5 text-secondary-700 dark:text-secondary-400 underline">
-                {{ preview }}
-            </a>
 
         </div>
 
