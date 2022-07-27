@@ -30,6 +30,7 @@ return new class extends Migration {
             $table->boolean('negotiable')->default(true);
             $table->string('state')->default((JobState::Draft)->value);
             $table->string('avatar_path', 2048)->nullable();
+            $table->smallInteger('open')->default(1);
 
             $this->addSeoFields($table);
 

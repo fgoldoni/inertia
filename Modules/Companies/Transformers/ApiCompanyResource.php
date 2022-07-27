@@ -19,6 +19,7 @@ class ApiCompanyResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
+            'website' => $this->website,
             'size' => $this->size,
             'founded' => $this->founded,
             'location' => $this->location,

@@ -44,7 +44,7 @@ class ApplicantsController extends Controller
                 new OrderBy('applicants.id', 'desc'),
                 new EagerLoad([
                     'attachments' => fn ($query) => $query->where('attachments.type', 'resumes'),
-                    'candidate:id,name,email',
+                    'candidate:id,name,email,profile_photo_path',
                     'job' => function (BelongsTo $query) {
                         $query->with(['city', 'country']);
                     },
@@ -122,8 +122,8 @@ class ApplicantsController extends Controller
         $applicant = new ApplicantsResource($this->applicantsRepository->withCriteria([
             new EagerLoad([
                 'attachments',
-                'candidate:id,name,email',
-                'job' => fn ($query) => $query->with('city'),
+                'candidate:id,name,email,profile_photo_path',
+                'job' => fn ($query) => $query->with(['city', 'company']),
             ]),
             new WhereHas('job', function (Builder $query) {
                 $query->where(
@@ -137,7 +137,7 @@ class ApplicantsController extends Controller
         ])->find($applicant->id));
 
 
-        return $this->response->json(['data' => $applicant], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
+        return $this->response->json(['data' => $applicant], Response::HTTP_OK, [], JSON_PRESERVE_ZERO_FRACTION);
     }
 
     public function update(Request $request, $id)

@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->longText('content')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();
+            $table->string('website')->nullable();
             $table->string('size')->nullable();
             $table->string('founded')->nullable();
             $table->string('location')->nullable();

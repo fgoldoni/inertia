@@ -48,7 +48,7 @@ class JobsService extends ServiceAbstract implements JobsServiceInterface
             new EagerLoad([
                 'user:id,name',
                 'team:id,name,display_name',
-                'company:id,name',
+                'company:id,name,phone,avatar_path',
                 'categories:id,name,type',
                 'country:id,name,emoji',
                 'city:id,name',

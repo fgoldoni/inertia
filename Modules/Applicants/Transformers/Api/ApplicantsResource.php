@@ -4,6 +4,7 @@ namespace Modules\Applicants\Transformers\Api;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Applicants\Entities\Applicant;
 use Modules\Jobs\Transformers\ApiJobResource;
+use Modules\Users\Transformers\ApiCandidateResource;
 
 class ApplicantsResource extends JsonResource
 {
@@ -25,10 +26,7 @@ class ApplicantsResource extends JsonResource
             'created_at' => $this->created_at?->format('d, M Y'),
             'model' => Applicant::class,
             'job' => new ApiJobResource($this->job),
-            'candidate' => [
-                'id' => $this->candidate->id,
-                'name' => $this->candidate->name . ' ( ' . $this->candidate->email . ' ) ',
-            ],
+            'candidate' => new ApiCandidateResource($this->candidate),
             'attachments' => $this->attachments->map(fn($attachment) => [
                 'id' => $attachment->id,
                 'name' => $attachment->name,

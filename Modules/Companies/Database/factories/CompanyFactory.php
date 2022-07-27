@@ -27,6 +27,7 @@ class CompanyFactory extends Factory
             'content' => $this->faker->sentence,
             'email' => $this->faker->email,
             'phone' => $this->faker->phoneNumber,
+            'website' => $this->faker->url,
             'size' => $this->faker->numberBetween(1, 20) . ' - ' . $this->faker->numberBetween(20, 40),
             'founded' => $this->faker->year,
             'location' => $this->faker->country,

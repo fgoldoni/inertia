@@ -20,7 +20,7 @@ class JobsDatabaseSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        Job::factory(500)->state(function (array $attributes) {
+        Job::factory(200)->state(function (array $attributes) {
             $city = City::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
 
             $division = Division::where('country_id', $attributes['country_id'])->inRandomOrder()->first();
