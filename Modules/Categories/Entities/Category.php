@@ -2,6 +2,7 @@
 
 namespace Modules\Categories\Entities;
 
+use App\Traits\HasAvatar;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,7 +19,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Category extends Model
 {
-    use HasFactory, HasSlug, HasTranslations, HasRecursiveRelationships;
+    use HasFactory, HasSlug, HasTranslations, HasAvatar, HasRecursiveRelationships;
 
     protected $guarded = [];
 
@@ -29,6 +30,10 @@ class Category extends Model
         'online' => 'boolean',
         'deleted_at' => 'datetime',
         'type' => CategoryType::class,
+    ];
+
+    protected $appends = [
+        'avatar_url',
     ];
 
     protected static function newFactory(): CategoryFactory

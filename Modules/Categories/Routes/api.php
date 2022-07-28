@@ -15,4 +15,5 @@ use Modules\Categories\Http\Controllers\Api\CategoriesController;
 
 Route::controller(CategoriesController::class)->prefix('categories')->name('api.categories.')->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('/search', 'search')->name('search');
 });

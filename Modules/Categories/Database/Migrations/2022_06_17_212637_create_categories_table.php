@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('position')->unsigned()->nullable();
             $table->string('type')->default('area');
             $table->unsignedBigInteger('parent_id')->nullable()->index();
+            $table->string('avatar_path', 2048)->nullable();
 
             $this->addSeoFields($table);
 

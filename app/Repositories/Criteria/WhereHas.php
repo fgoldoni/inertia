@@ -15,7 +15,7 @@ class WhereHas
 
     public function apply($model): Builder
     {
-        if (auth()->user()->hasRole(config('app.system.users.roles.administrator'))) {
+        if (auth()->user()?->hasRole(config('app.system.users.roles.administrator'))) {
             return $model->newQuery();
         }
 
