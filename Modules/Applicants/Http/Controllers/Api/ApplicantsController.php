@@ -47,7 +47,13 @@ class ApplicantsController extends Controller
                     },
                 ]),
                 new WhereHas('job', function (Builder $query) {
-                    $query->with(['company.categories', 'city']);
+                    $query->where(
+                        'jobs.team_id',
+                        session(
+                            config('app.system.sessions.keys.team'),
+                            auth()->user()->currentTeam?->id
+                        )
+                    )->with(['company.categories', 'city']);
                 }),
                 new WhereHas('candidate', function (Builder $query) {
                     $query->where('users.id', auth()->user()->id);
@@ -167,7 +173,7 @@ class ApplicantsController extends Controller
             $user = $this->usersRepository->create(
                 [
                     'email' => $email,
-                    'name' => "{$team->display_name} User",
+                    'name' => "{$team->display_name} Candidate",
                     'email_verified_at' => now(),
                     'password' => bcrypt(Str::random(8)),
                 ]

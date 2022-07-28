@@ -22,7 +22,7 @@ class JobFactory extends Factory
      */
     public function definition()
     {
-        $userId = $this->faker->numberBetween(1, 5);
+        $userId = $this->faker->numberBetween(1, 3);
 
         return [
             'name' => $this->faker->jobTitle,
@@ -31,7 +31,7 @@ class JobFactory extends Factory
             'content' => $this->faker->sentence(100),
             'user_id' => $userId,
             'country_id' => $this->faker->numberBetween(1, 200),
-            'state' => $this->faker->randomElement([JobState::Draft, JobState::Published, JobState::Archived, JobState::Hold]),
+            'state' => $this->faker->randomElement([JobState::Draft, JobState::Published]),
             'salary_type' => $this->faker->randomElement([SalaryType::Day, SalaryType::Hour, SalaryType::Month, SalaryType::Year]),
             'closing_to' => $this->faker->dateTimeInInterval('now', '+7 days'),
             'live_at' => $this->faker->randomElement([$this->faker->dateTimeInInterval('-5 days', 'now'), null]),

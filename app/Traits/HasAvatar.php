@@ -49,9 +49,14 @@ trait HasAvatar
      */
     public function getAvatarUrlAttribute()
     {
-        return $this->avatar_path
-            ? Storage::disk($this->avatarDisk())->url($this->avatar_path)
-            : $this->defaultAvatarUrl();
+        return match ($this->subdomain) {
+            'netflix' => asset('images/logos/netflix.png'),
+            'tesla' => asset('images/logos/tesla.png'),
+            'deutsche-bank' => asset('images/logos/deutsche-bank.png'),
+            default => $this->avatar_path
+                ? Storage::disk($this->avatarDisk())->url($this->avatar_path)
+                : $this->defaultAvatarUrl(),
+        };
     }
 
     /**

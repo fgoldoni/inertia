@@ -18,7 +18,7 @@ class CompaniesDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        Company::factory(100)->create();
+        Company::factory(10)->create();
     }
 
     private function syncCategories(Company $company)

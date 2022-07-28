@@ -94,7 +94,7 @@ const switchToTeam = (team) => {
                             </div>
                             <div class="mt-5 flex-1 h-0 overflow-y-auto">
                                 <nav class="px-2 space-y-1">
-                                    <template v-for="item in navigation" :key="item.name">
+                                    <template v-for="item in navigation" :key="item.name" v-if="$page.props.user">
                                         <NavLink :href="route(item.href)" :active="route().current(item.href)" v-if="$page.props.accessMenu[item.permission]">
                                             <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
                                             {{ item.name }}
@@ -127,13 +127,13 @@ const switchToTeam = (team) => {
         <!-- Static sidebar for desktop -->
         <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
             <!-- Sidebar component, swap this element with another sidebar if you like -->
-            <div class="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto" v-if="$page.props.user">
+            <div class="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
                 <div class="flex items-center flex-shrink-0 px-4">
                     <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg" alt="Workflow" />
                 </div>
                 <div class="mt-5 flex-grow flex flex-col">
                     <nav class="flex-1 px-2 pb-4 space-y-1">
-                        <template v-for="item in navigation" :key="item.name">
+                        <template v-for="item in navigation" :key="item.name" v-if="$page.props.user">
                             <NavLink :href="route(item.href)" :active="route().current(item.href)" v-if="$page.props.accessMenu[item.permission]">
                                 <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
                                 {{ item.name }}
@@ -182,7 +182,7 @@ const switchToTeam = (team) => {
                         </button>
 
                         <div class="hidden sm:flex sm:items-center">
-                            <div class="ml-3 relative">
+                            <div class="ml-3 relative" v-if="$page.props.user">
                                 <!-- Teams Dropdown -->
                                 <JetDropdown v-if="$page.props.jetstream.hasTeamFeatures" align="right" width="60">
                                     <template #trigger>

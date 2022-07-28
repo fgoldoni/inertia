@@ -22,7 +22,7 @@ class CommentFactory extends Factory
         return [
             'content' => $this->faker->sentence(10),
             'commentable_type' => Job::class,
-            'commentable_id' => $this->faker->numberBetween(1, 10),
+            'commentable_id' => $this->faker->numberBetween(1, 5),
             'user_id' => $userId,
         ];
     }

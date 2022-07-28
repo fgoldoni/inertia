@@ -3,10 +3,12 @@
 namespace Modules\Applicants\Entities;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Applicants\Database\factories\ApplicantFactory;
 use Modules\Applicants\Enums\Status;
 use Modules\Attachments\Traits\AttachableTrait;
 use Modules\Comments\Entities\Comment;
@@ -19,6 +21,7 @@ class Applicant extends Pivot
     use LogsActivity;
     use AttachableTrait;
     use SoftDeletes;
+    use HasFactory;
 
     protected $table = 'applicants';
 
@@ -30,14 +33,19 @@ class Applicant extends Pivot
 
     public $incrementing = true;
 
+    protected static function newFactory(): ApplicantFactory
+    {
+        return ApplicantFactory::new();
+    }
+
     public function candidate(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id')->withDefault(['name' => '']);
+        return $this->belongsTo(User::class, 'user_id')->withDefault(['name' => ''])->withoutGlobalScopes();
     }
 
     public function job(): BelongsTo
     {
-        return $this->belongsTo(Job::class, 'job_id')->withDefault(['name' => '']);
+        return $this->belongsTo(Job::class, 'job_id')->withDefault(['name' => ''])->withoutGlobalScopes();
     }
 
     public function getActivitylogOptions(): LogOptions

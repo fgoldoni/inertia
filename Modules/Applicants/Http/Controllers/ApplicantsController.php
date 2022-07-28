@@ -4,6 +4,7 @@ namespace Modules\Applicants\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Criteria\EagerLoad;
+use App\Repositories\Criteria\Has;
 use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\WhereHas;
 use App\Repositories\Criteria\WhereKey;
@@ -69,9 +70,7 @@ class ApplicantsController extends Controller
                         $query->with(['city']);
                     },
                 ]),
-                new WhereHas('job', function (Builder $query) {
-                    $query->where('jobs.team_id', auth()->user()->currentTeam->id);
-                }),
+                new Has('job'),
             ])->paginate()->withQueryString()
                 ->through(fn ($applicant) => [
                     'id' => $applicant->id,

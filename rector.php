@@ -9,8 +9,7 @@ use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-
-        __DIR__ . '/Modules/Applicants',
+        __DIR__ . '/Modules/Teams',
     ]);
 
     // register a single rule

@@ -95,6 +95,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasRole(config('app.system.users.roles.administrator'));
     }
 
+    /**
+     * Define if user is an admin.
+     */
+    public function isManager(): bool
+    {
+        return $this->hasRole(config('app.system.users.roles.manager'));
+    }
+
     public function sessions(): HasMany
     {
         return $this->hasMany(Session::class);

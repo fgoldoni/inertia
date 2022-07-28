@@ -10,7 +10,6 @@
 namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Class WithTrashed.

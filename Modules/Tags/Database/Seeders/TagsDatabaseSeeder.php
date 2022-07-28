@@ -20,7 +20,7 @@ class TagsDatabaseSeeder extends Seeder
         Model::unguard();
 
         Tag::factory(200)->create()->each(function ($tag) {
-            $tag->jobs()->sync([random_int(1, 50), random_int(50, 100), random_int(1, 50), random_int(50, 100)]);
+            $tag->jobs()->sync([random_int(1, 25), random_int(25, 50), random_int(50, 75), random_int(75, 100)]);
         });
     }
 }

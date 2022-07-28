@@ -81,7 +81,7 @@ test: ## phpunit test
 	./vendor/bin/phpunit --debug
 
 pint: ## phpunit test
-	 ./vendor/bin/pint Modules/Users -v
+	 ./vendor/bin/pint app -v
 
 optimize: install ## optimize
 		$(PHP) artisan cache:clear & $(PHP) artisan config:clear & $(PHP) artisan route:clear & $(PHP) artisan view:clear
@@ -102,9 +102,9 @@ refresh: migrate ## refresh + php artisan module:seed Admin & php artisan module
 	php artisan module:seed Companies
 	php artisan module:seed Dashboard
 	php artisan module:seed Jobs
-	## php artisan module:seed Applicants
 	php artisan module:seed Comments
 	php artisan module:seed Tags
+	php artisan module:seed Applicants
 	## php artisan module:seed Events
 	## php artisan module:seed Tickets
 routes: optimize

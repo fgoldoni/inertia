@@ -35,6 +35,7 @@ class SeedFakePermissionRoleTableSeeder extends Seeder
         $this->attachPermission($manager, [
             'system',
             'teams',
+            'companies',
             'jobs',
             'applicants',
             'comments',

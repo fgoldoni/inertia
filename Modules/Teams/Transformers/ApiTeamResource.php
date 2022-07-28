@@ -3,6 +3,7 @@
 namespace Modules\Teams\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 use Modules\Categories\Entities\Category;
 use Modules\Categories\Repositories\Contracts\CategoriesRepository;
 
@@ -18,16 +19,11 @@ class ApiTeamResource extends JsonResource
     {
         session()->put('team-id', $this->id);
 
-        $image = $this->attachments->value('url')
-            ?? 'https://images.unsplash.com/photo-1533693706533-57740e69765d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2700&amp;q=80';
-
-        $avatar = $this->avatar_path ? $this->avatar_url : asset('images/logo.png');
-
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'avatar' => $avatar,
-            'image' => $image,
+            'avatar' => $this->avatar_url,
+            'image' => $this->imagePreview(),
             'display_name' => $this->display_name,
             'subdomain' => $this->subdomain,
             'color' => $this->color->value,
@@ -43,5 +39,15 @@ class ApiTeamResource extends JsonResource
                     'jobs_count' => $item->jobs_count,
                 ])->filter(fn ($item) => $item['jobs_count'] > 0),
         ];
+    }
+
+    private function imagePreview()
+    {
+        return match ($this->subdomain) {
+            'netflix' => asset('images/preview/netflix.jpg'),
+            'tesla' => asset('images/preview/tesla.jpg'),
+            'deutsche-bank' => asset('images/preview/deutsche-bank.jpg'),
+            default => asset('images/preview/preview.jpg'),
+        };
     }
 }

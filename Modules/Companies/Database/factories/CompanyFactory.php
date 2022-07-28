@@ -2,6 +2,7 @@
 
 namespace Modules\Companies\Database\factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CompanyFactory extends Factory
@@ -20,7 +21,7 @@ class CompanyFactory extends Factory
      */
     public function definition()
     {
-        $userId = $this->faker->numberBetween(1, 10);
+        $user = User::find($this->faker->numberBetween(1, 3));
 
         return [
             'name' => $this->faker->company,
@@ -33,8 +34,8 @@ class CompanyFactory extends Factory
             'founded' => $this->faker->year,
             'location' => $this->faker->country,
             'online' => $this->faker->boolean,
-            'user_id' => $userId,
-            'team_id' => $userId,
+            'user_id' => $user->id,
+            'team_id' => $user->currentTeam()->value('id'),
         ];
     }
 }
