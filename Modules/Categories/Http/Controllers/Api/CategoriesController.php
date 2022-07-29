@@ -48,7 +48,7 @@ class CategoriesController extends Controller
                         config('app.system.sessions.keys.team'),
                         auth()->user()?->currentTeam?->id
                     )
-                );
+                )->published();
             }),
         ])->all(['id', 'name', 'online', 'avatar_path', 'created_at'])->map(function ($category)  {
             return [

@@ -68,6 +68,7 @@ class JobsService extends ServiceAbstract implements JobsServiceInterface
     public function search(Request $request): Collection
     {
         return $this->repository->withCriteria([
+            new EagerLoad(['categories']),
             new WhereLike(['jobs.id', 'jobs.name', 'jobs.content'], $request->get('search')),
             new WhereIn('jobs.id', $request->input('selected', [])),
             new WherePublished(),
@@ -76,6 +77,8 @@ class JobsService extends ServiceAbstract implements JobsServiceInterface
             return [
                 'id' => $job->id,
                 'name' => $job->name,
+                'slug' => $job->slug,
+                'category' => $job->categories()->get()->areas()->value('name'),
                 'avatar_url' => $job->avatar_url,
             ];
         });
