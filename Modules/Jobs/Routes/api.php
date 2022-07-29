@@ -15,4 +15,5 @@ use Modules\Jobs\Http\Controllers\Api\JobsController;
 
 Route::as('api.')->group(function () {
     Route::resource('jobs', JobsController::class);
+    Route::get('/search/jobs', [JobsController::class, 'search'])->name('search.jobs');
 });

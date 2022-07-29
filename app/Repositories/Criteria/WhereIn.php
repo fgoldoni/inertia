@@ -4,6 +4,7 @@ namespace App\Repositories\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
 
+
 /**
  * Class WhereIn.
  */
@@ -15,6 +16,8 @@ class WhereIn
 
     public function apply($model): Builder
     {
-        return null === $this->values ? $model->newQuery() : $model->whereIn($this->column, $this->values);
+        return $model->when($this->values, function (Builder $query) {
+            $query->whereIn($this->column, $this->values);
+        });
     }
 }

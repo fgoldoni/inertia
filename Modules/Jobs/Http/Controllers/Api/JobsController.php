@@ -2,8 +2,14 @@
 
 namespace Modules\Jobs\Http\Controllers\Api;
 
+use App\Repositories\Criteria\OrderBy;
+use App\Repositories\Criteria\WhereArea;
+use App\Repositories\Criteria\WhereHas;
+use App\Repositories\Criteria\WhereIn;
+use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -24,6 +30,13 @@ class JobsController extends Controller
         $result = $this->jobsService->apiJobs();
 
         return $this->response->json(['data' => $result], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
+    }
+
+    public function search(Request $request)
+    {
+        $jobs = $this->jobsService->search($request);
+
+        return $this->response->json(['data' => $jobs], Response::HTTP_OK, [], JSON_NUMERIC_CHECK);
     }
 
     /**

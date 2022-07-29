@@ -6,6 +6,7 @@ use App\Repositories\Criteria\OrderBy;
 use App\Repositories\Criteria\Where;
 use App\Repositories\Criteria\WhereArea;
 use App\Repositories\Criteria\WhereHas;
+use App\Repositories\Criteria\WhereIn;
 use App\Repositories\Criteria\WhereLike;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -37,6 +38,7 @@ class CategoriesController extends Controller
     {
         $categories = $this->categoriesRepository->withCriteria([
             new WhereLike(['categories.id', 'categories.name', 'categories.slug'], $request->get('search')),
+            new WhereIn('categories.id', $request->input('selected', [])),
             new WhereArea(),
             new OrderBy('name', 'asc'),
             new WhereHas('jobs', function (Builder $query) {

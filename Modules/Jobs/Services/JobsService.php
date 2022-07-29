@@ -3,10 +3,17 @@ namespace Modules\Jobs\Services;
 
 use App\Repositories\Criteria\EagerLoad;
 use App\Repositories\Criteria\Filters;
+use App\Repositories\Criteria\OrderBy;
+use App\Repositories\Criteria\WhereArea;
+use App\Repositories\Criteria\WhereHas;
+use App\Repositories\Criteria\WhereIn;
 use App\Repositories\Criteria\WhereLike;
 use App\Repositories\Criteria\WherePublished;
 use App\Services\ServiceAbstract;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Collection;
 use Modules\Jobs\Repositories\Contracts\JobsRepository;
 use Modules\Jobs\Services\Contracts\JobsServiceInterface;
 use Modules\Jobs\Transformers\ApiJobResource;
@@ -56,5 +63,21 @@ class JobsService extends ServiceAbstract implements JobsServiceInterface
                 'tags:id,name'
             ]),
         ])->find($id));
+    }
+
+    public function search(Request $request): Collection
+    {
+        return $this->repository->withCriteria([
+            new WhereLike(['jobs.id', 'jobs.name', 'jobs.content'], $request->get('search')),
+            new WhereIn('jobs.id', $request->input('selected', [])),
+            new WherePublished(),
+            new OrderBy('name', 'asc'),
+        ])->all()->map(function ($job) {
+            return [
+                'id' => $job->id,
+                'name' => $job->name,
+                'avatar_url' => $job->avatar_url,
+            ];
+        });
     }
 }
