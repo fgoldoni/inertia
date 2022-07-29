@@ -45,6 +45,7 @@ class CategoriesController extends Controller
                 $query->where(
                     'jobs.team_id',
                     session(
+
                         config('app.system.sessions.keys.team'),
                         auth()->user()?->currentTeam?->id
                     )
